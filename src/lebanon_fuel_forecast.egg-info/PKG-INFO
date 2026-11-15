@@ -1,0 +1,23 @@
+Metadata-Version: 2.4
+Name: lebanon-fuel-forecast
+Version: 0.1.0
+Summary: Auditable Lebanese official gasoline 95 price research and data platform
+Requires-Python: >=3.11
+Requires-Dist: httpx<1,>=0.28
+Requires-Dist: beautifulsoup4<5,>=4.12
+Requires-Dist: openpyxl<4,>=3.1
+Provides-Extra: research
+Requires-Dist: pandas<4,>=2.2; extra == "research"
+Requires-Dist: numpy<3,>=1.26; extra == "research"
+Requires-Dist: statsmodels<1,>=0.14; extra == "research"
+Requires-Dist: scikit-learn<2,>=1.5; extra == "research"
+Provides-Extra: ml
+Requires-Dist: lightgbm<5,>=4.6; extra == "ml"
+Requires-Dist: catboost<2,>=1.2; extra == "ml"
+Provides-Extra: dashboard
+Requires-Dist: streamlit<2,>=1.41; extra == "dashboard"
+Requires-Dist: plotly<7,>=6; extra == "dashboard"
+Provides-Extra: pdf
+Requires-Dist: pypdf<7,>=5; extra == "pdf"
+Provides-Extra: dev
+Requires-Dist: pytest<10,>=8; extra == "dev"

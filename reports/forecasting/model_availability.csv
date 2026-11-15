@@ -1,0 +1,105 @@
+regime,horizon,family,status,reason,train_rows,train_base_decisions,origin
+stabilized_fx_2023_2026,decision_1,A_no_change,saved_and_reload_verified,,145,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_1,A_mean,saved_and_reload_verified,,145,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_1,A_median,saved_and_reload_verified,,145,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_1,B_structural_proxy,saved_and_reload_verified,,145,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_1,C_ridge,saved_and_reload_verified,,145,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_1,C_distributed,saved_and_reload_verified,,145,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_1,D_sarimax,abstained,Latest contiguous sequence has fewer than minimum SARIMAX observations,145,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_1,E_lightgbm,saved_and_reload_verified,,145,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_1,F_catboost,saved_and_reload_verified,,145,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_1,G_hybrid,saved_and_reload_verified,,145,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_1,H_ensemble,saved_and_reload_verified,,145,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_1,Z_last_change,saved_and_reload_verified,,145,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_1,B_official_structural,abstained,Missing complete dated official parameters,145,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_2,A_no_change,saved_and_reload_verified,,130,130,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_2,A_mean,saved_and_reload_verified,,130,130,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_2,A_median,saved_and_reload_verified,,130,130,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_2,B_structural_proxy,saved_and_reload_verified,,130,130,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_2,C_ridge,saved_and_reload_verified,,130,130,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_2,C_distributed,saved_and_reload_verified,,130,130,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_2,D_sarimax,abstained,Latest contiguous sequence has fewer than minimum SARIMAX observations,130,130,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_2,E_lightgbm,saved_and_reload_verified,,130,130,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_2,F_catboost,saved_and_reload_verified,,130,130,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_2,G_hybrid,saved_and_reload_verified,,130,130,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_2,H_ensemble,saved_and_reload_verified,,130,130,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_2,Z_last_change,saved_and_reload_verified,,130,130,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_2,B_official_structural,abstained,Missing complete dated official parameters,130,130,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_4,A_no_change,saved_and_reload_verified,,107,107,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_4,A_mean,saved_and_reload_verified,,107,107,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_4,A_median,saved_and_reload_verified,,107,107,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_4,B_structural_proxy,saved_and_reload_verified,,107,107,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_4,C_ridge,saved_and_reload_verified,,107,107,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_4,C_distributed,saved_and_reload_verified,,107,107,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_4,D_sarimax,abstained,Latest contiguous sequence has fewer than minimum SARIMAX observations,107,107,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_4,E_lightgbm,saved_and_reload_verified,,107,107,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_4,F_catboost,saved_and_reload_verified,,107,107,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_4,G_hybrid,saved_and_reload_verified,,107,107,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_4,H_ensemble,saved_and_reload_verified,,107,107,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_4,Z_last_change,saved_and_reload_verified,,107,107,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,decision_4,B_official_structural,abstained,Missing complete dated official parameters,107,107,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_1,A_no_change,saved_and_reload_verified,,508,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_1,A_mean,saved_and_reload_verified,,508,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_1,A_median,saved_and_reload_verified,,508,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_1,B_structural_proxy,saved_and_reload_verified,,508,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_1,C_ridge,saved_and_reload_verified,,508,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_1,C_distributed,saved_and_reload_verified,,508,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_1,D_sarimax,abstained,Latest contiguous sequence has fewer than minimum SARIMAX observations,508,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_1,E_lightgbm,saved_and_reload_verified,,508,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_1,F_catboost,saved_and_reload_verified,,508,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_1,G_hybrid,saved_and_reload_verified,,508,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_1,H_ensemble,saved_and_reload_verified,,508,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_1,Z_last_change,saved_and_reload_verified,,508,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_1,B_official_structural,abstained,Missing complete dated official parameters,508,145,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_3,A_no_change,saved_and_reload_verified,,478,139,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_3,A_mean,saved_and_reload_verified,,478,139,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_3,A_median,saved_and_reload_verified,,478,139,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_3,B_structural_proxy,saved_and_reload_verified,,478,139,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_3,C_ridge,saved_and_reload_verified,,478,139,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_3,C_distributed,saved_and_reload_verified,,478,139,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_3,D_sarimax,abstained,Latest contiguous sequence has fewer than minimum SARIMAX observations,478,139,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_3,E_lightgbm,saved_and_reload_verified,,478,139,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_3,F_catboost,saved_and_reload_verified,,478,139,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_3,G_hybrid,saved_and_reload_verified,,478,139,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_3,H_ensemble,saved_and_reload_verified,,478,139,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_3,Z_last_change,saved_and_reload_verified,,478,139,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_3,B_official_structural,abstained,Missing complete dated official parameters,478,139,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_7,A_no_change,saved_and_reload_verified,,424,118,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_7,A_mean,saved_and_reload_verified,,424,118,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_7,A_median,saved_and_reload_verified,,424,118,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_7,B_structural_proxy,saved_and_reload_verified,,424,118,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_7,C_ridge,saved_and_reload_verified,,424,118,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_7,C_distributed,saved_and_reload_verified,,424,118,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_7,D_sarimax,abstained,Latest contiguous sequence has fewer than minimum SARIMAX observations,424,118,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_7,E_lightgbm,saved_and_reload_verified,,424,118,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_7,F_catboost,saved_and_reload_verified,,424,118,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_7,G_hybrid,saved_and_reload_verified,,424,118,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_7,H_ensemble,saved_and_reload_verified,,424,118,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_7,Z_last_change,saved_and_reload_verified,,424,118,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_7,B_official_structural,abstained,Missing complete dated official parameters,424,118,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_14,A_no_change,saved_and_reload_verified,,354,99,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_14,A_mean,saved_and_reload_verified,,354,99,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_14,A_median,saved_and_reload_verified,,354,99,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_14,B_structural_proxy,saved_and_reload_verified,,354,99,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_14,C_ridge,saved_and_reload_verified,,354,99,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_14,C_distributed,saved_and_reload_verified,,354,99,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_14,D_sarimax,abstained,Latest contiguous sequence has fewer than minimum SARIMAX observations,354,99,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_14,E_lightgbm,saved_and_reload_verified,,354,99,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_14,F_catboost,saved_and_reload_verified,,354,99,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_14,G_hybrid,saved_and_reload_verified,,354,99,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_14,H_ensemble,saved_and_reload_verified,,354,99,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_14,Z_last_change,saved_and_reload_verified,,354,99,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_14,B_official_structural,abstained,Missing complete dated official parameters,354,99,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_30,A_no_change,saved_and_reload_verified,,245,71,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_30,A_mean,saved_and_reload_verified,,245,71,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_30,A_median,saved_and_reload_verified,,245,71,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_30,B_structural_proxy,saved_and_reload_verified,,245,71,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_30,C_ridge,saved_and_reload_verified,,245,71,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_30,C_distributed,saved_and_reload_verified,,245,71,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_30,D_sarimax,saved_and_reload_verified,,245,71,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_30,E_lightgbm,saved_and_reload_verified,,245,71,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_30,F_catboost,saved_and_reload_verified,,245,71,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_30,G_hybrid,saved_and_reload_verified,,245,71,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_30,H_ensemble,saved_and_reload_verified,,245,71,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_30,Z_last_change,saved_and_reload_verified,,245,71,2026-06-01T00:00:00+03:00
+stabilized_fx_2023_2026,day_30,B_official_structural,abstained,Missing complete dated official parameters,245,71,2026-06-01T00:00:00+03:00

@@ -1,0 +1,26 @@
+{
+  "version": "2026-holdout-v1",
+  "horizons": ["decision_1", "decision_2", "decision_4", "day_1", "day_3", "day_7", "day_14", "day_30"],
+  "regime": "stabilized_fx_2023_2026",
+  "design_path": "data/exports/forecasting/holdout_evaluation_design.csv",
+  "development_predictions": "reports/forecasting/development_predictions.csv",
+  "evaluation_start": "2026-06-01",
+  "evaluation_end": "2026-11-10",
+  "market_availability_mode": "as_of_close",
+  "point_fit_policy": "Frozen development-only Part 2 bundles; no holdout refit or hyperparameter/ensemble-weight tuning",
+  "calibration_policy": "Sequential walk-forward: development OOF plus strictly earlier matured evaluation residuals, horizon/model conditioned, trailing 60 stride samples",
+  "selection_policy": "Common-origin MAE, then Brier, then distance of coverage from 0.90; unavailable holdout horizons use development ranking explicitly",
+  "selection_consequence": "This holdout is now used for selection and cannot subsequently be claimed as an untouched final test",
+  "quantitative_families": ["B_structural_proxy", "C_ridge", "C_distributed", "E_lightgbm", "F_catboost", "G_hybrid", "H_ensemble"],
+  "required_baselines": ["A_no_change", "Z_last_change"],
+  "approval": {
+    "mae_relative_tolerance": 0.01,
+    "mae_absolute_tolerance_lbp": 0.0,
+    "coverage_minimum": 0.80,
+    "coverage_maximum": 0.98,
+    "minimum_holdout_origins": 20,
+    "require_certified_target_coverage": true
+  },
+  "evidence": "Conditional archive targets and assumed daily close availability, not verified original-vintage real-time history",
+  "live": {"anchor_maximum_age_days": 10, "market_maximum_age_days": 7, "tier2_lagged_spot_maximum_age_days": 14}
+}

@@ -1,0 +1,46 @@
+{
+  "protocol_sha256": "feb1b1d9d3d570a51c3e4a84261bdd60533e73662f592a0813cfe4469240724c",
+  "selected_at": "2026-11-10T23:57:59.773170+00:00",
+  "selection": [
+    {
+      "regime": "pre_crisis",
+      "champion": "asymmetric:nyh_gasoline:w10:lag0",
+      "family_winners": [
+        "persistence",
+        "drift",
+        "linear:nyh_gasoline:w5:lag0",
+        "distributed_lag:nyh_gasoline:w10:lag0",
+        "rolling_linear:nyh_gasoline:w10:lag0",
+        "asymmetric:nyh_gasoline:w10:lag0"
+      ],
+      "selection_period": [
+        "2017-01-01",
+        "2017-12-27"
+      ],
+      "test_period": [
+        "2018-01-01",
+        "2019-08-31"
+      ]
+    },
+    {
+      "regime": "recent_pre_fiscal",
+      "champion": "asymmetric:brent_spot:w20:lag14",
+      "family_winners": [
+        "persistence",
+        "drift",
+        "linear:nyh_gasoline:w1:lag0",
+        "distributed_lag:nyh_gasoline:w1:lag0",
+        "rolling_linear:nyh_gasoline:w1:lag0",
+        "asymmetric:brent_spot:w20:lag14"
+      ],
+      "selection_period": [
+        "2024-01-01",
+        "2024-11-15"
+      ],
+      "test_period": [
+        "2025-01-01",
+        "2025-05-28"
+      ]
+    }
+  ]
+}

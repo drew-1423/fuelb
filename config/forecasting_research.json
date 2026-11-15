@@ -1,0 +1,146 @@
+{
+  "version": "t1-differential-v1",
+  "purpose": "Model development only; latest-vintage research; no production selection before Part 6",
+  "targets": {
+    "decisions": [
+      1,
+      2,
+      4
+    ],
+    "calendar_days": [
+      1,
+      3,
+      7,
+      14,
+      30
+    ]
+  },
+  "target_statuses": [
+    "document_verified",
+    "archive_corroborated",
+    "government_archive"
+  ],
+  "target_assumption": "Each source-date record becomes known the next Asia/Beirut midnight. Effective dates and complete decision coverage remain unverified.",
+  "calendar_assumption": "Last recorded price at endpoint conditional on observed archive completeness. Never a newly observed daily official price.",
+  "maximum_gap_days": 14,
+  "minimum_domestic_history": 5,
+  "series": [
+    "nyh_gasoline",
+    "brent_spot",
+    "eurusd",
+    "italy_gasoline_ex_tax",
+    "greece_gasoline_ex_tax",
+    "us_gasoline_stocks",
+    "us_crude_stocks",
+    "us_refinery_utilization",
+    "brent_futures",
+    "rbob_futures",
+    "gasoil_futures",
+    "cboe_ovx"
+  ],
+  "market_availability": "Research close convention: daily d 23:59:59 UTC; weekly EIA d+5 at 23:59:59 UTC. EIA spot T-1 is an optimistic research assumption, not its verified release history. Strict mode retains actual capture/vintage clocks. Latest-vintage revision risk remains.",
+  "regimes": [
+    {
+      "id": "pre_crisis",
+      "start": "2012-01-01",
+      "development_end": "2017-12-31",
+      "fold_starts": [
+        "2015-01-01",
+        "2016-01-01",
+        "2017-01-01"
+      ],
+      "part6_period": "2018-01-01 through 2019-08-31; already examined in Part 4, not globally untouched"
+    },
+    {
+      "id": "stabilized_fx_2023_2026",
+      "start": "2023-05-12",
+      "development_end": "2026-05-31",
+      "fold_starts": [
+        "2024-06-01",
+        "2025-01-01",
+        "2025-09-01"
+      ],
+      "evaluation_start": "2026-06-01",
+      "evaluation_end": "2026-11-10",
+      "part6_period": "June-November 2026 evaluation, separate export; no model fitting in this stage.",
+      "regime_status": "unified research bucket under user-specified stable-FX assumption; fiscal breaks remain in data"
+    }
+  ],
+  "families": [
+    "A_no_change",
+    "A_mean",
+    "A_median",
+    "B_structural_proxy",
+    "C_ridge",
+    "C_distributed",
+    "D_sarimax",
+    "E_lightgbm",
+    "F_catboost",
+    "G_hybrid",
+    "H_ensemble"
+  ],
+  "minimum_train": 24,
+  "minimum_tree_train": 60,
+  "minimum_sarimax_run": 40,
+  "minimum_calibration": 20,
+  "calibration_max": 80,
+  "coverage": 0.9,
+  "ridge_alphas": [
+    1.0,
+    10.0,
+    100.0
+  ],
+  "trees": {
+    "iterations": 80,
+    "depth": 3,
+    "minimum_leaf": 20,
+    "learning_rate": 0.04,
+    "regularization": 10.0
+  },
+  "ensemble_minimum_oof": 20,
+  "competitive_tolerance": 0.02,
+  "threads": 2,
+  "random_seed": 20261111,
+  "structural_status": "B official requires complete dated inputs and abstains if absent. B_structural_proxy is a positive estimated composite pass-through under constant policy and flat future market scenarios, never official FX/formula.",
+  "news": "Optional deterministic channel classification; strict known-at availability; no zero-filled unknown historical news coverage; no paid API",
+  "part6_reservation": "Development stops 2026-05-31; June-November targets go only to holdout_evaluation_design.csv. Prior stages already viewed some history; not a globally untouched holdout. No tuning, fitting or accuracy claims in this stage.",
+  "market_availability_mode": "as_of_close",
+  "origin_local_time": "03:00",
+  "structural_delta": {
+    "enabled": true,
+    "stabilized_start": "2023-05-12",
+    "fx_lbp_per_usd": 89700,
+    "bank_factor": 1.01,
+    "vat_factor": 1.11,
+    "shock_threshold_lbp": 150000,
+    "window_observed_sessions": 4,
+    "assumption_status": "User-specified sensitivity assumptions, not verified current government parameters",
+    "equation": "delta(mean4 USD/bbl)*1000/158.987294928*89700*1.01*1.11/50 after stabilization; preceding periods use trailing median price/product ratio (fees already embedded).",
+    "baseline_window": "Four available trading observations at latest known domestic source date, 03:00 Asia/Beirut; exact announcement/calculation windows unresolved.",
+    "shock_interpretation": "Large lagged price movement; may reflect commodity, FX or tax changes. Not proof of a fiscal decree.",
+    "limitations": "Constant charges cancel only between policy changes. Constant FX, bank fee and VAT are hypotheses. No licensed CIF Med benchmark or roll adjustment is available.",
+    "benchmark_series": "nyh_gasoline"
+  },
+  "futures_provenance": {
+    "provider": "Yahoo public chart daily unadjusted close; continuous front-symbol roll calendar unknown",
+    "symbols": {
+      "BZ=F": "NYMEX Brent last-day financial, not direct ICE contract history",
+      "RB=F": "NYMEX RBOB US gasoline, not Mediterranean 95",
+      "HO=F": "NYMEX NY Harbor ULSD, not ICE gasoil"
+    },
+    "sources": [
+      "https://finance.yahoo.com/quote/BZ=F/history/",
+      "https://finance.yahoo.com/quote/RB=F/history/",
+      "https://www.cmegroup.com/markets/energy/refined-products/heating-oil.html",
+      "https://www.cmegroup.com/tools-information/lookups/advisories/ser/SER-6887.html"
+    ],
+    "verification_date": "2026-11-12",
+    "fallback": "Retain futures as unavailable; choose fresh brent_spot/nyh_gasoline explicitly in derived features. No heating-oil substitute.",
+    "short_windows": "Means of last 3/4/5/10 observed trading sessions; return3/return5 compare against 3/5 observed sessions earlier; no holiday filling.",
+    "collection_status": "Yahoo robots policy denied; Stooq browser barrier; stopped. User directs EIA spot fallback for this stage. No futures observations collected."
+  },
+  "energy_source_override": {
+    "refined_gasoline": "nyh_gasoline",
+    "brent": "brent_spot"
+  }
+}

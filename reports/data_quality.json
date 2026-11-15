@@ -1,0 +1,998 @@
+{
+  "generated_at": "2026-11-15T14:56:38.345280+00:00",
+  "as_of_beirut": "2026-11-15",
+  "timezone": "Asia/Beirut",
+  "ledger_unique_dates": 1371,
+  "status_counts": {
+    "supplier_observed": 458,
+    "document_verified": 4,
+    "archive_corroborated": 809,
+    "government_archive": 58,
+    "conflict": 42
+  },
+  "earliest_verified_archive_or_document": "2010-10-27",
+  "latest_verified_archive_or_document": "2026-11-10",
+  "earliest_document_verified": "2010-10-27",
+  "latest_document_verified": "2025-05-29",
+  "document_verified_count": 4,
+  "raw_integrity_failures": [],
+  "unique_observed_official_archive_decision_ids": 667,
+  "official_archive_dates_without_decision_id": 274,
+  "total_historical_official_decisions": "unknown: archive coverage is incomplete; date-only rows do not certify unique decisions",
+  "conflict_dates": [
+    "2012-01-04",
+    "2012-04-25",
+    "2012-05-09",
+    "2015-06-24",
+    "2016-06-17",
+    "2016-07-14",
+    "2021-10-27",
+    "2022-01-14",
+    "2022-03-24",
+    "2022-03-28",
+    "2022-08-24",
+    "2022-09-01",
+    "2022-09-02",
+    "2023-01-26",
+    "2023-01-27",
+    "2023-01-30",
+    "2023-02-02",
+    "2023-02-06",
+    "2023-02-07",
+    "2023-02-13",
+    "2023-02-15",
+    "2023-02-16",
+    "2023-02-17",
+    "2023-02-23",
+    "2023-02-28",
+    "2023-03-02",
+    "2023-03-09",
+    "2023-03-10",
+    "2023-03-13",
+    "2023-03-14",
+    "2023-03-16",
+    "2023-03-17",
+    "2023-03-20",
+    "2023-03-21",
+    "2023-03-22",
+    "2023-04-03",
+    "2024-10-04",
+    "2025-05-23",
+    "2025-06-24",
+    "2025-09-30",
+    "2025-12-15",
+    "2026-01-02"
+  ],
+  "issue_counts": {
+    "contradictory_observations": 42,
+    "suspicious_change_over_25pct": 4,
+    "duplicate_date_source_price": 4,
+    "invalid_price": 1
+  },
+  "missing_publication_timestamp_observations": 3176,
+  "unknown_effective_date_observations": 3172,
+  "gap_candidates": 163,
+  "cross_source_absent_dates": 370,
+  "official_ids_on_multiple_dates": {
+    "2017/232": [
+      "2017-12-13",
+      "2017-12-27"
+    ],
+    "2019/239": [
+      "2019-01-02",
+      "2019-12-26"
+    ]
+  },
+  "sources": {
+    "ipt": {
+      "unique_source_observations": 1312,
+      "valid_unique_dates": 1308,
+      "earliest_source_date": "2008-01-02",
+      "latest_source_date": "2026-11-13",
+      "age_days": 2,
+      "stale": false,
+      "invalid_observations": 0,
+      "within_source_conflict_dates": [
+        "2023-03-13",
+        "2023-03-20",
+        "2023-03-21",
+        "2025-09-30"
+      ],
+      "duplicate_date_extra_observations": 4,
+      "exact_duplicate_rows_in_captures": 13,
+      "last_successful_run": {
+        "id": 88,
+        "finished_at": "2026-11-14T22:56:52.686106+00:00",
+        "details": {
+          "parsed_rows": 1313,
+          "new_observations": 0,
+          "capture_id": 333
+        }
+      }
+    },
+    "taqtek": {
+      "unique_source_observations": 915,
+      "valid_unique_dates": 915,
+      "earliest_source_date": "2010-10-27",
+      "latest_source_date": "2026-11-13",
+      "age_days": 2,
+      "stale": false,
+      "invalid_observations": 0,
+      "within_source_conflict_dates": [],
+      "duplicate_date_extra_observations": 0,
+      "exact_duplicate_rows_in_captures": 0,
+      "last_successful_run": {
+        "id": 92,
+        "finished_at": "2026-11-15T05:43:21.263456+00:00",
+        "details": {
+          "parsed_rows": 915,
+          "new_observations": 0,
+          "capture_id": 344
+        }
+      }
+    },
+    "ministry": {
+      "unique_source_observations": 945,
+      "valid_unique_dates": 913,
+      "earliest_source_date": "2010-10-27",
+      "latest_source_date": "2026-11-10",
+      "age_days": 5,
+      "stale": false,
+      "invalid_observations": 1,
+      "within_source_conflict_dates": [
+        "2022-01-14",
+        "2022-09-01",
+        "2022-09-02",
+        "2023-01-26",
+        "2023-01-27",
+        "2023-01-30",
+        "2023-02-02",
+        "2023-02-06",
+        "2023-02-07",
+        "2023-02-13",
+        "2023-02-15",
+        "2023-02-16",
+        "2023-02-17",
+        "2023-02-23",
+        "2023-02-28",
+        "2023-03-02",
+        "2023-03-09",
+        "2023-03-10",
+        "2023-03-14",
+        "2023-03-16",
+        "2023-03-17",
+        "2023-03-20",
+        "2023-03-21",
+        "2023-03-22",
+        "2023-04-03"
+      ],
+      "duplicate_date_extra_observations": 31,
+      "exact_duplicate_rows_in_captures": 0,
+      "last_successful_run": {
+        "id": 91,
+        "finished_at": "2026-11-15T05:38:07.224501+00:00",
+        "details": {
+          "parsed_rows": 8,
+          "new_observations": 0,
+          "pages": 1
+        }
+      }
+    },
+    "official_document": {
+      "unique_source_observations": 4,
+      "valid_unique_dates": 4,
+      "earliest_source_date": "2010-10-27",
+      "latest_source_date": "2025-05-29",
+      "age_days": 535,
+      "stale": true,
+      "invalid_observations": 0,
+      "within_source_conflict_dates": [],
+      "duplicate_date_extra_observations": 0,
+      "exact_duplicate_rows_in_captures": 0,
+      "last_successful_run": {
+        "id": 85,
+        "finished_at": "2026-11-14T20:06:49.507259+00:00",
+        "details": {
+          "parsed_rows": 1,
+          "new_observations": 1,
+          "capture_id": 322
+        }
+      }
+    }
+  },
+  "collection_runs": [
+    {
+      "id": 1,
+      "source_id": "ipt",
+      "started_at": "2026-11-10T19:03:51.661238+00:00",
+      "finished_at": "2026-11-10T19:04:04.258012+00:00",
+      "status": "failed",
+      "details": "{\"error\": \"Public export did not expose a download; use browser/manual import\", \"type\": \"ValueError\"}"
+    },
+    {
+      "id": 2,
+      "source_id": "ministry",
+      "started_at": "2026-11-10T19:04:04.258906+00:00",
+      "finished_at": "2026-11-10T19:04:14.570412+00:00",
+      "status": "failed",
+      "details": "{\"error\": \"Archive became paginated; stop to prevent claiming incomplete coverage\", \"type\": \"ValueError\"}"
+    },
+    {
+      "id": 3,
+      "source_id": "taqtek",
+      "started_at": "2026-11-10T19:04:14.571924+00:00",
+      "finished_at": "2026-11-10T19:04:20.922655+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 914, \"new_observations\": 914, \"capture_id\": 10}"
+    },
+    {
+      "id": 4,
+      "source_id": "ipt",
+      "started_at": "2026-11-10T19:08:11.499169+00:00",
+      "finished_at": "2026-11-10T19:08:28.530691+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1312, \"new_observations\": 1311, \"capture_id\": 15}"
+    },
+    {
+      "id": 5,
+      "source_id": "ministry",
+      "started_at": "2026-11-10T19:08:28.792102+00:00",
+      "finished_at": "2026-11-10T19:11:13.220074+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 940, \"new_observations\": 940, \"pages\": 47}"
+    },
+    {
+      "id": 6,
+      "source_id": "official_document",
+      "started_at": "2026-11-10T19:11:36.453362+00:00",
+      "finished_at": "2026-11-10T19:11:48.068528+00:00",
+      "status": "success",
+      "details": "{\"capture_id\": 67, \"evidence_only\": true}"
+    },
+    {
+      "id": 7,
+      "source_id": "official_document",
+      "started_at": "2026-11-10T19:11:48.319022+00:00",
+      "finished_at": "2026-11-10T19:12:15.296627+00:00",
+      "status": "success",
+      "details": "{\"capture_id\": 69, \"evidence_only\": true}"
+    },
+    {
+      "id": 8,
+      "source_id": "official_document",
+      "started_at": "2026-11-10T19:12:15.573966+00:00",
+      "finished_at": "2026-11-10T19:12:43.635479+00:00",
+      "status": "success",
+      "details": "{\"capture_id\": 71, \"evidence_only\": true}"
+    },
+    {
+      "id": 9,
+      "source_id": "official_document",
+      "started_at": "2026-11-10T19:14:49.125992+00:00",
+      "finished_at": "2026-11-10T19:14:49.130251+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1, \"new_observations\": 1, \"capture_id\": 72}"
+    },
+    {
+      "id": 10,
+      "source_id": "official_document",
+      "started_at": "2026-11-10T19:14:49.365579+00:00",
+      "finished_at": "2026-11-10T19:14:49.369481+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1, \"new_observations\": 1, \"capture_id\": 73}"
+    },
+    {
+      "id": 11,
+      "source_id": "official_document",
+      "started_at": "2026-11-10T19:14:49.574107+00:00",
+      "finished_at": "2026-11-10T19:14:49.578519+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1, \"new_observations\": 1, \"capture_id\": 74}"
+    },
+    {
+      "id": 12,
+      "source_id": "market_eia",
+      "started_at": "2026-11-10T19:27:37.423311+00:00",
+      "finished_at": "2026-11-10T19:27:41.812068+00:00",
+      "status": "success",
+      "details": "{\"probe\": true}"
+    },
+    {
+      "id": 13,
+      "source_id": "market_ec",
+      "started_at": "2026-11-10T19:27:41.813311+00:00",
+      "finished_at": "2026-11-10T19:27:45.807943+00:00",
+      "status": "success",
+      "details": "{\"probe\": true}"
+    },
+    {
+      "id": 14,
+      "source_id": "market_fred",
+      "started_at": "2026-11-10T19:27:45.813483+00:00",
+      "finished_at": "2026-11-10T19:42:05.842326+00:00",
+      "status": "withdrawn_source_policy",
+      "details": "{\"probe\": true}"
+    },
+    {
+      "id": 15,
+      "source_id": "market_eia",
+      "started_at": "2026-11-10T19:28:22.610259+00:00",
+      "finished_at": "2026-11-10T19:28:28.109691+00:00",
+      "status": "success",
+      "details": "{\"probe_download\": \"brent.xls\", \"capture_id\": 82}"
+    },
+    {
+      "id": 16,
+      "source_id": "market_ec",
+      "started_at": "2026-11-10T19:28:28.110928+00:00",
+      "finished_at": "2026-11-10T19:28:38.861589+00:00",
+      "status": "success",
+      "details": "{\"probe_download\": \"ec.xlsx\", \"capture_id\": 84}"
+    },
+    {
+      "id": 17,
+      "source_id": "market_fred",
+      "started_at": "2026-11-10T19:28:38.862924+00:00",
+      "finished_at": "2026-11-10T19:42:05.842326+00:00",
+      "status": "withdrawn_source_policy",
+      "details": "{\"probe_download\": \"eur.csv\", \"capture_id\": 86}"
+    },
+    {
+      "id": 18,
+      "source_id": "market_eia",
+      "started_at": "2026-11-10T19:33:13.429938+00:00",
+      "finished_at": "2026-11-10T19:33:49.299963+00:00",
+      "status": "success",
+      "details": "{\"downloaded\": [{\"series\": \"nyh_gasoline\", \"capture_id\": 89, \"bytes\": 518656}, {\"series\": \"us_gasoline_stocks\", \"capture_id\": 91, \"bytes\": 113152}, {\"series\": \"us_crude_stocks\", \"capture_id\": 93, \"bytes\": 130048}, {\"series\": \"us_refinery_utilization\", \"capture_id\": 95, \"bytes\": 112128}]}"
+    },
+    {
+      "id": 19,
+      "source_id": "market_official_review",
+      "started_at": "2026-11-10T19:36:57.959812+00:00",
+      "finished_at": "2026-11-10T19:36:57.961098+00:00",
+      "status": "success",
+      "details": "{\"series\": \"lbp_payment_fx\", \"parsed_rows\": 1, \"new_observations\": 1, \"capture_id\": 96}"
+    },
+    {
+      "id": 20,
+      "source_id": "market_eia",
+      "started_at": "2026-11-10T19:40:07.931217+00:00",
+      "finished_at": "2026-11-10T19:42:05.842507+00:00",
+      "status": "interrupted",
+      "details": "{\"reason\": \"Collector interrupted while changing the FX provider; existing captures retained.\"}"
+    },
+    {
+      "id": 21,
+      "source_id": "market_fed",
+      "started_at": "2026-11-10T19:41:04.126300+00:00",
+      "finished_at": "2026-11-10T19:41:14.586803+00:00",
+      "status": "success",
+      "details": "{\"investigation\": true, \"capture\": 108}"
+    },
+    {
+      "id": 22,
+      "source_id": "market_fed",
+      "started_at": "2026-11-10T19:41:36.462338+00:00",
+      "finished_at": "2026-11-10T19:41:45.832181+00:00",
+      "status": "success",
+      "details": "{\"downloaded_capture_id\": 110}"
+    },
+    {
+      "id": 23,
+      "source_id": "market_eia",
+      "started_at": "2026-11-10T19:43:10.209632+00:00",
+      "finished_at": "2026-11-10T19:43:51.033510+00:00",
+      "status": "success",
+      "details": "{\"results\": [{\"series\": \"brent_spot\", \"parsed_rows\": 9122, \"new_observations\": 0, \"capture_id\": 113}, {\"series\": \"nyh_gasoline\", \"parsed_rows\": 9171, \"new_observations\": 0, \"capture_id\": 115}, {\"series\": \"us_gasoline_stocks\", \"parsed_rows\": 1922, \"new_observations\": 0, \"capture_id\": 117}, {\"series\": \"us_crude_stocks\", \"parsed_rows\": 2301, \"new_observations\": 0, \"capture_id\": 119}, {\"series\": \"us_refinery_utilization\", \"parsed_rows\": 1879, \"new_observations\": 0, \"capture_id\": 121}]}"
+    },
+    {
+      "id": 24,
+      "source_id": "market_ec",
+      "started_at": "2026-11-10T19:43:51.034051+00:00",
+      "finished_at": "2026-11-10T19:43:56.034288+00:00",
+      "status": "failed",
+      "details": "{\"completed\": [], \"error\": \"HTTP 429; stopped without retry/bypass\"}"
+    },
+    {
+      "id": 25,
+      "source_id": "market_fed",
+      "started_at": "2026-11-10T19:43:56.034873+00:00",
+      "finished_at": "2026-11-10T19:44:04.007710+00:00",
+      "status": "success",
+      "details": "{\"results\": [{\"series\": \"eurusd\", \"parsed_rows\": 7265, \"new_observations\": 0, \"capture_id\": 126}]}"
+    },
+    {
+      "id": 26,
+      "source_id": "official_document",
+      "started_at": "2026-11-10T20:02:07.877037+00:00",
+      "finished_at": "2026-11-10T20:02:22.011532+00:00",
+      "status": "success",
+      "details": "{\"purpose\": \"Part 4 original annex verification\", \"capture_id\": 128}"
+    },
+    {
+      "id": 27,
+      "source_id": "news_eia",
+      "started_at": "2026-11-11T00:16:48.933063+00:00",
+      "finished_at": "2026-11-11T00:16:56.272166+00:00",
+      "status": "success",
+      "details": "[{\"parsed\": 25, \"new_items\": 25, \"with_source_timestamps\": 24, \"capture_id\": 130}, {\"parsed\": 10, \"new_items\": 10, \"with_source_timestamps\": 10, \"capture_id\": 131}]"
+    },
+    {
+      "id": 28,
+      "source_id": "ipt",
+      "started_at": "2026-11-11T15:59:54.311470+00:00",
+      "finished_at": "2026-11-11T16:00:09.454639+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1312, \"new_observations\": 0, \"capture_id\": 136}"
+    },
+    {
+      "id": 29,
+      "source_id": "ipt",
+      "started_at": "2026-11-11T16:27:42.464658+00:00",
+      "finished_at": "2026-11-11T16:27:58.261401+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1312, \"new_observations\": 0, \"capture_id\": 141}"
+    },
+    {
+      "id": 30,
+      "source_id": "ministry",
+      "started_at": "2026-11-11T16:27:59.971151+00:00",
+      "finished_at": "2026-11-11T16:28:10.538797+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 5, \"new_observations\": 1, \"pages\": 1}"
+    },
+    {
+      "id": 31,
+      "source_id": "taqtek",
+      "started_at": "2026-11-11T16:28:12.294585+00:00",
+      "finished_at": "2026-11-11T16:28:18.099324+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 914, \"new_observations\": 0, \"capture_id\": 147}"
+    },
+    {
+      "id": 32,
+      "source_id": "market_eia",
+      "started_at": "2026-11-11T16:28:19.572265+00:00",
+      "finished_at": "2026-11-11T16:29:00.711126+00:00",
+      "status": "success",
+      "details": "{\"results\": [{\"series\": \"brent_spot\", \"parsed_rows\": 9122, \"new_observations\": 0, \"capture_id\": 150}, {\"series\": \"nyh_gasoline\", \"parsed_rows\": 9171, \"new_observations\": 0, \"capture_id\": 152}, {\"series\": \"us_gasoline_stocks\", \"parsed_rows\": 1922, \"new_observations\": 0, \"capture_id\": 154}, {\"series\": \"us_crude_stocks\", \"parsed_rows\": 2301, \"new_observations\": 0, \"capture_id\": 156}, {\"series\": \"us_refinery_utilization\", \"parsed_rows\": 1879, \"new_observations\": 0, \"capture_id\": 158}]}"
+    },
+    {
+      "id": 33,
+      "source_id": "market_ec",
+      "started_at": "2026-11-11T16:29:02.509930+00:00",
+      "finished_at": "2026-11-11T16:29:18.191342+00:00",
+      "status": "success",
+      "details": "{\"results\": [{\"series\": \"italy_gasoline_ex_tax\", \"parsed_rows\": 1092, \"new_observations\": 1, \"capture_id\": 161}, {\"series\": \"greece_gasoline_ex_tax\", \"parsed_rows\": 1092, \"new_observations\": 1, \"capture_id\": 161}]}"
+    },
+    {
+      "id": 34,
+      "source_id": "market_fed",
+      "started_at": "2026-11-11T16:29:19.779764+00:00",
+      "finished_at": "2026-11-11T16:29:31.278300+00:00",
+      "status": "success",
+      "details": "{\"results\": [{\"series\": \"eurusd\", \"parsed_rows\": 7265, \"new_observations\": 0, \"capture_id\": 164}]}"
+    },
+    {
+      "id": 35,
+      "source_id": "ipt",
+      "started_at": "2026-11-11T23:03:01.949359+00:00",
+      "finished_at": "2026-11-11T23:03:18.987490+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1312, \"new_observations\": 0, \"capture_id\": 169}"
+    },
+    {
+      "id": 36,
+      "source_id": "ministry",
+      "started_at": "2026-11-11T23:03:20.752158+00:00",
+      "finished_at": "2026-11-11T23:03:31.446207+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 8, \"new_observations\": 3, \"pages\": 1}"
+    },
+    {
+      "id": 37,
+      "source_id": "ipt",
+      "started_at": "2026-11-12T07:22:06.782846+00:00",
+      "finished_at": "2026-11-12T07:44:12.819035+00:00",
+      "status": "failed",
+      "details": "{\"error\": \"The read operation timed out\", \"type\": \"ReadTimeout\"}"
+    },
+    {
+      "id": 38,
+      "source_id": "ministry",
+      "started_at": "2026-11-12T07:44:14.740370+00:00",
+      "finished_at": "2026-11-12T07:44:25.391639+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 8, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 39,
+      "source_id": "ipt",
+      "started_at": "2026-11-12T09:23:22.489950+00:00",
+      "finished_at": "2026-11-12T09:34:08.494083+00:00",
+      "status": "failed",
+      "details": "{\"error\": \"The read operation timed out\", \"type\": \"ReadTimeout\"}"
+    },
+    {
+      "id": 40,
+      "source_id": "ministry",
+      "started_at": "2026-11-12T09:34:10.347555+00:00",
+      "finished_at": "2026-11-12T09:34:21.150953+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 8, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 41,
+      "source_id": "market_yahoo",
+      "started_at": "2026-11-12T10:47:15.643307+00:00",
+      "finished_at": "2026-11-12T10:47:21.720877+00:00",
+      "status": "partial",
+      "details": "{\"results\": [{\"series\": \"brent_futures\", \"symbol\": \"BZ=F\", \"new_observations\": 0, \"status\": \"unavailable\", \"reason\": \"ConnectError: [Errno 8] nodename nor servname provided, or not known\", \"fallback_series\": \"brent_spot\", \"stored_fallback_rows\": 9122, \"fallback_latest_date\": \"2026-11-03\", \"fallback_note\": \"Use the named spot proxy only when fresh. No futures rows fabricated.\"}, {\"series\": \"rbob_futures\", \"symbol\": \"RB=F\", \"new_observations\": 0, \"status\": \"unavailable\", \"reason\": \"ConnectError: [Errno 8] nodename nor servname provided, or not known\", \"fallback_series\": \"nyh_gasoline\", \"stored_fallback_rows\": 9171, \"fallback_latest_date\": \"2026-11-03\", \"fallback_note\": \"Use the named spot proxy only when fresh. No futures rows fabricated.\"}, {\"series\": \"gasoil_futures\", \"symbol\": \"HO=F\", \"new_observations\": 0, \"status\": \"unavailable\", \"reason\": \"ConnectError: [Errno 8] nodename nor servname provided, or not known\", \"fallback_series\": null, \"stored_fallback_rows\": 0, \"fallback_latest_date\": null, \"fallback_note\": \"Use the named spot proxy only when fresh. No futures rows fabricated.\"}]}"
+    },
+    {
+      "id": 42,
+      "source_id": "market_yahoo",
+      "started_at": "2026-11-12T11:01:09.141588+00:00",
+      "finished_at": "2026-11-12T11:01:09.971477+00:00",
+      "status": "partial",
+      "details": "{\"results\": [{\"series\": \"brent_futures\", \"symbol\": \"BZ=F\", \"new_observations\": 0, \"status\": \"unavailable\", \"reason\": \"AccessStopped: Request denied by robots policy\", \"fallback_series\": \"brent_spot\", \"stored_fallback_rows\": 9122, \"fallback_latest_date\": \"2026-11-03\", \"fallback_note\": \"Use the named spot proxy only when fresh. No futures rows fabricated.\"}, {\"series\": \"rbob_futures\", \"symbol\": \"RB=F\", \"new_observations\": 0, \"status\": \"unavailable\", \"reason\": \"AccessStopped: Request denied by robots policy\", \"fallback_series\": \"nyh_gasoline\", \"stored_fallback_rows\": 9171, \"fallback_latest_date\": \"2026-11-03\", \"fallback_note\": \"Use the named spot proxy only when fresh. No futures rows fabricated.\"}, {\"series\": \"gasoil_futures\", \"symbol\": \"HO=F\", \"new_observations\": 0, \"status\": \"unavailable\", \"reason\": \"AccessStopped: Request denied by robots policy\", \"fallback_series\": null, \"stored_fallback_rows\": 0, \"fallback_latest_date\": null, \"fallback_note\": \"Use the named spot proxy only when fresh. No futures rows fabricated.\"}]}"
+    },
+    {
+      "id": 43,
+      "source_id": "market_eia",
+      "started_at": "2026-11-12T13:04:41.635288+00:00",
+      "finished_at": "2026-11-12T13:04:41.689714+00:00",
+      "status": "failed",
+      "details": "{\"completed\": [], \"error\": \"[Errno 8] nodename nor servname provided, or not known\"}"
+    },
+    {
+      "id": 44,
+      "source_id": "ipt",
+      "started_at": "2026-11-12T15:28:24.980659+00:00",
+      "finished_at": "2026-11-12T15:28:44.543652+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1312, \"new_observations\": 0, \"capture_id\": 194}"
+    },
+    {
+      "id": 45,
+      "source_id": "ministry",
+      "started_at": "2026-11-12T15:28:47.628200+00:00",
+      "finished_at": "2026-11-12T15:28:59.877671+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 8, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 46,
+      "source_id": "market_eia",
+      "started_at": "2026-11-12T18:39:16.010227+00:00",
+      "finished_at": "2026-11-12T18:40:00.769553+00:00",
+      "status": "success",
+      "details": "{\"results\": [{\"series\": \"brent_spot\", \"parsed_rows\": 9122, \"new_observations\": 0, \"capture_id\": 201}, {\"series\": \"nyh_gasoline\", \"parsed_rows\": 9171, \"new_observations\": 0, \"capture_id\": 203}, {\"series\": \"us_gasoline_stocks\", \"parsed_rows\": 1922, \"new_observations\": 0, \"capture_id\": 205}, {\"series\": \"us_crude_stocks\", \"parsed_rows\": 2301, \"new_observations\": 0, \"capture_id\": 207}, {\"series\": \"us_refinery_utilization\", \"parsed_rows\": 1879, \"new_observations\": 0, \"capture_id\": 209}]}"
+    },
+    {
+      "id": 47,
+      "source_id": "ipt",
+      "started_at": "2026-11-13T02:55:45.560386+00:00",
+      "finished_at": "2026-11-13T03:11:42.316618+00:00",
+      "status": "failed",
+      "details": "{\"error\": \"The read operation timed out\", \"type\": \"ReadTimeout\"}"
+    },
+    {
+      "id": 48,
+      "source_id": "ministry",
+      "started_at": "2026-11-13T03:11:44.125940+00:00",
+      "finished_at": "2026-11-13T03:11:54.696464+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 8, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 49,
+      "source_id": "taqtek",
+      "started_at": "2026-11-13T03:11:56.474974+00:00",
+      "finished_at": "2026-11-13T03:22:32.961413+00:00",
+      "status": "failed",
+      "details": "{\"error\": \"The read operation timed out\", \"type\": \"ReadTimeout\"}"
+    },
+    {
+      "id": 50,
+      "source_id": "market_eia",
+      "started_at": "2026-11-13T03:22:34.856298+00:00",
+      "finished_at": "2026-11-13T03:33:17.839618+00:00",
+      "status": "success",
+      "details": "{\"results\": [{\"series\": \"brent_spot\", \"parsed_rows\": 9128, \"new_observations\": 6, \"capture_id\": 219}, {\"series\": \"nyh_gasoline\", \"parsed_rows\": 9177, \"new_observations\": 6, \"capture_id\": 221}, {\"series\": \"us_gasoline_stocks\", \"parsed_rows\": 1923, \"new_observations\": 1, \"capture_id\": 223}, {\"series\": \"us_crude_stocks\", \"parsed_rows\": 2302, \"new_observations\": 1, \"capture_id\": 225}, {\"series\": \"us_refinery_utilization\", \"parsed_rows\": 1880, \"new_observations\": 1, \"capture_id\": 227}]}"
+    },
+    {
+      "id": 51,
+      "source_id": "market_ec",
+      "started_at": "2026-11-13T03:33:19.516529+00:00",
+      "finished_at": "2026-11-13T03:33:36.166340+00:00",
+      "status": "success",
+      "details": "{\"results\": [{\"series\": \"italy_gasoline_ex_tax\", \"parsed_rows\": 1092, \"new_observations\": 0, \"capture_id\": 230}, {\"series\": \"greece_gasoline_ex_tax\", \"parsed_rows\": 1092, \"new_observations\": 0, \"capture_id\": 230}]}"
+    },
+    {
+      "id": 52,
+      "source_id": "market_fed",
+      "started_at": "2026-11-13T03:38:41.065226+00:00",
+      "finished_at": "2026-11-13T03:38:55.391325+00:00",
+      "status": "success",
+      "details": "{\"results\": [{\"series\": \"eurusd\", \"parsed_rows\": 7265, \"new_observations\": 0, \"capture_id\": 233}]}"
+    },
+    {
+      "id": 53,
+      "source_id": "ipt",
+      "started_at": "2026-11-13T07:53:29.715115+00:00",
+      "finished_at": "2026-11-13T08:04:13.493828+00:00",
+      "status": "failed",
+      "details": "{\"error\": \"The read operation timed out\", \"type\": \"ReadTimeout\"}"
+    },
+    {
+      "id": 54,
+      "source_id": "ministry",
+      "started_at": "2026-11-13T08:04:15.530690+00:00",
+      "finished_at": "2026-11-13T08:04:27.118201+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 8, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 55,
+      "source_id": "ipt",
+      "started_at": "2026-11-13T09:59:58.052796+00:00",
+      "finished_at": "2026-11-13T10:10:39.090131+00:00",
+      "status": "failed",
+      "details": "{\"error\": \"The read operation timed out\", \"type\": \"ReadTimeout\"}"
+    },
+    {
+      "id": 56,
+      "source_id": "ministry",
+      "started_at": "2026-11-13T10:10:40.893308+00:00",
+      "finished_at": "2026-11-13T10:10:51.413980+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 8, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 57,
+      "source_id": "ipt",
+      "started_at": "2026-11-13T12:43:59.205064+00:00",
+      "finished_at": "2026-11-13T12:44:14.232461+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1313, \"new_observations\": 1, \"capture_id\": 249}"
+    },
+    {
+      "id": 58,
+      "source_id": "market_cboe",
+      "started_at": "2026-11-13T16:07:54.845423+00:00",
+      "finished_at": "2026-11-13T16:07:55.819045+00:00",
+      "status": "failed",
+      "details": "{\"status\": \"error\", \"source_id\": \"market_cboe\", \"source_url\": \"https://cdn-api.cboe.com/api/global/us_indices/daily_prices/OVX_History.csv\", \"capture_id\": null, \"error\": \"AccessStopped: Cannot establish robots policy; use documented manual import\", \"series\": \"cboe_ovx\", \"rows_ingested\": 0}"
+    },
+    {
+      "id": 59,
+      "source_id": "market_cboe",
+      "started_at": "2026-11-13T16:08:03.225316+00:00",
+      "finished_at": "2026-11-13T16:08:03.703180+00:00",
+      "status": "failed",
+      "details": "{\"status\": \"error\", \"source_id\": \"market_cboe\", \"source_url\": \"https://cdn-api.cboe.com/api/global/us_indices/daily_prices/OVX_History.csv\", \"capture_id\": null, \"error\": \"AccessStopped: Cannot establish robots policy; use documented manual import\", \"series\": \"cboe_ovx\", \"rows_ingested\": 0}"
+    },
+    {
+      "id": 60,
+      "source_id": "market_cboe",
+      "started_at": "2026-11-13T16:08:03.951173+00:00",
+      "finished_at": "2026-11-13T16:08:03.951641+00:00",
+      "status": "failed",
+      "details": "{\"status\": \"error\", \"source_id\": \"market_cboe\", \"source_url\": \"https://cdn.cboe.com/api/global/delayed_quotes/options/USO.json\", \"capture_id\": null, \"error\": \"FileNotFoundError: [Errno 2] No such file or directory: '/path/to/authorized-chain.json'\", \"symbol\": \"USO\"}"
+    },
+    {
+      "id": 61,
+      "source_id": "market_cboe",
+      "started_at": "2026-11-13T16:12:39.802697+00:00",
+      "finished_at": "2026-11-13T16:12:39.803820+00:00",
+      "status": "failed",
+      "details": "{\"status\": \"error\", \"source_id\": \"market_cboe\", \"source_url\": \"https://cdn.cboe.com/api/global/delayed_quotes/options/USO.json\", \"capture_id\": null, \"error\": \"FileNotFoundError: [Errno 2] No such file or directory: '/Users/andrew/Downloads/USO.json'\", \"symbol\": \"USO\"}"
+    },
+    {
+      "id": 62,
+      "source_id": "market_cboe",
+      "started_at": "2026-11-13T16:24:12.978388+00:00",
+      "finished_at": "2026-11-13T16:24:21.519270+00:00",
+      "status": "success",
+      "details": "{\"status\": \"ok\", \"source_id\": \"market_cboe\", \"source_url\": \"https://fred.stlouisfed.org/graph/fredgraph.csv?id=OVXCLS\", \"capture_id\": 253, \"series\": \"cboe_ovx\", \"publisher\": \"FRED\", \"parsed_rows\": 4912, \"new_observations\": 4912, \"rows_ingested\": 4912, \"latest_observation_date\": \"2026-11-12\", \"fred_series_id\": \"OVXCLS\"}"
+    },
+    {
+      "id": 63,
+      "source_id": "market_cboe",
+      "started_at": "2026-11-13T16:24:21.757932+00:00",
+      "finished_at": "2026-11-13T16:24:21.758580+00:00",
+      "status": "failed",
+      "details": "{\"status\": \"error\", \"source_id\": \"market_cboe\", \"capture_id\": null, \"input_path\": \"/Users/andrew/Downloads/ovx.csv\", \"error\": \"FileNotFoundError: [Errno 2] No such file or directory: '/Users/andrew/Downloads/ovx.csv'\"}"
+    },
+    {
+      "id": 64,
+      "source_id": "market_cboe",
+      "started_at": "2026-11-13T16:27:59.417146+00:00",
+      "finished_at": "2026-11-13T16:28:03.126952+00:00",
+      "status": "success",
+      "details": "{\"status\": \"ok\", \"source_id\": \"market_cboe\", \"source_url\": \"https://fred.stlouisfed.org/graph/fredgraph.csv?id=OVXCLS\", \"capture_id\": 255, \"series\": \"cboe_ovx\", \"publisher\": \"FRED\", \"parsed_rows\": 4912, \"new_observations\": 0, \"rows_ingested\": 4912, \"latest_observation_date\": \"2026-11-12\", \"fred_series_id\": \"OVXCLS\"}"
+    },
+    {
+      "id": 65,
+      "source_id": "ipt",
+      "started_at": "2026-11-13T18:44:50.982220+00:00",
+      "finished_at": "2026-11-13T18:45:07.607333+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1313, \"new_observations\": 0, \"capture_id\": 260}"
+    },
+    {
+      "id": 66,
+      "source_id": "ministry",
+      "started_at": "2026-11-13T18:45:09.112340+00:00",
+      "finished_at": "2026-11-13T18:45:19.753415+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 8, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 67,
+      "source_id": "ipt",
+      "started_at": "2026-11-13T20:32:36.714238+00:00",
+      "finished_at": "2026-11-13T20:32:55.718437+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1313, \"new_observations\": 0, \"capture_id\": 269}"
+    },
+    {
+      "id": 68,
+      "source_id": "ministry",
+      "started_at": "2026-11-13T20:32:55.969796+00:00",
+      "finished_at": "2026-11-13T20:33:06.245350+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 8, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 69,
+      "source_id": "ipt",
+      "started_at": "2026-11-14T03:19:44.465358+00:00",
+      "finished_at": "2026-11-14T03:20:00.044940+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1313, \"new_observations\": 0, \"capture_id\": 278}"
+    },
+    {
+      "id": 70,
+      "source_id": "ministry",
+      "started_at": "2026-11-14T03:20:01.912448+00:00",
+      "finished_at": "2026-11-14T03:30:43.079496+00:00",
+      "status": "failed",
+      "details": "{\"error\": \"The read operation timed out\", \"type\": \"ReadTimeout\"}"
+    },
+    {
+      "id": 71,
+      "source_id": "taqtek",
+      "started_at": "2026-11-14T03:30:45.039906+00:00",
+      "finished_at": "2026-11-14T03:30:52.164916+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 915, \"new_observations\": 1, \"capture_id\": 281}"
+    },
+    {
+      "id": 72,
+      "source_id": "market_eia",
+      "started_at": "2026-11-14T03:30:53.829402+00:00",
+      "finished_at": "2026-11-14T03:36:03.630698+00:00",
+      "status": "failed",
+      "details": "{\"completed\": [], \"error\": \"[Errno 54] Connection reset by peer\"}"
+    },
+    {
+      "id": 73,
+      "source_id": "market_ec",
+      "started_at": "2026-11-14T03:36:05.253143+00:00",
+      "finished_at": "2026-11-14T03:36:23.485853+00:00",
+      "status": "success",
+      "details": "{\"results\": [{\"series\": \"italy_gasoline_ex_tax\", \"parsed_rows\": 1092, \"new_observations\": 0, \"capture_id\": 285}, {\"series\": \"greece_gasoline_ex_tax\", \"parsed_rows\": 1092, \"new_observations\": 0, \"capture_id\": 285}]}"
+    },
+    {
+      "id": 74,
+      "source_id": "market_fed",
+      "started_at": "2026-11-14T03:36:24.993668+00:00",
+      "finished_at": "2026-11-14T03:41:43.169041+00:00",
+      "status": "success",
+      "details": "{\"results\": [{\"series\": \"eurusd\", \"parsed_rows\": 7265, \"new_observations\": 0, \"capture_id\": 288}]}"
+    },
+    {
+      "id": 75,
+      "source_id": "ipt",
+      "started_at": "2026-11-14T10:23:36.055803+00:00",
+      "finished_at": "2026-11-14T10:40:42.346017+00:00",
+      "status": "failed",
+      "details": "{\"error\": \"The read operation timed out\", \"type\": \"ReadTimeout\"}"
+    },
+    {
+      "id": 76,
+      "source_id": "ministry",
+      "started_at": "2026-11-14T10:40:44.231945+00:00",
+      "finished_at": "2026-11-14T10:40:56.756966+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 8, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 77,
+      "source_id": "ipt",
+      "started_at": "2026-11-14T16:20:40.808606+00:00",
+      "finished_at": "2026-11-14T16:20:57.960249+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1313, \"new_observations\": 0, \"capture_id\": 298}"
+    },
+    {
+      "id": 78,
+      "source_id": "ministry",
+      "started_at": "2026-11-14T16:20:59.456382+00:00",
+      "finished_at": "2026-11-14T16:21:09.795477+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 8, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 79,
+      "source_id": "ipt",
+      "started_at": "2026-11-14T18:28:38.868735+00:00",
+      "finished_at": "2026-11-14T18:28:54.573934+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1313, \"new_observations\": 0, \"capture_id\": 307}"
+    },
+    {
+      "id": 80,
+      "source_id": "ministry",
+      "started_at": "2026-11-14T18:28:54.908676+00:00",
+      "finished_at": "2026-11-14T18:29:05.138144+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 8, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 81,
+      "source_id": "ipt",
+      "started_at": "2026-11-14T20:00:48.839855+00:00",
+      "finished_at": "2026-11-14T20:01:05.254869+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1313, \"new_observations\": 0, \"capture_id\": 316}"
+    },
+    {
+      "id": 82,
+      "source_id": "ministry",
+      "started_at": "2026-11-14T20:01:05.683007+00:00",
+      "finished_at": "2026-11-14T20:01:15.861832+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 8, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 83,
+      "source_id": "official_document",
+      "started_at": "2026-11-14T20:06:38.194685+00:00",
+      "finished_at": "2026-11-14T20:06:38.196338+00:00",
+      "status": "failed",
+      "details": "{\"error\": \"[Errno 2] No such file or directory: '/Users/andrew/.gemini/tasks/c_eace3f3d29661655/workspace/official_20230512.csv'\"}"
+    },
+    {
+      "id": 84,
+      "source_id": "market_official_review",
+      "started_at": "2026-11-14T20:06:38.450493+00:00",
+      "finished_at": "2026-11-14T20:06:38.456497+00:00",
+      "status": "success",
+      "details": "{\"series\": \"lbp_payment_fx\", \"parsed_rows\": 1, \"new_observations\": 1, \"capture_id\": 321}"
+    },
+    {
+      "id": 85,
+      "source_id": "official_document",
+      "started_at": "2026-11-14T20:06:49.495473+00:00",
+      "finished_at": "2026-11-14T20:06:49.507259+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1, \"new_observations\": 1, \"capture_id\": 322}"
+    },
+    {
+      "id": 86,
+      "source_id": "ministry",
+      "started_at": "2026-11-14T20:12:08.531926+00:00",
+      "finished_at": "2026-11-14T20:12:18.593041+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 10, \"new_observations\": 1, \"pages\": 1}"
+    },
+    {
+      "id": 87,
+      "source_id": "taqtek",
+      "started_at": "2026-11-14T20:12:18.915524+00:00",
+      "finished_at": "2026-11-14T20:12:24.474450+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 915, \"new_observations\": 0, \"capture_id\": 328}"
+    },
+    {
+      "id": 88,
+      "source_id": "ipt",
+      "started_at": "2026-11-14T22:56:37.859485+00:00",
+      "finished_at": "2026-11-14T22:56:52.686106+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1313, \"new_observations\": 0, \"capture_id\": 333}"
+    },
+    {
+      "id": 89,
+      "source_id": "ministry",
+      "started_at": "2026-11-14T22:56:53.024253+00:00",
+      "finished_at": "2026-11-14T22:57:03.242778+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 8, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 90,
+      "source_id": "ipt",
+      "started_at": "2026-11-15T05:27:13.087296+00:00",
+      "finished_at": "2026-11-15T05:37:54.547056+00:00",
+      "status": "failed",
+      "details": "{\"error\": \"The read operation timed out\", \"type\": \"ReadTimeout\"}"
+    },
+    {
+      "id": 91,
+      "source_id": "ministry",
+      "started_at": "2026-11-15T05:37:56.611437+00:00",
+      "finished_at": "2026-11-15T05:38:07.224501+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 8, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 92,
+      "source_id": "taqtek",
+      "started_at": "2026-11-15T05:38:08.903873+00:00",
+      "finished_at": "2026-11-15T05:43:21.263456+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 915, \"new_observations\": 0, \"capture_id\": 344}"
+    },
+    {
+      "id": 93,
+      "source_id": "market_eia",
+      "started_at": "2026-11-15T05:43:23.027587+00:00",
+      "finished_at": "2026-11-15T05:48:40.010356+00:00",
+      "status": "failed",
+      "details": "{\"completed\": [{\"series\": \"brent_spot\", \"parsed_rows\": 9128, \"new_observations\": 0, \"capture_id\": 347}], \"error\": \"[Errno 54] Connection reset by peer\"}"
+    },
+    {
+      "id": 94,
+      "source_id": "market_ec",
+      "started_at": "2026-11-15T05:48:42.824276+00:00",
+      "finished_at": "2026-11-15T05:49:00.584685+00:00",
+      "status": "success",
+      "details": "{\"results\": [{\"series\": \"italy_gasoline_ex_tax\", \"parsed_rows\": 1092, \"new_observations\": 0, \"capture_id\": 351}, {\"series\": \"greece_gasoline_ex_tax\", \"parsed_rows\": 1092, \"new_observations\": 0, \"capture_id\": 351}]}"
+    },
+    {
+      "id": 95,
+      "source_id": "market_fed",
+      "started_at": "2026-11-15T05:49:02.207215+00:00",
+      "finished_at": "2026-11-15T06:06:50.896661+00:00",
+      "status": "success",
+      "details": "{\"results\": [{\"series\": \"eurusd\", \"parsed_rows\": 7265, \"new_observations\": 0, \"capture_id\": 354}]}"
+    },
+    {
+      "id": 96,
+      "source_id": "ipt",
+      "started_at": "2026-11-15T11:59:08.621260+00:00",
+      "finished_at": "2026-11-15T12:19:58.748036+00:00",
+      "status": "failed",
+      "details": "{\"error\": \"The read operation timed out\", \"type\": \"ReadTimeout\"}"
+    },
+    {
+      "id": 97,
+      "source_id": "ministry",
+      "started_at": "2026-11-15T12:25:04.982026+00:00",
+      "finished_at": "2026-11-15T12:43:36.347755+00:00",
+      "status": "failed",
+      "details": "{\"error\": \"The read operation timed out\", \"type\": \"ReadTimeout\"}"
+    },
+    {
+      "id": 98,
+      "source_id": "ipt",
+      "started_at": "2026-11-15T14:53:25.998364+00:00",
+      "finished_at": "2026-11-15T14:53:26.040670+00:00",
+      "status": "failed",
+      "details": "{\"error\": \"[Errno 8] nodename nor servname provided, or not known\", \"type\": \"ConnectError\"}"
+    },
+    {
+      "id": 99,
+      "source_id": "ministry",
+      "started_at": "2026-11-15T14:53:26.292033+00:00",
+      "finished_at": "2026-11-15T14:53:26.318487+00:00",
+      "status": "failed",
+      "details": "{\"error\": \"[Errno 8] nodename nor servname provided, or not known\", \"type\": \"ConnectError\"}"
+    }
+  ],
+  "readiness": "Adequate for source reconciliation and exploratory target analysis. Not ready for an institutional as-of forecasting backtest: effective/release times, unresolved conflicts, coverage and regimes need review."
+}

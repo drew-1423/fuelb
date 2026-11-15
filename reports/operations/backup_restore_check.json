@@ -1,0 +1,42 @@
+{
+  "checked_at": "2026-11-11T21:56:05.399258+00:00",
+  "status": "passed",
+  "backup": "/Users/andrew/MyApp_macOS/data/backups/20261111T215537776282Z",
+  "recovery_directory": "/var/folders/y3/pqbs2g0d6_q9m28_dszcnn3w0000gn/T/lebanon-fuel-recovery-3ekzvwkp",
+  "source_observations": 3169,
+  "backup_verification": {
+    "status": "verified",
+    "files": 4,
+    "archive_members": 690
+  },
+  "integrity": {
+    "checked_at": "2026-11-11T21:56:05.398730+00:00",
+    "databases": [
+      {
+        "database": "lebanon_fuel.sqlite",
+        "integrity": "ok",
+        "foreign_key_errors": 0
+      },
+      {
+        "database": "forecast_ledger.sqlite",
+        "integrity": "ok",
+        "foreign_key_errors": 0
+      },
+      {
+        "database": "operations.sqlite",
+        "integrity": "ok",
+        "foreign_key_errors": 0
+      }
+    ],
+    "raw_files_checked": 111,
+    "normalized_market_rows_checked": 33562,
+    "snapshots_checked": 678,
+    "model_files_checked": 109,
+    "evaluation_arithmetic_errors": 0,
+    "forecasts": 44960,
+    "evaluations": 44928,
+    "hash_chain_valid": true,
+    "legacy_signed_zero_matches": 62
+  },
+  "note": "Restored to a new directory. Working project and native scheduler were not replaced."
+}

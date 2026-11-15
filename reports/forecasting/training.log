@@ -1,0 +1,21 @@
+pre_crisis decision_1: 234 training rows, 10 fitted models
+pre_crisis decision_2: 211 training rows, 10 fitted models
+pre_crisis decision_4: 190 training rows, 10 fitted models
+pre_crisis day_1: 1575 training rows, 10 fitted models
+pre_crisis day_3: 1533 training rows, 10 fitted models
+pre_crisis day_7: 1461 training rows, 10 fitted models
+pre_crisis day_14: 1384 training rows, 10 fitted models
+pre_crisis day_30: 1254 training rows, 10 fitted models
+recent_pre_fiscal decision_1: 86 training rows, 9 fitted models
+recent_pre_fiscal decision_2: 80 training rows, 9 fitted models
+recent_pre_fiscal decision_4: 69 training rows, 9 fitted models
+recent_pre_fiscal day_1: 295 training rows, 9 fitted models
+recent_pre_fiscal day_3: 283 training rows, 9 fitted models
+recent_pre_fiscal day_7: 259 training rows, 9 fitted models
+recent_pre_fiscal day_14: 224 training rows, 9 fitted models
+recent_pre_fiscal day_30: 173 training rows, 6 fitted models
+{
+  "prediction_rows": 40641,
+  "saved_bundles": 16,
+  "production_winner": null
+}

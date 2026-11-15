@@ -1,0 +1,544 @@
+{
+  "origin": "2026-11-12T18:41:12.928465+00:00",
+  "unit": "LBP per 20 liters",
+  "status": "issued",
+  "market_freshness_limit_days": 7,
+  "market_observation_dates": {
+    "brent_spot": "2026-11-03",
+    "nyh_gasoline": "2026-11-03"
+  },
+  "forecasts": [
+    {
+      "horizon": "decision_1",
+      "origin": "2026-11-12T18:41:12.928465+00:00",
+      "endpoint": null,
+      "target_label": "Next 1 official pricing decision(s)",
+      "decision_date": "2026-11-13",
+      "scheduled_effective": "2026-11-13",
+      "schedule_basis": "Empirical Tue/Fri Ministry cadence",
+      "schedule_estimated": true,
+      "schedule_details": {
+        "dates": {
+          "decision_1": "2026-11-13",
+          "decision_2": "2026-11-17",
+          "decision_4": "2026-11-24"
+        },
+        "schedule_basis": "Empirical Tue/Fri Ministry cadence",
+        "interval_n": 20,
+        "median_interval_days": 6.0,
+        "weekday_counts": {
+          "4": 9,
+          "1": 11,
+          "2": 1
+        },
+        "estimated": true,
+        "limitations": "Date estimates only; announcement times, holidays and extraordinary decisions are unknown"
+      },
+      "tier": 4,
+      "label": "BASELINE FORECAST",
+      "status": "issued",
+      "predicted_price": 2398000,
+      "predicted_change": -47000,
+      "percentage_change": -1.9222903885480573,
+      "interval": null,
+      "probabilities": null,
+      "uncertainty": "No calibrated prediction interval or directional probabilities available. Historical MAE describes the cited research sample only.",
+      "attempts": [
+        {
+          "tier": 1,
+          "reasons": [
+            "No approved production model in the validation decision"
+          ]
+        },
+        {
+          "tier": 2,
+          "reasons": [
+            "Missing or stale required commodity input (maximum 7 days): nyh_gasoline"
+          ]
+        },
+        {
+          "tier": 3,
+          "reasons": [
+            "Missing current benchmark window, pricing FX, freight and dated tax/margin inputs"
+          ]
+        }
+      ],
+      "critical_missing_inputs": [
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
+      ],
+      "methodology": "Repeat the latest change between verified source records for each target decision.",
+      "family": "Z_last_change",
+      "model_version": "baseline-live-v1-Z_last_change",
+      "performance": {
+        "n": 2,
+        "distinct_base_decisions": 2,
+        "mae_lbp": 15500.0,
+        "direction_accuracy": 1.0,
+        "first_origin": "2026-08-08T00:00:00+00:00",
+        "last_origin": "2026-11-07T01:00:00+00:00",
+        "evidence": "2026 conditional archive holdout; assumed close availability, sparse outcomes, selected on this sample.",
+        "source": "reports/model_validation/metrics.csv"
+      },
+      "base_price": 2445000,
+      "base_source_date": "2026-11-10",
+      "base_revision_id": 3447,
+      "anchor_verification": "archive_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "forecast_id": 45009,
+      "snapshot_id": "0fc132a01252ea306e822e97455d791a3d63a8cdcc05105a2d161924812cd0bd"
+    },
+    {
+      "horizon": "decision_2",
+      "origin": "2026-11-12T18:41:12.928465+00:00",
+      "endpoint": null,
+      "target_label": "Next 2 official pricing decision(s)",
+      "decision_date": "2026-11-17",
+      "scheduled_effective": "2026-11-17",
+      "schedule_basis": "Empirical Tue/Fri Ministry cadence",
+      "schedule_estimated": true,
+      "schedule_details": {
+        "dates": {
+          "decision_1": "2026-11-13",
+          "decision_2": "2026-11-17",
+          "decision_4": "2026-11-24"
+        },
+        "schedule_basis": "Empirical Tue/Fri Ministry cadence",
+        "interval_n": 20,
+        "median_interval_days": 6.0,
+        "weekday_counts": {
+          "4": 9,
+          "1": 11,
+          "2": 1
+        },
+        "estimated": true,
+        "limitations": "Date estimates only; announcement times, holidays and extraordinary decisions are unknown"
+      },
+      "tier": 4,
+      "label": "BASELINE FORECAST",
+      "status": "issued",
+      "predicted_price": 2351000,
+      "predicted_change": -94000,
+      "percentage_change": -3.8445807770961147,
+      "interval": null,
+      "probabilities": null,
+      "uncertainty": "No calibrated prediction interval or directional probabilities available. Historical MAE describes the cited research sample only.",
+      "attempts": [
+        {
+          "tier": 1,
+          "reasons": [
+            "No approved production model in the validation decision"
+          ]
+        },
+        {
+          "tier": 2,
+          "reasons": [
+            "Missing or stale required commodity input (maximum 7 days): nyh_gasoline"
+          ]
+        },
+        {
+          "tier": 3,
+          "reasons": [
+            "Missing current benchmark window, pricing FX, freight and dated tax/margin inputs"
+          ]
+        }
+      ],
+      "critical_missing_inputs": [
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
+      ],
+      "methodology": "Repeat the latest change between verified source records for each target decision.",
+      "family": "Z_last_change",
+      "model_version": "baseline-live-v1-Z_last_change",
+      "performance": null,
+      "base_price": 2445000,
+      "base_source_date": "2026-11-10",
+      "base_revision_id": 3447,
+      "anchor_verification": "archive_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "forecast_id": 45010,
+      "snapshot_id": "0fc132a01252ea306e822e97455d791a3d63a8cdcc05105a2d161924812cd0bd"
+    },
+    {
+      "horizon": "decision_4",
+      "origin": "2026-11-12T18:41:12.928465+00:00",
+      "endpoint": null,
+      "target_label": "Next 4 official pricing decision(s)",
+      "decision_date": "2026-11-24",
+      "scheduled_effective": "2026-11-24",
+      "schedule_basis": "Empirical Tue/Fri Ministry cadence",
+      "schedule_estimated": true,
+      "schedule_details": {
+        "dates": {
+          "decision_1": "2026-11-13",
+          "decision_2": "2026-11-17",
+          "decision_4": "2026-11-24"
+        },
+        "schedule_basis": "Empirical Tue/Fri Ministry cadence",
+        "interval_n": 20,
+        "median_interval_days": 6.0,
+        "weekday_counts": {
+          "4": 9,
+          "1": 11,
+          "2": 1
+        },
+        "estimated": true,
+        "limitations": "Date estimates only; announcement times, holidays and extraordinary decisions are unknown"
+      },
+      "tier": 4,
+      "label": "BASELINE FORECAST",
+      "status": "issued",
+      "predicted_price": 2257000,
+      "predicted_change": -188000,
+      "percentage_change": -7.689161554192229,
+      "interval": null,
+      "probabilities": null,
+      "uncertainty": "No calibrated prediction interval or directional probabilities available. Historical MAE describes the cited research sample only.",
+      "attempts": [
+        {
+          "tier": 1,
+          "reasons": [
+            "No approved production model in the validation decision"
+          ]
+        },
+        {
+          "tier": 2,
+          "reasons": [
+            "Missing or stale required commodity input (maximum 7 days): nyh_gasoline"
+          ]
+        },
+        {
+          "tier": 3,
+          "reasons": [
+            "Missing current benchmark window, pricing FX, freight and dated tax/margin inputs"
+          ]
+        }
+      ],
+      "critical_missing_inputs": [
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
+      ],
+      "methodology": "Repeat the latest change between verified source records for each target decision.",
+      "family": "Z_last_change",
+      "model_version": "baseline-live-v1-Z_last_change",
+      "performance": null,
+      "base_price": 2445000,
+      "base_source_date": "2026-11-10",
+      "base_revision_id": 3447,
+      "anchor_verification": "archive_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "forecast_id": 45011,
+      "snapshot_id": "0fc132a01252ea306e822e97455d791a3d63a8cdcc05105a2d161924812cd0bd"
+    },
+    {
+      "horizon": "day_1",
+      "origin": "2026-11-12T18:41:12.928465+00:00",
+      "endpoint": "2026-11-13T20:41:12.928465+02:00",
+      "target_label": "Prevailing official price in 1 calendar days",
+      "decision_date": null,
+      "scheduled_effective": null,
+      "schedule_basis": null,
+      "schedule_estimated": false,
+      "schedule_details": null,
+      "tier": 4,
+      "label": "BASELINE FORECAST",
+      "status": "issued",
+      "predicted_price": 2445000.0,
+      "predicted_change": 0.0,
+      "percentage_change": 0.0,
+      "interval": null,
+      "probabilities": null,
+      "uncertainty": "No calibrated prediction interval or directional probabilities available. Historical MAE describes the cited research sample only.",
+      "attempts": [
+        {
+          "tier": 1,
+          "reasons": [
+            "No approved production model in the validation decision"
+          ]
+        },
+        {
+          "tier": 2,
+          "reasons": [
+            "Missing or stale required commodity input (maximum 7 days): nyh_gasoline"
+          ]
+        },
+        {
+          "tier": 3,
+          "reasons": [
+            "Missing current benchmark window, pricing FX, freight and dated tax/margin inputs"
+          ]
+        }
+      ],
+      "critical_missing_inputs": [
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
+      ],
+      "methodology": "Persistence of the latest verified price. Central assumption of no net change through the target horizon.",
+      "family": "A_no_change",
+      "model_version": "baseline-live-v1-A_no_change",
+      "performance": {
+        "n": 13,
+        "distinct_base_decisions": 4,
+        "mae_lbp": 6461.538461538462,
+        "direction_accuracy": 0.8461538461538461,
+        "first_origin": "2026-08-04T00:00:00+00:00",
+        "last_origin": "2026-11-09T01:00:00+00:00",
+        "evidence": "2026 conditional archive holdout; assumed close availability, sparse outcomes, selected on this sample.",
+        "source": "reports/model_validation/metrics.csv"
+      },
+      "base_price": 2445000,
+      "base_source_date": "2026-11-10",
+      "base_revision_id": 3447,
+      "anchor_verification": "archive_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "forecast_id": 45012,
+      "snapshot_id": "0fc132a01252ea306e822e97455d791a3d63a8cdcc05105a2d161924812cd0bd"
+    },
+    {
+      "horizon": "day_3",
+      "origin": "2026-11-12T18:41:12.928465+00:00",
+      "endpoint": "2026-11-15T20:41:12.928465+02:00",
+      "target_label": "Prevailing official price in 3 calendar days",
+      "decision_date": null,
+      "scheduled_effective": null,
+      "schedule_basis": null,
+      "schedule_estimated": false,
+      "schedule_details": null,
+      "tier": 4,
+      "label": "BASELINE FORECAST",
+      "status": "issued",
+      "predicted_price": 2445000.0,
+      "predicted_change": 0.0,
+      "percentage_change": 0.0,
+      "interval": null,
+      "probabilities": null,
+      "uncertainty": "No calibrated prediction interval or directional probabilities available. Historical MAE describes the cited research sample only.",
+      "attempts": [
+        {
+          "tier": 1,
+          "reasons": [
+            "No approved production model in the validation decision"
+          ]
+        },
+        {
+          "tier": 2,
+          "reasons": [
+            "Missing or stale required commodity input (maximum 7 days): nyh_gasoline"
+          ]
+        },
+        {
+          "tier": 3,
+          "reasons": [
+            "Missing current benchmark window, pricing FX, freight and dated tax/margin inputs"
+          ]
+        }
+      ],
+      "critical_missing_inputs": [
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
+      ],
+      "methodology": "Persistence of the latest verified price. Central assumption of no net change through the target horizon.",
+      "family": "A_no_change",
+      "model_version": "baseline-live-v1-A_no_change",
+      "performance": {
+        "n": 9,
+        "distinct_base_decisions": 4,
+        "mae_lbp": 28000.0,
+        "direction_accuracy": 0.3333333333333333,
+        "first_origin": "2026-08-04T00:00:00+00:00",
+        "last_origin": "2026-11-07T01:00:00+00:00",
+        "evidence": "2026 conditional archive holdout; assumed close availability, sparse outcomes, selected on this sample.",
+        "source": "reports/model_validation/metrics.csv"
+      },
+      "base_price": 2445000,
+      "base_source_date": "2026-11-10",
+      "base_revision_id": 3447,
+      "anchor_verification": "archive_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "forecast_id": 45013,
+      "snapshot_id": "0fc132a01252ea306e822e97455d791a3d63a8cdcc05105a2d161924812cd0bd"
+    },
+    {
+      "horizon": "day_7",
+      "origin": "2026-11-12T18:41:12.928465+00:00",
+      "endpoint": "2026-11-19T20:41:12.928465+02:00",
+      "target_label": "Prevailing official price in 7 calendar days",
+      "decision_date": null,
+      "scheduled_effective": null,
+      "schedule_basis": null,
+      "schedule_estimated": false,
+      "schedule_details": null,
+      "tier": 4,
+      "label": "BASELINE FORECAST",
+      "status": "issued",
+      "predicted_price": 2445000.0,
+      "predicted_change": 0.0,
+      "percentage_change": 0.0,
+      "interval": null,
+      "probabilities": null,
+      "uncertainty": "No calibrated prediction interval or directional probabilities available. Historical MAE describes the cited research sample only.",
+      "attempts": [
+        {
+          "tier": 1,
+          "reasons": [
+            "No approved production model in the validation decision"
+          ]
+        },
+        {
+          "tier": 2,
+          "reasons": [
+            "Missing or stale required commodity input (maximum 7 days): nyh_gasoline"
+          ]
+        },
+        {
+          "tier": 3,
+          "reasons": [
+            "Missing current benchmark window, pricing FX, freight and dated tax/margin inputs"
+          ]
+        }
+      ],
+      "critical_missing_inputs": [
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
+      ],
+      "methodology": "Persistence of the latest verified price. Central assumption of no net change through the target horizon.",
+      "family": "A_no_change",
+      "model_version": "baseline-live-v1-A_no_change",
+      "performance": {
+        "n": 1,
+        "distinct_base_decisions": 1,
+        "mae_lbp": 7000.0,
+        "direction_accuracy": 0.0,
+        "first_origin": "2026-08-04T00:00:00+00:00",
+        "last_origin": "2026-08-04T00:00:00+00:00",
+        "evidence": "2026 conditional archive holdout; assumed close availability, sparse outcomes, selected on this sample.",
+        "source": "reports/model_validation/metrics.csv"
+      },
+      "base_price": 2445000,
+      "base_source_date": "2026-11-10",
+      "base_revision_id": 3447,
+      "anchor_verification": "archive_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "forecast_id": 45014,
+      "snapshot_id": "0fc132a01252ea306e822e97455d791a3d63a8cdcc05105a2d161924812cd0bd"
+    },
+    {
+      "horizon": "day_14",
+      "origin": "2026-11-12T18:41:12.928465+00:00",
+      "endpoint": "2026-11-26T20:41:12.928465+02:00",
+      "target_label": "Prevailing official price in 14 calendar days",
+      "decision_date": null,
+      "scheduled_effective": null,
+      "schedule_basis": null,
+      "schedule_estimated": false,
+      "schedule_details": null,
+      "tier": 4,
+      "label": "BASELINE FORECAST",
+      "status": "issued",
+      "predicted_price": 2445000.0,
+      "predicted_change": 0.0,
+      "percentage_change": 0.0,
+      "interval": null,
+      "probabilities": null,
+      "uncertainty": "No calibrated prediction interval or directional probabilities available. Historical MAE describes the cited research sample only.",
+      "attempts": [
+        {
+          "tier": 1,
+          "reasons": [
+            "No approved production model in the validation decision"
+          ]
+        },
+        {
+          "tier": 2,
+          "reasons": [
+            "Missing or stale required commodity input (maximum 7 days): nyh_gasoline"
+          ]
+        },
+        {
+          "tier": 3,
+          "reasons": [
+            "Missing current benchmark window, pricing FX, freight and dated tax/margin inputs"
+          ]
+        }
+      ],
+      "critical_missing_inputs": [
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
+      ],
+      "methodology": "Persistence of the latest verified price. Central assumption of no net change through the target horizon.",
+      "family": "A_no_change",
+      "model_version": "baseline-live-v1-A_no_change",
+      "performance": null,
+      "base_price": 2445000,
+      "base_source_date": "2026-11-10",
+      "base_revision_id": 3447,
+      "anchor_verification": "archive_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "forecast_id": 45015,
+      "snapshot_id": "0fc132a01252ea306e822e97455d791a3d63a8cdcc05105a2d161924812cd0bd"
+    },
+    {
+      "horizon": "day_30",
+      "origin": "2026-11-12T18:41:12.928465+00:00",
+      "endpoint": "2026-12-12T20:41:12.928465+02:00",
+      "target_label": "Prevailing official price in 30 calendar days",
+      "decision_date": null,
+      "scheduled_effective": null,
+      "schedule_basis": null,
+      "schedule_estimated": false,
+      "schedule_details": null,
+      "tier": 4,
+      "label": "BASELINE FORECAST",
+      "status": "issued",
+      "predicted_price": 2445000.0,
+      "predicted_change": 0.0,
+      "percentage_change": 0.0,
+      "interval": null,
+      "probabilities": null,
+      "uncertainty": "No calibrated prediction interval or directional probabilities available. Historical MAE describes the cited research sample only.",
+      "attempts": [
+        {
+          "tier": 1,
+          "reasons": [
+            "No approved production model in the validation decision"
+          ]
+        },
+        {
+          "tier": 2,
+          "reasons": [
+            "Missing or stale required commodity input (maximum 7 days): nyh_gasoline"
+          ]
+        },
+        {
+          "tier": 3,
+          "reasons": [
+            "Missing current benchmark window, pricing FX, freight and dated tax/margin inputs"
+          ]
+        }
+      ],
+      "critical_missing_inputs": [
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
+      ],
+      "methodology": "Persistence of the latest verified price. Central assumption of no net change through the target horizon.",
+      "family": "A_no_change",
+      "model_version": "baseline-live-v1-A_no_change",
+      "performance": null,
+      "base_price": 2445000,
+      "base_source_date": "2026-11-10",
+      "base_revision_id": 3447,
+      "anchor_verification": "archive_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "forecast_id": 45016,
+      "snapshot_id": "0fc132a01252ea306e822e97455d791a3d63a8cdcc05105a2d161924812cd0bd"
+    }
+  ]
+}

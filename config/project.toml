@@ -1,0 +1,28 @@
+[project]
+timezone = "Asia/Beirut"
+target = "gasoline_95"
+currency = "LBP"
+liters = 20
+
+[storage]
+database = "data/lebanon_fuel.sqlite"
+raw_dir = "data/raw"
+export_dir = "data/exports"
+report_dir = "reports"
+
+[collection]
+minimum_request_interval_seconds = 3.0
+request_timeout_seconds = 30
+stale_after_days = 10
+
+[forecasting]
+enabled = true
+primary_horizon = "next_official_decision"
+scenario_days = [7, 30]
+formula_status = "unverified_current_parameters"
+maximum_forecast_age_hours = 12
+
+[validation]
+production_approved = false
+decision_file = "reports/model_validation/production_selection.json"
+forecast_ledger = "data/forecast_ledger.sqlite"

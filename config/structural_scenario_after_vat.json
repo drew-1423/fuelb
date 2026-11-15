@@ -1,0 +1,129 @@
+{
+  "mode": "scenario",
+  "effective_date": "2026-11-13",
+  "origin": "2026-11-10T23:58:37.166413+00:00",
+  "goods_taxable": true,
+  "costs": [
+    {
+      "name": "duties",
+      "taxable": true,
+      "value": "1022000",
+      "unit": "LBP/kl",
+      "status": "scenario",
+      "valid_from": "2026-11-13",
+      "valid_to": "2026-11-13",
+      "known_at": "2026-11-10T23:58:37.166413+00:00",
+      "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+      "note": "Carry forward this May 2025 amount; current value unresolved."
+    },
+    {
+      "name": "domestic_transport",
+      "taxable": true,
+      "value": "1570000",
+      "unit": "LBP/kl",
+      "status": "scenario",
+      "valid_from": "2026-11-13",
+      "valid_to": "2026-11-13",
+      "known_at": "2026-11-10T23:58:37.166413+00:00",
+      "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+      "note": "Carry forward this May 2025 amount; current value unresolved."
+    },
+    {
+      "name": "retail_margin",
+      "taxable": true,
+      "value": "4933500",
+      "unit": "LBP/kl",
+      "status": "scenario",
+      "valid_from": "2026-11-13",
+      "valid_to": "2026-11-13",
+      "known_at": "2026-11-10T23:58:37.166413+00:00",
+      "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+      "note": "Carry forward this May 2025 amount; current value unresolved."
+    },
+    {
+      "name": "bank_commission",
+      "taxable": true,
+      "value": "590000",
+      "unit": "LBP/kl",
+      "status": "scenario",
+      "valid_from": "2026-11-13",
+      "valid_to": "2026-11-13",
+      "known_at": "2026-11-10T23:58:37.166413+00:00",
+      "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+      "note": "Carry forward this May 2025 amount; current value unresolved."
+    },
+    {
+      "name": "hypothetical_additional_charge",
+      "taxable": false,
+      "value": "15000000",
+      "unit": "LBP/kl",
+      "status": "scenario",
+      "valid_from": "2026-11-13",
+      "valid_to": "2026-11-13",
+      "known_at": "2026-11-10T23:58:37.166413+00:00",
+      "note": "Illustrative 300,000 LBP/20 L charge; legal status and placement require verification.",
+      "evidence": "Explicit Part 4 illustrative scenario assumption"
+    }
+  ],
+  "vat": {
+    "value": ".11",
+    "unit": "fraction",
+    "status": "scenario",
+    "valid_from": "2026-11-13",
+    "valid_to": "2026-11-13",
+    "known_at": "2026-11-10T23:58:37.166413+00:00",
+    "note": "Historical 11% carried forward as an explicit assumption, current legal rate unverified.",
+    "evidence": "Explicit Part 4 illustrative scenario assumption"
+  },
+  "rounding": null,
+  "coverage_note": "Illustrative US-gasoline proxy stress calculation using the May 2025 cost scaffold. Fiscal changes after that date and current Med basis are unresolved. This is not an upcoming official-price forecast.",
+  "benchmark": {
+    "value": "114.57600000000001",
+    "unit": "USD/bbl",
+    "status": "scenario",
+    "valid_from": "2026-11-13",
+    "valid_to": "2026-11-13",
+    "known_at": "2026-11-10T23:58:37.166413+00:00",
+    "note": "Carry forward the actually observed 3 Nov 2026 NYH quote; future change and Med basis unknown.",
+    "evidence": "https://www.eia.gov/dnav/pet/hist_xls/EER_EPMRU_PF4_Y35NY_DPGd.xls",
+    "identity": "NYH regular US gasoline PROXY, not Mediterranean 95",
+    "basis": "FOB",
+    "window_description": "Last available observation carried forward as a scenario",
+    "low": "103.118400000000009",
+    "high": "126.033600000000011"
+  },
+  "fx": {
+    "value": "89700",
+    "unit": "LBP/USD",
+    "status": "scenario",
+    "valid_from": "2026-11-13",
+    "valid_to": "2026-11-13",
+    "known_at": "2026-11-10T23:58:37.166413+00:00",
+    "note": "Carry forward May 2025 annex FX solely as a scenario.",
+    "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2"
+  },
+  "freight_usd_kl": {
+    "value": "30",
+    "unit": "USD/kl",
+    "status": "scenario",
+    "valid_from": "2026-11-13",
+    "valid_to": "2026-11-13",
+    "known_at": "2026-11-10T23:58:37.166413+00:00",
+    "note": "Illustrative marine freight knob; no freight quotation collected.",
+    "evidence": "Explicit Part 4 illustrative scenario assumption",
+    "low": "10",
+    "high": "80"
+  },
+  "other_import_usd_kl": {
+    "value": "50",
+    "unit": "USD/kl",
+    "status": "scenario",
+    "valid_from": "2026-11-13",
+    "valid_to": "2026-11-13",
+    "known_at": "2026-11-10T23:58:37.166413+00:00",
+    "note": "Illustrative remaining import-cost knob; not an estimated official premium.",
+    "evidence": "Explicit Part 4 illustrative scenario assumption",
+    "low": "0",
+    "high": "100"
+  }
+}

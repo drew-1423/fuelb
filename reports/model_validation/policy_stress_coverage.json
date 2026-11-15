@@ -1,0 +1,24 @@
+[
+  {
+    "regime": "subsidy_fx_crisis",
+    "start": "2019-09-01",
+    "end": "2023-05-11",
+    "source_records": 366,
+    "eligible_archive_records": 330,
+    "evaluated_forecasts": 0,
+    "measured_error": null,
+    "status": "out_of_domain_abstain",
+    "note": "Analytical evidence boundary, not certification of every legal effective date"
+  },
+  {
+    "regime": "fiscal_policy_outside_training",
+    "start": "2025-05-29",
+    "end": "2026-11-11",
+    "source_records": 146,
+    "eligible_archive_records": 52,
+    "evaluated_forecasts": 0,
+    "measured_error": null,
+    "status": "out_of_domain_abstain",
+    "note": "Analytical evidence boundary, not certification of every legal effective date"
+  }
+]

@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lebanon-fuel-forecast"
+version = "0.1.0"
+description = "Auditable Lebanese official gasoline 95 price research and data platform"
+requires-python = ">=3.11"
+dependencies = [
+  "httpx>=0.28,<1", "beautifulsoup4>=4.12,<5", "openpyxl>=3.1,<4",
+]
+
+[project.optional-dependencies]
+market = ["pandas>=2.2,<4", "numpy>=1.26,<3", "matplotlib>=3.9,<4", "xlrd>=2,<3"]
+research = ["pandas>=2.2,<4", "numpy>=1.26,<3", "statsmodels>=0.14,<1", "scikit-learn>=1.5,<2"]
+ml = ["lightgbm>=4.6,<5", "catboost>=1.2,<2"]
+forecasting = ["pandas>=2.2,<4", "numpy>=1.26,<3", "scipy>=1.14,<2", "statsmodels>=0.14,<1", "scikit-learn>=1.5,<2", "lightgbm>=4.6,<5", "catboost>=1.2,<2", "joblib>=1.4,<2"]
+dashboard = ["streamlit>=1.55,<2", "plotly>=6,<8", "pandas>=2.2,<4"]
+pdf = ["pypdf>=5,<7"]
+dev = ["pytest>=8,<10"]
+
+[project.scripts]
+fuel-data = "lebanon_fuel.cli:main"
+fuel-market = "lebanon_fuel.market.cli:main"
+fuel-structure = "lebanon_fuel.structural.cli:main"
+fuel-forecast = "lebanon_fuel.forecasting.cli:main"
+fuel-validate = "lebanon_fuel.validation.cli:main"
+fuel-ops = "lebanon_fuel.automation.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+lebanon_fuel = ["storage/*.sql", "market/*.sql", "dashboard/*.css"]
+
+[tool.pytest.ini_options]
+testpaths = ["Tests/fuel"]
+pythonpath = ["src"]
+addopts = "-ra"

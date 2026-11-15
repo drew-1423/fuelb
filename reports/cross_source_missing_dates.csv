@@ -1,0 +1,371 @@
+source_missing_date,date,present_in_sources,status
+ipt,2012-01-01,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2012-01-02,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2012-01-03,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2012-01-09,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2012-01-30,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2012-01-31,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2014-10-02,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2015-01-05,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2015-04-09,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2015-07-02,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2015-07-13,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2015-09-03,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2015-10-02,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2015-10-29,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2015-11-13,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2015-11-20,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2015-12-08,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2015-12-17,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2016-01-04,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2016-01-14,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2016-02-11,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2016-02-15,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2016-04-28,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2016-05-19,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2016-06-17,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2016-06-30,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2016-07-14,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2016-07-28,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2016-08-11,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2016-09-14,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2016-09-29,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2016-10-10,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2016-10-28,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2016-11-10,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2016-11-25,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2016-12-06,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2016-12-12,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2016-12-19,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2020-01-16,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2020-05-20,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2021-08-22,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2021-10-11,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2021-12-16,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2023-03-11,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2023-05-12,"[""ministry"", ""official_document"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2023-07-31,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2023-09-01,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2024-01-09,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2024-02-06,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2024-09-03,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2024-09-24,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2025-01-03,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2025-03-28,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2025-04-08,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2025-04-11,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2025-05-06,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2025-06-13,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2025-12-09,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2025-12-15,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2025-12-18,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2025-12-22,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2026-01-02,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2026-08-03,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2010-11-03,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2010-11-10,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2010-11-19,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2010-12-01,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2010-12-08,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2010-12-15,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2010-12-22,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2010-12-29,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-01-05,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-01-12,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-01-19,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-01-26,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-02-04,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-02-12,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-02-18,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-02-24,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-02-26,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-03-02,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-03-09,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-03-16,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-03-23,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-03-30,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-04-06,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-04-13,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-04-20,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-04-27,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-05-04,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-05-12,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-05-18,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-05-26,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-06-01,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-06-08,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-06-15,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-06-22,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-06-29,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-07-06,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-07-13,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-07-20,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-07-27,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-08-03,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-08-10,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-08-17,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-08-24,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-09-02,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-09-07,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-09-14,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-09-21,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-09-28,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-10-05,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-10-12,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-10-19,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-10-26,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-11-02,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-11-10,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-11-16,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-11-23,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-11-30,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-12-07,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-12-14,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-12-19,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-12-21,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2011-12-28,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-01-11,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-01-18,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-01-19,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-01-25,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-02-01,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-02-08,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-02-15,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-02-22,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-02-29,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-03-07,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-03-08,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-03-14,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-03-22,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-03-30,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-04-04,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-04-11,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-04-21,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-05-02,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-05-16,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-05-23,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-05-30,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-06-06,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-06-13,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-06-20,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-06-27,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-07-04,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-07-11,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-07-18,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-07-25,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2012-08-29,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2014-10-01,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2014-12-31,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2015-01-07,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2015-04-08,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2015-07-01,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2015-07-08,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2015-09-02,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2015-09-30,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2015-10-28,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2015-11-11,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2015-11-18,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2015-12-02,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2015-12-16,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2015-12-30,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-01-13,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-02-03,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-02-10,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-04-27,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-05-11,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-05-18,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-05-26,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-06-08,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-06-15,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-06-22,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-06-29,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-07-13,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-07-27,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-08-10,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-08-17,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-09-07,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-09-15,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-09-21,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-09-28,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-10-05,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-10-13,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-10-26,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-11-09,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-11-23,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-11-30,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-12-07,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2016-12-14,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2018-01-01,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2019-10-23,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2020-01-22,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2020-01-29,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2021-10-12,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2021-12-17,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2022-03-25,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2023-08-29,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-01-03,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-02-28,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-03-01,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-03-05,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-03-08,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-03-12,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-03-15,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-03-19,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-03-22,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-03-26,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-04-02,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-04-05,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-04-09,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-04-15,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-04-16,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-04-19,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-04-23,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-04-26,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-04-30,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-05-07,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-05-10,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-05-14,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-05-17,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-05-21,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-05-24,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-05-28,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-05-31,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-06-04,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-06-07,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-06-11,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-06-14,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-06-19,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-06-21,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-06-28,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-07-02,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-07-05,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-07-12,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-07-16,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-07-23,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-07-26,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-07-30,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-08-02,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-08-06,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-08-09,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-08-16,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-08-20,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-09-06,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-10-11,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-10-15,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-10-18,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-10-22,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-10-25,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-10-29,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-11-01,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-11-19,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-11-25,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-11-26,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-11-29,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-12-10,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-12-13,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-12-17,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-12-20,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-12-24,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2024-12-31,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-01-10,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-01-15,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-01-17,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-01-21,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-01-24,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-01-28,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-01-31,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-02-04,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-02-12,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-02-18,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-03-21,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-03-23,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-05-09,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-05-27,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-10-07,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-10-10,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-10-14,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-10-17,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-10-24,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-10-28,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-10-31,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-11-14,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-12-16,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2025-12-23,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-01-07,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-01-09,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-01-13,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-01-16,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-01-20,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-01-23,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-01-27,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-01-30,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-02-03,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-02-06,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-02-10,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-02-13,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-02-17,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-02-20,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-02-24,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-02-27,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-03-03,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-03-06,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-03-10,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-03-13,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-03-17,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-03-19,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-03-24,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-03-27,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-03-31,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-04-02,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-04-07,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-04-14,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-04-17,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-04-21,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-04-24,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-04-28,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-04-30,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-05-05,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-05-08,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-05-12,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-05-15,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-05-19,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-05-22,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-06-02,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-06-05,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-06-09,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-06-12,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-06-15,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-06-19,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-06-23,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-06-25,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-06-29,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-07-03,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-07-07,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-07-10,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-07-14,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-07-17,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-07-21,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-07-24,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-07-31,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-08-14,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-08-18,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-08-21,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-08-28,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-09-01,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-09-04,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-09-08,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-09-11,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-09-15,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-09-18,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-09-22,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-09-25,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-09-29,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-10-06,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-10-09,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-10-13,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-10-16,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-10-20,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-10-23,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-10-27,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-10-30,"[""ipt"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-11-13,"[""ipt"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision

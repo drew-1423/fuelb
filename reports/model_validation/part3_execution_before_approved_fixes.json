@@ -1,0 +1,56 @@
+{
+  "verified_at": "2026-11-12T18:44:05.097898+00:00",
+  "tests": {
+    "command": ".venv/bin/pytest Tests/fuel/test_validation.py Tests/fuel/test_live_forecasting.py -q",
+    "passed": 49,
+    "failed": 0
+  },
+  "validation_commands": {
+    "run": "exit 0",
+    "report": "exit 0"
+  },
+  "offline_run_id": "ops-20261112T184107-36a44a35",
+  "offline_status": "degraded",
+  "failed_steps": [
+    {
+      "name": "market_quality_and_coverage",
+      "status": "failed",
+      "error": "KeyError: 'parsed_rows'",
+      "seconds": 4.121928957989439
+    }
+  ],
+  "forecast_ids": [
+    45009,
+    45010,
+    45011,
+    45012,
+    45013,
+    45014,
+    45015,
+    45016
+  ],
+  "forecast_tiers": {
+    "decision_1": 4,
+    "decision_2": 4,
+    "decision_4": 4,
+    "day_1": 4,
+    "day_3": 4,
+    "day_7": 4,
+    "day_14": 4,
+    "day_30": 4
+  },
+  "ledger_schema_and_triggers_unchanged": true,
+  "ledger_integrity": {
+    "forecasts": 45016,
+    "evaluations": 44928,
+    "hash_chain_valid": true,
+    "legacy_signed_zero_matches": 62
+  },
+  "limitations": [
+    "Refreshed EIA data still end on 2026-11-03, exceeding 7-day input limit.",
+    "Quantitative candidates registered as Tier 2; no Tier 1 evidence established.",
+    "30-day finite 90% conformal interval unavailable with six calibration residuals.",
+    "Dashboard date-field reader fix awaiting scope approval.",
+    "Market report missing parsed_rows handling awaiting scope approval."
+  ]
+}

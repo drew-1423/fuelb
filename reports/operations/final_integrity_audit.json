@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-11-11T16:33:53.886780+00:00",
+  "databases": [
+    {
+      "database": "lebanon_fuel.sqlite",
+      "integrity": "ok",
+      "foreign_key_errors": 0
+    },
+    {
+      "database": "forecast_ledger.sqlite",
+      "integrity": "ok",
+      "foreign_key_errors": 0
+    },
+    {
+      "database": "operations.sqlite",
+      "integrity": "ok",
+      "foreign_key_errors": 0
+    }
+  ],
+  "raw_files_checked": 111,
+  "normalized_market_rows_checked": 33562,
+  "snapshots_checked": 678,
+  "model_files_checked": 109,
+  "evaluation_arithmetic_errors": 0,
+  "forecasts": 44960,
+  "evaluations": 44928,
+  "hash_chain_valid": true,
+  "legacy_signed_zero_matches": 62
+}

@@ -1,0 +1,20 @@
+{
+  "created_at": "2026-11-11T00:24:33.706159+00:00",
+  "state": "Implementation settings frozen before first Part 5 fit; no performance viewed",
+  "files": {
+    "src/lebanon_fuel/forecasting/__init__.py": "1f4921e4b1d57d3b4205427a3b140ca61f3e8f144c98cf87934c1d91524dc6bc",
+    "src/lebanon_fuel/forecasting/cli.py": "5cb59c345d2034b9030dd99394231847eb2f37fd6a847cac9438d74895fc72dc",
+    "src/lebanon_fuel/forecasting/data.py": "4e76c0ea5042dfa16ee3d9dba9c3f4417ce597106e1b59f8a3c657d771505c46",
+    "src/lebanon_fuel/forecasting/models.py": "d630125d4c4e83bb5923b3a7edf5acd26a11ad1b91cc623ee95ae7bc600a753a",
+    "src/lebanon_fuel/forecasting/pipeline.py": "6b85acc1a1c5a2efcd7fd65375e99c0b254fd6ef110d33f3b564c5dd32be9f02",
+    "src/lebanon_fuel/forecasting/uncertainty.py": "4854cda38c2e2c766d46499046e382c8122a56ed26484502a38380534633f077"
+  },
+  "additional_settings": {
+    "SARIMAX": "AR(1) errors plus four contemporaneously available regressors; latest contiguous training run >=40, no gap compression",
+    "direction": "Separate exact-sign classifier; purged chronological 70/30 split, regularized logistic C=0.1, temperature [0.5,5]; otherwise smoothed class frequencies",
+    "hybrid": "Base residuals cross-fitted in temporal blocks 35\u201355%,55\u201375%,75\u2013100%; minimum24 distinct residual base decisions",
+    "ensemble": "Nonnegative sum-one MAE optimization on prior matured OOF only; choose simplest single within2%",
+    "interval": "Prior OOF, at most80 nonoverlapping windows and one per base decision, minimum20; expanding quantile or symmetric absolute residual",
+    "final_origin": "Latest eligible origin in development stratum, event origins immediately after a source record; all training labels mature strictly earlier"
+  }
+}

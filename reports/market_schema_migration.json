@@ -1,0 +1,11 @@
+{
+  "at": "2026-11-10T19:46:51.844512+00:00",
+  "purpose": "Part 3 initial semantic identity excludes changing row/package locators; raw captures and market values preserved.",
+  "market_observations_rehashed": 33843,
+  "identical_observations_merged": 0,
+  "triggers_restored": [
+    "market_observations_no_delete",
+    "market_observations_no_update",
+    "market_sightings_no_delete"
+  ]
+}

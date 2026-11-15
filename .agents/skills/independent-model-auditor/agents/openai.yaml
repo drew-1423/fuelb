@@ -1,0 +1,3 @@
+interface:
+  display_name: "Independent Model Auditor"
+  short_description: "Audit fuel forecast validity and claims"
