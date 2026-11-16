@@ -1,0 +1,17 @@
+{
+  "version": "next-decision-shadow-v1",
+  "horizon": "decision_1",
+  "development_regime": "stabilized_fx_2023_2026",
+  "research_training_cutoff": "2026-06-01T00:00:00+03:00",
+  "development_design": "data/exports/forecasting/development_design.csv",
+  "bundle": "data/models/part5/stabilized_fx_2023_2026/decision_1",
+  "anchor_maximum_age_days": 10,
+  "fresh_spot_maximum_age_days": 7,
+  "lagged_spot_maximum_age_days": 14,
+  "minimum_calibration_decisions": 20,
+  "maximum_calibration_decisions": 60,
+  "minimum_review_decisions": 20,
+  "target_review_decisions": 50,
+  "candidates": ["A_no_change", "Z_last_change", "A_median", "Z_brent", "B_structural_proxy", "G_hybrid", "B_official_structural"],
+  "production_approval": false
+}

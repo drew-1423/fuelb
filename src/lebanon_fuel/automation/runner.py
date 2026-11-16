@@ -85,7 +85,7 @@ def settle_available(root, cfg, ops):
     matches = {}
     with closing(ForecastLedger(root / cfg["validation"]["forecast_ledger"])) as ledger:
         # Revisit previously scored forecasts too: corrected actuals append evaluations.
-        ids = [r[0] for r in ledger.db.execute("SELECT id FROM forecasts WHERE mode IN ('prospective','prospective_research') AND status='issued'")]
+        ids = [r[0] for r in ledger.db.execute("SELECT id FROM forecasts WHERE mode IN ('prospective','prospective_research','prospective_shadow') AND status='issued'")]
         for fid in ids:
             matches[str(fid)] = ledger.match(fid, payload.get("coverage", {}))
     return dict(status="reviewed_manifest_processed", import_result=imported, match_status=matches)
@@ -189,6 +189,14 @@ def run(root, *, scheduled=False, sources=None, offline=False, collector=execute
                 check = step("refresh_forecast_decision", lambda: forecast.refresh(root, cfg, run_id))
                 if check["status"] == "success":
                     write_json(root / "reports/operations/current_forecast_check.json", check["result"])
+                shadow_path = ops.get("shadow", {}).get("frozen_manifest")
+                if shadow_path:
+                    from lebanon_fuel.validation import shadow
+                    def issue_shadow():
+                        output = shadow.issue(root, root / shadow_path, run_id=run_id + "-shadow")
+                        write_json(root / "reports/operations/shadow_evidence.json", shadow.report(root, root / shadow_path))
+                        return output
+                    step("issue_shadow_experiment", issue_shadow)
             previous_path = root / "reports/operations/monitoring.json"
             try:
                 previous = json.loads(previous_path.read_text()) if previous_path.exists() else None

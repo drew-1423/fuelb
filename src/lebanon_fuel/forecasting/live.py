@@ -1,6 +1,6 @@
 """Prospective forecasts with explicit evidence tiers and immutable input lineage."""
 from contextlib import closing
-from datetime import date, datetime, timedelta, time, timezone
+from datetime import date, datetime, timedelta, timezone
 from collections import Counter
 from hashlib import sha256
 import json
@@ -12,7 +12,7 @@ import pandas as pd
 
 from lebanon_fuel.domain import BEIRUT, VERIFIED
 from lebanon_fuel.market.catalog import SERIES
-from lebanon_fuel.market.store import MarketStore
+from lebanon_fuel.market.store import MarketStore, close_availability
 from lebanon_fuel.structural.engine import price
 from lebanon_fuel.validation.policy import gate
 from .data import MarketFeatures, features_at
@@ -80,9 +80,9 @@ def strict_feature_frame(root, records, histories, at, horizon):
             # that vintage, historical window endpoints use observation closes.
             if pd.Timestamp(row['available_at']) >= pd.Timestamp(at):
                 continue
-            day = date.fromisoformat(row['observation_date'])
-            lag = 5 if SERIES[sid].frequency == 'weekly' and sid.startswith('us_') else 0
-            window_at = datetime.combine(day+timedelta(days=lag), time(23,59,59), timezone.utc)
+            window_at = datetime.fromisoformat(close_availability(row['observation_date'], SERIES[sid]))
+            if row.get('publication_timestamp'):
+                window_at = max(window_at, datetime.fromisoformat(row['publication_timestamp']))
             if window_at >= at:
                 continue
             rows.append(dict(row, captured_available_at=row['available_at'], available_at=window_at.isoformat(),
