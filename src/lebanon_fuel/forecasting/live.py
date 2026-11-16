@@ -10,7 +10,7 @@ import sqlite3
 import numpy as np
 import pandas as pd
 
-from lebanon_fuel.domain import BEIRUT, VERIFIED
+from lebanon_fuel.domain import BEIRUT, VERIFIED, PROVISIONAL_PRICE
 from lebanon_fuel.market.catalog import SERIES
 from lebanon_fuel.market.store import MarketStore, close_availability
 from lebanon_fuel.structural.engine import price
@@ -52,13 +52,18 @@ def current_context(root, settings, at):
     return records, histories
 
 
-def anchor_check(records, at, maximum_age):
+def anchor_check(records, at, maximum_age, *, allow_provisional=False):
     if not records:
         return None, 'No Lebanese price observations. Collect IPT and the official ministry archive.'
     latest = records[-1]
     # Never step backwards over a newer disputed or supplier-only observation.
-    if latest['verification_status'] not in VERIFIED or not latest.get('price_lbp_20l') or not math.isfinite(latest['price_lbp_20l']) or latest['price_lbp_20l'] <= 0:
+    eligible = VERIFIED | ({PROVISIONAL_PRICE} if allow_provisional else set())
+    if latest['verification_status'] not in eligible or not latest.get('price_lbp_20l') or not math.isfinite(latest['price_lbp_20l']) or latest['price_lbp_20l'] <= 0:
         return None, 'The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision.'
+    if latest['verification_status'] == PROVISIONAL_PRICE:
+        sources = {row['id'] for row in latest.get('corroborating_sources', [])}
+        if not {'ipt', 'taqtek'} <= sources:
+            return None, 'The provisional price is missing matching IPT and Taqtek evidence.'
     age = (at.astimezone(BEIRUT).date() - date.fromisoformat(latest['source_date'])).days
     if age < 0 or age > maximum_age:
         return None, 'The latest verified price is stale or future-dated. Retrieve a current ministry price and reconcile it with IPT.'
@@ -70,6 +75,8 @@ def anchor_check(records, at, maximum_age):
 
 def strict_feature_frame(root, records, histories, at, horizon):
     config = json.loads((root/'config/forecasting_research.json').read_text())
+    if records[-1]['verification_status'] == PROVISIONAL_PRICE:
+        config['target_statuses'] = [*config['target_statuses'], PROVISIONAL_PRICE]
     market = MarketFeatures.__new__(MarketFeatures)
     market.config, market.cache, market.mode = config, {}, 'as_of_close'
     market.histories = {}
@@ -261,7 +268,8 @@ def baseline(records, anchor, horizon):
 
 
 def generate(root, settings, config, decision, records, histories, at):
-    anchor, problem = anchor_check(records, at, config['anchor_maximum_age_days'])
+    anchor, problem = anchor_check(records, at, config['anchor_maximum_age_days'], allow_provisional=True)
+    provisional = bool(anchor and anchor['verification_status'] == PROVISIONAL_PRICE)
     market = {sid: dict(history[-1], vintage_certified=True) for sid, history in histories.items() if history}
     results = []
     schedule = estimate_next_decision_date(records, at)
@@ -285,7 +293,9 @@ def generate(root, settings, config, decision, records, histories, at):
         frame = None
         for tier in (1, 2):
             errors = []
-            if tier==1 and not (settings['forecasting']['enabled'] and settings['validation']['production_approved'] and decision.get('production_approved')):
+            if tier == 1 and provisional:
+                errors.append('Provisional price anchors support research estimates only')
+            elif tier==1 and not (settings['forecasting']['enabled'] and settings['validation']['production_approved'] and decision.get('production_approved')):
                 errors.append('No approved production model in the validation decision')
             else:
                 for candidate in candidates:
@@ -363,7 +373,7 @@ def generate(root, settings, config, decision, records, histories, at):
             output['attempts'].append(dict(tier=tier,reasons=sorted(set(errors)) or ([] if output['tier'] else ['No eligible artifact registered'])))
             if output['tier']:
                 break
-        if not output['tier']:
+        if not output['tier'] and not provisional:
             request = config.get('structural_requests',{}).get(horizon)
             try:
                 if not request:raise ValueError('Missing current benchmark window, pricing FX, freight and dated tax/margin inputs')
@@ -387,7 +397,19 @@ def generate(root, settings, config, decision, records, histories, at):
                       future_market_assumption='Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.')
         if output['tier'] == 4:
             output['interval']=output['probabilities']=None
+            if provisional:
+                output['methodology'] = 'Persistence of the latest price corroborated by IPT and Taqtek.'
             output['uncertainty']='No calibrated prediction interval or directional probabilities available. Historical MAE describes the cited research sample only.'
+        if provisional:
+            output['label'] += ' · PROVISIONAL PRICE ANCHOR'
+            output['anchor_sources'] = anchor.get('corroborating_sources', [])
+            output['critical_missing_inputs'] = [
+                'IPT and Taqtek agree on the provisional price. Ministry confirmation and effective timing are pending.',
+                *output['critical_missing_inputs']]
+            for key in ('interval', 'interval_nominal', 'interval_80', 'interval_80_nominal', 'probabilities'):
+                output.pop(key, None)
+            output.update(interval=None, probabilities=None,
+                          uncertainty='No intervals or probabilities validated for a provisional price anchor.')
         results.append(output)
     return dict(origin=at.isoformat(), anchor=anchor, forecasts=results, available_market_inputs=market,
                 status='issued' if anchor else 'abstain', reasons=[problem] if problem else [])

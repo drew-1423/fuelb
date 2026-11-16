@@ -15,6 +15,7 @@ SOURCES = {
     "taqtek": (4, "ministry_derived"),
     "manual": (5, "manual_unverified"),
 }
+PROVISIONAL_PRICE = "provisional_corroborated"
 VERIFIED = {"document_verified", "archive_corroborated"}
 
 

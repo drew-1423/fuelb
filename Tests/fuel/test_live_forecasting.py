@@ -366,3 +366,19 @@ def test_atomic_batch_issuance_handles_slow_inference_and_prevents_partial_runs(
         assert ledger.db.execute('SELECT COUNT(*) FROM forecasts WHERE run_id=?', ('aborted-run',)).fetchone()[0] == 0
         assert ledger.integrity()['hash_chain_valid']
 
+
+
+def test_provisional_anchor_can_issue_point_estimate_without_production_or_uncertainty(context):
+    from lebanon_fuel.domain import PROVISIONAL_PRICE
+    row = candidate(context)
+    approve(context, row)
+    record = context[4][-1]
+    record.update(verification_status=PROVISIONAL_PRICE,
+                  corroborating_sources=[{'id': 'ipt'}, {'id': 'taqtek'}])
+    result = issued(context)
+    assert result['tier'] == 2
+    assert result['anchor_verification'] == PROVISIONAL_PRICE
+    assert result['anchor_sources'] == record['corroborating_sources']
+    assert result['predicted_price'] == pytest.approx(record['price_lbp_20l'] + result['predicted_change'])
+    assert result['interval'] is None and result['probabilities'] is None
+    assert live.anchor_check(context[4], context[-1], 10)[0] is None

@@ -190,3 +190,22 @@ def test_import_transaction_rolls_back_on_schema_failure(store):
     with pytest.raises(ValueError):store.ingest(cap,broken())
     assert store.db.execute('SELECT COUNT(*) FROM observations').fetchone()[0]==0
     assert store.db.execute('SELECT COUNT(*) FROM captures').fetchone()[0]==1
+
+
+def test_provisional_price_requires_agreement_between_named_sources(store):
+    from lebanon_fuel.domain import Observation, PROVISIONAL_PRICE, VERIFIED
+
+    for source, quote in [('ipt', 2391000), ('taqtek', 2391000), ('ministry', 2445000)]:
+        url = f'https://example.org/{source}'
+        capture = store.capture(source, url, source.encode(), 'text/plain')
+        store.ingest(capture, [Observation(source, '2026-11-13', quote, url, {}, '1')])
+        store.reconcile()
+        record = store.ledger()[-1]
+        if source == 'ipt':
+            assert record['verification_status'] == 'supplier_observed'
+        elif source == 'taqtek':
+            assert record['verification_status'] == PROVISIONAL_PRICE
+            assert PROVISIONAL_PRICE not in VERIFIED
+            assert [item['id'] for item in record['corroborating_sources']] == ['ipt', 'taqtek']
+        else:
+            assert record['verification_status'] == 'conflict' and record['price_lbp_20l'] is None
