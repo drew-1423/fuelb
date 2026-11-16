@@ -3,7 +3,6 @@
 Part 8 adds persistent macOS collection, forecast accountability, monitoring, analyst reports and backups. **No production forecasting model is approved.** The local system operates as a research and monitoring terminal and records current forecast abstentions. See the [final project report](reports/final_project_report.md), [financial and technical audit](reports/production_audit.md), and [operations guide](docs/operations.md).
 
 ```sh
-cd /Users/andrew/MyApp_macOS/fuel forecast
 .venv/bin/python -m lebanon_fuel.automation.cli run
 .venv/bin/python -m lebanon_fuel.automation.cli status
 ```
