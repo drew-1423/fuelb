@@ -7,6 +7,7 @@ import math
 import sqlite3
 import itertools
 from lebanon_fuel.domain import utc_timestamp
+from .decision_events import event_clocks, select_event
 
 
 def now():return datetime.now(timezone.utc).isoformat()
@@ -104,7 +105,7 @@ class ForecastLedger:
                                snapshot_id, snap_origin, snap_mode, horizon, target, base_price,
                                prediction=None, interval=None, probabilities=None, reasons=None,
                                max_origin_age_seconds=60):
-        if mode not in {'retrospective_research', 'strict_replay', 'prospective', 'prospective_research'}:
+        if mode not in {'retrospective_research', 'strict_replay', 'prospective', 'prospective_research', 'prospective_shadow'}:
             raise ValueError('Explicit issuance mode required')
         origin = utc_timestamp(origin or created)
         if snap_origin != origin or snap_mode != mode:
@@ -235,10 +236,17 @@ class ForecastLedger:
         f=self.db.execute('SELECT * FROM forecasts WHERE id=?',(forecast_id,)).fetchone();o=self.db.execute('SELECT * FROM outcomes WHERE id=?',(outcome_id,)).fetchone()
         if not f or not o or f['status']!='issued':raise ValueError('An issued numerical forecast and actual observation are required')
         if kind=='research_replay' and f['mode']!='retrospective_research':raise ValueError('Research labels cannot settle a prospective official forecast')
-        if kind=='official_match' and (o['verification_status']!='document_verified' or not o['publication_timestamp'] or not o['effective_timestamp']):
-            raise ValueError('Official matching needs verified publication and effective clocks')
         if kind not in {'official_match','research_replay'}:raise ValueError('Unknown evaluation kind')
-        if kind=='official_match' and json.loads(f['target_json'])['kind']=='decision' and pd_time(o['publication_timestamp'])<=pd_time(f['origin']):raise ValueError('Target announcement was already known at forecast origin')
+        if kind == 'official_match':
+            publication, effective = event_clocks(o)
+            if o['verification_status'] != 'document_verified' or publication is None or effective is None:
+                raise ValueError('Official matching needs reviewed publication and effective timing')
+            if json.loads(f['target_json'])['kind'] == 'decision':
+                origin = pd_time(f['origin'])
+                if f['mode'].startswith('prospective'):
+                    origin = max(origin, pd_time(f['created_at']))
+                if not publication.after(origin):
+                    raise ValueError('Target publication was not proven to follow issuance')
         delta=o['price']-f['base_price'];error=f['predicted_price']-o['price']
         hit=None if f['interval_low'] is None else int(f['interval_low']<=delta<=f['interval_high'])
         sign=lambda x:(x>0)-(x<0)
@@ -258,37 +266,26 @@ class ForecastLedger:
             start=utc_timestamp(coverage['from']);through=utc_timestamp(coverage['through']);spec=json.loads(f['target_json'])
             if pd_time(through)>pd_time(now()):raise ValueError('Complete-coverage attestation cannot extend into the future')
             if pd_time(start)<=pd_time(f['origin'])<pd_time(through):
-                # A corrected publication/effective clock can change target identity.
-                # Preserve both versions and require review rather than silently reordering decisions.
-                timing_conflicts=self.db.execute('''SELECT decision_key FROM outcomes
-                    WHERE verification_status='document_verified' AND publication_timestamp IS NOT NULL AND effective_timestamp IS NOT NULL
-                    GROUP BY decision_key HAVING COUNT(DISTINCT publication_timestamp)>1 OR COUNT(DISTINCT effective_timestamp)>1''').fetchall()
-                if timing_conflicts:
-                    details=dict(coverage,timing_conflict_decision_keys=[r[0] for r in timing_conflicts])
-                    with self.db:self.db.execute('INSERT INTO match_attempts(created_at,forecast_id,status,details_json) VALUES (?,?,?,?)',
-                        (now(),forecast_id,'timing_revision_requires_review',canonical(details)))
-                    return 'timing_revision_requires_review'
-                rows=[dict(r) for r in self.db.execute('''SELECT o.* FROM outcomes o JOIN
-                    (SELECT decision_key,MAX(id) id FROM outcomes GROUP BY decision_key) v ON o.id=v.id
-                    WHERE verification_status='document_verified' AND publication_timestamp IS NOT NULL AND effective_timestamp IS NOT NULL''')]
-                if spec['kind']=='decision':
-                    eligible=sorted([r for r in rows if pd_time(f['origin'])<pd_time(r['publication_timestamp'])<=pd_time(through)],key=lambda r:pd_time(r['publication_timestamp']))
-                    if len(eligible)>=spec['steps']:
-                        candidate=eligible[spec['steps']-1]
-                        if sum(r['publication_timestamp']==candidate['publication_timestamp'] for r in eligible)==1:chosen=candidate
-                        else:status='ambiguous_simultaneous_announcements'
-                else:
-                    endpoint=utc_timestamp(spec['endpoint'])
-                    if pd_time(through)>=pd_time(endpoint):
-                        eligible=sorted([r for r in rows if pd_time(r['effective_timestamp'])<=pd_time(endpoint) and pd_time(r['publication_timestamp'])<=pd_time(endpoint)],key=lambda r:pd_time(r['effective_timestamp']))
-                        if eligible:
-                            candidate=eligible[-1]
-                            if sum(r['effective_timestamp']==candidate['effective_timestamp'] for r in eligible)==1:chosen=candidate
-                            else:status='ambiguous_effective_price'
-        if chosen:
-            if json.loads(f['target_json'])['kind']=='calendar' and pd_time(chosen['publication_timestamp'])<=pd_time(f['origin']) and chosen['price']!=f['base_price']:
-                status='base_anchor_disagrees_requires_review'
-            else:self._score(forecast_id,chosen['id'],'official_match');status='matched_verified_outcome'
+                lower = pd_time(f['origin'])
+                rows = self.db.execute("SELECT * FROM outcomes ORDER BY id").fetchall()
+                chosen, status = select_event(rows, spec, lower, pd_time(through))
+                if chosen is not None:
+                    publication, _ = event_clocks(chosen)
+                    if (spec['kind'] == 'decision' and f['mode'].startswith('prospective')
+                            and not publication.after(pd_time(f['created_at']))):
+                        status = 'target_publication_not_proven_after_creation'
+                    elif (spec['kind'] == 'calendar' and publication.by(lower)
+                            and chosen['price'] != f['base_price']):
+                        status = 'base_anchor_disagrees_requires_review'
+                    elif 'base_decision_key' in spec:
+                        anchor, _ = select_event(rows, {'kind': 'calendar', 'endpoint': f['origin']}, lower, lower)
+                        if (anchor is None or anchor['decision_key'] != spec['base_decision_key']
+                                or anchor['price'] != f['base_price']):
+                            status = 'base_anchor_disagrees_requires_review'
+                        else:
+                            self._score(forecast_id, chosen['id'], 'official_match')
+                    else:
+                        self._score(forecast_id, chosen['id'], 'official_match')
         with self.db:self.db.execute('INSERT INTO match_attempts(created_at,forecast_id,status,details_json) VALUES (?,?,?,?)',(now(),forecast_id,status,canonical(coverage)))
         return status
 

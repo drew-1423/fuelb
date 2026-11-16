@@ -43,3 +43,7 @@ backup_every_hours = 24
 # A named reviewer must attest clocks and complete official coverage first.
 # Refer to docs/model_validation.md. Empty means pending, never guessed.
 reviewed_manifest = ""
+
+[shadow]
+# Opt in with a reviewed frozen manifest. Research forecasts stay out of the public dashboard.
+frozen_manifest = ""
