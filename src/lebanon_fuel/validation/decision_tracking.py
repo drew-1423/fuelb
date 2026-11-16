@@ -1,7 +1,7 @@
 """Append-only next-update scoring and prospective Hybrid interval validation."""
 from bisect import bisect_right
 from contextlib import closing
-from datetime import date, datetime
+from datetime import date
 import json
 from math import ceil
 from pathlib import Path
@@ -151,7 +151,7 @@ def settle_supplier_updates(root, cfg, source):
                         status = "record_may_precede_forecast"
                     elif available <= stamp(now()):
                         payload = dict(details, sources=evidence)
-                        oid = ledger.outcome("supplier:" + day, available, record["price_lbp_20l"],
+                        oid = ledger.outcome("supplier:" + day, available.isoformat(), record["price_lbp_20l"],
                                              evidence[0]["source_url"], "supplier_agreement", hashed(payload),
                                              payload, source_revision_id=record["revision_id"])
                         ledger._score(forecast["id"], oid, "provisional_match")
