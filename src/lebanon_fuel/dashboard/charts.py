@@ -6,16 +6,16 @@ import plotly.graph_objects as go
 
 from .data import forecast_bounds
 
-# Electric Purple (#8B5CF6) & Luminous Sky Blue (#38BDF8) Mobile-Native Palette
-TEAL = "#38BDF8"
-AMBER = "#8B5CF6"
-BLUE = "#7DD3FC"
-SECTION = "#0B1739"
+# Electric Purple (#C4AAFF) & Luminous Sky Blue (#72D9FF) Mobile-Native Palette
+TEAL = "#72D9FF"
+AMBER = "#C4AAFF"
+BLUE = "#95ACFF"
+SECTION = "#141E38"
 TEXT = "#F8FAFC"
-MUTED = "#CBD5E1"
-GRID = "#1A254B"
-HAIRLINE = "#1E294A"
-GLASS = "#081028"
+MUTED = "#C5D2EC"
+GRID = "#344369"
+HAIRLINE = "#516287"
+GLASS = "#1D2C4D"
 
 
 def style(fig, y_title, height=410):
@@ -23,22 +23,22 @@ def style(fig, y_title, height=410):
         template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor=SECTION,
         height=height, margin=dict(l=16, r=16, t=36, b=36), yaxis_title=y_title,
         dragmode="pan",
-        font=dict(family="Inter, system-ui, sans-serif", color=TEXT, size=13),
+        font=dict(family="Inter, system-ui, sans-serif", color=TEXT, size=12),
         legend=dict(orientation="h", y=1.04, x=0, yanchor="bottom",
                     font=dict(size=12, color=MUTED), bgcolor="rgba(0,0,0,0)"),
-        hoverlabel=dict(bgcolor=GLASS, bordercolor="#38BDF8", font=dict(color=TEXT, size=13)),
+        hoverlabel=dict(bgcolor=GLASS, bordercolor="#72D9FF", font=dict(color=TEXT, size=12)),
         hovermode="x unified",
     )
     fig.update_xaxes(
-        automargin=True, zerolinecolor=HAIRLINE, gridcolor="rgba(26,37,75,0.45)",
-        tickfont=dict(color=MUTED, size=13),
+        automargin=True, zerolinecolor=HAIRLINE, gridcolor=GRID,
+        tickfont=dict(color=MUTED, size=12),
         showspikes=True, spikemode="across", spikesnap="cursor",
-        spikecolor="#38BDF8", spikethickness=1.5, spikedash="dot",
+        spikecolor="#72D9FF", spikethickness=1.5, spikedash="dot",
     )
     fig.update_yaxes(
         automargin=True, zerolinecolor=HAIRLINE, gridcolor=GRID, separatethousands=True,
-        tickfont=dict(color=MUTED, size=13),
-        title_font=dict(size=13, color=MUTED),
+        tickfont=dict(color=MUTED, size=12),
+        title_font=dict(size=12, color=MUTED),
     )
     return fig
 
@@ -146,7 +146,7 @@ def history_chart(prices, replay, current):
             symbol = "diamond-open" if kind == "Decision" else "square-open"
             add_forecast_markers(fig, group, f"{label} · {kind}", TEAL, symbol)
     fig.update_xaxes(type="date", rangeselector=dict(
-        x=0, y=1.08, bgcolor=GLASS, activecolor="#8B5CF6", bordercolor="#38BDF8", borderwidth=1,
+        x=0, y=1.015, bgcolor=GLASS, activecolor="#51457A", bordercolor="#72D9FF", borderwidth=1,
         font=dict(color="#F8FAFC", size=12),
         buttons=[dict(count=7, label="1W", step="day", stepmode="backward"),
                  dict(count=1, label="1M", step="month", stepmode="backward"),
@@ -159,7 +159,7 @@ def history_chart(prices, replay, current):
     fig = style(fig, "LBP / 20 L", 440)
     fig.update_layout(legend=dict(orientation="h", y=-.2, x=0, yanchor="top",
                                   font=dict(size=12, color=MUTED), bgcolor="rgba(0,0,0,0)"),
-                      margin=dict(l=16, r=16, t=52, b=92))
+                      margin=dict(l=16, r=16, t=74, b=92))
     return fig
 
 
@@ -233,13 +233,13 @@ def ovx_history_chart(history):
                         line=dict(color=AMBER, width=2.4, shape='spline', smoothing=0.8),
                         fill='tonexty' if len(numeric) >= 2 else None,
                         fillcolor='rgba(139,92,246,.16)',
-                        marker=dict(size=5.5, color='#38BDF8', line=dict(color=SECTION, width=1)),
+                        marker=dict(size=5.5, color='#72D9FF', line=dict(color=SECTION, width=1)),
                         name='Cboe OVX close',
                         customdata=[row.get('source_url', '') for row in rows],
                         hovertemplate='%{x}<br>%{y:.2f}% annualized<br>%{customdata}<extra></extra>')
         closes = pd.to_numeric(pd.Series([row['value'] for row in history[-252:]]), errors='coerce').dropna()
         if len(closes) == 252:
-            colors = {25: '#38BDF8', 75: '#8B5CF6', 90: '#FB7185'}
+            colors = {25: '#72D9FF', 75: '#C4AAFF', 90: '#FB7185'}
             names = {25: 'p25 · Low / Normal', 75: 'p75 · Elevated', 90: 'p90 · Stress'}
             for percentile in (25, 75, 90):
                 level = float(closes.quantile(percentile / 100))
@@ -248,7 +248,4 @@ def ovx_history_chart(history):
                               annotation_text=f"{names[percentile]} · {level:.1f}%",
                               annotation_position='top right',
                               annotation_font=dict(color=colors[percentile], size=12))
-    fig = style(fig, 'OVX · annualized %', 360)
-    if history and len(history) >= 252:
-        fig.update_layout(margin=dict(l=16, r=140, t=36, b=36))
-    return fig
+    return style(fig, 'OVX · annualized %', 360)
