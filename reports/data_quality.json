@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16T12:52:14.431864+00:00",
+  "generated_at": "2026-11-16T14:42:49.548050+00:00",
   "as_of_beirut": "2026-11-16",
   "timezone": "Asia/Beirut",
   "ledger_unique_dates": 1371,
@@ -99,14 +99,14 @@
         "2025-09-30"
       ],
       "duplicate_date_extra_observations": 4,
-      "exact_duplicate_rows_in_captures": 13,
+      "exact_duplicate_rows_in_captures": 14,
       "last_successful_run": {
-        "id": 88,
-        "finished_at": "2026-11-14T22:56:52.686106+00:00",
+        "id": 113,
+        "finished_at": "2026-11-16T14:42:38.761007+00:00",
         "details": {
           "parsed_rows": 1313,
           "new_observations": 0,
-          "capture_id": 333
+          "capture_id": 403
         }
       }
     },
@@ -169,8 +169,8 @@
       "duplicate_date_extra_observations": 31,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 109,
-        "finished_at": "2026-11-16T09:58:23.958016+00:00",
+        "id": 114,
+        "finished_at": "2026-11-16T14:42:48.928595+00:00",
         "details": {
           "parsed_rows": 8,
           "new_observations": 0,
@@ -1109,6 +1109,22 @@
       "finished_at": "2026-11-16T12:51:31.912300+00:00",
       "status": "success",
       "details": "{\"parsed_rows\": 17, \"new_observations\": 17, \"capture_id\": 398}"
+    },
+    {
+      "id": 113,
+      "source_id": "ipt",
+      "started_at": "2026-11-16T14:42:21.873480+00:00",
+      "finished_at": "2026-11-16T14:42:38.761007+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1313, \"new_observations\": 0, \"capture_id\": 403}"
+    },
+    {
+      "id": 114,
+      "source_id": "ministry",
+      "started_at": "2026-11-16T14:42:39.258553+00:00",
+      "finished_at": "2026-11-16T14:42:48.928595+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 8, \"new_observations\": 0, \"pages\": 1}"
     }
   ],
   "readiness": "Adequate for source reconciliation and exploratory target analysis. Not ready for an institutional as-of forecasting backtest: effective/release times, unresolved conflicts, coverage and regimes need review."

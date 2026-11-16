@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-11-16T10:23:20.880016+00:00",
+  "generated_at": "2026-11-16T14:43:11.233386+00:00",
   "data_quality": {
     "conflict_dates": 42,
-    "missing_publication_clocks": 3176,
-    "missing_effective_dates": 3172,
+    "missing_publication_clocks": 3197,
+    "missing_effective_dates": 3193,
     "candidate_dates": 1371,
     "suspicious_dates": 4
   },
@@ -12,11 +12,6 @@
       "code": "conflicting_prices",
       "severity": "warning",
       "message": "42 source dates remain quarantined for conflicting prices."
-    },
-    {
-      "code": "source_failure",
-      "severity": "warning",
-      "message": "ipt: last collection is failed."
     },
     {
       "code": "source_failure",
@@ -109,8 +104,8 @@
     "revision_id": 3447
   },
   "market": {
-    "origin_utc": "2026-11-16T10:23:07.726855+00:00",
-    "origin_beirut": "2026-11-16T12:23:07.726855+02:00",
+    "origin_utc": "2026-11-16T14:43:08.137195+00:00",
+    "origin_beirut": "2026-11-16T16:43:08.137195+02:00",
     "mode": "strict",
     "backtest_eligible": true,
     "series": {
@@ -2903,7 +2898,7 @@
   },
   "policy_headlines": {
     "status": "captured_headlines_only",
-    "retrieved_at": "2026-11-16T09:58:17.201698+00:00",
+    "retrieved_at": "2026-11-16T14:42:42.704449+00:00",
     "items": [],
     "note": "Changes require original-document review. This is not complete policy surveillance."
   },

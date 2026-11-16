@@ -1,6 +1,6 @@
 # Lebanon gasoline 95 analyst report
 
-Generated 2026-11-16T10:23:20.880016+00:00
+Generated 2026-11-16T14:43:11.233386+00:00
 
 ## Executive summary
 
@@ -37,7 +37,6 @@ Selected G_hybrid measured MAE 366 LBP / 20 L, direction accuracy 100.0%, n=2 on
 ## Operating alerts
 
 - 42 source dates remain quarantined for conflicting prices.
-- ipt: last collection is failed.
 - market_ec: last collection is failed.
 - market_yahoo: last collection is partial.
 - market_fred: last collection is withdrawn_source_policy.
