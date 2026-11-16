@@ -12,7 +12,7 @@ import uuid
 import pandas as pd
 import streamlit as st
 
-from lebanon_fuel.dashboard import analyst, charts, data
+from lebanon_fuel.dashboard import analyst, charts, data, scorecard
 from lebanon_fuel.dashboard.scenarios import simulate
 from lebanon_fuel.domain import BEIRUT, PROVISIONAL_PRICE
 from lebanon_fuel.market.catalog import MISSING, SERIES
@@ -685,7 +685,10 @@ def volatility_view(snap):
 
 
 def model_view():
-    title("Model performance", "Historical accuracy scorecards · how closely each forecasting method matched actual price changes")
+    title("Model performance", "Live forecast results and historical research")
+    scorecard.render(ROOT, LEDGER_PATH)
+    st.divider()
+    st.subheader("Historical backtests")
     st.markdown(
         '<div class="plain-guide"><strong>How to judge accuracy:</strong> <strong>MAE (Mean Absolute Error)</strong> is the average miss in LBP per 20 liters '
         '(lower is better). <strong>Direction accuracy</strong> shows how often the model correctly called whether the price would rise, fall, or stay flat.</div>',
@@ -780,34 +783,6 @@ def model_view():
         if not bins.empty:
             st.caption("Model-specific residual probabilities · bin sample sizes in hover labels")
             show_chart(charts.reliability_chart(bins))
-    st.subheader("Live prospective track record (sealed 2026-11-14 onward)")
-    try:
-        track = data.prospective_track_record(ROOT, LEDGER_PATH, horizon)
-        p1, p2, p3 = st.columns(3)
-        p1.metric(
-            "Tier 1 decision progress",
-            f"{track['distinct_decisions']} / {track['required_decisions']}",
-            border=True,
-            help="Number of distinct certified decisions settled in the live ledger since 2026-11-14. At least 20 are required before any model can be promoted to Tier 1 production.",
-        )
-        p2.metric(
-            "Prospective live MAE · LBP",
-            amount(track["mae_lbp"], 0) if track["mae_lbp"] is not None else "Awaiting outcomes",
-            border=True,
-            help="Real-time Mean Absolute Error on forecasts issued after the 2026-11-14 prospective freeze and matched against verified Ministry outcomes.",
-        )
-        p3.metric(
-            "Prospective direction hit rate",
-            f"{track['direction_accuracy']:.1%}" if track["direction_accuracy"] is not None else "Awaiting outcomes",
-            border=True,
-            help="Percentage of live prospective forecasts since 2026-11-14 that called the correct direction (up, down, or unchanged within ±3,000 LBP).",
-        )
-        st.caption(
-            f"Prospective freeze active since {track['prospective_start'][:10]} · "
-            f"{track['issued_n']} live forecasts logged · {track['settled_n']} settled against verified outcomes."
-        )
-    except (OSError, ValueError, sqlite3.Error, pd.errors.DatabaseError):
-        st.caption("Live prospective track record is currently unavailable.")
 
 
 def scenario_view(snap):
