@@ -12,7 +12,7 @@ import uuid
 import pandas as pd
 import streamlit as st
 
-from lebanon_fuel.dashboard import analyst, charts, data, scorecard
+from lebanon_fuel.dashboard import analyst, backtesting, charts, data, scorecard
 from lebanon_fuel.dashboard.scenarios import simulate
 from lebanon_fuel.domain import BEIRUT, PROVISIONAL_PRICE
 from lebanon_fuel.market.catalog import MISSING, SERIES
@@ -20,7 +20,7 @@ from lebanon_fuel.market.catalog import MISSING, SERIES
 ROOT = Path(os.environ.get("LEBANON_FUEL_ROOT", Path.cwd())).resolve()
 REPORTS = ROOT / "reports/model_validation"
 VIEWS = ["Overview", "Price & forecasts", "Global markets", "Analyst report",
-         "Model performance", "Scenario simulator", "Volatility & options", "Data quality"]
+         "Model performance", "Backtesting", "Scenario simulator", "Volatility & options", "Data quality"]
 REGIMES = {"pre_crisis": "2018–19 challenge", "recent_pre_fiscal": "2025 challenge", "stabilized_fx_2023_2026": "2026 holdout"}
 FAMILIES = {"Z_last_change": "Last change", "A_no_change": "No change", "A_mean": "Historical mean",
             "Z_brent": "Brent baseline", "B_structural_proxy": "Structural proxy",
@@ -1007,6 +1007,10 @@ def main():
                            "lebanon-energy-brief.md", "text/markdown")
     elif view == "Model performance":
         model_view()
+    elif view == "Backtesting":
+        title("Backtesting", "Historical forecasts and observed Lebanon gasoline 95 prices")
+        backtesting.render(table_file(REPORTS / "research_walk_forward_predictions.csv"),
+                           FAMILIES, REGIMES, show_chart)
     elif view == "Scenario simulator":
         scenario_view(snap)
     elif view == "Volatility & options":
