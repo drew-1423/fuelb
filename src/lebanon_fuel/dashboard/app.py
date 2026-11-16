@@ -664,29 +664,49 @@ def volatility_view(snap):
 
 
 def model_view():
-    title("Model performance", "Live forecast results and historical research")
+    title("Model performance", "How the forecast compares with simple alternatives")
     scorecard.render(ROOT, LEDGER_PATH)
     st.divider()
     st.subheader("Historical backtests")
-    st.markdown(
-        '<div class="plain-guide"><strong>How to judge accuracy:</strong> <strong>MAE (Mean Absolute Error)</strong> is the average miss in LBP per 20 liters '
-        '(lower is better). <strong>Direction accuracy</strong> shows how often the model correctly called whether the price would rise, fall, or stay flat.</div>',
-        unsafe_allow_html=True,
-    )
-    a, b, c = st.columns(3)
-    horizon = data.HORIZONS[a.selectbox("Horizon", list(data.HORIZONS), key="model_horizon")]
-    regime = b.selectbox("Evaluation period", list(REGIMES), format_func=REGIMES.get)
+    st.caption("2026 research report · Next recorded price update")
+    saved = table_file(REPORTS / "research_walk_forward_predictions.csv")
+    dates, shared, comparison = backtesting.next_update_comparison(saved)
+    if comparison.empty:
+        st.info("The saved report has no next-update cases shared by the Hybrid model and both baselines.")
+    else:
+        st.info(f"The report contains {dates} matched target dates. "
+                f"All three methods could be compared on {shared} of those dates. "
+                "This is too little evidence to judge how the model will perform on future decisions."
+                if shared < 10 else
+                f"The report contains {dates} matched target dates, including {shared} shared by all three methods.")
+        st.dataframe(comparison, hide_index=True, width="stretch", column_config={
+            "Average miss · LBP / 20 L": st.column_config.NumberColumn(format="localized"),
+        })
+        st.caption("Average miss measures how far each estimate was from the observed price. "
+                   "Direction counts up, down or flat, with moves within ±3,000 LBP treated as flat.")
+    st.caption("The 2025 results came from an earlier evaluation and are outside this report.")
+    st.button("Open the backtest chart", on_click=st.session_state.update, args=({"view": "Backtesting"},))
+    with st.expander("Detailed model diagnostics"):
+        _historical_diagnostics()
+
+
+def _historical_diagnostics():
     metrics = table_file(REPORTS / "metrics.csv")
     if metrics.empty:
+        st.info("No historical diagnostics are available.")
         return
-    metrics = metrics[metrics.horizon.eq(horizon) & metrics.regime.eq(regime)]
-    if metrics.empty:
-        st.info("No measured results for this selection.")
+    results = metrics[["regime", "horizon", "family"]].dropna().drop_duplicates()
+    options = list(results.itertuples(index=False, name=None))
+    if not options:
+        st.info("No historical diagnostics are available.")
         return
-    families = sorted(metrics.family.unique())
-    family = c.selectbox("Model", families, index=families.index("Z_last_change") if "Z_last_change" in families else 0,
-                         format_func=lambda f: FAMILIES.get(f, f))
-    row = metrics[metrics.family.eq(family)].iloc[0]
+    default = ("stabilized_fx_2023_2026", "decision_1", "G_hybrid")
+    regime, horizon, family = st.selectbox(
+        "Result to inspect", options, index=options.index(default) if default in options else 0,
+        format_func=lambda value: " · ".join((REGIMES.get(value[0], value[0]),
+                      backtesting.HORIZONS.get(value[1], value[1]), FAMILIES.get(value[2], value[2]))),
+    )
+    row = metrics[metrics.horizon.eq(horizon) & metrics.regime.eq(regime) & metrics.family.eq(family)].iloc[0]
     columns = st.columns(4)
     columns[0].metric(
         "MAE · LBP / 20 L",
@@ -695,10 +715,10 @@ def model_view():
         help="Mean Absolute Error: the average miss in LBP per 20-liter tank across all tested decisions. Lower is better (e.g., 8,800 LBP is roughly $0.10 per tank).",
     )
     columns[1].metric(
-        "Direction accuracy",
-        f"{row.direction_accuracy:.1%}",
+        "Direction calls right",
+        f"{round(row.direction_accuracy * row.n):,} of {row.n:,}" if pd.notna(row.direction_accuracy) else "Unavailable",
         border=True,
-        help="How often the model correctly predicted whether the price would go up, go down, or stay flat (within ±3,000 LBP). Above 50% beats a coin flip.",
+        help="Correctly called up, down or flat. Changes within ±3,000 LBP are treated as flat.",
     )
     columns[2].metric(
         "Mean signed error · LBP",
@@ -740,7 +760,7 @@ def model_view():
     d, e, f = st.columns(3)
     d.metric(
         "Candidate coverage",
-        f"{row.interval_coverage:.1%}" if pd.notna(row.interval_coverage) else "Unavailable",
+        f"{round(row.interval_coverage * row.interval_n):,} of {row.interval_n:,}" if pd.notna(row.interval_coverage) else "Unavailable",
         help="How often the actual price landed inside the model's 90% range. Ideal is 80%–98% (around 90%); much lower means the range is too narrow/overconfident.",
     )
     e.metric(
