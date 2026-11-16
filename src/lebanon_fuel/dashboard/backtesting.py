@@ -88,3 +88,35 @@ def comparison_chart(paired):
         )
     fig.update_xaxes(title="Target date · Beirut", tickformat="%d %b %Y", hoverformat="%d %b %Y")
     return charts.style(fig, "LBP / 20 L")
+
+def next_update_comparison(rows):
+    """Compare three methods on identical saved origins, base prices and realized targets."""
+    methods = {"G_hybrid": "Hybrid", "A_no_change": "No price change", "Z_last_change": "Repeat last change"}
+    keys = ["origin", "base_price_lbp_20l", "target_source_date", "target_revision_id", OBSERVED,
+            "target_change_lbp_20l"]
+    required = {*keys, "regime", "horizon", "family", PREDICTED, "prediction"}
+    if not required.issubset(rows.columns):
+        return 0, 0, pd.DataFrame()
+    target = rows.loc[rows["horizon"].eq("decision_1") & rows["regime"].eq("stabilized_fx_2023_2026")]
+    target = target.dropna(subset=keys + [PREDICTED, "prediction"])
+    matched_dates = target["target_source_date"].nunique()
+    target = target.loc[target["family"].isin(methods)].drop_duplicates(
+        subset=keys + ["family", PREDICTED, "prediction"])
+    # Ambiguous records never get resolved by choosing the better prediction.
+    target = target.loc[~target.duplicated(keys + ["family"], keep=False)]
+    shared = target.groupby(keys)["family"].transform("nunique").eq(len(methods))
+    paired = target.loc[shared]
+    if paired.empty:
+        return matched_dates, 0, pd.DataFrame()
+
+    from lebanon_fuel.forecasting.uncertainty import direction_class
+
+    n = len(paired) // len(methods)
+    result = []
+    for family, label in methods.items():
+        sample = paired.loc[paired["family"].eq(family)]
+        hits = (direction_class(sample["prediction"]) == direction_class(sample["target_change_lbp_20l"])).sum()
+        result.append({"Forecast method": label,
+                       "Average miss · LBP / 20 L": int(round((sample[PREDICTED] - sample[OBSERVED]).abs().mean())),
+                       "Direction calls right": f"{hits} of {n}"})
+    return matched_dates, paired["target_source_date"].nunique(), pd.DataFrame(result)

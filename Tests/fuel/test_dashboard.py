@@ -139,6 +139,13 @@ def test_dashboard_views_and_interactions(monkeypatch):
     for view in ["Global markets", "Analyst report", "Model performance", "Volatility & options", "Data quality"]:
         app.radio(key="view").set_value(view).run()
         assert not app.exception and not app.error
+    app.radio(key="view").set_value("Model performance").run()
+    assert not app.exception
+    assert any(button.label == "Open the backtest chart" for button in app.button)
+    assert all(metric.label != "Direction accuracy" for metric in app.metric)
+    next(button for button in app.button if button.label == "Open the backtest chart").click().run()
+    assert app.radio(key="view").value == "Backtesting"
+    assert not app.exception and app.get("plotly_chart")
     app.radio(key="view").set_value("Volatility & options").run()
     assert {"Latest OVX close", "5-trading-session change", "252-close percentile", "Volatility regime"} <= {m.label for m in app.metric}
     assert app.get("plotly_chart")
