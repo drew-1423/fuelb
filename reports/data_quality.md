@@ -1,6 +1,6 @@
 # Lebanese gasoline 95 data quality report
 
-As of 2026-11-15, Asia/Beirut. Generated 2026-11-15T14:56:38.345280+00:00. Counts are database queries over actual captures.
+As of 2026-11-16, Asia/Beirut. Generated 2026-11-16T12:52:14.431864+00:00. Counts are database queries over actual captures.
 
 | Completion measure | Observed result |
 | --- | --- |
@@ -18,10 +18,11 @@ Verification: `document_verified` requires an original government PDF and record
 
 | Source | Observations | Unique valid dates | Earliest | Latest | Age days | Stale |
 | --- | ---: | ---: | --- | --- | ---: | --- |
-| ipt | 1312 | 1308 | 2008-01-02 | 2026-11-13 | 2 | False |
-| taqtek | 915 | 915 | 2010-10-27 | 2026-11-13 | 2 | False |
-| ministry | 945 | 913 | 2010-10-27 | 2026-11-10 | 5 | False |
-| official_document | 4 | 4 | 2010-10-27 | 2025-05-29 | 535 | True |
+| ipt | 1312 | 1308 | 2008-01-02 | 2026-11-13 | 3 | False |
+| taqtek | 915 | 915 | 2010-10-27 | 2026-11-13 | 3 | False |
+| ministry | 945 | 913 | 2010-10-27 | 2026-11-10 | 6 | False |
+| official_document | 4 | 4 | 2010-10-27 | 2025-05-29 | 536 | True |
+| manual | 21 | 17 | 2026-01-16 | 2026-11-13 | 3 | False |
 
 Latest successful IPT import parsed 1313 original rows. Semantic observations and unique dates differ because all raw row occurrences, including duplicates and same-day alternatives, are retained in `sightings`.
 
@@ -37,7 +38,7 @@ Latest successful IPT import parsed 1313 original rows. Semantic observations an
 
 ## Gaps and frequency
 
-163 unusually long observed intervals are listed in [gap_candidates.csv](gap_candidates.csv). The threshold is greater than max(5 days, 1.5 × that source/year median interval). These are investigation candidates, not fabricated missing decision dates. Cross-source absent dates are listed in [cross_source_missing_dates.csv](cross_source_missing_dates.csv). A source gap is not proof of a nonpublication.
+169 unusually long observed intervals are listed in [gap_candidates.csv](gap_candidates.csv). The threshold is greater than max(5 days, 1.5 × that source/year median interval). These are investigation candidates, not fabricated missing decision dates. Cross-source absent dates are listed in [cross_source_missing_dates.csv](cross_source_missing_dates.csv). A source gap is not proof of a nonpublication.
 
 Observed frequency by year is in [frequency_by_year.csv](frequency_by_year.csv); the ledger is a decision-event series, not a generated daily panel. No forward fill or interpolation is applied. Regime labels are provisional research buckets, not verified tax/FX boundaries.
 
@@ -45,7 +46,7 @@ Observed frequency by year is in [frequency_by_year.csv](frequency_by_year.csv);
 
 Status counts: `{"archive_corroborated": 809, "conflict": 42, "document_verified": 4, "government_archive": 58, "supplier_observed": 458}`. All contradictory valid source values remain in the immutable observation table; disputed dates have null canonical prices. [conflicting_observations.csv](conflicting_observations.csv) links them to observation IDs.
 
-Unknown publication timestamps: 3176 observations. Unknown official effective dates: 3172. Original Excel/HTML dates have no invented midnight release timestamp. Retrieval is stored in UTC and rendered with Asia/Beirut rules.
+Unknown publication timestamps: 3197 observations. Unknown official effective dates: 3193. Original Excel/HTML dates have no invented midnight release timestamp. Retrieval is stored in UTC and rendered with Asia/Beirut rules.
 
 Changes in the export are relative to the previous eligible verified record, with its date and an explicit basis. They are not asserted to be changes from the immediately preceding official decision. Sparse verified history cannot establish that predecessor.
 

@@ -1,6 +1,6 @@
 # International market coverage and quality
 
-Generated for 2026-11-15T14:56:38.353546+00:00. Counts below are actual stored observations, not estimates.
+Generated for 2026-11-16T10:03:28.459033+00:00. Counts below are actual stored observations, not estimates.
 
 | Series | Unique valid dates | Earliest | Latest | Latest normalized value | Stale |
 | --- | ---: | --- | --- | --- | --- |
@@ -23,9 +23,9 @@ Generated for 2026-11-15T14:56:38.353546+00:00. Counts below are actual stored o
 | Source | Result | Completed UTC | Detail |
 | --- | --- | --- | --- |
 | market_cboe | success | 2026-11-13T16:28:03.126952+00:00 | 4912 reviewed/imported rows |
-| market_ec | success | 2026-11-15T05:49:00.584685+00:00 | 2,184 rows parsed; 0 new observations |
-| market_eia | failed | 2026-11-15T05:48:40.010356+00:00 | [Errno 54] Connection reset by peer |
-| market_fed | success | 2026-11-15T06:06:50.896661+00:00 | 7,265 rows parsed; 0 new observations |
+| market_ec | failed | 2026-11-16T07:33:55.576046+00:00 | [Errno 54] Connection reset by peer |
+| market_eia | success | 2026-11-16T07:28:44.768844+00:00 | 24,410 rows parsed; 0 new observations |
+| market_fed | success | 2026-11-16T07:34:10.741565+00:00 | 7,265 rows parsed; 0 new observations |
 | market_official_review | success | 2026-11-14T20:06:38.456497+00:00 | 1 reviewed/imported rows |
 | market_yahoo | partial | 2026-11-12T11:01:09.971477+00:00 | rows parsed: unavailable; 0 new observations; brent_futures: unavailable — AccessStopped: Request denied by robots policy; Stored fallback: brent_spot (latest 2026-11-03); not newly collected futures; rbob_futures: unavailable — AccessStopped: Request denied by robots policy; Stored fallback: nyh_gasoline (latest 2026-11-03); not newly collected futures; gasoil_futures: unavailable — AccessStopped: Request denied by robots policy |
 

@@ -59,9 +59,10 @@ def show_chart(fig):
     st.plotly_chart(
         fig, width="stretch", theme=None,
         config={"displaylogo": False, "scrollZoom": True, "doubleClick": "reset",
-                "displayModeBar": True, "modeBarButtonsToRemove": ["select2d", "lasso2d"]},
+                "displayModeBar": True,
+                "modeBarButtonsToRemove": ["select2d", "lasso2d", "zoomIn2d", "zoomOut2d", "autoScale2d"]},
     )
-    st.caption("Trackpad: pinch or scroll over the chart to zoom · drag to pan · double-click to reset")
+    st.caption("Touch: 2-finger pinch to zoom · 1-finger drag to pan · tap Reset axes (🏠) or double-tap to reset")
 
 
 def amount(value, decimals=0):

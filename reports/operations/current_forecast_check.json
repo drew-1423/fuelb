@@ -1,10 +1,10 @@
 {
-  "origin": "2026-11-15T14:56:45.068414+00:00",
+  "origin": "2026-11-16T10:17:51.882413+00:00",
   "anchor": null,
   "forecasts": [
     {
       "horizon": "decision_1",
-      "origin": "2026-11-15T14:56:45.068414+00:00",
+      "origin": "2026-11-16T10:17:51.882413+00:00",
       "endpoint": null,
       "target_label": "Next 1 official pricing decision(s)",
       "decision_date": "2026-11-17",
@@ -41,13 +41,13 @@
       "critical_missing_inputs": [
         "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
       ],
-      "forecast_id": 45156,
-      "snapshot_id": "2a79da0927ed605a4c7eca6e6abb09335979c8b519f4f57be44cabdb72ce219e",
+      "forecast_id": 45180,
+      "snapshot_id": "6c6931f227e148b533af228b455b40f4e0f3b9bfc61f6dfa581f8cc0288fb69f",
       "model_version": "live-unavailable-v1"
     },
     {
       "horizon": "decision_2",
-      "origin": "2026-11-15T14:56:45.068414+00:00",
+      "origin": "2026-11-16T10:17:51.882413+00:00",
       "endpoint": null,
       "target_label": "Next 2 official pricing decision(s)",
       "decision_date": "2026-11-20",
@@ -84,13 +84,13 @@
       "critical_missing_inputs": [
         "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
       ],
-      "forecast_id": 45157,
-      "snapshot_id": "2a79da0927ed605a4c7eca6e6abb09335979c8b519f4f57be44cabdb72ce219e",
+      "forecast_id": 45181,
+      "snapshot_id": "6c6931f227e148b533af228b455b40f4e0f3b9bfc61f6dfa581f8cc0288fb69f",
       "model_version": "live-unavailable-v1"
     },
     {
       "horizon": "decision_4",
-      "origin": "2026-11-15T14:56:45.068414+00:00",
+      "origin": "2026-11-16T10:17:51.882413+00:00",
       "endpoint": null,
       "target_label": "Next 4 official pricing decision(s)",
       "decision_date": "2026-11-27",
@@ -127,14 +127,14 @@
       "critical_missing_inputs": [
         "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
       ],
-      "forecast_id": 45158,
-      "snapshot_id": "2a79da0927ed605a4c7eca6e6abb09335979c8b519f4f57be44cabdb72ce219e",
+      "forecast_id": 45182,
+      "snapshot_id": "6c6931f227e148b533af228b455b40f4e0f3b9bfc61f6dfa581f8cc0288fb69f",
       "model_version": "live-unavailable-v1"
     },
     {
       "horizon": "day_1",
-      "origin": "2026-11-15T14:56:45.068414+00:00",
-      "endpoint": "2026-11-16T16:56:45.068414+02:00",
+      "origin": "2026-11-16T10:17:51.882413+00:00",
+      "endpoint": "2026-11-17T12:17:51.882413+02:00",
       "target_label": "Prevailing official price in 1 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -154,14 +154,14 @@
       "critical_missing_inputs": [
         "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
       ],
-      "forecast_id": 45159,
-      "snapshot_id": "2a79da0927ed605a4c7eca6e6abb09335979c8b519f4f57be44cabdb72ce219e",
+      "forecast_id": 45183,
+      "snapshot_id": "6c6931f227e148b533af228b455b40f4e0f3b9bfc61f6dfa581f8cc0288fb69f",
       "model_version": "live-unavailable-v1"
     },
     {
       "horizon": "day_3",
-      "origin": "2026-11-15T14:56:45.068414+00:00",
-      "endpoint": "2026-11-18T16:56:45.068414+02:00",
+      "origin": "2026-11-16T10:17:51.882413+00:00",
+      "endpoint": "2026-11-19T12:17:51.882413+02:00",
       "target_label": "Prevailing official price in 3 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -181,14 +181,14 @@
       "critical_missing_inputs": [
         "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
       ],
-      "forecast_id": 45160,
-      "snapshot_id": "2a79da0927ed605a4c7eca6e6abb09335979c8b519f4f57be44cabdb72ce219e",
+      "forecast_id": 45184,
+      "snapshot_id": "6c6931f227e148b533af228b455b40f4e0f3b9bfc61f6dfa581f8cc0288fb69f",
       "model_version": "live-unavailable-v1"
     },
     {
       "horizon": "day_7",
-      "origin": "2026-11-15T14:56:45.068414+00:00",
-      "endpoint": "2026-11-22T16:56:45.068414+02:00",
+      "origin": "2026-11-16T10:17:51.882413+00:00",
+      "endpoint": "2026-11-23T12:17:51.882413+02:00",
       "target_label": "Prevailing official price in 7 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -208,14 +208,14 @@
       "critical_missing_inputs": [
         "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
       ],
-      "forecast_id": 45161,
-      "snapshot_id": "2a79da0927ed605a4c7eca6e6abb09335979c8b519f4f57be44cabdb72ce219e",
+      "forecast_id": 45185,
+      "snapshot_id": "6c6931f227e148b533af228b455b40f4e0f3b9bfc61f6dfa581f8cc0288fb69f",
       "model_version": "live-unavailable-v1"
     },
     {
       "horizon": "day_14",
-      "origin": "2026-11-15T14:56:45.068414+00:00",
-      "endpoint": "2026-11-29T16:56:45.068414+02:00",
+      "origin": "2026-11-16T10:17:51.882413+00:00",
+      "endpoint": "2026-11-30T12:17:51.882413+02:00",
       "target_label": "Prevailing official price in 14 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -235,14 +235,14 @@
       "critical_missing_inputs": [
         "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
       ],
-      "forecast_id": 45162,
-      "snapshot_id": "2a79da0927ed605a4c7eca6e6abb09335979c8b519f4f57be44cabdb72ce219e",
+      "forecast_id": 45186,
+      "snapshot_id": "6c6931f227e148b533af228b455b40f4e0f3b9bfc61f6dfa581f8cc0288fb69f",
       "model_version": "live-unavailable-v1"
     },
     {
       "horizon": "day_30",
-      "origin": "2026-11-15T14:56:45.068414+00:00",
-      "endpoint": "2026-12-15T16:56:45.068414+02:00",
+      "origin": "2026-11-16T10:17:51.882413+00:00",
+      "endpoint": "2026-12-16T12:17:51.882413+02:00",
       "target_label": "Prevailing official price in 30 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -262,8 +262,8 @@
       "critical_missing_inputs": [
         "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
       ],
-      "forecast_id": 45163,
-      "snapshot_id": "2a79da0927ed605a4c7eca6e6abb09335979c8b519f4f57be44cabdb72ce219e",
+      "forecast_id": 45187,
+      "snapshot_id": "6c6931f227e148b533af228b455b40f4e0f3b9bfc61f6dfa581f8cc0288fb69f",
       "model_version": "live-unavailable-v1"
     }
   ],
@@ -284,12 +284,12 @@
       "valid": 1,
       "raw_json": "{\"excel_date\": 46337.0, \"heading\": \"Europe Brent Spot Price FOB (Dollars per Barrel)\", \"row\": 9131, \"sheet\": \"Data 1\", \"value\": 92.14}",
       "issues_json": "[]",
-      "available_at": "2026-11-15T05:43:30.770277+00:00",
+      "available_at": "2026-11-16T07:23:12.593483+00:00",
       "availability_basis": "capture_time_latest_vintage",
-      "capture_id": 347,
-      "retrieved_at": "2026-11-15T05:43:30.770277+00:00",
+      "capture_id": 377,
+      "retrieved_at": "2026-11-16T07:23:12.593483+00:00",
       "source_url": "https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls",
-      "captured_available_at": "2026-11-15T05:43:30.770277+00:00",
+      "captured_available_at": "2026-11-16T07:23:12.593483+00:00",
       "value_usd_kl": 579.5431643876141,
       "vintage_certified": true
     },
@@ -309,12 +309,12 @@
       "valid": 1,
       "raw_json": "{\"excel_date\": 46337.0, \"heading\": \"New York Harbor Conventional Gasoline Regular Spot Price FOB (Dollars per Gallon)\", \"row\": 9180, \"sheet\": \"Data 1\", \"value\": 2.415}",
       "issues_json": "[]",
-      "available_at": "2026-11-13T03:27:53.200107+00:00",
+      "available_at": "2026-11-16T07:23:19.672713+00:00",
       "availability_basis": "capture_time_latest_vintage",
-      "capture_id": 221,
-      "retrieved_at": "2026-11-13T03:27:53.200107+00:00",
+      "capture_id": 379,
+      "retrieved_at": "2026-11-16T07:23:19.672713+00:00",
       "source_url": "https://www.eia.gov/dnav/pet/hist_xls/EER_EPMRU_PF4_Y35NY_DPGd.xls",
-      "captured_available_at": "2026-11-13T03:27:53.200107+00:00",
+      "captured_available_at": "2026-11-16T07:23:19.672713+00:00",
       "value_usd_kl": 637.9755064449283,
       "vintage_certified": true
     },
@@ -334,12 +334,12 @@
       "valid": 1,
       "raw_json": "{\"excel_date\": 46332.0, \"heading\": \"Weekly U.S. Ending Stocks of Total Gasoline  (Thousand Barrels)\", \"row\": 1926, \"sheet\": \"Data 1\", \"value\": 210757.0}",
       "issues_json": "[]",
-      "available_at": "2026-11-13T03:28:02.300873+00:00",
+      "available_at": "2026-11-16T07:28:28.235751+00:00",
       "availability_basis": "capture_time_latest_vintage",
-      "capture_id": 223,
-      "retrieved_at": "2026-11-13T03:28:02.300873+00:00",
+      "capture_id": 381,
+      "retrieved_at": "2026-11-16T07:28:28.235751+00:00",
       "source_url": "https://www.eia.gov/dnav/pet/hist_xls/WGTSTUS1w.xls",
-      "captured_available_at": "2026-11-13T03:28:02.300873+00:00",
+      "captured_available_at": "2026-11-16T07:28:28.235751+00:00",
       "vintage_certified": true
     },
     "us_crude_stocks": {
@@ -358,12 +358,12 @@
       "valid": 1,
       "raw_json": "{\"excel_date\": 46332.0, \"heading\": \"Weekly U.S. Ending Stocks excluding SPR of Crude Oil  (Thousand Barrels)\", \"row\": 2305, \"sheet\": \"Data 1\", \"value\": 414417.0}",
       "issues_json": "[]",
-      "available_at": "2026-11-13T03:28:10.454223+00:00",
+      "available_at": "2026-11-16T07:28:36.787859+00:00",
       "availability_basis": "capture_time_latest_vintage",
-      "capture_id": 225,
-      "retrieved_at": "2026-11-13T03:28:10.454223+00:00",
+      "capture_id": 383,
+      "retrieved_at": "2026-11-16T07:28:36.787859+00:00",
       "source_url": "https://www.eia.gov/dnav/pet/hist_xls/WCESTUS1w.xls",
-      "captured_available_at": "2026-11-13T03:28:10.454223+00:00",
+      "captured_available_at": "2026-11-16T07:28:36.787859+00:00",
       "vintage_certified": true
     },
     "us_refinery_utilization": {
@@ -382,12 +382,12 @@
       "valid": 1,
       "raw_json": "{\"excel_date\": 46332.0, \"heading\": \"Weekly U.S. Percent Utilization of Refinery Operable Capacity (Percent)\", \"row\": 1883, \"sheet\": \"Data 1\", \"value\": 95.2}",
       "issues_json": "[]",
-      "available_at": "2026-11-13T03:33:17.540444+00:00",
+      "available_at": "2026-11-16T07:28:44.470007+00:00",
       "availability_basis": "capture_time_latest_vintage",
-      "capture_id": 227,
-      "retrieved_at": "2026-11-13T03:33:17.540444+00:00",
+      "capture_id": 385,
+      "retrieved_at": "2026-11-16T07:28:44.470007+00:00",
       "source_url": "https://www.eia.gov/dnav/pet/hist_xls/WPULEUS3w.xls",
-      "captured_available_at": "2026-11-13T03:33:17.540444+00:00",
+      "captured_available_at": "2026-11-16T07:28:44.470007+00:00",
       "vintage_certified": true
     },
     "eurusd": {
@@ -406,12 +406,12 @@
       "valid": 1,
       "raw_json": "{\"observation\": {\"OBS_STATUS\": \"A\", \"OBS_VALUE\": \"1.1154\", \"TIME_PERIOD\": \"2026-11-06\"}, \"package_prepared_timestamp_timezone_unspecified\": \"2026-11-09T18:25:06\", \"series\": {\"CURRENCY\": \"EUR\", \"FREQ\": \"9\", \"FX\": \"EUR\", \"SERIES_NAME\": \"RXI$US_N.B.EU\", \"UNIT\": \"Currency\", \"UNIT_MULT\": \"1\"}}",
       "issues_json": "[]",
-      "available_at": "2026-11-15T06:06:47.064745+00:00",
+      "available_at": "2026-11-16T07:34:07.038754+00:00",
       "availability_basis": "capture_time_latest_vintage",
-      "capture_id": 354,
-      "retrieved_at": "2026-11-15T06:06:47.064745+00:00",
+      "capture_id": 389,
+      "retrieved_at": "2026-11-16T07:34:07.038754+00:00",
       "source_url": "https://www.federalreserve.gov/releases/h10/data/FRB_h10_xml.zip",
-      "captured_available_at": "2026-11-15T06:06:47.064745+00:00",
+      "captured_available_at": "2026-11-16T07:34:07.038754+00:00",
       "vintage_certified": true
     },
     "italy_gasoline_ex_tax": {
@@ -516,16 +516,16 @@
     "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
   ],
   "forecast_ids": [
-    45156,
-    45157,
-    45158,
-    45159,
-    45160,
-    45161,
-    45162,
-    45163
+    45180,
+    45181,
+    45182,
+    45183,
+    45184,
+    45185,
+    45186,
+    45187
   ],
   "snapshot_ids": [
-    "2a79da0927ed605a4c7eca6e6abb09335979c8b519f4f57be44cabdb72ce219e"
+    "6c6931f227e148b533af228b455b40f4e0f3b9bfc61f6dfa581f8cc0288fb69f"
   ]
 }
