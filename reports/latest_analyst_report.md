@@ -1,6 +1,6 @@
 # Lebanon gasoline 95 analyst report
 
-Generated 2026-11-16T18:43:42.267518+00:00
+Generated 2026-11-16T20:31:28.123502+00:00
 
 ## Executive summary
 
@@ -8,7 +8,7 @@ The latest verified-tier gasoline 95 record is **2,445,000 LBP / 20 L** on 2026-
 
 ## Expected price movement
 
-QUANTITATIVE MODEL FORECAST · PROVISIONAL PRICE ANCHOR: 2,356,016 LBP / 20 L, -34,984 LBP (-1.46%). Estimated announcement: 17 Nov 2026 (Tue cadence). A calibrated 90% interval is not supported for this issuance. Directional probabilities are not calibrated; the baseline is not certainty.
+QUANTITATIVE MODEL FORECAST · PROVISIONAL PRICE ANCHOR: 2,356,016 LBP / 20 L, -34,984 LBP (-1.46%). Estimated announcement: 17 Nov 2026 (Tue cadence). A calibrated 90% interval is not supported for this issuance. Directional probabilities are awaiting calibrated live evidence.
 
 ## Primary market drivers
 
