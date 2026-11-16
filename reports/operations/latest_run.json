@@ -1,6 +1,6 @@
 {
-  "run_id": "ops-20261116T145511-a7fd5efe",
-  "started_at": "2026-11-16T14:55:11.740015+00:00",
+  "run_id": "ops-20261116T145829-546c280f",
+  "started_at": "2026-11-16T14:58:29.749523+00:00",
   "offline": false,
   "steps": [
     {
@@ -18,15 +18,15 @@
           "foreign_key_errors": 0
         }
       ],
-      "seconds": 0.6778139689999989
+      "seconds": 0.5483004539999854
     },
     {
       "name": "reconcile_and_export",
       "status": "success",
       "result": {
-        "new_decision_versions": 2,
+        "new_decision_versions": 0,
         "report": {
-          "generated_at": "2026-11-16T14:55:12.760770+00:00",
+          "generated_at": "2026-11-16T14:58:30.603680+00:00",
           "as_of_beirut": "2026-11-16",
           "timezone": "Asia/Beirut",
           "ledger_unique_dates": 1371,
@@ -1163,13 +1163,13 @@
           "readiness": "Adequate for source reconciliation and exploratory target analysis. Not ready for an institutional as-of forecasting backtest: effective/release times, unresolved conflicts, coverage and regimes need review."
         }
       },
-      "seconds": 0.34668489400000624
+      "seconds": 0.308608946999982
     },
     {
       "name": "market_quality_and_coverage",
       "status": "success",
       "result": {
-        "as_of": "2026-11-16T14:55:12.779352+00:00",
+        "as_of": "2026-11-16T14:58:30.618513+00:00",
         "series": [
           {
             "series": "brent_spot",
@@ -1463,7 +1463,7 @@
         "historical_comparison_status": "assumed_date_origins_lags_latest_vintage_NOT_A_BACKTEST",
         "readiness": "research_ready_not_institutional_backtest_ready"
       },
-      "seconds": 13.213460089999998
+      "seconds": 11.017937161999981
     },
     {
       "name": "settle_verified_outcomes",
@@ -1472,13 +1472,13 @@
         "status": "pending_reviewed_official_clocks_and_complete_coverage",
         "newly_matched": 0
       },
-      "seconds": 3.5750000080270183e-06
+      "seconds": 4.978999982085952e-06
     },
     {
       "name": "refresh_forecast_decision",
       "status": "success",
       "result": {
-        "origin": "2026-11-16T14:55:26.013568+00:00",
+        "origin": "2026-11-16T14:58:41.635953+00:00",
         "anchor": {
           "absolute_price_change": -54000,
           "candidate_values": [
@@ -1527,7 +1527,7 @@
         "forecasts": [
           {
             "horizon": "decision_1",
-            "origin": "2026-11-16T14:55:26.013568+00:00",
+            "origin": "2026-11-16T14:58:41.635953+00:00",
             "endpoint": null,
             "target_label": "Next 1 official pricing decision(s)",
             "decision_date": "2026-11-17",
@@ -1654,12 +1654,12 @@
             ],
             "interval": null,
             "probabilities": null,
-            "forecast_id": 45196,
-            "snapshot_id": "22c55ef0db82455c459c47621386f3e40838be0a5afde646919894a788232e0d"
+            "forecast_id": 45204,
+            "snapshot_id": "3f541e094888b5c5f66ef6358a2359c7de4b20eb7021830a5075392645fe2cbd"
           },
           {
             "horizon": "decision_2",
-            "origin": "2026-11-16T14:55:26.013568+00:00",
+            "origin": "2026-11-16T14:58:41.635953+00:00",
             "endpoint": null,
             "target_label": "Next 2 official pricing decision(s)",
             "decision_date": "2026-11-20",
@@ -1786,12 +1786,12 @@
             ],
             "interval": null,
             "probabilities": null,
-            "forecast_id": 45197,
-            "snapshot_id": "22c55ef0db82455c459c47621386f3e40838be0a5afde646919894a788232e0d"
+            "forecast_id": 45205,
+            "snapshot_id": "3f541e094888b5c5f66ef6358a2359c7de4b20eb7021830a5075392645fe2cbd"
           },
           {
             "horizon": "decision_4",
-            "origin": "2026-11-16T14:55:26.013568+00:00",
+            "origin": "2026-11-16T14:58:41.635953+00:00",
             "endpoint": null,
             "target_label": "Next 4 official pricing decision(s)",
             "decision_date": "2026-11-27",
@@ -1885,13 +1885,13 @@
             ],
             "interval": null,
             "probabilities": null,
-            "forecast_id": 45198,
-            "snapshot_id": "22c55ef0db82455c459c47621386f3e40838be0a5afde646919894a788232e0d"
+            "forecast_id": 45206,
+            "snapshot_id": "3f541e094888b5c5f66ef6358a2359c7de4b20eb7021830a5075392645fe2cbd"
           },
           {
             "horizon": "day_1",
-            "origin": "2026-11-16T14:55:26.013568+00:00",
-            "endpoint": "2026-11-17T16:55:26.013568+02:00",
+            "origin": "2026-11-16T14:58:41.635953+00:00",
+            "endpoint": "2026-11-17T16:58:41.635953+02:00",
             "target_label": "Prevailing official price in 1 calendar days",
             "decision_date": null,
             "scheduled_effective": null,
@@ -2001,13 +2001,13 @@
             ],
             "interval": null,
             "probabilities": null,
-            "forecast_id": 45199,
-            "snapshot_id": "22c55ef0db82455c459c47621386f3e40838be0a5afde646919894a788232e0d"
+            "forecast_id": 45207,
+            "snapshot_id": "3f541e094888b5c5f66ef6358a2359c7de4b20eb7021830a5075392645fe2cbd"
           },
           {
             "horizon": "day_3",
-            "origin": "2026-11-16T14:55:26.013568+00:00",
-            "endpoint": "2026-11-19T16:55:26.013568+02:00",
+            "origin": "2026-11-16T14:58:41.635953+00:00",
+            "endpoint": "2026-11-19T16:58:41.635953+02:00",
             "target_label": "Prevailing official price in 3 calendar days",
             "decision_date": null,
             "scheduled_effective": null,
@@ -2117,13 +2117,13 @@
             ],
             "interval": null,
             "probabilities": null,
-            "forecast_id": 45200,
-            "snapshot_id": "22c55ef0db82455c459c47621386f3e40838be0a5afde646919894a788232e0d"
+            "forecast_id": 45208,
+            "snapshot_id": "3f541e094888b5c5f66ef6358a2359c7de4b20eb7021830a5075392645fe2cbd"
           },
           {
             "horizon": "day_7",
-            "origin": "2026-11-16T14:55:26.013568+00:00",
-            "endpoint": "2026-11-23T16:55:26.013568+02:00",
+            "origin": "2026-11-16T14:58:41.635953+00:00",
+            "endpoint": "2026-11-23T16:58:41.635953+02:00",
             "target_label": "Prevailing official price in 7 calendar days",
             "decision_date": null,
             "scheduled_effective": null,
@@ -2233,13 +2233,13 @@
             ],
             "interval": null,
             "probabilities": null,
-            "forecast_id": 45201,
-            "snapshot_id": "22c55ef0db82455c459c47621386f3e40838be0a5afde646919894a788232e0d"
+            "forecast_id": 45209,
+            "snapshot_id": "3f541e094888b5c5f66ef6358a2359c7de4b20eb7021830a5075392645fe2cbd"
           },
           {
             "horizon": "day_14",
-            "origin": "2026-11-16T14:55:26.013568+00:00",
-            "endpoint": "2026-11-30T16:55:26.013568+02:00",
+            "origin": "2026-11-16T14:58:41.635953+00:00",
+            "endpoint": "2026-11-30T16:58:41.635953+02:00",
             "target_label": "Prevailing official price in 14 calendar days",
             "decision_date": null,
             "scheduled_effective": null,
@@ -2316,13 +2316,13 @@
             ],
             "interval": null,
             "probabilities": null,
-            "forecast_id": 45202,
-            "snapshot_id": "22c55ef0db82455c459c47621386f3e40838be0a5afde646919894a788232e0d"
+            "forecast_id": 45210,
+            "snapshot_id": "3f541e094888b5c5f66ef6358a2359c7de4b20eb7021830a5075392645fe2cbd"
           },
           {
             "horizon": "day_30",
-            "origin": "2026-11-16T14:55:26.013568+00:00",
-            "endpoint": "2026-12-16T16:55:26.013568+02:00",
+            "origin": "2026-11-16T14:58:41.635953+00:00",
+            "endpoint": "2026-12-16T16:58:41.635953+02:00",
             "target_label": "Prevailing official price in 30 calendar days",
             "decision_date": null,
             "scheduled_effective": null,
@@ -2399,8 +2399,8 @@
             ],
             "interval": null,
             "probabilities": null,
-            "forecast_id": 45203,
-            "snapshot_id": "22c55ef0db82455c459c47621386f3e40838be0a5afde646919894a788232e0d"
+            "forecast_id": 45211,
+            "snapshot_id": "3f541e094888b5c5f66ef6358a2359c7de4b20eb7021830a5075392645fe2cbd"
           }
         ],
         "available_market_inputs": {
@@ -2650,26 +2650,26 @@
         "status": "issued",
         "reasons": [],
         "forecast_ids": [
-          45196,
-          45197,
-          45198,
-          45199,
-          45200,
-          45201,
-          45202,
-          45203
+          45204,
+          45205,
+          45206,
+          45207,
+          45208,
+          45209,
+          45210,
+          45211
         ],
         "snapshot_ids": [
-          "22c55ef0db82455c459c47621386f3e40838be0a5afde646919894a788232e0d"
+          "3f541e094888b5c5f66ef6358a2359c7de4b20eb7021830a5075392645fe2cbd"
         ]
       },
-      "seconds": 6.317497349000007
+      "seconds": 5.131168042000013
     },
     {
       "name": "monitor",
       "status": "success",
       "result": {
-        "generated_at": "2026-11-16T14:55:35.246476+00:00",
+        "generated_at": "2026-11-16T14:58:49.057972+00:00",
         "data_quality": {
           "conflict_dates": 42,
           "missing_publication_clocks": 3197,
@@ -2774,8 +2774,8 @@
           "revision_id": 3447
         },
         "market": {
-          "origin_utc": "2026-11-16T14:55:32.450128+00:00",
-          "origin_beirut": "2026-11-16T16:55:32.450128+02:00",
+          "origin_utc": "2026-11-16T14:58:46.772191+00:00",
+          "origin_beirut": "2026-11-16T16:58:46.772191+02:00",
           "mode": "strict",
           "backtest_eligible": true,
           "series": {
@@ -5587,19 +5587,19 @@
         },
         "threshold_status": "operating_review_rules_not_statistical_certification"
       },
-      "seconds": 5.978214918000006
+      "seconds": 2.776609936
     },
     {
       "name": "analyst_report",
       "status": "success",
-      "result": "# Lebanon gasoline 95 analyst report\n\nGenerated 2026-11-16T14:55:35.246476+00:00\n\n## Executive summary\n\nThe latest verified-tier gasoline 95 record is **2,445,000 LBP / 20 L** on 2026-11-10 (government archive corroborated). It is -47,000 LBP versus the previous verified-tier record on 2026-11-06. [Source record](https://energyandwater.gov.lb/ar/prices)\n\n## Expected price movement\n\nQUANTITATIVE MODEL FORECAST · PROVISIONAL PRICE ANCHOR: 2,356,016 LBP / 20 L, -34,984 LBP (-1.46%). Estimated announcement: 17 Nov 2026 (Tue cadence). A calibrated 90% interval is not supported for this issuance. Directional probabilities are not calibrated; the baseline is not certainty.\n\n## Primary market drivers\n\nGasoline / Brent proxy contribution (combined): -1,848 LBP; Domestic lagged adjustment: -27,968 LBP; Fiscal shock indicator: +0 LBP; Other model features: -3,585 LBP; Model intercept: -1,583 LBP. Statistical attribution, not causation. Brent futures has no fresh stored observation. RBOB futures has no fresh stored observation. Brent spot proxy last printed 92.14 USD/bbl on 2026-11-11, +0.33% over the trailing seven-day comparison. [Source](https://www.eia.gov/dnav/pet/hist/RBRTED.htm) New York Harbor gasoline proxy last printed 101.43 USD/bbl on 2026-11-11, -4.70% over the trailing seven-day comparison. [Source](https://www.eia.gov/dnav/pet/hist/EER_EPMRU_PF4_Y35NY_DPGD.htm)\n\n## Commodity market conditions\n\nBrent futures has no fresh stored observation. RBOB futures has no fresh stored observation. Brent spot proxy last printed 92.14 USD/bbl on 2026-11-11, +0.33% over the trailing seven-day comparison. [Source](https://www.eia.gov/dnav/pet/hist/RBRTED.htm) New York Harbor gasoline proxy last printed 101.43 USD/bbl on 2026-11-11, -4.70% over the trailing seven-day comparison. [Source](https://www.eia.gov/dnav/pet/hist/EER_EPMRU_PF4_Y35NY_DPGD.htm)\n\n## Domestic regulatory factors\n\nThe current pricing formula and regulatory regime remain unresolved in the project evidence. The simulator uses a May 2025 cost scaffold and explicit tax and government-charge assumptions.\n\n## Risks and uncertainty\n\n90% interval coverage does not meet 80%–98% on every evaluated prediction Fewer than 20 holdout origins; evidence too small for Tier 1 Official effective clocks and complete target sequence are uncertified. Sparse holdout outcomes, assumed historical availability and stale live inputs limit reliability.\n\n## What could change the forecast\n\nA verified official decision with timing, current tax and FX treatment, or a licensed Mediterranean product series would improve the information set. An approved model would also require a fresh holdout and acceptable calibration.\n\n## Historical model performance\n\nSelected G_hybrid measured MAE 366 LBP / 20 L, direction accuracy 100.0%, n=2 on common 2026 holdout origins.  Selection consumed this holdout; it is not an untouched final test. Market vintages remain revised.\n\n## Operating alerts\n\n- 42 source dates remain quarantined for conflicting prices.\n- market_ec: last collection is failed.\n- market_yahoo: last collection is partial.\n- market_fred: last collection is withdrawn_source_policy.\n- MOEW decision USD customer payment conversion: stale.\n- Yahoo BZ=F Brent last-day financial futures (NYMEX): no_available_observation.\n- Yahoo RB=F NYMEX RBOB gasoline futures: no_available_observation.\n- Yahoo HO=F NYMEX NY Harbor ULSD / heating oil futures: no_available_observation.\n- cboe_ovx: absolute seven-day move exceeds the configured review threshold.\n- Current pricing policy needs a dated, evidence-backed human review.\n- No numerical prospective forecasts have verified settled outcomes. Live accuracy is unavailable.\n- Part 6 rejects production approval for all selected horizons.\n",
-      "seconds": 0.08708336199998712
+      "result": "# Lebanon gasoline 95 analyst report\n\nGenerated 2026-11-16T14:58:49.057972+00:00\n\n## Executive summary\n\nThe latest verified-tier gasoline 95 record is **2,445,000 LBP / 20 L** on 2026-11-10 (government archive corroborated). It is -47,000 LBP versus the previous verified-tier record on 2026-11-06. [Source record](https://energyandwater.gov.lb/ar/prices)\n\n## Expected price movement\n\nQUANTITATIVE MODEL FORECAST · PROVISIONAL PRICE ANCHOR: 2,356,016 LBP / 20 L, -34,984 LBP (-1.46%). Estimated announcement: 17 Nov 2026 (Tue cadence). A calibrated 90% interval is not supported for this issuance. Directional probabilities are not calibrated; the baseline is not certainty.\n\n## Primary market drivers\n\nGasoline / Brent proxy contribution (combined): -1,848 LBP; Domestic lagged adjustment: -27,968 LBP; Fiscal shock indicator: +0 LBP; Other model features: -3,585 LBP; Model intercept: -1,583 LBP. Statistical attribution, not causation. Brent futures has no fresh stored observation. RBOB futures has no fresh stored observation. Brent spot proxy last printed 92.14 USD/bbl on 2026-11-11, +0.33% over the trailing seven-day comparison. [Source](https://www.eia.gov/dnav/pet/hist/RBRTED.htm) New York Harbor gasoline proxy last printed 101.43 USD/bbl on 2026-11-11, -4.70% over the trailing seven-day comparison. [Source](https://www.eia.gov/dnav/pet/hist/EER_EPMRU_PF4_Y35NY_DPGD.htm)\n\n## Commodity market conditions\n\nBrent futures has no fresh stored observation. RBOB futures has no fresh stored observation. Brent spot proxy last printed 92.14 USD/bbl on 2026-11-11, +0.33% over the trailing seven-day comparison. [Source](https://www.eia.gov/dnav/pet/hist/RBRTED.htm) New York Harbor gasoline proxy last printed 101.43 USD/bbl on 2026-11-11, -4.70% over the trailing seven-day comparison. [Source](https://www.eia.gov/dnav/pet/hist/EER_EPMRU_PF4_Y35NY_DPGD.htm)\n\n## Domestic regulatory factors\n\nThe current pricing formula and regulatory regime remain unresolved in the project evidence. The simulator uses a May 2025 cost scaffold and explicit tax and government-charge assumptions.\n\n## Risks and uncertainty\n\n90% interval coverage does not meet 80%–98% on every evaluated prediction Fewer than 20 holdout origins; evidence too small for Tier 1 Official effective clocks and complete target sequence are uncertified. Sparse holdout outcomes, assumed historical availability and stale live inputs limit reliability.\n\n## What could change the forecast\n\nA verified official decision with timing, current tax and FX treatment, or a licensed Mediterranean product series would improve the information set. An approved model would also require a fresh holdout and acceptable calibration.\n\n## Historical model performance\n\nSelected G_hybrid measured MAE 366 LBP / 20 L, direction accuracy 100.0%, n=2 on common 2026 holdout origins.  Selection consumed this holdout; it is not an untouched final test. Market vintages remain revised.\n\n## Operating alerts\n\n- 42 source dates remain quarantined for conflicting prices.\n- market_ec: last collection is failed.\n- market_yahoo: last collection is partial.\n- market_fred: last collection is withdrawn_source_policy.\n- MOEW decision USD customer payment conversion: stale.\n- Yahoo BZ=F Brent last-day financial futures (NYMEX): no_available_observation.\n- Yahoo RB=F NYMEX RBOB gasoline futures: no_available_observation.\n- Yahoo HO=F NYMEX NY Harbor ULSD / heating oil futures: no_available_observation.\n- cboe_ovx: absolute seven-day move exceeds the configured review threshold.\n- Current pricing policy needs a dated, evidence-backed human review.\n- No numerical prospective forecasts have verified settled outcomes. Live accuracy is unavailable.\n- Part 6 rejects production approval for all selected horizons.\n",
+      "seconds": 0.07339818599999148
     },
     {
       "name": "integrity_and_financial_arithmetic",
       "status": "failed",
       "error": "FileNotFoundError: [Errno 2] No such file or directory: '/home/runner/work/fuelb/fuelb/data/raw/ipt/733ab3728f89f3d5c16d33bef509593d1a7af5d791991524b865f7a92afc43f7.html'",
-      "seconds": 0.7134363119999989
+      "seconds": 0.577501653000013
     }
   ],
   "source_results": {
@@ -5629,7 +5629,7 @@
     }
   },
   "previous_interrupted_cycles": [],
-  "finished_at": "2026-11-16T14:55:39.245098+00:00",
+  "finished_at": "2026-11-16T14:58:50.212571+00:00",
   "status": "degraded",
   "production_forecast_status": "withheld_pending_validation",
   "forecast_status": "issued",
