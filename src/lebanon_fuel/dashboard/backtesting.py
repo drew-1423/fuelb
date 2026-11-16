@@ -17,7 +17,7 @@ OBSERVED = "endpoint_price_lbp_20l"
 COLUMNS = {"origin", "horizon", "family", "regime", "endpoint", "target_source_date", PREDICTED, OBSERVED}
 
 
-def render(rows, families, regimes, show_chart):
+def render(rows, families, regimes, show_chart, *, research_note=None):
     if not COLUMNS.issubset(rows.columns):
         st.info("The saved walk-forward prediction report is unavailable.")
         return
@@ -36,7 +36,7 @@ def render(rows, families, regimes, show_chart):
         st.info("There are no saved forecasts with matched historical prices to plot.")
         return
 
-    st.caption("Saved walk-forward research compared with matched archive prices. Sparse records and "
+    st.caption(research_note or "Saved walk-forward research compared with matched archive prices. Sparse records and "
                "unverified official timing limit what this backtest can establish.")
     a, b, c = st.columns(3)
     horizon = a.selectbox("Forecast horizon", horizons, format_func=HORIZONS.get)
