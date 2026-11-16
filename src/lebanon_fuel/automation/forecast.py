@@ -4,6 +4,7 @@ from hashlib import sha256
 import json
 
 from lebanon_fuel.forecasting.live import current_context, generate
+from lebanon_fuel.validation.decision_tracking import apply_live_calibration
 from lebanon_fuel.validation.ledger import ForecastLedger, hashed
 from .state import now
 
@@ -16,6 +17,8 @@ def refresh(root, cfg, run_id):
     records, histories = current_context(root, cfg, at)
     result = generate(root, cfg, policy, decision, records, histories, at)
     with closing(ForecastLedger(root / cfg['validation']['forecast_ledger'])) as ledger:
+        if policy.get('pinned_family'):
+            apply_live_calibration(root, root / cfg['validation']['forecast_ledger'], result['forecasts'], at.isoformat())
         policy_hash = sha256(policy_path.read_bytes()).hexdigest()
         snapshot_payload = dict(
             anchor=result['anchor'], prior_domestic_records=records[-30:],
