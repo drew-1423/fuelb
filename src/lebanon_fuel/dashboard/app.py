@@ -1008,8 +1008,21 @@ def main():
         model_view()
     elif view == "Backtesting":
         title("Backtesting", "Historical forecasts and observed Lebanon gasoline 95 prices")
-        backtesting.render(table_file(REPORTS / "research_walk_forward_predictions.csv"),
-                           FAMILIES, REGIMES, show_chart)
+        archive_path = ROOT / "reports/research/expanded_coverage/dashboard_predictions.csv"
+        archived = archive_path.is_file()
+        dataset = st.radio("Backtest dataset", ["Current validation report", "Expanded archive research"],
+                           horizontal=True, key="backtest_dataset") if archived else "Current validation report"
+        if dataset == "Expanded archive research":
+            backtesting.render(
+                table_file(archive_path), {**FAMILIES, "G_hybrid": "Current frozen Hybrid",
+                                           "G_hybrid_expanded": "Hybrid retrained on expanded data"},
+                {"expanded_2026_research": "2026 expanded research"}, show_chart,
+                research_note="Research comparison using recorded Ministry archive prices and exact IPT–LebVote matches. "
+                              "The larger sample has unverified decision timing. The retrained model is experimental.",
+            )
+        else:
+            backtesting.render(table_file(REPORTS / "research_walk_forward_predictions.csv"),
+                               FAMILIES, REGIMES, show_chart)
     elif view == "Scenario simulator":
         scenario_view(snap)
     elif view == "Volatility & options":

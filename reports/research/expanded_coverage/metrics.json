@@ -1,0 +1,267 @@
+{
+  "selected_pre_evaluation": "EIA + last domestic change",
+  "development_qualified": 177,
+  "archive_training_qualified": 134,
+  "evaluation_candidates": 20,
+  "evaluation_shared": 20,
+  "validation_scores": [
+    {
+      "method": "EIA Brent",
+      "n": 97,
+      "mae_lbp": 11715.410531714095,
+      "rmse_lbp": 18274.87988447364,
+      "direction_hits": 46
+    },
+    {
+      "method": "EIA gasoline",
+      "n": 97,
+      "mae_lbp": 11521.38490325636,
+      "rmse_lbp": 17464.304849989076,
+      "direction_hits": 32
+    },
+    {
+      "method": "EIA gasoline + Brent",
+      "n": 97,
+      "mae_lbp": 11751.1430749554,
+      "rmse_lbp": 17969.986646832604,
+      "direction_hits": 39
+    },
+    {
+      "method": "EIA + last domestic change",
+      "n": 97,
+      "mae_lbp": 9785.357497501062,
+      "rmse_lbp": 16903.987205660407,
+      "direction_hits": 61
+    },
+    {
+      "method": "EIA + European retail",
+      "n": 97,
+      "mae_lbp": 10419.329976901825,
+      "rmse_lbp": 16603.51921270185,
+      "direction_hits": 48
+    }
+  ],
+  "evaluation_scores": [
+    {
+      "method": "EIA Brent",
+      "n": 20,
+      "mae_lbp": 26630.243602162507,
+      "rmse_lbp": 32840.29884559085,
+      "direction_hits": 7
+    },
+    {
+      "method": "EIA gasoline",
+      "n": 20,
+      "mae_lbp": 26323.934700648097,
+      "rmse_lbp": 32672.875953197534,
+      "direction_hits": 13
+    },
+    {
+      "method": "EIA gasoline + Brent",
+      "n": 20,
+      "mae_lbp": 26182.60102810253,
+      "rmse_lbp": 32452.048789817774,
+      "direction_hits": 11
+    },
+    {
+      "method": "EIA + last domestic change",
+      "n": 20,
+      "mae_lbp": 19845.599407892347,
+      "rmse_lbp": 25447.750588918832,
+      "direction_hits": 16
+    },
+    {
+      "method": "EIA + European retail",
+      "n": 20,
+      "mae_lbp": 27820.127241669037,
+      "rmse_lbp": 31373.814849126615,
+      "direction_hits": 9
+    },
+    {
+      "method": "No price change",
+      "n": 20,
+      "mae_lbp": 28250.0,
+      "rmse_lbp": 35425.27346401154,
+      "direction_hits": 2
+    },
+    {
+      "method": "Repeat last change",
+      "n": 20,
+      "mae_lbp": 18050.0,
+      "rmse_lbp": 23395.512390199965,
+      "direction_hits": 15
+    },
+    {
+      "method": "Selected model with original cohort",
+      "n": 20,
+      "mae_lbp": 19946.42915706116,
+      "rmse_lbp": 24799.881330642416,
+      "direction_hits": 13
+    },
+    {
+      "method": "Selected model with three-day spot lag",
+      "n": 20,
+      "mae_lbp": 20778.508196426905,
+      "rmse_lbp": 27567.01475438417,
+      "direction_hits": 15
+    }
+  ],
+  "shared_path_counts": {
+    "multiple_source_research_path": 18,
+    "government_archive_path": 2
+  },
+  "futures_pilot_scores": [
+    {
+      "method": "EIA spot on paired history",
+      "n": 18,
+      "mae_lbp": 11154.115066521103,
+      "rmse_lbp": 13937.296069515512,
+      "direction_hits": 10
+    },
+    {
+      "method": "RBOB on paired history",
+      "n": 18,
+      "mae_lbp": 11171.822346349189,
+      "rmse_lbp": 13848.436534894076,
+      "direction_hits": 9
+    }
+  ],
+  "assumptions": "Retrospective latest-vintage archive research with assumed market availability. No production approval.",
+  "input_sha256": {
+    "lebvote_gasoline_95.html": "013d147262a18268fe7eb2993d75178086bb878217e49bd0bafe0a23fdae3027",
+    "eia_rbob_contract_1.xls": "eb60888dbee8a032a8fd50f75d7f55c043e83440e0a4ca312bfda47956357c8f",
+    "lebanon_fuel.sqlite": "e03104c7ebfe89d3ab910c2fa0797d7abb786683268864eefdb64f131810ab91",
+    "forecast_ledger.sqlite": "a13654b165b80eddc282b65a073cd405b708d1ce4d27e591d007760b18bf646b"
+  },
+  "source_rows": {
+    "lebvote": 293,
+    "rbob": 4609,
+    "rbob_in_project_era": 226
+  },
+  "source_comparison": [
+    {
+      "year": "2023",
+      "status": "already_corroborated",
+      "dates": 34
+    },
+    {
+      "year": "2023",
+      "status": "conflict",
+      "dates": 1
+    },
+    {
+      "year": "2024",
+      "status": "already_corroborated",
+      "dates": 21
+    },
+    {
+      "year": "2024",
+      "status": "conflict",
+      "dates": 1
+    },
+    {
+      "year": "2024",
+      "status": "new_research_corroboration",
+      "dates": 41
+    },
+    {
+      "year": "2024",
+      "status": "no_ipt_match",
+      "dates": 5
+    },
+    {
+      "year": "2025",
+      "status": "already_corroborated",
+      "dates": 43
+    },
+    {
+      "year": "2025",
+      "status": "conflict",
+      "dates": 2
+    },
+    {
+      "year": "2025",
+      "status": "new_research_corroboration",
+      "dates": 16
+    },
+    {
+      "year": "2025",
+      "status": "no_ipt_match",
+      "dates": 13
+    },
+    {
+      "year": "2026",
+      "status": "already_corroborated",
+      "dates": 7
+    },
+    {
+      "year": "2026",
+      "status": "new_research_corroboration",
+      "dates": 49
+    },
+    {
+      "year": "2026",
+      "status": "no_ipt_match",
+      "dates": 1
+    }
+  ],
+  "live": {
+    "complete_runs": 12,
+    "abstention_reasons": {
+      "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision.": 10
+    },
+    "issued_tiers": {
+      "2": 2
+    },
+    "tier_two_failures": {},
+    "officially_matched_decisions": 0
+  },
+  "evaluation_dates": [
+    "2026-07-31",
+    "2026-11-10"
+  ],
+  "current_hybrid_comparison": {
+    "status": "completed",
+    "artifact_sha256": "fbd34b3d4dadf1a06a160469dd2c1234f8dee0b133a5f9b4f310d441650b9462",
+    "expanded_hybrid_training_cases": 174,
+    "current_hybrid_training_cases": 145,
+    "retrained_hybrid_residual_model": "lightgbm",
+    "paired_scores": [
+      {
+        "method": "Current frozen Hybrid",
+        "n": 20,
+        "mae_lbp": 16885.25559073057,
+        "rmse_lbp": 24294.861325504437,
+        "direction_hits": 15
+      },
+      {
+        "method": "Hybrid retrained on expanded data",
+        "n": 20,
+        "mae_lbp": 16995.725787740703,
+        "rmse_lbp": 24255.407300071423,
+        "direction_hits": 17
+      },
+      {
+        "method": "EIA + last domestic change",
+        "n": 20,
+        "mae_lbp": 19845.599407892347,
+        "rmse_lbp": 25447.750588918832,
+        "direction_hits": 16
+      },
+      {
+        "method": "Repeat last change",
+        "n": 20,
+        "mae_lbp": 18050.0,
+        "rmse_lbp": 23395.512390199965,
+        "direction_hits": 15
+      },
+      {
+        "method": "No price change",
+        "n": 20,
+        "mae_lbp": 28250.0,
+        "rmse_lbp": 35425.27346401154,
+        "direction_hits": 2
+      }
+    ]
+  }
+}
