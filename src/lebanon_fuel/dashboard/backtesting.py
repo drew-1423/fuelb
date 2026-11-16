@@ -53,8 +53,13 @@ def render(rows, families, regimes, show_chart):
     paired = rows.loc[rows["family"].eq(family)].sort_values(["target_date", "origin"])
     paired = paired.drop_duplicates(subset=["target_date", "origin", PREDICTED, OBSERVED])
     error = (paired[PREDICTED] - paired[OBSERVED]).abs()
-    st.caption(f"{len(paired):,} paired forecasts across {paired['target_date'].nunique():,} target dates · "
-               f"Average absolute error {error.mean():,.0f} LBP / 20 L.")
+    percentage_error = (error / paired[OBSERVED]).mean()
+    with st.container(horizontal=True):
+        st.metric("Average absolute error", f"{error.mean():,.0f} LBP / 20 L", border=True)
+        st.metric("Average percentage error", f"{percentage_error:.2%}", border=True,
+                  help="Average of each absolute miss divided by its observed price. Lower is better.")
+        st.metric("Paired forecasts", f"{len(paired):,}", border=True)
+    st.caption(f"{paired['target_date'].nunique():,} target dates. Metrics apply to the selected model, horizon and period.")
     show_chart(comparison_chart(paired))
     st.caption("Each pair uses the same target date. Multiple forecasts can share a date. "
                "Calendar horizons use the saved endpoint; decision horizons use the matched archive date.")

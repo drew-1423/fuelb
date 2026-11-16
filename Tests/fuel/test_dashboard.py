@@ -116,7 +116,7 @@ def test_dashboard_views_and_interactions(monkeypatch):
     monkeypatch.setenv("LEBANON_FUEL_ROOT", str(ROOT))
     app = AppTest.from_file(str(APP), default_timeout=20).run()
     assert not app.exception
-    assert app.metric[0].label == "Latest verified-tier price"
+    assert app.metric[0].label == "Last government-archive price"
     settings = data.config(ROOT)
     db, ledger = data.database_paths(ROOT, settings)
     latest_record = data.market_and_prices(ROOT, db)['prices'][-1]

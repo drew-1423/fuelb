@@ -111,7 +111,7 @@ def forecast_details(forecast):
     spec = json.loads(forecast.target_json)
     st.info(spec['label'] + ' · ' + spec['methodology'])
     st.caption('Validation · ' + spec['validation_status'].replace('_', ' ') +
-               ' · Created ' + data.beirut_time(forecast.origin))
+               ' · Issued ' + data.beirut_time(forecast.created_at))
     if spec.get('tier') != 4:
         st.caption(spec['uncertainty'])
     measured = spec.get('performance')
@@ -210,10 +210,11 @@ def start_background_refresh(root, source="all"):
 
 
 def _forecast_health(snap, forecast, refresh_result=None):
-    tier = 4
+    tier, spec = 4, {}
     if forecast is not None:
         try:
-            tier = int(json.loads(forecast.target_json).get('tier', 4))
+            spec = json.loads(forecast.target_json)
+            tier = int(spec.get('tier', 4))
         except (TypeError, ValueError, AttributeError):
             tier = 4
     failures = []
@@ -223,10 +224,10 @@ def _forecast_health(snap, forecast, refresh_result=None):
             if str(row.get('status', '')).lower() not in {'ok', 'success', 'completed'}:
                 failures.append(str(row.get('source_id', 'a data source')).replace('market_', '').replace('_', ' '))
     if tier == 4 or forecast is None:
-        why = forecast_unavailable_reason() if forecast is None else "live inputs are stale; baseline fallback is active"
+        why = forecast_unavailable_reason() if forecast is None else _forecast_limitation(spec)
         return 'red', why
     if tier in (2, 3):
-        return 'yellow', f"Tier {tier} forecast uses lagged or partial inputs"
+        return 'yellow', _forecast_limitation(spec)
     if refresh_result and not refresh_result[0]:
         return 'yellow', 'The latest refresh failed; showing the last stored observations'
     if failures:
@@ -286,67 +287,78 @@ def evidence(row):
         st.link_button("View source record", row["source_url"])
 
 
-def _driver_summary_banner(snap, latest, active_forecast):
-    supplier = next((r for r in reversed(snap["prices"]) if r["verification_status"] in {"supplier_observed", PROVISIONAL_PRICE}
-                     and r["price_lbp_20l"] is not None), None)
-    has_newer_supplier = bool(supplier and (latest is None or supplier["source_date"] > latest["source_date"]))
-    if latest:
-        usd_20l = latest["price_lbp_20l"] / 89500.0
-        per_liter = latest["price_lbp_20l"] / 20.0
-        headline = f"{latest['price_lbp_20l']:,} LBP / 20 L"
-        headline_detail = f"Corroborated gasoline 95 price · ≈ ${usd_20l:.2f} USD"
-        if has_newer_supplier:
-            diff = supplier["price_lbp_20l"] - latest["price_lbp_20l"]
-            direction = "lower" if diff < 0 else "higher" if diff > 0 else "unchanged"
-            body = (
-                f"A newer station quote on {supplier['source_date']} lists {supplier['price_lbp_20l']:,} LBP / 20 L "
-                f"({abs(diff):,} LBP {direction}), awaiting Ministry archive corroboration. "
-                f"1 tank = 20 liters ({per_liter:,.0f} LBP/liter at the verified rate)."
-            )
-        elif active_forecast is not None:
-            chg = float(active_forecast.predicted_change)
-            move = "decrease" if chg < 0 else "increase" if chg > 0 else "hold steady"
-            body = (
-                f"The current research model projects the next update to {move} by {abs(chg):,.0f} LBP "
-                f"to {active_forecast.predicted_price:,.0f} LBP / 20 L. "
-                f"1 tank = 20 liters ({per_liter:,.0f} LBP/liter today)."
-            )
-        else:
-            body = (
-                f"Verified on {latest['source_date']} ({per_liter:,.0f} LBP per liter). "
-                "Live price predictions are currently paused until newer official Ministry records and fresh market data arrive."
-            )
+def _forecast_limitation(spec):
+    if spec.get("anchor_verification") == PROVISIONAL_PRICE:
+        return "Based on matching IPT and Taqtek prices. Ministry confirmation is pending."
+    if spec.get("tier") == 4:
+        return "Live inputs are unavailable for a model forecast. The estimate uses a simple price baseline."
+    if spec.get("lagged_market_inputs"):
+        return "Some energy-market observations are older than the usual freshness limit."
+    if spec.get("tier") == 3:
+        return "This estimate uses a simplified pricing calculation and available market proxies."
+    if spec.get("tier") == 2:
+        return "This research estimate has yet to receive production approval."
+    return "The forecast uses fresh primary inputs and a validated model."
+
+
+@st.cache_data(ttl=60, max_entries=16, show_spinner=False)
+def _saved_market_dates(ledger_path, snapshot_id, version):
+    uri = ledger_path.resolve().as_uri() + "?mode=ro"
+    connection = sqlite3.connect(uri, uri=True)
+    try:
+        row = connection.execute("SELECT payload_json FROM snapshots WHERE id = ?", (snapshot_id,)).fetchone()
+    finally:
+        connection.close()
+    inputs = json.loads(row[0]).get("inputs", {}).get("available_market_inputs", {}) if row else {}
+    labels = {"brent_spot": "Brent spot", "nyh_gasoline": "NY Harbor gasoline",
+              "brent_futures": "Brent futures", "rbob_futures": "RBOB futures"}
+    return [f"{label} {inputs[key]['observation_date']}" for key, label in labels.items()
+            if inputs.get(key) and inputs[key].get("observation_date")]
+
+
+def _overview_price_sequence(latest, agreed, forecast):
+    a, b, c = st.columns(3)
+    with a:
+        st.metric("Last government-archive price", amount(latest["price_lbp_20l"] if latest else None), border=True)
+        if latest:
+            st.caption(f"{latest['source_date']} · {data.STATUS[latest['verification_status']]}")
+            evidence(latest)
+    with b:
+        st.metric("Latest price agreed by IPT and Taqtek",
+                  amount(agreed["price_lbp_20l"]) if agreed else "No provisional match", border=True)
+        if agreed:
+            st.caption(f"{agreed['source_date']} · Ministry confirmation pending")
+    with c:
+        if forecast is None:
+            st.metric("Next estimated price", "Awaiting inputs", border=True)
+            return
+        spec = json.loads(forecast.target_json)
+        change = forecast.predicted_change
+        st.metric("Next estimated price", amount(forecast.predicted_price),
+                  delta=f"{change:+,.0f} LBP ({change / forecast.base_price:+.2%})",
+                  delta_color="off", border=True)
+        st.caption(f"Starting price · {forecast.base_price:,.0f} LBP / 20 L")
+    st.info(_forecast_limitation(spec))
+    if spec.get("tier") == 4:
+        market = "No market inputs used by the baseline"
     else:
-        headline = "Corroborated price unavailable"
-        headline_detail = "Lebanon gasoline 95"
-        body = "Refresh data sources to pull the latest Ministry of Energy and Water and station records."
-    supplier_pill = (
-        f"{supplier['price_lbp_20l']:,} LBP ({supplier['source_date']})"
-        if has_newer_supplier else "Matches verified record"
-    )
-    forecast_pill = (
-        f"{active_forecast.predicted_price:,.0f} LBP ({active_forecast.predicted_change:+,.0f})"
-        if active_forecast is not None else "Paused (awaiting fresh inputs)"
-    )
-    st.markdown(
-        f'<div class="driver-banner">'
-        f'<div><p class="driver-banner__headline">{headline}</p>'
-        f'<p class="driver-banner__caption">{headline_detail}</p>'
-        f'<p class="driver-banner__body">{body}</p></div>'
-        f'<div class="driver-banner__pills">'
-        f'<div class="driver-pill"><span>Latest station quote</span><strong>{supplier_pill}</strong></div>'
-        f'<div class="driver-pill"><span>Next update outlook</span><strong>{forecast_pill}</strong></div>'
-        f'<div class="driver-pill"><span>Display USD rate</span><strong>89,500 LBP / $1</strong></div>'
-        f'</div></div>',
-        unsafe_allow_html=True,
-    )
+        try:
+            dates = _saved_market_dates(LEDGER_PATH, forecast.snapshot_id, data.file_version(LEDGER_PATH))
+        except (OSError, ValueError, sqlite3.Error):
+            dates = []
+        market = " · ".join(dates) if dates else "Market dates were not recorded in this forecast snapshot"
+    st.caption(f"Starting price observed · {spec.get('base_source_date') or 'Date unknown'}"
+               f"  |  Market in forecast snapshot · {market}"
+               f"  |  Forecast issued · {data.beirut_time(forecast.created_at)}")
 
 
 def overview(snap, latest, previous):
     title("Lebanon gasoline 95", "Clear daily pump price tracker & next-decision outlook · LBP per 20-liter tank · Asia/Beirut")
     forecast_result = active("decision_1")
     active_forecast = forecast_result.iloc[0] if not forecast_result.empty else None
-    _driver_summary_banner(snap, latest, active_forecast)
+    agreed = next((r for r in reversed(snap["prices"])
+                   if r["verification_status"] == PROVISIONAL_PRICE and r["price_lbp_20l"] is not None), None)
+    _overview_price_sequence(latest, agreed, active_forecast)
     with st.container(key="overview_refresh_controls"):
         controls, status = st.columns([1, 3], vertical_alignment="center")
         with controls:
@@ -364,63 +376,30 @@ def overview(snap, latest, previous):
         with status:
             refresh_status(snap, active_forecast)
 
-    with st.container(key="overview_prices"):
-        a, b, c = st.columns([1.15, 1, 1])
-    with a:
-        st.metric(
-            "Latest verified-tier price",
-            amount(latest["price_lbp_20l"] if latest else None),
-            border=True,
-            help="Confirmed by both the Ministry of Energy and Water archive and fuel distributors (or an original reviewed PDF). Newer station-only quotes appear separately until corroborated.",
-        )
-        if latest:
-            age = (datetime.now(BEIRUT).date() - date.fromisoformat(latest["source_date"])).days
-            st.caption(f"{latest['source_date']} · {data.STATUS[latest['verification_status']]} · {age} days old")
-            evidence(latest)
-    with b:
-        st.metric(
-            "Previous verified-tier price",
-            amount(previous["price_lbp_20l"] if previous else None),
-            border=True,
-            help="The prior corroborated Ministry-tier price before the latest verified record.",
-        )
-        if previous:
-            st.caption(f"{previous['source_date']} · {data.STATUS[previous['verification_status']]}")
-    with c:
-        change = latest["price_lbp_20l"] - previous["price_lbp_20l"] if latest and previous else None
-        st.metric(
-            "Change between verified records",
-            f"{change:+,}" if change is not None else "Unavailable",
-            delta=percent(change / previous["price_lbp_20l"]) if change is not None else None,
-            border=True,
-            help="Difference between the two latest verified-tier records. Intermediate supplier-only updates may have occurred in between.",
-        )
-        st.caption("Consecutive official decisions cannot be established from the archive.")
+    if latest or previous:
+        with st.expander("Government price history details"):
+            if previous:
+                st.caption(f"Previous archive price · {previous['price_lbp_20l']:,} LBP / 20 L · {previous['source_date']}")
+            if latest and previous:
+                change = latest["price_lbp_20l"] - previous["price_lbp_20l"]
+                st.caption(f"Change between archive records · {change:+,} LBP / 20 L "
+                           f"({change / previous['price_lbp_20l']:+.2%}). Other decisions may have occurred between those dates.")
     if latest:
         if (datetime.now(BEIRUT).date() - date.fromisoformat(latest["source_date"])).days > SETTINGS["collection"]["stale_after_days"]:
-            st.warning("The latest verified-tier price exceeds the configured freshness limit.")
+            st.warning("The latest government-archive price exceeds the configured freshness limit.")
         if not latest["official_effective_date"]:
-            st.caption("The latest record has a source date. Its official effective date is unavailable.")
+            st.caption("The latest government-archive record has a source date. Its official effective date is unknown.")
     document = next((r for r in reversed(snap["prices"])
                      if r["verification_status"] == "document_verified"), None)
     if document and document != latest:
         st.caption(f"Latest reviewed original decision · {document['source_date']} · {document['price_lbp_20l']:,} LBP / 20 L")
-    supplier = next((r for r in reversed(snap["prices"]) if r["verification_status"] in {"supplier_observed", PROVISIONAL_PRICE}
+    supplier = next((r for r in reversed(snap["prices"]) if r["verification_status"] == "supplier_observed"
                      and r["price_lbp_20l"] is not None), None)
-    if supplier and (latest is None or supplier["source_date"] > latest["source_date"]):
-        st.caption(f"{data.STATUS[supplier['verification_status']]} quote · {supplier['source_date']} · {supplier['price_lbp_20l']:,} LBP / 20 L")
-    st.caption(f"Last successful price or market capture · {data.beirut_time(snap['latest_capture'])}")
+    if supplier and supplier["source_date"] > max((r["source_date"] for r in (latest, agreed) if r), default=""):
+        st.caption(f"Newer single-source quote · {supplier['source_date']} · {supplier['price_lbp_20l']:,} LBP / 20 L")
     price_history = st.container()
     st.subheader("Next official decision")
-    issued_path = ROOT / 'reports/model_validation/issued_live_forecasts.json'
-    try:
-        issued_export = json_file(str(issued_path), data.file_version(issued_path))
-        if issued_export.get('origin'):
-            st.caption('Issued forecast export · ' + data.beirut_time(issued_export['origin']))
-    except (OSError, ValueError, TypeError, AttributeError):
-        pass
-    result = active("decision_1")
-    forecast = result.iloc[0] if not result.empty else None
+    forecast = active_forecast
     if forecast is None:
         unavailable_forecast()
     else:
