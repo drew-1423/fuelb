@@ -2,6 +2,7 @@
 from datetime import date, datetime, timezone
 from decimal import DecimalException
 from pathlib import Path
+from html import escape
 import json
 import os
 import sqlite3
@@ -60,9 +61,9 @@ def show_chart(fig):
         fig, width="stretch", theme=None,
         config={"displaylogo": False, "scrollZoom": True, "doubleClick": "reset",
                 "displayModeBar": True,
-                "modeBarButtonsToRemove": ["select2d", "lasso2d", "zoomIn2d", "zoomOut2d", "autoScale2d"]},
+                "modeBarButtonsToRemove": ["select2d", "lasso2d", "autoScale2d"]},
     )
-    st.caption("Touch: 2-finger pinch to zoom · 1-finger drag to pan · tap Reset axes (🏠) or double-tap to reset")
+    st.caption("Pinch or scroll to zoom. Drag to pan, or use the chart toolbar to zoom and reset.")
 
 
 def amount(value, decimals=0):
@@ -246,13 +247,13 @@ def refresh_status(snap, forecast):
     else:
         status, explanation = _forecast_health(snap, forecast, result)
     last_refresh = finished_at or snap.get('latest_capture')
-    left, right = st.columns([1, 2])
-    with left:
-        st.caption('Last refreshed · ' + data.beirut_time(last_refresh))
-    with right:
-        st.markdown(
-            f'<span class="health-dot {status}" aria-label="{status.title()} data status">●</span> '
-            f'<strong>{status.title()} · {explanation}</strong>', unsafe_allow_html=True)
+    time_label = escape(data.beirut_time(last_refresh))
+    st.markdown(
+        f'<div class="refresh-health" role="status">'
+        f'<strong><span class="health-dot {status}" aria-hidden="true"></span>{status.title()}</strong>'
+        f'<span>{escape(explanation)}</span><small>Last refreshed · {time_label}</small></div>',
+        unsafe_allow_html=True,
+    )
     if result and job_id and st.session_state.get('refresh_rerun_job') != job_id:
         st.session_state['refresh_rerun_job'] = job_id
         # Re-read SQLite and version-keyed exports after the worker has committed.
@@ -285,14 +286,15 @@ def evidence(row):
         st.link_button("View source record", row["source_url"])
 
 
-def _driver_summary_banner(snap, latest, previous, active_forecast):
+def _driver_summary_banner(snap, latest, active_forecast):
     supplier = next((r for r in reversed(snap["prices"]) if r["verification_status"] == "supplier_observed"
                      and r["price_lbp_20l"] is not None), None)
     has_newer_supplier = bool(supplier and (latest is None or supplier["source_date"] > latest["source_date"]))
     if latest:
         usd_20l = latest["price_lbp_20l"] / 89500.0
         per_liter = latest["price_lbp_20l"] / 20.0
-        headline = f"Official corroborated price: {latest['price_lbp_20l']:,} LBP per 20L tank (~${usd_20l:.2f} USD)"
+        headline = f"{latest['price_lbp_20l']:,} LBP / 20 L"
+        headline_detail = f"Corroborated gasoline 95 price · ≈ ${usd_20l:.2f} USD"
         if has_newer_supplier:
             diff = supplier["price_lbp_20l"] - latest["price_lbp_20l"]
             direction = "lower" if diff < 0 else "higher" if diff > 0 else "unchanged"
@@ -315,7 +317,8 @@ def _driver_summary_banner(snap, latest, previous, active_forecast):
                 "Live price predictions are currently paused until newer official Ministry records and fresh market data arrive."
             )
     else:
-        headline = "Corroborated Lebanon 95-octane price is currently unavailable"
+        headline = "Corroborated price unavailable"
+        headline_detail = "Lebanon gasoline 95"
         body = "Refresh data sources to pull the latest Ministry of Energy and Water and station records."
     supplier_pill = (
         f"{supplier['price_lbp_20l']:,} LBP ({supplier['source_date']})"
@@ -327,8 +330,8 @@ def _driver_summary_banner(snap, latest, previous, active_forecast):
     )
     st.markdown(
         f'<div class="driver-banner">'
-        f'<div><span class="driver-banner__kicker">Everyday Driver Summary · 95 Octane (20L Tank)</span>'
-        f'<div class="driver-banner__headline">{headline}</div>'
+        f'<div><p class="driver-banner__headline">{headline}</p>'
+        f'<p class="driver-banner__caption">{headline_detail}</p>'
         f'<p class="driver-banner__body">{body}</p></div>'
         f'<div class="driver-banner__pills">'
         f'<div class="driver-pill"><span>Latest station quote</span><strong>{supplier_pill}</strong></div>'
@@ -343,17 +346,26 @@ def overview(snap, latest, previous):
     title("Lebanon gasoline 95", "Clear daily pump price tracker & next-decision outlook · LBP per 20-liter tank · Asia/Beirut")
     forecast_result = active("decision_1")
     active_forecast = forecast_result.iloc[0] if not forecast_result.empty else None
-    controls, status = st.columns([1, 2.3], vertical_alignment="center")
-    with controls:
-        if st.button("Refresh all data", type="primary", key="overview_refresh"):
-            if not _refresh_authorized():
-                st.warning("Public read-only mode · Enter your admin passcode in the sidebar to run live refreshes.")
-            elif not start_background_refresh(ROOT, "all"):
-                st.info("A full refresh is already running.")
-    with status:
-        refresh_status(snap, active_forecast)
-    _driver_summary_banner(snap, latest, previous, active_forecast)
-    a, b, c = st.columns([1.3, 1, 1])
+    _driver_summary_banner(snap, latest, active_forecast)
+    with st.container(key="overview_refresh_controls"):
+        controls, status = st.columns([1, 3], vertical_alignment="center")
+        with controls:
+            manager = _refresh_manager()
+            with manager["lock"]:
+                refresh_running = manager["running"]
+            if st.button("Refreshing…" if refresh_running else "Refresh all data", type="primary",
+                         key="overview_refresh", disabled=refresh_running):
+                if not _refresh_authorized():
+                    st.warning("Public read-only mode · Enter your admin passcode in the sidebar to run live refreshes.")
+                elif start_background_refresh(ROOT, "all"):
+                    st.rerun()
+                else:
+                    st.info("A full refresh is already running.")
+        with status:
+            refresh_status(snap, active_forecast)
+
+    with st.container(key="overview_prices"):
+        a, b, c = st.columns([1.15, 1, 1])
     with a:
         st.metric(
             "Latest verified-tier price",
