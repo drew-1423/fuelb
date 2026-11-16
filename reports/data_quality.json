@@ -1,21 +1,27 @@
 {
-  "generated_at": "2026-11-16T14:42:49.548050+00:00",
+  "generated_at": "2026-11-16T14:55:12.760770+00:00",
   "as_of_beirut": "2026-11-16",
   "timezone": "Asia/Beirut",
   "ledger_unique_dates": 1371,
   "status_counts": {
-    "supplier_observed": 458,
+    "supplier_observed": 456,
     "document_verified": 4,
     "archive_corroborated": 809,
     "government_archive": 58,
-    "conflict": 42
+    "conflict": 42,
+    "provisional_corroborated": 2
   },
   "earliest_verified_archive_or_document": "2010-10-27",
   "latest_verified_archive_or_document": "2026-11-10",
   "earliest_document_verified": "2010-10-27",
   "latest_document_verified": "2025-05-29",
   "document_verified_count": 4,
-  "raw_integrity_failures": [],
+  "raw_integrity_failures": [
+    "data/raw/ipt/733ab3728f89f3d5c16d33bef509593d1a7af5d791991524b865f7a92afc43f7.html",
+    "data/raw/ipt/c151abc9ed25b03a1778562769d27be0e77139b54b8bda52059233708e594b77.html",
+    "data/raw/ipt/8e058e3406c3d1f17ef0ed25a12f0ea42633c0d49a132acf8a19fc17dba38820.html",
+    "data/raw/ipt/7070545a10059ef628552571e7f4ffa36ec03d9c39e9ba25c6066d4b5e34478c.xlsx"
+  ],
   "unique_observed_official_archive_decision_ids": 667,
   "official_archive_dates_without_decision_id": 274,
   "total_historical_official_decisions": "unknown: archive coverage is incomplete; date-only rows do not certify unique decisions",

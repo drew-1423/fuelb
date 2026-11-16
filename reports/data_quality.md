@@ -1,6 +1,6 @@
 # Lebanese gasoline 95 data quality report
 
-As of 2026-11-16, Asia/Beirut. Generated 2026-11-16T14:42:49.548050+00:00. Counts are database queries over actual captures.
+As of 2026-11-16, Asia/Beirut. Generated 2026-11-16T14:55:12.760770+00:00. Counts are database queries over actual captures.
 
 | Completion measure | Observed result |
 | --- | --- |
@@ -34,7 +34,7 @@ Latest successful IPT import parsed 1313 original rows. Semantic observations an
 | 2010-10-27 | 33300 | document_verified | 2010-10-27 |
 | 2025-05-29 | 1489000 | document_verified | 2025-05-29 |
 | 2026-11-10 | 2445000 | archive_corroborated | unknown |
-| 2026-11-13 | 2391000 | supplier_observed | unknown |
+| 2026-11-13 | 2391000 | provisional_corroborated | unknown |
 
 ## Gaps and frequency
 
@@ -44,7 +44,7 @@ Observed frequency by year is in [frequency_by_year.csv](frequency_by_year.csv);
 
 ## Conflicts and limitations
 
-Status counts: `{"archive_corroborated": 809, "conflict": 42, "document_verified": 4, "government_archive": 58, "supplier_observed": 458}`. All contradictory valid source values remain in the immutable observation table; disputed dates have null canonical prices. [conflicting_observations.csv](conflicting_observations.csv) links them to observation IDs.
+Status counts: `{"archive_corroborated": 809, "conflict": 42, "document_verified": 4, "government_archive": 58, "provisional_corroborated": 2, "supplier_observed": 456}`. All contradictory valid source values remain in the immutable observation table; disputed dates have null canonical prices. [conflicting_observations.csv](conflicting_observations.csv) links them to observation IDs.
 
 Unknown publication timestamps: 3197 observations. Unknown official effective dates: 3193. Original Excel/HTML dates have no invented midnight release timestamp. Retrieval is stored in UTC and rendered with Asia/Beirut rules.
 
@@ -58,7 +58,7 @@ Adequate for source reconciliation and exploratory target analysis. Not ready fo
 
 See [source assessment](../research/data_source_assessment.md), [assumptions](../research/verified_assumptions.md) and [update instructions](../docs/data_updates.md).
 
-Raw integrity: 0 missing or hash-mismatched captured files. `date_alignment_review` records are excluded from verified exports pending review of inconsistent source weekday/date labels.
+Raw integrity: 4 missing or hash-mismatched captured files. `date_alignment_review` records are excluded from verified exports pending review of inconsistent source weekday/date labels.
 
 ## Longest IPT intervals to investigate
 

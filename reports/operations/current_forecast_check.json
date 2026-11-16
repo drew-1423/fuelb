@@ -1,10 +1,54 @@
 {
-  "origin": "2026-11-16T14:43:04.968359+00:00",
-  "anchor": null,
+  "origin": "2026-11-16T14:55:26.013568+00:00",
+  "anchor": {
+    "absolute_price_change": -54000,
+    "candidate_values": [
+      2391000
+    ],
+    "change_basis": "previous_verified_record_not_certified_previous_decision",
+    "chosen_observation_id": 3173,
+    "corroborating_sources": [
+      {
+        "id": "ipt",
+        "url": "https://www.iptgroup.com.lb/ipt/en/our-stations/fuel-prices"
+      },
+      {
+        "id": "taqtek",
+        "url": "https://taqteklb.com/en/fuel/"
+      }
+    ],
+    "date_role": "source_label",
+    "decision_numbers": [],
+    "issues": [],
+    "observation_ids": [
+      3173,
+      3174,
+      3197
+    ],
+    "official_effective_date": null,
+    "percentage_price_change": -2.208588957055215,
+    "previous_verified_date": "2026-11-10",
+    "previous_verified_price": 2445000,
+    "price_lbp_20l": 2391000,
+    "publication_date": null,
+    "publication_timestamp": null,
+    "regime": "2026_fiscal_changes_unresolved",
+    "regime_status": "provisional_research_bucket",
+    "resolution_id": null,
+    "retrieved_at": "2026-11-13T12:44:14.125195+00:00",
+    "source_date": "2026-11-13",
+    "source_priority": 3,
+    "source_url": "https://www.iptgroup.com.lb/ipt/en/our-stations/fuel-prices",
+    "timezone": "Asia/Beirut",
+    "unit": "LBP/20L",
+    "verification_status": "provisional_corroborated",
+    "revision_id": 3475,
+    "version_known_at": "2026-11-16T14:55:12.509244+00:00"
+  },
   "forecasts": [
     {
       "horizon": "decision_1",
-      "origin": "2026-11-16T14:43:04.968359+00:00",
+      "origin": "2026-11-16T14:55:26.013568+00:00",
       "endpoint": null,
       "target_label": "Next 1 official pricing decision(s)",
       "decision_date": "2026-11-17",
@@ -28,26 +72,115 @@
         "estimated": true,
         "limitations": "Date estimates only; announcement times, holidays and extraordinary decisions are unknown"
       },
-      "tier": null,
-      "label": "FORECAST UNAVAILABLE",
-      "status": "abstain",
-      "predicted_price": null,
-      "predicted_change": null,
-      "percentage_change": null,
+      "tier": 2,
+      "label": "QUANTITATIVE MODEL FORECAST · PROVISIONAL PRICE ANCHOR",
+      "status": "issued",
+      "predicted_price": 2356016.286714715,
+      "predicted_change": -34983.71328528512,
+      "percentage_change": -1.463141500848395,
+      "uncertainty": "No intervals or probabilities validated for a provisional price anchor.",
+      "attempts": [
+        {
+          "tier": 1,
+          "reasons": [
+            "Provisional price anchors support research estimates only"
+          ]
+        },
+        {
+          "tier": 2,
+          "reasons": []
+        }
+      ],
+      "critical_missing_inputs": [
+        "IPT and Taqtek agree on the provisional price. Ministry confirmation and effective timing are pending.",
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
+      ],
+      "methodology": "G_hybrid",
+      "family": "G_hybrid",
+      "model_version": "part3-fbd34b3d4dadf1a06a16-decision_1-G_hybrid-experimental",
+      "artifact_sha256": "fbd34b3d4dadf1a06a160469dd2c1234f8dee0b133a5f9b4f310d441650b9462",
+      "performance": {
+        "regime": "stabilized_fx_2023_2026",
+        "horizon": "decision_1",
+        "family": "G_hybrid",
+        "n": 2,
+        "unique_base_decisions": 2,
+        "first_origin": "2026-08-08T00:00:00+00:00",
+        "last_origin": "2026-11-07T01:00:00+00:00",
+        "mae": 366.16826975414097,
+        "rmse": 369.3414638815938,
+        "bias": -366.16826975414097,
+        "base_balanced_mae": 366.16826975414097,
+        "direction_accuracy": 1.0,
+        "exact_sign_direction_accuracy": 1.0,
+        "no_change_target_fraction": 0.0,
+        "interval_n": 2,
+        "interval_coverage": 1.0,
+        "interval_mean_width": 103208.20388777462,
+        "interval_80_n": 2,
+        "interval_80_coverage": 1.0,
+        "interval_80_mean_width": 24590.47747677584,
+        "probability_n": 2,
+        "probability_calibration_ready_n": 2,
+        "brier_multiclass": 0.06295556617616575,
+        "shared_direction_brier": 0.06295556617616575,
+        "shared_direction_log_loss": 0.18702280202192034,
+        "deadband_lbp": 3000.0,
+        "zero_width_interval_n": 0,
+        "change_mae_lbp": 366.16826975414097,
+        "price_mae_lbp": 366.16826975414097,
+        "change_rmse_lbp": 369.3414638815938,
+        "distinct_base_decisions": 2,
+        "interval_width_lbp": 103208.20388777462
+      },
+      "market_input_mode": "strict_captured_vintage",
+      "lagged_market_inputs": [],
+      "calibration_n": 31,
+      "calibration_maximum_label_end": "2026-11-10T22:00:00+00:00",
+      "probability_deadband_lbp": 3000,
+      "probability_order": [
+        "decrease",
+        "no_change",
+        "increase"
+      ],
+      "probability_status": "horizon_conditioned_past_oof_conformal_research",
+      "ovx_regime": "Normal",
+      "ovx_regime_conditioning": "regime_conditioned_matured_oof",
+      "calibration_ovx_regime": "Normal",
+      "driver_contributions": {
+        "commodity_pass_through": -1848.3942057431982,
+        "lagged_domestic_momentum": -27968.040407124507,
+        "fiscal_shock": 0.0,
+        "other_features": -3584.6509856910443,
+        "baseline_intercept": -1582.6276867263691,
+        "unit": "LBP/20L",
+        "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
+      },
+      "base_price": 2391000,
+      "base_source_date": "2026-11-13",
+      "base_revision_id": 3475,
+      "anchor_verification": "provisional_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "anchor_sources": [
+        {
+          "id": "ipt",
+          "url": "https://www.iptgroup.com.lb/ipt/en/our-stations/fuel-prices"
+        },
+        {
+          "id": "taqtek",
+          "url": "https://taqteklb.com/en/fuel/"
+        }
+      ],
       "interval": null,
       "probabilities": null,
-      "uncertainty": "Unavailable",
-      "attempts": [],
-      "critical_missing_inputs": [
-        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
-      ],
-      "forecast_id": 45188,
-      "snapshot_id": "b0df3ced9fee52fca44db676611d58153d6035a44a845bfa7d5c353d5dae9385",
-      "model_version": "live-unavailable-v1"
+      "forecast_id": 45196,
+      "snapshot_id": "22c55ef0db82455c459c47621386f3e40838be0a5afde646919894a788232e0d"
     },
     {
       "horizon": "decision_2",
-      "origin": "2026-11-16T14:43:04.968359+00:00",
+      "origin": "2026-11-16T14:55:26.013568+00:00",
       "endpoint": null,
       "target_label": "Next 2 official pricing decision(s)",
       "decision_date": "2026-11-20",
@@ -71,26 +204,115 @@
         "estimated": true,
         "limitations": "Date estimates only; announcement times, holidays and extraordinary decisions are unknown"
       },
-      "tier": null,
-      "label": "FORECAST UNAVAILABLE",
-      "status": "abstain",
-      "predicted_price": null,
-      "predicted_change": null,
-      "percentage_change": null,
+      "tier": 2,
+      "label": "QUANTITATIVE MODEL FORECAST · PROVISIONAL PRICE ANCHOR",
+      "status": "issued",
+      "predicted_price": 2273089.675846795,
+      "predicted_change": -117910.32415320502,
+      "percentage_change": -4.931423009335216,
+      "uncertainty": "No intervals or probabilities validated for a provisional price anchor.",
+      "attempts": [
+        {
+          "tier": 1,
+          "reasons": [
+            "Provisional price anchors support research estimates only"
+          ]
+        },
+        {
+          "tier": 2,
+          "reasons": []
+        }
+      ],
+      "critical_missing_inputs": [
+        "IPT and Taqtek agree on the provisional price. Ministry confirmation and effective timing are pending.",
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
+      ],
+      "methodology": "C_ridge",
+      "family": "C_ridge",
+      "model_version": "part3-b50640d13af84cd6ada0-decision_2-C_ridge-experimental",
+      "artifact_sha256": "b50640d13af84cd6ada0237fcab22c8aa483d90cc5cd125539be5776f0c1687c",
+      "performance": {
+        "regime": "stabilized_fx_2023_2026",
+        "horizon": "decision_2",
+        "family": "C_ridge",
+        "n": 2,
+        "unique_base_decisions": 2,
+        "first_origin": "2026-08-04T00:00:00+00:00",
+        "last_origin": "2026-11-04T01:00:00+00:00",
+        "mae": 41005.900899561515,
+        "rmse": 41864.87715677099,
+        "bias": -8437.062923012098,
+        "base_balanced_mae": 41005.900899561515,
+        "direction_accuracy": 1.0,
+        "exact_sign_direction_accuracy": 1.0,
+        "no_change_target_fraction": 0.0,
+        "interval_n": 2,
+        "interval_coverage": 0.5,
+        "interval_mean_width": 82029.42387227206,
+        "interval_80_n": 2,
+        "interval_80_coverage": 0.5,
+        "interval_80_mean_width": 66786.32003412477,
+        "probability_n": 2,
+        "probability_calibration_ready_n": 2,
+        "brier_multiclass": 2.1965343391842722e-06,
+        "shared_direction_brier": 2.1965343391842722e-06,
+        "shared_direction_log_loss": 0.0012107771381155,
+        "deadband_lbp": 3000.0,
+        "zero_width_interval_n": 0,
+        "change_mae_lbp": 41005.900899561515,
+        "price_mae_lbp": 41005.900899561515,
+        "change_rmse_lbp": 41864.87715677099,
+        "distinct_base_decisions": 2,
+        "interval_width_lbp": 82029.42387227206
+      },
+      "market_input_mode": "strict_captured_vintage",
+      "lagged_market_inputs": [],
+      "calibration_n": 20,
+      "calibration_maximum_label_end": "2026-11-10T22:00:00+00:00",
+      "probability_deadband_lbp": 3000,
+      "probability_order": [
+        "decrease",
+        "no_change",
+        "increase"
+      ],
+      "probability_status": "horizon_conditioned_past_oof_conformal_research",
+      "ovx_regime": "Normal",
+      "ovx_regime_conditioning": "regime_conditioned_matured_oof",
+      "calibration_ovx_regime": "Normal",
+      "driver_contributions": {
+        "commodity_pass_through": -44906.1261291493,
+        "lagged_domestic_momentum": -25328.812788000272,
+        "fiscal_shock": -52.33304842583294,
+        "other_features": -42630.74449532189,
+        "baseline_intercept": -4992.3076923077015,
+        "unit": "LBP/20L",
+        "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
+      },
+      "base_price": 2391000,
+      "base_source_date": "2026-11-13",
+      "base_revision_id": 3475,
+      "anchor_verification": "provisional_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "anchor_sources": [
+        {
+          "id": "ipt",
+          "url": "https://www.iptgroup.com.lb/ipt/en/our-stations/fuel-prices"
+        },
+        {
+          "id": "taqtek",
+          "url": "https://taqteklb.com/en/fuel/"
+        }
+      ],
       "interval": null,
       "probabilities": null,
-      "uncertainty": "Unavailable",
-      "attempts": [],
-      "critical_missing_inputs": [
-        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
-      ],
-      "forecast_id": 45189,
-      "snapshot_id": "b0df3ced9fee52fca44db676611d58153d6035a44a845bfa7d5c353d5dae9385",
-      "model_version": "live-unavailable-v1"
+      "forecast_id": 45197,
+      "snapshot_id": "22c55ef0db82455c459c47621386f3e40838be0a5afde646919894a788232e0d"
     },
     {
       "horizon": "decision_4",
-      "origin": "2026-11-16T14:43:04.968359+00:00",
+      "origin": "2026-11-16T14:55:26.013568+00:00",
       "endpoint": null,
       "target_label": "Next 4 official pricing decision(s)",
       "decision_date": "2026-11-27",
@@ -114,157 +336,592 @@
         "estimated": true,
         "limitations": "Date estimates only; announcement times, holidays and extraordinary decisions are unknown"
       },
-      "tier": null,
-      "label": "FORECAST UNAVAILABLE",
-      "status": "abstain",
-      "predicted_price": null,
-      "predicted_change": null,
-      "percentage_change": null,
+      "tier": 2,
+      "label": "QUANTITATIVE MODEL FORECAST · PROVISIONAL PRICE ANCHOR",
+      "status": "issued",
+      "predicted_price": 2330478.4381898628,
+      "predicted_change": -60521.56181013715,
+      "percentage_change": -2.531223831457012,
+      "uncertainty": "No intervals or probabilities validated for a provisional price anchor.",
+      "attempts": [
+        {
+          "tier": 1,
+          "reasons": [
+            "Provisional price anchors support research estimates only"
+          ]
+        },
+        {
+          "tier": 2,
+          "reasons": []
+        }
+      ],
+      "critical_missing_inputs": [
+        "IPT and Taqtek agree on the provisional price. Ministry confirmation and effective timing are pending.",
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
+      ],
+      "methodology": "E_lightgbm",
+      "family": "E_lightgbm",
+      "model_version": "part3-b4f2d76bb9c2bada3f63-decision_4-E_lightgbm-experimental",
+      "artifact_sha256": "b4f2d76bb9c2bada3f6378ad1fde238c342d5e2ca263d3e8f6992d3ae723a4a1",
+      "performance": null,
+      "market_input_mode": "strict_captured_vintage",
+      "lagged_market_inputs": [],
+      "calibration_n": 22,
+      "calibration_maximum_label_end": "2025-12-12T22:00:00+00:00",
+      "probability_deadband_lbp": 3000,
+      "probability_order": [
+        "decrease",
+        "no_change",
+        "increase"
+      ],
+      "probability_status": "horizon_conditioned_past_oof_conformal_research",
+      "ovx_regime": "Normal",
+      "ovx_regime_conditioning": "pooled_calibration",
+      "calibration_ovx_regime": null,
+      "driver_contributions": {
+        "commodity_pass_through": -24624.93762574338,
+        "lagged_domestic_momentum": -7767.078712640503,
+        "fiscal_shock": 0.0,
+        "other_features": -17595.088415262137,
+        "baseline_intercept": -10534.457056491125,
+        "unit": "LBP/20L",
+        "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
+      },
+      "base_price": 2391000,
+      "base_source_date": "2026-11-13",
+      "base_revision_id": 3475,
+      "anchor_verification": "provisional_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "anchor_sources": [
+        {
+          "id": "ipt",
+          "url": "https://www.iptgroup.com.lb/ipt/en/our-stations/fuel-prices"
+        },
+        {
+          "id": "taqtek",
+          "url": "https://taqteklb.com/en/fuel/"
+        }
+      ],
       "interval": null,
       "probabilities": null,
-      "uncertainty": "Unavailable",
-      "attempts": [],
-      "critical_missing_inputs": [
-        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
-      ],
-      "forecast_id": 45190,
-      "snapshot_id": "b0df3ced9fee52fca44db676611d58153d6035a44a845bfa7d5c353d5dae9385",
-      "model_version": "live-unavailable-v1"
+      "forecast_id": 45198,
+      "snapshot_id": "22c55ef0db82455c459c47621386f3e40838be0a5afde646919894a788232e0d"
     },
     {
       "horizon": "day_1",
-      "origin": "2026-11-16T14:43:04.968359+00:00",
-      "endpoint": "2026-11-17T16:43:04.968359+02:00",
+      "origin": "2026-11-16T14:55:26.013568+00:00",
+      "endpoint": "2026-11-17T16:55:26.013568+02:00",
       "target_label": "Prevailing official price in 1 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
       "schedule_basis": null,
       "schedule_estimated": false,
       "schedule_details": null,
-      "tier": null,
-      "label": "FORECAST UNAVAILABLE",
-      "status": "abstain",
-      "predicted_price": null,
-      "predicted_change": null,
-      "percentage_change": null,
+      "tier": 2,
+      "label": "QUANTITATIVE MODEL FORECAST · PROVISIONAL PRICE ANCHOR",
+      "status": "issued",
+      "predicted_price": 2390766.9106589044,
+      "predicted_change": -233.0893410955493,
+      "percentage_change": -0.009748613178400221,
+      "uncertainty": "No intervals or probabilities validated for a provisional price anchor.",
+      "attempts": [
+        {
+          "tier": 1,
+          "reasons": [
+            "Provisional price anchors support research estimates only"
+          ]
+        },
+        {
+          "tier": 2,
+          "reasons": []
+        }
+      ],
+      "critical_missing_inputs": [
+        "IPT and Taqtek agree on the provisional price. Ministry confirmation and effective timing are pending.",
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
+      ],
+      "methodology": "F_catboost",
+      "family": "F_catboost",
+      "model_version": "part3-34aaede583a9d2fb6290-day_1-F_catboost-experimental",
+      "artifact_sha256": "34aaede583a9d2fb62900fce02d50ebd07a18fcc7c9616e2d042387a53861a7e",
+      "performance": {
+        "regime": "stabilized_fx_2023_2026",
+        "horizon": "day_1",
+        "family": "F_catboost",
+        "n": 6,
+        "unique_base_decisions": 2,
+        "first_origin": "2026-08-08T00:00:00+00:00",
+        "last_origin": "2026-11-09T01:00:00+00:00",
+        "mae": 196.00740543477818,
+        "rmse": 205.96090318075883,
+        "bias": -196.00740543477818,
+        "base_balanced_mae": 196.00740543477818,
+        "direction_accuracy": 1.0,
+        "exact_sign_direction_accuracy": 0.0,
+        "no_change_target_fraction": 1.0,
+        "interval_n": 6,
+        "interval_coverage": 1.0,
+        "interval_mean_width": 14110.14403384584,
+        "interval_80_n": 6,
+        "interval_80_coverage": 1.0,
+        "interval_80_mean_width": 11881.606472475161,
+        "probability_n": 6,
+        "probability_calibration_ready_n": 6,
+        "brier_multiclass": 0.03949957905544745,
+        "shared_direction_brier": 0.03949957905544745,
+        "shared_direction_log_loss": 0.16362178794467372,
+        "deadband_lbp": 3000.0,
+        "zero_width_interval_n": 0,
+        "change_mae_lbp": 196.00740543477818,
+        "price_mae_lbp": 196.00740543477818,
+        "change_rmse_lbp": 205.96090318075883,
+        "distinct_base_decisions": 2,
+        "interval_width_lbp": 14110.14403384584
+      },
+      "market_input_mode": "strict_captured_vintage",
+      "lagged_market_inputs": [],
+      "calibration_n": 60,
+      "calibration_maximum_label_end": "2026-11-10T22:00:00+00:00",
+      "probability_deadband_lbp": 3000,
+      "probability_order": [
+        "decrease",
+        "no_change",
+        "increase"
+      ],
+      "probability_status": "horizon_conditioned_past_oof_conformal_research",
+      "ovx_regime": "Normal",
+      "ovx_regime_conditioning": "regime_conditioned_matured_oof",
+      "calibration_ovx_regime": "Normal",
+      "driver_contributions": {
+        "commodity_pass_through": 1.6894929625695596,
+        "lagged_domestic_momentum": -1.2901594955230136,
+        "fiscal_shock": -0.0035332074696251548,
+        "other_features": 61.06786500307355,
+        "baseline_intercept": -294.55300635819964,
+        "unit": "LBP/20L",
+        "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
+      },
+      "base_price": 2391000,
+      "base_source_date": "2026-11-13",
+      "base_revision_id": 3475,
+      "anchor_verification": "provisional_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "anchor_sources": [
+        {
+          "id": "ipt",
+          "url": "https://www.iptgroup.com.lb/ipt/en/our-stations/fuel-prices"
+        },
+        {
+          "id": "taqtek",
+          "url": "https://taqteklb.com/en/fuel/"
+        }
+      ],
       "interval": null,
       "probabilities": null,
-      "uncertainty": "Unavailable",
-      "attempts": [],
-      "critical_missing_inputs": [
-        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
-      ],
-      "forecast_id": 45191,
-      "snapshot_id": "b0df3ced9fee52fca44db676611d58153d6035a44a845bfa7d5c353d5dae9385",
-      "model_version": "live-unavailable-v1"
+      "forecast_id": 45199,
+      "snapshot_id": "22c55ef0db82455c459c47621386f3e40838be0a5afde646919894a788232e0d"
     },
     {
       "horizon": "day_3",
-      "origin": "2026-11-16T14:43:04.968359+00:00",
-      "endpoint": "2026-11-19T16:43:04.968359+02:00",
+      "origin": "2026-11-16T14:55:26.013568+00:00",
+      "endpoint": "2026-11-19T16:55:26.013568+02:00",
       "target_label": "Prevailing official price in 3 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
       "schedule_basis": null,
       "schedule_estimated": false,
       "schedule_details": null,
-      "tier": null,
-      "label": "FORECAST UNAVAILABLE",
-      "status": "abstain",
-      "predicted_price": null,
-      "predicted_change": null,
-      "percentage_change": null,
+      "tier": 2,
+      "label": "QUANTITATIVE MODEL FORECAST · PROVISIONAL PRICE ANCHOR",
+      "status": "issued",
+      "predicted_price": 2366391.1979036843,
+      "predicted_change": -24608.80209631577,
+      "percentage_change": -1.029226352836293,
+      "uncertainty": "No intervals or probabilities validated for a provisional price anchor.",
+      "attempts": [
+        {
+          "tier": 1,
+          "reasons": [
+            "Provisional price anchors support research estimates only"
+          ]
+        },
+        {
+          "tier": 2,
+          "reasons": []
+        }
+      ],
+      "critical_missing_inputs": [
+        "IPT and Taqtek agree on the provisional price. Ministry confirmation and effective timing are pending.",
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
+      ],
+      "methodology": "E_lightgbm",
+      "family": "E_lightgbm",
+      "model_version": "part3-d0289ebedc304dcc4de7-day_3-E_lightgbm-experimental",
+      "artifact_sha256": "d0289ebedc304dcc4de79f8da820220347066a71491602e1850d05a2a7c5162d",
+      "performance": {
+        "regime": "stabilized_fx_2023_2026",
+        "horizon": "day_3",
+        "family": "E_lightgbm",
+        "n": 2,
+        "unique_base_decisions": 2,
+        "first_origin": "2026-08-08T00:00:00+00:00",
+        "last_origin": "2026-11-07T01:00:00+00:00",
+        "mae": 7465.391288596231,
+        "rmse": 8037.190211364775,
+        "bias": -7465.391288596231,
+        "base_balanced_mae": 7465.391288596231,
+        "direction_accuracy": 0.0,
+        "exact_sign_direction_accuracy": 0.0,
+        "no_change_target_fraction": 1.0,
+        "interval_n": 2,
+        "interval_coverage": 1.0,
+        "interval_mean_width": 28176.705418348523,
+        "interval_80_n": 2,
+        "interval_80_coverage": 1.0,
+        "interval_80_mean_width": 17420.463795666845,
+        "probability_n": 2,
+        "probability_calibration_ready_n": 2,
+        "brier_multiclass": 1.0419261549789922,
+        "shared_direction_brier": 1.0419261549789922,
+        "shared_direction_log_loss": 1.6290710760599927,
+        "deadband_lbp": 3000.0,
+        "zero_width_interval_n": 0,
+        "change_mae_lbp": 7465.391288596231,
+        "price_mae_lbp": 7465.391288596231,
+        "change_rmse_lbp": 8037.190211364775,
+        "distinct_base_decisions": 2,
+        "interval_width_lbp": 28176.705418348523
+      },
+      "market_input_mode": "strict_captured_vintage",
+      "lagged_market_inputs": [],
+      "calibration_n": 60,
+      "calibration_maximum_label_end": "2026-11-10T22:00:00+00:00",
+      "probability_deadband_lbp": 3000,
+      "probability_order": [
+        "decrease",
+        "no_change",
+        "increase"
+      ],
+      "probability_status": "horizon_conditioned_past_oof_conformal_research",
+      "ovx_regime": "Normal",
+      "ovx_regime_conditioning": "regime_conditioned_matured_oof",
+      "calibration_ovx_regime": "Normal",
+      "driver_contributions": {
+        "commodity_pass_through": -5263.114216512137,
+        "lagged_domestic_momentum": -14316.542558400984,
+        "fiscal_shock": 0.0,
+        "other_features": -3369.7483168761873,
+        "baseline_intercept": -1659.3970045264539,
+        "unit": "LBP/20L",
+        "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
+      },
+      "base_price": 2391000,
+      "base_source_date": "2026-11-13",
+      "base_revision_id": 3475,
+      "anchor_verification": "provisional_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "anchor_sources": [
+        {
+          "id": "ipt",
+          "url": "https://www.iptgroup.com.lb/ipt/en/our-stations/fuel-prices"
+        },
+        {
+          "id": "taqtek",
+          "url": "https://taqteklb.com/en/fuel/"
+        }
+      ],
       "interval": null,
       "probabilities": null,
-      "uncertainty": "Unavailable",
-      "attempts": [],
-      "critical_missing_inputs": [
-        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
-      ],
-      "forecast_id": 45192,
-      "snapshot_id": "b0df3ced9fee52fca44db676611d58153d6035a44a845bfa7d5c353d5dae9385",
-      "model_version": "live-unavailable-v1"
+      "forecast_id": 45200,
+      "snapshot_id": "22c55ef0db82455c459c47621386f3e40838be0a5afde646919894a788232e0d"
     },
     {
       "horizon": "day_7",
-      "origin": "2026-11-16T14:43:04.968359+00:00",
-      "endpoint": "2026-11-23T16:43:04.968359+02:00",
+      "origin": "2026-11-16T14:55:26.013568+00:00",
+      "endpoint": "2026-11-23T16:55:26.013568+02:00",
       "target_label": "Prevailing official price in 7 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
       "schedule_basis": null,
       "schedule_estimated": false,
       "schedule_details": null,
-      "tier": null,
-      "label": "FORECAST UNAVAILABLE",
-      "status": "abstain",
-      "predicted_price": null,
-      "predicted_change": null,
-      "percentage_change": null,
+      "tier": 2,
+      "label": "QUANTITATIVE MODEL FORECAST · PROVISIONAL PRICE ANCHOR",
+      "status": "issued",
+      "predicted_price": 2348901.6796805547,
+      "predicted_change": -42098.32031944538,
+      "percentage_change": -1.7606993023607438,
+      "uncertainty": "No intervals or probabilities validated for a provisional price anchor.",
+      "attempts": [
+        {
+          "tier": 1,
+          "reasons": [
+            "Provisional price anchors support research estimates only"
+          ]
+        },
+        {
+          "tier": 2,
+          "reasons": []
+        }
+      ],
+      "critical_missing_inputs": [
+        "IPT and Taqtek agree on the provisional price. Ministry confirmation and effective timing are pending.",
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
+      ],
+      "methodology": "G_hybrid",
+      "family": "G_hybrid",
+      "model_version": "part3-f0afdf92c8244b3ee4d9-day_7-G_hybrid-experimental",
+      "artifact_sha256": "f0afdf92c8244b3ee4d9c7f1b02729eb33eab3803a88ddc9ca8007be4c682418",
+      "performance": {
+        "regime": "stabilized_fx_2023_2026",
+        "horizon": "day_7",
+        "family": "G_hybrid",
+        "n": 1,
+        "unique_base_decisions": 1,
+        "first_origin": "2026-08-04T00:00:00+00:00",
+        "last_origin": "2026-08-04T00:00:00+00:00",
+        "mae": 1354.2343498426526,
+        "rmse": 1354.2343498426526,
+        "bias": -1354.2343498426526,
+        "base_balanced_mae": 1354.2343498426526,
+        "direction_accuracy": 1.0,
+        "exact_sign_direction_accuracy": 1.0,
+        "no_change_target_fraction": 0.0,
+        "interval_n": 1,
+        "interval_coverage": 1.0,
+        "interval_mean_width": 74586.46774302132,
+        "interval_80_n": 1,
+        "interval_80_coverage": 1.0,
+        "interval_80_mean_width": 52847.17092348727,
+        "probability_n": 1,
+        "probability_calibration_ready_n": 1,
+        "brier_multiclass": 0.15437691080841437,
+        "shared_direction_brier": 0.15437691080841437,
+        "shared_direction_log_loss": 0.38153993189174196,
+        "deadband_lbp": 3000.0,
+        "zero_width_interval_n": 0,
+        "change_mae_lbp": 1354.2343498426526,
+        "price_mae_lbp": 1354.2343498426526,
+        "change_rmse_lbp": 1354.2343498426526,
+        "distinct_base_decisions": 1,
+        "interval_width_lbp": 74586.46774302132
+      },
+      "market_input_mode": "strict_captured_vintage",
+      "lagged_market_inputs": [],
+      "calibration_n": 46,
+      "calibration_maximum_label_end": "2025-12-12T22:00:00+00:00",
+      "probability_deadband_lbp": 3000,
+      "probability_order": [
+        "decrease",
+        "no_change",
+        "increase"
+      ],
+      "probability_status": "horizon_conditioned_past_oof_conformal_research",
+      "ovx_regime": "Normal",
+      "ovx_regime_conditioning": "regime_conditioned_matured_oof",
+      "calibration_ovx_regime": "Normal",
+      "driver_contributions": {
+        "commodity_pass_through": -466.2262628248684,
+        "lagged_domestic_momentum": -39215.00810628423,
+        "fiscal_shock": 0.0,
+        "other_features": 365.06382237790217,
+        "baseline_intercept": -2782.1497727141837,
+        "unit": "LBP/20L",
+        "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
+      },
+      "base_price": 2391000,
+      "base_source_date": "2026-11-13",
+      "base_revision_id": 3475,
+      "anchor_verification": "provisional_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "anchor_sources": [
+        {
+          "id": "ipt",
+          "url": "https://www.iptgroup.com.lb/ipt/en/our-stations/fuel-prices"
+        },
+        {
+          "id": "taqtek",
+          "url": "https://taqteklb.com/en/fuel/"
+        }
+      ],
       "interval": null,
       "probabilities": null,
-      "uncertainty": "Unavailable",
-      "attempts": [],
-      "critical_missing_inputs": [
-        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
-      ],
-      "forecast_id": 45193,
-      "snapshot_id": "b0df3ced9fee52fca44db676611d58153d6035a44a845bfa7d5c353d5dae9385",
-      "model_version": "live-unavailable-v1"
+      "forecast_id": 45201,
+      "snapshot_id": "22c55ef0db82455c459c47621386f3e40838be0a5afde646919894a788232e0d"
     },
     {
       "horizon": "day_14",
-      "origin": "2026-11-16T14:43:04.968359+00:00",
-      "endpoint": "2026-11-30T16:43:04.968359+02:00",
+      "origin": "2026-11-16T14:55:26.013568+00:00",
+      "endpoint": "2026-11-30T16:55:26.013568+02:00",
       "target_label": "Prevailing official price in 14 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
       "schedule_basis": null,
       "schedule_estimated": false,
       "schedule_details": null,
-      "tier": null,
-      "label": "FORECAST UNAVAILABLE",
-      "status": "abstain",
-      "predicted_price": null,
-      "predicted_change": null,
-      "percentage_change": null,
+      "tier": 2,
+      "label": "QUANTITATIVE MODEL FORECAST · PROVISIONAL PRICE ANCHOR",
+      "status": "issued",
+      "predicted_price": 2302105.70246865,
+      "predicted_change": -88894.29753135022,
+      "percentage_change": -3.7178710803576003,
+      "uncertainty": "No intervals or probabilities validated for a provisional price anchor.",
+      "attempts": [
+        {
+          "tier": 1,
+          "reasons": [
+            "Provisional price anchors support research estimates only"
+          ]
+        },
+        {
+          "tier": 2,
+          "reasons": []
+        }
+      ],
+      "critical_missing_inputs": [
+        "IPT and Taqtek agree on the provisional price. Ministry confirmation and effective timing are pending.",
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
+      ],
+      "methodology": "F_catboost",
+      "family": "F_catboost",
+      "model_version": "part3-461e1fe1925f7c456b9a-day_14-F_catboost-experimental",
+      "artifact_sha256": "461e1fe1925f7c456b9a8c387e131b013385a20218d507092b0a5f05191ae256",
+      "performance": null,
+      "market_input_mode": "strict_captured_vintage",
+      "lagged_market_inputs": [],
+      "calibration_n": 25,
+      "calibration_maximum_label_end": "2025-12-12T22:00:00+00:00",
+      "probability_deadband_lbp": 3000,
+      "probability_order": [
+        "decrease",
+        "no_change",
+        "increase"
+      ],
+      "probability_status": "horizon_conditioned_past_oof_conformal_research",
+      "ovx_regime": "Normal",
+      "ovx_regime_conditioning": "pooled_calibration",
+      "calibration_ovx_regime": null,
+      "driver_contributions": {
+        "commodity_pass_through": -46807.76173214125,
+        "lagged_domestic_momentum": -3404.6422472037043,
+        "fiscal_shock": 0.0,
+        "other_features": -29634.805079932747,
+        "baseline_intercept": -9047.088472072533,
+        "unit": "LBP/20L",
+        "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
+      },
+      "base_price": 2391000,
+      "base_source_date": "2026-11-13",
+      "base_revision_id": 3475,
+      "anchor_verification": "provisional_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "anchor_sources": [
+        {
+          "id": "ipt",
+          "url": "https://www.iptgroup.com.lb/ipt/en/our-stations/fuel-prices"
+        },
+        {
+          "id": "taqtek",
+          "url": "https://taqteklb.com/en/fuel/"
+        }
+      ],
       "interval": null,
       "probabilities": null,
-      "uncertainty": "Unavailable",
-      "attempts": [],
-      "critical_missing_inputs": [
-        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
-      ],
-      "forecast_id": 45194,
-      "snapshot_id": "b0df3ced9fee52fca44db676611d58153d6035a44a845bfa7d5c353d5dae9385",
-      "model_version": "live-unavailable-v1"
+      "forecast_id": 45202,
+      "snapshot_id": "22c55ef0db82455c459c47621386f3e40838be0a5afde646919894a788232e0d"
     },
     {
       "horizon": "day_30",
-      "origin": "2026-11-16T14:43:04.968359+00:00",
-      "endpoint": "2026-12-16T16:43:04.968359+02:00",
+      "origin": "2026-11-16T14:55:26.013568+00:00",
+      "endpoint": "2026-12-16T16:55:26.013568+02:00",
       "target_label": "Prevailing official price in 30 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
       "schedule_basis": null,
       "schedule_estimated": false,
       "schedule_details": null,
-      "tier": null,
-      "label": "FORECAST UNAVAILABLE",
-      "status": "abstain",
-      "predicted_price": null,
-      "predicted_change": null,
-      "percentage_change": null,
+      "tier": 2,
+      "label": "QUANTITATIVE MODEL FORECAST · PROVISIONAL PRICE ANCHOR",
+      "status": "issued",
+      "predicted_price": 2322981.9523596475,
+      "predicted_change": -68018.04764035242,
+      "percentage_change": -2.844753142632891,
+      "uncertainty": "No intervals or probabilities validated for a provisional price anchor.",
+      "attempts": [
+        {
+          "tier": 1,
+          "reasons": [
+            "Provisional price anchors support research estimates only"
+          ]
+        },
+        {
+          "tier": 2,
+          "reasons": []
+        }
+      ],
+      "critical_missing_inputs": [
+        "IPT and Taqtek agree on the provisional price. Ministry confirmation and effective timing are pending.",
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
+      ],
+      "methodology": "H_ensemble",
+      "family": "H_ensemble",
+      "model_version": "part3-a0207757c08a2f4b4e4f-day_30-H_ensemble-experimental",
+      "artifact_sha256": "a0207757c08a2f4b4e4f953d604e7eedd1dae5b393474dd5e22ee5e91aaae796",
+      "performance": null,
+      "market_input_mode": "strict_captured_vintage",
+      "lagged_market_inputs": [],
+      "calibration_n": 6,
+      "calibration_maximum_label_end": "2025-09-23T21:00:00+00:00",
+      "probability_deadband_lbp": 3000,
+      "probability_order": [
+        "decrease",
+        "no_change",
+        "increase"
+      ],
+      "probability_status": "insufficient_matured_oof_residuals",
+      "ovx_regime": "Normal",
+      "ovx_regime_conditioning": "pooled_calibration",
+      "calibration_ovx_regime": null,
+      "driver_contributions": {
+        "commodity_pass_through": -1626.1145317620005,
+        "lagged_domestic_momentum": -42480.496720403025,
+        "fiscal_shock": 0.25279225408450906,
+        "other_features": -1350.5624278309365,
+        "baseline_intercept": -22561.126752610562,
+        "unit": "LBP/20L",
+        "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
+      },
+      "base_price": 2391000,
+      "base_source_date": "2026-11-13",
+      "base_revision_id": 3475,
+      "anchor_verification": "provisional_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "anchor_sources": [
+        {
+          "id": "ipt",
+          "url": "https://www.iptgroup.com.lb/ipt/en/our-stations/fuel-prices"
+        },
+        {
+          "id": "taqtek",
+          "url": "https://taqteklb.com/en/fuel/"
+        }
+      ],
       "interval": null,
       "probabilities": null,
-      "uncertainty": "Unavailable",
-      "attempts": [],
-      "critical_missing_inputs": [
-        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
-      ],
-      "forecast_id": 45195,
-      "snapshot_id": "b0df3ced9fee52fca44db676611d58153d6035a44a845bfa7d5c353d5dae9385",
-      "model_version": "live-unavailable-v1"
+      "forecast_id": 45203,
+      "snapshot_id": "22c55ef0db82455c459c47621386f3e40838be0a5afde646919894a788232e0d"
     }
   ],
   "available_market_inputs": {
@@ -511,21 +1168,19 @@
       "vintage_certified": true
     }
   },
-  "status": "abstain",
-  "reasons": [
-    "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
-  ],
+  "status": "issued",
+  "reasons": [],
   "forecast_ids": [
-    45188,
-    45189,
-    45190,
-    45191,
-    45192,
-    45193,
-    45194,
-    45195
+    45196,
+    45197,
+    45198,
+    45199,
+    45200,
+    45201,
+    45202,
+    45203
   ],
   "snapshot_ids": [
-    "b0df3ced9fee52fca44db676611d58153d6035a44a845bfa7d5c353d5dae9385"
+    "22c55ef0db82455c459c47621386f3e40838be0a5afde646919894a788232e0d"
   ]
 }
