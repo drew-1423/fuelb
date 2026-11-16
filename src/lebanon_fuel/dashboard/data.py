@@ -116,7 +116,8 @@ LIVE_BATCH_QUERY = """
         GROUP BY run_id, origin
         HAVING COUNT(*) = :count AND COUNT(DISTINCT horizon) = :count
            AND SUM(horizon IN ({horizons})) = :count
-           AND (issued_count = :count OR SUM(status = 'abstained') = :count)
+           AND (issued_count = :count OR SUM(status = 'abstained') = :count
+                OR SUM(json_extract(target_json, '$.pinned_family') = 'G_hybrid') = :count)
         ORDER BY origin DESC, MAX(id) DESC
         LIMIT 1
     )
@@ -135,7 +136,14 @@ LEDGER_SELECT = """
                    o.effective_timestamp, e.kind AS evaluation_kind
             FROM forecasts f JOIN models m ON m.id=f.model_version
             LEFT JOIN evaluations e ON e.id=(
-                SELECT MAX(id) FROM evaluations WHERE forecast_id=f.id
+                SELECT ev.id FROM evaluations ev WHERE ev.forecast_id=f.id
+                  AND (ev.kind <> 'provisional_match' OR ev.outcome_id = (
+                    SELECT CASE WHEN status='supplier_match' THEN json_extract(details_json, '$.outcome_id') END
+                    FROM match_attempts WHERE forecast_id=f.id
+                      AND json_extract(details_json, '$.channel')='supplier_next_update'
+                    ORDER BY id DESC LIMIT 1
+                  ))
+                ORDER BY (ev.kind='official_match') DESC, ev.id DESC LIMIT 1
             )
             LEFT JOIN outcomes o ON o.id=e.outcome_id
 """
@@ -154,7 +162,7 @@ def live_ledger_rows(path, *, at=None, run_id=None):
     query += LEDGER_SELECT + """
         JOIN latest_complete batch ON batch.run_id = f.run_id AND batch.origin = f.origin
         WHERE f.mode IN (:production, :research) AND f.created_at <= :cutoff
-          AND batch.issued_count = :count
+          AND f.status = 'issued' AND f.predicted_price IS NOT NULL
         ORDER BY f.id
     """
     production, research = LIVE_MODES

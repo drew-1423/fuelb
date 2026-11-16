@@ -146,6 +146,10 @@ def test_dashboard_views_and_interactions(monkeypatch):
     next(button for button in app.button if button.label == "Open the backtest chart").click().run()
     assert app.radio(key="view").value == "Backtesting"
     assert not app.exception and app.get("plotly_chart")
+    assert all(selector.label != "Model" for selector in app.selectbox)
+    app.radio(key="view").set_value("Decision timeline").run()
+    assert not app.exception
+    assert any(heading.value == "Recorded gasoline price updates" for heading in app.subheader)
     app.radio(key="view").set_value("Volatility & options").run()
     assert {"Latest OVX close", "5-trading-session change", "252-close percentile", "Volatility regime"} <= {m.label for m in app.metric}
     assert app.get("plotly_chart")
@@ -166,7 +170,7 @@ def test_dashboard_views_and_interactions(monkeypatch):
     assert any("Effective scenario product quote" in c.value for c in app.caption)
 
 
-def test_overview_and_analyst_hide_low_sample_probabilities(monkeypatch):
+def test_public_dashboard_hides_legacy_uncertainty_without_live_evidence(monkeypatch):
     from streamlit.testing.v1 import AppTest
 
     monkeypatch.setenv("LEBANON_FUEL_ROOT", str(ROOT))
@@ -186,7 +190,7 @@ def test_overview_and_analyst_hide_low_sample_probabilities(monkeypatch):
              origin=now, created_at=now, target_json=json.dumps(spec), base_price=2445000,
              interval_low=-63300, interval_high=-18860, probabilities_json='[0.982,0.001,0.017]',
              endpoint=None, scheduled_effective='2026-11-17' if horizon == 'decision_1' else None,
-             model_version='fixture-experimental', snapshot_id='fixture')
+             model_version='fixture-experimental', family='G_hybrid', snapshot_id='fixture')
         for i, horizon in enumerate(data.EXPECTED_HORIZONS, 1)
     ])
     monkeypatch.setattr(data, 'live_ledger_rows', lambda path, *, at: batch)
@@ -199,12 +203,12 @@ def test_overview_and_analyst_hide_low_sample_probabilities(monkeypatch):
 
     app = AppTest.from_file(str(APP), default_timeout=20).run()
     assert not app.exception
-    assert [m.value for m in app.metric if m.label.endswith('probability')] == ['Insufficient sample'] * 3
-    assert any('2 comparable holdout cases' in c.value for c in app.caption)
-    assert next(m for m in app.metric if m.label == '90% prediction interval').value == '2,381,700 – 2,426,140'
+    assert not any(m.label.endswith('probability') for m in app.metric)
+    assert any('awaiting validated live outcomes' in c.value for c in app.caption)
+    assert next(m for m in app.metric if m.label == '90% prediction interval').value == 'Awaiting live evidence'
     app.radio(key="view").set_value("Analyst report").run()
     assert not app.exception
-    assert any('Directional probabilities are not calibrated' in item.value for item in app.markdown)
+    assert any('Directional probabilities are awaiting calibrated live evidence' in item.value for item in app.markdown)
     assert not any('98.2%' in item.value for item in app.markdown)
 
 

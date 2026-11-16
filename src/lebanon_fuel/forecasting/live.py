@@ -272,6 +272,7 @@ def generate(root, settings, config, decision, records, histories, at):
     provisional = bool(anchor and anchor['verification_status'] == PROVISIONAL_PRICE)
     market = {sid: dict(history[-1], vintage_certified=True) for sid, history in histories.items() if history}
     results = []
+    pinned = config.get('pinned_family')
     schedule = estimate_next_decision_date(records, at)
     for horizon in HORIZONS:
         kind, steps = horizon.split('_')
@@ -283,13 +284,16 @@ def generate(root, settings, config, decision, records, histories, at):
                       schedule_estimated=kind=='decision', schedule_details=schedule if kind=='decision' else None, tier=None, label='FORECAST UNAVAILABLE', status='abstain',
                       predicted_price=None, predicted_change=None, percentage_change=None,
                       interval=None, probabilities=None, uncertainty='Unavailable', attempts=[], critical_missing_inputs=[])
+        if pinned:
+            output['pinned_family'] = pinned
         if problem:
             output['critical_missing_inputs'] = [problem]
             results.append(output)
             continue
         missing = ['Exact publication/effective clocks and complete official decision sequence are unresolved.',
                    'Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable.']
-        candidates = sorted((c for c in config['quantitative_candidates'] if c['horizon']==horizon), key=lambda c:c['development_mae'])
+        candidates = sorted((c for c in config['quantitative_candidates'] if c['horizon']==horizon
+                             and (not pinned or c['family']==pinned)), key=lambda c:c['development_mae'])
         frame = None
         for tier in (1, 2):
             errors = []
@@ -373,6 +377,10 @@ def generate(root, settings, config, decision, records, histories, at):
             output['attempts'].append(dict(tier=tier,reasons=sorted(set(errors)) or ([] if output['tier'] else ['No eligible artifact registered'])))
             if output['tier']:
                 break
+        if not output['tier'] and pinned:
+            output['critical_missing_inputs'] = output['attempts'][-1]['reasons']
+            results.append(output)
+            continue
         if not output['tier'] and not provisional:
             request = config.get('structural_requests',{}).get(horizon)
             try:
@@ -411,5 +419,7 @@ def generate(root, settings, config, decision, records, histories, at):
             output.update(interval=None, probabilities=None,
                           uncertainty='No intervals or probabilities validated for a provisional price anchor.')
         results.append(output)
+    primary = results[0]
+    reasons = [problem] if problem else primary['critical_missing_inputs'] if pinned and primary['status'] != 'issued' else []
     return dict(origin=at.isoformat(), anchor=anchor, forecasts=results, available_market_inputs=market,
-                status='issued' if anchor else 'abstain', reasons=[problem] if problem else [])
+                status='issued' if any(row['status'] == 'issued' for row in results) else 'abstain', reasons=reasons)

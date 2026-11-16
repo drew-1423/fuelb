@@ -12,7 +12,7 @@ import uuid
 import pandas as pd
 import streamlit as st
 
-from lebanon_fuel.dashboard import analyst, backtesting, charts, data, scorecard
+from lebanon_fuel.dashboard import analyst, backtesting, charts, data, decisions
 from lebanon_fuel.dashboard.scenarios import simulate
 from lebanon_fuel.domain import BEIRUT, PROVISIONAL_PRICE
 from lebanon_fuel.market.catalog import MISSING, SERIES
@@ -20,7 +20,7 @@ from lebanon_fuel.market.catalog import MISSING, SERIES
 ROOT = Path(os.environ.get("LEBANON_FUEL_ROOT", Path.cwd())).resolve()
 REPORTS = ROOT / "reports/model_validation"
 VIEWS = ["Overview", "Price & forecasts", "Global markets", "Analyst report",
-         "Model performance", "Backtesting", "Scenario simulator", "Volatility & options", "Data quality"]
+         "Model performance", "Backtesting", "Decision timeline", "Scenario simulator", "Volatility & options", "Data quality"]
 REGIMES = {"pre_crisis": "2018–19 challenge", "recent_pre_fiscal": "2025 challenge", "stabilized_fx_2023_2026": "2026 holdout"}
 FAMILIES = {"Z_last_change": "Last change", "A_no_change": "No change", "A_mean": "Historical mean",
             "Z_brent": "Brent baseline", "B_structural_proxy": "Structural proxy",
@@ -101,6 +101,13 @@ def current_forecasts(path, settings, decision, latest_record):
         return pd.DataFrame(columns=["horizon"])
     if batch.empty:
         return batch
+    batch = batch.loc[batch["family"].eq("G_hybrid")].copy()
+    released_ranges = batch["target_json"].map(
+        lambda value: (json.loads(value).get("public_calibration") or {}).get("radius") is not None)
+    batch.loc[~released_ranges, ["interval_low", "interval_high"]] = None
+    batch["probabilities_json"] = None
+    if batch.empty:
+        return batch
     return pd.concat([
         data.live_forecasts(rows, settings, decision, horizon, latest_record, at=at)
         for horizon, rows in batch.groupby("horizon", sort=False)
@@ -113,13 +120,13 @@ def forecast_details(forecast):
     st.caption('Validation · ' + spec['validation_status'].replace('_', ' ') +
                ' · Issued ' + data.beirut_time(forecast.created_at))
     if spec.get('tier') != 4:
-        st.caption(spec['uncertainty'])
-    measured = spec.get('performance')
-    if measured:
-        st.caption(f"Historical research MAE · {measured.get('mae_lbp', measured.get('mae', 0)):,.0f} LBP / 20 L · "
-                   f"Direction {measured['direction_accuracy']:.1%} · n={measured['n']} "
-                   f"({measured.get('distinct_base_decisions', measured.get('unique_base_decisions', 0))} distinct base decisions) · "
-                   f"{measured['first_origin'][:10]} to {measured['last_origin'][:10]}. " + measured.get('evidence','Conditional archive evaluation; small samples and assumed market availability.'))
+        evidence = spec.get("public_calibration") or {}
+        st.caption(spec['uncertainty'] if evidence.get("radius") is not None
+                   else "Prediction range is awaiting validated live outcomes.")
+    calibration = spec.get("public_calibration")
+    if calibration:
+        st.caption(f"Range validation · {calibration['calibration_n']} settled prices · "
+                   f"{calibration['evaluation_n']} tested live ranges for this starting-price group")
     with st.expander('Assumptions, missing inputs and forecast selection'):
         st.write(spec['future_market_assumption'])
         for missing in spec['critical_missing_inputs']:
@@ -140,7 +147,7 @@ def unavailable_forecast():
             st.write(reason)
     except (OSError, ValueError):
         pass
-    st.caption('Refresh sources and forecasts from Data quality. A fresh corroborated official price and a forecast tied to its latest revision are required.')
+    st.caption('Refresh sources and forecasts from Data quality. The Hybrid needs a current corroborated price and eligible market inputs.')
 
 
 def forecast_unavailable_reason():
@@ -272,7 +279,7 @@ def future_table():
         spec = json.loads(row.target_json)
         has_endpoint = pd.notna(row.endpoint)
         rows.append({'Horizon':label, 'Target':data.beirut_time(row.endpoint) if has_endpoint else data.forecast_view(row)['schedule'],
-                     'Latest verified price':row.base_price, 'Estimated price · LBP / 20 L':row.predicted_price,
+                     'Starting price':row.base_price, 'Estimated price · LBP / 20 L':row.predicted_price,
                      'Change · LBP':row.predicted_change, 'Change · %':spec['percentage_change'],
                      'Forecast tier':spec['label'], 'Method':spec['methodology']})
         if has_endpoint or pd.notna(row.scheduled_effective):
@@ -405,33 +412,20 @@ def overview(snap, latest, previous):
     else:
         forecast_details(forecast)
     if forecast is not None:
-        view=data.forecast_view(forecast);p=view['probabilities'];bounds=view['bounds']
-        probability_status = view['probability_status']
+        view = data.forecast_view(forecast)
+        bounds = view['bounds']
         stats=[('Expected decision date',view['schedule'].split(' (')[0]),
                ('Predicted price',amount(forecast.predicted_price)),
                ('Predicted change · LBP',f'{forecast.predicted_change:+,.0f}'),
                ('Predicted change · %',percent(forecast.predicted_change/forecast.base_price)),
-               ('Increase probability',f'{p[2]:.1%}' if p else probability_status),
-               ('Decrease probability',f'{p[0]:.1%}' if p else probability_status),
-               ('No-change probability',f'{p[1]:.1%}' if p else probability_status),
-               ('90% prediction interval',f'{bounds[0]:,.0f} – {bounds[1]:,.0f}' if bounds else 'Not calibrated')]
-        tier = int(json.loads(forecast.target_json).get('tier', 4))
-        active_stats = stats[:4] if tier == 4 else stats
+               ('90% prediction interval', f'{bounds[0]:,.0f} – {bounds[1]:,.0f}' if bounds else 'Awaiting live evidence')]
+        active_stats = stats
         for offset in range(0, len(active_stats), 4):
             for col,(label,value) in zip(st.columns(4),active_stats[offset:offset+4]):
                 col.metric(label,value)
                 if label=='Expected decision date' and ' (' in view['schedule']:
                     col.caption(view['schedule'].split(' (',1)[1].rstrip(')')+' · estimated')
         st.caption(f"Prices and intervals: LBP / 20 L · USD equivalent: ${view['usd_equivalent']:,.2f} / 20 L at an assumed display rate of 89,500 LBP/USD. This is not a verified pricing-formula exchange rate.")
-        if tier == 4:
-            st.info('Tier 4 baseline · directional probabilities and prediction intervals are withheld because this fallback is not calibrated.')
-        elif p:show_chart(charts.probability_chart(p))
-        elif probability_status == 'Insufficient sample':
-            n = view['holdout_n']
-            cases = f'{n} comparable holdout cases' if type(n) is int else 'no documented comparable holdout sample'
-            st.caption(f'Directional probabilities require at least {data.MINIMUM_PROBABILITY_HOLDOUT} comparable holdout cases. This model has {cases}.')
-        else:
-            st.caption('Directional probabilities are not calibrated for this estimate.')
         st.subheader('Forecast Driver Attribution')
         if view['drivers']:
             show_chart(charts.driver_chart(view['drivers']))
@@ -470,9 +464,7 @@ def price_view(snap):
     if st.checkbox("Overlay saved retrospective predictions", key="show_replay"):
         rows = get_ledger(horizon, "retrospective_research")
         if not rows.empty:
-            families = sorted(rows.family.dropna().unique())
-            selected = st.selectbox("Saved model family", families, format_func=lambda f: FAMILIES.get(f, f))
-            replay = rows[rows.family.eq(selected)]
+            replay = rows[rows.family.eq("G_hybrid")]
             st.caption("Saved research predictions use previously examined periods. Candidate intervals have unresolved calibration failures.")
     trajectory=[active(h) for h in data.HORIZONS.values()]
     trajectory=pd.concat([r for r in trajectory if not r.empty],ignore_index=True) if any(not r.empty for r in trajectory) else pd.DataFrame()
@@ -486,6 +478,9 @@ def price_view(snap):
 
 def markets_view(snap):
     title("Global energy markets", "International crude oil, wholesale gasoline, and currency benchmarks that drive Lebanon's pump price")
+    st.caption("Mediterranean benchmark trial · awaiting licensed daily CIF Med AAWZB00 data with publication timestamps.")
+    st.link_button("View benchmark access options",
+                   "https://www.spglobal.com/energy/en/products-solutions/fuels-refined-products/fuels-refining-market-data")
     st.markdown(
         '<div class="plain-guide"><strong>Why global markets matter:</strong> Lebanon imports all of its refined gasoline in US dollars. '
         'When international crude oil (Brent) or wholesale gasoline rises overseas, Lebanon\'s official 20-liter pump price typically follows within 1–2 decisions.</div>',
@@ -664,124 +659,21 @@ def volatility_view(snap):
 
 
 def model_view():
-    title("Model performance", "How the forecast compares with simple alternatives")
-    scorecard.render(ROOT, LEDGER_PATH)
+    title("Model performance", "Hybrid forecasts scored against recorded prices")
+    decisions.performance(ROOT, LEDGER_PATH)
     st.divider()
-    st.subheader("Historical backtests")
-    st.caption("2026 research report · Next recorded price update")
-    saved = table_file(REPORTS / "research_walk_forward_predictions.csv")
-    dates, shared, comparison = backtesting.next_update_comparison(saved)
-    if comparison.empty:
-        st.info("The saved report has no next-update cases shared by the Hybrid model and both baselines.")
-    else:
-        st.info(f"The report contains {dates} matched target dates. "
-                f"All three methods could be compared on {shared} of those dates. "
-                "This is too little evidence to judge how the model will perform on future decisions."
-                if shared < 10 else
-                f"The report contains {dates} matched target dates, including {shared} shared by all three methods.")
-        st.dataframe(comparison, hide_index=True, width="stretch", column_config={
-            "Average miss · LBP / 20 L": st.column_config.NumberColumn(format="localized"),
-        })
-        st.caption("Average miss measures how far each estimate was from the observed price. "
-                   "Direction counts up, down or flat, with moves within ±3,000 LBP treated as flat.")
-    st.caption("The 2025 results came from an earlier evaluation and are outside this report.")
-    st.button("Open the backtest chart", on_click=st.session_state.update, args=({"view": "Backtesting"},))
-    with st.expander("Detailed model diagnostics"):
-        _historical_diagnostics()
-
-
-def _historical_diagnostics():
-    metrics = table_file(REPORTS / "metrics.csv")
-    if metrics.empty:
-        st.info("No historical diagnostics are available.")
-        return
-    results = metrics[["regime", "horizon", "family"]].dropna().drop_duplicates()
-    options = list(results.itertuples(index=False, name=None))
-    if not options:
-        st.info("No historical diagnostics are available.")
-        return
-    default = ("stabilized_fx_2023_2026", "decision_1", "G_hybrid")
-    regime, horizon, family = st.selectbox(
-        "Result to inspect", options, index=options.index(default) if default in options else 0,
-        format_func=lambda value: " · ".join((REGIMES.get(value[0], value[0]),
-                      backtesting.HORIZONS.get(value[1], value[1]), FAMILIES.get(value[2], value[2]))),
-    )
-    row = metrics[metrics.horizon.eq(horizon) & metrics.regime.eq(regime) & metrics.family.eq(family)].iloc[0]
-    columns = st.columns(4)
-    columns[0].metric(
-        "MAE · LBP / 20 L",
-        amount(row.change_mae_lbp, 2),
-        border=True,
-        help="Mean Absolute Error: the average miss in LBP per 20-liter tank across all tested decisions. Lower is better (e.g., 8,800 LBP is roughly $0.10 per tank).",
-    )
-    columns[1].metric(
-        "Direction calls right",
-        f"{round(row.direction_accuracy * row.n):,} of {row.n:,}" if pd.notna(row.direction_accuracy) else "Unavailable",
-        border=True,
-        help="Correctly called up, down or flat. Changes within ±3,000 LBP are treated as flat.",
-    )
-    columns[2].metric(
-        "Mean signed error · LBP",
-        amount(row.get('bias_lbp',row.get('bias')), 2),
-        border=True,
-        help="Average bias (predicted minus actual). Near 0 is ideal; positive means the model tends to predict too high, negative means too low.",
-    )
-    columns[3].metric(
-        "Evaluated cases",
-        f"{row.n:,}",
-        border=True,
-        help="Total forecast origins tested in this period. Tier 1 production approval requires at least 20 distinct base decisions in a fresh holdout.",
-    )
-    st.caption(f"{row.distinct_base_decisions} distinct base decisions · Part 6 decision {data.beirut_time(DECISION.get('decided_at'))} · Production approval withheld")
-    try:
-        run_id = data.read_json(REPORTS / "input_manifest.json")["run_id"]
-        rows = get_ledger(horizon, "retrospective_research", run_id)
-    except (OSError, ValueError, KeyError):
-        st.warning("The validation run manifest is unavailable.")
-        rows = pd.DataFrame()
-    if not rows.empty:
-        rows = rows[rows.family.eq(family) & rows.origin.between(row.first_origin, row.last_origin)
-                    & rows.actual_price.notna()]
-        # Keep a reproduction run from inflating the visual sample.
-        rows = rows.drop_duplicates("origin", keep="last")
+    st.subheader("Hybrid historical backtest")
+    archive = ROOT / "reports/research/expanded_coverage/dashboard_predictions.csv"
+    saved = table_file(archive if archive.is_file() else REPORTS / "research_walk_forward_predictions.csv")
+    if not saved.empty:
+        rows = saved.loc[saved["family"].eq("G_hybrid") & saved["horizon"].eq("decision_1")]
         if not rows.empty:
-            show_chart(charts.paired_chart(rows))
-            with st.expander("Saved model versions and input snapshots"):
-                st.dataframe(rows[["origin", "created_at", "model_version", "snapshot_id"]], hide_index=True)
-    st.subheader("Comparison on common origins")
-    baselines = table_file(REPORTS / "baseline_comparisons.csv")
-    if not baselines.empty:
-        baselines=baselines[baselines.horizon.eq(horizon)]
-        if 'regime' in baselines:baselines=baselines[baselines.regime.eq(regime)]
-        name='family' if 'family' in baselines else 'selected'
-        baselines=baselines[baselines[name].eq(family)]
-        st.dataframe(baselines,hide_index=True)
-    st.subheader("Uncertainty calibration")
-    d, e, f = st.columns(3)
-    d.metric(
-        "Candidate coverage",
-        f"{round(row.interval_coverage * row.interval_n):,} of {row.interval_n:,}" if pd.notna(row.interval_coverage) else "Unavailable",
-        help="How often the actual price landed inside the model's 90% range. Ideal is 80%–98% (around 90%); much lower means the range is too narrow/overconfident.",
-    )
-    e.metric(
-        "Candidate interval width · LBP",
-        amount(row.interval_width_lbp, 2),
-        help="Average size (high minus low) of the 90% prediction range in LBP per 20 liters. Narrower is sharper, as long as coverage stays near 90%.",
-    )
-    f.metric(
-        "Interval cases",
-        f"{row.interval_n:,}",
-        help="Number of tested predictions that had a valid 90% range calculated.",
-    )
-    st.caption("Nominal coverage 90%. Candidate intervals remain unapproved. Zero-width cases are included in the published coverage.")
-    bins = table_file(REPORTS / "probability_reliability.csv")
-    if not bins.empty:
-        bins=bins[bins.horizon.eq(horizon)]
-        if 'regime' in bins:bins=bins[bins.regime.eq(regime)]
-        if 'family' in bins:bins=bins[bins.family.eq(family)]
-        if not bins.empty:
-            st.caption("Model-specific residual probabilities · bin sample sizes in hover labels")
-            show_chart(charts.reliability_chart(bins))
+            actual = rows["endpoint_price_lbp_20l"]
+            error = (rows["predicted_endpoint_price_lbp_20l"] - actual).abs()
+            st.caption(f"{rows['target_source_date'].nunique()} historical target dates. "
+                       f"Average miss {error.mean():,.0f} LBP / 20 L ({(error/actual).mean():.2%}).")
+    st.caption("The archive backtest uses recorded prices. Live scores above track forecasts saved before new prices arrive.")
+    st.button("Open the backtest chart", on_click=st.session_state.update, args=({"view": "Backtesting"},))
 
 
 def scenario_view(snap):
@@ -997,8 +889,10 @@ def main():
             unsafe_allow_html=True,
         )
         result = active("decision_1")
-        sections = analyst.brief(latest, previous, snap["market"], table_file(REPORTS / "descriptive_best_models.csv"),
-                                 DECISION, result.iloc[0] if not result.empty else None)
+        current = DECISION.get("selection", {}).get("decision_1", {})
+        hybrid_decision = DECISION if current.get("family") == "G_hybrid" else {}
+        sections = analyst.brief(latest, previous, snap["market"], pd.DataFrame(),
+                                 hybrid_decision, result.iloc[0] if not result.empty else None)
         for heading, content in sections.items():
             st.subheader(heading)
             st.write(content)
@@ -1014,15 +908,18 @@ def main():
                            horizontal=True, key="backtest_dataset") if archived else "Current validation report"
         if dataset == "Expanded archive research":
             backtesting.render(
-                table_file(archive_path), {**FAMILIES, "G_hybrid": "Current frozen Hybrid",
-                                           "G_hybrid_expanded": "Hybrid retrained on expanded data"},
+                table_file(archive_path), FAMILIES,
                 {"expanded_2026_research": "2026 expanded research"}, show_chart,
                 research_note="Research comparison using recorded Ministry archive prices and exact IPT–LebVote matches. "
-                              "The larger sample has unverified decision timing. The retrained model is experimental.",
+                              "Some decision timing remains unverified. All predictions shown use the pinned Hybrid.",
+                only_family="G_hybrid",
             )
         else:
             backtesting.render(table_file(REPORTS / "research_walk_forward_predictions.csv"),
-                               FAMILIES, REGIMES, show_chart)
+                               FAMILIES, REGIMES, show_chart, only_family="G_hybrid")
+    elif view == "Decision timeline":
+        title("Decision timeline", "Price evidence, gaps and forecast outcomes")
+        decisions.timeline(snap["prices"], ROOT, LEDGER_PATH)
     elif view == "Scenario simulator":
         scenario_view(snap)
     elif view == "Volatility & options":

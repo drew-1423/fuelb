@@ -17,12 +17,12 @@ OBSERVED = "endpoint_price_lbp_20l"
 COLUMNS = {"origin", "horizon", "family", "regime", "endpoint", "target_source_date", PREDICTED, OBSERVED}
 
 
-def render(rows, families, regimes, show_chart, *, research_note=None):
+def render(rows, families, regimes, show_chart, *, research_note=None, only_family=None):
     if not COLUMNS.issubset(rows.columns):
         st.info("The saved walk-forward prediction report is unavailable.")
         return
 
-    rows = rows.copy()
+    rows = rows.loc[rows["family"].eq(only_family)].copy() if only_family else rows.copy()
     endpoints = pd.to_datetime(rows["endpoint"], utc=True, errors="coerce").dt.tz_convert(BEIRUT)
     source_dates = pd.to_datetime(rows["target_source_date"], format="%Y-%m-%d", errors="coerce")
     rows["target_date"] = endpoints.dt.tz_localize(None).dt.normalize().where(
@@ -38,7 +38,8 @@ def render(rows, families, regimes, show_chart, *, research_note=None):
 
     st.caption(research_note or "Saved walk-forward research compared with matched archive prices. Sparse records and "
                "unverified official timing limit what this backtest can establish.")
-    a, b, c = st.columns(3)
+    columns = st.columns(2 if only_family else 3)
+    a, b = columns[:2]
     horizon = a.selectbox("Forecast horizon", horizons, format_func=HORIZONS.get)
     rows = rows.loc[rows["horizon"].eq(horizon)]
     regime = b.selectbox("Evaluation period", sorted(rows["regime"].dropna().unique()),
@@ -48,8 +49,12 @@ def render(rows, families, regimes, show_chart, *, research_note=None):
     if not available:
         st.info("No saved model results are available for this selection.")
         return
-    family = c.selectbox("Model", available, index=available.index("G_hybrid") if "G_hybrid" in available else 0,
-                         format_func=lambda value: families.get(value, value))
+    family = only_family
+    if only_family:
+        st.caption("Forecast model · Hybrid")
+    else:
+        family = columns[2].selectbox("Model", available, index=available.index("G_hybrid") if "G_hybrid" in available else 0,
+                                      format_func=lambda value: families.get(value, value))
     paired = rows.loc[rows["family"].eq(family)].sort_values(["target_date", "origin"])
     paired = paired.drop_duplicates(subset=["target_date", "origin", PREDICTED, OBSERVED])
     error = (paired[PREDICTED] - paired[OBSERVED]).abs()

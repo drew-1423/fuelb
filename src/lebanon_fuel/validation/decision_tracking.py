@@ -1,0 +1,276 @@
+"""Append-only next-update scoring and prospective Hybrid interval validation."""
+from bisect import bisect_right
+from contextlib import closing
+from datetime import date, datetime
+import json
+from math import ceil
+from pathlib import Path
+import sqlite3
+from statistics import mean
+
+from lebanon_fuel.domain import BEIRUT, PROVISIONAL_PRICE, VERIFIED
+from .decision_events import event_clocks, stamp
+from .ledger import ForecastLedger, canonical, hashed, now
+
+FAMILY = "G_hybrid"
+MAX_GAP_DAYS = 7
+MIN_CALIBRATION = 30
+MIN_COVERAGE_TEST = 20
+INTERVAL_COVERAGE = .90
+RECENT_RESIDUALS = 60
+ATTEMPT_CHANNEL = "supplier_next_update"
+SUPPLIER_STATUS = "supplier_match"
+PUBLICATION_STATUS = {
+    "supplier_match": "IPT and Taqtek agree. Official review pending.",
+    "no_new_record": "Waiting for a newer dated price.",
+    "record_may_precede_forecast": "The first new record could have been published before issuance.",
+    "anchor_revised": "The starting price was revised or disputed.",
+    "gap": "More than seven days separate the starting price and next record.",
+    "conflict": "The next recorded price is disputed.",
+    "unconfirmed": "The next record is waiting for matching IPT and Taqtek prices.",
+}
+
+# Legacy complete runs still contribute genuine Hybrid observations. Missing rows
+# never qualify as a complete run, even if the row for the next decision exists.
+BATCH = """
+WITH live AS (
+    SELECT * FROM forecasts
+    WHERE mode IN ('prospective', 'prospective_research') AND created_at >= :start AND origin >= :start
+), complete AS (
+    SELECT run_id, origin FROM live GROUP BY run_id, origin
+    HAVING COUNT(*) = 8 AND COUNT(DISTINCT horizon) = 8
+       AND SUM(horizon IN ('decision_1','decision_2','decision_4','day_1','day_3','day_7','day_14','day_30')) = 8
+       AND (SUM(status = 'issued' AND predicted_price IS NOT NULL) = 8
+         OR SUM(status = 'abstained') = 8
+         OR SUM(json_extract(target_json, '$.pinned_family') = 'G_hybrid') = 8)
+)
+"""
+FORECASTS = """
+    SELECT f.*, json_extract(m.metadata_json, '$.family') AS family
+    FROM live f JOIN complete c USING (run_id, origin)
+    JOIN models m ON f.model_version=m.id
+    WHERE f.horizon='decision_1'
+"""
+ATTEMPT = """
+    SELECT * FROM match_attempts
+    WHERE forecast_id=? AND json_extract(details_json, '$.channel')='supplier_next_update'
+    ORDER BY id DESC LIMIT 1
+"""
+VERSION_QUERY = BATCH + """
+    SELECT f.id AS forecast_id, f.origin, f.created_at AS issued_at, f.target_json, f.base_price,
+           f.predicted_price, f.predicted_change, o.*, e.created_at AS scored_at, e.kind,
+           a.status AS supplier_status, a.details_json AS supplier_details, a.created_at AS supplier_reviewed_at
+    FROM live f JOIN complete c USING (run_id, origin)
+    JOIN models m ON f.model_version=m.id
+    JOIN evaluations e ON e.forecast_id=f.id AND e.kind IN ('official_match','provisional_match')
+    JOIN outcomes o ON o.id=e.outcome_id
+    LEFT JOIN match_attempts a ON a.id=(
+        SELECT MAX(id) FROM match_attempts WHERE forecast_id=f.id
+        AND json_extract(details_json, '$.channel')='supplier_next_update'
+    )
+    WHERE f.horizon='decision_1' AND f.status='issued'
+      AND json_extract(m.metadata_json,'$.family')='G_hybrid'
+      AND e.id=(SELECT MAX(id) FROM evaluations WHERE forecast_id=f.id AND kind=e.kind)
+    ORDER BY f.created_at, f.id
+"""
+
+
+def protocol_start(root):
+    protocol = json.loads((Path(root) / "config/prospective_holdout.json").read_text())
+    return max(stamp(protocol["prospective_start"]), stamp(protocol["sealed_at"])).isoformat()
+
+
+def first_new_record(forecast, records, days):
+    target = json.loads(forecast["target_json"])
+    base_day = target.get("base_source_date")
+    if not base_day or base_day not in records:
+        return "anchor_revised", None
+    base = records[base_day]
+    if base.get("price_lbp_20l") != forecast["base_price"] or base["verification_status"] == "conflict":
+        return "anchor_revised", None
+    index = bisect_right(days, base_day)
+    if index == len(days):
+        return "no_new_record", None
+    day = days[index]
+    row = records[day]
+    if row["verification_status"] == "conflict":
+        return "conflict", row
+    issued_day = max(stamp(forecast["origin"]), stamp(forecast["created_at"])).astimezone(BEIRUT).date()
+    candidate_date = date.fromisoformat(day)
+    if candidate_date <= issued_day:
+        return "record_may_precede_forecast", row
+    if (candidate_date - date.fromisoformat(base_day)).days > MAX_GAP_DAYS:
+        return "gap", row
+    return "candidate", row
+
+
+def supplier_proof(source, record):
+    if record["verification_status"] not in VERIFIED | {PROVISIONAL_PRICE}:
+        return None
+    rows = source.db.execute("""
+        SELECT id, source_id, price_lbp_20l, source_url, first_retrieved_at
+        FROM observations WHERE source_date=? AND is_valid=1 AND source_id IN ('ipt','taqtek')
+        ORDER BY first_retrieved_at, id
+    """, (record["source_date"],)).fetchall()
+    selected = {}
+    for row in rows:
+        if row["price_lbp_20l"] != record["price_lbp_20l"]:
+            return None
+        selected.setdefault(row["source_id"], dict(row))
+    return list(selected.values()) if set(selected) == {"ipt", "taqtek"} else None
+
+
+def settle_supplier_updates(root, cfg, source):
+    records = {record["source_date"]: record for record in source.ledger()}
+    days = sorted(records)
+    counts = {}
+    checked = {}
+    with closing(ForecastLedger(root / cfg["validation"]["forecast_ledger"])) as ledger:
+        forecasts = ledger.db.execute(BATCH + FORECASTS + " AND f.status='issued'",
+                                      {"start": protocol_start(root)}).fetchall()
+        for forecast in forecasts:
+            if forecast["family"] != FAMILY:
+                continue
+            status, record = first_new_record(forecast, records, days)
+            details = {"channel": ATTEMPT_CHANNEL}
+            if record:
+                details["source_date"] = record["source_date"]
+                details["source_revision_id"] = record["revision_id"]
+            if status == "candidate":
+                day = record["source_date"]
+                if day not in checked:
+                    checked[day] = supplier_proof(source, record)
+                evidence = checked[day]
+                status = "unconfirmed"
+                if evidence:
+                    # Keep the source's date label separate from actual publication or effective timing.
+                    receipts = [stamp(item["first_retrieved_at"]) for item in evidence]
+                    available = max(receipts)
+                    issued = max(stamp(forecast["origin"]), stamp(forecast["created_at"]))
+                    if min(receipts) <= issued:
+                        status = "record_may_precede_forecast"
+                    elif available <= stamp(now()):
+                        payload = dict(details, sources=evidence)
+                        oid = ledger.outcome("supplier:" + day, available, record["price_lbp_20l"],
+                                             evidence[0]["source_url"], "supplier_agreement", hashed(payload),
+                                             payload, source_revision_id=record["revision_id"])
+                        ledger._score(forecast["id"], oid, "provisional_match")
+                        details["outcome_id"] = oid
+                        status = SUPPLIER_STATUS
+            previous = ledger.db.execute(ATTEMPT, (forecast["id"],)).fetchone()
+            payload = canonical(details)
+            if previous is None or (previous["status"], previous["details_json"]) != (status, payload):
+                with ledger.db:
+                    ledger.db.execute("INSERT INTO match_attempts(created_at,forecast_id,status,details_json) VALUES (?,?,?,?)",
+                                      (now(), forecast["id"], status, payload))
+            counts[status] = counts.get(status, 0) + 1
+    return counts
+
+
+def _matched(db, start, at):
+    cases = {}
+    cutoff = stamp(at)
+    for row in db.execute(VERSION_QUERY, {"start": start}):
+        spec = json.loads(row["target_json"])
+        cohort = "provisional" if spec.get("anchor_verification") == PROVISIONAL_PRICE else "government_backed"
+        if spec.get("anchor_verification") not in VERIFIED | {PROVISIONAL_PRICE}:
+            continue
+        known = max(stamp(row["scored_at"]), stamp(row["available_at"]))
+        origin = max(stamp(row["origin"]), stamp(row["issued_at"]))
+        if known >= cutoff or origin >= cutoff:
+            continue
+        if row["kind"] == "provisional_match":
+            state = json.loads(row["supplier_details"] or "{}")
+            if row["supplier_status"] != SUPPLIER_STATUS or state.get("outcome_id") != row["id"]:
+                continue
+            known = max(known, stamp(row["supplier_reviewed_at"]))
+            if known >= cutoff:
+                continue
+            day = json.loads(row["payload_json"])["source_date"]
+            if date.fromisoformat(day) <= origin.astimezone(BEIRUT).date():
+                continue
+        else:
+            publication, effective = event_clocks(row)
+            if row["verification_status"] != "document_verified" or not publication or not effective or not publication.after(origin):
+                continue
+            day = publication.lower.astimezone(BEIRUT).date().isoformat()
+        key = (row["kind"], cohort, spec.get("artifact_sha256"), day)
+        cases[key] = dict(kind=row["kind"], cohort=cohort, artifact=spec.get("artifact_sha256"),
+                          day=day, known=known, origin=origin, forecast_id=row["forecast_id"],
+                          forecast=row["predicted_price"], actual=row["price"], base=row["base_price"],
+                          predicted_change=row["predicted_change"], source_url=row["source_url"])
+    return sorted(cases.values(), key=lambda row: (row["origin"], row["forecast_id"]))
+
+
+def _radius(sample):
+    errors = sorted(abs(row["actual"] - row["forecast"]) for row in sample)
+    rank = ceil((len(errors) + 1) * INTERVAL_COVERAGE)
+    return max(5000.0, errors[rank - 1])
+
+
+def calibration(cases, cohort, artifact):
+    kind = "provisional_match" if cohort == "provisional" else "official_match"
+    cohort_cases = [row for row in cases if row["kind"] == kind and row["cohort"] == cohort
+                    and row["artifact"] == artifact]
+    results = []
+    for case in cohort_cases:
+        earlier = [r for r in cohort_cases if r["origin"] < case["origin"] and r["known"] < case["origin"]]
+        if len(earlier) >= MIN_CALIBRATION:
+            results.append(abs(case["actual"] - case["forecast"]) <= _radius(earlier[-RECENT_RESIDUALS:]))
+    sample = cohort_cases[-RECENT_RESIDUALS:]
+    coverage = mean(results[-RECENT_RESIDUALS:]) if results else None
+    test_n = min(len(results), RECENT_RESIDUALS)
+    ready = len(sample) >= MIN_CALIBRATION and test_n >= MIN_COVERAGE_TEST and .80 <= coverage <= .98
+    return dict(cohort=cohort, calibration_n=len(sample), evaluation_n=test_n, empirical_coverage=coverage,
+                minimum_calibration_n=MIN_CALIBRATION, minimum_evaluation_n=MIN_COVERAGE_TEST,
+                nominal=INTERVAL_COVERAGE, radius=_radius(sample) if ready else None)
+
+
+def _read(path):
+    db = sqlite3.connect(Path(path).resolve().as_uri() + "?mode=ro", uri=True)
+    db.row_factory = sqlite3.Row
+    return closing(db)
+
+
+def apply_live_calibration(root, ledger_path, forecasts, at):
+    with _read(ledger_path) as db:
+        cases = _matched(db, protocol_start(root), at)
+    for forecast in forecasts:
+        if forecast.get("pinned_family") != FAMILY or forecast["status"] != "issued":
+            continue
+        for field in ("interval_nominal", "interval_80", "interval_80_nominal"):
+            forecast.pop(field, None)
+        forecast.update(interval=None, probabilities=None,
+                        uncertainty="Waiting for a validated prediction range from live outcomes.")
+        if forecast["horizon"] != "decision_1":
+            continue
+        cohort = "provisional" if forecast["anchor_verification"] == PROVISIONAL_PRICE else "government_backed"
+        measured = calibration(cases, cohort, forecast["artifact_sha256"])
+        forecast["public_calibration"] = measured
+        radius = measured["radius"]
+        if radius is not None:
+            change = forecast["predicted_change"]
+            forecast.update(interval=[max(-forecast["base_price"], change-radius), change+radius],
+                            interval_nominal=INTERVAL_COVERAGE,
+                            uncertainty=f"90% prediction range. Walk-forward coverage {measured['empirical_coverage']:.0%} "
+                                        f"on {measured['evaluation_n']} distinct {cohort.replace('_', ' ')} outcomes.")
+
+
+def dashboard_evidence(root, path):
+    start = protocol_start(root)
+    with _read(path) as db:
+        cases = _matched(db, start, now())
+        forecasts = db.execute(BATCH + FORECASTS + " ORDER BY f.id DESC", {"start": start}).fetchall()
+        issued = [f for f in forecasts if f["status"] == "issued" and f["family"] == FAMILY]
+        checks = []
+        official = {r["forecast_id"] for r in cases if r["kind"] == "official_match"}
+        for f in issued[:12]:
+            attempt = db.execute(ATTEMPT, (f["id"],)).fetchone()
+            detail = json.loads(attempt["details_json"]) if attempt else {}
+            checks.append(dict(issued=f["created_at"], start_date=json.loads(f["target_json"]).get("base_source_date"),
+                               target_date=detail.get("source_date"), status="Official outcome scored" if f["id"] in official
+                               else PUBLICATION_STATUS.get(attempt["status"], "Waiting for the next refresh") if attempt
+                               else "Waiting for the next refresh"))
+    checks = [dict(item, issued=stamp(item["issued"]).astimezone(BEIRUT).strftime("%d %b %Y %H:%M")) for item in checks]
+    return dict(complete=len(forecasts), issued=len(issued), checks=checks,
+                cases=[{k: v for k, v in case.items() if k not in ("origin", "known")} for case in cases])

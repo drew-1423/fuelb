@@ -18,6 +18,7 @@ from lebanon_fuel.domain import BEIRUT
 from lebanon_fuel.storage.database import Store
 from lebanon_fuel.validation.ledger import ForecastLedger
 from lebanon_fuel.validation.quality import export_data, report
+from lebanon_fuel.validation.decision_tracking import settle_supplier_updates
 from lebanon_fuel.validation.settlement import settle
 from . import forecast, maintenance, monitoring
 from .schedule import SOURCES, due, settings
@@ -186,6 +187,11 @@ def run(root, *, scheduled=False, sources=None, offline=False, collector=execute
             step("market_quality_and_coverage", market_quality)
             step("settle_verified_outcomes", lambda: settle_available(root, cfg, ops))
             if reconciliation["status"] == "success":
+                def supplier_matches():
+                    with closing(Store(root, cfg["storage"]["database"], readonly=True)) as store:
+                        return settle_supplier_updates(root, cfg, store)
+                if (root / "config/prospective_holdout.json").is_file():
+                    step("score_supplier_agreements", supplier_matches)
                 check = step("refresh_forecast_decision", lambda: forecast.refresh(root, cfg, run_id))
                 if check["status"] == "success":
                     write_json(root / "reports/operations/current_forecast_check.json", check["result"])

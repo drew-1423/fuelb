@@ -53,7 +53,7 @@ def brief(latest, previous, market, best, decision, forecast=None):
         else:movement+='A calibrated 90% interval is not supported for this issuance. '
         if view['probabilities']:
             down,flat,up=view['probabilities'];movement+=f"Increase {up:.1%}, decrease {down:.1%}, no change within ±3,000 LBP {flat:.1%}."
-        else:movement+='Directional probabilities are not calibrated; the baseline is not certainty.'
+        else:movement+='Directional probabilities are awaiting calibrated live evidence.'
         if view['drivers']:drivers='; '.join(f"{r['Driver']}: {r['LBP / 20 L']:+,.0f} LBP" for r in view['drivers'])+'. Statistical attribution, not causation.'
     return {
         "Executive summary": executive,
