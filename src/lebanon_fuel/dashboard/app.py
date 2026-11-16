@@ -14,7 +14,7 @@ import streamlit as st
 
 from lebanon_fuel.dashboard import analyst, charts, data
 from lebanon_fuel.dashboard.scenarios import simulate
-from lebanon_fuel.domain import BEIRUT
+from lebanon_fuel.domain import BEIRUT, PROVISIONAL_PRICE
 from lebanon_fuel.market.catalog import MISSING, SERIES
 
 ROOT = Path(os.environ.get("LEBANON_FUEL_ROOT", Path.cwd())).resolve()
@@ -287,7 +287,7 @@ def evidence(row):
 
 
 def _driver_summary_banner(snap, latest, active_forecast):
-    supplier = next((r for r in reversed(snap["prices"]) if r["verification_status"] == "supplier_observed"
+    supplier = next((r for r in reversed(snap["prices"]) if r["verification_status"] in {"supplier_observed", PROVISIONAL_PRICE}
                      and r["price_lbp_20l"] is not None), None)
     has_newer_supplier = bool(supplier and (latest is None or supplier["source_date"] > latest["source_date"]))
     if latest:
@@ -405,10 +405,10 @@ def overview(snap, latest, previous):
                      if r["verification_status"] == "document_verified"), None)
     if document and document != latest:
         st.caption(f"Latest reviewed original decision · {document['source_date']} · {document['price_lbp_20l']:,} LBP / 20 L")
-    supplier = next((r for r in reversed(snap["prices"]) if r["verification_status"] == "supplier_observed"
+    supplier = next((r for r in reversed(snap["prices"]) if r["verification_status"] in {"supplier_observed", PROVISIONAL_PRICE}
                      and r["price_lbp_20l"] is not None), None)
     if supplier and (latest is None or supplier["source_date"] > latest["source_date"]):
-        st.caption(f"Newer supplier-only quote · {supplier['source_date']} · {supplier['price_lbp_20l']:,} LBP / 20 L")
+        st.caption(f"{data.STATUS[supplier['verification_status']]} quote · {supplier['source_date']} · {supplier['price_lbp_20l']:,} LBP / 20 L")
     st.caption(f"Last successful price or market capture · {data.beirut_time(snap['latest_capture'])}")
     price_history = st.container()
     st.subheader("Next official decision")

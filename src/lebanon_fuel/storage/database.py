@@ -5,7 +5,7 @@ import json
 import sqlite3
 import tomllib
 
-from lebanon_fuel.domain import SOURCES, VERIFIED, now_utc, utc_timestamp, regime_label, weekday_disagreement
+from lebanon_fuel.domain import SOURCES, VERIFIED, PROVISIONAL_PRICE, now_utc, utc_timestamp, regime_label, weekday_disagreement
 
 
 class Store:
@@ -109,6 +109,9 @@ class Store:
                         status = "government_archive"
                     if any(r["source_id"]=="ministry" for r in valid) and any(r["source_id"]=="ipt" for r in valid):
                         status = "archive_corroborated"
+                    if status == "supplier_observed" and len(values) == 1 and any(
+                            r["source_id"] == "taqtek" for r in valid):
+                        status = PROVISIONAL_PRICE
                     if chosen["document_verified"]:
                         status = "document_verified"
                     calendar_errors=[r for r in valid if r['source_id']=='ministry' and weekday_disagreement(json.loads(r['raw_json']).get('cells',[''])[0],day)]
@@ -155,6 +158,11 @@ class Store:
                     delta=chosen["price_lbp_20l"]-previous_verified["price"]
                     payload["absolute_price_change"]=delta
                     payload["percentage_price_change"]=100*delta/previous_verified["price"]
+                if status == PROVISIONAL_PRICE:
+                    payload["corroborating_sources"] = [
+                        {"id": sid, "url": min(r["source_url"] for r in valid if r["source_id"] == sid)}
+                        for sid in ("ipt", "taqtek")
+                    ]
                 if chosen:
                     previous_observed={"date":day,"price":chosen["price_lbp_20l"]}
                     if status in VERIFIED:

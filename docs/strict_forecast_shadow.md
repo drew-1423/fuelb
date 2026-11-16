@@ -66,3 +66,9 @@ The official structural candidate remains unavailable pending verified pricing i
 ## First real run
 
 On 16 November at 16:24 Beirut, the local experiment `a965c880296590a856c52fa5887de38b409009eacee24fd2742f029ddda8b44c` froze the reference models using 145 matured conditional development rows from 145 base decisions. Its first batch appended seven candidate abstentions, forecast IDs 45188–45194. The November 13 supplier-only record blocked the base price. The strict replay reproduced all seven outputs, the read-only ledger hash-chain check passed, and there are zero scored shadow outcomes. The test suite passed 235 tests with 7 existing pandas deprecation warnings.
+
+## Provisional forecasts from two price sources
+
+When the latest valid IPT and Taqtek records agree on the gasoline 95 price and the source date, and there is no conflicting valid record for that date, reconciliation records a provisional price with the two source links. It does not change the official verification status of the price history or infer an effective date.
+
+The public forecast pipeline can use that price for an explicitly labeled research point estimate, subject to the normal freshness and market gates. If quantitative inputs fail, persistence can use the same provisional anchor. Prediction intervals and probabilities are withheld on this route because its calibration has not been established. Strict shadow scoring and production eligibility still require reviewed official evidence. If the source code changes, freeze a new shadow manifest before issuing under it.

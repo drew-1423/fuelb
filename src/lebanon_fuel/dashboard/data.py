@@ -11,7 +11,7 @@ import tomllib
 
 import pandas as pd
 
-from lebanon_fuel.domain import BEIRUT, VERIFIED, utc_timestamp
+from lebanon_fuel.domain import BEIRUT, VERIFIED, PROVISIONAL_PRICE, utc_timestamp
 from lebanon_fuel.features.market import from_histories
 from lebanon_fuel.market.catalog import SERIES
 from lebanon_fuel.market.store import MarketStore
@@ -25,6 +25,7 @@ MINIMUM_PROBABILITY_HOLDOUT = 10
 STATUS = {"document_verified": "Original document reviewed",
           "archive_corroborated": "Government archive corroborated",
           "government_archive": "Government archive only",
+          PROVISIONAL_PRICE: "Provisional · IPT and Taqtek agree",
           "supplier_observed": "Supplier only",
           "conflict": "Conflicting sources"}
 
@@ -225,7 +226,10 @@ def live_forecasts(rows, settings, decision, horizon, latest_record, *, at=None)
             or origin.tzinfo is None or created.tzinfo is None or origin > at or created > at
             or (at-origin).total_seconds() > settings['forecasting'].get('maximum_forecast_age_hours',12)*3600
             or spec.get('base_revision_id') != latest_record['revision_id']
-            or latest_record['verification_status'] not in VERIFIED
+            or (latest_record['verification_status'] not in VERIFIED
+                and not (latest_record['verification_status'] == PROVISIONAL_PRICE
+                         and spec.get('anchor_verification') == PROVISIONAL_PRICE
+                         and spec.get('tier') in (2, 4)))
             or (at.tz_convert(BEIRUT).date()-datetime.fromisoformat(latest_record['source_date']).date()).days > settings['collection']['stale_after_days']
             or (spec.get('endpoint') and pd.Timestamp(spec['endpoint']) <= at)):
         return latest.iloc[:0]

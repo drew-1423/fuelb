@@ -124,6 +124,7 @@ def history_chart(prices, replay, current):
         ("archive_corroborated", "Corroborated government archive", TEAL, "circle"),
         ("document_verified", "Original decision reviewed", AMBER, "diamond"),
         ("government_archive", "Government archive only", MUTED, "circle-open"),
+        ("provisional_corroborated", "Provisional · IPT + Taqtek", BLUE, "circle-open"),
         ("supplier_observed", "Supplier / news schedule", BLUE, "circle-open"),
     ]:
         rows = [r for r in prices if r["verification_status"] == status
