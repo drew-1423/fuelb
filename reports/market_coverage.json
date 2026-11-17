@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-16T20:31:03.966232+00:00",
+  "as_of": "2026-11-17T00:38:03.849633+00:00",
   "series": [
     {
       "series": "brent_spot",
@@ -11,7 +11,7 @@
       "latest": "2026-11-11",
       "latest_value": 92.14,
       "unit": "USD/bbl",
-      "age_days": 5,
+      "age_days": 6,
       "stale": false,
       "known_publication_timestamps": 0,
       "documented_historical_vintages": 0,
@@ -111,7 +111,7 @@
       "latest": "2026-11-09",
       "latest_value": 0.9626983606557379,
       "unit": "EUR/L",
-      "age_days": 7,
+      "age_days": 8,
       "stale": false,
       "known_publication_timestamps": 0,
       "documented_historical_vintages": 0,
@@ -129,7 +129,7 @@
       "latest": "2026-11-09",
       "latest_value": 0.9314341935483871,
       "unit": "EUR/L",
-      "age_days": 7,
+      "age_days": 8,
       "stale": false,
       "known_publication_timestamps": 0,
       "documented_historical_vintages": 0,
@@ -147,7 +147,7 @@
       "latest": "2025-05-29",
       "latest_value": 89700.0,
       "unit": "LBP/USD",
-      "age_days": 536,
+      "age_days": 537,
       "stale": true,
       "known_publication_timestamps": 0,
       "documented_historical_vintages": 0,

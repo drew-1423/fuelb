@@ -1,5 +1,5 @@
 {
-  "origin": "2026-11-16T20:31:18.268598+00:00",
+  "origin": "2026-11-17T00:38:17.096085+00:00",
   "anchor": {
     "absolute_price_change": -54000,
     "candidate_values": [
@@ -48,18 +48,18 @@
   "forecasts": [
     {
       "horizon": "decision_1",
-      "origin": "2026-11-16T20:31:18.268598+00:00",
+      "origin": "2026-11-17T00:38:17.096085+00:00",
       "endpoint": null,
       "target_label": "Next 1 official pricing decision(s)",
-      "decision_date": "2026-11-17",
-      "scheduled_effective": "2026-11-17",
+      "decision_date": "2026-11-20",
+      "scheduled_effective": "2026-11-20",
       "schedule_basis": "Empirical Tue/Fri Ministry cadence",
       "schedule_estimated": true,
       "schedule_details": {
         "dates": {
-          "decision_1": "2026-11-17",
-          "decision_2": "2026-11-20",
-          "decision_4": "2026-11-27"
+          "decision_1": "2026-11-20",
+          "decision_2": "2026-11-24",
+          "decision_4": "2026-12-01"
         },
         "schedule_basis": "Empirical Tue/Fri Ministry cadence",
         "interval_n": 20,
@@ -186,23 +186,23 @@
         "nominal": 0.9,
         "radius": null
       },
-      "forecast_id": 45220,
-      "snapshot_id": "97c5ebd6e3d95063a6b0a5c711e05bfcb74342785324a4dcf6c5292c4503761b"
+      "forecast_id": 45228,
+      "snapshot_id": "d18a94854d457b5094cd8a8ff3d0a1ff80f1724b901c79a661abc8164b06efd7"
     },
     {
       "horizon": "decision_2",
-      "origin": "2026-11-16T20:31:18.268598+00:00",
+      "origin": "2026-11-17T00:38:17.096085+00:00",
       "endpoint": null,
       "target_label": "Next 2 official pricing decision(s)",
-      "decision_date": "2026-11-20",
-      "scheduled_effective": "2026-11-20",
+      "decision_date": "2026-11-24",
+      "scheduled_effective": "2026-11-24",
       "schedule_basis": "Empirical Tue/Fri Ministry cadence",
       "schedule_estimated": true,
       "schedule_details": {
         "dates": {
-          "decision_1": "2026-11-17",
-          "decision_2": "2026-11-20",
-          "decision_4": "2026-11-27"
+          "decision_1": "2026-11-20",
+          "decision_2": "2026-11-24",
+          "decision_4": "2026-12-01"
         },
         "schedule_basis": "Empirical Tue/Fri Ministry cadence",
         "interval_n": 20,
@@ -286,23 +286,23 @@
       ],
       "interval": null,
       "probabilities": null,
-      "forecast_id": 45221,
-      "snapshot_id": "97c5ebd6e3d95063a6b0a5c711e05bfcb74342785324a4dcf6c5292c4503761b"
+      "forecast_id": 45229,
+      "snapshot_id": "d18a94854d457b5094cd8a8ff3d0a1ff80f1724b901c79a661abc8164b06efd7"
     },
     {
       "horizon": "decision_4",
-      "origin": "2026-11-16T20:31:18.268598+00:00",
+      "origin": "2026-11-17T00:38:17.096085+00:00",
       "endpoint": null,
       "target_label": "Next 4 official pricing decision(s)",
-      "decision_date": "2026-11-27",
-      "scheduled_effective": "2026-11-27",
+      "decision_date": "2026-12-01",
+      "scheduled_effective": "2026-12-01",
       "schedule_basis": "Empirical Tue/Fri Ministry cadence",
       "schedule_estimated": true,
       "schedule_details": {
         "dates": {
-          "decision_1": "2026-11-17",
-          "decision_2": "2026-11-20",
-          "decision_4": "2026-11-27"
+          "decision_1": "2026-11-20",
+          "decision_2": "2026-11-24",
+          "decision_4": "2026-12-01"
         },
         "schedule_basis": "Empirical Tue/Fri Ministry cadence",
         "interval_n": 20,
@@ -386,13 +386,13 @@
       ],
       "interval": null,
       "probabilities": null,
-      "forecast_id": 45222,
-      "snapshot_id": "97c5ebd6e3d95063a6b0a5c711e05bfcb74342785324a4dcf6c5292c4503761b"
+      "forecast_id": 45230,
+      "snapshot_id": "d18a94854d457b5094cd8a8ff3d0a1ff80f1724b901c79a661abc8164b06efd7"
     },
     {
       "horizon": "day_1",
-      "origin": "2026-11-16T20:31:18.268598+00:00",
-      "endpoint": "2026-11-17T22:31:18.268598+02:00",
+      "origin": "2026-11-17T00:38:17.096085+00:00",
+      "endpoint": "2026-11-18T02:38:17.096085+02:00",
       "target_label": "Prevailing official price in 1 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -444,10 +444,10 @@
       "ovx_regime_conditioning": "regime_conditioned_matured_oof",
       "calibration_ovx_regime": "Normal",
       "driver_contributions": {
-        "commodity_pass_through": 783.2428047583873,
+        "commodity_pass_through": 859.859549320043,
         "lagged_domestic_momentum": -7307.99451215491,
         "fiscal_shock": 0.0,
-        "other_features": -1613.5015774593599,
+        "other_features": -1690.118322021016,
         "baseline_intercept": -219.8884786926929,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
@@ -470,13 +470,13 @@
       ],
       "interval": null,
       "probabilities": null,
-      "forecast_id": 45223,
-      "snapshot_id": "97c5ebd6e3d95063a6b0a5c711e05bfcb74342785324a4dcf6c5292c4503761b"
+      "forecast_id": 45231,
+      "snapshot_id": "d18a94854d457b5094cd8a8ff3d0a1ff80f1724b901c79a661abc8164b06efd7"
     },
     {
       "horizon": "day_3",
-      "origin": "2026-11-16T20:31:18.268598+00:00",
-      "endpoint": "2026-11-19T22:31:18.268598+02:00",
+      "origin": "2026-11-17T00:38:17.096085+00:00",
+      "endpoint": "2026-11-20T02:38:17.096085+02:00",
       "target_label": "Prevailing official price in 3 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -554,13 +554,13 @@
       ],
       "interval": null,
       "probabilities": null,
-      "forecast_id": 45224,
-      "snapshot_id": "97c5ebd6e3d95063a6b0a5c711e05bfcb74342785324a4dcf6c5292c4503761b"
+      "forecast_id": 45232,
+      "snapshot_id": "d18a94854d457b5094cd8a8ff3d0a1ff80f1724b901c79a661abc8164b06efd7"
     },
     {
       "horizon": "day_7",
-      "origin": "2026-11-16T20:31:18.268598+00:00",
-      "endpoint": "2026-11-23T22:31:18.268598+02:00",
+      "origin": "2026-11-17T00:38:17.096085+00:00",
+      "endpoint": "2026-11-24T02:38:17.096085+02:00",
       "target_label": "Prevailing official price in 7 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -671,13 +671,13 @@
       ],
       "interval": null,
       "probabilities": null,
-      "forecast_id": 45225,
-      "snapshot_id": "97c5ebd6e3d95063a6b0a5c711e05bfcb74342785324a4dcf6c5292c4503761b"
+      "forecast_id": 45233,
+      "snapshot_id": "d18a94854d457b5094cd8a8ff3d0a1ff80f1724b901c79a661abc8164b06efd7"
     },
     {
       "horizon": "day_14",
-      "origin": "2026-11-16T20:31:18.268598+00:00",
-      "endpoint": "2026-11-30T22:31:18.268598+02:00",
+      "origin": "2026-11-17T00:38:17.096085+00:00",
+      "endpoint": "2026-12-01T02:38:17.096085+02:00",
       "target_label": "Prevailing official price in 14 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -755,13 +755,13 @@
       ],
       "interval": null,
       "probabilities": null,
-      "forecast_id": 45226,
-      "snapshot_id": "97c5ebd6e3d95063a6b0a5c711e05bfcb74342785324a4dcf6c5292c4503761b"
+      "forecast_id": 45234,
+      "snapshot_id": "d18a94854d457b5094cd8a8ff3d0a1ff80f1724b901c79a661abc8164b06efd7"
     },
     {
       "horizon": "day_30",
-      "origin": "2026-11-16T20:31:18.268598+00:00",
-      "endpoint": "2026-12-16T22:31:18.268598+02:00",
+      "origin": "2026-11-17T00:38:17.096085+00:00",
+      "endpoint": "2026-12-17T02:38:17.096085+02:00",
       "target_label": "Prevailing official price in 30 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -771,9 +771,9 @@
       "tier": 2,
       "label": "QUANTITATIVE MODEL FORECAST · PROVISIONAL PRICE ANCHOR",
       "status": "issued",
-      "predicted_price": 2135250.9146990096,
-      "predicted_change": -255749.08530099015,
-      "percentage_change": -10.696323099163118,
+      "predicted_price": 2146458.48824234,
+      "predicted_change": -244541.51175766002,
+      "percentage_change": -10.22758309316855,
       "uncertainty": "Waiting for a validated prediction range from live outcomes.",
       "attempts": [
         {
@@ -816,7 +816,7 @@
         "commodity_pass_through": -53846.91236711311,
         "lagged_domestic_momentum": -37891.220893165984,
         "fiscal_shock": 412.50592570475743,
-        "other_features": -59673.93058240103,
+        "other_features": -48466.35703907088,
         "baseline_intercept": -104749.52738401484,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
@@ -839,8 +839,8 @@
       ],
       "interval": null,
       "probabilities": null,
-      "forecast_id": 45227,
-      "snapshot_id": "97c5ebd6e3d95063a6b0a5c711e05bfcb74342785324a4dcf6c5292c4503761b"
+      "forecast_id": 45235,
+      "snapshot_id": "d18a94854d457b5094cd8a8ff3d0a1ff80f1724b901c79a661abc8164b06efd7"
     }
   ],
   "available_market_inputs": {
@@ -1090,16 +1090,16 @@
   "status": "issued",
   "reasons": [],
   "forecast_ids": [
-    45220,
-    45221,
-    45222,
-    45223,
-    45224,
-    45225,
-    45226,
-    45227
+    45228,
+    45229,
+    45230,
+    45231,
+    45232,
+    45233,
+    45234,
+    45235
   ],
   "snapshot_ids": [
-    "97c5ebd6e3d95063a6b0a5c711e05bfcb74342785324a4dcf6c5292c4503761b"
+    "d18a94854d457b5094cd8a8ff3d0a1ff80f1724b901c79a661abc8164b06efd7"
   ]
 }
