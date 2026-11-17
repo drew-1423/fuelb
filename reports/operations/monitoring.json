@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-11-17T06:56:01.301730+00:00",
+  "generated_at": "2026-11-17T12:47:38.398577+00:00",
   "data_quality": {
     "conflict_dates": 42,
-    "missing_publication_clocks": 3197,
-    "missing_effective_dates": 3193,
-    "candidate_dates": 1371,
+    "missing_publication_clocks": 3199,
+    "missing_effective_dates": 3195,
+    "candidate_dates": 1372,
     "suspicious_dates": 4
   },
   "alerts": [
@@ -12,11 +12,6 @@
       "code": "conflicting_prices",
       "severity": "warning",
       "message": "42 source dates remain quarantined for conflicting prices."
-    },
-    {
-      "code": "source_failure",
-      "severity": "warning",
-      "message": "market_ec: last collection is failed."
     },
     {
       "code": "source_failure",
@@ -104,8 +99,8 @@
     "revision_id": 3447
   },
   "market": {
-    "origin_utc": "2026-11-17T06:55:58.293149+00:00",
-    "origin_beirut": "2026-11-17T08:55:58.293149+02:00",
+    "origin_utc": "2026-11-17T12:47:35.219311+00:00",
+    "origin_beirut": "2026-11-17T14:47:35.219311+02:00",
     "mode": "strict",
     "backtest_eligible": true,
     "series": {
@@ -125,7 +120,7 @@
         "trend_above_trailing_mean20": 0,
         "high_vol_vs_prior_trailing_median": 1,
         "lag_1_observation_value": 90.16,
-        "max_available_at": "2026-11-16T07:23:12.593483+00:00",
+        "max_available_at": "2026-11-17T12:46:24.212459+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
@@ -429,7 +424,7 @@
         "trend_above_trailing_mean20": 0,
         "high_vol_vs_prior_trailing_median": 1,
         "lag_1_observation_value": 101.43,
-        "max_available_at": "2026-11-16T07:23:19.672713+00:00",
+        "max_available_at": "2026-11-17T12:46:30.476568+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
@@ -733,7 +728,7 @@
         "trend_above_trailing_mean20": 1,
         "high_vol_vs_prior_trailing_median": 0,
         "lag_1_observation_value": 208.958,
-        "max_available_at": "2026-11-16T07:28:28.235751+00:00",
+        "max_available_at": "2026-11-17T12:46:37.587152+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
@@ -1036,7 +1031,7 @@
         "trend_above_trailing_mean20": 0,
         "high_vol_vs_prior_trailing_median": 1,
         "lag_1_observation_value": 409.76,
-        "max_available_at": "2026-11-16T07:28:36.787859+00:00",
+        "max_available_at": "2026-11-17T12:46:47.362833+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
@@ -1339,7 +1334,7 @@
         "trend_above_trailing_mean20": 0,
         "high_vol_vs_prior_trailing_median": 0,
         "lag_1_observation_value": 94.5,
-        "max_available_at": "2026-11-16T07:28:44.470007+00:00",
+        "max_available_at": "2026-11-17T12:46:55.495682+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
@@ -1628,29 +1623,25 @@
       },
       "eurusd": {
         "status": "available",
-        "value": 1.1154,
+        "value": 1.1034,
         "unit": "USD/EUR",
-        "latest_observation_date": "2026-11-06",
-        "age_calendar_days": 11,
+        "latest_observation_date": "2026-11-13",
+        "age_calendar_days": 4,
         "allowed_age_days": 14,
-        "return_1_observation": -0.007209612817089428,
-        "return_7_calendar_days": -0.0008062348830960575,
-        "momentum_30_calendar_days": -0.002949852507374673,
-        "rolling_mean_5_observations": 1.12004,
-        "rolling_mean_20_observations": 1.11905,
-        "volatility_20_returns_annualized": 0.05205945135944418,
+        "return_1_observation": -0.001989869753979745,
+        "return_7_calendar_days": -0.01075847229693383,
+        "momentum_30_calendar_days": -0.008001438460846999,
+        "rolling_mean_5_observations": 1.11202,
+        "rolling_mean_20_observations": 1.117705,
+        "volatility_20_returns_annualized": 0.05387038228084336,
         "trend_above_trailing_mean20": 0,
         "high_vol_vs_prior_trailing_median": 1,
-        "lag_1_observation_value": 1.1235,
-        "max_available_at": "2026-11-16T07:34:07.038754+00:00",
+        "lag_1_observation_value": 1.1056,
+        "max_available_at": "2026-11-17T12:47:11.042822+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
         "observation_ids": [
-          40824,
-          40825,
-          40826,
-          40827,
           40828,
           40830,
           40831,
@@ -1919,14 +1910,18 @@
           41105,
           41106,
           41107,
-          41108
+          41108,
+          46039,
+          46040,
+          46042,
+          46043
         ],
-        "mean3": 1.1201999999999999,
-        "mean4": 1.11995,
-        "mean5": 1.12004,
-        "mean10": 1.11792,
-        "return3": -0.0033952823445317915,
-        "return5": -0.0008062348830960575,
+        "mean3": 1.1080999999999999,
+        "mean4": 1.111175,
+        "mean5": 1.11202,
+        "mean10": 1.11612,
+        "return3": -0.015173152445555282,
+        "return5": -0.017890520694259004,
         "short_window_convention": "trailing_observed_sessions_not_calendar_days"
       },
       "italy_gasoline_ex_tax": {
@@ -1945,7 +1940,7 @@
         "trend_above_trailing_mean20": 0,
         "high_vol_vs_prior_trailing_median": 1,
         "lag_1_observation_value": 0.966927868852459,
-        "max_available_at": "2026-11-15T05:48:55.247575+00:00",
+        "max_available_at": "2026-11-17T12:47:02.553830+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
@@ -2248,7 +2243,7 @@
         "trend_above_trailing_mean20": 0,
         "high_vol_vs_prior_trailing_median": 1,
         "lag_1_observation_value": 0.9983696774193549,
-        "max_available_at": "2026-11-15T05:48:55.247575+00:00",
+        "max_available_at": "2026-11-17T12:47:02.553830+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
@@ -2872,7 +2867,7 @@
         41116,
         41122
       ],
-      "max_available_at": "2026-11-16T07:23:19.672713+00:00"
+      "max_available_at": "2026-11-17T12:46:30.476568+00:00"
     },
     "rbob_minus_brent": {
       "value": null,
@@ -2898,7 +2893,7 @@
   },
   "policy_headlines": {
     "status": "captured_headlines_only",
-    "retrieved_at": "2026-11-17T06:55:29.197366+00:00",
+    "retrieved_at": "2026-11-17T12:46:06.617472+00:00",
     "items": [],
     "note": "Changes require original-document review. This is not complete policy surveillance."
   },

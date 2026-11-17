@@ -1,6 +1,6 @@
 # International market coverage and quality
 
-Generated for 2026-11-17T06:55:35.979663+00:00. Counts below are actual stored observations, not estimates.
+Generated for 2026-11-17T12:47:12.567599+00:00. Counts below are actual stored observations, not estimates.
 
 | Series | Unique valid dates | Earliest | Latest | Latest normalized value | Stale |
 | --- | ---: | --- | --- | --- | --- |
@@ -9,7 +9,7 @@ Generated for 2026-11-17T06:55:35.979663+00:00. Counts below are actual stored o
 | us_gasoline_stocks | 1923 | 1990-01-05 | 2026-11-06 | 210.757 million_bbl | False |
 | us_crude_stocks | 2302 | 1982-08-20 | 2026-11-06 | 414.417 million_bbl | False |
 | us_refinery_utilization | 1880 | 1990-11-02 | 2026-11-06 | 95.2 percent | False |
-| eurusd | 6984 | 1999-01-04 | 2026-11-06 | 1.1154 USD/EUR | False |
+| eurusd | 6988 | 1999-01-04 | 2026-11-13 | 1.1034 USD/EUR | False |
 | italy_gasoline_ex_tax | 1091 | 2005-01-03 | 2026-11-09 | 0.962698 EUR/L | False |
 | greece_gasoline_ex_tax | 1091 | 2005-01-03 | 2026-11-09 | 0.931434 EUR/L | False |
 | lbp_payment_fx | 2 | 2023-05-12 | 2025-05-29 | 89700 LBP/USD | True |
@@ -23,19 +23,19 @@ Generated for 2026-11-17T06:55:35.979663+00:00. Counts below are actual stored o
 | Source | Result | Completed UTC | Detail |
 | --- | --- | --- | --- |
 | market_cboe | success | 2026-11-13T16:28:03.126952+00:00 | 4912 reviewed/imported rows |
-| market_ec | failed | 2026-11-16T07:33:55.576046+00:00 | [Errno 54] Connection reset by peer |
-| market_eia | success | 2026-11-16T07:28:44.768844+00:00 | 24,410 rows parsed; 0 new observations |
-| market_fed | success | 2026-11-16T07:34:10.741565+00:00 | 7,265 rows parsed; 0 new observations |
+| market_ec | success | 2026-11-17T12:47:04.409278+00:00 | 2,184 rows parsed; 0 new observations |
+| market_eia | success | 2026-11-17T12:46:55.581597+00:00 | 24,410 rows parsed; 0 new observations |
+| market_fed | success | 2026-11-17T12:47:12.048514+00:00 | 7,270 rows parsed; 5 new observations |
 | market_official_review | success | 2026-11-14T20:06:38.456497+00:00 | 1 reviewed/imported rows |
 | market_yahoo | partial | 2026-11-12T11:01:09.971477+00:00 | rows parsed: unavailable; 0 new observations; brent_futures: unavailable — AccessStopped: Request denied by robots policy; Stored fallback: brent_spot (latest 2026-11-03); not newly collected futures; rbob_futures: unavailable — AccessStopped: Request denied by robots policy; Stored fallback: nyh_gasoline (latest 2026-11-03); not newly collected futures; gasoil_futures: unavailable — AccessStopped: Request denied by robots policy |
 
 ## Availability and validation
 
-38,773 immutable observations; 283 invalid/missing rows retained. 0 dates with captured value revisions; 0 same-capture contradictions quarantined. Raw hash failures: 0.
+38,778 immutable observations; 284 invalid/missing rows retained. 0 dates with captured value revisions; 0 same-capture contradictions quarantined. Raw hash failures: 0.
 39 long interval candidates; 2832 unclassified weekday/weekly calendar candidates. These include holidays and cannot be called missing market sessions without an authoritative calendar. No filling or interpolation was applied.
 40 large-move review candidates; 0 unusual reference-weekday candidates. Review flags do not prove source errors or erase real market shocks.
 Known per-observation publication timestamps: 0. Documented original historical vintages: 0. Dates in today's workbook are not release timestamps.
-At 1371 historical source-date origins, 1 have any market value proven available by this project's capture/vintage evidence. Origins are assumed 00:00 Asia/Beirut; Lebanese announcement times are still unknown.
+At 1372 historical source-date origins, 2 have any market value proven available by this project's capture/vintage evidence. Origins are assumed 00:00 Asia/Beirut; Lebanese announcement times are still unknown.
 
 ## Historical relationships
 

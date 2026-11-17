@@ -1,6 +1,6 @@
 # Lebanese gasoline 95 data quality report
 
-As of 2026-11-17, Asia/Beirut. Generated 2026-11-17T06:55:35.958593+00:00. Counts are database queries over actual captures.
+As of 2026-11-17, Asia/Beirut. Generated 2026-11-17T12:47:12.549552+00:00. Counts are database queries over actual captures.
 
 | Completion measure | Observed result |
 | --- | --- |
@@ -9,7 +9,7 @@ As of 2026-11-17, Asia/Beirut. Generated 2026-11-17T06:55:35.958593+00:00. Count
 | Original-document verified dates | 4; 2010-10-27 to 2025-05-29 |
 | Unique observed official archive IDs (year + number) | 667; incomplete archive, not the total historical decision count |
 | Archive dates without ID | 274 |
-| Candidate ledger dates | 1371 |
+| Candidate ledger dates | 1372 |
 | Conflict dates, quarantined | 42 |
 
 Verification: `document_verified` requires an original government PDF and recorded review. `archive_corroborated` means government HTML and IPT agree on a dated price; it does not authenticate an original decision or its publication time. Taqtek shares ministry lineage and cannot independently establish official truth. No source-labelled date is invented as an effective date.
@@ -18,13 +18,13 @@ Verification: `document_verified` requires an original government PDF and record
 
 | Source | Observations | Unique valid dates | Earliest | Latest | Age days | Stale |
 | --- | ---: | ---: | --- | --- | ---: | --- |
-| ipt | 1312 | 1308 | 2008-01-02 | 2026-11-13 | 4 | False |
-| taqtek | 915 | 915 | 2010-10-27 | 2026-11-13 | 4 | False |
+| ipt | 1313 | 1309 | 2008-01-02 | 2026-11-17 | 0 | False |
+| taqtek | 916 | 916 | 2010-10-27 | 2026-11-17 | 0 | False |
 | ministry | 945 | 913 | 2010-10-27 | 2026-11-10 | 7 | False |
 | official_document | 4 | 4 | 2010-10-27 | 2025-05-29 | 537 | True |
 | manual | 21 | 17 | 2026-01-16 | 2026-11-13 | 4 | False |
 
-Latest successful IPT import parsed 1313 original rows. Semantic observations and unique dates differ because all raw row occurrences, including duplicates and same-day alternatives, are retained in `sightings`.
+Latest successful IPT import parsed 1314 original rows. Semantic observations and unique dates differ because all raw row occurrences, including duplicates and same-day alternatives, are retained in `sightings`.
 
 ## Retrieved examples
 
@@ -34,7 +34,7 @@ Latest successful IPT import parsed 1313 original rows. Semantic observations an
 | 2010-10-27 | 33300 | document_verified | 2010-10-27 |
 | 2025-05-29 | 1489000 | document_verified | 2025-05-29 |
 | 2026-11-10 | 2445000 | archive_corroborated | unknown |
-| 2026-11-13 | 2391000 | provisional_corroborated | unknown |
+| 2026-11-17 | 2343000 | provisional_corroborated | unknown |
 
 ## Gaps and frequency
 
@@ -44,9 +44,9 @@ Observed frequency by year is in [frequency_by_year.csv](frequency_by_year.csv);
 
 ## Conflicts and limitations
 
-Status counts: `{"archive_corroborated": 809, "conflict": 42, "document_verified": 4, "government_archive": 58, "provisional_corroborated": 2, "supplier_observed": 456}`. All contradictory valid source values remain in the immutable observation table; disputed dates have null canonical prices. [conflicting_observations.csv](conflicting_observations.csv) links them to observation IDs.
+Status counts: `{"archive_corroborated": 809, "conflict": 42, "document_verified": 4, "government_archive": 58, "provisional_corroborated": 3, "supplier_observed": 456}`. All contradictory valid source values remain in the immutable observation table; disputed dates have null canonical prices. [conflicting_observations.csv](conflicting_observations.csv) links them to observation IDs.
 
-Unknown publication timestamps: 3197 observations. Unknown official effective dates: 3193. Original Excel/HTML dates have no invented midnight release timestamp. Retrieval is stored in UTC and rendered with Asia/Beirut rules.
+Unknown publication timestamps: 3199 observations. Unknown official effective dates: 3195. Original Excel/HTML dates have no invented midnight release timestamp. Retrieval is stored in UTC and rendered with Asia/Beirut rules.
 
 Changes in the export are relative to the previous eligible verified record, with its date and an explicit basis. They are not asserted to be changes from the immediately preceding official decision. Sparse verified history cannot establish that predecessor.
 
@@ -58,7 +58,7 @@ Adequate for source reconciliation and exploratory target analysis. Not ready fo
 
 See [source assessment](../research/data_source_assessment.md), [assumptions](../research/verified_assumptions.md) and [update instructions](../docs/data_updates.md).
 
-Raw integrity: 16 missing or hash-mismatched captured files. `date_alignment_review` records are excluded from verified exports pending review of inconsistent source weekday/date labels.
+Raw integrity: 20 missing or hash-mismatched captured files. `date_alignment_review` records are excluded from verified exports pending review of inconsistent source weekday/date labels.
 
 ## Longest IPT intervals to investigate
 
