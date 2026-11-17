@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-17T12:47:12.549552+00:00",
+  "generated_at": "2026-11-17T18:45:03.854206+00:00",
   "as_of_beirut": "2026-11-17",
   "timezone": "Asia/Beirut",
   "ledger_unique_dates": 1372,
@@ -36,7 +36,15 @@
     "data/raw/ipt/7823157d5af7604c2ea57f87632753a59842afb03855ee7d829f96a406e6ce19.html",
     "data/raw/ipt/144c6004eac93b65c88bd98797f101f94f3fb2a0c3d91b0b8961ca1a23a2aab6.html",
     "data/raw/ipt/e1db95aa55e55213e33ad6bc5cb8070f7a853a3cbd65c5c3aaf0009bafc062f6.html",
-    "data/raw/ipt/1e68cc83d0039251146a777818954fa4a0d05614133f11f6812c54361452eabf.xlsx"
+    "data/raw/ipt/1e68cc83d0039251146a777818954fa4a0d05614133f11f6812c54361452eabf.xlsx",
+    "data/raw/ipt/776e1772698a608db3a85c3afdaa25774e19a8ded8d965b7e2b0d1b4cda186d0.html",
+    "data/raw/ipt/3bf8b477ef7b929646f9c816b2370439a75824b649c16bca335dd530665dd1ce.html",
+    "data/raw/ipt/e197387c4b5625eb02d8941b8357302b13d03dc12a3cd29a315bb38fee1c0ed8.html",
+    "data/raw/ipt/1c826afdd0b4a14db269c7a9085accb5b8462681e181ee66ff9d5653b8707b13.xlsx",
+    "data/raw/taqtek/ee694c72ed38554a73cb65bafbfaa9ea095bfddf36a5589ebd2ed9598bae5e84.html",
+    "data/raw/market_ec/54d0ceb2ed9347a61634237612f95c02f4cb0a67fd9c52d88e723ff2b23f2498.html",
+    "data/raw/market_fed/944ae31c1f5166678826976edf235b9dea4077a9d06ea784a5846cef00eb69ae.html",
+    "data/raw/market_fed/c424bcdfe0947e48d9bc3937fd3a9e82bf144e5ac6454ae95a68346196394c77.zip"
   ],
   "unique_observed_official_archive_decision_ids": 667,
   "official_archive_dates_without_decision_id": 274,
@@ -121,14 +129,14 @@
         "2025-09-30"
       ],
       "duplicate_date_extra_observations": 4,
-      "exact_duplicate_rows_in_captures": 19,
+      "exact_duplicate_rows_in_captures": 20,
       "last_successful_run": {
-        "id": 123,
-        "finished_at": "2026-11-17T12:46:02.467258+00:00",
+        "id": 129,
+        "finished_at": "2026-11-17T18:44:53.260480+00:00",
         "details": {
           "parsed_rows": 1314,
-          "new_observations": 1,
-          "capture_id": 448
+          "new_observations": 0,
+          "capture_id": 476
         }
       }
     },
@@ -191,8 +199,8 @@
       "duplicate_date_extra_observations": 31,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 124,
-        "finished_at": "2026-11-17T12:46:12.761337+00:00",
+        "id": 130,
+        "finished_at": "2026-11-17T18:45:03.478696+00:00",
         "details": {
           "parsed_rows": 8,
           "new_observations": 0,
@@ -1259,6 +1267,22 @@
       "finished_at": "2026-11-17T12:47:12.048514+00:00",
       "status": "success",
       "details": "{\"results\": [{\"series\": \"eurusd\", \"parsed_rows\": 7270, \"new_observations\": 5, \"capture_id\": 471}]}"
+    },
+    {
+      "id": 129,
+      "source_id": "ipt",
+      "started_at": "2026-11-17T18:44:35.231227+00:00",
+      "finished_at": "2026-11-17T18:44:53.260480+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1314, \"new_observations\": 0, \"capture_id\": 476}"
+    },
+    {
+      "id": 130,
+      "source_id": "ministry",
+      "started_at": "2026-11-17T18:44:53.551134+00:00",
+      "finished_at": "2026-11-17T18:45:03.478696+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 8, \"new_observations\": 0, \"pages\": 1}"
     }
   ],
   "readiness": "Adequate for source reconciliation and exploratory target analysis. Not ready for an institutional as-of forecasting backtest: effective/release times, unresolved conflicts, coverage and regimes need review."
