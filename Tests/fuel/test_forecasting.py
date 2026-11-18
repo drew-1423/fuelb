@@ -57,6 +57,58 @@ def test_domestic_features_ignore_future_values_and_short_tail_alignment():
     assert a==b
 
 
+@pytest.mark.parametrize('status,expected', [
+    ('provisional_corroborated', 1000.),
+    ('archive_corroborated', 1000.),
+    ('government_archive', 1000.),
+    ('conflict', None),
+    ('supplier_observed', None),
+])
+def test_domestic_lag_accepts_agreed_history_without_relaxing_targets(status, expected):
+    class Market:
+        def at(self, at):
+            return {'x_nyh_gasoline_value': 100., 'x_nyh_gasoline_mean20': 99.}
+
+    config = json.loads(json.dumps(CONFIG))
+    rows = observations()
+    rows[-2]['verification_status'] = status
+    original_statuses = list(config['target_statuses'])
+    result = features_at(rows, len(rows)-1, known_at(rows[-1]), Market(), config)
+    if expected is None:
+        assert np.isnan(result['x_domestic_change_lag1'])
+    else:
+        assert result['x_domestic_change_lag1'] == expected
+        assert np.isfinite(result['x_domestic_change_lag1'])
+    assert config['target_statuses'] == original_statuses
+    # A usable input is not automatically an eligible historical target.
+    if status == 'provisional_corroborated':
+        assert label_for(rows, len(rows)-3, known_at(rows[-3]), 'decision_1', config)[1] == 'unverified_or_conflicting_path'
+
+
+@pytest.mark.parametrize('bad_value', [0., -1000., np.nan, np.inf])
+def test_domestic_lag_keeps_invalid_adjacent_prices_as_barriers(bad_value):
+    class Market:
+        def at(self, at):
+            return {'x_nyh_gasoline_value': 100., 'x_nyh_gasoline_mean20': 99.}
+
+    rows = observations()
+    rows[-2].update(verification_status='provisional_corroborated', price_lbp_20l=bad_value)
+    result = features_at(rows, len(rows)-1, known_at(rows[-1]), Market(), CONFIG)
+    assert np.isnan(result['x_domestic_change_lag1'])
+
+
+def test_domestic_lag_does_not_bridge_an_excessive_gap():
+    class Market:
+        def at(self, at):
+            return {'x_nyh_gasoline_value': 100., 'x_nyh_gasoline_mean20': 99.}
+
+    rows = observations()
+    rows[-2]['verification_status'] = 'provisional_corroborated'
+    rows[-1]['source_date'] = str(date.fromisoformat(rows[-2]['source_date']) + timedelta(days=CONFIG['maximum_gap_days']+1))
+    result = features_at(rows, len(rows)-1, known_at(rows[-1]), Market(), CONFIG)
+    assert np.isnan(result['x_domestic_change_lag1'])
+
+
 def test_ovx_features_respect_origin_cutoff_and_optional_history():
     from datetime import datetime, timezone
     dates=pd.bdate_range('2025-01-01',periods=302)
@@ -222,7 +274,7 @@ def calendar_predictions(n=180,horizon='day_1'):
     days=pd.date_range('2024-01-01',periods=n,freq='D',tz='UTC')
     f['origin']=days.astype(str);f['label_end']=(days+pd.Timedelta(days=3)).astype(str)
     f['base_revision_id']=np.arange(n)//7;f['horizon']=horizon
-    f['target_change_lbp_20l']=np.where(days.dayofweek.isin([1,4]),30000.,0.)
+    f['target_change_lbp_20l']=np.where(days.day_of_week.isin([1,4]),30000.,0.)
     f['x_interval_median']=3.5
     return f
 
@@ -232,7 +284,7 @@ def test_calendar_calibration_keeps_days_with_same_base_and_never_collapses():
     p=calendar_predictions()
     sampled,stride=calibration_sample(p)
     assert len(sampled)==60 and stride==1 and sampled.base_revision_id.nunique()<60
-    assert len(pd.to_datetime(sampled.origin,utc=True).dt.dayofweek.unique())==7
+    assert len(pd.to_datetime(sampled.origin,utc=True).dt.day_of_week.unique())==7
     cal=calibrate(p,CONFIG)
     assert cal['radius']>=30000 and cal['minimum_half_width_lbp']>=5000
     p['target_change_lbp_20l']=p['prediction']=0.
@@ -256,7 +308,7 @@ def test_seven_day_stride_does_not_alias_one_weekday():
     from lebanon_fuel.forecasting.uncertainty import calibration_sample
     sample,stride=calibration_sample(calendar_predictions(210,'day_14'))
     assert stride==7 and len(sample)>=20
-    assert len(pd.to_datetime(sample.origin,utc=True).dt.dayofweek.unique())==7
+    assert len(pd.to_datetime(sample.origin,utc=True).dt.day_of_week.unique())==7
 
 
 def test_calibration_rejects_mixed_horizons_and_only_uses_matured_labels():

@@ -28,6 +28,8 @@ def run():
         elif Path(p).name=='reporting.py':
             assert digest(root/p)==manifest['report_code_sha256'],p
         else:assert digest(root/p)==h,p
+    for p,h in manifest.get('release',{}).get('source_sha256',{}).items():
+        assert digest(root/p)==h,p
     for p,h in manifest['output_hashes'].items():assert digest(folder/p)==h,p
     design_path=root/'data/exports/forecasting/development_design.csv'
     feature_path=root/'data/exports/forecasting/origin_features.csv'
@@ -55,7 +57,11 @@ def run():
     assert (pd.to_datetime(cal.calibration_maximum_label_end,utc=True)<pd.to_datetime(cal.origin,utc=True)).all()
     used=features[features.max_assumed_market_available_at.notna()]
     assert (pd.to_datetime(used.max_assumed_market_available_at,utc=True)<=pd.to_datetime(used.origin,utc=True)).all()
-    store=Store(root);ledger={r['revision_id']:r for r in store.ledger()}
+    store=Store(root)
+    # Saved designs reference immutable revisions, including superseded ones.
+    # The current reconciled ledger alone cannot verify historical provenance.
+    ledger={r['id']:dict(json.loads(r['payload_json']),revision_id=r['id'])
+            for r in store.db.execute('SELECT id,payload_json FROM decision_versions')}
     for row in design.itertuples():
         base=ledger[row.base_revision_id];target=ledger[row.target_revision_id]
         assert base['price_lbp_20l']==row.base_price_lbp_20l

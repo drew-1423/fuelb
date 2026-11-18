@@ -13,6 +13,7 @@ import pandas as pd
 
 from lebanon_fuel.market.catalog import SERIES, BARREL_LITERS
 from lebanon_fuel.market.store import MarketStore
+from lebanon_fuel.domain import PROVISIONAL_PRICE
 
 BEIRUT=ZoneInfo('Asia/Beirut')
 STATUS='LATEST_VINTAGE_CONDITIONAL_ARCHIVE_RESEARCH_NOT_REAL_TIME'
@@ -203,10 +204,17 @@ def features_at(rows,index,at,market,config):
     past=rows[:index+1];base=past[-1]
     if len(past)<config['minimum_domestic_history'] or not valid_record(base,config):return None
     result=dict(market.at(at));changes=[];intervals=[]
+    # Supplier-agreed historical events are usable inputs even when training
+    # labels require government evidence. Do not relax target eligibility.
+    history_config = dict(config, target_statuses=set(config['target_statuses']) | {PROVISIONAL_PRICE})
     tail_rows=past[-21:]
     for a,b in zip(tail_rows,tail_rows[1:]):
         gap=(date.fromisoformat(b['source_date'])-date.fromisoformat(a['source_date'])).days
-        if valid_record(a,config) and valid_record(b,config) and gap<=config['maximum_gap_days']:
+        # Keep invalid adjacent events as barriers; skipping a conflict would
+        # misrepresent a multi-decision move as the most recent single change.
+        if (valid_record(a,history_config) and valid_record(b,history_config)
+                and np.isfinite(a['price_lbp_20l']) and np.isfinite(b['price_lbp_20l'])
+                and 0 < gap <= config['maximum_gap_days']):
             changes.append(b['price_lbp_20l']-a['price_lbp_20l']);intervals.append(gap)
         else:changes.append(np.nan)
     for lag in (1,2,3):result[f'x_domestic_change_lag{lag}']=changes[-lag] if len(changes)>=lag else np.nan

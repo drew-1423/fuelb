@@ -68,6 +68,37 @@
   "source_sha256": {
     "src/lebanon_fuel/validation/__init__.py": "21de04a89974e3226a0ed691572a6018cc7f136727dc2dd07b642175b4c033e6",
     "src/lebanon_fuel/validation/backtest.py": "ea8734f0f543321c518524da6dc690a3b8b235e0352782fc73a0e5c00c7cff6f",
+    "src/lebanon_fuel/validation/cli.py": "de84012a63872dd25665f7a0af549d1bc68d7ca0445adff4737752271eb785cb",
+    "src/lebanon_fuel/validation/ledger.py": "e9725f2bfb719e523d8272b4b137083c41ac769084267e6d4e40755632b3b249",
+    "src/lebanon_fuel/validation/metrics.py": "d55baaad8f1040e22ba2c140715b688947f2c17e2585001ba580f4226d7040ff",
+    "src/lebanon_fuel/validation/policy.py": "b83f8c1371701018402595ee1680f38299d3a7b77e684a37f34f453a56893dd5",
+    "src/lebanon_fuel/validation/quality.py": "92a0fbde5adfaafed74da5d7d446b8bcd975d9a2fb861ca447bb22d640d23f14",
+    "src/lebanon_fuel/validation/reporting.py": "507f9e11a7e5f94df50f6a90813904952f860b544e8601043e4f2182c32f875e",
+    "src/lebanon_fuel/validation/runner.py": "6d7084982051039d0acd64ddac7de8a93f48eb59e5c00c79a6f963dba24b983b",
+    "src/lebanon_fuel/validation/settlement.py": "b2777ea24678885d5352e5a4eda6a74419a9e8b962b428f3d8d343657a840e72",
+    "src/lebanon_fuel/validation/stress.py": "2c8d9f97992f469a34f9f0bf52fc4dc77fce899b8564009b8d868b853c4a3820",
+    "src/lebanon_fuel/forecasting/__init__.py": "1f4921e4b1d57d3b4205427a3b140ca61f3e8f144c98cf87934c1d91524dc6bc",
+    "src/lebanon_fuel/forecasting/cli.py": "ff95325f21f909fc7c682d407b14a51f0e121cc5241a55cabd429f47b3e47439",
+    "src/lebanon_fuel/forecasting/data.py": "2f8f4a7cb081b192c3137c5c0657a110b06b1e36f3c13d71acbe929a475aa6c8",
+    "src/lebanon_fuel/forecasting/live.py": "d7fc3674215201165030e3e02ba467c4b9e798ccf7746f5e81427bb58dafb5f2",
+    "src/lebanon_fuel/forecasting/models.py": "79d1f4983aa095bc85281506e8fe5fd0d348c9e5ebcc636cdf14e3990e4c575c",
+    "src/lebanon_fuel/forecasting/pipeline.py": "325a3df6f2d206bbb5d34d99f422ece3115718b645938c8b97bbac6b105fa8c1",
+    "src/lebanon_fuel/forecasting/reporting.py": "f67fad76dbd7312933c265bc4d040d89f3a0d12bf4928cc61892baa18558596f",
+    "src/lebanon_fuel/forecasting/uncertainty.py": "d4f34d03ebe0e11efde542e0e536e69eb30aad0d051fec97fef683f0740863f1"
+  },
+  "target_rows": 29,
+  "target_counts": {
+    "day_1": 13,
+    "day_3": 9,
+    "day_7": 1,
+    "decision_1": 4,
+    "decision_2": 2
+  },
+  "historical_vintage_certification": false,
+  "holdout_used_for_selection": true,
+  "evaluation_source_sha256": {
+    "src/lebanon_fuel/validation/__init__.py": "21de04a89974e3226a0ed691572a6018cc7f136727dc2dd07b642175b4c033e6",
+    "src/lebanon_fuel/validation/backtest.py": "ea8734f0f543321c518524da6dc690a3b8b235e0352782fc73a0e5c00c7cff6f",
     "src/lebanon_fuel/validation/cli.py": "0275bd63d147d826cc595cc4b3f9dacea802ca421258ff9ebc9bb178a0728ba0",
     "src/lebanon_fuel/validation/ledger.py": "acb757f39dc3ce036fa649a82de931abf93dfb89b1ece923e31f7252643e2bc2",
     "src/lebanon_fuel/validation/metrics.py": "d55baaad8f1040e22ba2c140715b688947f2c17e2585001ba580f4226d7040ff",
@@ -86,14 +117,20 @@
     "src/lebanon_fuel/forecasting/reporting.py": "f67fad76dbd7312933c265bc4d040d89f3a0d12bf4928cc61892baa18558596f",
     "src/lebanon_fuel/forecasting/uncertainty.py": "d4f34d03ebe0e11efde542e0e536e69eb30aad0d051fec97fef683f0740863f1"
   },
-  "target_rows": 29,
-  "target_counts": {
-    "day_1": 13,
-    "day_3": 9,
-    "day_7": 1,
-    "decision_1": 4,
-    "decision_2": 2
-  },
-  "historical_vintage_certification": false,
-  "holdout_used_for_selection": true
+  "release": {
+    "recorded_at": "2026-11-18T18:47:14.263776+00:00",
+    "base_commit": "b62c20fd901e350400553f7eb07e87ac702f9b3d",
+    "kind": "deterministic_bugfix_no_refit",
+    "hash_algorithm": "sha256",
+    "source_sha256": {
+      "src/lebanon_fuel/forecasting/data.py": "2f8f4a7cb081b192c3137c5c0657a110b06b1e36f3c13d71acbe929a475aa6c8",
+      "src/lebanon_fuel/forecasting/live.py": "d7fc3674215201165030e3e02ba467c4b9e798ccf7746f5e81427bb58dafb5f2",
+      "src/lebanon_fuel/dashboard/app.py": "a8c2fc04f51fadd774572174c75ef678433e20ec9b8b0b64153ead4863670163",
+      "Tests/fuel/test_forecasting.py": "24881e257319ae1fcdebc26e69217803318b9d33e2badf428774a0cd486d0bee",
+      "Tests/fuel/test_dashboard.py": "5fd589905e7e16a831758fc8504cca79ae781522c40f7c0f84ae6b86f2bfa658",
+      "scripts/audit_forecasting_artifacts.py": "b7d0936514f1db7a8f99be9e044a33f338d769f86708a8ac493b25b3a986a0da",
+      "scripts/audit_validation_artifacts.py": "5eca8d2615fb7ebc157e971041651cfaa6d77188cbfdbaced0cf853988c27573"
+    },
+    "note": "Release file checksums, not a new training or validation run. Frozen model bundles, datasets and saved predictions are unchanged. Original run code identities are preserved separately."
+  }
 }
