@@ -1,18 +1,18 @@
 # Lebanon gasoline 95 analyst report
 
-Generated 2026-11-17T18:45:25.774140+00:00
+Generated 2026-11-18T00:45:22.053162+00:00
 
 ## Executive summary
 
-The latest verified-tier gasoline 95 record is **2,445,000 LBP / 20 L** on 2026-11-10 (government archive corroborated). It is -47,000 LBP versus the previous verified-tier record on 2026-11-06. [Source record](https://energyandwater.gov.lb/ar/prices)
+The latest verified-tier gasoline 95 record is **2,343,000 LBP / 20 L** on 2026-11-17 (government archive corroborated). It is -102,000 LBP versus the previous verified-tier record on 2026-11-10. [Source record](https://energyandwater.gov.lb/ar/prices)
 
 ## Expected price movement
 
-QUANTITATIVE MODEL FORECAST · PROVISIONAL PRICE ANCHOR: 2,311,126 LBP / 20 L, -31,874 LBP (-1.36%). Estimated announcement: 20 Nov 2026 (Fri cadence). A calibrated 90% interval is not supported for this issuance. Directional probabilities are awaiting calibrated live evidence.
+No current estimate tied to the verified price. Refresh the forecast ledger.
 
 ## Primary market drivers
 
-Gasoline / Brent proxy contribution (combined): -1,848 LBP; Domestic lagged adjustment: -24,858 LBP; Fiscal shock indicator: +0 LBP; Other model features: -3,585 LBP; Model intercept: -1,583 LBP. Statistical attribution, not causation. Brent futures has no fresh stored observation. RBOB futures has no fresh stored observation. Brent spot proxy last printed 92.14 USD/bbl on 2026-11-11, +0.33% over the trailing seven-day comparison. [Source](https://www.eia.gov/dnav/pet/hist/RBRTED.htm) New York Harbor gasoline proxy last printed 101.43 USD/bbl on 2026-11-11, -4.70% over the trailing seven-day comparison. [Source](https://www.eia.gov/dnav/pet/hist/EER_EPMRU_PF4_Y35NY_DPGD.htm)
+No saved contribution breakdown. Commodity context does not establish a causal price forecast. Brent futures has no fresh stored observation. RBOB futures has no fresh stored observation. Brent spot proxy last printed 92.14 USD/bbl on 2026-11-11, +0.33% over the trailing seven-day comparison. [Source](https://www.eia.gov/dnav/pet/hist/RBRTED.htm) New York Harbor gasoline proxy last printed 101.43 USD/bbl on 2026-11-11, -4.70% over the trailing seven-day comparison. [Source](https://www.eia.gov/dnav/pet/hist/EER_EPMRU_PF4_Y35NY_DPGD.htm)
 
 ## Commodity market conditions
 

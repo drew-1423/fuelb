@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-11-17T18:45:03.854206+00:00",
-  "as_of_beirut": "2026-11-17",
+  "generated_at": "2026-11-18T00:44:58.274123+00:00",
+  "as_of_beirut": "2026-11-18",
   "timezone": "Asia/Beirut",
   "ledger_unique_dates": 1372,
   "status_counts": {
     "supplier_observed": 456,
     "document_verified": 4,
-    "archive_corroborated": 809,
+    "archive_corroborated": 810,
     "government_archive": 58,
     "conflict": 42,
-    "provisional_corroborated": 3
+    "provisional_corroborated": 2
   },
   "earliest_verified_archive_or_document": "2010-10-27",
-  "latest_verified_archive_or_document": "2026-11-10",
+  "latest_verified_archive_or_document": "2026-11-17",
   "earliest_document_verified": "2010-10-27",
   "latest_document_verified": "2025-05-29",
   "document_verified_count": 4,
@@ -33,6 +33,7 @@
     "data/raw/ipt/d01b3e3ee5d643b5cd35168e855100731e1ff60228b3faee78deb354641b7026.html",
     "data/raw/ipt/c2237442976de7eb5dec2beb1892defe73fd04b199fac1ee7b81094bc86528ed.html",
     "data/raw/ipt/2d3f1d038bdad9bc262260e0067177fbe2420477a3f30cde2d6c0807a09eedbe.xlsx",
+    "data/raw/ministry/6e7f37e45d104256a47f421f796e24f9d1592632dc43e8ca50caf428f031af67.html",
     "data/raw/ipt/7823157d5af7604c2ea57f87632753a59842afb03855ee7d829f96a406e6ce19.html",
     "data/raw/ipt/144c6004eac93b65c88bd98797f101f94f3fb2a0c3d91b0b8961ca1a23a2aab6.html",
     "data/raw/ipt/e1db95aa55e55213e33ad6bc5cb8070f7a853a3cbd65c5c3aaf0009bafc062f6.html",
@@ -44,9 +45,13 @@
     "data/raw/taqtek/ee694c72ed38554a73cb65bafbfaa9ea095bfddf36a5589ebd2ed9598bae5e84.html",
     "data/raw/market_ec/54d0ceb2ed9347a61634237612f95c02f4cb0a67fd9c52d88e723ff2b23f2498.html",
     "data/raw/market_fed/944ae31c1f5166678826976edf235b9dea4077a9d06ea784a5846cef00eb69ae.html",
-    "data/raw/market_fed/c424bcdfe0947e48d9bc3937fd3a9e82bf144e5ac6454ae95a68346196394c77.zip"
+    "data/raw/market_fed/c424bcdfe0947e48d9bc3937fd3a9e82bf144e5ac6454ae95a68346196394c77.zip",
+    "data/raw/ipt/481072ac7749ed52136d46e2e658716042ec87275137be70dd81ed6658723fbc.html",
+    "data/raw/ipt/531b74187e5f12d20b0cd7d5245f8a017eb887d45d496534354ccae565b3ef6e.html",
+    "data/raw/ipt/74461730b3ce05ec6180c34449d25c16f0fbed864cff22d8ee5a20fa409cc332.html",
+    "data/raw/ipt/45871bce61051d172663b7604572ff14f7c7da6208a0d2af1614cacab2664129.xlsx"
   ],
-  "unique_observed_official_archive_decision_ids": 667,
+  "unique_observed_official_archive_decision_ids": 668,
   "official_archive_dates_without_decision_id": 274,
   "total_historical_official_decisions": "unknown: archive coverage is incomplete; date-only rows do not certify unique decisions",
   "conflict_dates": [
@@ -99,10 +104,10 @@
     "duplicate_date_source_price": 8,
     "invalid_price": 1
   },
-  "missing_publication_timestamp_observations": 3199,
-  "unknown_effective_date_observations": 3195,
+  "missing_publication_timestamp_observations": 3200,
+  "unknown_effective_date_observations": 3196,
   "gap_candidates": 169,
-  "cross_source_absent_dates": 371,
+  "cross_source_absent_dates": 370,
   "official_ids_on_multiple_dates": {
     "2017/232": [
       "2017-12-13",
@@ -119,7 +124,7 @@
       "valid_unique_dates": 1309,
       "earliest_source_date": "2008-01-02",
       "latest_source_date": "2026-11-17",
-      "age_days": 0,
+      "age_days": 1,
       "stale": false,
       "invalid_observations": 0,
       "within_source_conflict_dates": [
@@ -129,14 +134,14 @@
         "2025-09-30"
       ],
       "duplicate_date_extra_observations": 4,
-      "exact_duplicate_rows_in_captures": 20,
+      "exact_duplicate_rows_in_captures": 21,
       "last_successful_run": {
-        "id": 129,
-        "finished_at": "2026-11-17T18:44:53.260480+00:00",
+        "id": 131,
+        "finished_at": "2026-11-18T00:44:46.671321+00:00",
         "details": {
           "parsed_rows": 1314,
           "new_observations": 0,
-          "capture_id": 476
+          "capture_id": 485
         }
       }
     },
@@ -145,7 +150,7 @@
       "valid_unique_dates": 916,
       "earliest_source_date": "2010-10-27",
       "latest_source_date": "2026-11-17",
-      "age_days": 0,
+      "age_days": 1,
       "stale": false,
       "invalid_observations": 0,
       "within_source_conflict_dates": [],
@@ -162,11 +167,11 @@
       }
     },
     "ministry": {
-      "unique_source_observations": 945,
-      "valid_unique_dates": 913,
+      "unique_source_observations": 946,
+      "valid_unique_dates": 914,
       "earliest_source_date": "2010-10-27",
-      "latest_source_date": "2026-11-10",
-      "age_days": 7,
+      "latest_source_date": "2026-11-17",
+      "age_days": 1,
       "stale": false,
       "invalid_observations": 1,
       "within_source_conflict_dates": [
@@ -199,11 +204,11 @@
       "duplicate_date_extra_observations": 31,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 130,
-        "finished_at": "2026-11-17T18:45:03.478696+00:00",
+        "id": 132,
+        "finished_at": "2026-11-18T00:44:57.456451+00:00",
         "details": {
-          "parsed_rows": 8,
-          "new_observations": 0,
+          "parsed_rows": 9,
+          "new_observations": 1,
           "pages": 1
         }
       }
@@ -213,7 +218,7 @@
       "valid_unique_dates": 4,
       "earliest_source_date": "2010-10-27",
       "latest_source_date": "2025-05-29",
-      "age_days": 537,
+      "age_days": 538,
       "stale": true,
       "invalid_observations": 0,
       "within_source_conflict_dates": [],
@@ -234,7 +239,7 @@
       "valid_unique_dates": 17,
       "earliest_source_date": "2026-01-16",
       "latest_source_date": "2026-11-13",
-      "age_days": 4,
+      "age_days": 5,
       "stale": false,
       "invalid_observations": 0,
       "within_source_conflict_dates": [],
@@ -1283,6 +1288,22 @@
       "finished_at": "2026-11-17T18:45:03.478696+00:00",
       "status": "success",
       "details": "{\"parsed_rows\": 8, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 131,
+      "source_id": "ipt",
+      "started_at": "2026-11-18T00:44:30.042135+00:00",
+      "finished_at": "2026-11-18T00:44:46.671321+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1314, \"new_observations\": 0, \"capture_id\": 485}"
+    },
+    {
+      "id": 132,
+      "source_id": "ministry",
+      "started_at": "2026-11-18T00:44:47.213320+00:00",
+      "finished_at": "2026-11-18T00:44:57.456451+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 9, \"new_observations\": 1, \"pages\": 1}"
     }
   ],
   "readiness": "Adequate for source reconciliation and exploratory target analysis. Not ready for an institutional as-of forecasting backtest: effective/release times, unresolved conflicts, coverage and regimes need review."
