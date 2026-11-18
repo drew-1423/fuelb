@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-18T06:54:36.186975+00:00",
+  "as_of": "2026-11-18T12:53:38.734101+00:00",
   "series": [
     {
       "series": "brent_spot",
@@ -228,28 +228,28 @@
       "details": "{\"status\": \"ok\", \"source_id\": \"market_cboe\", \"source_url\": \"https://fred.stlouisfed.org/graph/fredgraph.csv?id=OVXCLS\", \"capture_id\": 255, \"series\": \"cboe_ovx\", \"publisher\": \"FRED\", \"parsed_rows\": 4912, \"new_observations\": 0, \"rows_ingested\": 4912, \"latest_observation_date\": \"2026-11-12\", \"fred_series_id\": \"OVXCLS\"}"
     },
     "market_ec": {
-      "id": 127,
+      "id": 139,
       "source_id": "market_ec",
-      "started_at": "2026-11-17T12:46:55.941100+00:00",
-      "finished_at": "2026-11-17T12:47:04.409278+00:00",
+      "started_at": "2026-11-18T12:53:20.410553+00:00",
+      "finished_at": "2026-11-18T12:53:30.493138+00:00",
       "status": "success",
-      "details": "{\"results\": [{\"series\": \"italy_gasoline_ex_tax\", \"parsed_rows\": 1092, \"new_observations\": 0, \"capture_id\": 468}, {\"series\": \"greece_gasoline_ex_tax\", \"parsed_rows\": 1092, \"new_observations\": 0, \"capture_id\": 468}]}"
+      "details": "{\"results\": [{\"series\": \"italy_gasoline_ex_tax\", \"parsed_rows\": 1092, \"new_observations\": 0, \"capture_id\": 523}, {\"series\": \"greece_gasoline_ex_tax\", \"parsed_rows\": 1092, \"new_observations\": 0, \"capture_id\": 523}]}"
     },
     "market_eia": {
-      "id": 126,
+      "id": 138,
       "source_id": "market_eia",
-      "started_at": "2026-11-17T12:46:17.620662+00:00",
-      "finished_at": "2026-11-17T12:46:55.581597+00:00",
+      "started_at": "2026-11-18T12:52:43.022536+00:00",
+      "finished_at": "2026-11-18T12:53:20.065433+00:00",
       "status": "success",
-      "details": "{\"results\": [{\"series\": \"brent_spot\", \"parsed_rows\": 9128, \"new_observations\": 0, \"capture_id\": 457}, {\"series\": \"nyh_gasoline\", \"parsed_rows\": 9177, \"new_observations\": 0, \"capture_id\": 459}, {\"series\": \"us_gasoline_stocks\", \"parsed_rows\": 1923, \"new_observations\": 0, \"capture_id\": 461}, {\"series\": \"us_crude_stocks\", \"parsed_rows\": 2302, \"new_observations\": 0, \"capture_id\": 463}, {\"series\": \"us_refinery_utilization\", \"parsed_rows\": 1880, \"new_observations\": 0, \"capture_id\": 465}]}"
+      "details": "{\"results\": [{\"series\": \"brent_spot\", \"parsed_rows\": 9128, \"new_observations\": 0, \"capture_id\": 512}, {\"series\": \"nyh_gasoline\", \"parsed_rows\": 9177, \"new_observations\": 0, \"capture_id\": 514}, {\"series\": \"us_gasoline_stocks\", \"parsed_rows\": 1923, \"new_observations\": 0, \"capture_id\": 516}, {\"series\": \"us_crude_stocks\", \"parsed_rows\": 2302, \"new_observations\": 0, \"capture_id\": 518}, {\"series\": \"us_refinery_utilization\", \"parsed_rows\": 1880, \"new_observations\": 0, \"capture_id\": 520}]}"
     },
     "market_fed": {
-      "id": 128,
+      "id": 140,
       "source_id": "market_fed",
-      "started_at": "2026-11-17T12:47:04.735161+00:00",
-      "finished_at": "2026-11-17T12:47:12.048514+00:00",
+      "started_at": "2026-11-18T12:53:30.809702+00:00",
+      "finished_at": "2026-11-18T12:53:38.143939+00:00",
       "status": "success",
-      "details": "{\"results\": [{\"series\": \"eurusd\", \"parsed_rows\": 7270, \"new_observations\": 5, \"capture_id\": 471}]}"
+      "details": "{\"results\": [{\"series\": \"eurusd\", \"parsed_rows\": 7270, \"new_observations\": 0, \"capture_id\": 526}]}"
     },
     "market_official_review": {
       "id": 84,
@@ -284,9 +284,7 @@
   "large_move_review_candidates": 40,
   "date_alignment_review_candidates": 0,
   "conflicting_capture_dates": 0,
-  "raw_hash_failures": [
-    471
-  ],
+  "raw_hash_failures": [],
   "historical_strict_alignment": {
     "origins": 1372,
     "origins_with_any_strict_market_observation": 2
