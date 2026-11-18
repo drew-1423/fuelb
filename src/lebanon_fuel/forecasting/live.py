@@ -75,8 +75,9 @@ def anchor_check(records, at, maximum_age, *, allow_provisional=False):
 
 def strict_feature_frame(root, records, histories, at, horizon):
     config = json.loads((root/'config/forecasting_research.json').read_text())
-    if records[-1]['verification_status'] == PROVISIONAL_PRICE:
-        config['target_statuses'] = [*config['target_statuses'], PROVISIONAL_PRICE]
+    # A source-agreed historical price stays eligible after the next
+    # government-backed update. Otherwise the preceding change becomes NaN.
+    config['target_statuses'] = list(set(config['target_statuses']) | {PROVISIONAL_PRICE})
     market = MarketFeatures.__new__(MarketFeatures)
     market.config, market.cache, market.mode = config, {}, 'as_of_close'
     market.histories = {}
