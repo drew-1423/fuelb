@@ -382,3 +382,19 @@ def test_provisional_anchor_can_issue_point_estimate_without_production_or_uncer
     assert result['predicted_price'] == pytest.approx(record['price_lbp_20l'] + result['predicted_change'])
     assert result['interval'] is None and result['probabilities'] is None
     assert live.anchor_check(context[4], context[-1], 10)[0] is None
+
+
+def test_government_anchor_keeps_previous_source_agreed_change(context):
+    from lebanon_fuel.domain import PROVISIONAL_PRICE
+    root, _, _, _, records, histories, at = context
+    records[-2].update(verification_status=PROVISIONAL_PRICE,
+                      corroborating_sources=[{"id": "ipt"}, {"id": "taqtek"}],
+                      price_lbp_20l=2391000)
+    records[-1].update(verification_status="archive_corroborated", price_lbp_20l=2343000)
+    frame = live.strict_feature_frame(root, records, histories, at, "decision_1")
+    assert frame.x_domestic_change_lag1.iloc[0] == -48000
+    assert records[-2]["verification_status"] == PROVISIONAL_PRICE
+
+    records[-2]["verification_status"] = "supplier_observed"
+    frame = live.strict_feature_frame(root, records, histories, at, "decision_1")
+    assert np.isnan(frame.x_domestic_change_lag1.iloc[0])
