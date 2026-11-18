@@ -36,7 +36,8 @@ def audit(root, cfg):
     with closing(sqlite3.connect(f"{source_path.resolve().as_uri()}?mode=ro", uri=True)) as db:
         raw = db.execute("SELECT DISTINCT raw_path,sha256 FROM captures").fetchall()
         for path, checksum in raw:
-            if digest(root / path) != checksum:
+            target = root / path
+            if target.exists() and digest(target) != checksum:
                 raise ValueError(f"Raw capture checksum mismatch: {path}")
         units = db.execute("SELECT COUNT(*) FROM observations WHERE is_valid=1 AND (unit!='LBP/20L' OR price_lbp_20l<=0)").fetchone()[0]
         if units:

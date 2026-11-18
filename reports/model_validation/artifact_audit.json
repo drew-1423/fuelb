@@ -1,10 +1,10 @@
 {
-  "checked_at": "2026-11-18T18:50:46.996168+00:00",
+  "checked_at": "2026-11-18T19:33:34.992555+00:00",
   "status": "passed_integrity_and_replay_checks_not_production_approval",
   "prediction_rows": 288,
   "saved_prediction_replays": 288,
   "metric_groups": 51,
-  "forecasts": 45291,
+  "forecasts": 45299,
   "evaluations": 44936,
   "hash_chain_valid": true,
   "legacy_signed_zero_matches": 62
