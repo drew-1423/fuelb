@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-18T00:45:22.053162+00:00",
+  "generated_at": "2026-11-18T06:55:07.675866+00:00",
   "data_quality": {
     "conflict_dates": 42,
     "missing_publication_clocks": 3200,
@@ -101,8 +101,8 @@
     "revision_id": 3478
   },
   "market": {
-    "origin_utc": "2026-11-18T00:45:19.167175+00:00",
-    "origin_beirut": "2026-11-18T02:45:19.167175+02:00",
+    "origin_utc": "2026-11-18T06:55:03.830840+00:00",
+    "origin_beirut": "2026-11-18T08:55:03.830840+02:00",
     "mode": "strict",
     "backtest_eligible": true,
     "series": {
@@ -415,7 +415,7 @@
         "value": 101.43,
         "unit": "USD/bbl",
         "latest_observation_date": "2026-11-11",
-        "age_calendar_days": 6,
+        "age_calendar_days": 7,
         "allowed_age_days": 14,
         "return_1_observation": 0.0,
         "return_7_calendar_days": -0.046961325966850764,
@@ -719,7 +719,7 @@
         "value": 210.757,
         "unit": "million_bbl",
         "latest_observation_date": "2026-11-06",
-        "age_calendar_days": 11,
+        "age_calendar_days": 12,
         "allowed_age_days": 21,
         "return_1_observation": 0.008609385618162602,
         "return_7_calendar_days": 0.008609385618162602,
@@ -1022,7 +1022,7 @@
         "value": 414.41700000000003,
         "unit": "million_bbl",
         "latest_observation_date": "2026-11-06",
-        "age_calendar_days": 11,
+        "age_calendar_days": 12,
         "allowed_age_days": 21,
         "return_1_observation": 0.011365189379148877,
         "return_7_calendar_days": 0.011365189379148877,
@@ -1325,7 +1325,7 @@
         "value": 95.2,
         "unit": "percent",
         "latest_observation_date": "2026-11-06",
-        "age_calendar_days": 11,
+        "age_calendar_days": 12,
         "allowed_age_days": 21,
         "return_1_observation": 0.007407407407407529,
         "return_7_calendar_days": 0.007407407407407529,
@@ -1628,7 +1628,7 @@
         "value": 1.1034,
         "unit": "USD/EUR",
         "latest_observation_date": "2026-11-13",
-        "age_calendar_days": 4,
+        "age_calendar_days": 5,
         "allowed_age_days": 14,
         "return_1_observation": -0.001989869753979745,
         "return_7_calendar_days": -0.01075847229693383,
@@ -2561,7 +2561,7 @@
         "value": 51.72,
         "unit": "percent_annualized",
         "latest_observation_date": "2026-11-12",
-        "age_calendar_days": 5,
+        "age_calendar_days": 6,
         "allowed_age_days": 7,
         "return_1_observation": 0.008973858759266484,
         "return_7_calendar_days": -0.1421462929175651,
@@ -2895,7 +2895,7 @@
   },
   "policy_headlines": {
     "status": "captured_headlines_only",
-    "retrieved_at": "2026-11-18T00:44:50.629999+00:00",
+    "retrieved_at": "2026-11-18T06:54:29.228834+00:00",
     "items": [],
     "note": "Changes require original-document review. This is not complete policy surveillance."
   },
