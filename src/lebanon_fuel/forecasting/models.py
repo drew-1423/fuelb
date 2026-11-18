@@ -109,6 +109,8 @@ class Model:
         if self.family=='B_structural_proxy':
             if 'structural_coefficients' in self.extra:return differential_predict(frame,self.extra)
             return frame.x_structural_cost_gap.to_numpy(float)*self.extra['slope']
+        if self.family=='I_hurdle':
+            return self.fitted.predict(frame)
         if self.family=='Z_last_change':
             kind,n=str(frame.horizon.iloc[0]).split('_')
             factor=int(n) if kind=='decision' else int(n)/frame.x_interval_median.clip(lower=1).to_numpy(float)
@@ -131,6 +133,8 @@ class Model:
         return result
 
     def quantiles(self,frame):
+        if self.family=='I_hurdle' and hasattr(self.fitted,'quantiles'):
+            return self.fitted.quantiles(frame)
         if 'quantile_models' not in self.extra:return None
         x=self.transform.transform(frame[self.columns])
         a,b=[np.asarray(m.predict(x),float) for m in self.extra['quantile_models']]
@@ -150,6 +154,12 @@ def fit_model(family,frame,config):
         return model
     if family=='B_structural_proxy':
         model.extra.update(differential_fit(frame))
+        return model
+    if family=='I_hurdle':
+        from .hurdle import HurdleModel
+        hurdle=HurdleModel(family=family).fit(frame,config)
+        model.fitted=hurdle
+        model.extra.update(hurdle.extra)
         return model
     if family=='Z_last_change':return model
     if family in {'E_lightgbm','F_catboost'} and frame.base_revision_id.nunique()<config['minimum_tree_train']:

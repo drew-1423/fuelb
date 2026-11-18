@@ -81,7 +81,7 @@
     "src/lebanon_fuel/forecasting/cli.py": "ff95325f21f909fc7c682d407b14a51f0e121cc5241a55cabd429f47b3e47439",
     "src/lebanon_fuel/forecasting/data.py": "2f8f4a7cb081b192c3137c5c0657a110b06b1e36f3c13d71acbe929a475aa6c8",
     "src/lebanon_fuel/forecasting/live.py": "d7fc3674215201165030e3e02ba467c4b9e798ccf7746f5e81427bb58dafb5f2",
-    "src/lebanon_fuel/forecasting/models.py": "79d1f4983aa095bc85281506e8fe5fd0d348c9e5ebcc636cdf14e3990e4c575c",
+    "src/lebanon_fuel/forecasting/models.py": "8a04702d031527dee1cbeec997cf8c53992fdc81467bee435378abade10432c4",
     "src/lebanon_fuel/forecasting/pipeline.py": "325a3df6f2d206bbb5d34d99f422ece3115718b645938c8b97bbac6b105fa8c1",
     "src/lebanon_fuel/forecasting/reporting.py": "f67fad76dbd7312933c265bc4d040d89f3a0d12bf4928cc61892baa18558596f",
     "src/lebanon_fuel/forecasting/uncertainty.py": "d4f34d03ebe0e11efde542e0e536e69eb30aad0d051fec97fef683f0740863f1"
