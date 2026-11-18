@@ -1,7 +1,7 @@
 {
-  "checked_at": "2026-11-18T19:49:51.344190+00:00",
+  "checked_at": "2026-11-18T19:55:53.917922+00:00",
   "scope": "Lebanon fuel Python project; unrelated Swift application excluded",
-  "all_passed": false,
+  "all_passed": true,
   "results": {
     "pytest": {
       "command": [
@@ -12,8 +12,8 @@
         "-q"
       ],
       "returncode": 0,
-      "seconds": 74.91633958299644,
-      "stdout": "........................................................................ [ 25%]\n........................................................................ [ 51%]\n........................................................................ [ 77%]\n.............................................................            [100%]\n277 passed in 74.14s (0:01:14)\n",
+      "seconds": 58.77626637497451,
+      "stdout": "........................................................................ [ 25%]\n........................................................................ [ 50%]\n........................................................................ [ 76%]\n...................................................................      [100%]\n283 passed in 57.74s\n",
       "stderr": ""
     },
     "structural_artifact_audit": {
@@ -22,8 +22,8 @@
         "scripts/audit_structural_artifacts.py"
       ],
       "returncode": 0,
-      "seconds": 0.9132778330240399,
-      "stdout": "{\n  \"review_kind\": \"implementing_agent_recomputation_not_independent_external_audit\",\n  \"design_rows\": 433,\n  \"prediction_rows\": 630,\n  \"distinct_test_origins\": 105,\n  \"target_versions_checked\": 468,\n  \"market_capture_hashes_checked\": 2,\n  \"saved_metric_groups_checked\": 12,\n  \"annex_mae_lbp_20l\": \"2.733333333333333333333333333\",\n  \"strict_historical_evaluation_n\": 0,\n  \"result\": \"passed\",\n  \"code_hashes\": {\n    \"src/lebanon_fuel/structural/__init__.py\": \"ad481454cebe2100aa618a8c87fdd7e530dfeb26271ba2fbda5b2d985a0a04d0\",\n    \"src/lebanon_fuel/structural/annexes.py\": \"8116a9e1cc97c9851a2f824118b94c0e6da3402a26bf4599f49cd39adc1a1e6d\",\n    \"src/lebanon_fuel/structural/cli.py\": \"68c297a97071955b68459937c23240a28e291f627eb13de74dae9123b06dd2c6\",\n    \"src/lebanon_fuel/structural/engine.py\": \"5fb826dd32d98cfa7a9e2cb1431e78005beef8d84884bec5566b6c1814776fd9\",\n    \"src/lebanon_fuel/structural/reporting.py\": \"11a1ac859720482c09b75eca79ab4b821a7db2227508179eedca8cf9dc01b8c8\",\n    \"src/lebanon_fuel/structural/research.py\": \"3cf1e4f25222492068b8b9674956741886c96ef13376b8fdf6dd4656b4fdc6a3\"\n  }\n}\n",
+      "seconds": 0.7806819590041414,
+      "stdout": "{\n  \"review_kind\": \"implementing_agent_recomputation_not_independent_external_audit\",\n  \"design_rows\": 433,\n  \"prediction_rows\": 630,\n  \"distinct_test_origins\": 105,\n  \"target_versions_checked\": 468,\n  \"market_capture_hashes_checked\": 2,\n  \"saved_metric_groups_checked\": 12,\n  \"annex_mae_lbp_20l\": \"2.733333333333333333333333333\",\n  \"strict_historical_evaluation_n\": 0,\n  \"result\": \"passed\",\n  \"code_hashes\": {\n    \"src/lebanon_fuel/structural/__init__.py\": \"ad481454cebe2100aa618a8c87fdd7e530dfeb26271ba2fbda5b2d985a0a04d0\",\n    \"src/lebanon_fuel/structural/annexes.py\": \"8116a9e1cc97c9851a2f824118b94c0e6da3402a26bf4599f49cd39adc1a1e6d\",\n    \"src/lebanon_fuel/structural/cli.py\": \"30e739bb51b890a8c920a4ebbe2e52b5ffba0148ddb7ec863fb6cf7427f567f9\",\n    \"src/lebanon_fuel/structural/engine.py\": \"5fb826dd32d98cfa7a9e2cb1431e78005beef8d84884bec5566b6c1814776fd9\",\n    \"src/lebanon_fuel/structural/pdf_parser.py\": \"eff76e3a67985cf30554e29e6f28ee634aa1010a565dbb88074ddbac9a64207a\",\n    \"src/lebanon_fuel/structural/reporting.py\": \"11a1ac859720482c09b75eca79ab4b821a7db2227508179eedca8cf9dc01b8c8\",\n    \"src/lebanon_fuel/structural/research.py\": \"3cf1e4f25222492068b8b9674956741886c96ef13376b8fdf6dd4656b4fdc6a3\"\n  }\n}\n",
       "stderr": ""
     },
     "forecasting_artifact_audit": {
@@ -32,8 +32,8 @@
         "scripts/audit_forecasting_artifacts.py"
       ],
       "returncode": 0,
-      "seconds": 5.9603595830267295,
-      "stdout": "{\n  \"checked_at\": \"2026-11-18T19:49:41.825080+00:00\",\n  \"status\": \"passed_mechanical_checks_not_independent_validation\",\n  \"design_labels\": 10236,\n  \"feature_origins\": 2085,\n  \"prediction_rows\": 11205,\n  \"distinct_origin_horizon_cases\": 1025,\n  \"saved_bundles\": 8,\n  \"reloaded_forecasts\": 90,\n  \"production_approved\": false\n}\n",
+      "seconds": 4.68572308390867,
+      "stdout": "{\n  \"checked_at\": \"2026-11-18T19:55:44.236816+00:00\",\n  \"status\": \"passed_mechanical_checks_not_independent_validation\",\n  \"design_labels\": 10236,\n  \"feature_origins\": 2085,\n  \"prediction_rows\": 11205,\n  \"distinct_origin_horizon_cases\": 1025,\n  \"saved_bundles\": 8,\n  \"reloaded_forecasts\": 90,\n  \"production_approved\": false\n}\n",
       "stderr": ""
     },
     "validation_artifact_audit": {
@@ -42,8 +42,8 @@
         "scripts/audit_validation_artifacts.py"
       ],
       "returncode": 0,
-      "seconds": 7.05470987490844,
-      "stdout": "{\n  \"checked_at\": \"2026-11-18T19:49:48.844550+00:00\",\n  \"status\": \"passed_integrity_and_replay_checks_not_production_approval\",\n  \"prediction_rows\": 288,\n  \"saved_prediction_replays\": 288,\n  \"metric_groups\": 51,\n  \"forecasts\": 45299,\n  \"evaluations\": 44936,\n  \"hash_chain_valid\": true,\n  \"legacy_signed_zero_matches\": 62\n}\n",
+      "seconds": 5.962904332904145,
+      "stdout": "{\n  \"checked_at\": \"2026-11-18T19:55:50.315349+00:00\",\n  \"status\": \"passed_integrity_and_replay_checks_not_production_approval\",\n  \"prediction_rows\": 288,\n  \"saved_prediction_replays\": 288,\n  \"metric_groups\": 51,\n  \"forecasts\": 45299,\n  \"evaluations\": 44936,\n  \"hash_chain_valid\": true,\n  \"legacy_signed_zero_matches\": 62\n}\n",
       "stderr": ""
     },
     "operations_integrity": {
@@ -53,9 +53,9 @@
         "lebanon_fuel.automation.cli",
         "audit"
       ],
-      "returncode": 2,
-      "seconds": 1.9313368749571964,
-      "stdout": "A refresh is already running. No overlapping collection started.\n",
+      "returncode": 0,
+      "seconds": 3.2701782500371337,
+      "stdout": "{\n  \"checked_at\": \"2026-11-18T19:55:53.630348+00:00\",\n  \"databases\": [\n    {\n      \"database\": \"lebanon_fuel.sqlite\",\n      \"integrity\": \"ok\",\n      \"foreign_key_errors\": 0\n    },\n    {\n      \"database\": \"forecast_ledger.sqlite\",\n      \"integrity\": \"ok\",\n      \"foreign_key_errors\": 0\n    },\n    {\n      \"database\": \"operations.sqlite\",\n      \"integrity\": \"ok\",\n      \"foreign_key_errors\": 0\n    }\n  ],\n  \"raw_files_checked\": 260,\n  \"normalized_market_rows_checked\": 38494,\n  \"snapshots_checked\": 725,\n  \"model_files_checked\": 140,\n  \"evaluation_arithmetic_errors\": 0,\n  \"forecasts\": 45299,\n  \"evaluations\": 44936,\n  \"hash_chain_valid\": true,\n  \"legacy_signed_zero_matches\": 62\n}\n",
       "stderr": ""
     },
     "dependency_compatibility": {
@@ -66,7 +66,7 @@
         "check"
       ],
       "returncode": 0,
-      "seconds": 0.33712545793969184,
+      "seconds": 0.19809541595168412,
       "stdout": "No broken requirements found.\n",
       "stderr": ""
     }
