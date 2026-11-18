@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-18T12:54:06.899070+00:00",
+  "generated_at": "2026-11-18T16:26:53.907282+00:00",
   "data_quality": {
     "conflict_dates": 42,
     "missing_publication_clocks": 3200,
@@ -101,8 +101,8 @@
     "revision_id": 3478
   },
   "market": {
-    "origin_utc": "2026-11-18T12:54:03.348835+00:00",
-    "origin_beirut": "2026-11-18T14:54:03.348835+02:00",
+    "origin_utc": "2026-11-18T16:26:50.425509+00:00",
+    "origin_beirut": "2026-11-18T18:26:50.425509+02:00",
     "mode": "strict",
     "backtest_eligible": true,
     "series": {
@@ -2895,7 +2895,7 @@
   },
   "policy_headlines": {
     "status": "captured_headlines_only",
-    "retrieved_at": "2026-11-18T12:52:32.288881+00:00",
+    "retrieved_at": "2026-11-18T16:26:20.051410+00:00",
     "items": [],
     "note": "Changes require original-document review. This is not complete policy surveillance."
   },

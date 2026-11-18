@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-18T12:53:38.712467+00:00",
+  "generated_at": "2026-11-18T16:26:26.714264+00:00",
   "as_of_beirut": "2026-11-18",
   "timezone": "Asia/Beirut",
   "ledger_unique_dates": 1372,
@@ -42,8 +42,10 @@
     "data/raw/ipt/3bf8b477ef7b929646f9c816b2370439a75824b649c16bca335dd530665dd1ce.html",
     "data/raw/ipt/e197387c4b5625eb02d8941b8357302b13d03dc12a3cd29a315bb38fee1c0ed8.html",
     "data/raw/ipt/1c826afdd0b4a14db269c7a9085accb5b8462681e181ee66ff9d5653b8707b13.xlsx",
+    "data/raw/taqtek/ee694c72ed38554a73cb65bafbfaa9ea095bfddf36a5589ebd2ed9598bae5e84.html",
     "data/raw/market_ec/54d0ceb2ed9347a61634237612f95c02f4cb0a67fd9c52d88e723ff2b23f2498.html",
     "data/raw/market_fed/944ae31c1f5166678826976edf235b9dea4077a9d06ea784a5846cef00eb69ae.html",
+    "data/raw/market_fed/c424bcdfe0947e48d9bc3937fd3a9e82bf144e5ac6454ae95a68346196394c77.zip",
     "data/raw/ipt/481072ac7749ed52136d46e2e658716042ec87275137be70dd81ed6658723fbc.html",
     "data/raw/ipt/531b74187e5f12d20b0cd7d5245f8a017eb887d45d496534354ccae565b3ef6e.html",
     "data/raw/ipt/74461730b3ce05ec6180c34449d25c16f0fbed864cff22d8ee5a20fa409cc332.html",
@@ -55,7 +57,15 @@
     "data/raw/ipt/813b7f7e019fcaef07c0fc450df7c9f8f35531be21b595086715bb36bca1b02f.html",
     "data/raw/ipt/99368fe28974fa6fa81f051f3616a0fc6d58f122cd0efafdd389f3a4ee16396d.html",
     "data/raw/ipt/6fb84bb1c09780eb2576699b8b9d09fe4ed47b2f82cae70363cab0abbe18af3d.html",
-    "data/raw/ipt/c82621ffc09c29d3e4bc2417109b56ba2d2d6335d8e57696fb39b26928d17d77.xlsx"
+    "data/raw/ipt/c82621ffc09c29d3e4bc2417109b56ba2d2d6335d8e57696fb39b26928d17d77.xlsx",
+    "data/raw/ipt/59f92831ecfc573f9f3e572f6a758f667ceab264a7d4577d82374346c7d9bad5.html",
+    "data/raw/ipt/839e53959bda1e19dac9ef503c7243048e5687bbd28f19bee5b701412b3c9cad.html",
+    "data/raw/ipt/e33712c6249027aebed527dbfc5e9bdb37af1600bccbf6a84c095f0fd4e553d0.html",
+    "data/raw/ipt/80f25ab1d033faea5a9e5b08323db2290195b903ca6c4d399442511f33c671cc.xlsx",
+    "data/raw/market_eia/46fd12a9e54a58663fc91f9b6c5755693a7636de78ebc1a89affb4e8f1babd95.html",
+    "data/raw/market_eia/2a04c9de780a0762ae471a73e861b577c3d645cdb14e4b695c7e7c23f6eb8276.html",
+    "data/raw/market_ec/14f053c58d7b638c5afcbb6e323291b3214ff388f055b540e6c99aac7fcdeb38.html",
+    "data/raw/market_fed/158f76abd63f2ed453f519ed60dfa3e244fc4f6981832dbb844aabc1267215a8.html"
   ],
   "unique_observed_official_archive_decision_ids": 668,
   "official_archive_dates_without_decision_id": 274,
@@ -140,14 +150,14 @@
         "2025-09-30"
       ],
       "duplicate_date_extra_observations": 4,
-      "exact_duplicate_rows_in_captures": 23,
+      "exact_duplicate_rows_in_captures": 24,
       "last_successful_run": {
-        "id": 135,
-        "finished_at": "2026-11-18T12:52:27.977419+00:00",
+        "id": 141,
+        "finished_at": "2026-11-18T16:26:16.044212+00:00",
         "details": {
           "parsed_rows": 1314,
           "new_observations": 0,
-          "capture_id": 503
+          "capture_id": 531
         }
       }
     },
@@ -210,8 +220,8 @@
       "duplicate_date_extra_observations": 31,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 136,
-        "finished_at": "2026-11-18T12:52:38.534459+00:00",
+        "id": 142,
+        "finished_at": "2026-11-18T16:26:26.216342+00:00",
         "details": {
           "parsed_rows": 9,
           "new_observations": 0,
@@ -1374,6 +1384,22 @@
       "finished_at": "2026-11-18T12:53:38.143939+00:00",
       "status": "success",
       "details": "{\"results\": [{\"series\": \"eurusd\", \"parsed_rows\": 7270, \"new_observations\": 0, \"capture_id\": 526}]}"
+    },
+    {
+      "id": 141,
+      "source_id": "ipt",
+      "started_at": "2026-11-18T16:25:56.325491+00:00",
+      "finished_at": "2026-11-18T16:26:16.044212+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1314, \"new_observations\": 0, \"capture_id\": 531}"
+    },
+    {
+      "id": 142,
+      "source_id": "ministry",
+      "started_at": "2026-11-18T16:26:16.421789+00:00",
+      "finished_at": "2026-11-18T16:26:26.216342+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 9, \"new_observations\": 0, \"pages\": 1}"
     }
   ],
   "readiness": "Adequate for source reconciliation and exploratory target analysis. Not ready for an institutional as-of forecasting backtest: effective/release times, unresolved conflicts, coverage and regimes need review."

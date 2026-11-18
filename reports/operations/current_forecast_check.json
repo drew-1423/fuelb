@@ -1,5 +1,5 @@
 {
-  "origin": "2026-11-18T12:53:56.306965+00:00",
+  "origin": "2026-11-18T16:26:43.632620+00:00",
   "anchor": {
     "absolute_price_change": -102000,
     "candidate_values": [
@@ -40,7 +40,7 @@
   "forecasts": [
     {
       "horizon": "decision_1",
-      "origin": "2026-11-18T12:53:56.306965+00:00",
+      "origin": "2026-11-18T16:26:43.632620+00:00",
       "endpoint": null,
       "target_label": "Next 1 official pricing decision(s)",
       "decision_date": "2026-11-20",
@@ -64,15 +64,15 @@
         "estimated": true,
         "limitations": "Date estimates only; announcement times, holidays and extraordinary decisions are unknown"
       },
-      "tier": null,
-      "label": "FORECAST UNAVAILABLE",
-      "status": "abstain",
-      "predicted_price": null,
-      "predicted_change": null,
-      "percentage_change": null,
+      "tier": 2,
+      "label": "QUANTITATIVE MODEL FORECAST",
+      "status": "issued",
+      "predicted_price": 2311125.918366177,
+      "predicted_change": -31874.08163382287,
+      "percentage_change": -1.3603961431422478,
       "interval": null,
       "probabilities": null,
-      "uncertainty": "Unavailable",
+      "uncertainty": "Waiting for a validated prediction range from live outcomes.",
       "attempts": [
         {
           "tier": 1,
@@ -82,22 +82,97 @@
         },
         {
           "tier": 2,
-          "reasons": [
-            "Required quantitative features unavailable: domestic change"
-          ]
+          "reasons": []
         }
       ],
       "critical_missing_inputs": [
-        "Required quantitative features unavailable: domestic change"
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
       ],
       "pinned_family": "G_hybrid",
-      "forecast_id": 45276,
-      "snapshot_id": "0f4a1885ba099e9f29c03b4b88f5214ed6bcd09ab6d31074bc6d424cc9750f9c",
-      "model_version": "live-unavailable-v1"
+      "methodology": "G_hybrid",
+      "family": "G_hybrid",
+      "model_version": "part3-fbd34b3d4dadf1a06a16-decision_1-G_hybrid-experimental",
+      "artifact_sha256": "fbd34b3d4dadf1a06a160469dd2c1234f8dee0b133a5f9b4f310d441650b9462",
+      "performance": {
+        "regime": "stabilized_fx_2023_2026",
+        "horizon": "decision_1",
+        "family": "G_hybrid",
+        "n": 2,
+        "unique_base_decisions": 2,
+        "first_origin": "2026-08-08T00:00:00+00:00",
+        "last_origin": "2026-11-07T01:00:00+00:00",
+        "mae": 366.16826975414097,
+        "rmse": 369.3414638815938,
+        "bias": -366.16826975414097,
+        "base_balanced_mae": 366.16826975414097,
+        "direction_accuracy": 1.0,
+        "exact_sign_direction_accuracy": 1.0,
+        "no_change_target_fraction": 0.0,
+        "interval_n": 2,
+        "interval_coverage": 1.0,
+        "interval_mean_width": 103208.20388777462,
+        "interval_80_n": 2,
+        "interval_80_coverage": 1.0,
+        "interval_80_mean_width": 24590.47747677584,
+        "probability_n": 2,
+        "probability_calibration_ready_n": 2,
+        "brier_multiclass": 0.06295556617616575,
+        "shared_direction_brier": 0.06295556617616575,
+        "shared_direction_log_loss": 0.18702280202192034,
+        "deadband_lbp": 3000.0,
+        "zero_width_interval_n": 0,
+        "change_mae_lbp": 366.16826975414097,
+        "price_mae_lbp": 366.16826975414097,
+        "change_rmse_lbp": 369.3414638815938,
+        "distinct_base_decisions": 2,
+        "interval_width_lbp": 103208.20388777462
+      },
+      "market_input_mode": "strict_captured_vintage",
+      "lagged_market_inputs": [],
+      "calibration_n": 31,
+      "calibration_maximum_label_end": "2026-11-10T22:00:00+00:00",
+      "probability_deadband_lbp": 3000,
+      "probability_order": [
+        "decrease",
+        "no_change",
+        "increase"
+      ],
+      "probability_status": "horizon_conditioned_past_oof_conformal_research",
+      "ovx_regime": "Normal",
+      "ovx_regime_conditioning": "regime_conditioned_matured_oof",
+      "calibration_ovx_regime": "Normal",
+      "driver_contributions": {
+        "commodity_pass_through": -1848.3942057431982,
+        "lagged_domestic_momentum": -24858.408755662254,
+        "fiscal_shock": 0.0,
+        "other_features": -3584.6509856910443,
+        "baseline_intercept": -1582.6276867263691,
+        "unit": "LBP/20L",
+        "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
+      },
+      "base_price": 2343000,
+      "base_source_date": "2026-11-17",
+      "base_revision_id": 3478,
+      "anchor_verification": "archive_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "public_calibration": {
+        "cohort": "government_backed",
+        "calibration_n": 0,
+        "evaluation_n": 0,
+        "empirical_coverage": null,
+        "minimum_calibration_n": 30,
+        "minimum_evaluation_n": 20,
+        "nominal": 0.9,
+        "radius": null
+      },
+      "forecast_id": 45284,
+      "snapshot_id": "4cb63ff78ddd4062095d814e94258410d709f2ce8d9d7fb8f14b16ba3df20b9c"
     },
     {
       "horizon": "decision_2",
-      "origin": "2026-11-18T12:53:56.306965+00:00",
+      "origin": "2026-11-18T16:26:43.632620+00:00",
       "endpoint": null,
       "target_label": "Next 2 official pricing decision(s)",
       "decision_date": "2026-11-24",
@@ -121,15 +196,15 @@
         "estimated": true,
         "limitations": "Date estimates only; announcement times, holidays and extraordinary decisions are unknown"
       },
-      "tier": null,
-      "label": "FORECAST UNAVAILABLE",
-      "status": "abstain",
-      "predicted_price": null,
-      "predicted_change": null,
-      "percentage_change": null,
+      "tier": 2,
+      "label": "QUANTITATIVE MODEL FORECAST",
+      "status": "issued",
+      "predicted_price": 2302840.9372099433,
+      "predicted_change": -40159.06279005666,
+      "percentage_change": -1.7140018262934982,
       "interval": null,
       "probabilities": null,
-      "uncertainty": "Unavailable",
+      "uncertainty": "Waiting for a validated prediction range from live outcomes.",
       "attempts": [
         {
           "tier": 1,
@@ -139,22 +214,54 @@
         },
         {
           "tier": 2,
-          "reasons": [
-            "Required quantitative features unavailable: domestic change"
-          ]
+          "reasons": []
         }
       ],
       "critical_missing_inputs": [
-        "Required quantitative features unavailable: domestic change"
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
       ],
       "pinned_family": "G_hybrid",
-      "forecast_id": 45277,
-      "snapshot_id": "0f4a1885ba099e9f29c03b4b88f5214ed6bcd09ab6d31074bc6d424cc9750f9c",
-      "model_version": "live-unavailable-v1"
+      "methodology": "G_hybrid",
+      "family": "G_hybrid",
+      "model_version": "part3-b50640d13af84cd6ada0-decision_2-G_hybrid-experimental",
+      "artifact_sha256": "b50640d13af84cd6ada0237fcab22c8aa483d90cc5cd125539be5776f0c1687c",
+      "performance": null,
+      "market_input_mode": "strict_captured_vintage",
+      "lagged_market_inputs": [],
+      "calibration_n": 49,
+      "calibration_maximum_label_end": "2025-12-09T22:00:00+00:00",
+      "probability_deadband_lbp": 3000,
+      "probability_order": [
+        "decrease",
+        "no_change",
+        "increase"
+      ],
+      "probability_status": "horizon_conditioned_past_oof_conformal_research",
+      "ovx_regime": "Normal",
+      "ovx_regime_conditioning": "pooled_calibration",
+      "calibration_ovx_regime": null,
+      "driver_contributions": {
+        "commodity_pass_through": 5480.895795708601,
+        "lagged_domestic_momentum": -42140.495270147156,
+        "fiscal_shock": 0.0,
+        "other_features": -1699.0893285756802,
+        "baseline_intercept": -1800.373987042425,
+        "unit": "LBP/20L",
+        "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
+      },
+      "base_price": 2343000,
+      "base_source_date": "2026-11-17",
+      "base_revision_id": 3478,
+      "anchor_verification": "archive_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "forecast_id": 45285,
+      "snapshot_id": "4cb63ff78ddd4062095d814e94258410d709f2ce8d9d7fb8f14b16ba3df20b9c"
     },
     {
       "horizon": "decision_4",
-      "origin": "2026-11-18T12:53:56.306965+00:00",
+      "origin": "2026-11-18T16:26:43.632620+00:00",
       "endpoint": null,
       "target_label": "Next 4 official pricing decision(s)",
       "decision_date": "2026-12-01",
@@ -178,15 +285,15 @@
         "estimated": true,
         "limitations": "Date estimates only; announcement times, holidays and extraordinary decisions are unknown"
       },
-      "tier": null,
-      "label": "FORECAST UNAVAILABLE",
-      "status": "abstain",
-      "predicted_price": null,
-      "predicted_change": null,
-      "percentage_change": null,
+      "tier": 2,
+      "label": "QUANTITATIVE MODEL FORECAST",
+      "status": "issued",
+      "predicted_price": 2283041.296361834,
+      "predicted_change": -59958.703638166364,
+      "percentage_change": -2.5590569201095335,
       "interval": null,
       "probabilities": null,
-      "uncertainty": "Unavailable",
+      "uncertainty": "Waiting for a validated prediction range from live outcomes.",
       "attempts": [
         {
           "tier": 1,
@@ -196,38 +303,70 @@
         },
         {
           "tier": 2,
-          "reasons": [
-            "Required quantitative features unavailable: domestic change"
-          ]
+          "reasons": []
         }
       ],
       "critical_missing_inputs": [
-        "Required quantitative features unavailable: domestic change"
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
       ],
       "pinned_family": "G_hybrid",
-      "forecast_id": 45278,
-      "snapshot_id": "0f4a1885ba099e9f29c03b4b88f5214ed6bcd09ab6d31074bc6d424cc9750f9c",
-      "model_version": "live-unavailable-v1"
+      "methodology": "G_hybrid",
+      "family": "G_hybrid",
+      "model_version": "part3-b4f2d76bb9c2bada3f63-decision_4-G_hybrid-experimental",
+      "artifact_sha256": "b4f2d76bb9c2bada3f6378ad1fde238c342d5e2ca263d3e8f6992d3ae723a4a1",
+      "performance": null,
+      "market_input_mode": "strict_captured_vintage",
+      "lagged_market_inputs": [],
+      "calibration_n": 22,
+      "calibration_maximum_label_end": "2025-12-12T22:00:00+00:00",
+      "probability_deadband_lbp": 3000,
+      "probability_order": [
+        "decrease",
+        "no_change",
+        "increase"
+      ],
+      "probability_status": "horizon_conditioned_past_oof_conformal_research",
+      "ovx_regime": "Normal",
+      "ovx_regime_conditioning": "pooled_calibration",
+      "calibration_ovx_regime": null,
+      "driver_contributions": {
+        "commodity_pass_through": 4310.957193327149,
+        "lagged_domestic_momentum": -54328.116061979665,
+        "fiscal_shock": 0.0,
+        "other_features": -6289.351056445768,
+        "baseline_intercept": -3652.1937130680835,
+        "unit": "LBP/20L",
+        "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
+      },
+      "base_price": 2343000,
+      "base_source_date": "2026-11-17",
+      "base_revision_id": 3478,
+      "anchor_verification": "archive_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "forecast_id": 45286,
+      "snapshot_id": "4cb63ff78ddd4062095d814e94258410d709f2ce8d9d7fb8f14b16ba3df20b9c"
     },
     {
       "horizon": "day_1",
-      "origin": "2026-11-18T12:53:56.306965+00:00",
-      "endpoint": "2026-11-19T14:53:56.306965+02:00",
+      "origin": "2026-11-18T16:26:43.632620+00:00",
+      "endpoint": "2026-11-19T18:26:43.632620+02:00",
       "target_label": "Prevailing official price in 1 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
       "schedule_basis": null,
       "schedule_estimated": false,
       "schedule_details": null,
-      "tier": null,
-      "label": "FORECAST UNAVAILABLE",
-      "status": "abstain",
-      "predicted_price": null,
-      "predicted_change": null,
-      "percentage_change": null,
+      "tier": 2,
+      "label": "QUANTITATIVE MODEL FORECAST",
+      "status": "issued",
+      "predicted_price": 2335828.157106869,
+      "predicted_change": -7171.842893131118,
+      "percentage_change": -0.3060965810128518,
       "interval": null,
       "probabilities": null,
-      "uncertainty": "Unavailable",
+      "uncertainty": "Waiting for a validated prediction range from live outcomes.",
       "attempts": [
         {
           "tier": 1,
@@ -237,38 +376,70 @@
         },
         {
           "tier": 2,
-          "reasons": [
-            "Required quantitative features unavailable: domestic change"
-          ]
+          "reasons": []
         }
       ],
       "critical_missing_inputs": [
-        "Required quantitative features unavailable: domestic change"
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
       ],
       "pinned_family": "G_hybrid",
-      "forecast_id": 45279,
-      "snapshot_id": "0f4a1885ba099e9f29c03b4b88f5214ed6bcd09ab6d31074bc6d424cc9750f9c",
-      "model_version": "live-unavailable-v1"
+      "methodology": "G_hybrid",
+      "family": "G_hybrid",
+      "model_version": "part3-34aaede583a9d2fb6290-day_1-G_hybrid-experimental",
+      "artifact_sha256": "34aaede583a9d2fb62900fce02d50ebd07a18fcc7c9616e2d042387a53861a7e",
+      "performance": null,
+      "market_input_mode": "strict_captured_vintage",
+      "lagged_market_inputs": [],
+      "calibration_n": 60,
+      "calibration_maximum_label_end": "2025-12-22T22:00:00+00:00",
+      "probability_deadband_lbp": 3000,
+      "probability_order": [
+        "decrease",
+        "no_change",
+        "increase"
+      ],
+      "probability_status": "horizon_conditioned_past_oof_conformal_research",
+      "ovx_regime": "Normal",
+      "ovx_regime_conditioning": "regime_conditioned_matured_oof",
+      "calibration_ovx_regime": "Normal",
+      "driver_contributions": {
+        "commodity_pass_through": -275.138352108261,
+        "lagged_domestic_momentum": -6141.214709804391,
+        "fiscal_shock": 0.0,
+        "other_features": -535.6013525257734,
+        "baseline_intercept": -219.8884786926929,
+        "unit": "LBP/20L",
+        "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
+      },
+      "base_price": 2343000,
+      "base_source_date": "2026-11-17",
+      "base_revision_id": 3478,
+      "anchor_verification": "archive_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "forecast_id": 45287,
+      "snapshot_id": "4cb63ff78ddd4062095d814e94258410d709f2ce8d9d7fb8f14b16ba3df20b9c"
     },
     {
       "horizon": "day_3",
-      "origin": "2026-11-18T12:53:56.306965+00:00",
-      "endpoint": "2026-11-21T14:53:56.306965+02:00",
+      "origin": "2026-11-18T16:26:43.632620+00:00",
+      "endpoint": "2026-11-21T18:26:43.632620+02:00",
       "target_label": "Prevailing official price in 3 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
       "schedule_basis": null,
       "schedule_estimated": false,
       "schedule_details": null,
-      "tier": null,
-      "label": "FORECAST UNAVAILABLE",
-      "status": "abstain",
-      "predicted_price": null,
-      "predicted_change": null,
-      "percentage_change": null,
+      "tier": 2,
+      "label": "QUANTITATIVE MODEL FORECAST",
+      "status": "issued",
+      "predicted_price": 2319771.425401067,
+      "predicted_change": -23228.574598932893,
+      "percentage_change": -0.991403098546005,
       "interval": null,
       "probabilities": null,
-      "uncertainty": "Unavailable",
+      "uncertainty": "Waiting for a validated prediction range from live outcomes.",
       "attempts": [
         {
           "tier": 1,
@@ -278,38 +449,70 @@
         },
         {
           "tier": 2,
-          "reasons": [
-            "Required quantitative features unavailable: domestic change"
-          ]
+          "reasons": []
         }
       ],
       "critical_missing_inputs": [
-        "Required quantitative features unavailable: domestic change"
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
       ],
       "pinned_family": "G_hybrid",
-      "forecast_id": 45280,
-      "snapshot_id": "0f4a1885ba099e9f29c03b4b88f5214ed6bcd09ab6d31074bc6d424cc9750f9c",
-      "model_version": "live-unavailable-v1"
+      "methodology": "G_hybrid",
+      "family": "G_hybrid",
+      "model_version": "part3-d0289ebedc304dcc4de7-day_3-G_hybrid-experimental",
+      "artifact_sha256": "d0289ebedc304dcc4de79f8da820220347066a71491602e1850d05a2a7c5162d",
+      "performance": null,
+      "market_input_mode": "strict_captured_vintage",
+      "lagged_market_inputs": [],
+      "calibration_n": 60,
+      "calibration_maximum_label_end": "2025-12-22T22:00:00+00:00",
+      "probability_deadband_lbp": 3000,
+      "probability_order": [
+        "decrease",
+        "no_change",
+        "increase"
+      ],
+      "probability_status": "horizon_conditioned_past_oof_conformal_research",
+      "ovx_regime": "Normal",
+      "ovx_regime_conditioning": "regime_conditioned_matured_oof",
+      "calibration_ovx_regime": "Normal",
+      "driver_contributions": {
+        "commodity_pass_through": -5076.355978719846,
+        "lagged_domestic_momentum": -15910.722667538264,
+        "fiscal_shock": 0.0,
+        "other_features": -1069.7965258401691,
+        "baseline_intercept": -1171.6994268346095,
+        "unit": "LBP/20L",
+        "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
+      },
+      "base_price": 2343000,
+      "base_source_date": "2026-11-17",
+      "base_revision_id": 3478,
+      "anchor_verification": "archive_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "forecast_id": 45288,
+      "snapshot_id": "4cb63ff78ddd4062095d814e94258410d709f2ce8d9d7fb8f14b16ba3df20b9c"
     },
     {
       "horizon": "day_7",
-      "origin": "2026-11-18T12:53:56.306965+00:00",
-      "endpoint": "2026-11-25T14:53:56.306965+02:00",
+      "origin": "2026-11-18T16:26:43.632620+00:00",
+      "endpoint": "2026-11-25T18:26:43.632620+02:00",
       "target_label": "Prevailing official price in 7 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
       "schedule_basis": null,
       "schedule_estimated": false,
       "schedule_details": null,
-      "tier": null,
-      "label": "FORECAST UNAVAILABLE",
-      "status": "abstain",
-      "predicted_price": null,
-      "predicted_change": null,
-      "percentage_change": null,
+      "tier": 2,
+      "label": "QUANTITATIVE MODEL FORECAST",
+      "status": "issued",
+      "predicted_price": 2296809.9139090767,
+      "predicted_change": -46190.08609092313,
+      "percentage_change": -1.9714078570603129,
       "interval": null,
       "probabilities": null,
-      "uncertainty": "Unavailable",
+      "uncertainty": "Waiting for a validated prediction range from live outcomes.",
       "attempts": [
         {
           "tier": 1,
@@ -319,38 +522,103 @@
         },
         {
           "tier": 2,
-          "reasons": [
-            "Required quantitative features unavailable: domestic change"
-          ]
+          "reasons": []
         }
       ],
       "critical_missing_inputs": [
-        "Required quantitative features unavailable: domestic change"
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
       ],
       "pinned_family": "G_hybrid",
-      "forecast_id": 45281,
-      "snapshot_id": "0f4a1885ba099e9f29c03b4b88f5214ed6bcd09ab6d31074bc6d424cc9750f9c",
-      "model_version": "live-unavailable-v1"
+      "methodology": "G_hybrid",
+      "family": "G_hybrid",
+      "model_version": "part3-f0afdf92c8244b3ee4d9-day_7-G_hybrid-experimental",
+      "artifact_sha256": "f0afdf92c8244b3ee4d9c7f1b02729eb33eab3803a88ddc9ca8007be4c682418",
+      "performance": {
+        "regime": "stabilized_fx_2023_2026",
+        "horizon": "day_7",
+        "family": "G_hybrid",
+        "n": 1,
+        "unique_base_decisions": 1,
+        "first_origin": "2026-08-04T00:00:00+00:00",
+        "last_origin": "2026-08-04T00:00:00+00:00",
+        "mae": 1354.2343498426526,
+        "rmse": 1354.2343498426526,
+        "bias": -1354.2343498426526,
+        "base_balanced_mae": 1354.2343498426526,
+        "direction_accuracy": 1.0,
+        "exact_sign_direction_accuracy": 1.0,
+        "no_change_target_fraction": 0.0,
+        "interval_n": 1,
+        "interval_coverage": 1.0,
+        "interval_mean_width": 74586.46774302132,
+        "interval_80_n": 1,
+        "interval_80_coverage": 1.0,
+        "interval_80_mean_width": 52847.17092348727,
+        "probability_n": 1,
+        "probability_calibration_ready_n": 1,
+        "brier_multiclass": 0.15437691080841437,
+        "shared_direction_brier": 0.15437691080841437,
+        "shared_direction_log_loss": 0.38153993189174196,
+        "deadband_lbp": 3000.0,
+        "zero_width_interval_n": 0,
+        "change_mae_lbp": 1354.2343498426526,
+        "price_mae_lbp": 1354.2343498426526,
+        "change_rmse_lbp": 1354.2343498426526,
+        "distinct_base_decisions": 1,
+        "interval_width_lbp": 74586.46774302132
+      },
+      "market_input_mode": "strict_captured_vintage",
+      "lagged_market_inputs": [],
+      "calibration_n": 46,
+      "calibration_maximum_label_end": "2025-12-12T22:00:00+00:00",
+      "probability_deadband_lbp": 3000,
+      "probability_order": [
+        "decrease",
+        "no_change",
+        "increase"
+      ],
+      "probability_status": "horizon_conditioned_past_oof_conformal_research",
+      "ovx_regime": "Normal",
+      "ovx_regime_conditioning": "regime_conditioned_matured_oof",
+      "calibration_ovx_regime": "Normal",
+      "driver_contributions": {
+        "commodity_pass_through": -1766.5792820355077,
+        "lagged_domestic_momentum": -32896.06725273088,
+        "fiscal_shock": 0.0,
+        "other_features": -8745.28978344257,
+        "baseline_intercept": -2782.1497727141837,
+        "unit": "LBP/20L",
+        "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
+      },
+      "base_price": 2343000,
+      "base_source_date": "2026-11-17",
+      "base_revision_id": 3478,
+      "anchor_verification": "archive_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "forecast_id": 45289,
+      "snapshot_id": "4cb63ff78ddd4062095d814e94258410d709f2ce8d9d7fb8f14b16ba3df20b9c"
     },
     {
       "horizon": "day_14",
-      "origin": "2026-11-18T12:53:56.306965+00:00",
-      "endpoint": "2026-12-02T14:53:56.306965+02:00",
+      "origin": "2026-11-18T16:26:43.632620+00:00",
+      "endpoint": "2026-12-02T18:26:43.632620+02:00",
       "target_label": "Prevailing official price in 14 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
       "schedule_basis": null,
       "schedule_estimated": false,
       "schedule_details": null,
-      "tier": null,
-      "label": "FORECAST UNAVAILABLE",
-      "status": "abstain",
-      "predicted_price": null,
-      "predicted_change": null,
-      "percentage_change": null,
+      "tier": 2,
+      "label": "QUANTITATIVE MODEL FORECAST",
+      "status": "issued",
+      "predicted_price": 2242647.567397464,
+      "predicted_change": -100352.43260253583,
+      "percentage_change": -4.283074374841479,
       "interval": null,
       "probabilities": null,
-      "uncertainty": "Unavailable",
+      "uncertainty": "Waiting for a validated prediction range from live outcomes.",
       "attempts": [
         {
           "tier": 1,
@@ -360,38 +628,70 @@
         },
         {
           "tier": 2,
-          "reasons": [
-            "Required quantitative features unavailable: domestic change"
-          ]
+          "reasons": []
         }
       ],
       "critical_missing_inputs": [
-        "Required quantitative features unavailable: domestic change"
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
       ],
       "pinned_family": "G_hybrid",
-      "forecast_id": 45282,
-      "snapshot_id": "0f4a1885ba099e9f29c03b4b88f5214ed6bcd09ab6d31074bc6d424cc9750f9c",
-      "model_version": "live-unavailable-v1"
+      "methodology": "G_hybrid",
+      "family": "G_hybrid",
+      "model_version": "part3-461e1fe1925f7c456b9a-day_14-G_hybrid-experimental",
+      "artifact_sha256": "461e1fe1925f7c456b9a8c387e131b013385a20218d507092b0a5f05191ae256",
+      "performance": null,
+      "market_input_mode": "strict_captured_vintage",
+      "lagged_market_inputs": [],
+      "calibration_n": 25,
+      "calibration_maximum_label_end": "2025-12-12T22:00:00+00:00",
+      "probability_deadband_lbp": 3000,
+      "probability_order": [
+        "decrease",
+        "no_change",
+        "increase"
+      ],
+      "probability_status": "horizon_conditioned_past_oof_conformal_research",
+      "ovx_regime": "Normal",
+      "ovx_regime_conditioning": "pooled_calibration",
+      "calibration_ovx_regime": null,
+      "driver_contributions": {
+        "commodity_pass_through": -16870.759416665405,
+        "lagged_domestic_momentum": -61524.20451852961,
+        "fiscal_shock": 0.0,
+        "other_features": -13658.569532229885,
+        "baseline_intercept": -8298.899135110953,
+        "unit": "LBP/20L",
+        "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
+      },
+      "base_price": 2343000,
+      "base_source_date": "2026-11-17",
+      "base_revision_id": 3478,
+      "anchor_verification": "archive_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "forecast_id": 45290,
+      "snapshot_id": "4cb63ff78ddd4062095d814e94258410d709f2ce8d9d7fb8f14b16ba3df20b9c"
     },
     {
       "horizon": "day_30",
-      "origin": "2026-11-18T12:53:56.306965+00:00",
-      "endpoint": "2026-12-18T14:53:56.306965+02:00",
+      "origin": "2026-11-18T16:26:43.632620+00:00",
+      "endpoint": "2026-12-18T18:26:43.632620+02:00",
       "target_label": "Prevailing official price in 30 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
       "schedule_basis": null,
       "schedule_estimated": false,
       "schedule_details": null,
-      "tier": null,
-      "label": "FORECAST UNAVAILABLE",
-      "status": "abstain",
-      "predicted_price": null,
-      "predicted_change": null,
-      "percentage_change": null,
+      "tier": 2,
+      "label": "QUANTITATIVE MODEL FORECAST",
+      "status": "issued",
+      "predicted_price": 2129201.6993929106,
+      "predicted_change": -213798.30060708962,
+      "percentage_change": -9.124980819764815,
       "interval": null,
       "probabilities": null,
-      "uncertainty": "Unavailable",
+      "uncertainty": "Waiting for a validated prediction range from live outcomes.",
       "attempts": [
         {
           "tier": 1,
@@ -401,18 +701,50 @@
         },
         {
           "tier": 2,
-          "reasons": [
-            "Required quantitative features unavailable: domestic change"
-          ]
+          "reasons": []
         }
       ],
       "critical_missing_inputs": [
-        "Required quantitative features unavailable: domestic change"
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.",
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
       ],
       "pinned_family": "G_hybrid",
-      "forecast_id": 45283,
-      "snapshot_id": "0f4a1885ba099e9f29c03b4b88f5214ed6bcd09ab6d31074bc6d424cc9750f9c",
-      "model_version": "live-unavailable-v1"
+      "methodology": "G_hybrid",
+      "family": "G_hybrid",
+      "model_version": "part3-a0207757c08a2f4b4e4f-day_30-G_hybrid-experimental",
+      "artifact_sha256": "a0207757c08a2f4b4e4f953d604e7eedd1dae5b393474dd5e22ee5e91aaae796",
+      "performance": null,
+      "market_input_mode": "strict_captured_vintage",
+      "lagged_market_inputs": [],
+      "calibration_n": 6,
+      "calibration_maximum_label_end": "2025-09-23T21:00:00+00:00",
+      "probability_deadband_lbp": 3000,
+      "probability_order": [
+        "decrease",
+        "no_change",
+        "increase"
+      ],
+      "probability_status": "insufficient_matured_oof_residuals",
+      "ovx_regime": "Normal",
+      "ovx_regime_conditioning": "pooled_calibration",
+      "calibration_ovx_regime": null,
+      "driver_contributions": {
+        "commodity_pass_through": -53846.91236711311,
+        "lagged_domestic_momentum": -16713.65745384556,
+        "fiscal_shock": 412.50592570475743,
+        "other_features": -38900.70932782089,
+        "baseline_intercept": -104749.52738401484,
+        "unit": "LBP/20L",
+        "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
+      },
+      "base_price": 2343000,
+      "base_source_date": "2026-11-17",
+      "base_revision_id": 3478,
+      "anchor_verification": "archive_corroborated",
+      "validation_status": "unapproved_research",
+      "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
+      "forecast_id": 45291,
+      "snapshot_id": "4cb63ff78ddd4062095d814e94258410d709f2ce8d9d7fb8f14b16ba3df20b9c"
     }
   ],
   "available_market_inputs": {
@@ -659,21 +991,19 @@
       "vintage_certified": true
     }
   },
-  "status": "abstain",
-  "reasons": [
-    "Required quantitative features unavailable: domestic change"
-  ],
+  "status": "issued",
+  "reasons": [],
   "forecast_ids": [
-    45276,
-    45277,
-    45278,
-    45279,
-    45280,
-    45281,
-    45282,
-    45283
+    45284,
+    45285,
+    45286,
+    45287,
+    45288,
+    45289,
+    45290,
+    45291
   ],
   "snapshot_ids": [
-    "0f4a1885ba099e9f29c03b4b88f5214ed6bcd09ab6d31074bc6d424cc9750f9c"
+    "4cb63ff78ddd4062095d814e94258410d709f2ce8d9d7fb8f14b16ba3df20b9c"
   ]
 }
