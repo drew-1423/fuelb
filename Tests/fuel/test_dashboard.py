@@ -114,6 +114,7 @@ def test_dashboard_views_and_interactions(monkeypatch):
     from streamlit.testing.v1 import AppTest
 
     monkeypatch.setenv("LEBANON_FUEL_ROOT", str(ROOT))
+    monkeypatch.setenv("LEBANON_FUEL_ADMIN_PASSCODE", "test-owner-passcode")
     app = AppTest.from_file(str(APP), default_timeout=20).run()
     assert not app.exception
     assert app.metric[0].label == "Last government-archive price"
@@ -157,6 +158,7 @@ def test_dashboard_views_and_interactions(monkeypatch):
     assert any("higher than about" in item.value for item in app.caption)
     assert any("options-chain JSON import is optional" in item.value for item in app.info)
     app.radio(key="view").set_value("Data quality").run()
+    app.sidebar.text_input(key="admin_passcode_entered").set_value("test-owner-passcode").run()
     monkeypatch.setattr(data, "refresh_source", lambda root, source: (False, "Source unavailable"))
     next(b for b in app.button if b.label == "Refresh selected source").click().run()
     assert any("Collection failed" in e.value for e in app.error)
@@ -347,3 +349,27 @@ def test_public_passcode_gate_blocks_unauthenticated_refresh(monkeypatch):
     assert any("Public read-only mode" in w.value for w in app.warning)
     app.sidebar.text_input(key="admin_passcode_entered").set_value("secret-owner-code").run()
     assert any("Unlocked · live refresh enabled" in c.value for c in app.sidebar.caption)
+
+
+@pytest.mark.parametrize(('expected', 'entered', 'authorized'), [
+    ('', '', False), ('', 'anything', False),
+    ('owner-secret', '', False), ('owner-secret', 'wrong', False),
+    ('owner-secret', 'owner-secret', True),
+])
+def test_refresh_authorization_fails_closed_before_starting_workers(expected, entered, authorized):
+    import ast
+    from types import SimpleNamespace
+
+    tree = ast.parse(APP.read_text())
+    names = {'_refresh_authorized', 'start_background_refresh'}
+    functions = ast.Module(body=[node for node in tree.body
+        if isinstance(node, ast.FunctionDef) and node.name in names], type_ignores=[])
+    def unexpected_manager_access():
+        pytest.fail('An unauthorized refresh reached the worker manager')
+    namespace = {'_configured_passcode': lambda: expected,
+                 'st': SimpleNamespace(session_state={'admin_passcode_entered': entered}),
+                 '_refresh_manager': unexpected_manager_access}
+    exec(compile(functions, str(APP), 'exec'), namespace)
+    assert namespace['_refresh_authorized']() is authorized
+    if not authorized:
+        assert namespace['start_background_refresh'](ROOT) is False

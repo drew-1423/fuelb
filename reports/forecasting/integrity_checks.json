@@ -1,9 +1,9 @@
 {
-  "checked_at": "2026-11-12T23:53:13.018135+00:00",
+  "checked_at": "2026-11-18T18:50:39.196304+00:00",
   "status": "passed_mechanical_checks_not_independent_validation",
   "design_labels": 10236,
   "feature_origins": 2085,
-  "prediction_rows": 11208,
+  "prediction_rows": 11205,
   "distinct_origin_horizon_cases": 1025,
   "saved_bundles": 8,
   "reloaded_forecasts": 90,

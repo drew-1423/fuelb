@@ -16,6 +16,8 @@ def main():
     protocol=manifest['protocol']
     assert manifest['protocol_sha256']==digest(ROOT/'config/validation_protocol.json')
     for path,h in manifest['source_sha256'].items():assert digest(ROOT/path)==h,path
+    for path,h in manifest.get('release',{}).get('source_sha256',{}).items():
+        assert digest(ROOT/path)==h,path
     assert digest(ROOT/manifest['design_path'])==manifest['design_sha256']
     assert digest(ROOT/protocol['development_predictions'])==manifest['development_predictions_sha256']
     design=load_holdout(ROOT,protocol)
@@ -57,7 +59,11 @@ def main():
         assert stored.interval_n==good.sum()
         if good.any():
             np.testing.assert_allclose(stored.interval_coverage,np.mean((rows.loc[good,'interval_low']<=y[good])&(rows.loc[good,'interval_high']>=y[good])))
-    store=Store(ROOT);raw={r['revision_id']:r for r in store.ledger()};store.close()
+    store=Store(ROOT)
+    # Match the exact immutable revision used by each saved prediction.
+    raw={r['id']:dict(json.loads(r['payload_json']),revision_id=r['id'])
+         for r in store.db.execute('SELECT id,payload_json FROM decision_versions')}
+    store.close()
     for row in design.itertuples():
         assert raw[row.base_revision_id]['price_lbp_20l']==row.base_price_lbp_20l
         assert raw[row.target_revision_id]['price_lbp_20l']-row.base_price_lbp_20l==row.target_change_lbp_20l

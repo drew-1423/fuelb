@@ -181,7 +181,7 @@ def _configured_passcode():
 def _refresh_authorized():
     expected = _configured_passcode()
     if not expected:
-        return True
+        return False
     return st.session_state.get("admin_passcode_entered", "") == expected
 
 
@@ -204,6 +204,8 @@ def _refresh_worker(manager, root, source, job_id):
 
 
 def start_background_refresh(root, source="all"):
+    if not _refresh_authorized():
+        return False
     manager = _refresh_manager()
     with manager["lock"]:
         if manager["running"]:
