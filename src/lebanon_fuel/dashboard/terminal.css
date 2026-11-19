@@ -279,3 +279,26 @@ button:is([data-testid="stBaseButton-primary"], [data-testid="stBaseButton-prima
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
 }
+
+/* Driver task hierarchy. Evidence remains secondary to the current price. */
+.st-key-driver_prices { padding: .3rem 0 1.1rem; border-bottom: 1px solid var(--border); }
+.st-key-driver_prices [data-testid="stMetric"] { background: transparent; border: 0; padding: .2rem 0; }
+.st-key-driver_prices [data-testid="stMetricValue"] > div { font-size: 2.2rem; font-weight: 740; letter-spacing: -.025em; }
+.trust-strip { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 1rem; padding: 1rem 0; }
+.trust-item { min-width: 0; display: grid; gap: .35rem; padding: .8rem 0; border-top: 1px solid var(--border); }
+.trust-item strong { color: var(--text); font-size: .9rem; }
+.trust-item span { color: var(--sky); font-size: .9rem; font-weight: 650; }
+.trust-item.warning span { color: #f6d89d; }
+.trust-item.failed span { color: #ffb7c7; }
+.trust-item small { color: var(--muted); font-size: .8rem; line-height: 1.5; overflow-wrap: anywhere; }
+#fuel-copy-brief:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+#fuel-copy-brief:hover { filter: brightness(1.08); }
+#fuel-copy-brief:active { transform: translateY(1px); }
+@media (max-width: 1000px) { .trust-strip { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 640px) {
+  .trust-strip { gap: .65rem; }
+  [data-testid="stPlotlyChart"] .modebar-btn { min-width: 40px; min-height: 40px; }
+  [data-testid="stSidebarCollapsedControl"] button { min-width: 44px; min-height: 44px; }
+  .st-key-driver_prices [data-testid="stMetricValue"] > div { font-size: 1.85rem; }
+  [data-testid="stMain"] h1 { font-size: 1.85rem; }
+}

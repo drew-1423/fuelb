@@ -46,10 +46,11 @@ def performance(root, ledger):
             calls = direction_class([r["predicted_change"] for r in matches])
             actual = direction_class([r["actual"] - r["base"] for r in matches])
             rows.append({"Starting price evidence": label, "Updates": len(matches),
+                         "First target": min(r['day'] for r in matches), "Last target": max(r['day'] for r in matches),
                          "Average miss · LBP / 20 L": round(mean(abs(r["actual"]-r["forecast"]) for r in matches)),
                          "Direction calls right": f"{int((calls == actual).sum())} of {len(matches)}"})
         st.dataframe(rows, hide_index=True, width="stretch")
-    st.caption("A supplier outcome can appear in both sections once officially reviewed. Within each section "
+    st.caption("Direction counts use increase, decrease and no-change with a 3,000 LBP deadband. A supplier outcome can appear in both sections once officially reviewed. Within each section "
                "and starting-price group, repeated forecasts for one date count once.")
 
 

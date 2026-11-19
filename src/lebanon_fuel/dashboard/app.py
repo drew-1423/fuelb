@@ -12,7 +12,7 @@ import uuid
 import pandas as pd
 import streamlit as st
 
-from lebanon_fuel.dashboard import analyst, backtesting, charts, data, decisions
+from lebanon_fuel.dashboard import analyst, backtesting, charts, data, decisions, driver, experience
 from lebanon_fuel.dashboard.scenarios import simulate, macro_preset, MACRO_PRESETS, anchored_simulate, economic_breakdown
 from lebanon_fuel.storage.database import sqlite_connection
 from lebanon_fuel.domain import BEIRUT, PROVISIONAL_PRICE
@@ -20,22 +20,29 @@ from lebanon_fuel.market.catalog import MISSING, SERIES
 
 ROOT = Path(os.environ.get("LEBANON_FUEL_ROOT", Path.cwd())).resolve()
 REPORTS = ROOT / "reports/model_validation"
-PERSPECTIVES = {
-    '🚗 Driver Pulse': {'Overview': 'Pump Pulse & Overview', 'Scenario simulator': 'What-If Fuel Calculator'},
-    '📊 Market & Intelligence': {'Price & forecasts': 'Price & Forecast Trajectory',
-        'Global markets': 'Global Energy Markets', 'Analyst report': 'Analyst Briefing'},
-    '🔬 Quantitative & Governance': {'Model performance': 'Model Performance & Backtesting',
-        'Decision timeline': 'Decision Timeline & Ledgers', 'Volatility & options': 'Implied Volatility (OVX) & Options',
-        'Data quality': 'Data Quality & Gap Audit'},
-}
+PERSPECTIVES = experience.PERSPECTIVES
 VIEWS = [view for group in PERSPECTIVES.values() for view in group]
+
+
+def _remember_inputs():
+    remembered=dict(st.session_state.get('_scenario_inputs',{}))
+    remembered.update({k:v for k,v in st.session_state.items() if k.startswith('scenario_') and not k.startswith('scenario_preset')})
+    st.session_state['_scenario_inputs'] = remembered
+
+
+def _view_changed():
+    _remember_inputs()
+    slug = next((s for s,v in experience.SLUGS.items() if v == st.session_state.get('view')), 'driver')
+    st.query_params['view'] = slug
+    st.session_state['_url_view'] = slug
 
 
 def _perspective_changed():
     st.session_state['view'] = next(iter(PERSPECTIVES[st.session_state['perspective']]))
+    _view_changed()
 
 
-REGIMES = {"pre_crisis": "2018–19 challenge", "recent_pre_fiscal": "2025 challenge", "stabilized_fx_2023_2026": "2026 holdout"}
+REGIMES = {"pre_crisis": "2018–19 examined research", "recent_pre_fiscal": "2025 examined research", "stabilized_fx_2023_2026": "2026 examined research"}
 FAMILIES = {"Z_last_change": "Last change", "A_no_change": "No change", "A_mean": "Historical mean",
             "Z_brent": "Brent baseline", "B_structural_proxy": "Structural proxy",
             "E_lightgbm": "LightGBM", "F_catboost": "CatBoost", "G_hybrid": "Hybrid",
@@ -92,53 +99,11 @@ def _provenance_badge(record):
 
 
 def whatsapp_briefing(current, forecast=None):
-    """Share a saved estimate with its date, source and research limitations."""
-    lines = ['⛽ LEBANON GASOLINE 95 OUTLOOK (Levant Energy Terminal)']
-    if current:
-        price = current['price_lbp_20l']
-        lines += [f'📍 Current recorded price: {price:,.0f} LBP (~${price / data.DISPLAY_FX:.2f} / 20L)',
-                  f"Source: {data.STATUS.get(current['verification_status'], 'Under review')} · {current['source_date']}"]
-    if forecast is not None:
-        spec = json.loads(forecast.target_json)
-        change = float(forecast.predicted_change)
-        lines += [f"⚡ Next update: {data.forecast_view(forecast)['schedule']} (estimated; time unconfirmed)",
-                  f'🔮 Projected change: {change:+,.0f} LBP ({_signed_usd(change)} USD) '
-                  f'from {forecast.base_price:,.0f} to ~{forecast.predicted_price:,.0f} LBP',
-                  f'Percentage change: {change / forecast.base_price:+.2%}',
-                  '💡 Check the posted price after the update. The projected change is not confirmed.',
-                  f"Issued: {data.beirut_time(forecast.created_at)} · {_forecast_limitation(spec)}"]
-    else:
-        lines += ['🔮 Forecast unavailable. Check the latest posted station price before filling.']
-    lines += ['USD equivalents assume 89,500 LBP/USD.', '🔗 Live Tracker: https://fuelb95.streamlit.app/']
-    return '\n'.join(lines)
+    return experience.briefing(current, forecast, data.config(ROOT))
 
 
 def _share_briefing(current, forecast):
-    text = whatsapp_briefing(current, forecast)
-    payload = json.dumps(text).replace('<', chr(92) + 'u003c')
-    st.html("""<button id="fuel-copy-brief" type="button" style="padding:12px 18px;border-radius:10px;background:#b4dfff;color:#101626;border:0;font-weight:700;cursor:pointer">📋 Copy WhatsApp Briefing</button>
-    <span id="fuel-copy-status" role="status" style="display:block;margin-top:8px"></span>
-    <script>
-    (() => {
-    const button = document.getElementById('fuel-copy-brief');
-    button.onclick = async () => {
-      try {
-        await navigator.clipboard.writeText(""" + payload + """);
-        document.getElementById('fuel-copy-status').textContent = 'Copied. Paste into WhatsApp or your social app.';
-      } catch (error) {
-        document.getElementById('fuel-copy-status').textContent = 'Clipboard access is blocked. Use the copy icon in the briefing preview below.';
-      }
-    };
-    })();
-    </script>""", unsafe_allow_javascript=True)
-    with st.expander('Preview the shareable briefing'):
-        st.code(text, language=None)
-        st.download_button('Download briefing', text, 'lebanon-gasoline-brief.txt', 'text/plain')
-    if forecast is not None:
-        with st.expander('Your tank: estimated cost change'):
-            liters = st.number_input('Fill-up size · liters', min_value=1, max_value=200, value=50)
-            change = float(forecast.predicted_change) * liters / 20
-            st.write(f'{change:+,.0f} LBP (~{_signed_usd(change)} USD) for {liters} L if the estimate is realized.')
+    driver.share(current, forecast, SETTINGS)
 
 
 def _decree_outlook(records, forecast):
@@ -238,8 +203,7 @@ def current_forecasts(path, settings, decision, latest_record):
     if batch.empty:
         return batch
     batch = batch.loc[batch["family"].eq("G_hybrid")].copy()
-    released_ranges = batch["target_json"].map(
-        lambda value: (json.loads(value).get("public_calibration") or {}).get("radius") is not None)
+    released_ranges = batch.apply(lambda row: experience.released_bounds(row,90) is not None,axis=1)
     batch.loc[~released_ranges, ["interval_low", "interval_high"]] = None
     batch["probabilities_json"] = None
     if batch.empty:
@@ -412,14 +376,12 @@ def _render_refresh_status(snap, forecast):
         status, explanation = 'yellow', 'Refresh is running in the background'
     else:
         status, explanation = _forecast_health(snap, forecast, result)
-    last_refresh = snap.get('latest_capture')
-    time_label = escape(data.beirut_time(last_refresh))
-    st.markdown(
-        f'<div class="refresh-health" role="status">'
-        f'<strong><span class="health-dot {status}" aria-hidden="true"></span>{status.title()}</strong>'
-        f'<span>{escape(explanation)}</span><small>Last successful capture · {time_label}</small></div>',
-        unsafe_allow_html=True,
-    )
+    st.caption('Last successful capture · '+data.beirut_time(snap.get('latest_capture')))
+    if running:
+        st.info('Refresh request is being processed. Stored observations remain unchanged until a durable run commits them.')
+    if result:
+        st.session_state['refresh_result']=result
+        (st.info if result[0] else st.warning)(result[1])
     if manager.get('started_at'):
         st.caption('Last refresh requested · ' + data.beirut_time(manager['started_at']) + (' · finished ' + data.beirut_time(finished_at) if finished_at else ''))
     if result and job_id and st.session_state.get('refresh_rerun_job') != job_id:
@@ -494,136 +456,27 @@ def _saved_market_dates(ledger_path, snapshot_id, version):
 
 
 def _overview_price_sequence(latest, agreed, forecast):
-    st.caption('USD equivalents use an assumed display rate of 89,500 LBP/USD; this is not a verified ministry conversion rate.')
-    with st.container(key="price_sequence"):
-        a, b, c = st.columns(3)
-    with a:
-        st.metric("Last government-archive price", amount(latest["price_lbp_20l"] if latest else None) + " LBP", border=True)
-        if latest:
-            _currency_detail(latest["price_lbp_20l"])
-            _provenance_badge(latest)
-            evidence(latest)
-    with b:
-        st.metric("Latest price agreed by IPT and Taqtek",
-                  amount(agreed["price_lbp_20l"]) + " LBP" if agreed else "No provisional match", border=True)
-        if agreed:
-            _currency_detail(agreed["price_lbp_20l"])
-            _provenance_badge(agreed)
-    with c:
-        if forecast is None:
-            st.metric("Next estimated price", "Awaiting inputs", border=True)
-            return
-        spec = json.loads(forecast.target_json)
-        change = forecast.predicted_change
-        st.metric("Next estimated price", amount(forecast.predicted_price) + " LBP",
-                  delta=f"{change:+,.0f} LBP ({change / forecast.base_price:+.2%})",
-                  delta_color="off", border=True)
-        _currency_detail(forecast.predicted_price)
-        st.caption(f"Expected change · {change:+,.0f} LBP · ~{_signed_usd(change)} USD")
-        st.caption(f"Starting price · {forecast.base_price:,.0f} LBP / 20 L")
-    st.info(_forecast_limitation(spec))
-    if spec.get("tier") == 4:
-        market = "No market inputs used by the baseline"
-    else:
-        try:
-            dates = _saved_market_dates(LEDGER_PATH, forecast.snapshot_id, data.file_version(LEDGER_PATH))
-        except (OSError, ValueError, sqlite3.Error):
-            dates = []
-        market = " · ".join(dates) if dates else "Market dates were not recorded in this forecast snapshot"
-    st.caption(f"Starting price observed · {spec.get('base_source_date') or 'Date unknown'}"
-               f"  |  Market in forecast snapshot · {market}"
-               f"  |  Forecast issued · {data.beirut_time(forecast.created_at)}")
+    # Kept as a compatibility entry point; historical evidence lives in the driver panel.
+    driver.money(forecast.base_price if forecast is not None else latest['price_lbp_20l'])
+
+
+def _refresh_controls(snap, forecast):
+    with st.expander('Refresh and capture times'):
+        manager = _refresh_manager()
+        with manager['lock']:
+            running = manager['running']
+        if st.button('Refreshing…' if running else 'Refresh all data', key='overview_refresh', disabled=running):
+            if not _refresh_authorized():
+                st.warning('Public read-only mode. Owner authorization is required; scheduled updates continue independently.')
+            elif start_background_refresh(ROOT,'all'):
+                st.rerun()
+        refresh_status(snap,forecast)
 
 
 def overview(snap, latest, previous):
-    title("Lebanon gasoline 95", "Clear daily pump price tracker & next-decision outlook · LBP per 20-liter tank · Asia/Beirut")
-    forecast_result = active("decision_1")
-    active_forecast = forecast_result.iloc[0] if not forecast_result.empty else None
-    agreed = next((r for r in reversed(snap["prices"])
-                   if r["verification_status"] == PROVISIONAL_PRICE and r["price_lbp_20l"] is not None), None)
-    _decree_outlook(snap["prices"], active_forecast)
-    with st.expander('Forecast trust and health details'):
-        from lebanon_fuel.automation.health import build as health_contract
-        st.json(health_contract(ROOT,snap,active_forecast))
-    _overview_price_sequence(latest, agreed, active_forecast)
-    _share_briefing(max((r for r in (latest, agreed) if r), key=lambda r: r['source_date'], default=None), active_forecast)
-    with st.container(key="overview_refresh_controls"):
-        controls, status = st.columns([1, 3], vertical_alignment="center")
-        with controls:
-            manager = _refresh_manager()
-            with manager["lock"]:
-                refresh_running = manager["running"]
-            if st.button("Refreshing…" if refresh_running else "Refresh all data", type="primary",
-                         key="overview_refresh", disabled=refresh_running):
-                if not _refresh_authorized():
-                    st.warning("Public read-only mode · Enter your admin passcode in the sidebar to run live refreshes.")
-                elif start_background_refresh(ROOT, "all"):
-                    st.rerun()
-                else:
-                    st.info("A full refresh is already running.")
-        with status:
-            refresh_status(snap, active_forecast)
-
-    if latest or previous:
-        with st.expander("Government price history details"):
-            if previous:
-                st.caption(f"Previous archive price · {previous['price_lbp_20l']:,} LBP / 20 L · {previous['source_date']}")
-            if latest and previous:
-                change = latest["price_lbp_20l"] - previous["price_lbp_20l"]
-                st.caption(f"Change between archive records · {change:+,} LBP / 20 L "
-                           f"({change / previous['price_lbp_20l']:+.2%}). Other decisions may have occurred between those dates.")
-    if latest:
-        if (datetime.now(BEIRUT).date() - date.fromisoformat(latest["source_date"])).days > SETTINGS["collection"]["stale_after_days"]:
-            st.warning("The latest government-archive price exceeds the configured freshness limit.")
-        if not latest["official_effective_date"]:
-            st.caption("The latest government-archive record has a source date. Its official effective date is unknown.")
-    document = next((r for r in reversed(snap["prices"])
-                     if r["verification_status"] == "document_verified"), None)
-    if document and document != latest:
-        st.caption(f"Latest reviewed original decision · {document['source_date']} · {document['price_lbp_20l']:,} LBP / 20 L")
-    supplier = next((r for r in reversed(snap["prices"]) if r["verification_status"] == "supplier_observed"
-                     and r["price_lbp_20l"] is not None), None)
-    if supplier and supplier["source_date"] > max((r["source_date"] for r in (latest, agreed) if r), default=""):
-        st.caption(f"Newer single-source quote · {supplier['source_date']} · {supplier['price_lbp_20l']:,} LBP / 20 L")
-    price_history = st.container()
-    st.subheader("Next official decision")
-    forecast = active_forecast
-    if forecast is None:
-        unavailable_forecast()
-    else:
-        forecast_details(forecast)
-    if forecast is not None:
-        view = data.forecast_view(forecast)
-        bounds = view['bounds']
-        stats=[('Expected decision date',view['schedule'].split(' (')[0]),
-               ('Predicted price',amount(forecast.predicted_price) + ' LBP'),
-               ('Predicted change · LBP',f'{forecast.predicted_change:+,.0f}'),
-               ('Predicted change · %',percent(forecast.predicted_change/forecast.base_price)),
-               ('90% prediction interval', f'{bounds[0]:,.0f} – {bounds[1]:,.0f}' if bounds else 'Awaiting live evidence')]
-        active_stats = stats
-        for offset in range(0, len(active_stats), 2):
-            for col,(label,value) in zip(st.columns(2),active_stats[offset:offset+2]):
-                col.metric(label,value)
-                if label == 'Predicted price':
-                    with col:
-                        _currency_detail(forecast.predicted_price)
-                if label == 'Predicted change · LBP':
-                    col.caption(f'~{_signed_usd(forecast.predicted_change)} USD / 20 L')
-                if label=='Expected decision date' and ' (' in view['schedule']:
-                    col.caption(view['schedule'].split(' (',1)[1].rstrip(')')+' · estimated')
-        st.caption(f"Prices and intervals: LBP / 20 L · USD equivalent: ${view['usd_equivalent']:,.2f} / 20 L at an assumed display rate of 89,500 LBP/USD. This is not a verified pricing-formula exchange rate.")
-        st.subheader('Forecast Driver Attribution')
-        if view['drivers']:
-            show_chart(charts.driver_chart(view['drivers']))
-            st.dataframe(pd.DataFrame(view['drivers']),hide_index=True,width='stretch')
-        st.caption('Only saved model contributions are shown. Combined commodity attribution cannot be split into gasoline and Brent effects. EIA NY Harbor gasoline is a proxy, not a Mediterranean or RBOB assessment.')
-    st.subheader('Future price estimates')
-    dated = future_table()
-    with price_history:
-        st.subheader("Observed prices and future estimates")
-        cutoff = datetime.now(BEIRUT).date().replace(day=1) - pd.Timedelta(days=180)
-        recent = [r for r in snap["prices"] if r["source_date"] >= cutoff.isoformat()]
-        show_chart(charts.history_chart(recent, pd.DataFrame(), dated))
+    result=active('decision_1')
+    forecast=result.iloc[0] if not result.empty else None
+    driver.overview(ROOT,snap,SETTINGS,forecast,_refresh_controls)
 
 
 def price_view(snap):
@@ -661,6 +514,17 @@ def price_view(snap):
     if not replay.empty:
         st.dataframe(replay[["origin", "created_at", "recorded_target_date", "endpoint", "predicted_price",
                              "actual_price", "model_version", "snapshot_id"]].tail(25), hide_index=True)
+
+    if not production.empty:
+        st.subheader('Forecast Driver Attribution')
+        view = data.forecast_view(production.iloc[0])
+        if view['drivers']:
+            show_chart(charts.driver_chart(view['drivers']))
+            st.dataframe(pd.DataFrame(view['drivers']),hide_index=True,width='stretch')
+        st.caption('Saved model contributions; combined gasoline/Brent proxy effects cannot be split into separate causal drivers.')
+        driver.range_status(production.iloc[0])
+    st.subheader('All eight forecast horizons')
+    future_table()
 
 
 def markets_view(snap):
@@ -847,7 +711,31 @@ def volatility_view(snap):
 
 def model_view():
     title("Model performance", "Hybrid forecasts scored against recorded prices")
+    st.subheader('Retrospective Hybrid research')
+    measured=driver.read_report(ROOT,'reports/trust_phase1/evaluation.json')
+    metric=next((r for r in measured.get('shared_origin_comparisons',[]) if r['family']=='G_hybrid'),None)
+    if metric:
+        a,b,c=st.columns(3)
+        a.metric('Research average error',f"{metric['mae_lbp']:,.0f} LBP / 20 L")
+        b.metric('Independent target dates',str(metric['n']))
+        c.metric('Direction calls right',f"{metric['direction_hits']} of {metric['direction_n']}")
+        st.caption('Evaluation dates · '+' to '.join(measured['dates'])+'. Previously examined conditional archive research; independence here means distinct target dates, not proven statistically independent errors.')
+        st.caption(f"RMSE {metric['rmse_lbp']:,.0f} LBP / 20 L · bias {metric['bias_lbp']:+,.0f} LBP. Reference-method comparisons remain in the governance release report, not a consumer model selector.")
+        with st.expander('Historical range coverage by horizon'):
+            rows=[]
+            for horizon,result in measured.get('historical_saved_holdout_by_horizon',{}).items():
+                for level,interval in result['intervals'].items():
+                    rows.append({'Horizon':horizon,'Nominal research range':level+'%','Measured cases':interval.get('interval_n',0),
+                        'Coverage':f"{interval['interval_coverage']:.1%}" if interval.get('interval_coverage') is not None else 'Not measurable',
+                        'Average width · LBP':interval.get('interval_mean_width_lbp')})
+            st.dataframe(rows,hide_index=True,width='stretch')
+            st.caption('Saved research intervals; these measurements do not release live bands. Small samples and weak coverage remain visible.')
+    st.subheader('Prospective outcomes · saved before the result')
     decisions.performance(ROOT, LEDGER_PATH)
+    with st.expander('Forecast availability and abstentions'):
+        rows=experience.availability(ROOT,LEDGER_PATH)
+        st.dataframe(rows,hide_index=True,width='stretch')
+        st.caption('Denominator: complete recorded eight-horizon issuance attempts since the sealed prospective cutoff, not uptime or independent pricing decisions. Hybrid estimates plus abstentions may not sum to the denominator when older archived attempts used another method. No alternate active model is offered.')
     st.divider()
     st.subheader("Hybrid historical backtest")
     archive = ROOT / "reports/research/expanded_coverage/dashboard_predictions.csv"
@@ -858,8 +746,8 @@ def model_view():
             actual = rows["endpoint_price_lbp_20l"]
             error = (rows["predicted_endpoint_price_lbp_20l"] - actual).abs()
             st.caption(f"{rows['target_source_date'].nunique()} historical target dates. "
-                       f"Average miss {error.mean():,.0f} LBP / 20 L ({(error/actual).mean():.2%}).")
-    st.caption("The archive backtest uses recorded prices. Live scores above track forecasts saved before new prices arrive.")
+                       f"Average miss {error.mean():,.0f} LBP / 20 L — not an accuracy percentage.")
+    st.caption("Retrospective research uses previously examined archive periods; it is not an untouched holdout. Live scores above use predictions saved before outcomes arrived. Software test passes do not establish forecasting accuracy.")
     st.button("Open the backtest chart", on_click=st.session_state.update, args=({"quant_detail": "Backtesting"},))
 
 
@@ -952,6 +840,25 @@ def quality_view(snap):
         'this system automatically pauses live predictions or falls back to a clearly labeled baseline until fresh, corroborated records arrive.</div>',
         unsafe_allow_html=True,
     )
+    result=active('decision_1')
+    health=driver.build(ROOT,snap,result.iloc[0] if not result.empty else None)
+    st.subheader('Current blocking issues')
+    for key in ('required_feeds','domestic_anchor','forecast','operational_integrity','release_verification'):
+        check=health['checks'][key]
+        if check['status'] in ('failed','unknown'):
+            st.warning(key.replace('_',' ').title()+': '+', '.join(check['reasons']))
+            if check.get('recovery'):st.caption(check['recovery'])
+    with st.expander('Optional unavailable feeds'):
+        st.write(health['checks']['optional_feeds']['reasons'] or 'No optional feed warnings')
+    with st.expander('Historical evidence gaps'):
+        catalog=driver.read_report(ROOT,'reports/operations/phase1_missing_raw_captures.json')
+        st.write(f"{catalog.get('missing_capture_rows','Unknown')} missing capture rows / {catalog.get('captures_checked','unknown')} checked captures; {catalog.get('missing_count','Unknown')} unique missing paths.")
+        missing=catalog.get('missing_captures',[])
+        if missing:
+            dates=[r['retrieved_at'] for r in missing]
+            st.caption('Missing captures retrieved '+min(dates)+' through '+max(dates)+'. These are capture counts, not pricing decisions.')
+        st.json(catalog)
+    st.caption(f"Clock counts below use {snap.get('raw_observation_count','unknown')} raw observations as denominator, not unique decisions. Stored source-date records: {len(snap['prices'])}; dates range from {snap['prices'][0]['source_date'] if snap['prices'] else 'unknown'} to {snap['prices'][-1]['source_date'] if snap['prices'] else 'unknown'}.")
     a, b, c = st.columns(3)
     conflicts = [r for r in snap["prices"] if r["verification_status"] == "conflict"]
     a.metric("Quarantined conflict dates", len(conflicts), border=True)
@@ -1008,7 +915,7 @@ def quality_view(snap):
     if "refresh_result" in st.session_state:
         ok, output = st.session_state.refresh_result
         if ok:
-            st.success("Collection completed. Check the latest observation dates for new data.")
+            st.info("Refresh request accepted. A queued cloud workflow is not a completed data update; check the capture times after it finishes.")
         else:
             st.error("Collection failed or was incomplete. Stored observations retain their original dates and evidence.")
         with st.expander("Refresh output"):
@@ -1069,6 +976,9 @@ def main():
     try:
         SETTINGS = data.config(ROOT)
         db_path, LEDGER_PATH = data.database_paths(ROOT, SETTINGS)
+        if st.query_params.get('forecast'):
+            driver.forecast_page(ROOT,LEDGER_PATH,st.query_params['forecast'],SETTINGS,show_chart)
+            return
         snap = snapshot(ROOT, db_path, data.file_version(db_path))
         latest_record = snap['prices'][-1] if snap['prices'] else None
     except (OSError, ValueError, KeyError, sqlite3.Error, pd.errors.DatabaseError) as exc:
@@ -1080,6 +990,10 @@ def main():
         DECISION = {}
         st.warning("The validation decision file is unavailable. Production-approved forecasts are withheld.")
     ACTIVE_FORECASTS = current_forecasts(LEDGER_PATH, SETTINGS, DECISION, latest_record)
+    slug=st.query_params.get('view')
+    if slug and slug != st.session_state.get('_url_view'):
+        perspective, view = experience.destination(slug)
+        st.session_state.update(perspective=perspective,view=view,_url_view=slug)
     with st.sidebar:
         st.markdown(
             '<div class="terminal-brand">'
@@ -1092,7 +1006,7 @@ def main():
         choices = PERSPECTIVES[perspective]
         if st.session_state.get('view') not in choices:
             st.session_state['view'] = next(iter(choices))
-        view = st.radio("Workspace", list(choices), format_func=choices.get, key="view")
+        view = st.radio("Workspace", list(choices), format_func=choices.get, key="view", on_change=_view_changed)
         st.divider()
         st.caption("Local time · Asia/Beirut")
         st.caption(f"Stored capture · {data.beirut_time(snap['latest_capture'])}")
@@ -1146,7 +1060,12 @@ def main():
     elif view == "Decision timeline":
         title("Decision timeline", "Price evidence, gaps and forecast outcomes")
         decisions.timeline(snap["prices"], ROOT, LEDGER_PATH)
+    elif view == "Alerts":
+        result=active('decision_1')
+        driver.alert_center(ROOT,snap,result.iloc[0] if not result.empty else None,SETTINGS)
     elif view == "Scenario simulator":
+        for key,value in st.session_state.get('_scenario_inputs',{}).items():
+            if key not in st.session_state: st.session_state[key]=value
         scenario_view(snap)
     elif view == "Volatility & options":
         volatility_view(snap)

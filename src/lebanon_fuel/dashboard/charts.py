@@ -7,6 +7,7 @@ import pandas as pd
 import plotly.graph_objects as go
 
 from .data import forecast_bounds
+from .experience import released_bounds
 
 # Electric Purple (#C4AAFF) & Luminous Sky Blue (#72D9FF) Mobile-Native Palette
 TEAL = "#72D9FF"
@@ -75,7 +76,7 @@ def forecast_points(rows, *, replay=False):
 def add_forecast_markers(fig, points, label, color, symbol):
     upper, lower = [], []
     for row in points.to_dict("records"):
-        bounds = forecast_bounds(row, tier=row.get("forecast_tier"))
+        bounds = released_bounds(row, 90)
         upper.append(bounds[1] - row["predicted_price"] if bounds else None)
         lower.append(row["predicted_price"] - bounds[0] if bounds else None)
     error = {}
@@ -85,75 +86,65 @@ def add_forecast_markers(fig, points, label, color, symbol):
     fig.add_scatter(
         x=points.plot_date, y=points.predicted_price, mode="markers", name=label,
         marker=dict(symbol=symbol, color=color, size=9,
-                    line=dict(color=SECTION, width=1.5)), customdata=points.origin,
-        hovertemplate="%{x|%d %b %Y}<br>%{y:,.0f} LBP / 20 L<br>Origin: %{customdata}",
+                    line=dict(color=SECTION, width=1.5)), customdata=[[r["origin"],
+                        f'{released_bounds(r,90)[0]:,.0f}–{released_bounds(r,90)[1]:,.0f} LBP / 20 L' if released_bounds(r,90) else 'Not released'] for r in points.to_dict("records")],
+        hovertemplate="%{x|%d %b %Y}<br>Estimate %{y:,.0f} LBP / 20 L<br>90% range: %{customdata[1]}<br>Issued %{customdata[0]}<extra></extra>",
         **error,
     )
 
 
 def conformal_bounds(row, level):
-    """Only released live calibration, never candidate/training-only intervals."""
-    spec = json.loads(row.get('target_json') or '{}')
-    evidence = spec.get('public_calibration') or {}
-    if spec.get('tier', row.get('forecast_tier', 4)) not in (1, 2):
-        return None
-    if evidence.get('calibration_n', 0) < 30 or evidence.get('evaluation_n', 0) < 20:
-        return None
-    try:
-        radius = float(evidence.get('radius' if level == 90 else 'radius_80'))
-    except (TypeError, ValueError):
-        return None
-    if not math.isfinite(radius) or radius <= 0:
-        return None
-    center = float(row['predicted_price'])
-    return max(1., center - radius), center + radius
+    return released_bounds(row, level)
 
 
 def add_conformal_cone(fig, points, *, single=False):
-    """Pointwise bands and linear visual interpolation, not joint path coverage."""
+    """Connect only contiguous released endpoints with identical issuance identity."""
     if points.empty or 'target_json' not in points:
         return
-    points = points.copy()
-    # Different model families, runs and anchors never share a ribbon.
-    points['_family'] = points.target_json.map(lambda s: json.loads(s).get('family', 'unknown'))
-    points['_kind'] = points.endpoint.notna().map({True: 'Calendar', False: 'Decision'})
-    for _, group in points.groupby(['origin', 'base_price', '_family', '_kind'], dropna=False):
-        group = group.sort_values('plot_date').drop_duplicates('plot_date')
-        # Unsupported endpoints break a ribbon rather than being bridged.
-        runs = []
-        current = []
-        for row in group.to_dict('records'):
-            if conformal_bounds(row, 90):
-                current.append(row)
-            else:
-                if current: runs.append(current)
-                current = []
-        if current: runs.append(current)
-        for run in runs:
-            if len(run) < (1 if single else 2):
-                continue
-            origin = target_date(run[0]['origin'])
-            if any(r['plot_date'] <= origin for r in run):
-                continue
-            for level, color in [(90, 'rgba(149,172,255,.14)'), (80, 'rgba(114,217,255,.25)')]:
-                bounds = [conformal_bounds(r, level) for r in run]
-                if not all(bounds):
+    points=points.copy()
+    specs=points.target_json.map(json.loads)
+    points['_family']=specs.map(lambda s:s.get('family'))
+    points['_artifact']=specs.map(lambda s:s.get('artifact_sha256'))
+    points['_kind']=points.horizon.str.split('_').str[0] if 'horizon' in points else 'unknown'
+    keys=['origin','base_price','_family','_artifact','_kind']
+    # Without an immutable run and snapshot identity, endpoints stay isolated.
+    for key in ('run_id','snapshot_id','model_version'):
+        if key not in points:points[key]=None
+        keys.append(key)
+    for _,group in points.groupby(keys,dropna=False,sort=False):
+        rows=group.sort_values('plot_date').drop_duplicates('plot_date').to_dict('records')
+        for level,color in [(90,'rgba(149,172,255,.14)'),(80,'rgba(114,217,255,.25)')]:
+            runs=[];run=[];last_index=None
+            for r in rows:
+                order=['decision_1','decision_2','decision_4'] if r['_kind']=='decision' else ['day_1','day_3','day_7','day_14','day_30']
+                idx=order.index(r['horizon']) if r.get('horizon') in order else None
+                valid=conformal_bounds(r,level)
+                identity=all(pd.notna(r.get(k)) for k in ('run_id','snapshot_id','model_version','_artifact'))
+                if run and (not valid or not identity or idx is None or idx!=last_index+1):
+                    runs.append(run);run=[]
+                if valid:
+                    run.append(r);last_index=idx
+                    if not identity:runs.append(run);run=[]
+            if run:runs.append(run)
+            for run in runs:
+                bounds=[conformal_bounds(r,level) for r in run]
+                if len(run)==1:
+                    # Outer whisker comes from the point trace; inner interval is
+                    # a second error bar, never an artificial cone to the anchor.
+                    if level==80:
+                        r=run[0];lo,hi=bounds[0]
+                        fig.add_scatter(x=[r['plot_date']],y=[r['predicted_price']],mode='markers',marker=dict(size=1,color=TEAL),
+                            error_y=dict(type='data',symmetric=False,array=[hi-r['predicted_price']],arrayminus=[r['predicted_price']-lo],color=TEAL,thickness=4),
+                            name='80% calibrated pointwise interval',customdata=[[lo,hi]],hovertemplate='%{x|%d %b %Y}<br>80% range %{customdata[0]:,.0f}–%{customdata[1]:,.0f} LBP / 20 L<extra></extra>')
                     continue
-                if level == 80 and any(b[0] < conformal_bounds(r,90)[0] or b[1] > conformal_bounds(r,90)[1] for b,r in zip(bounds,run)):
-                    continue
-                anchored = run[0]['plot_date'] == group.iloc[0].plot_date
-                x = ([origin] if anchored else []) + [r['plot_date'] for r in run]
-                base = float(run[0]['base_price'])
-                low = ([base] if anchored else []) + [b[0] for b in bounds]
-                high = ([base] if anchored else []) + [b[1] for b in bounds]
-                fig.add_scatter(x=x,y=low,mode='lines',line=dict(width=0),showlegend=False,hoverinfo='skip')
-                fig.add_scatter(x=x,y=high,mode='lines',line=dict(width=0),fill='tonexty',fillcolor=color,
-                    name=f'{level}% calibrated pointwise prediction band',
-                    hovertemplate='%{x|%d %b}<br>Upper bound %{y:,.0f} LBP / 20 L<extra></extra>')
-            anchored = run[0]['plot_date'] == group.iloc[0].plot_date
-            fig.add_scatter(x=([origin] if anchored else [])+[r['plot_date'] for r in run],
-                y=([float(run[0]['base_price'])] if anchored else [])+[r['predicted_price'] for r in run],
-                mode='lines',line=dict(color=TEAL,dash='dash'),name='Forecast guide · interpolated between targets')
+                x=[r['plot_date'] for r in run];lo=[b[0] for b in bounds];hi=[b[1] for b in bounds]
+                hover=[[r['predicted_price'],l,h] for r,l,h in zip(run,lo,hi)]
+                fig.add_scatter(x=x,y=lo,mode='lines',line=dict(width=0),showlegend=False,hoverinfo='skip')
+                fig.add_scatter(x=x,y=hi,mode='lines',line=dict(width=0),fill='tonexty',fillcolor=color,
+                    name=f'{level}% calibrated pointwise prediction band',customdata=hover,
+                    hovertemplate=f'%{{x|%d %b %Y}}<br>Estimate %{{customdata[0]:,.0f}} LBP / 20 L<br>{level}% range %{{customdata[1]:,.0f}}–%{{customdata[2]:,.0f}}<extra></extra>')
+        # Forecasts remain markers; ribbons interpolate bounds only between
+        # supported endpoints, not an asserted realized price path.
 
 
 def history_chart(prices, replay, current):
@@ -257,6 +248,12 @@ def decision_chart(row):
     else:
         fig.add_bar(x=['Known price', 'Next decision · date unconfirmed'],
                     y=[row.base_price,row.predicted_price],name=row.forecast_label)
+    if isinstance(row.get('scheduled_effective'),str) and len(row['scheduled_effective'])==10:
+        # A projected source date has no announcement clock. Do not let Plotly
+        # turn its midnight plotting coordinate into an apparent update time.
+        dates=[target_date(row.origin),target_date(row.scheduled_effective)]
+        fig.update_xaxes(tickmode='array',tickvals=dates,
+            ticktext=[dates[0].strftime('%d %b')+' · issued',dates[1].strftime('%d %b')+' · estimated date'],hoverformat='%d %b %Y')
     return style(fig, 'LBP / 20 L', 340)
 
 

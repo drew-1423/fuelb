@@ -255,7 +255,7 @@ def test_dynamic_validity_keeps_2026_models_and_routes_eighth_day_spot_to_tier_t
     candidate(context)
     assert issued(context)['tier']==2
     at=context[-1]
-    context[5]['nyh_gasoline'][-1]['observation_date']=(at-timedelta(days=8)).date().isoformat()
+    context[5]['nyh_gasoline'][-1]['observation_date']=(at.astimezone(BEIRUT).date()-timedelta(days=8)).isoformat()
     result=issued(context)
     assert result['tier']==2
     assert any(row['series']=='nyh_gasoline' and row['age_calendar_days']==8

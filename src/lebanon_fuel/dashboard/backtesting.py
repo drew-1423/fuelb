@@ -36,7 +36,7 @@ def render(rows, families, regimes, show_chart, *, research_note=None, only_fami
         st.info("There are no saved forecasts with matched historical prices to plot.")
         return
 
-    st.caption(research_note or "Saved walk-forward research compared with matched archive prices. Sparse records and "
+    st.caption(research_note or "Previously examined walk-forward research compared with matched archive prices. This is not an untouched holdout. Sparse records and "
                "unverified official timing limit what this backtest can establish.")
     columns = st.columns(2 if only_family else 3)
     a, b = columns[:2]

@@ -131,12 +131,12 @@ def market_and_prices(root, db_path):
         """).fetchone()[0]
         clocks = store.db.execute("""
             SELECT COUNT(*) - COUNT(publication_timestamp),
-                   COUNT(*) - COUNT(official_effective_date) FROM observations
+                   COUNT(*) - COUNT(official_effective_date), COUNT(*) FROM observations
         """).fetchone()
     return {
         "prices": prices, "histories": histories,
         "market": from_histories(histories, now.isoformat(), "strict"),
-        "runs": runs, "latest_capture": latest_capture, "missing_clocks": tuple(clocks),
+        "runs": runs, "latest_capture": latest_capture, "missing_clocks": tuple(clocks[:2]), "raw_observation_count": clocks[2],
     }
 
 
@@ -165,7 +165,7 @@ LIVE_BATCH_QUERY = """
     )
 """
 LEDGER_SELECT = """
-            SELECT f.id, f.run_id, f.horizon, f.created_at, f.origin, f.mode, f.status, f.model_version,
+            SELECT f.id, f.record_hash, f.run_id, f.horizon, f.created_at, f.origin, f.mode, f.status, f.model_version,
                    f.snapshot_id, f.base_price, f.predicted_price, f.predicted_change,
                    f.interval_low, f.interval_high, f.probabilities_json, f.reason_json, f.target_json,
                    json_extract(f.target_json, '$.endpoint') AS endpoint,
@@ -383,7 +383,10 @@ def forecast_view(row):
     bounds = forecast_bounds(row, tier=tier)
     stamp = pd.to_datetime(row.get('scheduled_effective'), errors='coerce')
     schedule = 'Date not established'
-    if pd.notna(stamp):
+    endpoint=row.get('endpoint')
+    if endpoint is not None and pd.notna(endpoint):
+        schedule=beirut_time(endpoint)
+    elif pd.notna(stamp):
         schedule=stamp.strftime('%d %b %Y') + (f" ({stamp.strftime('%a')} cadence)" if spec.get('schedule_estimated') else '')
     contributions=spec.get('driver_contributions') or {}
     labels={'commodity_pass_through':'Gasoline / Brent proxy contribution (combined)',
