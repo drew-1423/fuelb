@@ -1,6 +1,6 @@
 """Read-only dashboard queries. Collection goes through the existing CLI."""
 from contextlib import closing
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 import json
 import math
 import os
@@ -15,6 +15,7 @@ from lebanon_fuel.domain import BEIRUT, VERIFIED, PROVISIONAL_PRICE, utc_timesta
 from lebanon_fuel.features.market import from_histories
 from lebanon_fuel.market.catalog import SERIES
 from lebanon_fuel.market.store import MarketStore
+from lebanon_fuel.storage.database import sqlite_connection
 
 HORIZONS = {"Next official update": "decision_1", "7 days": "day_7",
             "14 days": "day_14", "30 days": "day_30"}
@@ -22,12 +23,52 @@ EXPECTED_HORIZONS = ("decision_1", "decision_2", "decision_4", "day_1",
                      "day_3", "day_7", "day_14", "day_30")
 LIVE_MODES = ("prospective", "prospective_research")
 MINIMUM_PROBABILITY_HOLDOUT = 10
-STATUS = {"document_verified": "Original document reviewed",
-          "archive_corroborated": "Government archive corroborated",
-          "government_archive": "Government archive only",
-          PROVISIONAL_PRICE: "Provisional · IPT and Taqtek agree",
-          "supplier_observed": "Supplier only",
+DISPLAY_FX = 89500.0
+STATUS = {"document_verified": "🏛️ Official Ministry Decree",
+          "archive_corroborated": "📜 Government Archive",
+          "government_archive": "📜 Government Archive · uncorroborated",
+          PROVISIONAL_PRICE: "🤝 Station Consensus (IPT + Taqtek)",
+          "supplier_observed": "🔍 Single Station Quote",
           "conflict": "Conflicting sources"}
+
+
+def currency_values(price, change=None):
+    """Display conversion only; never a pricing-formula or observed FX input."""
+    price = float(price)
+    if not math.isfinite(price) or price <= 0:
+        raise ValueError("A finite positive price is required")
+    result = dict(lbp_20l=price, usd_20l=price / DISPLAY_FX,
+                  lbp_liter=price / 20, usd_liter=price / 20 / DISPLAY_FX)
+    if change is not None:
+        if not math.isfinite(float(change)):
+            raise ValueError("A finite change is required")
+        result.update(change_lbp=float(change), change_usd=float(change) / DISPLAY_FX)
+    return result
+
+
+def refresh_poll_seconds(running):
+    return 2 if running else 60
+
+
+def decree_hazard_context(records, as_of_date=None, scheduled_date=None):
+    """Empirical source-date cadence; not a probability of the next decree."""
+    today = date.fromisoformat(as_of_date) if isinstance(as_of_date, str) else as_of_date or datetime.now(BEIRUT).date()
+    dates = sorted({date.fromisoformat(r['source_date']) for r in records
+                    if r.get('verification_status') in VERIFIED | {PROVISIONAL_PRICE}
+                    and r.get('price_lbp_20l') and r['source_date'] <= today.isoformat()})[-60:]
+    n = len(dates)
+    share = sum(d.weekday() in (1, 4) for d in dates) / n if n else None
+    projected = None
+    if scheduled_date:
+        candidate = pd.Timestamp(scheduled_date).date()
+        if candidate > today:
+            projected = candidate
+    if projected is None and n >= 20 and share >= .8:
+        projected = next(today + timedelta(days=i) for i in range(1, 8)
+                         if (today + timedelta(days=i)).weekday() in (1, 4))
+    return dict(sample_size=n, tue_fri_share=share, projected_date=projected,
+                basis='dated price observations; original decree publication times may be unknown')
+
 
 
 def config(root):
@@ -168,7 +209,7 @@ def live_ledger_rows(path, *, at=None, run_id=None):
     production, research = LIVE_MODES
     params = dict(production=production, research=research, cutoff=cutoff,
                   run_id=run_id, count=count, **horizons)
-    with closing(sqlite3.connect(f"{path.as_uri()}?mode=ro", uri=True)) as db:
+    with closing(sqlite_connection(path, readonly=True)) as db:
         return pd.read_sql_query(query, db, params=params)
 
 
@@ -180,7 +221,7 @@ def ledger_rows(path, horizon, mode, run_id=None):
         WHERE f.horizon = ? AND f.mode = ? AND (? IS NULL OR f.run_id = ?)
         ORDER BY f.origin, f.id
     """
-    with closing(sqlite3.connect(f"{path.as_uri()}?mode=ro", uri=True)) as db:
+    with closing(sqlite_connection(path, readonly=True)) as db:
         return pd.read_sql_query(query, db, params=(horizon, mode, run_id, run_id))
 
 
@@ -330,7 +371,7 @@ def forecast_view(row):
                   'LBP / 20 L':float(row.predicted_change)}]
     return dict(spec=spec, probabilities=probabilities, probability_status=probability_status,
                 holdout_n=holdout_n, bounds=bounds, schedule=schedule, drivers=drivers,
-                usd_equivalent=float(row.predicted_price)/89500.,display_fx=89500.)
+                usd_equivalent=float(row.predicted_price)/DISPLAY_FX,display_fx=DISPLAY_FX)
 
 
 def prospective_track_record(root, ledger_path, horizon="decision_1"):
@@ -344,7 +385,7 @@ def prospective_track_record(root, ledger_path, horizon="decision_1"):
           AND f.origin >= ? AND f.status = 'issued'
         ORDER BY f.origin, f.id
     """
-    with closing(sqlite3.connect(f"{Path(ledger_path).as_uri()}?mode=ro", uri=True)) as db:
+    with closing(sqlite_connection(ledger_path, readonly=True)) as db:
         rows = pd.read_sql_query(query, db, params=(horizon, start))
     issued_n = len(rows)
     settled = rows[rows.actual_price.notna() & rows.predicted_price.notna()].copy() if not rows.empty else pd.DataFrame()
