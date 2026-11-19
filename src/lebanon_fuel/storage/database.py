@@ -8,6 +8,19 @@ import tomllib
 from lebanon_fuel.domain import SOURCES, VERIFIED, PROVISIONAL_PRICE, now_utc, utc_timestamp, regime_label, weekday_disagreement
 
 
+def sqlite_connection(path, *, readonly=False):
+    """Bound waits for concurrent writers without changing database journal mode."""
+    path = Path(path).resolve()
+    target = path.as_uri() + "?mode=ro" if readonly else path
+    connection = sqlite3.connect(target, uri=readonly, timeout=15.0)
+    try:
+        connection.execute("PRAGMA busy_timeout = 5000;")
+    except sqlite3.Error:
+        connection.close()
+        raise
+    return connection
+
+
 class Store:
     def __init__(self, root, db_path="data/lebanon_fuel.sqlite", *, readonly=False):
         self.root = Path(root).resolve()
@@ -15,11 +28,11 @@ class Store:
         self.config=tomllib.loads(cfg_path.read_text()) if cfg_path.exists() else {}
         path = self.root / db_path
         if readonly:
-            self.db = sqlite3.connect(f"{path.as_uri()}?mode=ro", uri=True)
+            self.db = sqlite_connection(path, readonly=True)
             self.db.row_factory = sqlite3.Row
             return
         path.parent.mkdir(parents=True, exist_ok=True)
-        self.db = sqlite3.connect(path)
+        self.db = sqlite_connection(path)
         self.db.row_factory = sqlite3.Row
         self.db.executescript(Path(__file__).with_name("schema.sql").read_text())
         if 'basis_observation_ids' not in {r[1] for r in self.db.execute('PRAGMA table_info(resolutions)')}:

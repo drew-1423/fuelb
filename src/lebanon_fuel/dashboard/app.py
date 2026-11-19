@@ -14,6 +14,7 @@ import streamlit as st
 
 from lebanon_fuel.dashboard import analyst, backtesting, charts, data, decisions
 from lebanon_fuel.dashboard.scenarios import simulate
+from lebanon_fuel.storage.database import sqlite_connection
 from lebanon_fuel.domain import BEIRUT, PROVISIONAL_PRICE
 from lebanon_fuel.market.catalog import MISSING, SERIES
 
@@ -26,6 +27,78 @@ FAMILIES = {"Z_last_change": "Last change", "A_no_change": "No change", "A_mean"
             "Z_brent": "Brent baseline", "B_structural_proxy": "Structural proxy",
             "E_lightgbm": "LightGBM", "F_catboost": "CatBoost", "G_hybrid": "Hybrid",
             "H_ensemble": "Ensemble", "C_ridge": "Ridge", "D_sarimax": "SARIMAX"}
+
+RESPONSIVE_CSS = """
+.currency-secondary { color: #bfe9ff; font-size: 1.12rem; font-weight: 650; margin: .25rem 0; }
+.provenance-badge { display: inline-block; padding: .35rem .6rem; border-radius: 8px;
+  background: #22234c; color: #ded7ff; font-size: .83rem; line-height: 1.5; }
+.provenance-badge.consensus { background: #163c49; color: #b9f1ff; }
+.provenance-badge.single { background: #49371a; color: #ffe1a1; }
+.provenance-badge.conflict { background: #4a2438; color: #ffd0df; }
+.decree-outlook { padding: 1.2rem 1.4rem; background: #22234c; border: 1px solid #8b8fd9;
+  border-radius: 14px; margin: .25rem 0 1.3rem; color: #f8faff; }
+.decree-outlook h3 { margin: 0 0 .5rem; font-size: 1.2rem; }
+.decree-outlook p { margin: .4rem 0; max-width: 72ch; }
+.decree-outlook small { color: #ced7ee; }
+[data-testid="stMetricValue"] > div { white-space: normal; overflow: visible;
+  overflow-wrap: anywhere; font-size: clamp(1.45rem, 2.1vw, 2rem); }
+[data-testid="stMetricDelta"] { white-space: normal; height: auto; }
+.forecast-row { display: grid; grid-template-columns: .9fr 1.3fr 1.15fr; gap: .8rem;
+  padding: .85rem 0; border-bottom: 1px solid #42486a; align-items: start; }
+.forecast-row span { min-width: 0; overflow-wrap: anywhere; }
+.forecast-row small { display: block; color: #bfe9ff; margin-top: .25rem; }
+.forecast-head { font-size: .85rem; color: #c4cee4; }
+@media (max-width: 1000px) {
+  .st-key-price_sequence [data-testid="stHorizontalBlock"] { flex-wrap: wrap; }
+  .st-key-price_sequence [data-testid="stColumn"] { flex: 1 1 100% !important; width: 100% !important; }
+}
+@media (max-width: 480px) {
+  .decree-outlook { padding: 1rem; }
+  .forecast-row { gap: .45rem; font-size: .82rem; }
+}
+"""
+
+
+def _signed_usd(change):
+    return f"{'−' if change < 0 else '+'}${abs(change) / data.DISPLAY_FX:,.2f}"
+
+
+def _currency_detail(price):
+    values = data.currency_values(price)
+    st.markdown(f'<p class="currency-secondary">~${values["usd_20l"]:,.2f} USD / 20 L</p>',
+                unsafe_allow_html=True)
+    st.caption(f'{values["lbp_liter"]:,.0f} LBP / L · ~${values["usd_liter"]:,.2f} USD / L')
+
+
+def _provenance_badge(record):
+    status = record['verification_status']
+    style = 'consensus' if status == PROVISIONAL_PRICE else 'single' if status == 'supplier_observed' else 'conflict' if status == 'conflict' else ''
+    st.markdown(f'<span class="provenance-badge {style}">{escape(data.STATUS.get(status, "Source under review"))}</span>',
+                unsafe_allow_html=True)
+    st.caption(record['source_date'])
+
+
+def _decree_outlook(records, forecast):
+    scheduled = forecast.scheduled_effective if forecast is not None and pd.notna(forecast.scheduled_effective) else None
+    context = data.decree_hazard_context(records, scheduled_date=scheduled)
+    target = context['projected_date']
+    window = target.strftime('%A, %d %b %Y') + ' · estimated' if target else 'Next announcement window is unconfirmed'
+    n, share = context['sample_size'], context['tue_fri_share']
+    cadence = (f'{share:.0%} of the latest {n} dated price observations fall on Tuesday or Friday.'
+               if n else 'Not enough dated observations to summarize the cadence.')
+    advice = 'Check the latest posted station price before filling.'
+    if forecast is not None:
+        change = float(forecast.predicted_change)
+        if abs(change) > 3000:
+            direction = 'less' if change < 0 else 'more'
+            advice = (f'The model estimates {abs(change):,.0f} LBP (~${abs(change) / data.DISPLAY_FX:.2f} USD) '
+                      f'{direction} per 20 L. Check the posted price after the update; the change is not confirmed.')
+        else:
+            advice = 'The model estimates little change. Refuel when convenient and check the posted price.'
+    st.markdown(f'<section class="decree-outlook" aria-label="Decree outlook">'
+                f'<h3>Decree outlook · {escape(window)}</h3><p>{escape(advice)}</p>'
+                f'<small>{escape(cadence)} Historical source-date pattern, not a calibrated announcement probability. '
+                'Announcement time is not verified.</small></section>', unsafe_allow_html=True)
 
 
 @st.cache_data(ttl=60, max_entries=8, show_spinner=False)
@@ -244,8 +317,15 @@ def _forecast_health(snap, forecast, refresh_result=None):
     return 'green', 'Primary inputs are fresh and a Tier 1 forecast is active'
 
 
-@st.fragment(run_every=2)
 def refresh_status(snap, forecast):
+    manager = _refresh_manager()
+    with manager['lock']:
+        running = manager['running']
+    # Rebuild on completion via st.rerun below, dropping back to idle polling.
+    st.fragment(run_every=data.refresh_poll_seconds(running))(_render_refresh_status)(snap, forecast)
+
+
+def _render_refresh_status(snap, forecast):
     manager = _refresh_manager()
     with manager['lock']:
         running = manager['running']
@@ -286,7 +366,18 @@ def future_table():
                      'Forecast tier':spec['label'], 'Method':spec['methodology']})
         if has_endpoint or pd.notna(row.scheduled_effective):
             dated.append(current)
-    st.dataframe(pd.DataFrame(rows), hide_index=True, width='stretch')
+    parts = ['<div role="table" aria-label="Future price estimates"><div class="forecast-row forecast-head" role="row">'
+             '<span role="columnheader">Horizon</span><span role="columnheader">Expected price / 20 L</span>'
+             '<span role="columnheader">Change / 20 L</span></div>']
+    for item in rows:
+        price, change = item.get('Estimated price · LBP / 20 L'), item.get('Change · LBP')
+        price_text = f'{price:,.0f} LBP<small>~${price / data.DISPLAY_FX:.2f} USD</small>' if price is not None else 'Awaiting inputs'
+        change_text = f'{change:+,.0f} LBP<small>~{_signed_usd(change)} USD</small>' if change is not None else '—'
+        parts.append(f'<div class="forecast-row" role="row"><span role="cell">{escape(item["Horizon"])}</span>'
+                     f'<span role="cell">{price_text}</span><span role="cell">{change_text}</span></div>')
+    st.markdown(''.join(parts) + '</div>', unsafe_allow_html=True)
+    with st.expander('Forecast dates, methods and technical details'):
+        st.dataframe(pd.DataFrame(rows), hide_index=True, width='stretch')
     st.caption('Calendar estimates describe the prevailing price at each endpoint. They do not assume a daily official update. No-change estimates allow intervening rises or falls; they are a central baseline, not certainty.')
     return pd.concat(dated, ignore_index=True) if dated else pd.DataFrame()
 
@@ -312,8 +403,7 @@ def _forecast_limitation(spec):
 
 @st.cache_data(ttl=60, max_entries=16, show_spinner=False)
 def _saved_market_dates(ledger_path, snapshot_id, version):
-    uri = ledger_path.resolve().as_uri() + "?mode=ro"
-    connection = sqlite3.connect(uri, uri=True)
+    connection = sqlite_connection(ledger_path, readonly=True)
     try:
         row = connection.execute("SELECT payload_json FROM snapshots WHERE id = ?", (snapshot_id,)).fetchone()
     finally:
@@ -326,26 +416,32 @@ def _saved_market_dates(ledger_path, snapshot_id, version):
 
 
 def _overview_price_sequence(latest, agreed, forecast):
-    a, b, c = st.columns(3)
+    st.caption('USD equivalents use an assumed display rate of 89,500 LBP/USD; this is not a verified ministry conversion rate.')
+    with st.container(key="price_sequence"):
+        a, b, c = st.columns(3)
     with a:
-        st.metric("Last government-archive price", amount(latest["price_lbp_20l"] if latest else None), border=True)
+        st.metric("Last government-archive price", amount(latest["price_lbp_20l"] if latest else None) + " LBP", border=True)
         if latest:
-            st.caption(f"{latest['source_date']} · {data.STATUS[latest['verification_status']]}")
+            _currency_detail(latest["price_lbp_20l"])
+            _provenance_badge(latest)
             evidence(latest)
     with b:
         st.metric("Latest price agreed by IPT and Taqtek",
-                  amount(agreed["price_lbp_20l"]) if agreed else "No provisional match", border=True)
+                  amount(agreed["price_lbp_20l"]) + " LBP" if agreed else "No provisional match", border=True)
         if agreed:
-            st.caption(f"{agreed['source_date']} · Ministry confirmation pending")
+            _currency_detail(agreed["price_lbp_20l"])
+            _provenance_badge(agreed)
     with c:
         if forecast is None:
             st.metric("Next estimated price", "Awaiting inputs", border=True)
             return
         spec = json.loads(forecast.target_json)
         change = forecast.predicted_change
-        st.metric("Next estimated price", amount(forecast.predicted_price),
+        st.metric("Next estimated price", amount(forecast.predicted_price) + " LBP",
                   delta=f"{change:+,.0f} LBP ({change / forecast.base_price:+.2%})",
                   delta_color="off", border=True)
+        _currency_detail(forecast.predicted_price)
+        st.caption(f"Expected change · {change:+,.0f} LBP · ~{_signed_usd(change)} USD")
         st.caption(f"Starting price · {forecast.base_price:,.0f} LBP / 20 L")
     st.info(_forecast_limitation(spec))
     if spec.get("tier") == 4:
@@ -367,6 +463,7 @@ def overview(snap, latest, previous):
     active_forecast = forecast_result.iloc[0] if not forecast_result.empty else None
     agreed = next((r for r in reversed(snap["prices"])
                    if r["verification_status"] == PROVISIONAL_PRICE and r["price_lbp_20l"] is not None), None)
+    _decree_outlook(snap["prices"], active_forecast)
     _overview_price_sequence(latest, agreed, active_forecast)
     with st.container(key="overview_refresh_controls"):
         controls, status = st.columns([1, 3], vertical_alignment="center")
@@ -417,14 +514,19 @@ def overview(snap, latest, previous):
         view = data.forecast_view(forecast)
         bounds = view['bounds']
         stats=[('Expected decision date',view['schedule'].split(' (')[0]),
-               ('Predicted price',amount(forecast.predicted_price)),
+               ('Predicted price',amount(forecast.predicted_price) + ' LBP'),
                ('Predicted change · LBP',f'{forecast.predicted_change:+,.0f}'),
                ('Predicted change · %',percent(forecast.predicted_change/forecast.base_price)),
                ('90% prediction interval', f'{bounds[0]:,.0f} – {bounds[1]:,.0f}' if bounds else 'Awaiting live evidence')]
         active_stats = stats
-        for offset in range(0, len(active_stats), 4):
-            for col,(label,value) in zip(st.columns(4),active_stats[offset:offset+4]):
+        for offset in range(0, len(active_stats), 2):
+            for col,(label,value) in zip(st.columns(2),active_stats[offset:offset+2]):
                 col.metric(label,value)
+                if label == 'Predicted price':
+                    with col:
+                        _currency_detail(forecast.predicted_price)
+                if label == 'Predicted change · LBP':
+                    col.caption(f'~{_signed_usd(forecast.predicted_change)} USD / 20 L')
                 if label=='Expected decision date' and ' (' in view['schedule']:
                     col.caption(view['schedule'].split(' (',1)[1].rstrip(')')+' · estimated')
         st.caption(f"Prices and intervals: LBP / 20 L · USD equivalent: ${view['usd_equivalent']:,.2f} / 20 L at an assumed display rate of 89,500 LBP/USD. This is not a verified pricing-formula exchange rate.")
@@ -834,7 +936,7 @@ def quality_view(snap):
 def main():
     global SETTINGS, DECISION, LEDGER_PATH, ACTIVE_FORECASTS
     st.set_page_config(page_title="Levant Energy Terminal", layout="wide", initial_sidebar_state="auto")
-    stylesheet = Path(__file__).with_name("terminal.css").read_text(encoding="utf-8")
+    stylesheet = Path(__file__).with_name("terminal.css").read_text(encoding="utf-8") + RESPONSIVE_CSS
     st.markdown(f"<style>{stylesheet}</style>", unsafe_allow_html=True)
     try:
         SETTINGS = data.config(ROOT)

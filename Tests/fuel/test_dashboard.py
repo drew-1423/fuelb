@@ -130,7 +130,7 @@ def test_dashboard_views_and_interactions(monkeypatch):
         assert not any(m.label == 'Predicted price' for m in app.metric)
     else:
         row = expected.iloc[0]
-        assert next(m for m in app.metric if m.label == 'Predicted price').value == f'{row.predicted_price:,.0f}'
+        assert next(m for m in app.metric if m.label == 'Predicted price').value == f'{row.predicted_price:,.0f} LBP'
         assert any(row.forecast_label in item.value for item in app.info)
     app.radio(key="view").set_value("Price & forecasts").run()
     for label in data.HORIZONS:
@@ -373,3 +373,80 @@ def test_refresh_authorization_fails_closed_before_starting_workers(expected, en
     assert namespace['_refresh_authorized']() is authorized
     if not authorized:
         assert namespace['start_background_refresh'](ROOT) is False
+
+
+def test_display_currency_and_empirical_cadence_are_explicit():
+    values = data.currency_values(2343000, -31800)
+    assert values['usd_20l'] == pytest.approx(26.1787709497)
+    assert values['lbp_liter'] == 117150
+    assert values['usd_liter'] == pytest.approx(1.3089385475)
+    assert values['change_usd'] == pytest.approx(-31800 / 89500)
+    rows = [dict(source_date=day, verification_status='archive_corroborated', price_lbp_20l=2300000)
+            for day in ['2026-11-06', '2026-11-10', '2026-11-11']]
+    rows += [dict(rows[-1]), dict(rows[-1], source_date='2026-11-20')]
+    context = data.decree_hazard_context(rows, '2026-11-19', '2026-11-20')
+    assert context['sample_size'] == 3 and context['tue_fri_share'] == pytest.approx(2/3)
+    assert context['projected_date'].isoformat() == '2026-11-20'
+    assert data.decree_hazard_context([], '2026-11-19')['tue_fri_share'] is None
+    assert data.refresh_poll_seconds(True) == 2
+    assert data.refresh_poll_seconds(False) == 60
+
+
+def test_refresh_fragment_changes_polling_with_the_shared_worker():
+    import ast
+    import threading
+    from types import SimpleNamespace
+    tree = ast.parse(APP.read_text())
+    function = next(node for node in tree.body if isinstance(node, ast.FunctionDef)
+                    and node.name == 'refresh_status')
+    manager = {'lock': threading.Lock(), 'running': False}
+    intervals = []
+    def fragment(*, run_every):
+        intervals.append(run_every)
+        return lambda render: lambda *args: None
+    scope = {'_refresh_manager': lambda: manager, 'data': data,
+             'st': SimpleNamespace(fragment=fragment), '_render_refresh_status': lambda *args: None}
+    exec(compile(ast.Module(body=[function], type_ignores=[]), str(APP), 'exec'), scope)
+    for running in (False, True, False):
+        manager['running'] = running
+        scope['refresh_status']({}, None)
+    assert intervals == [60, 2, 60]
+
+
+@pytest.mark.parametrize('journal', ['DELETE', 'WAL'])
+def test_concurrent_dashboard_reads_wait_for_writer_and_checkpoint(tmp_path, journal):
+    import threading
+    import time
+    from lebanon_fuel.storage.database import Store, sqlite_connection
+
+    with closing(Store(tmp_path)) as store:
+        path = tmp_path / 'data/lebanon_fuel.sqlite'
+        store.db.execute(f'PRAGMA journal_mode={journal}')
+        assert store.db.execute('PRAGMA busy_timeout').fetchone()[0] == 5000
+    locked = threading.Event()
+    errors = []
+    def write():
+        try:
+            with closing(sqlite_connection(path)) as writer:
+                writer.execute('BEGIN EXCLUSIVE')
+                writer.execute('UPDATE sources SET priority=priority')
+                locked.set()
+                time.sleep(.2)
+                writer.commit()
+                if journal == 'WAL':
+                    writer.execute('PRAGMA wal_checkpoint(PASSIVE)')
+        except Exception as exc:
+            errors.append(exc)
+            locked.set()
+    worker = threading.Thread(target=write)
+    worker.start()
+    try:
+        assert locked.wait(3)
+        with closing(Store(tmp_path, readonly=True)) as reader:
+            assert reader.db.execute('PRAGMA busy_timeout').fetchone()[0] == 5000
+            assert reader.db.execute('SELECT COUNT(*) FROM sources').fetchone()[0] > 0
+            with pytest.raises(Exception, match='readonly'):
+                reader.db.execute('UPDATE sources SET priority=priority')
+    finally:
+        worker.join(3)
+    assert not worker.is_alive() and not errors
