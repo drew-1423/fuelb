@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-19T06:54:50.097036+00:00",
+  "generated_at": "2026-11-19T12:54:07.181697+00:00",
   "as_of_beirut": "2026-11-19",
   "timezone": "Asia/Beirut",
   "ledger_unique_dates": 1372,
@@ -45,7 +45,6 @@
     "data/raw/taqtek/ee694c72ed38554a73cb65bafbfaa9ea095bfddf36a5589ebd2ed9598bae5e84.html",
     "data/raw/market_ec/54d0ceb2ed9347a61634237612f95c02f4cb0a67fd9c52d88e723ff2b23f2498.html",
     "data/raw/market_fed/944ae31c1f5166678826976edf235b9dea4077a9d06ea784a5846cef00eb69ae.html",
-    "data/raw/market_fed/c424bcdfe0947e48d9bc3937fd3a9e82bf144e5ac6454ae95a68346196394c77.zip",
     "data/raw/ipt/481072ac7749ed52136d46e2e658716042ec87275137be70dd81ed6658723fbc.html",
     "data/raw/ipt/531b74187e5f12d20b0cd7d5245f8a017eb887d45d496534354ccae565b3ef6e.html",
     "data/raw/ipt/74461730b3ce05ec6180c34449d25c16f0fbed864cff22d8ee5a20fa409cc332.html",
@@ -78,7 +77,11 @@
     "data/raw/ipt/5fec7d1ed9ea0fd97cbc50483d2e35bca1cb5f3da85d26dc279e1e5262d7c961.html",
     "data/raw/ipt/5bb7e53ce69095185150790c71c71c48f5f50375ff38c3091e526dbd2754bcc2.html",
     "data/raw/ipt/d5a4b10cce37659665be7f9082d68e9bfcb48321949e45df2eeb3fe2c0bb9368.html",
-    "data/raw/ipt/33ea54da98f16e580c11be2e4cba38ea049512bdf0e552ec752717ab48112435.xlsx"
+    "data/raw/ipt/33ea54da98f16e580c11be2e4cba38ea049512bdf0e552ec752717ab48112435.xlsx",
+    "data/raw/ipt/1437b06083507cccd71ae7752a7eb3a420567e54cb7d101806ee433bad3ef20f.html",
+    "data/raw/ipt/6282c2f9c78f51b4e2c16e9f43e2f5873781408e2e66c6f0bda28543e2a0d583.html",
+    "data/raw/ipt/0fac448bb93080a780a50564be08d71e9a7b050f36f8fe0fed832b3084cb8ee0.html",
+    "data/raw/ipt/c38c853b9df8f75ba4085fc2f14ceefa46cf542d84af80000c1ecc1bde22d729.xlsx"
   ],
   "unique_observed_official_archive_decision_ids": 668,
   "official_archive_dates_without_decision_id": 274,
@@ -163,14 +166,14 @@
         "2025-09-30"
       ],
       "duplicate_date_extra_observations": 4,
-      "exact_duplicate_rows_in_captures": 27,
+      "exact_duplicate_rows_in_captures": 28,
       "last_successful_run": {
-        "id": 147,
-        "finished_at": "2026-11-19T06:54:39.367742+00:00",
+        "id": 149,
+        "finished_at": "2026-11-19T12:52:59.449830+00:00",
         "details": {
           "parsed_rows": 1314,
           "new_observations": 0,
-          "capture_id": 558
+          "capture_id": 567
         }
       }
     },
@@ -186,12 +189,12 @@
       "duplicate_date_extra_observations": 0,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 137,
-        "finished_at": "2026-11-18T12:52:42.641280+00:00",
+        "id": 151,
+        "finished_at": "2026-11-19T12:53:13.732618+00:00",
         "details": {
           "parsed_rows": 916,
           "new_observations": 0,
-          "capture_id": 509
+          "capture_id": 573
         }
       }
     },
@@ -233,8 +236,8 @@
       "duplicate_date_extra_observations": 31,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 148,
-        "finished_at": "2026-11-19T06:54:49.452570+00:00",
+        "id": 150,
+        "finished_at": "2026-11-19T12:53:09.560366+00:00",
         "details": {
           "parsed_rows": 9,
           "new_observations": 0,
@@ -1461,6 +1464,54 @@
       "finished_at": "2026-11-19T06:54:49.452570+00:00",
       "status": "success",
       "details": "{\"parsed_rows\": 9, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 149,
+      "source_id": "ipt",
+      "started_at": "2026-11-19T12:52:43.163909+00:00",
+      "finished_at": "2026-11-19T12:52:59.449830+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1314, \"new_observations\": 0, \"capture_id\": 567}"
+    },
+    {
+      "id": 150,
+      "source_id": "ministry",
+      "started_at": "2026-11-19T12:52:59.756305+00:00",
+      "finished_at": "2026-11-19T12:53:09.560366+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 9, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 151,
+      "source_id": "taqtek",
+      "started_at": "2026-11-19T12:53:09.870532+00:00",
+      "finished_at": "2026-11-19T12:53:13.732618+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 916, \"new_observations\": 0, \"capture_id\": 573}"
+    },
+    {
+      "id": 152,
+      "source_id": "market_eia",
+      "started_at": "2026-11-19T12:53:14.048957+00:00",
+      "finished_at": "2026-11-19T12:53:49.829768+00:00",
+      "status": "success",
+      "details": "{\"results\": [{\"series\": \"brent_spot\", \"parsed_rows\": 9132, \"new_observations\": 4, \"capture_id\": 576}, {\"series\": \"nyh_gasoline\", \"parsed_rows\": 9181, \"new_observations\": 4, \"capture_id\": 578}, {\"series\": \"us_gasoline_stocks\", \"parsed_rows\": 1924, \"new_observations\": 1, \"capture_id\": 580}, {\"series\": \"us_crude_stocks\", \"parsed_rows\": 2303, \"new_observations\": 1, \"capture_id\": 582}, {\"series\": \"us_refinery_utilization\", \"parsed_rows\": 1881, \"new_observations\": 1, \"capture_id\": 584}]}"
+    },
+    {
+      "id": 153,
+      "source_id": "market_ec",
+      "started_at": "2026-11-19T12:53:50.116379+00:00",
+      "finished_at": "2026-11-19T12:53:59.304366+00:00",
+      "status": "success",
+      "details": "{\"results\": [{\"series\": \"italy_gasoline_ex_tax\", \"parsed_rows\": 1093, \"new_observations\": 1, \"capture_id\": 587}, {\"series\": \"greece_gasoline_ex_tax\", \"parsed_rows\": 1093, \"new_observations\": 1, \"capture_id\": 587}]}"
+    },
+    {
+      "id": 154,
+      "source_id": "market_fed",
+      "started_at": "2026-11-19T12:53:59.561991+00:00",
+      "finished_at": "2026-11-19T12:54:06.778753+00:00",
+      "status": "success",
+      "details": "{\"results\": [{\"series\": \"eurusd\", \"parsed_rows\": 7270, \"new_observations\": 0, \"capture_id\": 590}]}"
     }
   ],
   "readiness": "Adequate for source reconciliation and exploratory target analysis. Not ready for an institutional as-of forecasting backtest: effective/release times, unresolved conflicts, coverage and regimes need review."

@@ -1,17 +1,17 @@
 # International market coverage and quality
 
-Generated for 2026-11-19T06:54:50.118654+00:00. Counts below are actual stored observations, not estimates.
+Generated for 2026-11-19T12:54:07.197130+00:00. Counts below are actual stored observations, not estimates.
 
 | Series | Unique valid dates | Earliest | Latest | Latest normalized value | Stale |
 | --- | ---: | --- | --- | --- | --- |
-| brent_spot | 9128 | 1987-05-20 | 2026-11-11 | 92.14 USD/bbl | False |
-| nyh_gasoline | 9177 | 1986-06-02 | 2026-11-11 | 101.43 USD/bbl | False |
-| us_gasoline_stocks | 1923 | 1990-01-05 | 2026-11-06 | 210.757 million_bbl | False |
-| us_crude_stocks | 2302 | 1982-08-20 | 2026-11-06 | 414.417 million_bbl | False |
-| us_refinery_utilization | 1880 | 1990-11-02 | 2026-11-06 | 95.2 percent | False |
+| brent_spot | 9132 | 1987-05-20 | 2026-11-17 | 92.94 USD/bbl | False |
+| nyh_gasoline | 9181 | 1986-06-02 | 2026-11-17 | 97.776 USD/bbl | False |
+| us_gasoline_stocks | 1924 | 1990-01-05 | 2026-11-13 | 215.949 million_bbl | False |
+| us_crude_stocks | 2303 | 1982-08-20 | 2026-11-13 | 417.797 million_bbl | False |
+| us_refinery_utilization | 1881 | 1990-11-02 | 2026-11-13 | 95.7 percent | False |
 | eurusd | 6988 | 1999-01-04 | 2026-11-13 | 1.1034 USD/EUR | False |
-| italy_gasoline_ex_tax | 1091 | 2005-01-03 | 2026-11-09 | 0.962698 EUR/L | False |
-| greece_gasoline_ex_tax | 1091 | 2005-01-03 | 2026-11-09 | 0.931434 EUR/L | False |
+| italy_gasoline_ex_tax | 1092 | 2005-01-03 | 2026-11-16 | 0.941526 EUR/L | False |
+| greece_gasoline_ex_tax | 1092 | 2005-01-03 | 2026-11-16 | 0.872563 EUR/L | False |
 | lbp_payment_fx | 2 | 2023-05-12 | 2025-05-29 | 89700 LBP/USD | True |
 | brent_futures | 0 | None | None | unknown USD/bbl | True |
 | rbob_futures | 0 | None | None | unknown USD/bbl | True |
@@ -23,15 +23,15 @@ Generated for 2026-11-19T06:54:50.118654+00:00. Counts below are actual stored o
 | Source | Result | Completed UTC | Detail |
 | --- | --- | --- | --- |
 | market_cboe | success | 2026-11-13T16:28:03.126952+00:00 | 4912 reviewed/imported rows |
-| market_ec | success | 2026-11-18T12:53:30.493138+00:00 | 2,184 rows parsed; 0 new observations |
-| market_eia | success | 2026-11-18T12:53:20.065433+00:00 | 24,410 rows parsed; 0 new observations |
-| market_fed | success | 2026-11-18T12:53:38.143939+00:00 | 7,270 rows parsed; 0 new observations |
+| market_ec | success | 2026-11-19T12:53:59.304366+00:00 | 2,186 rows parsed; 2 new observations |
+| market_eia | success | 2026-11-19T12:53:49.829768+00:00 | 24,421 rows parsed; 11 new observations |
+| market_fed | success | 2026-11-19T12:54:06.778753+00:00 | 7,270 rows parsed; 0 new observations |
 | market_official_review | success | 2026-11-14T20:06:38.456497+00:00 | 1 reviewed/imported rows |
 | market_yahoo | partial | 2026-11-12T11:01:09.971477+00:00 | rows parsed: unavailable; 0 new observations; brent_futures: unavailable — AccessStopped: Request denied by robots policy; Stored fallback: brent_spot (latest 2026-11-03); not newly collected futures; rbob_futures: unavailable — AccessStopped: Request denied by robots policy; Stored fallback: nyh_gasoline (latest 2026-11-03); not newly collected futures; gasoil_futures: unavailable — AccessStopped: Request denied by robots policy |
 
 ## Availability and validation
 
-38,778 immutable observations; 284 invalid/missing rows retained. 0 dates with captured value revisions; 0 same-capture contradictions quarantined. Raw hash failures: 2.
+38,791 immutable observations; 284 invalid/missing rows retained. 0 dates with captured value revisions; 0 same-capture contradictions quarantined. Raw hash failures: 0.
 39 long interval candidates; 2832 unclassified weekday/weekly calendar candidates. These include holidays and cannot be called missing market sessions without an authoritative calendar. No filling or interpolation was applied.
 40 large-move review candidates; 0 unusual reference-weekday candidates. Review flags do not prove source errors or erase real market shocks.
 Known per-observation publication timestamps: 0. Documented original historical vintages: 0. Dates in today's workbook are not release timestamps.
