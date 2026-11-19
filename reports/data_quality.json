@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-19T00:47:00.605168+00:00",
+  "generated_at": "2026-11-19T06:54:50.097036+00:00",
   "as_of_beirut": "2026-11-19",
   "timezone": "Asia/Beirut",
   "ledger_unique_dates": 1372,
@@ -74,7 +74,11 @@
     "data/raw/ipt/8aa103b5f6ab9d0fa33b5111b4b94b0dba8ad92787aca9f5bb45c8a7d093e865.html",
     "data/raw/ipt/579ed7c4b5700dc691d1a15e35e5ef591809e0a61429b4be1583180547fd6b62.html",
     "data/raw/ipt/f1c9152b3ba408e266bb2f2dd86eea6d99ebc52307c7d861dc2d2a10c356fac3.html",
-    "data/raw/ipt/7b0047ed2fd6058b9dd7be7d8fe23d323bbb58109bcefe1d691c2a6ba88deb7d.xlsx"
+    "data/raw/ipt/7b0047ed2fd6058b9dd7be7d8fe23d323bbb58109bcefe1d691c2a6ba88deb7d.xlsx",
+    "data/raw/ipt/5fec7d1ed9ea0fd97cbc50483d2e35bca1cb5f3da85d26dc279e1e5262d7c961.html",
+    "data/raw/ipt/5bb7e53ce69095185150790c71c71c48f5f50375ff38c3091e526dbd2754bcc2.html",
+    "data/raw/ipt/d5a4b10cce37659665be7f9082d68e9bfcb48321949e45df2eeb3fe2c0bb9368.html",
+    "data/raw/ipt/33ea54da98f16e580c11be2e4cba38ea049512bdf0e552ec752717ab48112435.xlsx"
   ],
   "unique_observed_official_archive_decision_ids": 668,
   "official_archive_dates_without_decision_id": 274,
@@ -159,14 +163,14 @@
         "2025-09-30"
       ],
       "duplicate_date_extra_observations": 4,
-      "exact_duplicate_rows_in_captures": 26,
+      "exact_duplicate_rows_in_captures": 27,
       "last_successful_run": {
-        "id": 145,
-        "finished_at": "2026-11-19T00:46:49.876337+00:00",
+        "id": 147,
+        "finished_at": "2026-11-19T06:54:39.367742+00:00",
         "details": {
           "parsed_rows": 1314,
           "new_observations": 0,
-          "capture_id": 549
+          "capture_id": 558
         }
       }
     },
@@ -229,8 +233,8 @@
       "duplicate_date_extra_observations": 31,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 146,
-        "finished_at": "2026-11-19T00:47:00.091125+00:00",
+        "id": 148,
+        "finished_at": "2026-11-19T06:54:49.452570+00:00",
         "details": {
           "parsed_rows": 9,
           "new_observations": 0,
@@ -1439,6 +1443,22 @@
       "source_id": "ministry",
       "started_at": "2026-11-19T00:46:50.192192+00:00",
       "finished_at": "2026-11-19T00:47:00.091125+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 9, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 147,
+      "source_id": "ipt",
+      "started_at": "2026-11-19T06:54:23.925663+00:00",
+      "finished_at": "2026-11-19T06:54:39.367742+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1314, \"new_observations\": 0, \"capture_id\": 558}"
+    },
+    {
+      "id": 148,
+      "source_id": "ministry",
+      "started_at": "2026-11-19T06:54:39.842948+00:00",
+      "finished_at": "2026-11-19T06:54:49.452570+00:00",
       "status": "success",
       "details": "{\"parsed_rows\": 9, \"new_observations\": 0, \"pages\": 1}"
     }
