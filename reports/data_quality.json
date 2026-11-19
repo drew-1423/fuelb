@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-18T18:41:12.419613+00:00",
-  "as_of_beirut": "2026-11-18",
+  "generated_at": "2026-11-19T00:47:00.605168+00:00",
+  "as_of_beirut": "2026-11-19",
   "timezone": "Asia/Beirut",
   "ledger_unique_dates": 1372,
   "status_counts": {
@@ -54,6 +54,7 @@
     "data/raw/ipt/aa5fe79e99e6a231b63c78fc4903898d479b9c457632ceab6e78f51443e2f723.html",
     "data/raw/ipt/2edc314b76cf50e644232d71428f63f3d7676b76ebcb2548e92ac91759f7ee54.html",
     "data/raw/ipt/dbf4a965ca74ba132ab7b906b8d872602ae5354f15aabd8162e8433325687837.xlsx",
+    "data/raw/ministry/f70e3d61a2d815f803be76623b3941f3e92e2543d1330930a3b5ff74e765d6ae.html",
     "data/raw/ipt/813b7f7e019fcaef07c0fc450df7c9f8f35531be21b595086715bb36bca1b02f.html",
     "data/raw/ipt/99368fe28974fa6fa81f051f3616a0fc6d58f122cd0efafdd389f3a4ee16396d.html",
     "data/raw/ipt/6fb84bb1c09780eb2576699b8b9d09fe4ed47b2f82cae70363cab0abbe18af3d.html",
@@ -69,7 +70,11 @@
     "data/raw/ipt/8c2950809c5ea92a823f8045ffbebc27c472ebd545a295b04a53340d48b088f4.html",
     "data/raw/ipt/0571b3c3b3baf5c329b157590cece6099531ccf0f855b569cc0e84696d9b5125.html",
     "data/raw/ipt/f8d58f250d46b1d41845ff453cf794406b716ad22a806714692f6cac5121ff62.html",
-    "data/raw/ipt/9257222d1a6c8a8e11c2e819666b046cef3d7713631e6c0e1c7dfc44244b2df8.xlsx"
+    "data/raw/ipt/9257222d1a6c8a8e11c2e819666b046cef3d7713631e6c0e1c7dfc44244b2df8.xlsx",
+    "data/raw/ipt/8aa103b5f6ab9d0fa33b5111b4b94b0dba8ad92787aca9f5bb45c8a7d093e865.html",
+    "data/raw/ipt/579ed7c4b5700dc691d1a15e35e5ef591809e0a61429b4be1583180547fd6b62.html",
+    "data/raw/ipt/f1c9152b3ba408e266bb2f2dd86eea6d99ebc52307c7d861dc2d2a10c356fac3.html",
+    "data/raw/ipt/7b0047ed2fd6058b9dd7be7d8fe23d323bbb58109bcefe1d691c2a6ba88deb7d.xlsx"
   ],
   "unique_observed_official_archive_decision_ids": 668,
   "official_archive_dates_without_decision_id": 274,
@@ -144,7 +149,7 @@
       "valid_unique_dates": 1309,
       "earliest_source_date": "2008-01-02",
       "latest_source_date": "2026-11-17",
-      "age_days": 1,
+      "age_days": 2,
       "stale": false,
       "invalid_observations": 0,
       "within_source_conflict_dates": [
@@ -154,14 +159,14 @@
         "2025-09-30"
       ],
       "duplicate_date_extra_observations": 4,
-      "exact_duplicate_rows_in_captures": 25,
+      "exact_duplicate_rows_in_captures": 26,
       "last_successful_run": {
-        "id": 143,
-        "finished_at": "2026-11-18T18:41:01.401563+00:00",
+        "id": 145,
+        "finished_at": "2026-11-19T00:46:49.876337+00:00",
         "details": {
           "parsed_rows": 1314,
           "new_observations": 0,
-          "capture_id": 540
+          "capture_id": 549
         }
       }
     },
@@ -170,7 +175,7 @@
       "valid_unique_dates": 916,
       "earliest_source_date": "2010-10-27",
       "latest_source_date": "2026-11-17",
-      "age_days": 1,
+      "age_days": 2,
       "stale": false,
       "invalid_observations": 0,
       "within_source_conflict_dates": [],
@@ -191,7 +196,7 @@
       "valid_unique_dates": 914,
       "earliest_source_date": "2010-10-27",
       "latest_source_date": "2026-11-17",
-      "age_days": 1,
+      "age_days": 2,
       "stale": false,
       "invalid_observations": 1,
       "within_source_conflict_dates": [
@@ -224,8 +229,8 @@
       "duplicate_date_extra_observations": 31,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 144,
-        "finished_at": "2026-11-18T18:41:11.853987+00:00",
+        "id": 146,
+        "finished_at": "2026-11-19T00:47:00.091125+00:00",
         "details": {
           "parsed_rows": 9,
           "new_observations": 0,
@@ -238,7 +243,7 @@
       "valid_unique_dates": 4,
       "earliest_source_date": "2010-10-27",
       "latest_source_date": "2025-05-29",
-      "age_days": 538,
+      "age_days": 539,
       "stale": true,
       "invalid_observations": 0,
       "within_source_conflict_dates": [],
@@ -259,7 +264,7 @@
       "valid_unique_dates": 17,
       "earliest_source_date": "2026-01-16",
       "latest_source_date": "2026-11-13",
-      "age_days": 5,
+      "age_days": 6,
       "stale": false,
       "invalid_observations": 0,
       "within_source_conflict_dates": [],
@@ -1418,6 +1423,22 @@
       "source_id": "ministry",
       "started_at": "2026-11-18T18:41:01.791586+00:00",
       "finished_at": "2026-11-18T18:41:11.853987+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 9, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 145,
+      "source_id": "ipt",
+      "started_at": "2026-11-19T00:46:33.859735+00:00",
+      "finished_at": "2026-11-19T00:46:49.876337+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1314, \"new_observations\": 0, \"capture_id\": 549}"
+    },
+    {
+      "id": 146,
+      "source_id": "ministry",
+      "started_at": "2026-11-19T00:46:50.192192+00:00",
+      "finished_at": "2026-11-19T00:47:00.091125+00:00",
       "status": "success",
       "details": "{\"parsed_rows\": 9, \"new_observations\": 0, \"pages\": 1}"
     }

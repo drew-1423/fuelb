@@ -1,5 +1,5 @@
 {
-  "origin": "2026-11-18T18:41:30.515821+00:00",
+  "origin": "2026-11-19T00:47:14.849901+00:00",
   "anchor": {
     "absolute_price_change": -102000,
     "candidate_values": [
@@ -40,7 +40,7 @@
   "forecasts": [
     {
       "horizon": "decision_1",
-      "origin": "2026-11-18T18:41:30.515821+00:00",
+      "origin": "2026-11-19T00:47:14.849901+00:00",
       "endpoint": null,
       "target_label": "Next 1 official pricing decision(s)",
       "decision_date": "2026-11-20",
@@ -129,7 +129,20 @@
         "interval_width_lbp": 103208.20388777462
       },
       "market_input_mode": "strict_captured_vintage",
-      "lagged_market_inputs": [],
+      "lagged_market_inputs": [
+        {
+          "series": "nyh_gasoline",
+          "observation_date": "2026-11-11",
+          "age_calendar_days": 8,
+          "status": "lagged_spot_8_14d"
+        },
+        {
+          "series": "brent_spot",
+          "observation_date": "2026-11-11",
+          "age_calendar_days": 8,
+          "status": "lagged_spot_8_14d"
+        }
+      ],
       "calibration_n": 31,
       "calibration_maximum_label_end": "2026-11-10T22:00:00+00:00",
       "probability_deadband_lbp": 3000,
@@ -167,12 +180,12 @@
         "nominal": 0.9,
         "radius": null
       },
-      "forecast_id": 45292,
-      "snapshot_id": "8d1c8564040bf28d198f3d01ffc731c315cc08cc9fdddabf092f9be0bd171ab3"
+      "forecast_id": 45300,
+      "snapshot_id": "9d0dcb13298fb457c16a3a2ab24aeea25c6f3eaa9fcc52cd65397cfc98729882"
     },
     {
       "horizon": "decision_2",
-      "origin": "2026-11-18T18:41:30.515821+00:00",
+      "origin": "2026-11-19T00:47:14.849901+00:00",
       "endpoint": null,
       "target_label": "Next 2 official pricing decision(s)",
       "decision_date": "2026-11-24",
@@ -228,7 +241,20 @@
       "artifact_sha256": "b50640d13af84cd6ada0237fcab22c8aa483d90cc5cd125539be5776f0c1687c",
       "performance": null,
       "market_input_mode": "strict_captured_vintage",
-      "lagged_market_inputs": [],
+      "lagged_market_inputs": [
+        {
+          "series": "nyh_gasoline",
+          "observation_date": "2026-11-11",
+          "age_calendar_days": 8,
+          "status": "lagged_spot_8_14d"
+        },
+        {
+          "series": "brent_spot",
+          "observation_date": "2026-11-11",
+          "age_calendar_days": 8,
+          "status": "lagged_spot_8_14d"
+        }
+      ],
       "calibration_n": 49,
       "calibration_maximum_label_end": "2025-12-09T22:00:00+00:00",
       "probability_deadband_lbp": 3000,
@@ -256,12 +282,12 @@
       "anchor_verification": "archive_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
-      "forecast_id": 45293,
-      "snapshot_id": "8d1c8564040bf28d198f3d01ffc731c315cc08cc9fdddabf092f9be0bd171ab3"
+      "forecast_id": 45301,
+      "snapshot_id": "9d0dcb13298fb457c16a3a2ab24aeea25c6f3eaa9fcc52cd65397cfc98729882"
     },
     {
       "horizon": "decision_4",
-      "origin": "2026-11-18T18:41:30.515821+00:00",
+      "origin": "2026-11-19T00:47:14.849901+00:00",
       "endpoint": null,
       "target_label": "Next 4 official pricing decision(s)",
       "decision_date": "2026-12-01",
@@ -317,7 +343,20 @@
       "artifact_sha256": "b4f2d76bb9c2bada3f6378ad1fde238c342d5e2ca263d3e8f6992d3ae723a4a1",
       "performance": null,
       "market_input_mode": "strict_captured_vintage",
-      "lagged_market_inputs": [],
+      "lagged_market_inputs": [
+        {
+          "series": "nyh_gasoline",
+          "observation_date": "2026-11-11",
+          "age_calendar_days": 8,
+          "status": "lagged_spot_8_14d"
+        },
+        {
+          "series": "brent_spot",
+          "observation_date": "2026-11-11",
+          "age_calendar_days": 8,
+          "status": "lagged_spot_8_14d"
+        }
+      ],
       "calibration_n": 22,
       "calibration_maximum_label_end": "2025-12-12T22:00:00+00:00",
       "probability_deadband_lbp": 3000,
@@ -345,13 +384,13 @@
       "anchor_verification": "archive_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
-      "forecast_id": 45294,
-      "snapshot_id": "8d1c8564040bf28d198f3d01ffc731c315cc08cc9fdddabf092f9be0bd171ab3"
+      "forecast_id": 45302,
+      "snapshot_id": "9d0dcb13298fb457c16a3a2ab24aeea25c6f3eaa9fcc52cd65397cfc98729882"
     },
     {
       "horizon": "day_1",
-      "origin": "2026-11-18T18:41:30.515821+00:00",
-      "endpoint": "2026-11-19T20:41:30.515821+02:00",
+      "origin": "2026-11-19T00:47:14.849901+00:00",
+      "endpoint": "2026-11-20T02:47:14.849901+02:00",
       "target_label": "Prevailing official price in 1 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -390,7 +429,20 @@
       "artifact_sha256": "34aaede583a9d2fb62900fce02d50ebd07a18fcc7c9616e2d042387a53861a7e",
       "performance": null,
       "market_input_mode": "strict_captured_vintage",
-      "lagged_market_inputs": [],
+      "lagged_market_inputs": [
+        {
+          "series": "nyh_gasoline",
+          "observation_date": "2026-11-11",
+          "age_calendar_days": 8,
+          "status": "lagged_spot_8_14d"
+        },
+        {
+          "series": "brent_spot",
+          "observation_date": "2026-11-11",
+          "age_calendar_days": 8,
+          "status": "lagged_spot_8_14d"
+        }
+      ],
       "calibration_n": 60,
       "calibration_maximum_label_end": "2025-12-22T22:00:00+00:00",
       "probability_deadband_lbp": 3000,
@@ -418,13 +470,13 @@
       "anchor_verification": "archive_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
-      "forecast_id": 45295,
-      "snapshot_id": "8d1c8564040bf28d198f3d01ffc731c315cc08cc9fdddabf092f9be0bd171ab3"
+      "forecast_id": 45303,
+      "snapshot_id": "9d0dcb13298fb457c16a3a2ab24aeea25c6f3eaa9fcc52cd65397cfc98729882"
     },
     {
       "horizon": "day_3",
-      "origin": "2026-11-18T18:41:30.515821+00:00",
-      "endpoint": "2026-11-21T20:41:30.515821+02:00",
+      "origin": "2026-11-19T00:47:14.849901+00:00",
+      "endpoint": "2026-11-22T02:47:14.849901+02:00",
       "target_label": "Prevailing official price in 3 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -463,7 +515,20 @@
       "artifact_sha256": "d0289ebedc304dcc4de79f8da820220347066a71491602e1850d05a2a7c5162d",
       "performance": null,
       "market_input_mode": "strict_captured_vintage",
-      "lagged_market_inputs": [],
+      "lagged_market_inputs": [
+        {
+          "series": "nyh_gasoline",
+          "observation_date": "2026-11-11",
+          "age_calendar_days": 8,
+          "status": "lagged_spot_8_14d"
+        },
+        {
+          "series": "brent_spot",
+          "observation_date": "2026-11-11",
+          "age_calendar_days": 8,
+          "status": "lagged_spot_8_14d"
+        }
+      ],
       "calibration_n": 60,
       "calibration_maximum_label_end": "2025-12-22T22:00:00+00:00",
       "probability_deadband_lbp": 3000,
@@ -491,13 +556,13 @@
       "anchor_verification": "archive_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
-      "forecast_id": 45296,
-      "snapshot_id": "8d1c8564040bf28d198f3d01ffc731c315cc08cc9fdddabf092f9be0bd171ab3"
+      "forecast_id": 45304,
+      "snapshot_id": "9d0dcb13298fb457c16a3a2ab24aeea25c6f3eaa9fcc52cd65397cfc98729882"
     },
     {
       "horizon": "day_7",
-      "origin": "2026-11-18T18:41:30.515821+00:00",
-      "endpoint": "2026-11-25T20:41:30.515821+02:00",
+      "origin": "2026-11-19T00:47:14.849901+00:00",
+      "endpoint": "2026-11-26T02:47:14.849901+02:00",
       "target_label": "Prevailing official price in 7 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -569,7 +634,20 @@
         "interval_width_lbp": 74586.46774302132
       },
       "market_input_mode": "strict_captured_vintage",
-      "lagged_market_inputs": [],
+      "lagged_market_inputs": [
+        {
+          "series": "nyh_gasoline",
+          "observation_date": "2026-11-11",
+          "age_calendar_days": 8,
+          "status": "lagged_spot_8_14d"
+        },
+        {
+          "series": "brent_spot",
+          "observation_date": "2026-11-11",
+          "age_calendar_days": 8,
+          "status": "lagged_spot_8_14d"
+        }
+      ],
       "calibration_n": 46,
       "calibration_maximum_label_end": "2025-12-12T22:00:00+00:00",
       "probability_deadband_lbp": 3000,
@@ -597,13 +675,13 @@
       "anchor_verification": "archive_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
-      "forecast_id": 45297,
-      "snapshot_id": "8d1c8564040bf28d198f3d01ffc731c315cc08cc9fdddabf092f9be0bd171ab3"
+      "forecast_id": 45305,
+      "snapshot_id": "9d0dcb13298fb457c16a3a2ab24aeea25c6f3eaa9fcc52cd65397cfc98729882"
     },
     {
       "horizon": "day_14",
-      "origin": "2026-11-18T18:41:30.515821+00:00",
-      "endpoint": "2026-12-02T20:41:30.515821+02:00",
+      "origin": "2026-11-19T00:47:14.849901+00:00",
+      "endpoint": "2026-12-03T02:47:14.849901+02:00",
       "target_label": "Prevailing official price in 14 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -642,7 +720,20 @@
       "artifact_sha256": "461e1fe1925f7c456b9a8c387e131b013385a20218d507092b0a5f05191ae256",
       "performance": null,
       "market_input_mode": "strict_captured_vintage",
-      "lagged_market_inputs": [],
+      "lagged_market_inputs": [
+        {
+          "series": "nyh_gasoline",
+          "observation_date": "2026-11-11",
+          "age_calendar_days": 8,
+          "status": "lagged_spot_8_14d"
+        },
+        {
+          "series": "brent_spot",
+          "observation_date": "2026-11-11",
+          "age_calendar_days": 8,
+          "status": "lagged_spot_8_14d"
+        }
+      ],
       "calibration_n": 25,
       "calibration_maximum_label_end": "2025-12-12T22:00:00+00:00",
       "probability_deadband_lbp": 3000,
@@ -670,13 +761,13 @@
       "anchor_verification": "archive_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
-      "forecast_id": 45298,
-      "snapshot_id": "8d1c8564040bf28d198f3d01ffc731c315cc08cc9fdddabf092f9be0bd171ab3"
+      "forecast_id": 45306,
+      "snapshot_id": "9d0dcb13298fb457c16a3a2ab24aeea25c6f3eaa9fcc52cd65397cfc98729882"
     },
     {
       "horizon": "day_30",
-      "origin": "2026-11-18T18:41:30.515821+00:00",
-      "endpoint": "2026-12-18T20:41:30.515821+02:00",
+      "origin": "2026-11-19T00:47:14.849901+00:00",
+      "endpoint": "2026-12-19T02:47:14.849901+02:00",
       "target_label": "Prevailing official price in 30 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -686,9 +777,9 @@
       "tier": 2,
       "label": "QUANTITATIVE MODEL FORECAST",
       "status": "issued",
-      "predicted_price": 2129201.6993929106,
-      "predicted_change": -213798.30060708962,
-      "percentage_change": -9.124980819764815,
+      "predicted_price": 2127979.187671381,
+      "predicted_change": -215020.81232861886,
+      "percentage_change": -9.177158016586379,
       "interval": null,
       "probabilities": null,
       "uncertainty": "Waiting for a validated prediction range from live outcomes.",
@@ -715,7 +806,20 @@
       "artifact_sha256": "a0207757c08a2f4b4e4f953d604e7eedd1dae5b393474dd5e22ee5e91aaae796",
       "performance": null,
       "market_input_mode": "strict_captured_vintage",
-      "lagged_market_inputs": [],
+      "lagged_market_inputs": [
+        {
+          "series": "nyh_gasoline",
+          "observation_date": "2026-11-11",
+          "age_calendar_days": 8,
+          "status": "lagged_spot_8_14d"
+        },
+        {
+          "series": "brent_spot",
+          "observation_date": "2026-11-11",
+          "age_calendar_days": 8,
+          "status": "lagged_spot_8_14d"
+        }
+      ],
       "calibration_n": 6,
       "calibration_maximum_label_end": "2025-09-23T21:00:00+00:00",
       "probability_deadband_lbp": 3000,
@@ -732,7 +836,7 @@
         "commodity_pass_through": -53846.91236711311,
         "lagged_domestic_momentum": -16713.65745384556,
         "fiscal_shock": 412.50592570475743,
-        "other_features": -38900.70932782089,
+        "other_features": -40123.22104935013,
         "baseline_intercept": -104749.52738401484,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
@@ -743,8 +847,8 @@
       "anchor_verification": "archive_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
-      "forecast_id": 45299,
-      "snapshot_id": "8d1c8564040bf28d198f3d01ffc731c315cc08cc9fdddabf092f9be0bd171ab3"
+      "forecast_id": 45307,
+      "snapshot_id": "9d0dcb13298fb457c16a3a2ab24aeea25c6f3eaa9fcc52cd65397cfc98729882"
     }
   ],
   "available_market_inputs": {
@@ -994,16 +1098,16 @@
   "status": "issued",
   "reasons": [],
   "forecast_ids": [
-    45292,
-    45293,
-    45294,
-    45295,
-    45296,
-    45297,
-    45298,
-    45299
+    45300,
+    45301,
+    45302,
+    45303,
+    45304,
+    45305,
+    45306,
+    45307
   ],
   "snapshot_ids": [
-    "8d1c8564040bf28d198f3d01ffc731c315cc08cc9fdddabf092f9be0bd171ab3"
+    "9d0dcb13298fb457c16a3a2ab24aeea25c6f3eaa9fcc52cd65397cfc98729882"
   ]
 }
