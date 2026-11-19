@@ -1,0 +1,164 @@
+{
+  "as_of": "2026-11-19T21:33:56.721436+00:00",
+  "attempt_counts": {
+    "day_1": {
+      "attempts": 27,
+      "hybrid_issued": 10,
+      "abstentions": 14,
+      "reasons": {
+        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision.": 11,
+        "IPT and Taqtek agree on the provisional price. Ministry confirmation and effective timing are pending.": 8,
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.": 13,
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable.": 13,
+        "Required quantitative features unavailable: domestic change": 3
+      }
+    },
+    "day_14": {
+      "attempts": 27,
+      "hybrid_issued": 10,
+      "abstentions": 14,
+      "reasons": {
+        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision.": 11,
+        "IPT and Taqtek agree on the provisional price. Ministry confirmation and effective timing are pending.": 8,
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.": 13,
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable.": 13,
+        "Required quantitative features unavailable: domestic change": 3
+      }
+    },
+    "day_3": {
+      "attempts": 27,
+      "hybrid_issued": 10,
+      "abstentions": 14,
+      "reasons": {
+        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision.": 11,
+        "IPT and Taqtek agree on the provisional price. Ministry confirmation and effective timing are pending.": 8,
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.": 13,
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable.": 13,
+        "Required quantitative features unavailable: domestic change": 3
+      }
+    },
+    "day_30": {
+      "attempts": 27,
+      "hybrid_issued": 10,
+      "abstentions": 14,
+      "reasons": {
+        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision.": 11,
+        "IPT and Taqtek agree on the provisional price. Ministry confirmation and effective timing are pending.": 8,
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.": 13,
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable.": 13,
+        "Required quantitative features unavailable: domestic change": 3
+      }
+    },
+    "day_7": {
+      "attempts": 27,
+      "hybrid_issued": 13,
+      "abstentions": 14,
+      "reasons": {
+        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision.": 11,
+        "IPT and Taqtek agree on the provisional price. Ministry confirmation and effective timing are pending.": 8,
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.": 13,
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable.": 13,
+        "Required quantitative features unavailable: domestic change": 3
+      }
+    },
+    "decision_1": {
+      "attempts": 27,
+      "hybrid_issued": 13,
+      "abstentions": 14,
+      "reasons": {
+        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision.": 11,
+        "IPT and Taqtek agree on the provisional price. Ministry confirmation and effective timing are pending.": 8,
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.": 13,
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable.": 13,
+        "Required quantitative features unavailable: domestic change": 3
+      }
+    },
+    "decision_2": {
+      "attempts": 27,
+      "hybrid_issued": 10,
+      "abstentions": 14,
+      "reasons": {
+        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision.": 11,
+        "IPT and Taqtek agree on the provisional price. Ministry confirmation and effective timing are pending.": 8,
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.": 13,
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable.": 13,
+        "Required quantitative features unavailable: domestic change": 3
+      }
+    },
+    "decision_4": {
+      "attempts": 27,
+      "hybrid_issued": 10,
+      "abstentions": 14,
+      "reasons": {
+        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision.": 11,
+        "IPT and Taqtek agree on the provisional price. Ministry confirmation and effective timing are pending.": 8,
+        "Exact publication/effective clocks and complete official decision sequence are unresolved.": 13,
+        "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable.": 13,
+        "Required quantitative features unavailable: domestic change": 3
+      }
+    }
+  },
+  "denominator": "Complete scheduled/manual refresh attempts, not time uptime or independent decisions.",
+  "next_decision_scores": [
+    {
+      "evidence": "official_match",
+      "anchor_cohort": "government_backed",
+      "n": 0,
+      "mae_lbp": null,
+      "rmse_lbp": null,
+      "bias_lbp": null,
+      "direction_hits": null
+    },
+    {
+      "evidence": "official_match",
+      "anchor_cohort": "provisional",
+      "n": 0,
+      "mae_lbp": null,
+      "rmse_lbp": null,
+      "bias_lbp": null,
+      "direction_hits": null
+    },
+    {
+      "evidence": "provisional_match",
+      "anchor_cohort": "government_backed",
+      "n": 0,
+      "mae_lbp": null,
+      "rmse_lbp": null,
+      "bias_lbp": null,
+      "direction_hits": null
+    },
+    {
+      "evidence": "provisional_match",
+      "anchor_cohort": "provisional",
+      "n": 1,
+      "mae_lbp": 13016.286714714952,
+      "rmse_lbp": 13016.286714714952,
+      "bias_lbp": 13016.286714714952,
+      "direction_hits": 1,
+      "direction_n": 1,
+      "mean_absolute_actual_change_lbp": 48000.0,
+      "error_over_typical_change": 0.2711726398898948
+    }
+  ],
+  "settlement_statuses": {
+    "not_matured": 45,
+    "supplier_match": 4,
+    "missing_calendar_witness": 1,
+    "no_new_record": 27,
+    "missing_endpoint_observation": 7,
+    "record_may_precede_forecast": 2
+  },
+  "forecast_hash_chain_preserved": true,
+  "counts_before": {
+    "forecasts": 45323,
+    "evaluations": 44940,
+    "hash_chain_valid": true,
+    "legacy_signed_zero_matches": 62
+  },
+  "counts_after": {
+    "forecasts": 45323,
+    "evaluations": 44940,
+    "hash_chain_valid": true,
+    "legacy_signed_zero_matches": 62
+  }
+}

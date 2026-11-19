@@ -89,6 +89,7 @@ def test_production_gate_rejects_replay_and_superseded_issuance():
 
 
 def test_market_refresh_failure_is_surfaced(monkeypatch):
+    monkeypatch.setenv("LEBANON_FUEL_WRITER", "local")
     def unavailable(args, **kwargs):
         assert args[-2:] == ["--source", "eia"]
         return subprocess.CompletedProcess(args, 1, "", "Source unavailable")

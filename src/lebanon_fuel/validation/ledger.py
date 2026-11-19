@@ -238,19 +238,8 @@ class ForecastLedger:
         if kind=='research_replay' and f['mode']!='retrospective_research':raise ValueError('Research labels cannot settle a prospective official forecast')
         if kind not in {'official_match','research_replay','provisional_match'}:raise ValueError('Unknown evaluation kind')
         if kind == 'provisional_match':
-            from lebanon_fuel.domain import BEIRUT
-            evidence = json.loads(o['payload_json'])
-            sources = evidence.get('sources', [])
-            day = evidence.get('source_date')
-            issued = max(pd_time(f['origin']), pd_time(f['created_at'])).astimezone(BEIRUT).date()
-            if (f['mode'] not in {'prospective', 'prospective_research'} or f['horizon'] != 'decision_1'
-                    or o['verification_status'] != 'supplier_agreement' or not day
-                    or date.fromisoformat(day) <= issued or o['decision_key'] != 'supplier:' + day
-                    or {item['source_id'] for item in sources} != {'ipt', 'taqtek'}
-                    or any(item['price_lbp_20l'] != o['price']
-                           or pd_time(item['first_retrieved_at']) <= max(pd_time(f['origin']), pd_time(f['created_at']))
-                           for item in sources)):
-                raise ValueError('Provisional scoring requires a later, same-date IPT and Taqtek agreement')
+            from .provisional import validate
+            validate(f, o)
         if kind == 'official_match':
             publication, effective = event_clocks(o)
             if o['verification_status'] != 'document_verified' or publication is None or effective is None:

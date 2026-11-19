@@ -10,6 +10,7 @@ import pandas as pd
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
 from lebanon_fuel.storage.database import Store
+from lebanon_fuel.automation.release import verify_frozen
 from lebanon_fuel.forecasting.pipeline import load_bundle,preview
 
 
@@ -18,18 +19,9 @@ def digest(path):return sha256(Path(path).read_bytes()).hexdigest()
 
 def run():
     root=ROOT;folder=root/'reports/forecasting'
-    manifest=json.loads((folder/'run_manifest.json').read_text())
+    manifest=verify_frozen(root,'reports/forecasting/run_manifest.json')
     config=json.loads((root/'config/forecasting_research.json').read_text())
     assert manifest['config_sha256']==digest(root/'config/forecasting_research.json')
-    validation=json.loads((root/'reports/model_validation/input_manifest.json').read_text())
-    for p,h in manifest['code_hashes'].items():
-        if Path(p).name=='live.py':
-            assert digest(root/p)==validation['source_sha256'][p],p
-        elif Path(p).name=='reporting.py':
-            assert digest(root/p)==manifest['report_code_sha256'],p
-        else:assert digest(root/p)==h,p
-    for p,h in manifest.get('release',{}).get('source_sha256',{}).items():
-        assert digest(root/p)==h,p
     for p,h in manifest['output_hashes'].items():assert digest(folder/p)==h,p
     design_path=root/'data/exports/forecasting/development_design.csv'
     feature_path=root/'data/exports/forecasting/origin_features.csv'

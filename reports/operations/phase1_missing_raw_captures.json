@@ -1,10 +1,9 @@
 {
-  "checked_at": "2026-11-19T13:35:14.663759+00:00",
-  "repository_commit": "05064862c80623480ed4881d0b4ac0f520b05f4d",
-  "database_sha256": "af38fa5d90645a98c3edf92b5c4b2cbe60e383c7080668e7130928eaa70ed540",
-  "total_capture_rows": 586,
-  "missing_count": 86,
-  "missing_capture_rows": 105,
+  "checked_at": "2026-11-19T21:41:45.293038+00:00",
+  "base_commit": "20fdccd08b4d1433736997edd908e55d94ea8657",
+  "database_sha256": "18ab576cc31f55eb0ff392bbab4bea6cee3d263adfe161fe2ddfa801430d2db5",
+  "missing_count": 69,
+  "missing_capture_rows": 69,
   "missing_paths": [
     "data/raw/ipt/048e61213d973686dc92561a5ea300c68e6b031ca99d4fbfde7d1a82a29f142d.html",
     "data/raw/ipt/0571b3c3b3baf5c329b157590cece6099531ccf0f855b569cc0e84696d9b5125.html",
@@ -70,28 +69,11 @@
     "data/raw/market_ec/1867577c8f46b6cd69106beb8af9d11ba74fff110afb78053a08f918159b9ca2.html",
     "data/raw/market_ec/54d0ceb2ed9347a61634237612f95c02f4cb0a67fd9c52d88e723ff2b23f2498.html",
     "data/raw/market_ec/d03df345caa9b7ddad9a70b4fccf81b658dd7122fa55f61b49f6637e968f70d5.xlsx",
-    "data/raw/market_eia/099cc50c88f3f28452b597744ca4c79147211cf15f9bbe3d7e232107d4e94672.xls",
     "data/raw/market_eia/2a04c9de780a0762ae471a73e861b577c3d645cdb14e4b695c7e7c23f6eb8276.html",
     "data/raw/market_eia/46fd12a9e54a58663fc91f9b6c5755693a7636de78ebc1a89affb4e8f1babd95.html",
-    "data/raw/market_eia/539089717d98465228884992847e5852511e91383026ce598288a4e608bece3f.html",
-    "data/raw/market_eia/82474ddd76ff01cac27cd5814736ba9e9d33f5a3ec92c96cc1b0f9c3c453d4b5.html",
-    "data/raw/market_eia/8efb2a474db8665a628d73cff9f4d96fcf88ad41866aca96cbcae06cb3dc41d0.html",
-    "data/raw/market_eia/91cabd86184db57035b99630c357f2683c50e51a85fec37facae5a960e38ee15.xls",
-    "data/raw/market_eia/ab845e2fe8a29fcdd5fbb275e737a34fd49e14af92713afd39b383685cac6c29.html",
-    "data/raw/market_eia/bf7a46a165420b5ca89ec17355179403bcaf3aaa621cbebf023b30cfc77c9754.xls",
-    "data/raw/market_eia/c043fbb34bdf2b870096b54e87eff91d2a71c62e55dc1d60dd9d50f19fcde7d4.html",
-    "data/raw/market_eia/cee877416aa21ac3ec0fb21eb1a79747747d5ccdb88f302e4025fd5acf392331.xls",
-    "data/raw/market_eia/f453fcda4cf9567bf054e68a41b14e22ba253026b094185fd06c18eabe27d379.xls",
     "data/raw/market_fed/158f76abd63f2ed453f519ed60dfa3e244fc4f6981832dbb844aabc1267215a8.html",
     "data/raw/market_fed/4ada726a3aecc88503d9c5415f050cc6b4e13362964db81c70bd1661d656ba8d.html",
-    "data/raw/market_fed/944ae31c1f5166678826976edf235b9dea4077a9d06ea784a5846cef00eb69ae.html",
-    "data/raw/market_fed/c424bcdfe0947e48d9bc3937fd3a9e82bf144e5ac6454ae95a68346196394c77.zip",
-    "data/raw/ministry/514c80905610c4bd6fd13eddf7ae2ae46be3d6751b08f02129229518709f6c73.html",
-    "data/raw/ministry/6e7f37e45d104256a47f421f796e24f9d1592632dc43e8ca50caf428f031af67.html",
-    "data/raw/ministry/886e2f25cd12f717fc4ed6947548155b44cb949069cae10f6e6d9aafabc492bd.html",
-    "data/raw/ministry/f70e3d61a2d815f803be76623b3941f3e92e2543d1330930a3b5ff74e765d6ae.html",
-    "data/raw/taqtek/0667cfc6f8333143be698a8467a565c2b12678d59979a4af874a3324b1d16253.html",
-    "data/raw/taqtek/ee694c72ed38554a73cb65bafbfaa9ea095bfddf36a5589ebd2ed9598bae5e84.html"
+    "data/raw/market_fed/944ae31c1f5166678826976edf235b9dea4077a9d06ea784a5846cef00eb69ae.html"
   ],
   "missing_captures": [
     {
@@ -223,14 +205,6 @@
       "raw_path": "data/raw/ipt/2d3f1d038bdad9bc262260e0067177fbe2420477a3f30cde2d6c0807a09eedbe.xlsx"
     },
     {
-      "id": 432,
-      "source_id": "ministry",
-      "url": "https://energyandwater.gov.lb/ar/prices",
-      "retrieved_at": "2026-11-17T00:37:57.112849+00:00",
-      "sha256": "6e7f37e45d104256a47f421f796e24f9d1592632dc43e8ca50caf428f031af67",
-      "raw_path": "data/raw/ministry/6e7f37e45d104256a47f421f796e24f9d1592632dc43e8ca50caf428f031af67.html"
-    },
-    {
       "id": 436,
       "source_id": "ipt",
       "url": "https://www.iptgroup.com.lb/ipt/en/our-stations/fuel-prices",
@@ -261,14 +235,6 @@
       "retrieved_at": "2026-11-17T06:55:25.218571+00:00",
       "sha256": "1e68cc83d0039251146a777818954fa4a0d05614133f11f6812c54361452eabf",
       "raw_path": "data/raw/ipt/1e68cc83d0039251146a777818954fa4a0d05614133f11f6812c54361452eabf.xlsx"
-    },
-    {
-      "id": 441,
-      "source_id": "ministry",
-      "url": "https://energyandwater.gov.lb/ar/prices",
-      "retrieved_at": "2026-11-17T06:55:29.197366+00:00",
-      "sha256": "6e7f37e45d104256a47f421f796e24f9d1592632dc43e8ca50caf428f031af67",
-      "raw_path": "data/raw/ministry/6e7f37e45d104256a47f421f796e24f9d1592632dc43e8ca50caf428f031af67.html"
     },
     {
       "id": 445,
@@ -303,22 +269,6 @@
       "raw_path": "data/raw/ipt/1c826afdd0b4a14db269c7a9085accb5b8462681e181ee66ff9d5653b8707b13.xlsx"
     },
     {
-      "id": 450,
-      "source_id": "ministry",
-      "url": "https://energyandwater.gov.lb/ar/prices",
-      "retrieved_at": "2026-11-17T12:46:06.617472+00:00",
-      "sha256": "6e7f37e45d104256a47f421f796e24f9d1592632dc43e8ca50caf428f031af67",
-      "raw_path": "data/raw/ministry/6e7f37e45d104256a47f421f796e24f9d1592632dc43e8ca50caf428f031af67.html"
-    },
-    {
-      "id": 454,
-      "source_id": "taqtek",
-      "url": "https://taqteklb.com/en/fuel/",
-      "retrieved_at": "2026-11-17T12:46:17.010477+00:00",
-      "sha256": "ee694c72ed38554a73cb65bafbfaa9ea095bfddf36a5589ebd2ed9598bae5e84",
-      "raw_path": "data/raw/taqtek/ee694c72ed38554a73cb65bafbfaa9ea095bfddf36a5589ebd2ed9598bae5e84.html"
-    },
-    {
       "id": 467,
       "source_id": "market_ec",
       "url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
@@ -333,14 +283,6 @@
       "retrieved_at": "2026-11-17T12:47:07.975908+00:00",
       "sha256": "944ae31c1f5166678826976edf235b9dea4077a9d06ea784a5846cef00eb69ae",
       "raw_path": "data/raw/market_fed/944ae31c1f5166678826976edf235b9dea4077a9d06ea784a5846cef00eb69ae.html"
-    },
-    {
-      "id": 471,
-      "source_id": "market_fed",
-      "url": "https://www.federalreserve.gov/releases/h10/data/FRB_h10_xml.zip",
-      "retrieved_at": "2026-11-17T12:47:11.042822+00:00",
-      "sha256": "c424bcdfe0947e48d9bc3937fd3a9e82bf144e5ac6454ae95a68346196394c77",
-      "raw_path": "data/raw/market_fed/c424bcdfe0947e48d9bc3937fd3a9e82bf144e5ac6454ae95a68346196394c77.zip"
     },
     {
       "id": 473,
@@ -375,14 +317,6 @@
       "raw_path": "data/raw/ipt/45871bce61051d172663b7604572ff14f7c7da6208a0d2af1614cacab2664129.xlsx"
     },
     {
-      "id": 478,
-      "source_id": "ministry",
-      "url": "https://energyandwater.gov.lb/ar/prices",
-      "retrieved_at": "2026-11-17T18:44:57.157463+00:00",
-      "sha256": "6e7f37e45d104256a47f421f796e24f9d1592632dc43e8ca50caf428f031af67",
-      "raw_path": "data/raw/ministry/6e7f37e45d104256a47f421f796e24f9d1592632dc43e8ca50caf428f031af67.html"
-    },
-    {
       "id": 482,
       "source_id": "ipt",
       "url": "https://www.iptgroup.com.lb/ipt/en/our-stations/fuel-prices",
@@ -413,22 +347,6 @@
       "retrieved_at": "2026-11-18T00:44:46.522185+00:00",
       "sha256": "dbf4a965ca74ba132ab7b906b8d872602ae5354f15aabd8162e8433325687837",
       "raw_path": "data/raw/ipt/dbf4a965ca74ba132ab7b906b8d872602ae5354f15aabd8162e8433325687837.xlsx"
-    },
-    {
-      "id": 487,
-      "source_id": "ministry",
-      "url": "https://energyandwater.gov.lb/ar/prices",
-      "retrieved_at": "2026-11-18T00:44:50.629999+00:00",
-      "sha256": "f70e3d61a2d815f803be76623b3941f3e92e2543d1330930a3b5ff74e765d6ae",
-      "raw_path": "data/raw/ministry/f70e3d61a2d815f803be76623b3941f3e92e2543d1330930a3b5ff74e765d6ae.html"
-    },
-    {
-      "id": 489,
-      "source_id": "ministry",
-      "url": "https://energyandwater.gov.lb/ajax/pricesCtrl.php",
-      "retrieved_at": "2026-11-18T00:44:56.829294+00:00",
-      "sha256": "886e2f25cd12f717fc4ed6947548155b44cb949069cae10f6e6d9aafabc492bd",
-      "raw_path": "data/raw/ministry/886e2f25cd12f717fc4ed6947548155b44cb949069cae10f6e6d9aafabc492bd.html"
     },
     {
       "id": 491,
@@ -463,22 +381,6 @@
       "raw_path": "data/raw/ipt/c82621ffc09c29d3e4bc2417109b56ba2d2d6335d8e57696fb39b26928d17d77.xlsx"
     },
     {
-      "id": 496,
-      "source_id": "ministry",
-      "url": "https://energyandwater.gov.lb/ar/prices",
-      "retrieved_at": "2026-11-18T06:54:29.228834+00:00",
-      "sha256": "f70e3d61a2d815f803be76623b3941f3e92e2543d1330930a3b5ff74e765d6ae",
-      "raw_path": "data/raw/ministry/f70e3d61a2d815f803be76623b3941f3e92e2543d1330930a3b5ff74e765d6ae.html"
-    },
-    {
-      "id": 498,
-      "source_id": "ministry",
-      "url": "https://energyandwater.gov.lb/ajax/pricesCtrl.php",
-      "retrieved_at": "2026-11-18T06:54:35.450665+00:00",
-      "sha256": "886e2f25cd12f717fc4ed6947548155b44cb949069cae10f6e6d9aafabc492bd",
-      "raw_path": "data/raw/ministry/886e2f25cd12f717fc4ed6947548155b44cb949069cae10f6e6d9aafabc492bd.html"
-    },
-    {
       "id": 500,
       "source_id": "ipt",
       "url": "https://www.iptgroup.com.lb/ipt/en/our-stations/fuel-prices",
@@ -509,30 +411,6 @@
       "retrieved_at": "2026-11-18T12:52:27.865437+00:00",
       "sha256": "80f25ab1d033faea5a9e5b08323db2290195b903ca6c4d399442511f33c671cc",
       "raw_path": "data/raw/ipt/80f25ab1d033faea5a9e5b08323db2290195b903ca6c4d399442511f33c671cc.xlsx"
-    },
-    {
-      "id": 505,
-      "source_id": "ministry",
-      "url": "https://energyandwater.gov.lb/ar/prices",
-      "retrieved_at": "2026-11-18T12:52:32.288881+00:00",
-      "sha256": "f70e3d61a2d815f803be76623b3941f3e92e2543d1330930a3b5ff74e765d6ae",
-      "raw_path": "data/raw/ministry/f70e3d61a2d815f803be76623b3941f3e92e2543d1330930a3b5ff74e765d6ae.html"
-    },
-    {
-      "id": 507,
-      "source_id": "ministry",
-      "url": "https://energyandwater.gov.lb/ajax/pricesCtrl.php",
-      "retrieved_at": "2026-11-18T12:52:38.491403+00:00",
-      "sha256": "886e2f25cd12f717fc4ed6947548155b44cb949069cae10f6e6d9aafabc492bd",
-      "raw_path": "data/raw/ministry/886e2f25cd12f717fc4ed6947548155b44cb949069cae10f6e6d9aafabc492bd.html"
-    },
-    {
-      "id": 509,
-      "source_id": "taqtek",
-      "url": "https://taqteklb.com/en/fuel/",
-      "retrieved_at": "2026-11-18T12:52:42.465132+00:00",
-      "sha256": "ee694c72ed38554a73cb65bafbfaa9ea095bfddf36a5589ebd2ed9598bae5e84",
-      "raw_path": "data/raw/taqtek/ee694c72ed38554a73cb65bafbfaa9ea095bfddf36a5589ebd2ed9598bae5e84.html"
     },
     {
       "id": 513,
@@ -567,14 +445,6 @@
       "raw_path": "data/raw/market_fed/158f76abd63f2ed453f519ed60dfa3e244fc4f6981832dbb844aabc1267215a8.html"
     },
     {
-      "id": 526,
-      "source_id": "market_fed",
-      "url": "https://www.federalreserve.gov/releases/h10/data/FRB_h10_xml.zip",
-      "retrieved_at": "2026-11-18T12:53:37.289041+00:00",
-      "sha256": "c424bcdfe0947e48d9bc3937fd3a9e82bf144e5ac6454ae95a68346196394c77",
-      "raw_path": "data/raw/market_fed/c424bcdfe0947e48d9bc3937fd3a9e82bf144e5ac6454ae95a68346196394c77.zip"
-    },
-    {
       "id": 528,
       "source_id": "ipt",
       "url": "https://www.iptgroup.com.lb/ipt/en/our-stations/fuel-prices",
@@ -605,22 +475,6 @@
       "retrieved_at": "2026-11-18T16:26:15.932722+00:00",
       "sha256": "9257222d1a6c8a8e11c2e819666b046cef3d7713631e6c0e1c7dfc44244b2df8",
       "raw_path": "data/raw/ipt/9257222d1a6c8a8e11c2e819666b046cef3d7713631e6c0e1c7dfc44244b2df8.xlsx"
-    },
-    {
-      "id": 533,
-      "source_id": "ministry",
-      "url": "https://energyandwater.gov.lb/ar/prices",
-      "retrieved_at": "2026-11-18T16:26:20.051410+00:00",
-      "sha256": "f70e3d61a2d815f803be76623b3941f3e92e2543d1330930a3b5ff74e765d6ae",
-      "raw_path": "data/raw/ministry/f70e3d61a2d815f803be76623b3941f3e92e2543d1330930a3b5ff74e765d6ae.html"
-    },
-    {
-      "id": 535,
-      "source_id": "ministry",
-      "url": "https://energyandwater.gov.lb/ajax/pricesCtrl.php",
-      "retrieved_at": "2026-11-18T16:26:26.195330+00:00",
-      "sha256": "886e2f25cd12f717fc4ed6947548155b44cb949069cae10f6e6d9aafabc492bd",
-      "raw_path": "data/raw/ministry/886e2f25cd12f717fc4ed6947548155b44cb949069cae10f6e6d9aafabc492bd.html"
     },
     {
       "id": 537,
@@ -655,22 +509,6 @@
       "raw_path": "data/raw/ipt/7b0047ed2fd6058b9dd7be7d8fe23d323bbb58109bcefe1d691c2a6ba88deb7d.xlsx"
     },
     {
-      "id": 542,
-      "source_id": "ministry",
-      "url": "https://energyandwater.gov.lb/ar/prices",
-      "retrieved_at": "2026-11-18T18:41:05.648736+00:00",
-      "sha256": "f70e3d61a2d815f803be76623b3941f3e92e2543d1330930a3b5ff74e765d6ae",
-      "raw_path": "data/raw/ministry/f70e3d61a2d815f803be76623b3941f3e92e2543d1330930a3b5ff74e765d6ae.html"
-    },
-    {
-      "id": 544,
-      "source_id": "ministry",
-      "url": "https://energyandwater.gov.lb/ajax/pricesCtrl.php",
-      "retrieved_at": "2026-11-18T18:41:11.824672+00:00",
-      "sha256": "886e2f25cd12f717fc4ed6947548155b44cb949069cae10f6e6d9aafabc492bd",
-      "raw_path": "data/raw/ministry/886e2f25cd12f717fc4ed6947548155b44cb949069cae10f6e6d9aafabc492bd.html"
-    },
-    {
       "id": 546,
       "source_id": "ipt",
       "url": "https://www.iptgroup.com.lb/ipt/en/our-stations/fuel-prices",
@@ -701,22 +539,6 @@
       "retrieved_at": "2026-11-19T00:46:49.773893+00:00",
       "sha256": "33ea54da98f16e580c11be2e4cba38ea049512bdf0e552ec752717ab48112435",
       "raw_path": "data/raw/ipt/33ea54da98f16e580c11be2e4cba38ea049512bdf0e552ec752717ab48112435.xlsx"
-    },
-    {
-      "id": 551,
-      "source_id": "ministry",
-      "url": "https://energyandwater.gov.lb/ar/prices",
-      "retrieved_at": "2026-11-19T00:46:53.596102+00:00",
-      "sha256": "514c80905610c4bd6fd13eddf7ae2ae46be3d6751b08f02129229518709f6c73",
-      "raw_path": "data/raw/ministry/514c80905610c4bd6fd13eddf7ae2ae46be3d6751b08f02129229518709f6c73.html"
-    },
-    {
-      "id": 553,
-      "source_id": "ministry",
-      "url": "https://energyandwater.gov.lb/ajax/pricesCtrl.php",
-      "retrieved_at": "2026-11-19T00:46:59.788265+00:00",
-      "sha256": "886e2f25cd12f717fc4ed6947548155b44cb949069cae10f6e6d9aafabc492bd",
-      "raw_path": "data/raw/ministry/886e2f25cd12f717fc4ed6947548155b44cb949069cae10f6e6d9aafabc492bd.html"
     },
     {
       "id": 555,
@@ -751,22 +573,6 @@
       "raw_path": "data/raw/ipt/c38c853b9df8f75ba4085fc2f14ceefa46cf542d84af80000c1ecc1bde22d729.xlsx"
     },
     {
-      "id": 560,
-      "source_id": "ministry",
-      "url": "https://energyandwater.gov.lb/ar/prices",
-      "retrieved_at": "2026-11-19T06:54:43.349404+00:00",
-      "sha256": "514c80905610c4bd6fd13eddf7ae2ae46be3d6751b08f02129229518709f6c73",
-      "raw_path": "data/raw/ministry/514c80905610c4bd6fd13eddf7ae2ae46be3d6751b08f02129229518709f6c73.html"
-    },
-    {
-      "id": 562,
-      "source_id": "ministry",
-      "url": "https://energyandwater.gov.lb/ajax/pricesCtrl.php",
-      "retrieved_at": "2026-11-19T06:54:49.430386+00:00",
-      "sha256": "886e2f25cd12f717fc4ed6947548155b44cb949069cae10f6e6d9aafabc492bd",
-      "raw_path": "data/raw/ministry/886e2f25cd12f717fc4ed6947548155b44cb949069cae10f6e6d9aafabc492bd.html"
-    },
-    {
       "id": 564,
       "source_id": "ipt",
       "url": "https://www.iptgroup.com.lb/ipt/en/our-stations/fuel-prices",
@@ -799,110 +605,6 @@
       "raw_path": "data/raw/ipt/6d3da24eb9b033a26eb08f401a1a8ef4e07d8ea7b16a60c77a586ce1e88c0196.xlsx"
     },
     {
-      "id": 569,
-      "source_id": "ministry",
-      "url": "https://energyandwater.gov.lb/ar/prices",
-      "retrieved_at": "2026-11-19T12:53:03.191927+00:00",
-      "sha256": "514c80905610c4bd6fd13eddf7ae2ae46be3d6751b08f02129229518709f6c73",
-      "raw_path": "data/raw/ministry/514c80905610c4bd6fd13eddf7ae2ae46be3d6751b08f02129229518709f6c73.html"
-    },
-    {
-      "id": 571,
-      "source_id": "ministry",
-      "url": "https://energyandwater.gov.lb/ajax/pricesCtrl.php",
-      "retrieved_at": "2026-11-19T12:53:09.416828+00:00",
-      "sha256": "886e2f25cd12f717fc4ed6947548155b44cb949069cae10f6e6d9aafabc492bd",
-      "raw_path": "data/raw/ministry/886e2f25cd12f717fc4ed6947548155b44cb949069cae10f6e6d9aafabc492bd.html"
-    },
-    {
-      "id": 573,
-      "source_id": "taqtek",
-      "url": "https://taqteklb.com/en/fuel/",
-      "retrieved_at": "2026-11-19T12:53:13.603651+00:00",
-      "sha256": "0667cfc6f8333143be698a8467a565c2b12678d59979a4af874a3324b1d16253",
-      "raw_path": "data/raw/taqtek/0667cfc6f8333143be698a8467a565c2b12678d59979a4af874a3324b1d16253.html"
-    },
-    {
-      "id": 575,
-      "source_id": "market_eia",
-      "url": "https://www.eia.gov/dnav/pet/hist/RBRTED.htm",
-      "retrieved_at": "2026-11-19T12:53:17.362422+00:00",
-      "sha256": "8efb2a474db8665a628d73cff9f4d96fcf88ad41866aca96cbcae06cb3dc41d0",
-      "raw_path": "data/raw/market_eia/8efb2a474db8665a628d73cff9f4d96fcf88ad41866aca96cbcae06cb3dc41d0.html"
-    },
-    {
-      "id": 576,
-      "source_id": "market_eia",
-      "url": "https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls",
-      "retrieved_at": "2026-11-19T12:53:20.412384+00:00",
-      "sha256": "099cc50c88f3f28452b597744ca4c79147211cf15f9bbe3d7e232107d4e94672",
-      "raw_path": "data/raw/market_eia/099cc50c88f3f28452b597744ca4c79147211cf15f9bbe3d7e232107d4e94672.xls"
-    },
-    {
-      "id": 577,
-      "source_id": "market_eia",
-      "url": "https://www.eia.gov/dnav/pet/hist/EER_EPMRU_PF4_Y35NY_DPGD.htm",
-      "retrieved_at": "2026-11-19T12:53:23.562295+00:00",
-      "sha256": "c043fbb34bdf2b870096b54e87eff91d2a71c62e55dc1d60dd9d50f19fcde7d4",
-      "raw_path": "data/raw/market_eia/c043fbb34bdf2b870096b54e87eff91d2a71c62e55dc1d60dd9d50f19fcde7d4.html"
-    },
-    {
-      "id": 578,
-      "source_id": "market_eia",
-      "url": "https://www.eia.gov/dnav/pet/hist_xls/EER_EPMRU_PF4_Y35NY_DPGd.xls",
-      "retrieved_at": "2026-11-19T12:53:26.708087+00:00",
-      "sha256": "bf7a46a165420b5ca89ec17355179403bcaf3aaa621cbebf023b30cfc77c9754",
-      "raw_path": "data/raw/market_eia/bf7a46a165420b5ca89ec17355179403bcaf3aaa621cbebf023b30cfc77c9754.xls"
-    },
-    {
-      "id": 579,
-      "source_id": "market_eia",
-      "url": "https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=WGTSTUS1&f=W",
-      "retrieved_at": "2026-11-19T12:53:31.292701+00:00",
-      "sha256": "ab845e2fe8a29fcdd5fbb275e737a34fd49e14af92713afd39b383685cac6c29",
-      "raw_path": "data/raw/market_eia/ab845e2fe8a29fcdd5fbb275e737a34fd49e14af92713afd39b383685cac6c29.html"
-    },
-    {
-      "id": 580,
-      "source_id": "market_eia",
-      "url": "https://www.eia.gov/dnav/pet/hist_xls/WGTSTUS1w.xls",
-      "retrieved_at": "2026-11-19T12:53:34.315735+00:00",
-      "sha256": "cee877416aa21ac3ec0fb21eb1a79747747d5ccdb88f302e4025fd5acf392331",
-      "raw_path": "data/raw/market_eia/cee877416aa21ac3ec0fb21eb1a79747747d5ccdb88f302e4025fd5acf392331.xls"
-    },
-    {
-      "id": 581,
-      "source_id": "market_eia",
-      "url": "https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=WCESTUS1&f=W",
-      "retrieved_at": "2026-11-19T12:53:39.588952+00:00",
-      "sha256": "539089717d98465228884992847e5852511e91383026ce598288a4e608bece3f",
-      "raw_path": "data/raw/market_eia/539089717d98465228884992847e5852511e91383026ce598288a4e608bece3f.html"
-    },
-    {
-      "id": 582,
-      "source_id": "market_eia",
-      "url": "https://www.eia.gov/dnav/pet/hist_xls/WCESTUS1w.xls",
-      "retrieved_at": "2026-11-19T12:53:42.602646+00:00",
-      "sha256": "91cabd86184db57035b99630c357f2683c50e51a85fec37facae5a960e38ee15",
-      "raw_path": "data/raw/market_eia/91cabd86184db57035b99630c357f2683c50e51a85fec37facae5a960e38ee15.xls"
-    },
-    {
-      "id": 583,
-      "source_id": "market_eia",
-      "url": "https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=WPULEUS3&f=W",
-      "retrieved_at": "2026-11-19T12:53:46.743276+00:00",
-      "sha256": "82474ddd76ff01cac27cd5814736ba9e9d33f5a3ec92c96cc1b0f9c3c453d4b5",
-      "raw_path": "data/raw/market_eia/82474ddd76ff01cac27cd5814736ba9e9d33f5a3ec92c96cc1b0f9c3c453d4b5.html"
-    },
-    {
-      "id": 584,
-      "source_id": "market_eia",
-      "url": "https://www.eia.gov/dnav/pet/hist_xls/WPULEUS3w.xls",
-      "retrieved_at": "2026-11-19T12:53:49.780153+00:00",
-      "sha256": "f453fcda4cf9567bf054e68a41b14e22ba253026b094185fd06c18eabe27d379",
-      "raw_path": "data/raw/market_eia/f453fcda4cf9567bf054e68a41b14e22ba253026b094185fd06c18eabe27d379.xls"
-    },
-    {
       "id": 586,
       "source_id": "market_ec",
       "url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
@@ -925,117 +627,13 @@
       "retrieved_at": "2026-11-19T12:54:02.909406+00:00",
       "sha256": "4ada726a3aecc88503d9c5415f050cc6b4e13362964db81c70bd1661d656ba8d",
       "raw_path": "data/raw/market_fed/4ada726a3aecc88503d9c5415f050cc6b4e13362964db81c70bd1661d656ba8d.html"
-    },
-    {
-      "id": 590,
-      "source_id": "market_fed",
-      "url": "https://www.federalreserve.gov/releases/h10/data/FRB_h10_xml.zip",
-      "retrieved_at": "2026-11-19T12:54:06.052875+00:00",
-      "sha256": "c424bcdfe0947e48d9bc3937fd3a9e82bf144e5ac6454ae95a68346196394c77",
-      "raw_path": "data/raw/market_fed/c424bcdfe0947e48d9bc3937fd3a9e82bf144e5ac6454ae95a68346196394c77.zip"
     }
   ],
-  "previous_catalog_missing_count": 50,
-  "previous_catalog_paths_still_missing": 50,
-  "missing_paths_added_since_previous_catalog": [
-    "data/raw/ipt/048e61213d973686dc92561a5ea300c68e6b031ca99d4fbfde7d1a82a29f142d.html",
-    "data/raw/ipt/0fac448bb93080a780a50564be08d71e9a7b050f36f8fe0fed832b3084cb8ee0.html",
-    "data/raw/ipt/1437b06083507cccd71ae7752a7eb3a420567e54cb7d101806ee433bad3ef20f.html",
-    "data/raw/ipt/33ea54da98f16e580c11be2e4cba38ea049512bdf0e552ec752717ab48112435.xlsx",
-    "data/raw/ipt/579ed7c4b5700dc691d1a15e35e5ef591809e0a61429b4be1583180547fd6b62.html",
-    "data/raw/ipt/5bb7e53ce69095185150790c71c71c48f5f50375ff38c3091e526dbd2754bcc2.html",
-    "data/raw/ipt/5fec7d1ed9ea0fd97cbc50483d2e35bca1cb5f3da85d26dc279e1e5262d7c961.html",
-    "data/raw/ipt/6282c2f9c78f51b4e2c16e9f43e2f5873781408e2e66c6f0bda28543e2a0d583.html",
-    "data/raw/ipt/6d3da24eb9b033a26eb08f401a1a8ef4e07d8ea7b16a60c77a586ce1e88c0196.xlsx",
-    "data/raw/ipt/700d49e9da33ab2de82f88563f19ef07c088ff68a2f85df5b833137f5a5b9ab9.html",
-    "data/raw/ipt/7b0047ed2fd6058b9dd7be7d8fe23d323bbb58109bcefe1d691c2a6ba88deb7d.xlsx",
-    "data/raw/ipt/8aa103b5f6ab9d0fa33b5111b4b94b0dba8ad92787aca9f5bb45c8a7d093e865.html",
-    "data/raw/ipt/c38c853b9df8f75ba4085fc2f14ceefa46cf542d84af80000c1ecc1bde22d729.xlsx",
-    "data/raw/ipt/c6a7d8620cfb26175783292281f5f40264d05f3cf917be38b5aa684fc570fc2a.html",
-    "data/raw/ipt/d5a4b10cce37659665be7f9082d68e9bfcb48321949e45df2eeb3fe2c0bb9368.html",
-    "data/raw/ipt/f1c9152b3ba408e266bb2f2dd86eea6d99ebc52307c7d861dc2d2a10c356fac3.html",
-    "data/raw/market_ec/1867577c8f46b6cd69106beb8af9d11ba74fff110afb78053a08f918159b9ca2.html",
-    "data/raw/market_ec/d03df345caa9b7ddad9a70b4fccf81b658dd7122fa55f61b49f6637e968f70d5.xlsx",
-    "data/raw/market_eia/099cc50c88f3f28452b597744ca4c79147211cf15f9bbe3d7e232107d4e94672.xls",
-    "data/raw/market_eia/539089717d98465228884992847e5852511e91383026ce598288a4e608bece3f.html",
-    "data/raw/market_eia/82474ddd76ff01cac27cd5814736ba9e9d33f5a3ec92c96cc1b0f9c3c453d4b5.html",
-    "data/raw/market_eia/8efb2a474db8665a628d73cff9f4d96fcf88ad41866aca96cbcae06cb3dc41d0.html",
-    "data/raw/market_eia/91cabd86184db57035b99630c357f2683c50e51a85fec37facae5a960e38ee15.xls",
-    "data/raw/market_eia/ab845e2fe8a29fcdd5fbb275e737a34fd49e14af92713afd39b383685cac6c29.html",
-    "data/raw/market_eia/bf7a46a165420b5ca89ec17355179403bcaf3aaa621cbebf023b30cfc77c9754.xls",
-    "data/raw/market_eia/c043fbb34bdf2b870096b54e87eff91d2a71c62e55dc1d60dd9d50f19fcde7d4.html",
-    "data/raw/market_eia/cee877416aa21ac3ec0fb21eb1a79747747d5ccdb88f302e4025fd5acf392331.xls",
-    "data/raw/market_eia/f453fcda4cf9567bf054e68a41b14e22ba253026b094185fd06c18eabe27d379.xls",
-    "data/raw/market_fed/4ada726a3aecc88503d9c5415f050cc6b4e13362964db81c70bd1661d656ba8d.html",
-    "data/raw/market_fed/c424bcdfe0947e48d9bc3937fd3a9e82bf144e5ac6454ae95a68346196394c77.zip",
-    "data/raw/ministry/514c80905610c4bd6fd13eddf7ae2ae46be3d6751b08f02129229518709f6c73.html",
-    "data/raw/ministry/6e7f37e45d104256a47f421f796e24f9d1592632dc43e8ca50caf428f031af67.html",
-    "data/raw/ministry/886e2f25cd12f717fc4ed6947548155b44cb949069cae10f6e6d9aafabc492bd.html",
-    "data/raw/ministry/f70e3d61a2d815f803be76623b3941f3e92e2543d1330930a3b5ff74e765d6ae.html",
-    "data/raw/taqtek/0667cfc6f8333143be698a8467a565c2b12678d59979a4af874a3324b1d16253.html",
-    "data/raw/taqtek/ee694c72ed38554a73cb65bafbfaa9ea095bfddf36a5589ebd2ed9598bae5e84.html"
-  ],
-  "restored": false,
-  "note": "Complete current repository snapshot inventory. Capture timestamps are retrieval times, not inferred publication dates. Original bytes must match the stored SHA-256. No capture rows removed and no missing files treated as verified.",
-  "requested_phase1_cohort": {
-    "missing_count": 54,
-    "missing_paths": [
-      "data/raw/ipt/0571b3c3b3baf5c329b157590cece6099531ccf0f855b569cc0e84696d9b5125.html",
-      "data/raw/ipt/144c6004eac93b65c88bd98797f101f94f3fb2a0c3d91b0b8961ca1a23a2aab6.html",
-      "data/raw/ipt/1585e28526b874ac46bc1233503940a4bb9c4948396e72b7d86546291c49acc8.html",
-      "data/raw/ipt/1c826afdd0b4a14db269c7a9085accb5b8462681e181ee66ff9d5653b8707b13.xlsx",
-      "data/raw/ipt/1e68cc83d0039251146a777818954fa4a0d05614133f11f6812c54361452eabf.xlsx",
-      "data/raw/ipt/2d3f1d038bdad9bc262260e0067177fbe2420477a3f30cde2d6c0807a09eedbe.xlsx",
-      "data/raw/ipt/2edc314b76cf50e644232d71428f63f3d7676b76ebcb2548e92ac91759f7ee54.html",
-      "data/raw/ipt/3111ed00d83ae02a95bbe3f0742b672d0f0ba9d68b9b625be22eaab7b9dcc00f.html",
-      "data/raw/ipt/3a95360cbd3cccd3f3f956fdd8942cb1d6d8e135ca0afac1368b92d7eedff5d3.html",
-      "data/raw/ipt/3bf5baca7080946e410219b2b8c36cfe796b7e12610fede045845c046b7b1045.html",
-      "data/raw/ipt/3bf8b477ef7b929646f9c816b2370439a75824b649c16bca335dd530665dd1ce.html",
-      "data/raw/ipt/3eb605db0861b6011cb375978cb0945aa6fe27be9dfaa22575806621564f0edc.xlsx",
-      "data/raw/ipt/4345a4b59318da0d5f84737b7ff99e537aaa4db01624ba8ae1ae94fc80396573.xlsx",
-      "data/raw/ipt/45871bce61051d172663b7604572ff14f7c7da6208a0d2af1614cacab2664129.xlsx",
-      "data/raw/ipt/481072ac7749ed52136d46e2e658716042ec87275137be70dd81ed6658723fbc.html",
-      "data/raw/ipt/531b74187e5f12d20b0cd7d5245f8a017eb887d45d496534354ccae565b3ef6e.html",
-      "data/raw/ipt/579ed7c4b5700dc691d1a15e35e5ef591809e0a61429b4be1583180547fd6b62.html",
-      "data/raw/ipt/59f92831ecfc573f9f3e572f6a758f667ceab264a7d4577d82374346c7d9bad5.html",
-      "data/raw/ipt/67ffbae31b7d9839be2e0c83464a772da4d9140e4dd3cc93af50eacf0b3dd6e6.html",
-      "data/raw/ipt/6fb84bb1c09780eb2576699b8b9d09fe4ed47b2f82cae70363cab0abbe18af3d.html",
-      "data/raw/ipt/7070545a10059ef628552571e7f4ffa36ec03d9c39e9ba25c6066d4b5e34478c.xlsx",
-      "data/raw/ipt/71c4612cb9f3c7241891c3a4dc48a59d12ddefc6431ba78771cd34dfa0c2858c.html",
-      "data/raw/ipt/733ab3728f89f3d5c16d33bef509593d1a7af5d791991524b865f7a92afc43f7.html",
-      "data/raw/ipt/74461730b3ce05ec6180c34449d25c16f0fbed864cff22d8ee5a20fa409cc332.html",
-      "data/raw/ipt/776e1772698a608db3a85c3afdaa25774e19a8ded8d965b7e2b0d1b4cda186d0.html",
-      "data/raw/ipt/7823157d5af7604c2ea57f87632753a59842afb03855ee7d829f96a406e6ce19.html",
-      "data/raw/ipt/7b0047ed2fd6058b9dd7be7d8fe23d323bbb58109bcefe1d691c2a6ba88deb7d.xlsx",
-      "data/raw/ipt/80f25ab1d033faea5a9e5b08323db2290195b903ca6c4d399442511f33c671cc.xlsx",
-      "data/raw/ipt/813b7f7e019fcaef07c0fc450df7c9f8f35531be21b595086715bb36bca1b02f.html",
-      "data/raw/ipt/839e53959bda1e19dac9ef503c7243048e5687bbd28f19bee5b701412b3c9cad.html",
-      "data/raw/ipt/8aa103b5f6ab9d0fa33b5111b4b94b0dba8ad92787aca9f5bb45c8a7d093e865.html",
-      "data/raw/ipt/8c2950809c5ea92a823f8045ffbebc27c472ebd545a295b04a53340d48b088f4.html",
-      "data/raw/ipt/8e058e3406c3d1f17ef0ed25a12f0ea42633c0d49a132acf8a19fc17dba38820.html",
-      "data/raw/ipt/9257222d1a6c8a8e11c2e819666b046cef3d7713631e6c0e1c7dfc44244b2df8.xlsx",
-      "data/raw/ipt/99368fe28974fa6fa81f051f3616a0fc6d58f122cd0efafdd389f3a4ee16396d.html",
-      "data/raw/ipt/aa5fe79e99e6a231b63c78fc4903898d479b9c457632ceab6e78f51443e2f723.html",
-      "data/raw/ipt/c151abc9ed25b03a1778562769d27be0e77139b54b8bda52059233708e594b77.html",
-      "data/raw/ipt/c2237442976de7eb5dec2beb1892defe73fd04b199fac1ee7b81094bc86528ed.html",
-      "data/raw/ipt/c82621ffc09c29d3e4bc2417109b56ba2d2d6335d8e57696fb39b26928d17d77.xlsx",
-      "data/raw/ipt/d01b3e3ee5d643b5cd35168e855100731e1ff60228b3faee78deb354641b7026.html",
-      "data/raw/ipt/dbf4a965ca74ba132ab7b906b8d872602ae5354f15aabd8162e8433325687837.xlsx",
-      "data/raw/ipt/e197387c4b5625eb02d8941b8357302b13d03dc12a3cd29a315bb38fee1c0ed8.html",
-      "data/raw/ipt/e1db95aa55e55213e33ad6bc5cb8070f7a853a3cbd65c5c3aaf0009bafc062f6.html",
-      "data/raw/ipt/e33712c6249027aebed527dbfc5e9bdb37af1600bccbf6a84c095f0fd4e553d0.html",
-      "data/raw/ipt/ea87b880ebc2d05f214704292e71a815d1562c17b80d96693a25e31ce0f27669.html",
-      "data/raw/ipt/f1c9152b3ba408e266bb2f2dd86eea6d99ebc52307c7d861dc2d2a10c356fac3.html",
-      "data/raw/ipt/f8d58f250d46b1d41845ff453cf794406b716ad22a806714692f6cac5121ff62.html",
-      "data/raw/ipt/fdde808002d240b653d3971f67326723e944bb8482d420c7c2a531cfc8095e5b.html",
-      "data/raw/market_ec/14f053c58d7b638c5afcbb6e323291b3214ff388f055b540e6c99aac7fcdeb38.html",
-      "data/raw/market_ec/54d0ceb2ed9347a61634237612f95c02f4cb0a67fd9c52d88e723ff2b23f2498.html",
-      "data/raw/market_eia/2a04c9de780a0762ae471a73e861b577c3d645cdb14e4b695c7e7c23f6eb8276.html",
-      "data/raw/market_eia/46fd12a9e54a58663fc91f9b6c5755693a7636de78ebc1a89affb4e8f1babd95.html",
-      "data/raw/market_fed/158f76abd63f2ed453f519ed60dfa3e244fc4f6981832dbb844aabc1267215a8.html",
-      "data/raw/market_fed/944ae31c1f5166678826976edf235b9dea4077a9d06ea784a5846cef00eb69ae.html"
-    ],
-    "all_paths_accounted_for": true,
-    "note": "Original 50-path catalog plus captures 537\u2013540. Further scheduled runs have since added missing captures; the top-level inventory includes those too."
-  }
+  "corrupt_count": 0,
+  "corrupt_captures": [],
+  "status": "failed",
+  "recovery_report": "reports/trust_phase1/capture_recovery.json",
+  "note": "Only exact original bytes recovered. Remaining files were not found in available local copies; original backups are needed. Missing captures are not accepted as verified.",
+  "initial_baseline_commit": "e311c0884426a5fdde2ce1f2f0bf53dff006670b",
+  "captures_checked": 595
 }

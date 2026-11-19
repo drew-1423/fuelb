@@ -1,0 +1,74 @@
+{
+  "checked_at": "2026-11-19T16:36:40.718847+00:00",
+  "scope": "Lebanon fuel Python project; unrelated Swift application excluded",
+  "all_passed": false,
+  "results": {
+    "pytest": {
+      "command": [
+        "/Users/andrew/MyApp_macOS/fuel forecast/.venv/bin/python",
+        "-m",
+        "pytest",
+        "Tests/fuel",
+        "-q"
+      ],
+      "returncode": 0,
+      "seconds": 60.740057334071025,
+      "stdout": "........................................................................ [ 24%]\n........................................................................ [ 49%]\n........................................................................ [ 73%]\n........................................................................ [ 98%]\n....                                                                     [100%]\n292 passed in 59.93s\n",
+      "stderr": ""
+    },
+    "structural_artifact_audit": {
+      "command": [
+        "/Users/andrew/MyApp_macOS/fuel forecast/.venv/bin/python",
+        "scripts/audit_structural_artifacts.py"
+      ],
+      "returncode": 0,
+      "seconds": 0.8763141250237823,
+      "stdout": "{\n  \"review_kind\": \"implementing_agent_recomputation_not_independent_external_audit\",\n  \"design_rows\": 433,\n  \"prediction_rows\": 630,\n  \"distinct_test_origins\": 105,\n  \"target_versions_checked\": 468,\n  \"market_capture_hashes_checked\": 2,\n  \"saved_metric_groups_checked\": 12,\n  \"annex_mae_lbp_20l\": \"2.733333333333333333333333333\",\n  \"strict_historical_evaluation_n\": 0,\n  \"result\": \"passed\",\n  \"code_hashes\": {\n    \"src/lebanon_fuel/structural/__init__.py\": \"ad481454cebe2100aa618a8c87fdd7e530dfeb26271ba2fbda5b2d985a0a04d0\",\n    \"src/lebanon_fuel/structural/annexes.py\": \"8116a9e1cc97c9851a2f824118b94c0e6da3402a26bf4599f49cd39adc1a1e6d\",\n    \"src/lebanon_fuel/structural/cli.py\": \"30e739bb51b890a8c920a4ebbe2e52b5ffba0148ddb7ec863fb6cf7427f567f9\",\n    \"src/lebanon_fuel/structural/engine.py\": \"5fb826dd32d98cfa7a9e2cb1431e78005beef8d84884bec5566b6c1814776fd9\",\n    \"src/lebanon_fuel/structural/pdf_parser.py\": \"eff76e3a67985cf30554e29e6f28ee634aa1010a565dbb88074ddbac9a64207a\",\n    \"src/lebanon_fuel/structural/reporting.py\": \"11a1ac859720482c09b75eca79ab4b821a7db2227508179eedca8cf9dc01b8c8\",\n    \"src/lebanon_fuel/structural/research.py\": \"3cf1e4f25222492068b8b9674956741886c96ef13376b8fdf6dd4656b4fdc6a3\"\n  }\n}\n",
+      "stderr": ""
+    },
+    "forecasting_artifact_audit": {
+      "command": [
+        "/Users/andrew/MyApp_macOS/fuel forecast/.venv/bin/python",
+        "scripts/audit_forecasting_artifacts.py"
+      ],
+      "returncode": 1,
+      "seconds": 1.6659681670134887,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/private/tmp/fuel-trust-phase1/scripts/audit_forecasting_artifacts.py\", line 98, in <module>\n    if __name__=='__main__':run()\n                            ~~~^^\n  File \"/private/tmp/fuel-trust-phase1/scripts/audit_forecasting_artifacts.py\", line 32, in run\n    assert digest(root/p)==h,p\n           ^^^^^^^^^^^^^^^^^\nAssertionError: src/lebanon_fuel/dashboard/app.py\n"
+    },
+    "validation_artifact_audit": {
+      "command": [
+        "/Users/andrew/MyApp_macOS/fuel forecast/.venv/bin/python",
+        "scripts/audit_validation_artifacts.py"
+      ],
+      "returncode": 1,
+      "seconds": 1.0935315829701722,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/private/tmp/fuel-trust-phase1/scripts/audit_validation_artifacts.py\", line 77, in <module>\n    if __name__=='__main__':main()\n                            ~~~~^^\n  File \"/private/tmp/fuel-trust-phase1/scripts/audit_validation_artifacts.py\", line 20, in main\n    assert digest(ROOT/path)==h,path\n           ^^^^^^^^^^^^^^^^^^^^\nAssertionError: src/lebanon_fuel/dashboard/app.py\n"
+    },
+    "operations_integrity": {
+      "command": [
+        "/Users/andrew/MyApp_macOS/fuel forecast/.venv/bin/python",
+        "-m",
+        "lebanon_fuel.automation.cli",
+        "audit"
+      ],
+      "returncode": 1,
+      "seconds": 2.2085650409571826,
+      "stdout": "",
+      "stderr": "ValueError: Raw capture checksum mismatch: data/raw/ipt/733ab3728f89f3d5c16d33bef509593d1a7af5d791991524b865f7a92afc43f7.html\n"
+    },
+    "dependency_compatibility": {
+      "command": [
+        "/Users/andrew/MyApp_macOS/fuel forecast/.venv/bin/python",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "returncode": 0,
+      "seconds": 0.2652984999585897,
+      "stdout": "No broken requirements found.\n",
+      "stderr": "WARNING: The directory '/Users/andrew/Library/Caches/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.\n"
+    }
+  }
+}

@@ -13,7 +13,7 @@ import pandas as pd
 import streamlit as st
 
 from lebanon_fuel.dashboard import analyst, backtesting, charts, data, decisions
-from lebanon_fuel.dashboard.scenarios import simulate, macro_preset, MACRO_PRESETS
+from lebanon_fuel.dashboard.scenarios import simulate, macro_preset, MACRO_PRESETS, anchored_simulate, economic_breakdown
 from lebanon_fuel.storage.database import sqlite_connection
 from lebanon_fuel.domain import BEIRUT, PROVISIONAL_PRICE
 from lebanon_fuel.market.catalog import MISSING, SERIES
@@ -355,6 +355,15 @@ def start_background_refresh(root, source="all"):
 
 
 def _forecast_health(snap, forecast, refresh_result=None):
+    try:
+        missing = data.read_json(ROOT / 'reports/operations/phase1_missing_raw_captures.json')
+        if missing.get('missing_count',0):
+            return 'red', f"Strict evidence integrity failed: {missing['missing_count']} original capture files are missing. Any displayed forecast remains a research estimate."
+        latest = data.read_json(ROOT / 'reports/operations/latest_run.json')
+        if any(r['name']=='integrity_and_financial_arithmetic' and r['status']=='failed' for r in latest.get('steps',[])):
+            return 'red', 'The latest strict integrity audit failed. Review Data Quality; the model label does not clear this failure.'
+    except (OSError,ValueError,KeyError):
+        pass
     tier, spec = 4, {}
     if forecast is not None:
         try:
@@ -368,6 +377,10 @@ def _forecast_health(snap, forecast, refresh_result=None):
         for _, row in runs.iterrows():
             if str(row.get('status', '')).lower() not in {'ok', 'success', 'completed'}:
                 failures.append(str(row.get('source_id', 'a data source')).replace('market_', '').replace('_', ' '))
+    if refresh_result and not refresh_result[0]:
+        return 'red', 'The latest refresh request failed. Stored observations retain their original timestamps.'
+    if failures:
+        return 'yellow', 'Source collection needs review: ' + ', '.join(dict.fromkeys(failures))
     if tier == 4 or forecast is None:
         why = forecast_unavailable_reason() if forecast is None else _forecast_limitation(spec)
         return 'red', why
@@ -399,14 +412,16 @@ def _render_refresh_status(snap, forecast):
         status, explanation = 'yellow', 'Refresh is running in the background'
     else:
         status, explanation = _forecast_health(snap, forecast, result)
-    last_refresh = finished_at or snap.get('latest_capture')
+    last_refresh = snap.get('latest_capture')
     time_label = escape(data.beirut_time(last_refresh))
     st.markdown(
         f'<div class="refresh-health" role="status">'
         f'<strong><span class="health-dot {status}" aria-hidden="true"></span>{status.title()}</strong>'
-        f'<span>{escape(explanation)}</span><small>Last refreshed · {time_label}</small></div>',
+        f'<span>{escape(explanation)}</span><small>Last successful capture · {time_label}</small></div>',
         unsafe_allow_html=True,
     )
+    if manager.get('started_at'):
+        st.caption('Last refresh requested · ' + data.beirut_time(manager['started_at']) + (' · finished ' + data.beirut_time(finished_at) if finished_at else ''))
     if result and job_id and st.session_state.get('refresh_rerun_job') != job_id:
         st.session_state['refresh_rerun_job'] = job_id
         # Re-read SQLite and version-keyed exports after the worker has committed.
@@ -527,6 +542,9 @@ def overview(snap, latest, previous):
     agreed = next((r for r in reversed(snap["prices"])
                    if r["verification_status"] == PROVISIONAL_PRICE and r["price_lbp_20l"] is not None), None)
     _decree_outlook(snap["prices"], active_forecast)
+    with st.expander('Forecast trust and health details'):
+        from lebanon_fuel.automation.health import build as health_contract
+        st.json(health_contract(ROOT,snap,active_forecast))
     _overview_price_sequence(latest, agreed, active_forecast)
     _share_briefing(max((r for r in (latest, agreed) if r), key=lambda r: r['source_date'], default=None), active_forecast)
     with st.container(key="overview_refresh_controls"):
@@ -852,6 +870,7 @@ def scenario_view(snap):
         'or domestic fees below and click <strong>Calculate scenario</strong> to see the resulting 20-liter pump price and tax/margin breakdown.</div>',
         unsafe_allow_html=True,
     )
+    calculation_mode = st.radio('Scenario calculation', ['Anchored to the recorded price', 'Illustrative May 2025 cost reconstruction'],key='scenario_calculation_mode')
     template = data.read_json(ROOT / "config/structural_scenario_before_vat.json")
     st.info("Inputs are assumptions. Domestic duties, transport, retail margin and bank commission use the May 2025 scaffold.")
     product_history = snap["histories"]["nyh_gasoline"]
@@ -865,6 +884,8 @@ def scenario_view(snap):
                 st.session_state.update(macro_preset(name,
                     product=product_history[-1]['value'] if product_history else None,
                     brent=brent_history[-1]['value'] if brent_history else None))
+                if name == 'Status Quo Baseline':
+                    st.session_state.update(scenario_freight=float(template['freight_usd_kl']['value']),scenario_vat=float(template['vat']['value'])*100,scenario_charge=300000,scenario_taxable=True)
                 st.session_state['scenario_preset_applied'] = name
             except ValueError as exc:
                 st.warning(str(exc))
@@ -881,35 +902,47 @@ def scenario_view(snap):
         else:
             product = a.number_input("Refined gasoline assumption · USD/bbl", min_value=0.01, value=float(product_default), step=1.0, key="scenario_product")
         fx = c.slider("USD/LBP assumption · LBP per USD", min_value=89500, max_value=100000,
-                      value=min(100000,max(89500,int(template["fx"]["value"]))), step=500, key="scenario_fx")
-        freight = a.number_input("Freight assumption · USD/kL", min_value=0.0, value=float(template["freight_usd_kl"]["value"]), step=5.0)
-        vat = b.number_input("VAT assumption · %", min_value=0.0, max_value=100.0, value=float(template["vat"]["value"]) * 100, step=1.0)
-        charge = c.number_input("Government charge · LBP / 20 L", min_value=0, value=300000, step=10000)
-        taxable = st.checkbox("Apply VAT to the government charge", value=True)
+                      value=89500, step=500, key="scenario_fx")
+        freight = a.number_input("Freight assumption · USD/kL", min_value=0.0, value=float(template["freight_usd_kl"]["value"]), step=5.0,key="scenario_freight")
+        vat = b.number_input("VAT assumption · %", min_value=0.0, max_value=100.0, value=float(template["vat"]["value"]) * 100, step=1.0,key="scenario_vat")
+        charge = c.number_input("Government charge · LBP / 20 L", min_value=0, value=300000, step=10000,key="scenario_charge")
+        taxable = st.checkbox("Apply VAT to the government charge", value=True,key="scenario_taxable")
         calculate = st.form_submit_button("Calculate scenario", type="primary")
     st.caption(f"Product and Brent starting values use stored proxy observations where available. Other import costs are held at {template['other_import_usd_kl']['value']} USD/kL.")
     if calculate:
         try:
-            result = simulate(template, product=product, fx=fx, freight=freight, vat_percent=vat,
-                              charge=charge, charge_taxable=taxable, brent=brent, spread=spread)
+            scenario_inputs = dict(product=product,fx=fx,freight=freight,vat_percent=vat,charge=charge,
+                                   charge_taxable=taxable,brent=brent,spread=spread)
+            if calculation_mode == 'Anchored to the recorded price':
+                eligible = snap['prices'][-1:]
+                if eligible and eligible[0]['verification_status'] not in data.VERIFIED | {PROVISIONAL_PRICE}:
+                    raise ValueError('The latest price is disputed or unconfirmed; cannot step back over it')
+                if product_history and not 0 <= (datetime.now(BEIRUT).date()-date.fromisoformat(product_history[-1]['observation_date'])).days <= 14:
+                    raise ValueError('Stored product proxy is stale or future-dated')
+                if not eligible or not product_history:
+                    raise ValueError('A current eligible recorded price and observed product proxy are required')
+                baseline_inputs = dict(product=float(product_default),fx=89500,freight=float(template['freight_usd_kl']['value']),
+                    vat_percent=float(template['vat']['value'])*100,charge=300000,charge_taxable=True)
+                anchored = anchored_simulate(template,anchor=eligible[-1],baseline_inputs=baseline_inputs,scenario_inputs=scenario_inputs)
+                result = dict(anchored['scenario_model'],price_lbp_20l=anchored['price_lbp_20l'])
+            else:
+                anchored = None
+                result = simulate(template,**scenario_inputs)
         except (ValueError, DecimalException) as exc:
             st.error(f"Invalid scenario. {exc}")
             return
         st.metric("Hypothetical price · LBP / 20 L", amount(float(result["price_lbp_20l"])), border=True)
         if brent is not None:
             st.caption(f"Effective scenario product quote · {brent + spread:,.2f} USD/bbl")
-        imported=result.get('import_breakdown') or {}
-        if imported:
-            cif_lbp_20l=(float(imported['benchmark_usd_kl'])+float(imported['freight_usd_kl']))*float(fx)/50
+        if anchored:
+            st.caption(f"Observed anchor: {anchored['baseline_price_lbp_20l']} LBP / 20 L · structural scenario change: {float(anchored['change_lbp_20l']):+,.0f} LBP. Display equivalent at unchanged 89,500 LBP/USD: ${float(anchored['price_usd_20l']):,.2f}.")
+            rows=anchored['components']
+            st.caption(anchored['assumptions'])
         else:
-            cif_lbp_20l=float(result['breakdown_lbp_20l'].get('goods',0))
-        wedge_lbp_20l=float(result['price_lbp_20l'])-cif_lbp_20l
-        st.dataframe(pd.DataFrame([
-            {"Component":"CIF Cargo Cost · modeled benchmark + freight", "LBP / 20 L":cif_lbp_20l},
-            {"Component":"Fixed Tax/Margin Wedge · residual to pump price", "LBP / 20 L":wedge_lbp_20l},
-        ]), hide_index=True)
-        st.caption("The residual wedge includes modeled other import costs, government charges, VAT, margins and any rounding adjustment; it is not a separately verified official tariff schedule.")
-        st.caption("Deterministic cost calculation. No probability or confidence interval applies.")
+            rows=economic_breakdown(result,fx)
+            st.caption('Illustrative unanchored May 2025 cost reconstruction; does not reproduce the current official tariff.')
+        st.dataframe(pd.DataFrame(rows).rename(columns={'component':'Component','lbp_20l':'LBP / 20 L','basis':'Evidence / assumption'}),hide_index=True)
+        st.caption('Distribution margins are not separately documented in this scaffold. No unexplained residual is labelled as an official duty or margin. No probability or confidence interval applies.')
 
 
 def quality_view(snap):

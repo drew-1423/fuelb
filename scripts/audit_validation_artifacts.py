@@ -9,15 +9,13 @@ from lebanon_fuel.forecasting.uncertainty import direction_class
 from lebanon_fuel.validation.backtest import load_holdout,walk_forward_bundle
 from lebanon_fuel.validation.ledger import ForecastLedger,now
 from lebanon_fuel.storage.database import Store
+from lebanon_fuel.automation.release import verify_frozen
 
 
 def main():
-    folder=ROOT/'reports/model_validation';manifest=json.loads((folder/'input_manifest.json').read_text())
+    folder=ROOT/'reports/model_validation';manifest=verify_frozen(ROOT,'reports/model_validation/input_manifest.json')
     protocol=manifest['protocol']
     assert manifest['protocol_sha256']==digest(ROOT/'config/validation_protocol.json')
-    for path,h in manifest['source_sha256'].items():assert digest(ROOT/path)==h,path
-    for path,h in manifest.get('release',{}).get('source_sha256',{}).items():
-        assert digest(ROOT/path)==h,path
     assert digest(ROOT/manifest['design_path'])==manifest['design_sha256']
     assert digest(ROOT/protocol['development_predictions'])==manifest['development_predictions_sha256']
     design=load_holdout(ROOT,protocol)

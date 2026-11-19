@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: "0 */6 * * *"
   workflow_dispatch:
+    inputs:
+      source:
+        description: Source to refresh
+        type: choice
+        default: all
+        options: [all, ipt, ministry, taqtek, eia, ec, fed]
 
 permissions:
   contents: write
@@ -29,13 +35,23 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Attest current source and frozen models
+        env:
+          PYTHONPATH: src
+        run: python -m lebanon_fuel.automation.release create --base-commit "$GITHUB_SHA"
+
       - name: Run bounded data & forecast refresh
         id: collect
         continue-on-error: true
         env:
           PYTHONPATH: src
+          REFRESH_SOURCE: ${{ inputs.source || 'all' }}
         run: |
-          python -m lebanon_fuel.automation.cli --root . run
+          if [ "$REFRESH_SOURCE" = "all" ]; then
+            python -m lebanon_fuel.automation.cli --root . run
+          else
+            python -m lebanon_fuel.automation.cli --root . run --source "$REFRESH_SOURCE"
+          fi
 
       - name: Verify operations integrity
         id: audit

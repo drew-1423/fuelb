@@ -51,11 +51,14 @@ PRODUCT_PATTERNS = {
 
 
 def normalize_arabic(text: str) -> str:
-    """Normalize Arabic text by removing tatweel/kashida and standardizing hamza/alef."""
+    """Remove tatweel and extraction spacing inside words, preserving boundaries."""
     if not text:
         return ""
-    # Remove tatweel (U+0640)
-    cleaned = text.replace("\u0640", "")
+    # Some supported PDF extractors put a horizontal space before a connecting
+    # tatweel inside a word (e.g. الطاق ـة). Do not join ordinary words or lines.
+    letters = r"\u0621-\u063a\u0641-\u064a"
+    cleaned = re.sub(rf"(?<=[{letters}])[ \t]+(?=\u0640[{letters}])", "", text)
+    cleaned = cleaned.replace("\u0640", "")
     return cleaned
 
 

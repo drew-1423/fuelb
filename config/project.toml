@@ -26,3 +26,8 @@ maximum_forecast_age_hours = 12
 production_approved = false
 decision_file = "reports/model_validation/production_selection.json"
 forecast_ledger = "data/forecast_ledger.sqlite"
+
+[deployment]
+dashboard_writer = "github_actions"
+repository = "drew-1423/fuelb"
+refresh_workflow = "refresh.yml"
