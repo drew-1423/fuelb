@@ -17,10 +17,11 @@ Scheduled data commit `20fdccd08b4d1433736997edd908e55d94ea8657` arrived during 
 - Current release integrity is separate from immutable historical manifests. Original source bytes and the exact compressed development input are preserved where recoverable; saved metrics and model predictions still undergo replay checks.
 - GitHub Actions is the durable writer. Owner refreshes dispatch a workflow; without the server-side dispatch secret they fail closed rather than writing ephemeral cloud databases. Scheduled raw captures and their database references are committed together even when the run later fails strict checks.
 - Structured health distinguishes feeds, anchor, forecast age, calibration, integrity, release and refresh status. A research-model label cannot conceal an integrity failure.
+- Cross-platform PDF normalization repairs a horizontal spacing artifact adjacent to a connecting Arabic tatweel. Original PDF bytes, extracted raw text, checksum assertions and financial table assertions remain unchanged. Regression cases preserve ordinary word boundaries and newlines.
 
 ## Actual verification
 
-The final local production-verification command ran the complete existing fuel suite: **316 passed, zero pytest warnings**. Current release identity, structural artifact audit, forecasting artifact audit, validation artifact replay/hash-chain audit and dependency compatibility passed. Strict operations integrity **failed**, so the command correctly returned exit code **1**. Full command output is preserved in `reports/operations/final_verification.json`.
+The final local production-verification command ran the complete existing fuel suite: **319 passed, zero pytest warnings**. Current release identity, structural artifact audit, forecasting artifact audit, validation artifact replay/hash-chain audit and dependency compatibility passed. Strict operations integrity **failed**, so the command correctly returned exit code **1**. Full command output is preserved in `reports/operations/final_verification.json`.
 
 Baseline verification had 292 passing tests and failed forecasting/validation release-hash checks and strict operations integrity. The new separation fixes the release-hash mismatch without rewriting either historical manifest. It does not claim recovery of all older scientific source versions.
 

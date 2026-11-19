@@ -17,6 +17,15 @@ PDF_FIXTURE_DIGITAL = ROOT / "data/raw/official_document/12b629160cb79062cbd8463
 PDF_FIXTURE_SCANNED = ROOT / "data/raw/official_document/9f59129eaa93ba4fe82d5614a28b73a02ae271e5a1f30a1e5a9537c693fa0d39.pdf"
 
 
+@pytest.mark.parametrize("raw,expected", [
+    ("وزارة الطاق ـة والميـاه", "وزارة الطاقة والمياه"),
+    ("وزارة الطاقة والمياه", "وزارة الطاقة والمياه"),
+    ("الطاق\nـة 33300", "الطاق\nة 33300"),
+])
+def test_normalization_repairs_only_horizontal_tatweel_word_spacing(raw, expected):
+    assert normalize_arabic(raw) == expected
+
+
 def test_arabic_date_parsing():
     assert parse_arabic_date("بيروت في 27/10/2010") == "2010-10-27"
     assert parse_arabic_date("الأربعاء 27 تشرين الأول 2010") == "2010-10-27"
