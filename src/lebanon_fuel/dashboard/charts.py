@@ -1,5 +1,7 @@
 """Plot saved results and source records with their distinct dates and evidence."""
 from datetime import date, timedelta
+import json
+import math
 
 import pandas as pd
 import plotly.graph_objects as go
@@ -64,7 +66,7 @@ def forecast_points(rows, *, replay=False):
     points = rows.reset_index(drop=True).copy()
     if "id" in points:
         points = points.drop_duplicates(subset="id")
-    points["plot_date"] = points.endpoint.fillna(points.scheduled_effective).map(target_date)
+    points["plot_date"] = points.endpoint.astype(object).where(points.endpoint.notna(), points.scheduled_effective.astype(object)).map(target_date)
     if replay:
         points["plot_date"] = points.plot_date.fillna(points.recorded_target_date.map(target_date))
     return points.dropna(subset=["plot_date", "predicted_price"]).sort_values("plot_date", kind="stable")
@@ -87,6 +89,71 @@ def add_forecast_markers(fig, points, label, color, symbol):
         hovertemplate="%{x|%d %b %Y}<br>%{y:,.0f} LBP / 20 L<br>Origin: %{customdata}",
         **error,
     )
+
+
+def conformal_bounds(row, level):
+    """Only released live calibration, never candidate/training-only intervals."""
+    spec = json.loads(row.get('target_json') or '{}')
+    evidence = spec.get('public_calibration') or {}
+    if spec.get('tier', row.get('forecast_tier', 4)) not in (1, 2):
+        return None
+    if evidence.get('calibration_n', 0) < 30 or evidence.get('evaluation_n', 0) < 20:
+        return None
+    try:
+        radius = float(evidence.get('radius' if level == 90 else 'radius_80'))
+    except (TypeError, ValueError):
+        return None
+    if not math.isfinite(radius) or radius <= 0:
+        return None
+    center = float(row['predicted_price'])
+    return center - radius, center + radius
+
+
+def add_conformal_cone(fig, points, *, single=False):
+    """Pointwise bands and linear visual interpolation, not joint path coverage."""
+    if points.empty or 'target_json' not in points:
+        return
+    points = points.copy()
+    # Different model families, runs and anchors never share a ribbon.
+    points['_family'] = points.target_json.map(lambda s: json.loads(s).get('family', 'unknown'))
+    points['_kind'] = points.endpoint.notna().map({True: 'Calendar', False: 'Decision'})
+    for _, group in points.groupby(['origin', 'base_price', '_family', '_kind'], dropna=False):
+        group = group.sort_values('plot_date').drop_duplicates('plot_date')
+        # Unsupported endpoints break a ribbon rather than being bridged.
+        runs = []
+        current = []
+        for row in group.to_dict('records'):
+            if conformal_bounds(row, 90):
+                current.append(row)
+            else:
+                if current: runs.append(current)
+                current = []
+        if current: runs.append(current)
+        for run in runs:
+            if len(run) < (1 if single else 2):
+                continue
+            origin = target_date(run[0]['origin'])
+            if any(r['plot_date'] <= origin for r in run):
+                continue
+            for level, color in [(90, 'rgba(149,172,255,.14)'), (80, 'rgba(114,217,255,.25)')]:
+                bounds = [conformal_bounds(r, level) for r in run]
+                if not all(bounds):
+                    continue
+                if level == 80 and any(b[0] < conformal_bounds(r,90)[0] or b[1] > conformal_bounds(r,90)[1] for b,r in zip(bounds,run)):
+                    continue
+                anchored = run[0]['plot_date'] == group.iloc[0].plot_date
+                x = ([origin] if anchored else []) + [r['plot_date'] for r in run]
+                base = float(run[0]['base_price'])
+                low = ([base] if anchored else []) + [b[0] for b in bounds]
+                high = ([base] if anchored else []) + [b[1] for b in bounds]
+                fig.add_scatter(x=x,y=low,mode='lines',line=dict(width=0),showlegend=False,hoverinfo='skip')
+                fig.add_scatter(x=x,y=high,mode='lines',line=dict(width=0),fill='tonexty',fillcolor=color,
+                    name=f'{level}% calibrated pointwise prediction band',
+                    hovertemplate='%{x|%d %b}<br>Upper bound %{y:,.0f} LBP / 20 L<extra></extra>')
+            anchored = run[0]['plot_date'] == group.iloc[0].plot_date
+            fig.add_scatter(x=([origin] if anchored else [])+[r['plot_date'] for r in run],
+                y=([float(run[0]['base_price'])] if anchored else [])+[r['predicted_price'] for r in run],
+                mode='lines',line=dict(color=TEAL,dash='dash'),name='Forecast guide · interpolated between targets')
 
 
 def history_chart(prices, replay, current):
@@ -139,6 +206,7 @@ def history_chart(prices, replay, current):
     if not historical.empty:
         add_forecast_markers(fig, historical, "Saved research prediction", AMBER, "diamond-open")
     points = forecast_points(current)
+    add_conformal_cone(fig, points)
     if not points.empty:
         # Separate target types and evidence tiers. These independent point
         # estimates have no interpolated path or joint uncertainty band.
@@ -179,11 +247,17 @@ def paired_chart(rows):
 
 
 def decision_chart(row):
-    fig = go.Figure(go.Bar(x=['Latest verified record', 'Next official decision'],
-                           y=[row.base_price, row.predicted_price],
-                           marker_color=[TEAL, AMBER], text=[f'{row.base_price:,.0f}', f'{row.predicted_price:,.0f}'],
-                           textposition='auto', name=row.forecast_label))
-    return style(fig, 'LBP / 20 L', 280)
+    points = forecast_points(pd.DataFrame([row]))
+    fig = go.Figure()
+    if not points.empty:
+        add_conformal_cone(fig, points, single=True)
+        fig.add_scatter(x=[target_date(row.origin)], y=[row.base_price], mode='markers',
+                        name='Known price at forecast origin', marker=dict(color=AMBER))
+        add_forecast_markers(fig, points, row.forecast_label, TEAL, 'diamond-open')
+    else:
+        fig.add_bar(x=['Known price', 'Next decision · date unconfirmed'],
+                    y=[row.base_price,row.predicted_price],name=row.forecast_label)
+    return style(fig, 'LBP / 20 L', 340)
 
 
 def reliability_chart(rows):

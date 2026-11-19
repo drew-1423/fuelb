@@ -29,3 +29,32 @@ def simulate(template, *, product, fx, freight, vat_percent, charge,
         field.pop("low", None)
         field.pop("high", None)
     return price(request)
+
+
+MACRO_PRESETS = ('Middle East Geopolitical Spike', 'Global Demand Slump',
+                 'Currency Devaluation Shock', 'Status Quo Baseline')
+
+
+def macro_preset(name, *, product=None, brent=None):
+    """Hypothetical inputs only; missing closes remain missing."""
+    if name not in MACRO_PRESETS:
+        raise ValueError('Unknown macro scenario')
+    result = dict(scenario_fx=89500)
+    if product is not None:
+        result['scenario_product'] = float(product)
+    if brent is not None:
+        result['scenario_brent'] = float(brent)
+    if product is not None and brent is not None:
+        result['scenario_spread'] = float(product-brent)
+    if name in MACRO_PRESETS[:2]:
+        crude, spread = (95., 18.) if name == MACRO_PRESETS[0] else (65., 10.)
+        result.update(scenario_brent=crude, scenario_spread=spread,
+                      scenario_product=crude+spread,
+                      scenario_mode='Brent plus assumed product spread')
+    else:
+        if product is None:
+            raise ValueError('A stored refined gasoline close is required for this preset')
+        result['scenario_mode'] = 'Direct product quote'
+        if name == 'Currency Devaluation Shock':
+            result['scenario_fx'] = 100000
+    return result

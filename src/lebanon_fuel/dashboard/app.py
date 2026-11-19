@@ -13,15 +13,28 @@ import pandas as pd
 import streamlit as st
 
 from lebanon_fuel.dashboard import analyst, backtesting, charts, data, decisions
-from lebanon_fuel.dashboard.scenarios import simulate
+from lebanon_fuel.dashboard.scenarios import simulate, macro_preset, MACRO_PRESETS
 from lebanon_fuel.storage.database import sqlite_connection
 from lebanon_fuel.domain import BEIRUT, PROVISIONAL_PRICE
 from lebanon_fuel.market.catalog import MISSING, SERIES
 
 ROOT = Path(os.environ.get("LEBANON_FUEL_ROOT", Path.cwd())).resolve()
 REPORTS = ROOT / "reports/model_validation"
-VIEWS = ["Overview", "Price & forecasts", "Global markets", "Analyst report",
-         "Model performance", "Backtesting", "Decision timeline", "Scenario simulator", "Volatility & options", "Data quality"]
+PERSPECTIVES = {
+    '🚗 Driver Pulse': {'Overview': 'Pump Pulse & Overview', 'Scenario simulator': 'What-If Fuel Calculator'},
+    '📊 Market & Intelligence': {'Price & forecasts': 'Price & Forecast Trajectory',
+        'Global markets': 'Global Energy Markets', 'Analyst report': 'Analyst Briefing'},
+    '🔬 Quantitative & Governance': {'Model performance': 'Model Performance & Backtesting',
+        'Decision timeline': 'Decision Timeline & Ledgers', 'Volatility & options': 'Implied Volatility (OVX) & Options',
+        'Data quality': 'Data Quality & Gap Audit'},
+}
+VIEWS = [view for group in PERSPECTIVES.values() for view in group]
+
+
+def _perspective_changed():
+    st.session_state['view'] = next(iter(PERSPECTIVES[st.session_state['perspective']]))
+
+
 REGIMES = {"pre_crisis": "2018–19 challenge", "recent_pre_fiscal": "2025 challenge", "stabilized_fx_2023_2026": "2026 holdout"}
 FAMILIES = {"Z_last_change": "Last change", "A_no_change": "No change", "A_mean": "Historical mean",
             "Z_brent": "Brent baseline", "B_structural_proxy": "Structural proxy",
@@ -76,6 +89,56 @@ def _provenance_badge(record):
     st.markdown(f'<span class="provenance-badge {style}">{escape(data.STATUS.get(status, "Source under review"))}</span>',
                 unsafe_allow_html=True)
     st.caption(record['source_date'])
+
+
+def whatsapp_briefing(current, forecast=None):
+    """Share a saved estimate with its date, source and research limitations."""
+    lines = ['⛽ LEBANON GASOLINE 95 OUTLOOK (Levant Energy Terminal)']
+    if current:
+        price = current['price_lbp_20l']
+        lines += [f'📍 Current recorded price: {price:,.0f} LBP (~${price / data.DISPLAY_FX:.2f} / 20L)',
+                  f"Source: {data.STATUS.get(current['verification_status'], 'Under review')} · {current['source_date']}"]
+    if forecast is not None:
+        spec = json.loads(forecast.target_json)
+        change = float(forecast.predicted_change)
+        lines += [f"⚡ Next update: {data.forecast_view(forecast)['schedule']} (estimated; time unconfirmed)",
+                  f'🔮 Projected change: {change:+,.0f} LBP ({_signed_usd(change)} USD) '
+                  f'from {forecast.base_price:,.0f} to ~{forecast.predicted_price:,.0f} LBP',
+                  f'Percentage change: {change / forecast.base_price:+.2%}',
+                  '💡 Check the posted price after the update. The projected change is not confirmed.',
+                  f"Issued: {data.beirut_time(forecast.created_at)} · {_forecast_limitation(spec)}"]
+    else:
+        lines += ['🔮 Forecast unavailable. Check the latest posted station price before filling.']
+    lines += ['USD equivalents assume 89,500 LBP/USD.', '🔗 Live Tracker: https://fuelb95.streamlit.app/']
+    return '\n'.join(lines)
+
+
+def _share_briefing(current, forecast):
+    text = whatsapp_briefing(current, forecast)
+    payload = json.dumps(text).replace('<', chr(92) + 'u003c')
+    st.html("""<button id="fuel-copy-brief" type="button" style="padding:12px 18px;border-radius:10px;background:#b4dfff;color:#101626;border:0;font-weight:700;cursor:pointer">📋 Copy WhatsApp Briefing</button>
+    <span id="fuel-copy-status" role="status" style="display:block;margin-top:8px"></span>
+    <script>
+    (() => {
+    const button = document.getElementById('fuel-copy-brief');
+    button.onclick = async () => {
+      try {
+        await navigator.clipboard.writeText(""" + payload + """);
+        document.getElementById('fuel-copy-status').textContent = 'Copied. Paste into WhatsApp or your social app.';
+      } catch (error) {
+        document.getElementById('fuel-copy-status').textContent = 'Clipboard access is blocked. Use the copy icon in the briefing preview below.';
+      }
+    };
+    })();
+    </script>""", unsafe_allow_javascript=True)
+    with st.expander('Preview the shareable briefing'):
+        st.code(text, language=None)
+        st.download_button('Download briefing', text, 'lebanon-gasoline-brief.txt', 'text/plain')
+    if forecast is not None:
+        with st.expander('Your tank: estimated cost change'):
+            liters = st.number_input('Fill-up size · liters', min_value=1, max_value=200, value=50)
+            change = float(forecast.predicted_change) * liters / 20
+            st.write(f'{change:+,.0f} LBP (~{_signed_usd(change)} USD) for {liters} L if the estimate is realized.')
 
 
 def _decree_outlook(records, forecast):
@@ -352,7 +415,7 @@ def _render_refresh_status(snap, forecast):
 
 def future_table():
     rows, dated = [], []
-    for label, horizon in data.HORIZONS.items():
+    for label, horizon in {**data.HORIZONS, 'Next two decisions': 'decision_2', 'Next four decisions': 'decision_4', '1 day': 'day_1', '3 days': 'day_3'}.items():
         current = active(horizon)
         if current.empty:
             rows.append({'Horizon':label, 'Forecast tier':'Unavailable'})
@@ -465,6 +528,7 @@ def overview(snap, latest, previous):
                    if r["verification_status"] == PROVISIONAL_PRICE and r["price_lbp_20l"] is not None), None)
     _decree_outlook(snap["prices"], active_forecast)
     _overview_price_sequence(latest, agreed, active_forecast)
+    _share_briefing(max((r for r in (latest, agreed) if r), key=lambda r: r['source_date'], default=None), active_forecast)
     with st.container(key="overview_refresh_controls"):
         controls, status = st.columns([1, 3], vertical_alignment="center")
         with controls:
@@ -552,8 +616,9 @@ def price_view(snap):
         'estimates the price will land next.</div>',
         unsafe_allow_html=True,
     )
-    label = st.radio("Horizon", list(data.HORIZONS), horizontal=True, key="price_horizon")
-    horizon = data.HORIZONS[label]
+    horizons = {**data.HORIZONS, 'Next two decisions': 'decision_2', 'Next four decisions': 'decision_4', '1 day': 'day_1', '3 days': 'day_3'}
+    label = st.radio("Horizon", list(horizons), key="price_horizon")
+    horizon = horizons[label]
     production = active(horizon)
     if production.empty:
         unavailable_forecast()
@@ -570,10 +635,10 @@ def price_view(snap):
         if not rows.empty:
             replay = rows[rows.family.eq("G_hybrid")]
             st.caption("Saved research predictions use previously examined periods. Candidate intervals have unresolved calibration failures.")
-    trajectory=[active(h) for h in data.HORIZONS.values()]
+    trajectory=[active(h) for h in data.EXPECTED_HORIZONS]
     trajectory=pd.concat([r for r in trajectory if not r.empty],ignore_index=True) if any(not r.empty for r in trajectory) else pd.DataFrame()
     show_chart(charts.history_chart(snap["prices"], replay, trajectory))
-    st.caption('Decision and calendar estimates appear as separate points. Whiskers show saved pointwise intervals for individual targets.')
+    st.caption('Shading appears only for released live conformal calibration: outer 90%, inner 80% where separately available. Bands apply at forecast targets; interpolated ribbons do not guarantee coverage between dates. Uncalibrated forecasts remain separate points.')
     st.caption("Dots are the archived observations at their source dates. A faint step trace carries the last observed price forward between dates; its timing is indicative where official effective dates are undocumented. Forecast estimates remain separate markers.")
     if not replay.empty:
         st.dataframe(replay[["origin", "created_at", "recorded_target_date", "endpoint", "predicted_price",
@@ -777,7 +842,7 @@ def model_view():
             st.caption(f"{rows['target_source_date'].nunique()} historical target dates. "
                        f"Average miss {error.mean():,.0f} LBP / 20 L ({(error/actual).mean():.2%}).")
     st.caption("The archive backtest uses recorded prices. Live scores above track forecasts saved before new prices arrive.")
-    st.button("Open the backtest chart", on_click=st.session_state.update, args=({"view": "Backtesting"},))
+    st.button("Open the backtest chart", on_click=st.session_state.update, args=({"quant_detail": "Backtesting"},))
 
 
 def scenario_view(snap):
@@ -789,23 +854,34 @@ def scenario_view(snap):
     )
     template = data.read_json(ROOT / "config/structural_scenario_before_vat.json")
     st.info("Inputs are assumptions. Domestic duties, transport, retail margin and bank commission use the May 2025 scaffold.")
-    mode = st.radio("Refined gasoline input", ["Direct product quote", "Brent plus assumed product spread"], horizontal=True)
     product_history = snap["histories"]["nyh_gasoline"]
     brent_history = snap["histories"]["brent_spot"]
     product_default = product_history[-1]["value"] if product_history else float(template["benchmark"]["value"])
     brent_default = brent_history[-1]["value"] if brent_history else product_default
+    st.subheader('Macro scenarios')
+    for name in MACRO_PRESETS:
+        if st.button(name, key='preset_' + name, width='stretch'):
+            try:
+                st.session_state.update(macro_preset(name,
+                    product=product_history[-1]['value'] if product_history else None,
+                    brent=brent_history[-1]['value'] if brent_history else None))
+                st.session_state['scenario_preset_applied'] = name
+            except ValueError as exc:
+                st.warning(str(exc))
+    st.caption('Presets are hypothetical shocks, not forecasts or assessed probabilities. Stored closes may be stale.')
+    mode = st.radio("Refined gasoline input", ["Direct product quote", "Brent plus assumed product spread"], horizontal=True, key='scenario_mode')
     with st.form("scenario"):
         a, b, c = st.columns(3)
         brent = None
         spread = 0.0
         if mode == "Brent plus assumed product spread":
-            brent = a.number_input("Brent assumption · USD/bbl", min_value=0.01, value=float(brent_default), step=1.0)
-            spread = b.number_input("Assumed product spread · USD/bbl", value=float(product_default - brent_default), step=1.0)
+            brent = a.number_input("Brent assumption · USD/bbl", min_value=0.01, value=float(brent_default), step=1.0, key="scenario_brent")
+            spread = b.number_input("Assumed product spread · USD/bbl", value=float(product_default - brent_default), step=1.0, key="scenario_spread")
             product = product_default
         else:
-            product = a.number_input("Refined gasoline assumption · USD/bbl", min_value=0.01, value=float(product_default), step=1.0)
+            product = a.number_input("Refined gasoline assumption · USD/bbl", min_value=0.01, value=float(product_default), step=1.0, key="scenario_product")
         fx = c.slider("USD/LBP assumption · LBP per USD", min_value=89500, max_value=100000,
-                      value=min(100000,max(89500,int(template["fx"]["value"]))), step=500)
+                      value=min(100000,max(89500,int(template["fx"]["value"]))), step=500, key="scenario_fx")
         freight = a.number_input("Freight assumption · USD/kL", min_value=0.0, value=float(template["freight_usd_kl"]["value"]), step=5.0)
         vat = b.number_input("VAT assumption · %", min_value=0.0, max_value=100.0, value=float(template["vat"]["value"]) * 100, step=1.0)
         charge = c.number_input("Government charge · LBP / 20 L", min_value=0, value=300000, step=10000)
@@ -933,6 +1009,25 @@ def quality_view(snap):
                 st.dataframe(result.tail(200), hide_index=True)
 
 
+def backtest_view():
+    title("Backtesting", "Historical forecasts and observed Lebanon gasoline 95 prices")
+    archive_path = ROOT / "reports/research/expanded_coverage/dashboard_predictions.csv"
+    archived = archive_path.is_file()
+    dataset = st.radio("Backtest dataset", ["Current validation report", "Expanded archive research"],
+                       horizontal=True, key="backtest_dataset") if archived else "Current validation report"
+    if dataset == "Expanded archive research":
+        backtesting.render(
+            table_file(archive_path), FAMILIES,
+            {"expanded_2026_research": "2026 expanded research"}, show_chart,
+            research_note="Research comparison using recorded Ministry archive prices and exact IPT–LebVote matches. "
+                          "Some decision timing remains unverified. All predictions shown use the pinned Hybrid.",
+            only_family="G_hybrid",
+        )
+    else:
+        backtesting.render(table_file(REPORTS / "research_walk_forward_predictions.csv"),
+                           FAMILIES, REGIMES, show_chart, only_family="G_hybrid")
+
+
 def main():
     global SETTINGS, DECISION, LEDGER_PATH, ACTIVE_FORECASTS
     st.set_page_config(page_title="Levant Energy Terminal", layout="wide", initial_sidebar_state="auto")
@@ -960,7 +1055,11 @@ def main():
             '<div class="brand-badge">LBP / 20L Tank · Beirut</div></div>',
             unsafe_allow_html=True,
         )
-        view = st.radio("Workspace", VIEWS, key="view")
+        perspective = st.radio("Perspective", list(PERSPECTIVES), key="perspective", on_change=_perspective_changed)
+        choices = PERSPECTIVES[perspective]
+        if st.session_state.get('view') not in choices:
+            st.session_state['view'] = next(iter(choices))
+        view = st.radio("Workspace", list(choices), format_func=choices.get, key="view")
         st.divider()
         st.caption("Local time · Asia/Beirut")
         st.caption(f"Stored capture · {data.beirut_time(snap['latest_capture'])}")
@@ -1003,24 +1102,14 @@ def main():
         st.download_button("Download analyst report", "\n\n".join(f"## {k}\n\n{v}" for k, v in sections.items()),
                            "lebanon-energy-brief.md", "text/markdown")
     elif view == "Model performance":
-        model_view()
-    elif view == "Backtesting":
-        title("Backtesting", "Historical forecasts and observed Lebanon gasoline 95 prices")
-        archive_path = ROOT / "reports/research/expanded_coverage/dashboard_predictions.csv"
-        archived = archive_path.is_file()
-        dataset = st.radio("Backtest dataset", ["Current validation report", "Expanded archive research"],
-                           horizontal=True, key="backtest_dataset") if archived else "Current validation report"
-        if dataset == "Expanded archive research":
-            backtesting.render(
-                table_file(archive_path), FAMILIES,
-                {"expanded_2026_research": "2026 expanded research"}, show_chart,
-                research_note="Research comparison using recorded Ministry archive prices and exact IPT–LebVote matches. "
-                              "Some decision timing remains unverified. All predictions shown use the pinned Hybrid.",
-                only_family="G_hybrid",
-            )
+        section = st.radio('Research view', ['Performance', 'Backtesting'], horizontal=True, key='quant_detail')
+        if section == 'Performance':
+            model_view()
         else:
-            backtesting.render(table_file(REPORTS / "research_walk_forward_predictions.csv"),
-                               FAMILIES, REGIMES, show_chart, only_family="G_hybrid")
+            backtest_view()
+    elif view == "Backtesting":
+        backtest_view()
+
     elif view == "Decision timeline":
         title("Decision timeline", "Price evidence, gaps and forecast outcomes")
         decisions.timeline(snap["prices"], ROOT, LEDGER_PATH)
