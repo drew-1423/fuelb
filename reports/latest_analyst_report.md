@@ -1,10 +1,10 @@
 # Lebanon gasoline 95 analyst report
 
-Generated 2026-11-19T12:54:29.645486+00:00
+Generated 2026-11-19T18:47:30.231449+00:00
 
 ## Executive summary
 
-The latest verified-tier gasoline 95 record is **2,343,000 LBP / 20 L** on 2026-11-17 (government archive corroborated). It is -102,000 LBP versus the previous verified-tier record on 2026-11-10. [Source record](https://energyandwater.gov.lb/ar/prices)
+The latest verified-tier gasoline 95 record is **2,343,000 LBP / 20 L** on 2026-11-17 (📜 government archive). It is -102,000 LBP versus the previous verified-tier record on 2026-11-10. [Source record](https://energyandwater.gov.lb/ar/prices)
 
 ## Expected price movement
 

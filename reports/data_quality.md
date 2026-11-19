@@ -1,6 +1,6 @@
 # Lebanese gasoline 95 data quality report
 
-As of 2026-11-19, Asia/Beirut. Generated 2026-11-19T12:54:07.181697+00:00. Counts are database queries over actual captures.
+As of 2026-11-19, Asia/Beirut. Generated 2026-11-19T18:46:54.666864+00:00. Counts are database queries over actual captures.
 
 | Completion measure | Observed result |
 | --- | --- |
@@ -57,7 +57,7 @@ Adequate for source reconciliation and exploratory target analysis. Not ready fo
 
 See [source assessment](../research/data_source_assessment.md), [assumptions](../research/verified_assumptions.md) and [update instructions](../docs/data_updates.md).
 
-Raw integrity: 65 missing or hash-mismatched captured files. `date_alignment_review` records are excluded from verified exports pending review of inconsistent source weekday/date labels.
+Raw integrity: 84 missing or hash-mismatched captured files. `date_alignment_review` records are excluded from verified exports pending review of inconsistent source weekday/date labels.
 
 ## Longest IPT intervals to investigate
 

@@ -1,5 +1,5 @@
 {
-  "origin": "2026-11-19T12:54:21.419060+00:00",
+  "origin": "2026-11-19T18:47:16.884563+00:00",
   "anchor": {
     "absolute_price_change": -102000,
     "candidate_values": [
@@ -40,7 +40,7 @@
   "forecasts": [
     {
       "horizon": "decision_1",
-      "origin": "2026-11-19T12:54:21.419060+00:00",
+      "origin": "2026-11-19T18:47:16.884563+00:00",
       "endpoint": null,
       "target_label": "Next 1 official pricing decision(s)",
       "decision_date": "2026-11-20",
@@ -167,12 +167,12 @@
         "nominal": 0.9,
         "radius": null
       },
-      "forecast_id": 45316,
-      "snapshot_id": "0683b4df3390fab0824c10d88b28757a2d20283ce05256c8067ee8bcc7cb7c00"
+      "forecast_id": 45324,
+      "snapshot_id": "a5d29613cceef076eed9b0ce929a9ae7e43f2eb4de45233b7a3544d1325d1f6e"
     },
     {
       "horizon": "decision_2",
-      "origin": "2026-11-19T12:54:21.419060+00:00",
+      "origin": "2026-11-19T18:47:16.884563+00:00",
       "endpoint": null,
       "target_label": "Next 2 official pricing decision(s)",
       "decision_date": "2026-11-24",
@@ -256,12 +256,12 @@
       "anchor_verification": "archive_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
-      "forecast_id": 45317,
-      "snapshot_id": "0683b4df3390fab0824c10d88b28757a2d20283ce05256c8067ee8bcc7cb7c00"
+      "forecast_id": 45325,
+      "snapshot_id": "a5d29613cceef076eed9b0ce929a9ae7e43f2eb4de45233b7a3544d1325d1f6e"
     },
     {
       "horizon": "decision_4",
-      "origin": "2026-11-19T12:54:21.419060+00:00",
+      "origin": "2026-11-19T18:47:16.884563+00:00",
       "endpoint": null,
       "target_label": "Next 4 official pricing decision(s)",
       "decision_date": "2026-12-01",
@@ -289,8 +289,8 @@
       "label": "QUANTITATIVE MODEL FORECAST",
       "status": "issued",
       "predicted_price": 2267894.7460089675,
-      "predicted_change": -75105.25399103228,
-      "percentage_change": -3.205516602263435,
+      "predicted_change": -75105.25399103227,
+      "percentage_change": -3.2055166022634345,
       "interval": null,
       "probabilities": null,
       "uncertainty": "Waiting for a validated prediction range from live outcomes.",
@@ -345,13 +345,13 @@
       "anchor_verification": "archive_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
-      "forecast_id": 45318,
-      "snapshot_id": "0683b4df3390fab0824c10d88b28757a2d20283ce05256c8067ee8bcc7cb7c00"
+      "forecast_id": 45326,
+      "snapshot_id": "a5d29613cceef076eed9b0ce929a9ae7e43f2eb4de45233b7a3544d1325d1f6e"
     },
     {
       "horizon": "day_1",
-      "origin": "2026-11-19T12:54:21.419060+00:00",
-      "endpoint": "2026-11-20T14:54:21.419060+02:00",
+      "origin": "2026-11-19T18:47:16.884563+00:00",
+      "endpoint": "2026-11-20T20:47:16.884563+02:00",
       "target_label": "Prevailing official price in 1 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -362,8 +362,8 @@
       "label": "QUANTITATIVE MODEL FORECAST",
       "status": "issued",
       "predicted_price": 2335632.6901240675,
-      "predicted_change": -7367.30987593231,
-      "percentage_change": -0.31443917524252285,
+      "predicted_change": -7367.309875932309,
+      "percentage_change": -0.3144391752425228,
       "interval": null,
       "probabilities": null,
       "uncertainty": "Waiting for a validated prediction range from live outcomes.",
@@ -418,13 +418,13 @@
       "anchor_verification": "archive_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
-      "forecast_id": 45319,
-      "snapshot_id": "0683b4df3390fab0824c10d88b28757a2d20283ce05256c8067ee8bcc7cb7c00"
+      "forecast_id": 45327,
+      "snapshot_id": "a5d29613cceef076eed9b0ce929a9ae7e43f2eb4de45233b7a3544d1325d1f6e"
     },
     {
       "horizon": "day_3",
-      "origin": "2026-11-19T12:54:21.419060+00:00",
-      "endpoint": "2026-11-22T14:54:21.419060+02:00",
+      "origin": "2026-11-19T18:47:16.884563+00:00",
+      "endpoint": "2026-11-22T20:47:16.884563+02:00",
       "target_label": "Prevailing official price in 3 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -435,7 +435,7 @@
       "label": "QUANTITATIVE MODEL FORECAST",
       "status": "issued",
       "predicted_price": 2318205.229493426,
-      "predicted_change": -24794.77050657403,
+      "predicted_change": -24794.770506574034,
       "percentage_change": -1.0582488479118237,
       "interval": null,
       "probabilities": null,
@@ -491,13 +491,13 @@
       "anchor_verification": "archive_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
-      "forecast_id": 45320,
-      "snapshot_id": "0683b4df3390fab0824c10d88b28757a2d20283ce05256c8067ee8bcc7cb7c00"
+      "forecast_id": 45328,
+      "snapshot_id": "a5d29613cceef076eed9b0ce929a9ae7e43f2eb4de45233b7a3544d1325d1f6e"
     },
     {
       "horizon": "day_7",
-      "origin": "2026-11-19T12:54:21.419060+00:00",
-      "endpoint": "2026-11-26T14:54:21.419060+02:00",
+      "origin": "2026-11-19T18:47:16.884563+00:00",
+      "endpoint": "2026-11-26T20:47:16.884563+02:00",
       "target_label": "Prevailing official price in 7 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -597,13 +597,13 @@
       "anchor_verification": "archive_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
-      "forecast_id": 45321,
-      "snapshot_id": "0683b4df3390fab0824c10d88b28757a2d20283ce05256c8067ee8bcc7cb7c00"
+      "forecast_id": 45329,
+      "snapshot_id": "a5d29613cceef076eed9b0ce929a9ae7e43f2eb4de45233b7a3544d1325d1f6e"
     },
     {
       "horizon": "day_14",
-      "origin": "2026-11-19T12:54:21.419060+00:00",
-      "endpoint": "2026-12-03T14:54:21.419060+02:00",
+      "origin": "2026-11-19T18:47:16.884563+00:00",
+      "endpoint": "2026-12-03T20:47:16.884563+02:00",
       "target_label": "Prevailing official price in 14 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -670,13 +670,13 @@
       "anchor_verification": "archive_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
-      "forecast_id": 45322,
-      "snapshot_id": "0683b4df3390fab0824c10d88b28757a2d20283ce05256c8067ee8bcc7cb7c00"
+      "forecast_id": 45330,
+      "snapshot_id": "a5d29613cceef076eed9b0ce929a9ae7e43f2eb4de45233b7a3544d1325d1f6e"
     },
     {
       "horizon": "day_30",
-      "origin": "2026-11-19T12:54:21.419060+00:00",
-      "endpoint": "2026-12-19T14:54:21.419060+02:00",
+      "origin": "2026-11-19T18:47:16.884563+00:00",
+      "endpoint": "2026-12-19T20:47:16.884563+02:00",
       "target_label": "Prevailing official price in 30 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -743,8 +743,8 @@
       "anchor_verification": "archive_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
-      "forecast_id": 45323,
-      "snapshot_id": "0683b4df3390fab0824c10d88b28757a2d20283ce05256c8067ee8bcc7cb7c00"
+      "forecast_id": 45331,
+      "snapshot_id": "a5d29613cceef076eed9b0ce929a9ae7e43f2eb4de45233b7a3544d1325d1f6e"
     }
   ],
   "available_market_inputs": {
@@ -994,16 +994,16 @@
   "status": "issued",
   "reasons": [],
   "forecast_ids": [
-    45316,
-    45317,
-    45318,
-    45319,
-    45320,
-    45321,
-    45322,
-    45323
+    45324,
+    45325,
+    45326,
+    45327,
+    45328,
+    45329,
+    45330,
+    45331
   ],
   "snapshot_ids": [
-    "0683b4df3390fab0824c10d88b28757a2d20283ce05256c8067ee8bcc7cb7c00"
+    "a5d29613cceef076eed9b0ce929a9ae7e43f2eb4de45233b7a3544d1325d1f6e"
   ]
 }
