@@ -1,12 +1,12 @@
 {
-  "created_at": "2026-11-19T21:33:54.276454+00:00",
+  "created_at": "2026-11-19T21:39:53.233884+00:00",
   "hash_algorithm": "sha256",
   "commit_sha": null,
   "base_commit": "e311c0884426a5fdde2ce1f2f0bf53dff006670b",
   "binding": "local candidate base plus exact source/model digests; not a deployed commit attestation",
   "source_sha256": {
     ".github/workflows/refresh.yml": "5b1329b948fb25debdc5cde1c6269a1b2e20e7b4f0ab9092d4cb9044e0571e88",
-    ".github/workflows/verify.yml": "c89e321866f06391ec807308fa5effe5dfe516ff8ba6df0f5a0a0daaf4a5c9c4",
+    ".github/workflows/verify.yml": "c1d48e57db89559a9d76c29ef4a6c2f1387f427c044f1ec04d064fc09a920e5e",
     "Tests/fuel/test_automation.py": "ec42eb0b1bc583c8e2e0c45757dc37ad800a47b91352d13f1344dbf1d9e13440",
     "Tests/fuel/test_cboe_market.py": "d426931c609e003f449b6c7d4bc0e046391911a23c810153e42e2e254e9d1016",
     "Tests/fuel/test_dashboard.py": "c793477f2fe7230f4a4eaefb07ab718f30a4d353494bff7539f2a749243c5bf3",
@@ -126,7 +126,7 @@
     "src/lebanon_fuel/validation/shadow.py": "f5fd968de3dc9712c459f0bae97220c08553f8edd3df4b5f3856c755e2d8daee",
     "src/lebanon_fuel/validation/stress.py": "2c8d9f97992f469a34f9f0bf52fc4dc77fce899b8564009b8d868b853c4a3820"
   },
-  "source_identity": "6c4933e3a1b8fbad246ae199b8a14d3389f0280202334788ba7bcd5aa4a2f253",
+  "source_identity": "0e5fbdafc21d8b9d93306968cdf342317c075f662de67583ed9cd18dc2348abb",
   "model_sha256": {
     "data/models/part5/pre_crisis/day_1/E_lightgbm.txt": "a167094ad5062279e788c5161df57b8990a4bf7a5335d40812303239e448be65",
     "data/models/part5/pre_crisis/day_1/F_catboost.cbm": "d47aaaa5cb5b7d75f965a1b313e7d79d6ab31fae6c757de08d0df30cb03fbdef",

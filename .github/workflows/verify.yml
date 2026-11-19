@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
-      - run: pip install -r requirements.txt
+      - run: pip install -r requirements.txt 'pytest>=8,<10'
       - name: Bind source and model identities to this exact commit
         env:
           PYTHONPATH: src

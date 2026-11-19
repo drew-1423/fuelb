@@ -1,7 +1,7 @@
 {
-  "checked_at": "2026-11-19T16:56:47.912384+00:00",
-  "base_commit": "e311c0884426a5fdde2ce1f2f0bf53dff006670b",
-  "database_sha256": "af38fa5d90645a98c3edf92b5c4b2cbe60e383c7080668e7130928eaa70ed540",
+  "checked_at": "2026-11-19T21:41:45.293038+00:00",
+  "base_commit": "20fdccd08b4d1433736997edd908e55d94ea8657",
+  "database_sha256": "18ab576cc31f55eb0ff392bbab4bea6cee3d263adfe161fe2ddfa801430d2db5",
   "missing_count": 69,
   "missing_capture_rows": 69,
   "missing_paths": [
@@ -633,5 +633,7 @@
   "corrupt_captures": [],
   "status": "failed",
   "recovery_report": "reports/trust_phase1/capture_recovery.json",
-  "note": "Only exact original bytes recovered. Remaining files were not found in available local copies; original backups are needed. Missing captures are not accepted as verified."
+  "note": "Only exact original bytes recovered. Remaining files were not found in available local copies; original backups are needed. Missing captures are not accepted as verified.",
+  "initial_baseline_commit": "e311c0884426a5fdde2ce1f2f0bf53dff006670b",
+  "captures_checked": 595
 }
