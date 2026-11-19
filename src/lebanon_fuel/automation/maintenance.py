@@ -37,7 +37,7 @@ def audit(root, cfg):
         raw = db.execute("SELECT DISTINCT raw_path,sha256 FROM captures").fetchall()
         for path, checksum in raw:
             target = root / path
-            if target.exists() and digest(target) != checksum:
+            if not target.exists() or digest(target) != checksum:
                 raise ValueError(f"Raw capture checksum mismatch: {path}")
         units = db.execute("SELECT COUNT(*) FROM observations WHERE is_valid=1 AND (unit!='LBP/20L' OR price_lbp_20l<=0)").fetchone()[0]
         if units:

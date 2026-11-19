@@ -8,6 +8,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: fuel-data-refresh
+  cancel-in-progress: false
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
@@ -26,19 +30,36 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run bounded data & forecast refresh
+        id: collect
+        continue-on-error: true
         env:
           PYTHONPATH: src
         run: |
-          python -m lebanon_fuel.automation.cli --root . run || true
+          python -m lebanon_fuel.automation.cli --root . run
+
+      - name: Verify operations integrity
+        id: audit
+        continue-on-error: true
+        env:
+          PYTHONPATH: src
+        run: python -m lebanon_fuel.automation.cli --root . audit
 
       - name: Commit updated databases and exports
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/lebanon_fuel.sqlite data/forecast_ledger.sqlite data/operations.sqlite data/exports/ reports/
+          # Keep captures and their database references in the same commit,
+          # including partial collections that the strict audit rejects.
+          git add data/raw/ data/lebanon_fuel.sqlite data/forecast_ledger.sqlite data/operations.sqlite data/exports/ reports/
           if ! git diff --cached --quiet; then
             git commit -m "chore: scheduled 6h fuel data refresh"
             git push
           else
             echo "No new observations to commit."
           fi
+
+      - name: Report collection or integrity failure
+        if: always() && (steps.collect.outcome == 'failure' || steps.audit.outcome == 'failure')
+        run: |
+          echo "Collection or strict integrity audit failed; inspect the preserved reports and captures."
+          exit 1
