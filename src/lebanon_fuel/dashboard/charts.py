@@ -106,7 +106,7 @@ def conformal_bounds(row, level):
     if not math.isfinite(radius) or radius <= 0:
         return None
     center = float(row['predicted_price'])
-    return center - radius, center + radius
+    return max(1., center - radius), center + radius
 
 
 def add_conformal_cone(fig, points, *, single=False):

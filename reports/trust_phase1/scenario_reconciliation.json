@@ -1,0 +1,1267 @@
+{
+  "original_unanchored": {
+    "price_lbp_20l": "1894044.773533183041414656303",
+    "unrounded_lbp_20l": "1894044.773533183041414656303",
+    "pretax_lbp_kl": "85317332.14113437123489442807",
+    "vat_base_lbp_kl": "85317332.14113437123489442807",
+    "vat_lbp_kl": "9384906.535524780835838387088",
+    "breakdown_lbp_20l": {
+      "goods": "1244036.642822687424697888561",
+      "duties": "20440",
+      "domestic_transport": "31400",
+      "retail_margin": "98670",
+      "bank_commission": "11800",
+      "hypothetical_additional_charge": "300000",
+      "vat": "187698.1307104956167167677418"
+    },
+    "import_breakdown": {
+      "benchmark_usd_kl": "614.9925378897695110044070175",
+      "freight_usd_kl": "30",
+      "other_import_usd_kl": "50"
+    },
+    "rounding_adjustment_lbp_20l": "0E-21",
+    "mode": "scenario",
+    "effective_date": "2026-11-19",
+    "origin": "2026-11-19T21:33:56.721436+00:00",
+    "exact_official_formula": false,
+    "coverage_note": "Hypothetical FOB cost calculation using the May 2025 domestic cost scaffold.",
+    "parameter_evidence": {
+      "benchmark": {
+        "status": "scenario",
+        "evidence": "Dashboard scenario inputs",
+        "known_at": "2026-11-19T21:33:56.721436+00:00",
+        "valid_from": "2026-11-19",
+        "valid_to": "2026-11-19",
+        "note": "Direct product quote or Brent plus user-assumed product spread."
+      },
+      "fx": {
+        "status": "scenario",
+        "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+        "known_at": "2026-11-19T21:33:56.721436+00:00",
+        "valid_from": "2026-11-19",
+        "valid_to": "2026-11-19",
+        "note": "Carry forward May 2025 annex FX solely as a scenario."
+      },
+      "freight_usd_kl": {
+        "status": "scenario",
+        "evidence": "Explicit Part 4 illustrative scenario assumption",
+        "known_at": "2026-11-19T21:33:56.721436+00:00",
+        "valid_from": "2026-11-19",
+        "valid_to": "2026-11-19",
+        "note": "Illustrative marine freight knob; no freight quotation collected."
+      },
+      "other_import_usd_kl": {
+        "status": "scenario",
+        "evidence": "Explicit Part 4 illustrative scenario assumption",
+        "known_at": "2026-11-19T21:33:56.721436+00:00",
+        "valid_from": "2026-11-19",
+        "valid_to": "2026-11-19",
+        "note": "Illustrative remaining import-cost knob; not an estimated official premium."
+      },
+      "vat": {
+        "status": "scenario",
+        "evidence": "Explicit Part 4 illustrative scenario assumption",
+        "known_at": "2026-11-19T21:33:56.721436+00:00",
+        "valid_from": "2026-11-19",
+        "valid_to": "2026-11-19",
+        "note": "Historical 11% carried forward as an explicit assumption, current legal rate unverified."
+      },
+      "duties": {
+        "status": "scenario",
+        "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+        "known_at": "2026-11-19T21:33:56.721436+00:00",
+        "valid_from": "2026-11-19",
+        "valid_to": "2026-11-19",
+        "note": "Carry forward this May 2025 amount; current value unresolved."
+      },
+      "domestic_transport": {
+        "status": "scenario",
+        "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+        "known_at": "2026-11-19T21:33:56.721436+00:00",
+        "valid_from": "2026-11-19",
+        "valid_to": "2026-11-19",
+        "note": "Carry forward this May 2025 amount; current value unresolved."
+      },
+      "retail_margin": {
+        "status": "scenario",
+        "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+        "known_at": "2026-11-19T21:33:56.721436+00:00",
+        "valid_from": "2026-11-19",
+        "valid_to": "2026-11-19",
+        "note": "Carry forward this May 2025 amount; current value unresolved."
+      },
+      "bank_commission": {
+        "status": "scenario",
+        "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+        "known_at": "2026-11-19T21:33:56.721436+00:00",
+        "valid_from": "2026-11-19",
+        "valid_to": "2026-11-19",
+        "note": "Carry forward this May 2025 amount; current value unresolved."
+      },
+      "hypothetical_additional_charge": {
+        "status": "scenario",
+        "evidence": "Explicit Part 4 illustrative scenario assumption",
+        "known_at": "2026-11-19T21:33:56.721436+00:00",
+        "valid_from": "2026-11-19",
+        "valid_to": "2026-11-19",
+        "note": "Illustrative 300,000 LBP/20 L charge; legal status and placement require verification."
+      }
+    },
+    "uncertainty": {
+      "kind": "not_quantified",
+      "low_lbp_20l": null,
+      "high_lbp_20l": null,
+      "bounded_inputs": [],
+      "probability": null,
+      "limitations": "Excludes omitted costs, benchmark basis risk and unknown government action."
+    }
+  },
+  "observed_anchor": {
+    "absolute_price_change": -102000,
+    "candidate_values": [
+      2343000
+    ],
+    "change_basis": "previous_verified_record_not_certified_previous_decision",
+    "chosen_observation_id": 3200,
+    "date_role": "decision_date",
+    "decision_numbers": [
+      "246"
+    ],
+    "issues": [],
+    "observation_ids": [
+      3198,
+      3199,
+      3200
+    ],
+    "official_effective_date": null,
+    "percentage_price_change": -4.171779141104294,
+    "previous_verified_date": "2026-11-10",
+    "previous_verified_price": 2445000,
+    "price_lbp_20l": 2343000,
+    "publication_date": null,
+    "publication_timestamp": null,
+    "regime": "2026_fiscal_changes_unresolved",
+    "regime_status": "provisional_research_bucket",
+    "resolution_id": null,
+    "retrieved_at": "2026-11-18T00:44:56.829294+00:00",
+    "source_date": "2026-11-17",
+    "source_priority": 2,
+    "source_url": "https://energyandwater.gov.lb/ar/prices",
+    "timezone": "Asia/Beirut",
+    "unit": "LBP/20L",
+    "verification_status": "archive_corroborated",
+    "revision_id": 3478,
+    "version_known_at": "2026-11-18T00:44:57.848134+00:00"
+  },
+  "baseline_inputs": {
+    "product": 97.776,
+    "fx": 89500,
+    "freight": 30,
+    "vat_percent": 11,
+    "charge": 300000,
+    "charge_taxable": true
+  },
+  "scenarios": {
+    "unchanged": {
+      "mode": "anchored_hypothetical_scenario",
+      "anchor": {
+        "absolute_price_change": -102000,
+        "candidate_values": [
+          2343000
+        ],
+        "change_basis": "previous_verified_record_not_certified_previous_decision",
+        "chosen_observation_id": 3200,
+        "date_role": "decision_date",
+        "decision_numbers": [
+          "246"
+        ],
+        "issues": [],
+        "observation_ids": [
+          3198,
+          3199,
+          3200
+        ],
+        "official_effective_date": null,
+        "percentage_price_change": -4.171779141104294,
+        "previous_verified_date": "2026-11-10",
+        "previous_verified_price": 2445000,
+        "price_lbp_20l": 2343000,
+        "publication_date": null,
+        "publication_timestamp": null,
+        "regime": "2026_fiscal_changes_unresolved",
+        "regime_status": "provisional_research_bucket",
+        "resolution_id": null,
+        "retrieved_at": "2026-11-18T00:44:56.829294+00:00",
+        "source_date": "2026-11-17",
+        "source_priority": 2,
+        "source_url": "https://energyandwater.gov.lb/ar/prices",
+        "timezone": "Asia/Beirut",
+        "unit": "LBP/20L",
+        "verification_status": "archive_corroborated",
+        "revision_id": 3478,
+        "version_known_at": "2026-11-18T00:44:57.848134+00:00"
+      },
+      "price_lbp_20l": "2343000.000000000000000000000",
+      "change_lbp_20l": "0E-21",
+      "price_usd_20l": "26.17877094972067039106145251",
+      "display_fx": "89500",
+      "baseline_price_lbp_20l": "2343000",
+      "illustrative_model_baseline_lbp_20l": "1894044.773533183041414656303",
+      "baseline_reconciliation_residual_lbp_20l": "448955.226466816958585343697",
+      "components": [
+        {
+          "component": "Refined-product cargo",
+          "lbp_20l": "1100836.642822687424697888561",
+          "basis": "USD-linked model assumption"
+        },
+        {
+          "component": "Freight",
+          "lbp_20l": "53700",
+          "basis": "USD-linked model assumption"
+        },
+        {
+          "component": "Other import costs",
+          "lbp_20l": "89500",
+          "basis": "USD-linked model assumption"
+        },
+        {
+          "component": "Duties",
+          "lbp_20l": "20440",
+          "basis": "LBP cost scaffold assumption; not verified current tariff"
+        },
+        {
+          "component": "Domestic Transport",
+          "lbp_20l": "31400",
+          "basis": "LBP cost scaffold assumption; not verified current tariff"
+        },
+        {
+          "component": "Retail Margin",
+          "lbp_20l": "98670",
+          "basis": "LBP cost scaffold assumption; not verified current tariff"
+        },
+        {
+          "component": "Bank Commission",
+          "lbp_20l": "11800",
+          "basis": "LBP cost scaffold assumption; not verified current tariff"
+        },
+        {
+          "component": "Hypothetical Additional Charge",
+          "lbp_20l": "300000",
+          "basis": "LBP cost scaffold assumption; not verified current tariff"
+        },
+        {
+          "component": "Vat",
+          "lbp_20l": "187698.1307104956167167677418",
+          "basis": "Percentage tax on modeled taxable base"
+        },
+        {
+          "component": "Rounding adjustment",
+          "lbp_20l": "0E-21",
+          "basis": "Model rounding assumption"
+        },
+        {
+          "component": "Anchor reconciliation residual",
+          "lbp_20l": "448955.226466816958585343697",
+          "basis": "Unexplained baseline difference held constant; not an official duty or margin"
+        },
+        {
+          "component": "Decimal precision reconciliation",
+          "lbp_20l": "0E-21",
+          "basis": "Arithmetic precision only; not a financial charge"
+        }
+      ],
+      "baseline_model": {
+        "price_lbp_20l": "1894044.773533183041414656303",
+        "unrounded_lbp_20l": "1894044.773533183041414656303",
+        "pretax_lbp_kl": "85317332.14113437123489442807",
+        "vat_base_lbp_kl": "85317332.14113437123489442807",
+        "vat_lbp_kl": "9384906.535524780835838387088",
+        "breakdown_lbp_20l": {
+          "goods": "1244036.642822687424697888561",
+          "duties": "20440",
+          "domestic_transport": "31400",
+          "retail_margin": "98670",
+          "bank_commission": "11800",
+          "hypothetical_additional_charge": "300000",
+          "vat": "187698.1307104956167167677418"
+        },
+        "import_breakdown": {
+          "benchmark_usd_kl": "614.9925378897695110044070175",
+          "freight_usd_kl": "30",
+          "other_import_usd_kl": "50"
+        },
+        "rounding_adjustment_lbp_20l": "0E-21",
+        "mode": "scenario",
+        "effective_date": "2026-11-19",
+        "origin": "2026-11-19T21:33:56.721436+00:00",
+        "exact_official_formula": false,
+        "coverage_note": "Hypothetical FOB cost calculation using the May 2025 domestic cost scaffold.",
+        "parameter_evidence": {
+          "benchmark": {
+            "status": "scenario",
+            "evidence": "Dashboard scenario inputs",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Direct product quote or Brent plus user-assumed product spread."
+          },
+          "fx": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward May 2025 annex FX solely as a scenario."
+          },
+          "freight_usd_kl": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Illustrative marine freight knob; no freight quotation collected."
+          },
+          "other_import_usd_kl": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Illustrative remaining import-cost knob; not an estimated official premium."
+          },
+          "vat": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Historical 11% carried forward as an explicit assumption, current legal rate unverified."
+          },
+          "duties": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "domestic_transport": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "retail_margin": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "bank_commission": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "hypothetical_additional_charge": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Illustrative 300,000 LBP/20 L charge; legal status and placement require verification."
+          }
+        },
+        "uncertainty": {
+          "kind": "not_quantified",
+          "low_lbp_20l": null,
+          "high_lbp_20l": null,
+          "bounded_inputs": [],
+          "probability": null,
+          "limitations": "Excludes omitted costs, benchmark basis risk and unknown government action."
+        }
+      },
+      "scenario_model": {
+        "price_lbp_20l": "1894044.773533183041414656303",
+        "unrounded_lbp_20l": "1894044.773533183041414656303",
+        "pretax_lbp_kl": "85317332.14113437123489442807",
+        "vat_base_lbp_kl": "85317332.14113437123489442807",
+        "vat_lbp_kl": "9384906.535524780835838387088",
+        "breakdown_lbp_20l": {
+          "goods": "1244036.642822687424697888561",
+          "duties": "20440",
+          "domestic_transport": "31400",
+          "retail_margin": "98670",
+          "bank_commission": "11800",
+          "hypothetical_additional_charge": "300000",
+          "vat": "187698.1307104956167167677418"
+        },
+        "import_breakdown": {
+          "benchmark_usd_kl": "614.9925378897695110044070175",
+          "freight_usd_kl": "30",
+          "other_import_usd_kl": "50"
+        },
+        "rounding_adjustment_lbp_20l": "0E-21",
+        "mode": "scenario",
+        "effective_date": "2026-11-19",
+        "origin": "2026-11-19T21:33:56.721436+00:00",
+        "exact_official_formula": false,
+        "coverage_note": "Hypothetical FOB cost calculation using the May 2025 domestic cost scaffold.",
+        "parameter_evidence": {
+          "benchmark": {
+            "status": "scenario",
+            "evidence": "Dashboard scenario inputs",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Direct product quote or Brent plus user-assumed product spread."
+          },
+          "fx": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward May 2025 annex FX solely as a scenario."
+          },
+          "freight_usd_kl": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Illustrative marine freight knob; no freight quotation collected."
+          },
+          "other_import_usd_kl": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Illustrative remaining import-cost knob; not an estimated official premium."
+          },
+          "vat": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Historical 11% carried forward as an explicit assumption, current legal rate unverified."
+          },
+          "duties": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "domestic_transport": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "retail_margin": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "bank_commission": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "hypothetical_additional_charge": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Illustrative 300,000 LBP/20 L charge; legal status and placement require verification."
+          }
+        },
+        "uncertainty": {
+          "kind": "not_quantified",
+          "low_lbp_20l": null,
+          "high_lbp_20l": null,
+          "bounded_inputs": [],
+          "probability": null,
+          "limitations": "Excludes omitted costs, benchmark basis risk and unknown government action."
+        }
+      },
+      "baseline_inputs": {
+        "product": 97.776,
+        "fx": 89500,
+        "freight": 30,
+        "vat_percent": 11,
+        "charge": 300000,
+        "charge_taxable": true
+      },
+      "scenario_inputs": {
+        "product": 97.776,
+        "fx": 89500,
+        "freight": 30,
+        "vat_percent": 11,
+        "charge": 300000,
+        "charge_taxable": true
+      },
+      "undocumented_components": [
+        "Distribution margin is not separately documented in this illustrative scaffold"
+      ],
+      "assumptions": "Structural difference under the May 2025 illustrative cost scaffold; anchor residual and unadjusted charges held constant. Pricing FX is an explicit scenario input, separate from display conversion. No calibrated probability applies.",
+      "exact_official_formula": false,
+      "uncertainty": {
+        "probability": null
+      }
+    },
+    "fx_100000": {
+      "mode": "anchored_hypothetical_scenario",
+      "anchor": {
+        "absolute_price_change": -102000,
+        "candidate_values": [
+          2343000
+        ],
+        "change_basis": "previous_verified_record_not_certified_previous_decision",
+        "chosen_observation_id": 3200,
+        "date_role": "decision_date",
+        "decision_numbers": [
+          "246"
+        ],
+        "issues": [],
+        "observation_ids": [
+          3198,
+          3199,
+          3200
+        ],
+        "official_effective_date": null,
+        "percentage_price_change": -4.171779141104294,
+        "previous_verified_date": "2026-11-10",
+        "previous_verified_price": 2445000,
+        "price_lbp_20l": 2343000,
+        "publication_date": null,
+        "publication_timestamp": null,
+        "regime": "2026_fiscal_changes_unresolved",
+        "regime_status": "provisional_research_bucket",
+        "resolution_id": null,
+        "retrieved_at": "2026-11-18T00:44:56.829294+00:00",
+        "source_date": "2026-11-17",
+        "source_priority": 2,
+        "source_url": "https://energyandwater.gov.lb/ar/prices",
+        "timezone": "Asia/Beirut",
+        "unit": "LBP/20L",
+        "verification_status": "archive_corroborated",
+        "revision_id": 3478,
+        "version_known_at": "2026-11-18T00:44:57.848134+00:00"
+      },
+      "price_lbp_20l": "2505002.760582105273015127275",
+      "change_lbp_20l": "162002.760582105273015127275",
+      "price_usd_20l": "27.98885766013525444709639413",
+      "display_fx": "89500",
+      "baseline_price_lbp_20l": "2343000",
+      "illustrative_model_baseline_lbp_20l": "1894044.773533183041414656303",
+      "baseline_reconciliation_residual_lbp_20l": "448955.226466816958585343697",
+      "components": [
+        {
+          "component": "Refined-product cargo",
+          "lbp_20l": "1229985.075779539022008814035",
+          "basis": "USD-linked model assumption"
+        },
+        {
+          "component": "Freight",
+          "lbp_20l": "60000",
+          "basis": "USD-linked model assumption"
+        },
+        {
+          "component": "Other import costs",
+          "lbp_20l": "100000",
+          "basis": "USD-linked model assumption"
+        },
+        {
+          "component": "Duties",
+          "lbp_20l": "20440",
+          "basis": "LBP cost scaffold assumption; not verified current tariff"
+        },
+        {
+          "component": "Domestic Transport",
+          "lbp_20l": "31400",
+          "basis": "LBP cost scaffold assumption; not verified current tariff"
+        },
+        {
+          "component": "Retail Margin",
+          "lbp_20l": "98670",
+          "basis": "LBP cost scaffold assumption; not verified current tariff"
+        },
+        {
+          "component": "Bank Commission",
+          "lbp_20l": "11800",
+          "basis": "LBP cost scaffold assumption; not verified current tariff"
+        },
+        {
+          "component": "Hypothetical Additional Charge",
+          "lbp_20l": "300000",
+          "basis": "LBP cost scaffold assumption; not verified current tariff"
+        },
+        {
+          "component": "Vat",
+          "lbp_20l": "203752.4583357492924209695438",
+          "basis": "Percentage tax on modeled taxable base"
+        },
+        {
+          "component": "Rounding adjustment",
+          "lbp_20l": "0E-21",
+          "basis": "Model rounding assumption"
+        },
+        {
+          "component": "Anchor reconciliation residual",
+          "lbp_20l": "448955.226466816958585343697",
+          "basis": "Unexplained baseline difference held constant; not an official duty or margin"
+        },
+        {
+          "component": "Decimal precision reconciliation",
+          "lbp_20l": "-1E-21",
+          "basis": "Arithmetic precision only; not a financial charge"
+        }
+      ],
+      "baseline_model": {
+        "price_lbp_20l": "1894044.773533183041414656303",
+        "unrounded_lbp_20l": "1894044.773533183041414656303",
+        "pretax_lbp_kl": "85317332.14113437123489442807",
+        "vat_base_lbp_kl": "85317332.14113437123489442807",
+        "vat_lbp_kl": "9384906.535524780835838387088",
+        "breakdown_lbp_20l": {
+          "goods": "1244036.642822687424697888561",
+          "duties": "20440",
+          "domestic_transport": "31400",
+          "retail_margin": "98670",
+          "bank_commission": "11800",
+          "hypothetical_additional_charge": "300000",
+          "vat": "187698.1307104956167167677418"
+        },
+        "import_breakdown": {
+          "benchmark_usd_kl": "614.9925378897695110044070175",
+          "freight_usd_kl": "30",
+          "other_import_usd_kl": "50"
+        },
+        "rounding_adjustment_lbp_20l": "0E-21",
+        "mode": "scenario",
+        "effective_date": "2026-11-19",
+        "origin": "2026-11-19T21:33:56.721436+00:00",
+        "exact_official_formula": false,
+        "coverage_note": "Hypothetical FOB cost calculation using the May 2025 domestic cost scaffold.",
+        "parameter_evidence": {
+          "benchmark": {
+            "status": "scenario",
+            "evidence": "Dashboard scenario inputs",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Direct product quote or Brent plus user-assumed product spread."
+          },
+          "fx": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward May 2025 annex FX solely as a scenario."
+          },
+          "freight_usd_kl": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Illustrative marine freight knob; no freight quotation collected."
+          },
+          "other_import_usd_kl": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Illustrative remaining import-cost knob; not an estimated official premium."
+          },
+          "vat": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Historical 11% carried forward as an explicit assumption, current legal rate unverified."
+          },
+          "duties": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "domestic_transport": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "retail_margin": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "bank_commission": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "hypothetical_additional_charge": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Illustrative 300,000 LBP/20 L charge; legal status and placement require verification."
+          }
+        },
+        "uncertainty": {
+          "kind": "not_quantified",
+          "low_lbp_20l": null,
+          "high_lbp_20l": null,
+          "bounded_inputs": [],
+          "probability": null,
+          "limitations": "Excludes omitted costs, benchmark basis risk and unknown government action."
+        }
+      },
+      "scenario_model": {
+        "price_lbp_20l": "2056047.534115288314429783578",
+        "unrounded_lbp_20l": "2056047.534115288314429783578",
+        "pretax_lbp_kl": "92614753.78897695110044070175",
+        "vat_base_lbp_kl": "92614753.78897695110044070175",
+        "vat_lbp_kl": "10187622.91678746462104847719",
+        "breakdown_lbp_20l": {
+          "goods": "1389985.075779539022008814035",
+          "duties": "20440",
+          "domestic_transport": "31400",
+          "retail_margin": "98670",
+          "bank_commission": "11800",
+          "hypothetical_additional_charge": "300000",
+          "vat": "203752.4583357492924209695438"
+        },
+        "import_breakdown": {
+          "benchmark_usd_kl": "614.9925378897695110044070175",
+          "freight_usd_kl": "30",
+          "other_import_usd_kl": "50"
+        },
+        "rounding_adjustment_lbp_20l": "0E-21",
+        "mode": "scenario",
+        "effective_date": "2026-11-19",
+        "origin": "2026-11-19T21:33:56.721436+00:00",
+        "exact_official_formula": false,
+        "coverage_note": "Hypothetical FOB cost calculation using the May 2025 domestic cost scaffold.",
+        "parameter_evidence": {
+          "benchmark": {
+            "status": "scenario",
+            "evidence": "Dashboard scenario inputs",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Direct product quote or Brent plus user-assumed product spread."
+          },
+          "fx": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward May 2025 annex FX solely as a scenario."
+          },
+          "freight_usd_kl": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Illustrative marine freight knob; no freight quotation collected."
+          },
+          "other_import_usd_kl": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Illustrative remaining import-cost knob; not an estimated official premium."
+          },
+          "vat": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Historical 11% carried forward as an explicit assumption, current legal rate unverified."
+          },
+          "duties": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "domestic_transport": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "retail_margin": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "bank_commission": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "hypothetical_additional_charge": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Illustrative 300,000 LBP/20 L charge; legal status and placement require verification."
+          }
+        },
+        "uncertainty": {
+          "kind": "not_quantified",
+          "low_lbp_20l": null,
+          "high_lbp_20l": null,
+          "bounded_inputs": [],
+          "probability": null,
+          "limitations": "Excludes omitted costs, benchmark basis risk and unknown government action."
+        }
+      },
+      "baseline_inputs": {
+        "product": 97.776,
+        "fx": 89500,
+        "freight": 30,
+        "vat_percent": 11,
+        "charge": 300000,
+        "charge_taxable": true
+      },
+      "scenario_inputs": {
+        "product": 97.776,
+        "fx": 100000,
+        "freight": 30,
+        "vat_percent": 11,
+        "charge": 300000,
+        "charge_taxable": true
+      },
+      "undocumented_components": [
+        "Distribution margin is not separately documented in this illustrative scaffold"
+      ],
+      "assumptions": "Structural difference under the May 2025 illustrative cost scaffold; anchor residual and unadjusted charges held constant. Pricing FX is an explicit scenario input, separate from display conversion. No calibrated probability applies.",
+      "exact_official_formula": false,
+      "uncertainty": {
+        "probability": null
+      }
+    },
+    "product_plus_10": {
+      "mode": "anchored_hypothetical_scenario",
+      "anchor": {
+        "absolute_price_change": -102000,
+        "candidate_values": [
+          2343000
+        ],
+        "change_basis": "previous_verified_record_not_certified_previous_decision",
+        "chosen_observation_id": 3200,
+        "date_role": "decision_date",
+        "decision_numbers": [
+          "246"
+        ],
+        "issues": [],
+        "observation_ids": [
+          3198,
+          3199,
+          3200
+        ],
+        "official_effective_date": null,
+        "percentage_price_change": -4.171779141104294,
+        "previous_verified_date": "2026-11-10",
+        "previous_verified_price": 2445000,
+        "price_lbp_20l": 2343000,
+        "publication_date": null,
+        "publication_timestamp": null,
+        "regime": "2026_fiscal_changes_unresolved",
+        "regime_status": "provisional_research_bucket",
+        "resolution_id": null,
+        "retrieved_at": "2026-11-18T00:44:56.829294+00:00",
+        "source_date": "2026-11-17",
+        "source_priority": 2,
+        "source_url": "https://energyandwater.gov.lb/ar/prices",
+        "timezone": "Asia/Beirut",
+        "unit": "LBP/20L",
+        "verification_status": "archive_corroborated",
+        "revision_id": 3478,
+        "version_known_at": "2026-11-18T00:44:57.848134+00:00"
+      },
+      "price_lbp_20l": "2467972.250197715496790076941",
+      "change_lbp_20l": "124972.250197715496790076941",
+      "price_usd_20l": "27.57510894075659772949806638",
+      "display_fx": "89500",
+      "baseline_price_lbp_20l": "2343000",
+      "illustrative_model_baseline_lbp_20l": "1894044.773533183041414656303",
+      "baseline_reconciliation_residual_lbp_20l": "448955.226466816958585343697",
+      "components": [
+        {
+          "component": "Refined-product cargo",
+          "lbp_20l": "1213424.255613422106490750671",
+          "basis": "USD-linked model assumption"
+        },
+        {
+          "component": "Freight",
+          "lbp_20l": "53700",
+          "basis": "USD-linked model assumption"
+        },
+        {
+          "component": "Other import costs",
+          "lbp_20l": "89500",
+          "basis": "USD-linked model assumption"
+        },
+        {
+          "component": "Duties",
+          "lbp_20l": "20440",
+          "basis": "LBP cost scaffold assumption; not verified current tariff"
+        },
+        {
+          "component": "Domestic Transport",
+          "lbp_20l": "31400",
+          "basis": "LBP cost scaffold assumption; not verified current tariff"
+        },
+        {
+          "component": "Retail Margin",
+          "lbp_20l": "98670",
+          "basis": "LBP cost scaffold assumption; not verified current tariff"
+        },
+        {
+          "component": "Bank Commission",
+          "lbp_20l": "11800",
+          "basis": "LBP cost scaffold assumption; not verified current tariff"
+        },
+        {
+          "component": "Hypothetical Additional Charge",
+          "lbp_20l": "300000",
+          "basis": "LBP cost scaffold assumption; not verified current tariff"
+        },
+        {
+          "component": "Vat",
+          "lbp_20l": "200082.7681174764317139825738",
+          "basis": "Percentage tax on modeled taxable base"
+        },
+        {
+          "component": "Rounding adjustment",
+          "lbp_20l": "0E-21",
+          "basis": "Model rounding assumption"
+        },
+        {
+          "component": "Anchor reconciliation residual",
+          "lbp_20l": "448955.226466816958585343697",
+          "basis": "Unexplained baseline difference held constant; not an official duty or margin"
+        },
+        {
+          "component": "Decimal precision reconciliation",
+          "lbp_20l": "-1E-21",
+          "basis": "Arithmetic precision only; not a financial charge"
+        }
+      ],
+      "baseline_model": {
+        "price_lbp_20l": "1894044.773533183041414656303",
+        "unrounded_lbp_20l": "1894044.773533183041414656303",
+        "pretax_lbp_kl": "85317332.14113437123489442807",
+        "vat_base_lbp_kl": "85317332.14113437123489442807",
+        "vat_lbp_kl": "9384906.535524780835838387088",
+        "breakdown_lbp_20l": {
+          "goods": "1244036.642822687424697888561",
+          "duties": "20440",
+          "domestic_transport": "31400",
+          "retail_margin": "98670",
+          "bank_commission": "11800",
+          "hypothetical_additional_charge": "300000",
+          "vat": "187698.1307104956167167677418"
+        },
+        "import_breakdown": {
+          "benchmark_usd_kl": "614.9925378897695110044070175",
+          "freight_usd_kl": "30",
+          "other_import_usd_kl": "50"
+        },
+        "rounding_adjustment_lbp_20l": "0E-21",
+        "mode": "scenario",
+        "effective_date": "2026-11-19",
+        "origin": "2026-11-19T21:33:56.721436+00:00",
+        "exact_official_formula": false,
+        "coverage_note": "Hypothetical FOB cost calculation using the May 2025 domestic cost scaffold.",
+        "parameter_evidence": {
+          "benchmark": {
+            "status": "scenario",
+            "evidence": "Dashboard scenario inputs",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Direct product quote or Brent plus user-assumed product spread."
+          },
+          "fx": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward May 2025 annex FX solely as a scenario."
+          },
+          "freight_usd_kl": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Illustrative marine freight knob; no freight quotation collected."
+          },
+          "other_import_usd_kl": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Illustrative remaining import-cost knob; not an estimated official premium."
+          },
+          "vat": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Historical 11% carried forward as an explicit assumption, current legal rate unverified."
+          },
+          "duties": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "domestic_transport": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "retail_margin": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "bank_commission": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "hypothetical_additional_charge": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Illustrative 300,000 LBP/20 L charge; legal status and placement require verification."
+          }
+        },
+        "uncertainty": {
+          "kind": "not_quantified",
+          "low_lbp_20l": null,
+          "high_lbp_20l": null,
+          "bounded_inputs": [],
+          "probability": null,
+          "limitations": "Excludes omitted costs, benchmark basis risk and unknown government action."
+        }
+      },
+      "scenario_model": {
+        "price_lbp_20l": "2019017.023730898538204733244",
+        "unrounded_lbp_20l": "2019017.023730898538204733244",
+        "pretax_lbp_kl": "90946712.78067110532453753354",
+        "vat_base_lbp_kl": "90946712.78067110532453753354",
+        "vat_lbp_kl": "10004138.40587382158569912869",
+        "breakdown_lbp_20l": {
+          "goods": "1356624.255613422106490750671",
+          "duties": "20440",
+          "domestic_transport": "31400",
+          "retail_margin": "98670",
+          "bank_commission": "11800",
+          "hypothetical_additional_charge": "300000",
+          "vat": "200082.7681174764317139825738"
+        },
+        "import_breakdown": {
+          "benchmark_usd_kl": "677.8906455940905622853355703",
+          "freight_usd_kl": "30",
+          "other_import_usd_kl": "50"
+        },
+        "rounding_adjustment_lbp_20l": "0E-21",
+        "mode": "scenario",
+        "effective_date": "2026-11-19",
+        "origin": "2026-11-19T21:33:56.721436+00:00",
+        "exact_official_formula": false,
+        "coverage_note": "Hypothetical FOB cost calculation using the May 2025 domestic cost scaffold.",
+        "parameter_evidence": {
+          "benchmark": {
+            "status": "scenario",
+            "evidence": "Dashboard scenario inputs",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Direct product quote or Brent plus user-assumed product spread."
+          },
+          "fx": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward May 2025 annex FX solely as a scenario."
+          },
+          "freight_usd_kl": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Illustrative marine freight knob; no freight quotation collected."
+          },
+          "other_import_usd_kl": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Illustrative remaining import-cost knob; not an estimated official premium."
+          },
+          "vat": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Historical 11% carried forward as an explicit assumption, current legal rate unverified."
+          },
+          "duties": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "domestic_transport": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "retail_margin": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "bank_commission": {
+            "status": "scenario",
+            "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Carry forward this May 2025 amount; current value unresolved."
+          },
+          "hypothetical_additional_charge": {
+            "status": "scenario",
+            "evidence": "Explicit Part 4 illustrative scenario assumption",
+            "known_at": "2026-11-19T21:33:56.721436+00:00",
+            "valid_from": "2026-11-19",
+            "valid_to": "2026-11-19",
+            "note": "Illustrative 300,000 LBP/20 L charge; legal status and placement require verification."
+          }
+        },
+        "uncertainty": {
+          "kind": "not_quantified",
+          "low_lbp_20l": null,
+          "high_lbp_20l": null,
+          "bounded_inputs": [],
+          "probability": null,
+          "limitations": "Excludes omitted costs, benchmark basis risk and unknown government action."
+        }
+      },
+      "baseline_inputs": {
+        "product": 97.776,
+        "fx": 89500,
+        "freight": 30,
+        "vat_percent": 11,
+        "charge": 300000,
+        "charge_taxable": true
+      },
+      "scenario_inputs": {
+        "product": 107.776,
+        "fx": 89500,
+        "freight": 30,
+        "vat_percent": 11,
+        "charge": 300000,
+        "charge_taxable": true
+      },
+      "undocumented_components": [
+        "Distribution margin is not separately documented in this illustrative scaffold"
+      ],
+      "assumptions": "Structural difference under the May 2025 illustrative cost scaffold; anchor residual and unadjusted charges held constant. Pricing FX is an explicit scenario input, separate from display conversion. No calibrated probability applies.",
+      "exact_official_formula": false,
+      "uncertainty": {
+        "probability": null
+      }
+    }
+  }
+}

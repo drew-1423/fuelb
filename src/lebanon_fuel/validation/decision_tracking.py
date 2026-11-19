@@ -4,6 +4,8 @@ from contextlib import closing
 from datetime import date
 import json
 from math import ceil
+from collections import Counter
+import math
 from pathlib import Path
 import sqlite3
 from statistics import mean
@@ -11,6 +13,8 @@ from statistics import mean
 from lebanon_fuel.domain import BEIRUT, PROVISIONAL_PRICE, VERIFIED
 from .decision_events import event_clocks, stamp
 from .ledger import ForecastLedger, canonical, hashed, now
+from .provisional import select_target
+from lebanon_fuel.storage.database import sqlite_connection
 
 FAMILY = "G_hybrid"
 MAX_GAP_DAYS = 7
@@ -28,6 +32,10 @@ PUBLICATION_STATUS = {
     "gap": "More than seven days separate the starting price and next record.",
     "conflict": "The next recorded price is disputed.",
     "unconfirmed": "The next record is waiting for matching IPT and Taqtek prices.",
+    "not_matured": "The calendar endpoint has not matured yet.",
+    "missing_calendar_witness": "A later corroborated record is required to confirm the endpoint observation.",
+    "missing_endpoint_observation": "No corroborated observation exists on the calendar endpoint date.",
+    "endpoint_not_observed_in_time": "Endpoint quotes were not both captured before the forecast cutoff.",
 }
 
 # Legacy complete runs still contribute genuine Hybrid observations. Missing rows
@@ -57,7 +65,7 @@ ATTEMPT = """
     ORDER BY id DESC LIMIT 1
 """
 VERSION_QUERY = BATCH + """
-    SELECT f.id AS forecast_id, f.origin, f.created_at AS issued_at, f.target_json, f.base_price,
+    SELECT f.id AS forecast_id, f.horizon, f.origin, f.created_at AS issued_at, f.target_json, f.base_price,
            f.predicted_price, f.predicted_change, o.*, e.created_at AS scored_at, e.kind,
            a.status AS supplier_status, a.details_json AS supplier_details, a.created_at AS supplier_reviewed_at
     FROM live f JOIN complete c USING (run_id, origin)
@@ -66,11 +74,12 @@ VERSION_QUERY = BATCH + """
     JOIN outcomes o ON o.id=e.outcome_id
     LEFT JOIN match_attempts a ON a.id=(
         SELECT MAX(id) FROM match_attempts WHERE forecast_id=f.id
-        AND json_extract(details_json, '$.channel')='supplier_next_update'
+        AND json_extract(details_json, '$.channel')='supplier_next_update' AND created_at < :cutoff
     )
-    WHERE f.horizon='decision_1' AND f.status='issued'
+    WHERE f.status='issued'
       AND json_extract(m.metadata_json,'$.family')='G_hybrid'
-      AND e.id=(SELECT MAX(id) FROM evaluations WHERE forecast_id=f.id AND kind=e.kind)
+      AND e.created_at < :cutoff
+      AND e.id=(SELECT MAX(id) FROM evaluations WHERE forecast_id=f.id AND kind=e.kind AND created_at < :cutoff)
     ORDER BY f.created_at, f.id
 """
 
@@ -126,37 +135,28 @@ def settle_supplier_updates(root, cfg, source):
     counts = {}
     checked = {}
     with closing(ForecastLedger(root / cfg["validation"]["forecast_ledger"])) as ledger:
-        forecasts = ledger.db.execute(BATCH + FORECASTS + " AND f.status='issued'",
+        forecasts = ledger.db.execute(BATCH + FORECASTS.replace("WHERE f.horizon='decision_1'", "WHERE 1=1") + " AND f.status='issued'",
                                       {"start": protocol_start(root)}).fetchall()
         for forecast in forecasts:
             if forecast["family"] != FAMILY:
                 continue
-            status, record = first_new_record(forecast, records, days)
-            details = {"channel": ATTEMPT_CHANNEL}
+            status, record, payload = select_target(forecast, records, days, source)
+            details = {"channel": ATTEMPT_CHANNEL, "horizon": forecast['horizon']}
             if record:
-                details["source_date"] = record["source_date"]
-                details["source_revision_id"] = record["revision_id"]
-            if status == "candidate":
-                day = record["source_date"]
-                if day not in checked:
-                    checked[day] = supplier_proof(source, record)
-                evidence = checked[day]
-                status = "unconfirmed"
-                if evidence:
-                    # Keep the source's date label separate from actual publication or effective timing.
-                    receipts = [stamp(item["first_retrieved_at"]) for item in evidence]
-                    available = max(receipts)
-                    issued = max(stamp(forecast["origin"]), stamp(forecast["created_at"]))
-                    if min(receipts) <= issued:
-                        status = "record_may_precede_forecast"
-                    elif available <= stamp(now()):
-                        payload = dict(details, sources=evidence)
-                        oid = ledger.outcome("supplier:" + day, available.isoformat(), record["price_lbp_20l"],
-                                             evidence[0]["source_url"], "supplier_agreement", hashed(payload),
-                                             payload, source_revision_id=record["revision_id"])
-                        ledger._score(forecast["id"], oid, "provisional_match")
-                        details["outcome_id"] = oid
-                        status = SUPPLIER_STATUS
+                details.update(source_date=record['source_date'], source_revision_id=record['revision_id'])
+            if status == 'candidate':
+                sources = [s for item in payload['path'] + ([payload['witness']] if payload['witness'] else []) for s in item['sources']]
+                available = max(stamp(s['first_retrieved_at']) for s in sources)
+                if available <= stamp(now()):
+                    payload.update(details)
+                    oid = ledger.outcome('supplier:'+record['source_date'], available.isoformat(), record['price_lbp_20l'],
+                        payload['sources'][0]['source_url'], 'supplier_agreement', hashed(payload), payload,
+                        source_revision_id=record['revision_id'])
+                    ledger._score(forecast['id'], oid, 'provisional_match')
+                    details['outcome_id'] = oid
+                    status = SUPPLIER_STATUS
+                else:
+                    status = 'not_matured'
             previous = ledger.db.execute(ATTEMPT, (forecast["id"],)).fetchone()
             payload = canonical(details)
             if previous is None or (previous["status"], previous["details_json"]) != (status, payload):
@@ -170,7 +170,7 @@ def settle_supplier_updates(root, cfg, source):
 def _matched(db, start, at):
     cases = {}
     cutoff = stamp(at)
-    for row in db.execute(VERSION_QUERY, {"start": start}):
+    for row in db.execute(VERSION_QUERY, {"start": start, "cutoff": cutoff.isoformat()}):
         spec = json.loads(row["target_json"])
         cohort = "provisional" if spec.get("anchor_verification") == PROVISIONAL_PRICE else "government_backed"
         if spec.get("anchor_verification") not in VERIFIED | {PROVISIONAL_PRICE}:
@@ -191,43 +191,107 @@ def _matched(db, start, at):
                 continue
         else:
             publication, effective = event_clocks(row)
-            if row["verification_status"] != "document_verified" or not publication or not effective or not publication.after(origin):
+            if row["verification_status"] != "document_verified" or not publication or not effective:
                 continue
-            day = publication.lower.astimezone(BEIRUT).date().isoformat()
-        key = (row["kind"], cohort, spec.get("artifact_sha256"), day)
+            if row['horizon'].startswith('decision_'):
+                if not publication.after(origin):
+                    continue
+                day = publication.lower.astimezone(BEIRUT).date().isoformat()
+            else:
+                endpoint = stamp(spec['endpoint'])
+                if not publication.by(endpoint) or not effective.by(endpoint) or endpoint >= cutoff:
+                    continue
+                day = endpoint.astimezone(BEIRUT).date().isoformat()
+        key = (row["kind"], cohort, spec.get("artifact_sha256"), row["horizon"], day)
         cases[key] = dict(kind=row["kind"], cohort=cohort, artifact=spec.get("artifact_sha256"),
+                          horizon=row["horizon"], label_end=known,
                           day=day, known=known, origin=origin, forecast_id=row["forecast_id"],
                           forecast=row["predicted_price"], actual=row["price"], base=row["base_price"],
                           predicted_change=row["predicted_change"], source_url=row["source_url"])
     return sorted(cases.values(), key=lambda row: (row["origin"], row["forecast_id"]))
 
 
-def _radius(sample):
-    errors = sorted(abs(row["actual"] - row["forecast"]) for row in sample)
-    rank = ceil((len(errors) + 1) * INTERVAL_COVERAGE)
-    return max(5000.0, errors[rank - 1])
+def _radius(sample, coverage=INTERVAL_COVERAGE):
+    errors = sorted(abs(row['actual'] - row['forecast']) for row in sample)
+    rank = ceil((len(errors)+1)*coverage)
+    if not errors or rank > len(errors):
+        return None
+    return max(5000.0, errors[rank-1])
 
 
-def calibration(cases, cohort, artifact):
-    kind = "provisional_match" if cohort == "provisional" else "official_match"
-    cohort_cases = [row for row in cases if row["kind"] == kind and row["cohort"] == cohort
-                    and row["artifact"] == artifact]
-    results = []
-    for case in cohort_cases:
-        earlier = [r for r in cohort_cases if r["origin"] < case["origin"] and r["known"] < case["origin"]]
-        if len(earlier) >= MIN_CALIBRATION:
-            results.append(abs(case["actual"] - case["forecast"]) <= _radius(earlier[-RECENT_RESIDUALS:]))
-    sample = cohort_cases[-RECENT_RESIDUALS:]
-    coverage = mean(results[-RECENT_RESIDUALS:]) if results else None
-    test_n = min(len(results), RECENT_RESIDUALS)
-    ready = len(sample) >= MIN_CALIBRATION and test_n >= MIN_COVERAGE_TEST and .80 <= coverage <= .98
-    return dict(cohort=cohort, calibration_n=len(sample), evaluation_n=test_n, empirical_coverage=coverage,
-                minimum_calibration_n=MIN_CALIBRATION, minimum_evaluation_n=MIN_COVERAGE_TEST,
-                nominal=INTERVAL_COVERAGE, radius=_radius(sample) if ready else None)
+def _clock(value):
+    return stamp(value.isoformat() if hasattr(value, 'isoformat') else value)
+
+
+def _independent(cases):
+    """Non-overlapping forecast-to-label-information intervals, not first-day sampling."""
+    result = []
+    end = None
+    for row in sorted(cases, key=lambda r: _clock(r['origin'])):
+        origin = _clock(row['origin'])
+        if end is not None and origin <= end:
+            continue
+        result.append(row)
+        end = max(_clock(row.get('label_end',row['known'])), _clock(row['known']))
+    return result
+
+
+def calibration(cases, cohort, artifact, horizon='decision_1', at=None):
+    cutoff = _clock(at or now())
+    strata = {}
+    for kind in ('official_match','provisional_match'):
+        # Repeated runs for a target date contribute once, using the latest
+        # eligible forecast without rewriting the earlier immutable forecasts.
+        unique = {}
+        for row in cases:
+            if (row['kind'] == kind and row['cohort'] == cohort and row['artifact'] == artifact
+                    and row.get('horizon','decision_1') == horizon
+                    and _clock(row['known']) < cutoff and _clock(row['origin']) < cutoff
+                    and math.isfinite(row['actual']) and math.isfinite(row['forecast'])):
+                key = row.get('day',str(row['origin']))
+                if key not in unique or _clock(row['origin']) > _clock(unique[key]['origin']):
+                    unique[key] = row
+        eligible = _independent(list(unique.values()))
+        sample = eligible[-RECENT_RESIDUALS:]
+        levels = {}
+        for coverage in (.8,.9):
+            checks = []
+            for case in eligible:
+                earlier = [r for r in eligible if _clock(r['origin']) < _clock(case['origin'])
+                           and _clock(r['known']) < _clock(case['origin'])]
+                if len(earlier) >= MIN_CALIBRATION:
+                    radius = _radius(earlier[-RECENT_RESIDUALS:],coverage)
+                    checks.append((abs(case['actual']-case['forecast']) <= radius, 2*radius))
+            checks = checks[-RECENT_RESIDUALS:]
+            measured = mean(c[0] for c in checks) if checks else None
+            lower, upper = (.70,.90) if coverage == .8 else (.80,.98)
+            ready = len(sample) >= MIN_CALIBRATION and len(checks) >= MIN_COVERAGE_TEST and lower <= measured <= upper
+            reasons = []
+            if len(sample) < MIN_CALIBRATION: reasons.append('insufficient_nonoverlapping_matured_calibration_cases')
+            if len(checks) < MIN_COVERAGE_TEST: reasons.append('insufficient_chronological_coverage_tests')
+            if measured is not None and not lower <= measured <= upper: reasons.append('empirical_coverage_outside_release_tolerance')
+            levels[str(int(coverage*100))] = dict(nominal=coverage, calibration_n=len(sample), evaluation_n=len(checks),
+                empirical_coverage=measured, mean_evaluated_width_lbp=mean(c[1] for c in checks) if checks else None,
+                radius=_radius(sample,coverage) if ready else None, status='released' if ready else 'withheld', reasons=reasons)
+        strata[kind] = dict(levels=levels, eligible_n=len(eligible), raw_distinct_targets=len(unique))
+    # Outcome evidence quality is independent of starting-price evidence. Never
+    # pool official effective targets with conditional supplier targets.
+    chosen = 'official_match'
+    if strata['official_match']['levels']['90']['radius'] is None:
+        if (strata['provisional_match']['levels']['90']['radius'] is not None
+                or strata['provisional_match']['eligible_n'] > strata['official_match']['eligible_n']):
+            chosen = 'provisional_match'
+    selected = strata[chosen]; outer=selected['levels']['90']; inner=selected['levels']['80']
+    return dict(cohort=cohort,horizon=horizon,artifact=artifact,evidence_category=chosen,
+        calibration_n=outer['calibration_n'],evaluation_n=outer['evaluation_n'],empirical_coverage=outer['empirical_coverage'],
+        minimum_calibration_n=MIN_CALIBRATION,minimum_evaluation_n=MIN_COVERAGE_TEST,
+        nominal=.9,radius=outer['radius'],radius_80=inner['radius'],levels=selected['levels'],evidence_strata=strata,
+        policy='Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals',
+        target_limitation='Supplier evaluation is conditional on recorded corroborated quotes and does not certify official publication/effective times' if chosen=='provisional_match' else 'Reviewed complete official outcome sequence')
 
 
 def _read(path):
-    db = sqlite3.connect(Path(path).resolve().as_uri() + "?mode=ro", uri=True)
+    db = sqlite_connection(path, readonly=True)
     db.row_factory = sqlite3.Row
     return closing(db)
 
@@ -242,24 +306,23 @@ def apply_live_calibration(root, ledger_path, forecasts, at):
             forecast.pop(field, None)
         forecast.update(interval=None, probabilities=None,
                         uncertainty="Waiting for a validated prediction range from live outcomes.")
-        if forecast["horizon"] != "decision_1":
-            continue
-        cohort = "provisional" if forecast["anchor_verification"] == PROVISIONAL_PRICE else "government_backed"
-        measured = calibration(cases, cohort, forecast["artifact_sha256"])
-        forecast["public_calibration"] = measured
-        radius = measured["radius"]
-        if radius is not None:
-            change = forecast["predicted_change"]
-            forecast.update(interval=[max(-forecast["base_price"], change-radius), change+radius],
-                            interval_nominal=INTERVAL_COVERAGE,
-                            uncertainty=f"90% prediction range. Walk-forward coverage {measured['empirical_coverage']:.0%} "
-                                        f"on {measured['evaluation_n']} distinct {cohort.replace('_', ' ')} outcomes.")
+        cohort = 'provisional' if forecast['anchor_verification'] == PROVISIONAL_PRICE else 'government_backed'
+        measured = calibration(cases,cohort,forecast['artifact_sha256'],forecast['horizon'],at=at)
+        forecast['public_calibration'] = measured
+        change,base = forecast['predicted_change'],forecast['base_price']
+        if measured['radius'] is not None:
+            radius = measured['radius']
+            forecast.update(interval=[max(1-base,change-radius),change+radius],interval_nominal=.9,
+                uncertainty=f"90% pointwise prediction range conditional on {measured['evidence_category']} evidence; empirical coverage {measured['empirical_coverage']:.0%} on {measured['evaluation_n']} nonoverlapping tests.")
+        if measured['radius_80'] is not None:
+            radius = measured['radius_80']
+            forecast.update(interval_80=[max(1-base,change-radius),change+radius],interval_80_nominal=.8)
 
 
 def dashboard_evidence(root, path):
     start = protocol_start(root)
     with _read(path) as db:
-        cases = _matched(db, start, now())
+        cases = [r for r in _matched(db, start, now()) if r.get("horizon", "decision_1") == "decision_1"]
         forecasts = db.execute(BATCH + FORECASTS + " ORDER BY f.id DESC", {"start": start}).fetchall()
         issued = [f for f in forecasts if f["status"] == "issued" and f["family"] == FAMILY]
         checks = []

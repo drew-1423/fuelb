@@ -55,4 +55,8 @@ def refresh(root, cfg, run_id):
             ids.append(fid)
             snapshots.append(snapshot)
     result.update(forecast_ids=ids, snapshot_ids=sorted(set(snapshots)))
+    from .state import write_json
+    write_json(root/'reports/operations/calibration_readiness.json',dict(as_of=at.isoformat(),
+        horizons={r['horizon']:r.get('public_calibration',dict(status='abstained',reasons=r['critical_missing_inputs'])) for r in result['forecasts']},
+        forecast_ids=ids))
     return result

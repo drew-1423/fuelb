@@ -8,6 +8,7 @@ import time
 
 ROOT = Path(__file__).resolve().parents[1]
 COMMANDS = {
+    "current_release_integrity": [sys.executable, "-m", "lebanon_fuel.automation.release", "verify"],
     "pytest": [sys.executable, "-m", "pytest", "Tests/fuel", "-q"],
     "structural_artifact_audit": [sys.executable, "scripts/audit_structural_artifacts.py"],
     "forecasting_artifact_audit": [sys.executable, "scripts/audit_forecasting_artifacts.py"],

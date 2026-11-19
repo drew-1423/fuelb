@@ -1,0 +1,105 @@
+{
+  "as_of": "2026-11-19T21:34:04.820664+00:00",
+  "overall": "failed",
+  "checks": {
+    "required_feeds": {
+      "status": "ok",
+      "reasons": [],
+      "recovery": null,
+      "feeds": {
+        "nyh_gasoline": {
+          "status": "ok",
+          "reasons": [],
+          "recovery": "Run the durable scheduled collector; verify provider availability.",
+          "observation_date": "2026-11-17",
+          "age_days": 2
+        },
+        "brent_spot": {
+          "status": "ok",
+          "reasons": [],
+          "recovery": "Run the durable scheduled collector; verify provider availability.",
+          "observation_date": "2026-11-17",
+          "age_days": 2
+        }
+      }
+    },
+    "optional_feeds": {
+      "status": "warning",
+      "reasons": [
+        "lbp_payment_fx",
+        "brent_futures",
+        "rbob_futures",
+        "gasoil_futures"
+      ],
+      "recovery": "Review optional feeds; they do not automatically block the active model."
+    },
+    "domestic_anchor": {
+      "status": "ok",
+      "reasons": [],
+      "recovery": null,
+      "source_date": "2026-11-17",
+      "verification_status": "archive_corroborated",
+      "age_days": 2
+    },
+    "forecast": {
+      "status": "warning",
+      "reasons": [
+        "unapproved_research"
+      ],
+      "recovery": null,
+      "issued_at": "2026-11-19T12:54:26.560420+00:00",
+      "age_hours": 8.662056001111111,
+      "tier": 2
+    },
+    "calibration": {
+      "status": "warning",
+      "reasons": [
+        "insufficient_validated_outcomes"
+      ],
+      "recovery": "Collect independent matured outcomes; do not manufacture interval widths.",
+      "horizon": "decision_1",
+      "readiness": {
+        "calibration_n": 0,
+        "cohort": "government_backed",
+        "empirical_coverage": null,
+        "evaluation_n": 0,
+        "minimum_calibration_n": 30,
+        "minimum_evaluation_n": 20,
+        "nominal": 0.9,
+        "radius": null
+      }
+    },
+    "operational_integrity": {
+      "status": "failed",
+      "reasons": [
+        "missing_original_capture_files"
+      ],
+      "recovery": "Restore only original bytes matching recorded checksums; unresolved evidence remains failed.",
+      "missing_files": 69
+    },
+    "release_verification": {
+      "status": "warning",
+      "reasons": [
+        "source_verified_commit_attestation_unbound"
+      ],
+      "recovery": "Inspect the exact-commit CI attestation and strict verification results.",
+      "source_identity": "6c4933e3a1b8fbad246ae199b8a14d3389f0280202334788ba7bcd5aa4a2f253",
+      "commit_sha": null
+    },
+    "refresh": {
+      "status": "unknown",
+      "reasons": [],
+      "recovery": "Inspect the latest refresh log."
+    }
+  },
+  "clocks": {
+    "last_refresh_attempted": "2026-11-18T18:40:43.581329+00:00",
+    "last_successful_capture": "2026-11-19T12:54:06.052875+00:00",
+    "market_observations": {
+      "nyh_gasoline": "2026-11-17",
+      "brent_spot": "2026-11-17"
+    },
+    "forecast_issued": "2026-11-19T12:54:26.560420+00:00"
+  },
+  "production_approved": false
+}
