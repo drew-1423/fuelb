@@ -1,9 +1,12 @@
 """Unit tests for regional Mediterranean benchmark proxy support and evaluation."""
 from pathlib import Path
+from contextlib import closing
 import json
 import numpy as np
 import pandas as pd
 import pytest
+
+ROOT = Path(__file__).resolve().parents[2]
 
 from lebanon_fuel.market.regional import (
     extract_mediterranean_series,
@@ -96,7 +99,7 @@ def test_med_crack_spread():
 
 def test_evaluate_regional_benchmarks_live_store():
     from lebanon_fuel.market.store import MarketStore
-    store = MarketStore(Path("."))
+    store = MarketStore(ROOT, readonly=True)
     try:
         report = evaluate_regional_benchmarks(store, start_date="2023-05-12")
         assert report["status"] == "evaluated"
@@ -127,7 +130,7 @@ def test_evaluate_regional_benchmarks_live_store():
 
 def test_generate_regional_evaluation_report(tmp_path):
     from lebanon_fuel.market.store import MarketStore
-    store = MarketStore(Path("."))
+    store = MarketStore(ROOT, readonly=True)
     try:
         report_path = generate_regional_evaluation_report(tmp_path, store=store)
         assert report_path.exists()
@@ -136,3 +139,22 @@ def test_generate_regional_evaluation_report(tmp_path):
         assert "benchmarks" in payload
     finally:
         store.close()
+
+
+@pytest.mark.parametrize('damage', ['missing', 'checksum'])
+def test_operations_audit_rejects_missing_or_modified_capture(tmp_path, damage):
+    from lebanon_fuel.market.store import MarketStore
+    from lebanon_fuel.automation.maintenance import audit
+
+    with closing(MarketStore(tmp_path)) as store:
+        capture_id = store.capture('ipt', 'https://example.org/test-capture', b'original evidence', 'text/html')
+        raw = store.db.execute('SELECT raw_path FROM captures WHERE id=?', (capture_id,)).fetchone()[0]
+    path = tmp_path / raw
+    if damage == 'missing':
+        path.unlink()
+    else:
+        path.write_bytes(b'changed evidence')
+    settings = {'storage': {'database': 'data/lebanon_fuel.sqlite'},
+                'validation': {'forecast_ledger': 'data/forecast_ledger.sqlite'}}
+    with pytest.raises(ValueError, match='Raw capture checksum mismatch'):
+        audit(tmp_path, settings)
