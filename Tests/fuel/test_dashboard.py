@@ -132,12 +132,15 @@ def test_dashboard_views_and_interactions(monkeypatch):
         row = expected.iloc[0]
         assert next(m for m in app.metric if m.label == 'Predicted price').value == f'{row.predicted_price:,.0f} LBP'
         assert any(row.forecast_label in item.value for item in app.info)
+    app.radio(key="perspective").set_value("📊 Market & Intelligence").run()
     app.radio(key="view").set_value("Price & forecasts").run()
     for label in data.HORIZONS:
         app.radio(key="price_horizon").set_value(label).run()
         app.checkbox(key="show_replay").set_value(True).run()
         assert not app.exception and app.get("plotly_chart")
     for view in ["Global markets", "Analyst report", "Model performance", "Volatility & options", "Data quality"]:
+        perspective = '📊 Market & Intelligence' if view in ('Global markets','Analyst report') else '🔬 Quantitative & Governance'
+        app.radio(key="perspective").set_value(perspective).run()
         app.radio(key="view").set_value(view).run()
         assert not app.exception and not app.error
     app.radio(key="view").set_value("Model performance").run()
@@ -145,7 +148,7 @@ def test_dashboard_views_and_interactions(monkeypatch):
     assert any(button.label == "Open the backtest chart" for button in app.button)
     assert all(metric.label != "Direction accuracy" for metric in app.metric)
     next(button for button in app.button if button.label == "Open the backtest chart").click().run()
-    assert app.radio(key="view").value == "Backtesting"
+    assert app.radio(key="quant_detail").value == "Backtesting"
     assert not app.exception and app.get("plotly_chart")
     assert all(selector.label != "Model" for selector in app.selectbox)
     app.radio(key="view").set_value("Decision timeline").run()
@@ -162,6 +165,7 @@ def test_dashboard_views_and_interactions(monkeypatch):
     monkeypatch.setattr(data, "refresh_source", lambda root, source: (False, "Source unavailable"))
     next(b for b in app.button if b.label == "Refresh selected source").click().run()
     assert any("Collection failed" in e.value for e in app.error)
+    app.radio(key="perspective").set_value("🚗 Driver Pulse").run()
     app.radio(key="view").set_value("Scenario simulator").run()
     next(b for b in app.button if b.label == "Calculate scenario").click().run()
     assert not app.exception
@@ -208,6 +212,7 @@ def test_public_dashboard_hides_legacy_uncertainty_without_live_evidence(monkeyp
     assert not any(m.label.endswith('probability') for m in app.metric)
     assert any('awaiting validated live outcomes' in c.value for c in app.caption)
     assert next(m for m in app.metric if m.label == '90% prediction interval').value == 'Awaiting live evidence'
+    app.radio(key="perspective").set_value("📊 Market & Intelligence").run()
     app.radio(key="view").set_value("Analyst report").run()
     assert not app.exception
     assert any('Directional probabilities are awaiting calibrated live evidence' in item.value for item in app.markdown)
@@ -450,3 +455,50 @@ def test_concurrent_dashboard_reads_wait_for_writer_and_checkpoint(tmp_path, jou
     finally:
         worker.join(3)
     assert not worker.is_alive() and not errors
+
+
+def test_macro_scenarios_use_exact_inputs_and_keep_missing_data_honest():
+    from lebanon_fuel.dashboard.scenarios import macro_preset
+    spike = macro_preset('Middle East Geopolitical Spike')
+    assert (spike['scenario_brent'],spike['scenario_spread'],spike['scenario_product']) == (95,18,113)
+    slump = macro_preset('Global Demand Slump')
+    assert slump['scenario_brent'] == 65 and slump['scenario_spread'] == 10
+    assert macro_preset('Currency Devaluation Shock',product=100)['scenario_fx'] == 100000
+    baseline = macro_preset('Status Quo Baseline',product=102,brent=80)
+    assert baseline['scenario_product'] == 102 and baseline['scenario_fx'] == 89500
+    with pytest.raises(ValueError,match='stored refined'):
+        macro_preset('Status Quo Baseline')
+
+
+def test_briefing_has_real_price_math_and_no_invented_publication_time():
+    import ast
+    tree = ast.parse(APP.read_text())
+    functions = [n for n in tree.body if isinstance(n,ast.FunctionDef)
+                 and n.name in ('whatsapp_briefing','_signed_usd','_forecast_limitation')]
+    scope = {'data':data,'json':json,'PROVISIONAL_PRICE':'provisional_corroborated'}
+    exec(compile(ast.Module(body=functions,type_ignores=[]),str(APP),'exec'),scope)
+    record = dict(price_lbp_20l=2343000,verification_status='archive_corroborated',source_date='2026-11-17')
+    row = pd.Series(dict(predicted_change=-31800,predicted_price=2311200,base_price=2343000,
+        scheduled_effective='2026-11-20', created_at='2026-11-19T12:00:00+00:00',
+        target_json=json.dumps({'tier':2,'percentage_change':-31800/2343000*100}),
+        probabilities_json=None,interval_low=None,interval_high=None))
+    text = scope['whatsapp_briefing'](record,row)
+    assert '2,343,000 LBP (~$26.18' in text and '2,311,200 LBP' in text
+    assert '−$0.36' in text and 'time unconfirmed' in text and '9:00' not in text
+    assert 'WAIT TO REFUEL' not in text and 'https://fuelb95.streamlit.app/' in text
+
+
+def test_released_conformal_bands_render_and_unreleased_bands_stay_hidden():
+    rows = []
+    for n in (7,14):
+        rows.append(dict(origin='2026-11-19T12:00:00+00:00',endpoint=f'2026-12-{n:02d}',
+            scheduled_effective=None,predicted_price=2300000,base_price=2343000,
+            interval_low=-80000,interval_high=20000,forecast_tier=2,forecast_label='QUANTITATIVE MODEL FORECAST',
+            target_json=json.dumps({'tier':2,'family':'G_hybrid','public_calibration':
+                {'radius':50000,'radius_80':30000,'calibration_n':60,'evaluation_n':25}})))
+    f = charts.history_chart([],pd.DataFrame(),pd.DataFrame(rows))
+    ribbons = [t for t in f.data if t.fill == 'tonexty']
+    assert len(ribbons) == 2 and all('calibrated pointwise' in t.name for t in ribbons)
+    for row in rows: row['target_json'] = json.dumps({'tier':4})
+    f = charts.history_chart([],pd.DataFrame(),pd.DataFrame(rows))
+    assert not any(t.fill=='tonexty' for t in f.data)
