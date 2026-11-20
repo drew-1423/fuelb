@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-11-20T12:50:55.964631+00:00",
+  "generated_at": "2026-11-20T18:15:07.028808+00:00",
   "as_of_beirut": "2026-11-20",
   "timezone": "Asia/Beirut",
   "ledger_unique_dates": 1373,
   "status_counts": {
-    "supplier_observed": 457,
+    "supplier_observed": 456,
     "document_verified": 4,
     "archive_corroborated": 810,
     "government_archive": 58,
     "conflict": 42,
-    "provisional_corroborated": 2
+    "provisional_corroborated": 3
   },
   "earliest_verified_archive_or_document": "2010-10-27",
   "latest_verified_archive_or_document": "2026-11-17",
@@ -140,8 +140,8 @@
     "duplicate_date_source_price": 8,
     "invalid_price": 1
   },
-  "missing_publication_timestamp_observations": 3201,
-  "unknown_effective_date_observations": 3197,
+  "missing_publication_timestamp_observations": 3203,
+  "unknown_effective_date_observations": 3199,
   "gap_candidates": 169,
   "cross_source_absent_dates": 371,
   "official_ids_on_multiple_dates": {
@@ -288,6 +288,48 @@
           "parsed_rows": 17,
           "new_observations": 17,
           "capture_id": 398
+        }
+      }
+    },
+    "thefuelprice": {
+      "unique_source_observations": 1,
+      "valid_unique_dates": 1,
+      "earliest_source_date": "2026-11-17",
+      "latest_source_date": "2026-11-17",
+      "age_days": 3,
+      "stale": false,
+      "invalid_observations": 0,
+      "within_source_conflict_dates": [],
+      "duplicate_date_extra_observations": 0,
+      "exact_duplicate_rows_in_captures": 0,
+      "last_successful_run": {
+        "id": 164,
+        "finished_at": "2026-11-20T18:14:53.997521+00:00",
+        "details": {
+          "parsed_rows": 1,
+          "new_observations": 1,
+          "capture_id": 632
+        }
+      }
+    },
+    "totalenergies": {
+      "unique_source_observations": 1,
+      "valid_unique_dates": 1,
+      "earliest_source_date": "2026-11-20",
+      "latest_source_date": "2026-11-20",
+      "age_days": 0,
+      "stale": false,
+      "invalid_observations": 0,
+      "within_source_conflict_dates": [],
+      "duplicate_date_extra_observations": 0,
+      "exact_duplicate_rows_in_captures": 0,
+      "last_successful_run": {
+        "id": 163,
+        "finished_at": "2026-11-20T18:14:45.952953+00:00",
+        "details": {
+          "parsed_rows": 1,
+          "new_observations": 1,
+          "capture_id": 630
         }
       }
     }
@@ -1580,6 +1622,22 @@
       "finished_at": "2026-11-20T12:50:55.544516+00:00",
       "status": "success",
       "details": "{\"parsed_rows\": 9, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 163,
+      "source_id": "totalenergies",
+      "started_at": "2026-11-20T18:14:38.494935+00:00",
+      "finished_at": "2026-11-20T18:14:45.952953+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1, \"new_observations\": 1, \"capture_id\": 630}"
+    },
+    {
+      "id": 164,
+      "source_id": "thefuelprice",
+      "started_at": "2026-11-20T18:14:49.858830+00:00",
+      "finished_at": "2026-11-20T18:14:53.997521+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1, \"new_observations\": 1, \"capture_id\": 632}"
     }
   ],
   "readiness": "Adequate for source reconciliation and exploratory target analysis. Not ready for an institutional as-of forecasting backtest: effective/release times, unresolved conflicts, coverage and regimes need review."
