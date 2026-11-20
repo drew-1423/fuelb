@@ -146,7 +146,7 @@ def briefing(current, forecast, settings, *, at=None):
         f"Change: {change:+,.0f} LBP (~{'−' if change<0 else '+'}${abs(change)/data.DISPLAY_FX:.2f} USD; {change/forecast['base_price']:+.2%}) from {forecast['base_price']:,.0f} LBP",
         f"Issued: {data.beirut_time(status['issued'])}", f"Freshness: {status['status']} · expires {data.beirut_time(status['expires'])}",
         'Research estimate; production approval withheld.' if spec.get('tier')!=1 else 'Validated model; outcomes remain uncertain.',
-        'No released prediction range for this forecast.' if not released_bounds(forecast,90) else 'A released pointwise prediction range is saved with this forecast.',
+        'No released prediction range for this forecast.' if not any(released_bounds(forecast,level) for level in (80,90)) else 'A released pointwise prediction range is saved with this forecast; see its exact supported level at the link.',
         '💡 The change is conditional, not a guarantee. Check the posted station price before filling.',
         'USD display equivalents assume 89,500 LBP/USD.', '🔗 Exact saved forecast: '+permalink(forecast.get('record_hash'))]
     return '\n'.join(lines)

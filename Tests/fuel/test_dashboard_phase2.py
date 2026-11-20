@@ -101,6 +101,19 @@ def test_alerts_are_deduplicated_and_expired_thresholds_do_not_prompt_action():
     assert 'threshold' not in {r['kind'] for r in c} and 'unavailable' in {r['kind'] for r in c}
 
 
+def test_an_eighty_percent_only_release_is_not_reported_as_no_range():
+    from streamlit.testing.v1 import AppTest
+    row=forecast_fixture('decision_1');spec=json.loads(row['target_json'])
+    spec['public_calibration']['levels']['90']['status']='withheld';spec['public_calibration']['radius']=None
+    row['target_json']=json.dumps(spec);row['interval_low']=row['interval_high']=None
+    source='from lebanon_fuel.dashboard.driver import range_status\nrange_status('+repr(row)+')'
+    app=AppTest.from_string(source).run()
+    assert not app.exception and not app.info
+    assert any('80% pointwise prediction range' in item.value for item in app.markdown)
+    text=ux.briefing(None,row,{'forecasting':{'maximum_forecast_age_hours':12}})
+    assert 'No released prediction range' not in text
+
+
 def test_forecast_link_is_exact_and_accessible_without_current_feeds(monkeypatch):
     from streamlit.testing.v1 import AppTest
     settings=data.config(ROOT);_,path=data.database_paths(ROOT,settings)

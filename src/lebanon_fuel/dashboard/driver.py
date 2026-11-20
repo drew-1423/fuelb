@@ -49,9 +49,12 @@ def health_strip(health,row):
 
 def range_status(row):
     progress=ux.readiness(row)
-    if row is not None and ux.released_bounds(row,90):
-        low,high=ux.released_bounds(row,90)
-        st.write(f'90% pointwise prediction range · **{low:,.0f}–{high:,.0f} LBP / 20 L**')
+    available=[(level,ux.released_bounds(row,level)) for level in (80,90)] if row is not None else []
+    available=[(level,bounds) for level,bounds in available if bounds]
+    if available:
+        for level,(low,high) in available:
+            st.write(f'{level}% pointwise prediction range · **{low:,.0f}–{high:,.0f} LBP / 20 L**')
+        if len(available)==1:st.caption('The other interval level remains withheld; no range is inferred by scaling this one.')
     else:
         st.info(f'Prediction range not ready: {progress["cases"]} matched cases and {progress["tests"]} chronological range tests for this horizon, model version and starting-price group. At least {progress["minimum_cases"]} cases and {progress["minimum_tests"]} tests are required; measured coverage must also pass.')
 

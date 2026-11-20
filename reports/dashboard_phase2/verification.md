@@ -22,7 +22,7 @@ In-app alerts cover recorded corroborated price changes, research-estimate thres
 
 ## Actual local verification
 
-The complete fuel suite passed with **349 tests and zero pytest warnings** after the final changes. `scripts/verify_production.py` runs the suite together with release, financial artifact, ledger replay and dependency checks. Source/model release identity, structural artifact audit, forecasting artifact audit, validation replay/hash-chain audit and dependency compatibility passed. Strict operations integrity failed on the missing original captures, so the overall verifier correctly returned **exit code 1**. Exact outputs are retained in `reports/operations/final_verification.json`.
+The complete fuel suite passed with **350 tests and zero pytest warnings** after the final changes. `scripts/verify_production.py` runs the suite together with release, financial artifact, ledger replay and dependency checks. Source/model release identity, structural artifact audit, forecasting artifact audit, validation replay/hash-chain audit and dependency compatibility passed. Strict operations integrity failed on the missing original captures, so the overall verifier correctly returned **exit code 1**. Exact outputs are retained in `reports/operations/final_verification.json`.
 
 An existing feed-age fixture was corrected to subtract eight days from the Beirut calendar date, matching the unchanged production gate. Before that fix it failed during the period when Beirut had crossed midnight and UTC had not. No forecasting gate or audit assertion was weakened.
 
