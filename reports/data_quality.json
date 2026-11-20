@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T00:38:38.346896+00:00",
+  "generated_at": "2026-11-20T06:54:18.087930+00:00",
   "as_of_beirut": "2026-11-20",
   "timezone": "Asia/Beirut",
   "ledger_unique_dates": 1372,
@@ -170,14 +170,14 @@
         "2025-09-30"
       ],
       "duplicate_date_extra_observations": 4,
-      "exact_duplicate_rows_in_captures": 30,
+      "exact_duplicate_rows_in_captures": 31,
       "last_successful_run": {
-        "id": 157,
-        "finished_at": "2026-11-20T00:38:27.151657+00:00",
+        "id": 159,
+        "finished_at": "2026-11-20T06:54:06.722410+00:00",
         "details": {
           "parsed_rows": 1314,
           "new_observations": 0,
-          "capture_id": 604
+          "capture_id": 613
         }
       }
     },
@@ -240,8 +240,8 @@
       "duplicate_date_extra_observations": 31,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 158,
-        "finished_at": "2026-11-20T00:38:37.787083+00:00",
+        "id": 160,
+        "finished_at": "2026-11-20T06:54:17.632467+00:00",
         "details": {
           "parsed_rows": 9,
           "new_observations": 0,
@@ -1546,6 +1546,22 @@
       "source_id": "ministry",
       "started_at": "2026-11-20T00:38:27.553732+00:00",
       "finished_at": "2026-11-20T00:38:37.787083+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 9, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 159,
+      "source_id": "ipt",
+      "started_at": "2026-11-20T06:53:49.140227+00:00",
+      "finished_at": "2026-11-20T06:54:06.722410+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1314, \"new_observations\": 0, \"capture_id\": 613}"
+    },
+    {
+      "id": 160,
+      "source_id": "ministry",
+      "started_at": "2026-11-20T06:54:07.057462+00:00",
+      "finished_at": "2026-11-20T06:54:17.632467+00:00",
       "status": "success",
       "details": "{\"parsed_rows\": 9, \"new_observations\": 0, \"pages\": 1}"
     }

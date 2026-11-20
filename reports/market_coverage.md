@@ -1,6 +1,6 @@
 # International market coverage and quality
 
-Generated for 2026-11-20T00:38:39.268849+00:00. Counts below are actual stored observations, not estimates.
+Generated for 2026-11-20T06:54:18.105088+00:00. Counts below are actual stored observations, not estimates.
 
 | Series | Unique valid dates | Earliest | Latest | Latest normalized value | Stale |
 | --- | ---: | --- | --- | --- | --- |
@@ -16,7 +16,7 @@ Generated for 2026-11-20T00:38:39.268849+00:00. Counts below are actual stored o
 | brent_futures | 0 | None | None | unknown USD/bbl | True |
 | rbob_futures | 0 | None | None | unknown USD/bbl | True |
 | gasoil_futures | 0 | None | None | unknown USD/bbl | True |
-| cboe_ovx | 4912 | 2007-05-10 | 2026-11-12 | 51.72 percent_annualized | False |
+| cboe_ovx | 4912 | 2007-05-10 | 2026-11-12 | 51.72 percent_annualized | True |
 
 ## Latest collection outcomes
 

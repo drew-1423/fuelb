@@ -1,6 +1,6 @@
 # Lebanon gasoline 95 analyst report
 
-Generated 2026-11-20T00:39:09.516864+00:00
+Generated 2026-11-20T06:54:43.513602+00:00
 
 ## Executive summary
 
@@ -43,7 +43,7 @@ Selected G_hybrid measured MAE 366 LBP / 20 L, direction accuracy 100.0%, n=2 on
 - Yahoo BZ=F Brent last-day financial futures (NYMEX): no_available_observation.
 - Yahoo RB=F NYMEX RBOB gasoline futures: no_available_observation.
 - Yahoo HO=F NYMEX NY Harbor ULSD / heating oil futures: no_available_observation.
-- cboe_ovx: absolute seven-day move exceeds the configured review threshold.
+- Cboe Crude Oil ETF Volatility Index (OVX): stale.
 - Current pricing policy needs a dated, evidence-backed human review.
 - No numerical prospective forecasts have verified settled outcomes. Live accuracy is unavailable.
 - Part 6 rejects production approval for all selected horizons.
