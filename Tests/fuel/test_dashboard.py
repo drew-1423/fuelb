@@ -118,7 +118,7 @@ def test_dashboard_views_and_interactions(monkeypatch):
     monkeypatch.setenv("LEBANON_FUEL_ADMIN_PASSCODE", "test-owner-passcode")
     app = AppTest.from_file(str(APP), default_timeout=20).run()
     assert not app.exception
-    assert app.metric[0].label == "Last government-archive price"
+    assert app.metric[0].label == "Current recorded price"
     settings = data.config(ROOT)
     db, ledger = data.database_paths(ROOT, settings)
     latest_record = data.market_and_prices(ROOT, db)['prices'][-1]
@@ -128,11 +128,11 @@ def test_dashboard_views_and_interactions(monkeypatch):
                                    'decision_1', latest_record)
     if expected.empty:
         assert any('No current absolute-price forecast' in warning.value for warning in app.warning)
-        assert not any(m.label == 'Predicted price' for m in app.metric)
+        assert next(m for m in app.metric if m.label == 'Predicted price').value == 'Awaiting eligible inputs'
     else:
         row = expected.iloc[0]
         assert next(m for m in app.metric if m.label == 'Predicted price').value == f'{row.predicted_price:,.0f} LBP'
-        assert any(row.forecast_label in item.value for item in app.info)
+        assert any("Hybrid" in item.value for item in app.info)
     app.radio(key="perspective").set_value("📊 Market & Intelligence").run()
     app.radio(key="view").set_value("Price & forecasts").run()
     for label in data.HORIZONS:
@@ -168,6 +168,7 @@ def test_dashboard_views_and_interactions(monkeypatch):
     assert any("Collection failed" in e.value for e in app.error)
     app.radio(key="perspective").set_value("🚗 Driver Pulse").run()
     app.radio(key="view").set_value("Scenario simulator").run()
+    app.radio(key='scenario_calculation_mode').set_value('Illustrative May 2025 cost reconstruction').run()
     next(b for b in app.button if b.label == "Calculate scenario").click().run()
     assert not app.exception
     assert any("Hypothetical price" in m.label for m in app.metric)
@@ -211,8 +212,8 @@ def test_public_dashboard_hides_legacy_uncertainty_without_live_evidence(monkeyp
     app = AppTest.from_file(str(APP), default_timeout=20).run()
     assert not app.exception
     assert not any(m.label.endswith('probability') for m in app.metric)
-    assert any('awaiting validated live outcomes' in c.value for c in app.caption)
-    assert next(m for m in app.metric if m.label == '90% prediction interval').value == 'Awaiting live evidence'
+    assert any('Prediction range not ready' in c.value for c in app.info)
+    assert not any('98.2%' in c.value for c in app.markdown)
     app.radio(key="perspective").set_value("📊 Market & Intelligence").run()
     app.radio(key="view").set_value("Analyst report").run()
     assert not app.exception
@@ -293,11 +294,10 @@ def test_independent_forecast_markers_keep_each_target_once():
 def test_single_supported_interval_draws_only_target_whisker():
     from lebanon_fuel.dashboard.charts import history_chart
 
-    rows = pd.DataFrame([
-        dict(endpoint=None, scheduled_effective='2026-11-13', origin='2026-11-12T00:00:00+00:00',
-             predicted_price=2400000, base_price=2445000, interval_low=-65000, interval_high=-15000,
-             forecast_tier=2, forecast_label='QUANTITATIVE MODEL FORECAST'),
-    ])
+    from test_dashboard_phase2 import forecast_fixture
+    item=forecast_fixture('decision_1')
+    item.update(predicted_price=2400000,base_price=2445000,interval_low=-65000,interval_high=-15000)
+    rows=pd.DataFrame([item])
     fig = history_chart([], pd.DataFrame(), rows)
     trace = fig.data[-1]
     assert list(trace.y) == [2400000]
@@ -472,34 +472,24 @@ def test_macro_scenarios_use_exact_inputs_and_keep_missing_data_honest():
 
 
 def test_briefing_has_real_price_math_and_no_invented_publication_time():
-    import ast
-    tree = ast.parse(APP.read_text())
-    functions = [n for n in tree.body if isinstance(n,ast.FunctionDef)
-                 and n.name in ('whatsapp_briefing','_signed_usd','_forecast_limitation')]
-    scope = {'data':data,'json':json,'PROVISIONAL_PRICE':'provisional_corroborated'}
-    exec(compile(ast.Module(body=functions,type_ignores=[]),str(APP),'exec'),scope)
-    record = dict(price_lbp_20l=2343000,verification_status='archive_corroborated',source_date='2026-11-17')
-    row = pd.Series(dict(predicted_change=-31800,predicted_price=2311200,base_price=2343000,
-        scheduled_effective='2026-11-20', created_at='2026-11-19T12:00:00+00:00',
-        target_json=json.dumps({'tier':2,'percentage_change':-31800/2343000*100}),
-        probabilities_json=None,interval_low=None,interval_high=None))
-    text = scope['whatsapp_briefing'](record,row)
+    from lebanon_fuel.dashboard.experience import briefing
+    record=dict(price_lbp_20l=2343000,verification_status='archive_corroborated',source_date='2026-11-17')
+    row=dict(predicted_change=-31800,predicted_price=2311200,base_price=2343000,origin='2026-11-19T12:00:00+00:00',
+        scheduled_effective='2026-11-20',created_at='2026-11-19T12:00:00+00:00',record_hash='a'*64,
+        target_json=json.dumps({'tier':2}),probabilities_json=None,interval_low=None,interval_high=None)
+    text=briefing(record,row,data.config(ROOT))
     assert '2,343,000 LBP (~$26.18' in text and '2,311,200 LBP' in text
     assert '−$0.36' in text and 'time unconfirmed' in text and '9:00' not in text
-    assert 'WAIT TO REFUEL' not in text and 'https://fuelb95.streamlit.app/' in text
+    assert 'WAIT TO REFUEL' not in text and '?forecast='+('a'*64) in text
+    assert 'expires' in text and 'production approval withheld' in text
 
 
 def test_released_conformal_bands_render_and_unreleased_bands_stay_hidden():
-    rows = []
-    for n in (7,14):
-        rows.append(dict(origin='2026-11-19T12:00:00+00:00',endpoint=f'2026-12-{n:02d}',
-            scheduled_effective=None,predicted_price=2300000,base_price=2343000,
-            interval_low=-80000,interval_high=20000,forecast_tier=2,forecast_label='QUANTITATIVE MODEL FORECAST',
-            target_json=json.dumps({'tier':2,'family':'G_hybrid','public_calibration':
-                {'radius':50000,'radius_80':30000,'calibration_n':60,'evaluation_n':25}})))
-    f = charts.history_chart([],pd.DataFrame(),pd.DataFrame(rows))
-    ribbons = [t for t in f.data if t.fill == 'tonexty']
-    assert len(ribbons) == 2 and all('calibrated pointwise' in t.name for t in ribbons)
-    for row in rows: row['target_json'] = json.dumps({'tier':4})
-    f = charts.history_chart([],pd.DataFrame(),pd.DataFrame(rows))
+    from test_dashboard_phase2 import forecast_fixture
+    rows=pd.DataFrame([forecast_fixture('day_7'),forecast_fixture('day_14')])
+    f=charts.history_chart([],pd.DataFrame(),rows)
+    ribbons=[t for t in f.data if t.fill=='tonexty']
+    assert len(ribbons)==2 and all('calibrated pointwise' in t.name for t in ribbons)
+    rows['target_json']=json.dumps({'tier':4})
+    f=charts.history_chart([],pd.DataFrame(),rows)
     assert not any(t.fill=='tonexty' for t in f.data)
