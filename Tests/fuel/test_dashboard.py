@@ -168,6 +168,7 @@ def test_dashboard_views_and_interactions(monkeypatch):
     assert any("Collection failed" in e.value for e in app.error)
     app.radio(key="perspective").set_value("🚗 Driver Pulse").run()
     app.radio(key="view").set_value("Scenario simulator").run()
+    app.radio(key='scenario_calculation_mode').set_value('Illustrative May 2025 cost reconstruction').run()
     next(b for b in app.button if b.label == "Calculate scenario").click().run()
     assert not app.exception
     assert any("Hypothetical price" in m.label for m in app.metric)
