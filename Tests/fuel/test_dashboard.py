@@ -128,7 +128,7 @@ def test_dashboard_views_and_interactions(monkeypatch):
                                    'decision_1', latest_record)
     if expected.empty:
         assert any('No current absolute-price forecast' in warning.value for warning in app.warning)
-        assert not any(m.label == 'Predicted price' for m in app.metric)
+        assert next(m for m in app.metric if m.label == 'Predicted price').value == 'Awaiting eligible inputs'
     else:
         row = expected.iloc[0]
         assert next(m for m in app.metric if m.label == 'Predicted price').value == f'{row.predicted_price:,.0f} LBP'
