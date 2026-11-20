@@ -434,7 +434,9 @@ def evidence(row):
 
 def _forecast_limitation(spec):
     if spec.get("anchor_verification") == PROVISIONAL_PRICE:
-        return "Based on matching IPT and Taqtek prices. Ministry confirmation is pending."
+        sources = {item.get('id') for item in spec.get('anchor_sources', [])}
+        other = 'TotalEnergies' if 'totalenergies' in sources else 'Taqtek' if 'taqtek' in sources else 'another dated source'
+        return f"Based on matching IPT and {other} prices. Ministry confirmation is pending."
     if spec.get("tier") == 4:
         return "Live inputs are unavailable for a model forecast. The estimate uses a simple price baseline."
     if spec.get("lagged_market_inputs"):
@@ -907,7 +909,7 @@ def quality_view(snap):
             st.rerun()
     st.subheader("Source refresh")
     st.caption(f"Last successful capture · {data.beirut_time(snap['latest_capture'])}. Observation dates determine freshness.")
-    sources = {"ipt": "IPT", "ministry": "Ministry of Energy and Water", "taqtek": "Taqtek",
+    sources = {"ipt": "IPT", "totalenergies": "TotalEnergies", "ministry": "Ministry of Energy and Water", "taqtek": "Taqtek", "thefuelprice": "TheFuelPrice",
                "eia": "US Energy Information Administration", "ec": "European Commission", "fed": "Federal Reserve"}
     source = st.selectbox("Public source", list(sources), format_func=sources.get)
     if st.button("Refresh selected source", type="primary"):

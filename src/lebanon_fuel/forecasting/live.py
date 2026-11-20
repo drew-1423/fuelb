@@ -10,7 +10,7 @@ import sqlite3
 import numpy as np
 import pandas as pd
 
-from lebanon_fuel.domain import BEIRUT, VERIFIED, PROVISIONAL_PRICE
+from lebanon_fuel.domain import BEIRUT, VERIFIED, PROVISIONAL_PRICE, supplier_agreement
 from lebanon_fuel.market.catalog import SERIES
 from lebanon_fuel.market.store import MarketStore, close_availability
 from lebanon_fuel.structural.engine import price
@@ -62,8 +62,8 @@ def anchor_check(records, at, maximum_age, *, allow_provisional=False):
         return None, 'The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision.'
     if latest['verification_status'] == PROVISIONAL_PRICE:
         sources = {row['id'] for row in latest.get('corroborating_sources', [])}
-        if not {'ipt', 'taqtek'} <= sources:
-            return None, 'The provisional price is missing matching IPT and Taqtek evidence.'
+        if not supplier_agreement(sources):
+            return None, 'The provisional price needs matching IPT and a second dated source.'
     age = (at.astimezone(BEIRUT).date() - date.fromisoformat(latest['source_date'])).days
     if age < 0 or age > maximum_age:
         return None, 'The latest verified price is stale or future-dated. Retrieve a current ministry price and reconcile it with IPT.'
@@ -407,13 +407,13 @@ def generate(root, settings, config, decision, records, histories, at):
         if output['tier'] == 4:
             output['interval']=output['probabilities']=None
             if provisional:
-                output['methodology'] = 'Persistence of the latest price corroborated by IPT and Taqtek.'
+                output['methodology'] = 'Persistence of the latest price supported by matching dated sources.'
             output['uncertainty']='No calibrated prediction interval or directional probabilities available. Historical MAE describes the cited research sample only.'
         if provisional:
             output['label'] += ' · PROVISIONAL PRICE ANCHOR'
             output['anchor_sources'] = anchor.get('corroborating_sources', [])
             output['critical_missing_inputs'] = [
-                'IPT and Taqtek agree on the provisional price. Ministry confirmation and effective timing are pending.',
+                'IPT and another dated source agree on the provisional price. Ministry confirmation and effective timing are pending.',
                 *output['critical_missing_inputs']]
             for key in ('interval', 'interval_nominal', 'interval_80', 'interval_80_nominal', 'probabilities'):
                 output.pop(key, None)

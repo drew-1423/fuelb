@@ -97,7 +97,9 @@ def overview(root,snap,settings,row,refresh_controls):
                 st.write(data.STATUS.get(current['verification_status'],'Evidence under review'))
                 st.caption(f'Observed {current["source_date"]} · {current["age_days"]} days old')
                 if current['verification_status']==data.PROVISIONAL_PRICE:
-                    st.caption('IPT and Taqtek report the same price. Ministry confirmation and effective timing remain pending.')
+                    matches = {item['id'] for item in current.get('corroborating_sources', [])}
+                    partner = 'TotalEnergies' if 'totalenergies' in matches else 'Taqtek' if 'taqtek' in matches else 'another source'
+                    st.caption(f'IPT and {partner} report the same dated price. Ministry confirmation and effective timing remain pending.')
                 else:st.caption('Recorded source date; an official effective time may be undocumented.')
             else:
                 st.warning(reason)

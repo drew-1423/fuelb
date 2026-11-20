@@ -13,10 +13,18 @@ SOURCES = {
     "ministry": (2, "ministry"),
     "ipt": (3, "ipt"),
     "taqtek": (4, "ministry_derived"),
+    "totalenergies": (4, "supplier"),
     "manual": (5, "manual_unverified"),
+    "thefuelprice": (6, "supplementary_archive"),
 }
 PROVISIONAL_PRICE = "provisional_corroborated"
 VERIFIED = {"document_verified", "archive_corroborated"}
+
+
+def supplier_agreement(sources):
+    """A dated IPT quote needs a matching independent supplier or archive."""
+    ids = set(sources)
+    return "ipt" in ids and bool(ids & {"totalenergies", "taqtek"})
 
 
 def now_utc():

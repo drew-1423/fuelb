@@ -57,9 +57,24 @@ def test_provisional_all_horizons_need_actual_path_and_endpoint_evidence(horizon
         validate(forecast,outcome)
         payload['sources'][0]['price_lbp_20l']+=1
         outcome['payload_json']=json.dumps(payload)
-        with pytest.raises(ValueError,match='IPT and Taqtek'):
+        with pytest.raises(ValueError,match='IPT and independent-source'):
             validate(forecast,outcome)
     finally:source.db.close()
+
+
+def test_totalenergies_pair_can_score_a_later_provisional_update():
+    forecast, records, source = supplier_fixture('decision_1')
+    try:
+        source.db.execute("UPDATE observations SET source_id='totalenergies' WHERE source_id='taqtek'")
+        status, row, payload = select_target(forecast, records, sorted(records), source)
+        assert status == 'candidate'
+        assert {s['source_id'] for s in payload['sources']} == {'ipt', 'totalenergies'}
+        outcome = dict(payload_json=json.dumps(payload), verification_status='supplier_agreement',
+                       decision_key='supplier:' + row['source_date'], price=row['price_lbp_20l'],
+                       available_at=max(s['first_retrieved_at'] for s in payload['sources']))
+        validate(forecast, outcome)
+    finally:
+        source.db.close()
 
 
 def test_missing_calendar_witness_and_late_capture_do_not_become_zero_changes():

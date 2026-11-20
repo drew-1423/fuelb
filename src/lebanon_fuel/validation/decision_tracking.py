@@ -25,13 +25,13 @@ RECENT_RESIDUALS = 60
 ATTEMPT_CHANNEL = "supplier_next_update"
 SUPPLIER_STATUS = "supplier_match"
 PUBLICATION_STATUS = {
-    "supplier_match": "IPT and Taqtek agree. Official review pending.",
+    "supplier_match": "IPT and another dated source agree. Official review pending.",
     "no_new_record": "Waiting for a newer dated price.",
     "record_may_precede_forecast": "The first new record could have been published before issuance.",
     "anchor_revised": "The starting price was revised or disputed.",
     "gap": "More than seven days separate the starting price and next record.",
     "conflict": "The next recorded price is disputed.",
-    "unconfirmed": "The next record is waiting for matching IPT and Taqtek prices.",
+    "unconfirmed": "The next record is waiting for matching dated price sources.",
     "not_matured": "The calendar endpoint has not matured yet.",
     "missing_calendar_witness": "A later corroborated record is required to confirm the endpoint observation.",
     "missing_endpoint_observation": "No corroborated observation exists on the calendar endpoint date.",
@@ -118,7 +118,7 @@ def supplier_proof(source, record):
         return None
     rows = source.db.execute("""
         SELECT id, source_id, price_lbp_20l, source_url, first_retrieved_at
-        FROM observations WHERE source_date=? AND is_valid=1 AND source_id IN ('ipt','taqtek')
+        FROM observations WHERE source_date=? AND is_valid=1 AND source_id IN ('ipt','totalenergies','taqtek')
         ORDER BY first_retrieved_at, id
     """, (record["source_date"],)).fetchall()
     selected = {}
@@ -126,7 +126,8 @@ def supplier_proof(source, record):
         if row["price_lbp_20l"] != record["price_lbp_20l"]:
             return None
         selected.setdefault(row["source_id"], dict(row))
-    return list(selected.values()) if set(selected) == {"ipt", "taqtek"} else None
+    partner = "totalenergies" if "totalenergies" in selected else "taqtek"
+    return [selected["ipt"], selected[partner]] if "ipt" in selected and partner in selected else None
 
 
 def settle_supplier_updates(root, cfg, source):

@@ -13,6 +13,9 @@ from lebanon_fuel.domain import Observation, UNIT
 IPT_URL="https://www.iptgroup.com.lb/ipt/en/our-stations/fuel-prices"
 MINISTRY_URL="https://energyandwater.gov.lb/ar/prices"
 TAQTEK_URL="https://taqteklb.com/en/fuel/"
+TOTAL_URL="https://totalenergies.com.lb/en/service-station/fuels/fuel-prices"
+TOTAL_BOARD_URL="https://pricing.totalenergies.com.lb/fuelprice/"
+THEFUELPRICE_URL="https://www.thefuelprice.com/Flb/en"
 
 
 def soup(raw):
@@ -183,6 +186,67 @@ def parse_taqtek(raw):
 def collect_taqtek(client):
     result=client.fetch(TAQTEK_URL)
     return client.store.ingest(result.capture_id,parse_taqtek(result.response.content))
+
+
+def parse_totalenergies(raw):
+    """Read the settled SP95 value, never the JavaScript count-up placeholder."""
+    doc=soup(raw)
+    dated=doc.select_one('.divToday')
+    unit=next((node for node in doc.select('.divDate')
+               if node.get_text(' ',strip=True)=='Price in LBP for 20L'),None)
+    if not dated or not unit:
+        raise ValueError('TotalEnergies dated 20 L price header missing')
+    label=dated.get_text(' ',strip=True)
+    if not re.fullmatch(r'\d{1,2}/\d{1,2}/\d{4}',label):
+        raise ValueError('TotalEnergies price date missing or changed')
+    day=datetime.strptime(label,'%d/%m/%Y').date().isoformat()
+    matches=[row for row in doc.select('tr') if row.select_one('.P1')
+             and row.select_one('.P1').get_text(' ',strip=True)=='SP95']
+    if len(matches)!=1:
+        raise ValueError('TotalEnergies SP95 row missing or ambiguous')
+    values=matches[0].select('div[id^="v"][style*="display:none"]')
+    if len(values)!=1 or not re.fullmatch(r'\d+',values[0].get_text(strip=True)):
+        raise ValueError('TotalEnergies settled SP95 value missing or changed')
+    raw_row={'date_label':label,'unit_label':unit.get_text(' ',strip=True),
+             'fuel':'SP95','settled_price':values[0].get_text(strip=True),
+             'html':str(matches[0])}
+    yield Observation('totalenergies',day,raw_row['settled_price'],TOTAL_BOARD_URL,raw_row,'SP95')
+
+
+def collect_totalenergies(client):
+    page=client.fetch(TOTAL_URL)
+    iframes=[urljoin(str(page.response.url),tag['src']) for tag in soup(page.response.content).select('iframe[src]')]
+    if TOTAL_BOARD_URL not in iframes:
+        raise ValueError('TotalEnergies public price iframe changed; review before collecting')
+    board=client.fetch(TOTAL_BOARD_URL)
+    return client.store.ingest(board.capture_id,parse_totalenergies(board.response.content))
+
+
+def parse_thefuelprice(raw):
+    """Supplementary current card only; the site's historical sequence has gaps."""
+    doc=soup(raw)
+    section=doc.select_one('#fuel_prices_today')
+    if not section or not re.search(r'A gallon contains 20 liters',section.get_text(' ',strip=True),re.I):
+        raise ValueError('TheFuelPrice 20 L unit statement missing')
+    rows=[row for row in section.select('table tbody tr')
+          if row.select_one('td') and row.select_one('td').get_text(' ',strip=True)=='Gasoline 95']
+    if len(rows)!=1:
+        raise ValueError('TheFuelPrice current gasoline 95 row missing or ambiguous')
+    cells=[cell.get_text(' ',strip=True) for cell in rows[0].select('td')]
+    if len(cells)!=5 or cells[2]!='Gallon':
+        raise ValueError('TheFuelPrice gasoline 95 table schema or unit changed')
+    try:
+        day=datetime.strptime(cells[4],'%d %B %Y').date().isoformat()
+    except ValueError as exc:
+        raise ValueError('TheFuelPrice starting date missing or changed') from exc
+    yield Observation('thefuelprice',day,cells[1],THEFUELPRICE_URL,
+                      {'cells':cells,'html':str(rows[0]),'unit_explanation':'A gallon contains 20 liters'},'gasoline95',
+                      date_role='source_label')
+
+
+def collect_thefuelprice(client):
+    page=client.fetch(THEFUELPRICE_URL)
+    return client.store.ingest(page.capture_id,parse_thefuelprice(page.response.content))
 
 
 def parse_manual(raw, source='manual'):

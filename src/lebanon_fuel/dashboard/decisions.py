@@ -39,7 +39,7 @@ def performance(root, ledger):
             continue
         rows = []
         for cohort, label in (("government_backed", "Government-backed starting price"),
-                              ("provisional", "IPT and Taqtek starting price")):
+                              ("provisional", "Matching dated supplier starting price")):
             matches = [row for row in sample if row["cohort"] == cohort]
             if not matches:
                 continue

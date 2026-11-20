@@ -9,7 +9,7 @@ on:
         description: Source to refresh
         type: choice
         default: all
-        options: [all, ipt, ministry, taqtek, eia, ec, fed]
+        options: [all, ipt, totalenergies, ministry, taqtek, thefuelprice, eia, ec, fed]
 
 permissions:
   contents: write

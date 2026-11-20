@@ -3,7 +3,7 @@ from copy import deepcopy
 from datetime import datetime, timezone
 from decimal import Decimal
 
-from lebanon_fuel.domain import BEIRUT
+from lebanon_fuel.domain import BEIRUT, supplier_agreement
 from lebanon_fuel.structural.engine import parameters, price
 
 
@@ -85,7 +85,7 @@ def anchored_simulate(template, *, anchor, baseline_inputs, scenario_inputs, dis
     if anchor.get('verification_status') not in VERIFIED | {PROVISIONAL_PRICE}:
         raise ValueError('Scenario anchor must be verified or supplier-corroborated')
     if anchor['verification_status'] == PROVISIONAL_PRICE:
-        if not {'ipt','taqtek'} <= {r['id'] for r in anchor.get('corroborating_sources',[])}:
+        if not supplier_agreement(r['id'] for r in anchor.get('corroborating_sources',[])):
             raise ValueError('Provisional anchor needs both supplier sources')
     age = (now.astimezone(BEIRUT).date()-date.fromisoformat(anchor['source_date'])).days
     if not 0 <= age <= maximum_anchor_age_days:

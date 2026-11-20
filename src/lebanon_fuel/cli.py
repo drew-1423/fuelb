@@ -9,7 +9,8 @@ import tomllib
 from lebanon_fuel.domain import BEIRUT, now_utc
 from lebanon_fuel.storage.database import Store
 from lebanon_fuel.ingestion.http import PublicClient
-from lebanon_fuel.ingestion.adapters import (collect_ipt, collect_ministry, collect_taqtek, parse_ipt, parse_manual, parse_ministry, parse_taqtek)
+from lebanon_fuel.ingestion.adapters import (collect_ipt, collect_ministry, collect_taqtek, collect_totalenergies,
+    collect_thefuelprice, parse_ipt, parse_manual, parse_ministry, parse_taqtek, parse_totalenergies, parse_thefuelprice)
 
 
 def parser():
@@ -18,7 +19,7 @@ def parser():
     sub=p.add_subparsers(dest='command',required=True)
     sub.add_parser('init')
     c=sub.add_parser('collect')
-    c.add_argument('--source',choices=['ipt','ministry','taqtek','all'],default='all')
+    c.add_argument('--source',choices=['ipt','ministry','taqtek','totalenergies','thefuelprice','all'],default='all')
     c.add_argument('--start',default='2008-01-01',help='Ministry lower bound; IPT/Taqtek collect complete exposed history')
     c.add_argument('--end',default=datetime.now(BEIRUT).date().isoformat(),help='Ministry upper date bound')
     x=sub.add_parser('import-ipt');x.add_argument('path',type=Path)
@@ -27,7 +28,7 @@ def parser():
     x.add_argument('--source',choices=['manual','official_document'],default='manual')
     x.add_argument('--evidence',type=Path);x.add_argument('--retrieved-at')
     x=sub.add_parser('import-html');x.add_argument('path',type=Path)
-    x.add_argument('--source',choices=['ministry','taqtek'],required=True)
+    x.add_argument('--source',choices=['ministry','taqtek','totalenergies','thefuelprice'],required=True)
     x.add_argument('--source-url',required=True);x.add_argument('--retrieved-at')
     x=sub.add_parser('download-official');x.add_argument('--url',required=True)
     x=sub.add_parser('resolve')
@@ -47,13 +48,15 @@ def main(argv=None):
     try:
         if args.command=='collect':
             failures=[]
-            for source in (['ipt','ministry','taqtek'] if args.source=='all' else [args.source]):
+            for source in (['ipt','totalenergies','ministry','taqtek','thefuelprice'] if args.source=='all' else [args.source]):
                 run=store.start_run(source)
                 client=PublicClient(store,source,run,cfg.get('collection',{}).get('minimum_request_interval_seconds',3))
                 try:
                     if source=='ipt': result=collect_ipt(client)
                     elif source=='ministry': result=collect_ministry(client,args.start,args.end)
-                    else: result=collect_taqtek(client)
+                    elif source=='taqtek': result=collect_taqtek(client)
+                    elif source=='totalenergies': result=collect_totalenergies(client)
+                    else: result=collect_thefuelprice(client)
                     store.finish_run(run,'success',result)
                     print(json.dumps({'source':source,**result}),flush=True)
                 except Exception as exc:
@@ -89,7 +92,9 @@ def main(argv=None):
                 if source=='ipt': rows=parse_ipt(raw)
                 elif args.command=='import-csv': rows=manual_rows
                 elif source=='ministry': rows=parse_ministry(raw,args.source_url)
-                else: rows=parse_taqtek(raw)
+                elif source=='taqtek': rows=parse_taqtek(raw)
+                elif source=='totalenergies': rows=parse_totalenergies(raw)
+                else: rows=parse_thefuelprice(raw)
                 if evidence_cap:
                     rows=list(rows)
                     digest=store.db.execute('SELECT sha256 FROM captures WHERE id=?',(evidence_cap,)).fetchone()[0]
