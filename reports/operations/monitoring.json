@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-11-20T12:51:17.487818+00:00",
+  "generated_at": "2026-11-20T18:15:24.900349+00:00",
   "data_quality": {
     "conflict_dates": 42,
-    "missing_publication_clocks": 3201,
-    "missing_effective_dates": 3197,
+    "missing_publication_clocks": 3203,
+    "missing_effective_dates": 3199,
     "candidate_dates": 1373,
     "suspicious_dates": 4
   },
@@ -79,7 +79,8 @@
     "observation_ids": [
       3198,
       3199,
-      3200
+      3200,
+      3203
     ],
     "official_effective_date": null,
     "percentage_price_change": -4.171779141104294,
@@ -98,11 +99,11 @@
     "timezone": "Asia/Beirut",
     "unit": "LBP/20L",
     "verification_status": "archive_corroborated",
-    "revision_id": 3478
+    "revision_id": 3481
   },
   "market": {
-    "origin_utc": "2026-11-20T12:51:14.531902+00:00",
-    "origin_beirut": "2026-11-20T14:51:14.531902+02:00",
+    "origin_utc": "2026-11-20T18:15:22.529959+00:00",
+    "origin_beirut": "2026-11-20T20:15:22.529959+02:00",
     "mode": "strict",
     "backtest_eligible": true,
     "series": {

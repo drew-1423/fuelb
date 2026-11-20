@@ -1,0 +1,368 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Total Liban Fuel Price Liban Fuel Price</title>
+  <script  type="module" src='countUp.min.js'></script>
+  <script  type="module" src='demo2.js'></script>
+ <meta name = "format-detection" content = "telephone=no">
+</head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap');
+
+@font-face {
+    font-family: 'robotomedium';
+    src: url('https://pricing.totalenergies.com.lb/fuelprice/fonts/roboto-medium-webfont.woff2') format('woff2'),
+         url('https://pricing.totalenergies.com.lb/fuelprice/fonts/roboto-medium-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+html{
+    font-family: 'Nunito', sans-serif;
+}
+
+.priceAnimation{
+	font-size:32px !important;
+	padding:0px;
+	margin:0px;
+}
+
+.color-excellium-unleaded-98{
+	color:#36AB58 !important;
+    -webkit-text-fill-color: rgba(54, 171, 88, 1); 
+   -webkit-opacity: 1; 
+   color: rgba(54, 171, 88, 1);
+}
+
+.color-excellium-unleaded-95{
+	color:#F29449;
+	    -webkit-text-fill-color: rgba(242, 148, 73, 1); 
+   -webkit-opacity: 1; 
+   color: rgba(242, 148, 73, 1);
+}
+
+.color-diesel{
+	color:#9C9B9B;
+	    -webkit-text-fill-color: rgba(156, 155, 155, 1); 
+   -webkit-opacity: 1; 
+   color: rgba(156, 155, 155, 1);
+}
+.color-gasoil{
+	color:#285AFF;
+	    -webkit-text-fill-color: rgba(40, 90, 255, 1); 
+   -webkit-opacity: 1; 
+   color: rgba(40, 90, 255, 1);
+}
+.next-week{
+    border-radius: 20px;
+}
+
+.next-week-excellium-unleaded-98{
+	background-color:#36AB58;
+}
+
+.next-week-excellium-unleaded-95{
+	background-color:#F29449;
+}
+
+.next-week-diesel{
+	background-color:#9C9B9B;
+}
+
+.newsletter-button {
+  background-color: #ed0000;
+  border: none;
+  color: white;
+  padding: 10px 21px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+}
+.P1 {
+    font-size: 1.3em;
+    text-align:center;
+}
+.divHeader{
+    width: 100%;
+    -webkit-border-top-left-radius: 20px;
+    -webkit-border-top-right-radius: 20px;
+    -moz-border-radius-topleft: 20px;
+    -moz-border-radius-topright: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+@media screen and (min-width: 485px) {
+table {
+	width: 485px;
+}
+.tdFP {
+/*border: 1px solid black; */
+border-radius: 20px;
+}
+
+.divDate {
+    
+}
+.divToday {
+	color: #ff0000;
+	font-size: 31px;
+	font-weight: bold;
+	text-align: left;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: left;
+	display: table-cell;
+	vertical-align: middle;
+}
+.divFP {
+/* border: 1px solid red;*/
+border-radius: 20px;
+}
+.divFP img {
+	margin-top: 5%;
+	margin-bottom: 5%;/* border: 1px solid ;*/
+	/*float:left;*/
+	
+}
+.divFP img:first-child {
+	/*margin-left: 25px;*/
+}
+.tblFP {
+}
+.greyFont{
+	color:#FF0000;
+	font-size:15px;
+	height: auto;
+}
+}
+
+/* If screen size is 600px wide, or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 485px) {
+table {
+	width: 100%;
+}
+.divDate {
+	height: 26vw;
+	font-size: 50%;
+}
+.greyFont {
+    color: #FF0000;
+    font-size: 15px;
+    height: auto;
+}
+.divToday {
+	color: #FF0000;
+	font-size:25px;
+	font-weight: bold;
+	text-align: left;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: left;
+	display: table-cell;
+	vertical-align: middle;
+}
+.divFP img:first-child {
+	/*padding-left: 6.66%;*/
+}
+.divSeperate img {
+	width: 100%;
+	height: auto;
+}
+.tblFP {
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+.PDATE {
+	width: 24%;
+	height: auto;
+}
+.P1 {
+	/*width: 125px;
+	height: auto;
+	margin-top: 5%;
+	margin-bottom: 5%;*/
+}
+.P2 {
+	width: 5.6%;
+	height: auto;
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+.P3 {
+	width: 38%;
+	height: auto;
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+.P4 {
+	width: 9.9%;
+	height: auto;
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+.P5 {
+	width: 20%;
+	height: auto;
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+.priceAnimation {
+    font-size: 32px;
+    height: 36px;
+}
+}
+</style>
+
+<body style="margin:0 5px 0 5px;padding:0;border: 2px solid #ececec;border-radius: 20px;">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:white;-webkit-border-top-left-radius: 20px;-webkit-border-top-right-radius: 20px;-moz-border-radius-topleft: 20px;-moz-border-radius-topright: 20px;border-top-left-radius: 20px;border-top-right-radius: 20px;">
+   
+  <tr>
+    <td colspan="3" class="tdFP" width="457"  align="center" >
+    	<div  align="left" class="divHeader">
+        <img src="images/header-fuelprice.jpg" class="divHeader" />
+      </div></td>
+    <!--<td width="14">&nbsp;</td> -->
+  </tr>
+  
+  <tr>
+    
+    <td colspan="3" class="tdFP"   align="center" >
+        
+    	
+		<div class="divToday" style="">
+		
+		20/11/2026        
+        </div>
+        <div class="divDate greyFont" >
+			Price in LBP for 20L
+		</div>
+	</td>
+    <!--<td width="20">&nbsp;</td>
+	 <td class="tdFP" width="153"  align="center" >
+    	<div align="left" class="divDate greyFont" >
+			FORECAST
+		</div>
+	</td>-->
+    
+  </tr>
+
+   
+        <tr>
+            <td colspan="4"><div class="divSeperate"> <img src="images/seperate2.png" width="485" height="5" /></div></td>
+        </tr>
+        <tr>
+            <td width="120"><div class="P1 color-excellium-unleaded-98">SP98</div></td>
+            <td class="tdFP" width="304"  align="center" style="text-align:center;">
+                <div class="divFP" style="border:1px #C6C6C6 solid;border-radius: 20px;">
+                    
+                    
+                    <div class="priceAnimation color-excellium-unleaded-98" id="excellium-unleaded-98">0</div>
+					<div style="display:none;" id="v1">2309000</div>
+					<div style="display:none;" id="id1">excellium-unleaded-98</div>
+                </div>
+            </td>
+			<!--<td width="20">&nbsp;</td>
+			<td class="tdFP next-week next-week-< ?php echo $row["fuel_code"]; ? >" width="153"  align="center"  style="border:1px #C6C6C6 solid;">
+                <div class="divFP">
+                    <img src="images/forecast/< ?php echo getForecastIcon($row["forecast"]); ? >" name="P5" class="P5" id="P3">
+                </div>
+            </td> -->
+            <td width="14">&nbsp;</td>
+        </tr>
+        
+  
+   
+        <tr>
+            <td colspan="4"><div class="divSeperate"> <img src="images/seperate2.png" width="485" height="5" /></div></td>
+        </tr>
+        <tr>
+            <td width="120"><div class="P1 color-excellium-unleaded-95">SP95</div></td>
+            <td class="tdFP" width="304"  align="center" style="text-align:center;">
+                <div class="divFP" style="border:1px #C6C6C6 solid;border-radius: 20px;">
+                    
+                    
+                    <div class="priceAnimation color-excellium-unleaded-95" id="excellium-unleaded-95">0</div>
+					<div style="display:none;" id="v2">2291000</div>
+					<div style="display:none;" id="id2">excellium-unleaded-95</div>
+                </div>
+            </td>
+			<!--<td width="20">&nbsp;</td>
+			<td class="tdFP next-week next-week-< ?php echo $row["fuel_code"]; ? >" width="153"  align="center"  style="border:1px #C6C6C6 solid;">
+                <div class="divFP">
+                    <img src="images/forecast/< ?php echo getForecastIcon($row["forecast"]); ? >" name="P5" class="P5" id="P3">
+                </div>
+            </td> -->
+            <td width="14">&nbsp;</td>
+        </tr>
+        
+  
+   
+        <tr>
+            <td colspan="4"><div class="divSeperate"> <img src="images/seperate2.png" width="485" height="5" /></div></td>
+        </tr>
+        <tr>
+            <td width="120"><div class="P1 color-diesel">Diesel</div></td>
+            <td class="tdFP" width="304"  align="center" style="text-align:center;">
+                <div class="divFP" style="border:1px #C6C6C6 solid;border-radius: 20px;">
+                    
+                    
+                    <div class="priceAnimation color-diesel" id="diesel">0</div>
+					<div style="display:none;" id="v3">2445000</div>
+					<div style="display:none;" id="id3">diesel</div>
+                </div>
+            </td>
+			<!--<td width="20">&nbsp;</td>
+			<td class="tdFP next-week next-week-< ?php echo $row["fuel_code"]; ? >" width="153"  align="center"  style="border:1px #C6C6C6 solid;">
+                <div class="divFP">
+                    <img src="images/forecast/< ?php echo getForecastIcon($row["forecast"]); ? >" name="P5" class="P5" id="P3">
+                </div>
+            </td> -->
+            <td width="14">&nbsp;</td>
+        </tr>
+        
+  
+    <tr>
+    
+    <td colspan="3" class="tdFP"   align="center" style="padding-top: 10px;" >
+    	<div class="divDate greyFont" >
+			Price in LBP for 10Kg
+		</div>
+	</td>
+    
+  </tr>
+    <tr>
+        <td colspan="4"><div class="divSeperate"> <img src="images/seperate2.png" width="485" height="5" /></div></td>
+        </tr>
+        <tr>
+            <td width="120"><div class="P1 color-gasoil">Gas</div></td>
+            <td class="tdFP" width="304"  align="center" style="text-align:center;">
+                <div class="divFP" style="border:1px #C6C6C6 solid;border-radius: 20px;">
+                    
+                    
+                    <div class="priceAnimation color-gasoil" id="gasoil">0</div>
+					<div style="display:none;" id="v4">1636000</div>
+					<div style="display:none;" id="id4">gasoil</div>
+                </div>
+            </td>
+			<!--<td width="20">&nbsp;</td>
+			<td class="tdFP next-week next-week-< ?php echo $row["fuel_code"]; ? >" width="153"  align="center"  style="border:1px #C6C6C6 solid;">
+                <div class="divFP">
+                    <img src="images/forecast/< ?php echo getForecastIcon($row["forecast"]); ? >" name="P5" class="P5" id="P3">
+                </div>
+            </td> -->
+            <td width="14">&nbsp;</td>
+        </tr>
+</table>
+<div style="background-color:white;text-align:center;-webkit-border-bottom-right-radius: 20px;-webkit-border-bottom-left-radius: 20px;-moz-border-radius-bottomright: 20px;-moz-border-radius-bottomleft: 20px;border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;adding-bottom: 6px;">
+<span style="color:#ed0000;font-size: 0.8em;">Sign up to be the first to receive our <br>latest news and offers!</span><br>
+<a href="https://web.mails.totalenergies.fr/webApp/msLebanonRegistrationandConfirmationWebApp" target="_blank" class="newsletter-button">Sign Up Here</a></div>
+</body>
+</html>
