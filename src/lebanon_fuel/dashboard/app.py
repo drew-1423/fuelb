@@ -251,6 +251,10 @@ def unavailable_forecast():
 
 
 def forecast_unavailable_reason():
+    source_gate = ('The latest price lacks official corroboration or has conflicting values. '
+                   'Verify its original ministry decision.')
+    plain_gate = ('The newest price needs a matching ministry or independent station record; '
+                  'resolve any source disagreement before forecasting.')
     labels = {
         "model_not_approved": "no model is approved for this horizon",
         "unsupported_regulatory_regime": "the latest pricing regime is not validated",
@@ -260,7 +264,8 @@ def forecast_unavailable_reason():
     }
     try:
         check = data.read_json(ROOT / 'reports/operations/current_forecast_check.json')
-        reasons = [labels.get(reason, str(reason).replace('_', ' ')) for reason in check.get('reasons', [])]
+        reasons = [plain_gate if reason == source_gate else labels.get(reason, str(reason).replace('_', ' '))
+                   for reason in check.get('reasons', [])]
         if reasons:
             return '; '.join(reasons)
     except (OSError, ValueError, TypeError):
@@ -876,7 +881,8 @@ def quality_view(snap):
                       "anchor_effective_at_missing": "Official effective time unavailable",
                       "decision_coverage_unverified": "Decision coverage unverified"}
             for reason in checks.get("reasons", []):
-                st.write(labels.get(reason, reason.replace("_", " ")))
+                st.write(forecast_unavailable_reason() if reason.startswith('The latest price lacks official corroboration')
+                         else labels.get(reason, reason.replace("_", " ")))
             st.caption("Forecast ledger entries " + ", ".join(map(str, checks.get("forecast_ids", []))))
         except (OSError, ValueError, KeyError):
             st.caption("The saved prospective checks are unavailable.")

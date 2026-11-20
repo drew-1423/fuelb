@@ -43,7 +43,7 @@ def health_strip(health,row):
         parts.append(f'<div class="trust-item {status}"><strong>{title}</strong><span>{label}</span><small>{escape(detail)}</small></div>')
     st.markdown('<section class="trust-strip" aria-label="Forecast trust indicators">'+''.join(parts)+'</section>',unsafe_allow_html=True)
     if checks['operational_integrity']['status']=='failed':
-        st.error('Evidence audit incomplete. Missing original capture files prevent production approval; the displayed estimate remains research only.')
+        st.error('Evidence audit incomplete. Original capture files are missing, so production approval remains withheld.')
     if checks['refresh']['status']=='failed':
         st.warning(data.refresh_result_message(st.session_state.get('refresh_result',(False,''))))
 
