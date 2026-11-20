@@ -33,7 +33,8 @@ def health_strip(health,row):
             labels={'nyh_gasoline':'Gasoline proxy','brent_spot':'Brent spot'}
             detail=' · '.join(f'{labels.get(sid,sid.replace("_"," "))}: {v.get("observation_date") or "missing"}' for sid,v in state.get('feeds',{}).items()) or 'Required feed dates need review'
         elif key=='calibration':
-            detail=f'{progress["cases"]}/{progress["minimum_cases"]} matched cases · {progress["tests"]}/{progress["minimum_tests"]} range tests'
+            detail=(f'{progress["cases"]}/{progress["minimum_cases"]} matched cases · {progress["tests"]}/{progress["minimum_tests"]} range tests'
+                    if row is not None else 'No current forecast to evaluate')
         elif key=='operational_integrity':
             detail=f'{state["missing_files"]} original captures missing' if state.get('missing_files') else 'Strict audit '+('passed' if status=='ok' else 'needs review')
         else:
@@ -42,7 +43,7 @@ def health_strip(health,row):
         parts.append(f'<div class="trust-item {status}"><strong>{title}</strong><span>{label}</span><small>{escape(detail)}</small></div>')
     st.markdown('<section class="trust-strip" aria-label="Forecast trust indicators">'+''.join(parts)+'</section>',unsafe_allow_html=True)
     if checks['operational_integrity']['status']=='failed':
-        st.error('Evidence audit incomplete. Missing original capture files prevent production approval; the displayed estimate remains research only.')
+        st.error('Evidence audit incomplete. Original capture files are missing, so production approval remains withheld.')
     if checks['refresh']['status']=='failed':
         st.warning(data.refresh_result_message(st.session_state.get('refresh_result',(False,''))))
 

@@ -38,7 +38,9 @@ def test_latest_conflict_or_single_quote_never_replaced_with_older_price():
     at=datetime(2026,11,20,tzinfo=timezone.utc)
     old=dict(source_date='2026-11-17',price_lbp_20l=2343000,verification_status='archive_corroborated')
     for status in ('conflict','supplier_observed'):
-        assert ux.current_price([old,dict(old,source_date='2026-11-19',verification_status=status)],at=at)[0] is None
+        eligible,reason=ux.current_price([old,dict(old,source_date='2026-11-19',verification_status=status)],at=at)
+        assert eligible is None
+        assert ('one station' if status=='supplier_observed' else 'Sources disagree') in reason
     eligible,_=ux.current_price([old],at=at)
     assert eligible['age_days']==3
     assert ux.current_price([old],at=at+timedelta(days=20))[0] is None

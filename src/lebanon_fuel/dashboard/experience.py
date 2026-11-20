@@ -40,8 +40,13 @@ def current_price(records, *, at=None, maximum_age_days=10):
         return None, 'No dated price is stored. Check the posted station price.'
     row = max(records, key=lambda r:r['source_date'])
     price = row.get('price_lbp_20l')
-    if row.get('verification_status') not in VERIFIED | {PROVISIONAL_PRICE} or not price or not math.isfinite(price) or price <= 0:
-        return None, 'The newest price is disputed or needs a second source. An older quote is not substituted.'
+    status=row.get('verification_status')
+    if status not in VERIFIED | {PROVISIONAL_PRICE} or not price or not math.isfinite(price) or price <= 0:
+        if status == 'supplier_observed':
+            return None, 'The newest quote comes from one station. A matching ministry record or independent station quote is needed.'
+        if status == 'conflict':
+            return None, 'Sources disagree on the newest price. Review their original records before forecasting.'
+        return None, 'The newest price needs source verification before it can anchor a forecast.'
     age = ((at or datetime.now(timezone.utc)).astimezone(BEIRUT).date()-datetime.fromisoformat(row['source_date']).date()).days
     if not 0 <= age <= maximum_age_days:
         return None, 'The newest corroborated record is stale or future-dated. Verify the posted price.'
