@@ -1,6 +1,6 @@
 # International market coverage and quality
 
-Generated for 2026-11-19T18:46:54.691206+00:00. Counts below are actual stored observations, not estimates.
+Generated for 2026-11-20T12:50:55.980070+00:00. Counts below are actual stored observations, not estimates.
 
 | Series | Unique valid dates | Earliest | Latest | Latest normalized value | Stale |
 | --- | ---: | --- | --- | --- | --- |
@@ -16,7 +16,7 @@ Generated for 2026-11-19T18:46:54.691206+00:00. Counts below are actual stored o
 | brent_futures | 0 | None | None | unknown USD/bbl | True |
 | rbob_futures | 0 | None | None | unknown USD/bbl | True |
 | gasoil_futures | 0 | None | None | unknown USD/bbl | True |
-| cboe_ovx | 4912 | 2007-05-10 | 2026-11-12 | 51.72 percent_annualized | False |
+| cboe_ovx | 4912 | 2007-05-10 | 2026-11-12 | 51.72 percent_annualized | True |
 
 ## Latest collection outcomes
 
@@ -31,11 +31,11 @@ Generated for 2026-11-19T18:46:54.691206+00:00. Counts below are actual stored o
 
 ## Availability and validation
 
-38,791 immutable observations; 284 invalid/missing rows retained. 0 dates with captured value revisions; 0 same-capture contradictions quarantined. Raw hash failures: 9.
+38,791 immutable observations; 284 invalid/missing rows retained. 0 dates with captured value revisions; 0 same-capture contradictions quarantined. Raw hash failures: 1.
 39 long interval candidates; 2832 unclassified weekday/weekly calendar candidates. These include holidays and cannot be called missing market sessions without an authoritative calendar. No filling or interpolation was applied.
 40 large-move review candidates; 0 unusual reference-weekday candidates. Review flags do not prove source errors or erase real market shocks.
 Known per-observation publication timestamps: 0. Documented original historical vintages: 0. Dates in today's workbook are not release timestamps.
-At 1372 historical source-date origins, 2 have any market value proven available by this project's capture/vintage evidence. Origins are assumed 00:00 Asia/Beirut; Lebanese announcement times are still unknown.
+At 1373 historical source-date origins, 3 have any market value proven available by this project's capture/vintage evidence. Origins are assumed 00:00 Asia/Beirut; Lebanese announcement times are still unknown.
 
 ## Historical relationships
 

@@ -1,0 +1,63 @@
+{
+  "as_of": "2026-11-20T12:51:11.504467+00:00",
+  "horizons": {
+    "decision_1": {
+      "status": "abstained",
+      "reasons": [
+        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
+      ]
+    },
+    "decision_2": {
+      "status": "abstained",
+      "reasons": [
+        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
+      ]
+    },
+    "decision_4": {
+      "status": "abstained",
+      "reasons": [
+        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
+      ]
+    },
+    "day_1": {
+      "status": "abstained",
+      "reasons": [
+        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
+      ]
+    },
+    "day_3": {
+      "status": "abstained",
+      "reasons": [
+        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
+      ]
+    },
+    "day_7": {
+      "status": "abstained",
+      "reasons": [
+        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
+      ]
+    },
+    "day_14": {
+      "status": "abstained",
+      "reasons": [
+        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
+      ]
+    },
+    "day_30": {
+      "status": "abstained",
+      "reasons": [
+        "The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision."
+      ]
+    }
+  },
+  "forecast_ids": [
+    45348,
+    45349,
+    45350,
+    45351,
+    45352,
+    45353,
+    45354,
+    45355
+  ]
+}

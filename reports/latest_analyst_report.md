@@ -1,6 +1,6 @@
 # Lebanon gasoline 95 analyst report
 
-Generated 2026-11-19T18:47:30.231449+00:00
+Generated 2026-11-20T12:51:17.487818+00:00
 
 ## Executive summary
 
@@ -8,11 +8,11 @@ The latest verified-tier gasoline 95 record is **2,343,000 LBP / 20 L** on 2026-
 
 ## Expected price movement
 
-QUANTITATIVE MODEL FORECAST: 2,307,569 LBP / 20 L, -35,431 LBP (-1.51%). Estimated announcement: 20 Nov 2026 (Fri cadence). A calibrated 90% interval is not supported for this issuance. Directional probabilities are awaiting calibrated live evidence.
+No current estimate tied to the verified price. Refresh the forecast ledger.
 
 ## Primary market drivers
 
-Gasoline / Brent proxy contribution (combined): -5,406 LBP; Domestic lagged adjustment: -24,858 LBP; Fiscal shock indicator: +0 LBP; Other model features: -3,585 LBP; Model intercept: -1,583 LBP. Statistical attribution, not causation. Brent futures has no fresh stored observation. RBOB futures has no fresh stored observation. Brent spot proxy last printed 92.94 USD/bbl on 2026-11-17, +3.08% over the trailing seven-day comparison. [Source](https://www.eia.gov/dnav/pet/hist/RBRTED.htm) New York Harbor gasoline proxy last printed 97.78 USD/bbl on 2026-11-17, -3.60% over the trailing seven-day comparison. [Source](https://www.eia.gov/dnav/pet/hist/EER_EPMRU_PF4_Y35NY_DPGD.htm)
+No saved contribution breakdown. Commodity context does not establish a causal price forecast. Brent futures has no fresh stored observation. RBOB futures has no fresh stored observation. Brent spot proxy last printed 92.94 USD/bbl on 2026-11-17, +3.08% over the trailing seven-day comparison. [Source](https://www.eia.gov/dnav/pet/hist/RBRTED.htm) New York Harbor gasoline proxy last printed 97.78 USD/bbl on 2026-11-17, -3.60% over the trailing seven-day comparison. [Source](https://www.eia.gov/dnav/pet/hist/EER_EPMRU_PF4_Y35NY_DPGD.htm)
 
 ## Commodity market conditions
 
@@ -43,7 +43,7 @@ Selected G_hybrid measured MAE 366 LBP / 20 L, direction accuracy 100.0%, n=2 on
 - Yahoo BZ=F Brent last-day financial futures (NYMEX): no_available_observation.
 - Yahoo RB=F NYMEX RBOB gasoline futures: no_available_observation.
 - Yahoo HO=F NYMEX NY Harbor ULSD / heating oil futures: no_available_observation.
-- cboe_ovx: absolute seven-day move exceeds the configured review threshold.
+- Cboe Crude Oil ETF Volatility Index (OVX): stale.
 - Current pricing policy needs a dated, evidence-backed human review.
 - No numerical prospective forecasts have verified settled outcomes. Live accuracy is unavailable.
 - Part 6 rejects production approval for all selected horizons.
