@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-19T18:46:54.691206+00:00",
+  "as_of": "2026-11-20T00:38:39.268849+00:00",
   "series": [
     {
       "series": "brent_spot",
@@ -11,7 +11,7 @@
       "latest": "2026-11-17",
       "latest_value": 92.94,
       "unit": "USD/bbl",
-      "age_days": 2,
+      "age_days": 3,
       "stale": false,
       "known_publication_timestamps": 0,
       "documented_historical_vintages": 0,
@@ -111,7 +111,7 @@
       "latest": "2026-11-16",
       "latest_value": 0.9415262295081966,
       "unit": "EUR/L",
-      "age_days": 3,
+      "age_days": 4,
       "stale": false,
       "known_publication_timestamps": 0,
       "documented_historical_vintages": 0,
@@ -129,7 +129,7 @@
       "latest": "2026-11-16",
       "latest_value": 0.8725632258064517,
       "unit": "EUR/L",
-      "age_days": 3,
+      "age_days": 4,
       "stale": false,
       "known_publication_timestamps": 0,
       "documented_historical_vintages": 0,
@@ -147,7 +147,7 @@
       "latest": "2025-05-29",
       "latest_value": 89700.0,
       "unit": "LBP/USD",
-      "age_days": 539,
+      "age_days": 540,
       "stale": true,
       "known_publication_timestamps": 0,
       "documented_historical_vintages": 0,
@@ -285,15 +285,7 @@
   "date_alignment_review_candidates": 0,
   "conflicting_capture_dates": 0,
   "raw_hash_failures": [
-    471,
-    526,
-    576,
-    578,
-    580,
-    582,
-    584,
-    587,
-    590
+    587
   ],
   "historical_strict_alignment": {
     "origins": 1372,

@@ -1,5 +1,5 @@
 {
-  "origin": "2026-11-19T18:47:16.884563+00:00",
+  "origin": "2026-11-20T00:38:58.684611+00:00",
   "anchor": {
     "absolute_price_change": -102000,
     "candidate_values": [
@@ -40,18 +40,18 @@
   "forecasts": [
     {
       "horizon": "decision_1",
-      "origin": "2026-11-19T18:47:16.884563+00:00",
+      "origin": "2026-11-20T00:38:58.684611+00:00",
       "endpoint": null,
       "target_label": "Next 1 official pricing decision(s)",
-      "decision_date": "2026-11-20",
-      "scheduled_effective": "2026-11-20",
+      "decision_date": "2026-11-24",
+      "scheduled_effective": "2026-11-24",
       "schedule_basis": "Empirical Tue/Fri Ministry cadence",
       "schedule_estimated": true,
       "schedule_details": {
         "dates": {
-          "decision_1": "2026-11-20",
-          "decision_2": "2026-11-24",
-          "decision_4": "2026-12-01"
+          "decision_1": "2026-11-24",
+          "decision_2": "2026-11-27",
+          "decision_4": "2026-12-04"
         },
         "schedule_basis": "Empirical Tue/Fri Ministry cadence",
         "interval_n": 20,
@@ -67,9 +67,9 @@
       "tier": 2,
       "label": "QUANTITATIVE MODEL FORECAST",
       "status": "issued",
-      "predicted_price": 2307568.5249291984,
-      "predicted_change": -35431.47507080152,
-      "percentage_change": -1.512226848945861,
+      "predicted_price": 2306780.1336048255,
+      "predicted_change": -36219.866395174475,
+      "percentage_change": -1.5458756464009593,
       "interval": null,
       "probabilities": null,
       "uncertainty": "Waiting for a validated prediction range from live outcomes.",
@@ -130,7 +130,7 @@
       },
       "market_input_mode": "strict_captured_vintage",
       "lagged_market_inputs": [],
-      "calibration_n": 31,
+      "calibration_n": 60,
       "calibration_maximum_label_end": "2026-11-10T22:00:00+00:00",
       "probability_deadband_lbp": 3000,
       "probability_order": [
@@ -139,14 +139,14 @@
         "increase"
       ],
       "probability_status": "horizon_conditioned_past_oof_conformal_research",
-      "ovx_regime": "Normal",
-      "ovx_regime_conditioning": "regime_conditioned_matured_oof",
-      "calibration_ovx_regime": "Normal",
+      "ovx_regime": null,
+      "ovx_regime_conditioning": "pooled_calibration",
+      "calibration_ovx_regime": null,
       "driver_contributions": {
         "commodity_pass_through": -5405.78764272185,
         "lagged_domestic_momentum": -24858.408755662254,
         "fiscal_shock": 0.0,
-        "other_features": -3584.6509856910443,
+        "other_features": -4373.042310064,
         "baseline_intercept": -1582.6276867263691,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
@@ -159,31 +159,131 @@
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
       "public_calibration": {
         "cohort": "government_backed",
+        "horizon": "decision_1",
+        "artifact": "fbd34b3d4dadf1a06a160469dd2c1234f8dee0b133a5f9b4f310d441650b9462",
+        "evidence_category": "official_match",
         "calibration_n": 0,
         "evaluation_n": 0,
         "empirical_coverage": null,
         "minimum_calibration_n": 30,
         "minimum_evaluation_n": 20,
         "nominal": 0.9,
-        "radius": null
+        "radius": null,
+        "radius_80": null,
+        "levels": {
+          "80": {
+            "nominal": 0.8,
+            "calibration_n": 0,
+            "evaluation_n": 0,
+            "empirical_coverage": null,
+            "mean_evaluated_width_lbp": null,
+            "radius": null,
+            "status": "withheld",
+            "reasons": [
+              "insufficient_nonoverlapping_matured_calibration_cases",
+              "insufficient_chronological_coverage_tests"
+            ]
+          },
+          "90": {
+            "nominal": 0.9,
+            "calibration_n": 0,
+            "evaluation_n": 0,
+            "empirical_coverage": null,
+            "mean_evaluated_width_lbp": null,
+            "radius": null,
+            "status": "withheld",
+            "reasons": [
+              "insufficient_nonoverlapping_matured_calibration_cases",
+              "insufficient_chronological_coverage_tests"
+            ]
+          }
+        },
+        "evidence_strata": {
+          "official_match": {
+            "levels": {
+              "80": {
+                "nominal": 0.8,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              },
+              "90": {
+                "nominal": 0.9,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              }
+            },
+            "eligible_n": 0,
+            "raw_distinct_targets": 0
+          },
+          "provisional_match": {
+            "levels": {
+              "80": {
+                "nominal": 0.8,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              },
+              "90": {
+                "nominal": 0.9,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              }
+            },
+            "eligible_n": 0,
+            "raw_distinct_targets": 0
+          }
+        },
+        "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
+        "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45324,
-      "snapshot_id": "a5d29613cceef076eed9b0ce929a9ae7e43f2eb4de45233b7a3544d1325d1f6e"
+      "forecast_id": 45332,
+      "snapshot_id": "cd0688b511264b9b6416226149a2f828bd373eb7b863a16b361f407f971d57d6"
     },
     {
       "horizon": "decision_2",
-      "origin": "2026-11-19T18:47:16.884563+00:00",
+      "origin": "2026-11-20T00:38:58.684611+00:00",
       "endpoint": null,
       "target_label": "Next 2 official pricing decision(s)",
-      "decision_date": "2026-11-24",
-      "scheduled_effective": "2026-11-24",
+      "decision_date": "2026-11-27",
+      "scheduled_effective": "2026-11-27",
       "schedule_basis": "Empirical Tue/Fri Ministry cadence",
       "schedule_estimated": true,
       "schedule_details": {
         "dates": {
-          "decision_1": "2026-11-20",
-          "decision_2": "2026-11-24",
-          "decision_4": "2026-12-01"
+          "decision_1": "2026-11-24",
+          "decision_2": "2026-11-27",
+          "decision_4": "2026-12-04"
         },
         "schedule_basis": "Empirical Tue/Fri Ministry cadence",
         "interval_n": 20,
@@ -199,9 +299,9 @@
       "tier": 2,
       "label": "QUANTITATIVE MODEL FORECAST",
       "status": "issued",
-      "predicted_price": 2295153.8374247416,
-      "predicted_change": -47846.162575258495,
-      "percentage_change": -2.0420897385940457,
+      "predicted_price": 2294060.8809135854,
+      "predicted_change": -48939.11908641475,
+      "percentage_change": -2.088737477013007,
       "interval": null,
       "probabilities": null,
       "uncertainty": "Waiting for a validated prediction range from live outcomes.",
@@ -238,14 +338,14 @@
         "increase"
       ],
       "probability_status": "horizon_conditioned_past_oof_conformal_research",
-      "ovx_regime": "Normal",
+      "ovx_regime": null,
       "ovx_regime_conditioning": "pooled_calibration",
       "calibration_ovx_regime": null,
       "driver_contributions": {
-        "commodity_pass_through": -2206.203989493231,
-        "lagged_domestic_momentum": -42140.495270147156,
+        "commodity_pass_through": -2295.952466905056,
+        "lagged_domestic_momentum": -42383.67846903234,
         "fiscal_shock": 0.0,
-        "other_features": -1699.0893285756802,
+        "other_features": -2459.1141634349196,
         "baseline_intercept": -1800.373987042425,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
@@ -256,23 +356,133 @@
       "anchor_verification": "archive_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
-      "forecast_id": 45325,
-      "snapshot_id": "a5d29613cceef076eed9b0ce929a9ae7e43f2eb4de45233b7a3544d1325d1f6e"
+      "public_calibration": {
+        "cohort": "government_backed",
+        "horizon": "decision_2",
+        "artifact": "b50640d13af84cd6ada0237fcab22c8aa483d90cc5cd125539be5776f0c1687c",
+        "evidence_category": "official_match",
+        "calibration_n": 0,
+        "evaluation_n": 0,
+        "empirical_coverage": null,
+        "minimum_calibration_n": 30,
+        "minimum_evaluation_n": 20,
+        "nominal": 0.9,
+        "radius": null,
+        "radius_80": null,
+        "levels": {
+          "80": {
+            "nominal": 0.8,
+            "calibration_n": 0,
+            "evaluation_n": 0,
+            "empirical_coverage": null,
+            "mean_evaluated_width_lbp": null,
+            "radius": null,
+            "status": "withheld",
+            "reasons": [
+              "insufficient_nonoverlapping_matured_calibration_cases",
+              "insufficient_chronological_coverage_tests"
+            ]
+          },
+          "90": {
+            "nominal": 0.9,
+            "calibration_n": 0,
+            "evaluation_n": 0,
+            "empirical_coverage": null,
+            "mean_evaluated_width_lbp": null,
+            "radius": null,
+            "status": "withheld",
+            "reasons": [
+              "insufficient_nonoverlapping_matured_calibration_cases",
+              "insufficient_chronological_coverage_tests"
+            ]
+          }
+        },
+        "evidence_strata": {
+          "official_match": {
+            "levels": {
+              "80": {
+                "nominal": 0.8,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              },
+              "90": {
+                "nominal": 0.9,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              }
+            },
+            "eligible_n": 0,
+            "raw_distinct_targets": 0
+          },
+          "provisional_match": {
+            "levels": {
+              "80": {
+                "nominal": 0.8,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              },
+              "90": {
+                "nominal": 0.9,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              }
+            },
+            "eligible_n": 0,
+            "raw_distinct_targets": 0
+          }
+        },
+        "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
+        "target_limitation": "Reviewed complete official outcome sequence"
+      },
+      "forecast_id": 45333,
+      "snapshot_id": "cd0688b511264b9b6416226149a2f828bd373eb7b863a16b361f407f971d57d6"
     },
     {
       "horizon": "decision_4",
-      "origin": "2026-11-19T18:47:16.884563+00:00",
+      "origin": "2026-11-20T00:38:58.684611+00:00",
       "endpoint": null,
       "target_label": "Next 4 official pricing decision(s)",
-      "decision_date": "2026-12-01",
-      "scheduled_effective": "2026-12-01",
+      "decision_date": "2026-12-04",
+      "scheduled_effective": "2026-12-04",
       "schedule_basis": "Empirical Tue/Fri Ministry cadence",
       "schedule_estimated": true,
       "schedule_details": {
         "dates": {
-          "decision_1": "2026-11-20",
-          "decision_2": "2026-11-24",
-          "decision_4": "2026-12-01"
+          "decision_1": "2026-11-24",
+          "decision_2": "2026-11-27",
+          "decision_4": "2026-12-04"
         },
         "schedule_basis": "Empirical Tue/Fri Ministry cadence",
         "interval_n": 20,
@@ -288,9 +498,9 @@
       "tier": 2,
       "label": "QUANTITATIVE MODEL FORECAST",
       "status": "issued",
-      "predicted_price": 2267894.7460089675,
-      "predicted_change": -75105.25399103227,
-      "percentage_change": -3.2055166022634345,
+      "predicted_price": 2268192.2241572044,
+      "predicted_change": -74807.7758427954,
+      "percentage_change": -3.1928201384035595,
       "interval": null,
       "probabilities": null,
       "uncertainty": "Waiting for a validated prediction range from live outcomes.",
@@ -327,14 +537,14 @@
         "increase"
       ],
       "probability_status": "horizon_conditioned_past_oof_conformal_research",
-      "ovx_regime": "Normal",
+      "ovx_regime": null,
       "ovx_regime_conditioning": "pooled_calibration",
       "calibration_ovx_regime": null,
       "driver_contributions": {
         "commodity_pass_through": -10835.593159538756,
         "lagged_domestic_momentum": -54328.116061979665,
         "fiscal_shock": 0.0,
-        "other_features": -6289.351056445768,
+        "other_features": -5991.872908208887,
         "baseline_intercept": -3652.1937130680835,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
@@ -345,13 +555,123 @@
       "anchor_verification": "archive_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
-      "forecast_id": 45326,
-      "snapshot_id": "a5d29613cceef076eed9b0ce929a9ae7e43f2eb4de45233b7a3544d1325d1f6e"
+      "public_calibration": {
+        "cohort": "government_backed",
+        "horizon": "decision_4",
+        "artifact": "b4f2d76bb9c2bada3f6378ad1fde238c342d5e2ca263d3e8f6992d3ae723a4a1",
+        "evidence_category": "official_match",
+        "calibration_n": 0,
+        "evaluation_n": 0,
+        "empirical_coverage": null,
+        "minimum_calibration_n": 30,
+        "minimum_evaluation_n": 20,
+        "nominal": 0.9,
+        "radius": null,
+        "radius_80": null,
+        "levels": {
+          "80": {
+            "nominal": 0.8,
+            "calibration_n": 0,
+            "evaluation_n": 0,
+            "empirical_coverage": null,
+            "mean_evaluated_width_lbp": null,
+            "radius": null,
+            "status": "withheld",
+            "reasons": [
+              "insufficient_nonoverlapping_matured_calibration_cases",
+              "insufficient_chronological_coverage_tests"
+            ]
+          },
+          "90": {
+            "nominal": 0.9,
+            "calibration_n": 0,
+            "evaluation_n": 0,
+            "empirical_coverage": null,
+            "mean_evaluated_width_lbp": null,
+            "radius": null,
+            "status": "withheld",
+            "reasons": [
+              "insufficient_nonoverlapping_matured_calibration_cases",
+              "insufficient_chronological_coverage_tests"
+            ]
+          }
+        },
+        "evidence_strata": {
+          "official_match": {
+            "levels": {
+              "80": {
+                "nominal": 0.8,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              },
+              "90": {
+                "nominal": 0.9,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              }
+            },
+            "eligible_n": 0,
+            "raw_distinct_targets": 0
+          },
+          "provisional_match": {
+            "levels": {
+              "80": {
+                "nominal": 0.8,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              },
+              "90": {
+                "nominal": 0.9,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              }
+            },
+            "eligible_n": 0,
+            "raw_distinct_targets": 0
+          }
+        },
+        "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
+        "target_limitation": "Reviewed complete official outcome sequence"
+      },
+      "forecast_id": 45334,
+      "snapshot_id": "cd0688b511264b9b6416226149a2f828bd373eb7b863a16b361f407f971d57d6"
     },
     {
       "horizon": "day_1",
-      "origin": "2026-11-19T18:47:16.884563+00:00",
-      "endpoint": "2026-11-20T20:47:16.884563+02:00",
+      "origin": "2026-11-20T00:38:58.684611+00:00",
+      "endpoint": "2026-11-21T02:38:58.684611+02:00",
       "target_label": "Prevailing official price in 1 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -361,9 +681,9 @@
       "tier": 2,
       "label": "QUANTITATIVE MODEL FORECAST",
       "status": "issued",
-      "predicted_price": 2335632.6901240675,
-      "predicted_change": -7367.309875932309,
-      "percentage_change": -0.3144391752425228,
+      "predicted_price": 2335577.7060477734,
+      "predicted_change": -7422.293952226808,
+      "percentage_change": -0.3167859134539824,
       "interval": null,
       "probabilities": null,
       "uncertainty": "Waiting for a validated prediction range from live outcomes.",
@@ -400,14 +720,14 @@
         "increase"
       ],
       "probability_status": "horizon_conditioned_past_oof_conformal_research",
-      "ovx_regime": "Normal",
-      "ovx_regime_conditioning": "regime_conditioned_matured_oof",
-      "calibration_ovx_regime": "Normal",
+      "ovx_regime": null,
+      "ovx_regime_conditioning": "pooled_calibration",
+      "calibration_ovx_regime": null,
       "driver_contributions": {
-        "commodity_pass_through": -791.2903248777674,
-        "lagged_domestic_momentum": -6141.214709804391,
+        "commodity_pass_through": 498.9660116027315,
+        "lagged_domestic_momentum": -6163.7780703031995,
         "fiscal_shock": 0.0,
-        "other_features": -214.9163625574595,
+        "other_features": -1537.593414833647,
         "baseline_intercept": -219.8884786926929,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
@@ -418,13 +738,123 @@
       "anchor_verification": "archive_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
-      "forecast_id": 45327,
-      "snapshot_id": "a5d29613cceef076eed9b0ce929a9ae7e43f2eb4de45233b7a3544d1325d1f6e"
+      "public_calibration": {
+        "cohort": "government_backed",
+        "horizon": "day_1",
+        "artifact": "34aaede583a9d2fb62900fce02d50ebd07a18fcc7c9616e2d042387a53861a7e",
+        "evidence_category": "official_match",
+        "calibration_n": 0,
+        "evaluation_n": 0,
+        "empirical_coverage": null,
+        "minimum_calibration_n": 30,
+        "minimum_evaluation_n": 20,
+        "nominal": 0.9,
+        "radius": null,
+        "radius_80": null,
+        "levels": {
+          "80": {
+            "nominal": 0.8,
+            "calibration_n": 0,
+            "evaluation_n": 0,
+            "empirical_coverage": null,
+            "mean_evaluated_width_lbp": null,
+            "radius": null,
+            "status": "withheld",
+            "reasons": [
+              "insufficient_nonoverlapping_matured_calibration_cases",
+              "insufficient_chronological_coverage_tests"
+            ]
+          },
+          "90": {
+            "nominal": 0.9,
+            "calibration_n": 0,
+            "evaluation_n": 0,
+            "empirical_coverage": null,
+            "mean_evaluated_width_lbp": null,
+            "radius": null,
+            "status": "withheld",
+            "reasons": [
+              "insufficient_nonoverlapping_matured_calibration_cases",
+              "insufficient_chronological_coverage_tests"
+            ]
+          }
+        },
+        "evidence_strata": {
+          "official_match": {
+            "levels": {
+              "80": {
+                "nominal": 0.8,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              },
+              "90": {
+                "nominal": 0.9,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              }
+            },
+            "eligible_n": 0,
+            "raw_distinct_targets": 0
+          },
+          "provisional_match": {
+            "levels": {
+              "80": {
+                "nominal": 0.8,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              },
+              "90": {
+                "nominal": 0.9,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              }
+            },
+            "eligible_n": 0,
+            "raw_distinct_targets": 0
+          }
+        },
+        "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
+        "target_limitation": "Reviewed complete official outcome sequence"
+      },
+      "forecast_id": 45335,
+      "snapshot_id": "cd0688b511264b9b6416226149a2f828bd373eb7b863a16b361f407f971d57d6"
     },
     {
       "horizon": "day_3",
-      "origin": "2026-11-19T18:47:16.884563+00:00",
-      "endpoint": "2026-11-22T20:47:16.884563+02:00",
+      "origin": "2026-11-20T00:38:58.684611+00:00",
+      "endpoint": "2026-11-23T02:38:58.684611+02:00",
       "target_label": "Prevailing official price in 3 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -435,7 +865,7 @@
       "label": "QUANTITATIVE MODEL FORECAST",
       "status": "issued",
       "predicted_price": 2318205.229493426,
-      "predicted_change": -24794.770506574034,
+      "predicted_change": -24794.77050657403,
       "percentage_change": -1.0582488479118237,
       "interval": null,
       "probabilities": null,
@@ -473,14 +903,14 @@
         "increase"
       ],
       "probability_status": "horizon_conditioned_past_oof_conformal_research",
-      "ovx_regime": "Normal",
-      "ovx_regime_conditioning": "regime_conditioned_matured_oof",
-      "calibration_ovx_regime": "Normal",
+      "ovx_regime": null,
+      "ovx_regime_conditioning": "pooled_calibration",
+      "calibration_ovx_regime": null,
       "driver_contributions": {
-        "commodity_pass_through": -6593.415561964032,
-        "lagged_domestic_momentum": -15921.588137993784,
+        "commodity_pass_through": -7233.173193287081,
+        "lagged_domestic_momentum": -15733.549646098849,
         "fiscal_shock": 0.0,
-        "other_features": -1108.0673797816028,
+        "other_features": -656.3482403534906,
         "baseline_intercept": -1171.6994268346095,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
@@ -491,13 +921,123 @@
       "anchor_verification": "archive_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
-      "forecast_id": 45328,
-      "snapshot_id": "a5d29613cceef076eed9b0ce929a9ae7e43f2eb4de45233b7a3544d1325d1f6e"
+      "public_calibration": {
+        "cohort": "government_backed",
+        "horizon": "day_3",
+        "artifact": "d0289ebedc304dcc4de79f8da820220347066a71491602e1850d05a2a7c5162d",
+        "evidence_category": "official_match",
+        "calibration_n": 0,
+        "evaluation_n": 0,
+        "empirical_coverage": null,
+        "minimum_calibration_n": 30,
+        "minimum_evaluation_n": 20,
+        "nominal": 0.9,
+        "radius": null,
+        "radius_80": null,
+        "levels": {
+          "80": {
+            "nominal": 0.8,
+            "calibration_n": 0,
+            "evaluation_n": 0,
+            "empirical_coverage": null,
+            "mean_evaluated_width_lbp": null,
+            "radius": null,
+            "status": "withheld",
+            "reasons": [
+              "insufficient_nonoverlapping_matured_calibration_cases",
+              "insufficient_chronological_coverage_tests"
+            ]
+          },
+          "90": {
+            "nominal": 0.9,
+            "calibration_n": 0,
+            "evaluation_n": 0,
+            "empirical_coverage": null,
+            "mean_evaluated_width_lbp": null,
+            "radius": null,
+            "status": "withheld",
+            "reasons": [
+              "insufficient_nonoverlapping_matured_calibration_cases",
+              "insufficient_chronological_coverage_tests"
+            ]
+          }
+        },
+        "evidence_strata": {
+          "official_match": {
+            "levels": {
+              "80": {
+                "nominal": 0.8,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              },
+              "90": {
+                "nominal": 0.9,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              }
+            },
+            "eligible_n": 0,
+            "raw_distinct_targets": 0
+          },
+          "provisional_match": {
+            "levels": {
+              "80": {
+                "nominal": 0.8,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              },
+              "90": {
+                "nominal": 0.9,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              }
+            },
+            "eligible_n": 0,
+            "raw_distinct_targets": 0
+          }
+        },
+        "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
+        "target_limitation": "Reviewed complete official outcome sequence"
+      },
+      "forecast_id": 45336,
+      "snapshot_id": "cd0688b511264b9b6416226149a2f828bd373eb7b863a16b361f407f971d57d6"
     },
     {
       "horizon": "day_7",
-      "origin": "2026-11-19T18:47:16.884563+00:00",
-      "endpoint": "2026-11-26T20:47:16.884563+02:00",
+      "origin": "2026-11-20T00:38:58.684611+00:00",
+      "endpoint": "2026-11-27T02:38:58.684611+02:00",
       "target_label": "Prevailing official price in 7 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -570,8 +1110,8 @@
       },
       "market_input_mode": "strict_captured_vintage",
       "lagged_market_inputs": [],
-      "calibration_n": 46,
-      "calibration_maximum_label_end": "2025-12-12T22:00:00+00:00",
+      "calibration_n": 60,
+      "calibration_maximum_label_end": "2026-08-11T21:00:00+00:00",
       "probability_deadband_lbp": 3000,
       "probability_order": [
         "decrease",
@@ -579,14 +1119,14 @@
         "increase"
       ],
       "probability_status": "horizon_conditioned_past_oof_conformal_research",
-      "ovx_regime": "Normal",
-      "ovx_regime_conditioning": "regime_conditioned_matured_oof",
-      "calibration_ovx_regime": "Normal",
+      "ovx_regime": null,
+      "ovx_regime_conditioning": "pooled_calibration",
+      "calibration_ovx_regime": null,
       "driver_contributions": {
-        "commodity_pass_through": -6033.190134371946,
+        "commodity_pass_through": -6092.77202211037,
         "lagged_domestic_momentum": -32896.06725273088,
         "fiscal_shock": 0.0,
-        "other_features": -8698.647584795392,
+        "other_features": -8639.065697056967,
         "baseline_intercept": -2782.1497727141837,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
@@ -597,13 +1137,123 @@
       "anchor_verification": "archive_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
-      "forecast_id": 45329,
-      "snapshot_id": "a5d29613cceef076eed9b0ce929a9ae7e43f2eb4de45233b7a3544d1325d1f6e"
+      "public_calibration": {
+        "cohort": "government_backed",
+        "horizon": "day_7",
+        "artifact": "f0afdf92c8244b3ee4d9c7f1b02729eb33eab3803a88ddc9ca8007be4c682418",
+        "evidence_category": "official_match",
+        "calibration_n": 0,
+        "evaluation_n": 0,
+        "empirical_coverage": null,
+        "minimum_calibration_n": 30,
+        "minimum_evaluation_n": 20,
+        "nominal": 0.9,
+        "radius": null,
+        "radius_80": null,
+        "levels": {
+          "80": {
+            "nominal": 0.8,
+            "calibration_n": 0,
+            "evaluation_n": 0,
+            "empirical_coverage": null,
+            "mean_evaluated_width_lbp": null,
+            "radius": null,
+            "status": "withheld",
+            "reasons": [
+              "insufficient_nonoverlapping_matured_calibration_cases",
+              "insufficient_chronological_coverage_tests"
+            ]
+          },
+          "90": {
+            "nominal": 0.9,
+            "calibration_n": 0,
+            "evaluation_n": 0,
+            "empirical_coverage": null,
+            "mean_evaluated_width_lbp": null,
+            "radius": null,
+            "status": "withheld",
+            "reasons": [
+              "insufficient_nonoverlapping_matured_calibration_cases",
+              "insufficient_chronological_coverage_tests"
+            ]
+          }
+        },
+        "evidence_strata": {
+          "official_match": {
+            "levels": {
+              "80": {
+                "nominal": 0.8,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              },
+              "90": {
+                "nominal": 0.9,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              }
+            },
+            "eligible_n": 0,
+            "raw_distinct_targets": 0
+          },
+          "provisional_match": {
+            "levels": {
+              "80": {
+                "nominal": 0.8,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              },
+              "90": {
+                "nominal": 0.9,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              }
+            },
+            "eligible_n": 0,
+            "raw_distinct_targets": 0
+          }
+        },
+        "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
+        "target_limitation": "Reviewed complete official outcome sequence"
+      },
+      "forecast_id": 45337,
+      "snapshot_id": "cd0688b511264b9b6416226149a2f828bd373eb7b863a16b361f407f971d57d6"
     },
     {
       "horizon": "day_14",
-      "origin": "2026-11-19T18:47:16.884563+00:00",
-      "endpoint": "2026-12-03T20:47:16.884563+02:00",
+      "origin": "2026-11-20T00:38:58.684611+00:00",
+      "endpoint": "2026-12-04T02:38:58.684611+02:00",
       "target_label": "Prevailing official price in 14 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -652,14 +1302,14 @@
         "increase"
       ],
       "probability_status": "horizon_conditioned_past_oof_conformal_research",
-      "ovx_regime": "Normal",
+      "ovx_regime": null,
       "ovx_regime_conditioning": "pooled_calibration",
       "calibration_ovx_regime": null,
       "driver_contributions": {
-        "commodity_pass_through": -23975.953569460275,
+        "commodity_pass_through": -22650.085275535905,
         "lagged_domestic_momentum": -61645.80233234953,
         "fiscal_shock": 0.0,
-        "other_features": -4354.7587975292645,
+        "other_features": -5680.627091453629,
         "baseline_intercept": -8298.899135110953,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
@@ -670,13 +1320,123 @@
       "anchor_verification": "archive_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
-      "forecast_id": 45330,
-      "snapshot_id": "a5d29613cceef076eed9b0ce929a9ae7e43f2eb4de45233b7a3544d1325d1f6e"
+      "public_calibration": {
+        "cohort": "government_backed",
+        "horizon": "day_14",
+        "artifact": "461e1fe1925f7c456b9a8c387e131b013385a20218d507092b0a5f05191ae256",
+        "evidence_category": "official_match",
+        "calibration_n": 0,
+        "evaluation_n": 0,
+        "empirical_coverage": null,
+        "minimum_calibration_n": 30,
+        "minimum_evaluation_n": 20,
+        "nominal": 0.9,
+        "radius": null,
+        "radius_80": null,
+        "levels": {
+          "80": {
+            "nominal": 0.8,
+            "calibration_n": 0,
+            "evaluation_n": 0,
+            "empirical_coverage": null,
+            "mean_evaluated_width_lbp": null,
+            "radius": null,
+            "status": "withheld",
+            "reasons": [
+              "insufficient_nonoverlapping_matured_calibration_cases",
+              "insufficient_chronological_coverage_tests"
+            ]
+          },
+          "90": {
+            "nominal": 0.9,
+            "calibration_n": 0,
+            "evaluation_n": 0,
+            "empirical_coverage": null,
+            "mean_evaluated_width_lbp": null,
+            "radius": null,
+            "status": "withheld",
+            "reasons": [
+              "insufficient_nonoverlapping_matured_calibration_cases",
+              "insufficient_chronological_coverage_tests"
+            ]
+          }
+        },
+        "evidence_strata": {
+          "official_match": {
+            "levels": {
+              "80": {
+                "nominal": 0.8,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              },
+              "90": {
+                "nominal": 0.9,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              }
+            },
+            "eligible_n": 0,
+            "raw_distinct_targets": 0
+          },
+          "provisional_match": {
+            "levels": {
+              "80": {
+                "nominal": 0.8,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              },
+              "90": {
+                "nominal": 0.9,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              }
+            },
+            "eligible_n": 0,
+            "raw_distinct_targets": 0
+          }
+        },
+        "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
+        "target_limitation": "Reviewed complete official outcome sequence"
+      },
+      "forecast_id": 45338,
+      "snapshot_id": "cd0688b511264b9b6416226149a2f828bd373eb7b863a16b361f407f971d57d6"
     },
     {
       "horizon": "day_30",
-      "origin": "2026-11-19T18:47:16.884563+00:00",
-      "endpoint": "2026-12-19T20:47:16.884563+02:00",
+      "origin": "2026-11-20T00:38:58.684611+00:00",
+      "endpoint": "2026-12-20T02:38:58.684611+02:00",
       "target_label": "Prevailing official price in 30 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -686,9 +1446,9 @@
       "tier": 2,
       "label": "QUANTITATIVE MODEL FORECAST",
       "status": "issued",
-      "predicted_price": 2155582.135866352,
-      "predicted_change": -187417.86413364823,
-      "percentage_change": -7.999055234043886,
+      "predicted_price": 2135587.562729397,
+      "predicted_change": -207412.43727060338,
+      "percentage_change": -8.85243010117812,
       "interval": null,
       "probabilities": null,
       "uncertainty": "Waiting for a validated prediction range from live outcomes.",
@@ -725,14 +1485,14 @@
         "increase"
       ],
       "probability_status": "insufficient_matured_oof_residuals",
-      "ovx_regime": "Normal",
+      "ovx_regime": null,
       "ovx_regime_conditioning": "pooled_calibration",
       "calibration_ovx_regime": null,
       "driver_contributions": {
         "commodity_pass_through": -39852.700579437704,
         "lagged_domestic_momentum": -16713.65745384556,
         "fiscal_shock": 412.50592570475743,
-        "other_features": -26514.48464205488,
+        "other_features": -46509.057779010036,
         "baseline_intercept": -104749.52738401484,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
@@ -743,8 +1503,118 @@
       "anchor_verification": "archive_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
-      "forecast_id": 45331,
-      "snapshot_id": "a5d29613cceef076eed9b0ce929a9ae7e43f2eb4de45233b7a3544d1325d1f6e"
+      "public_calibration": {
+        "cohort": "government_backed",
+        "horizon": "day_30",
+        "artifact": "a0207757c08a2f4b4e4f953d604e7eedd1dae5b393474dd5e22ee5e91aaae796",
+        "evidence_category": "official_match",
+        "calibration_n": 0,
+        "evaluation_n": 0,
+        "empirical_coverage": null,
+        "minimum_calibration_n": 30,
+        "minimum_evaluation_n": 20,
+        "nominal": 0.9,
+        "radius": null,
+        "radius_80": null,
+        "levels": {
+          "80": {
+            "nominal": 0.8,
+            "calibration_n": 0,
+            "evaluation_n": 0,
+            "empirical_coverage": null,
+            "mean_evaluated_width_lbp": null,
+            "radius": null,
+            "status": "withheld",
+            "reasons": [
+              "insufficient_nonoverlapping_matured_calibration_cases",
+              "insufficient_chronological_coverage_tests"
+            ]
+          },
+          "90": {
+            "nominal": 0.9,
+            "calibration_n": 0,
+            "evaluation_n": 0,
+            "empirical_coverage": null,
+            "mean_evaluated_width_lbp": null,
+            "radius": null,
+            "status": "withheld",
+            "reasons": [
+              "insufficient_nonoverlapping_matured_calibration_cases",
+              "insufficient_chronological_coverage_tests"
+            ]
+          }
+        },
+        "evidence_strata": {
+          "official_match": {
+            "levels": {
+              "80": {
+                "nominal": 0.8,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              },
+              "90": {
+                "nominal": 0.9,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              }
+            },
+            "eligible_n": 0,
+            "raw_distinct_targets": 0
+          },
+          "provisional_match": {
+            "levels": {
+              "80": {
+                "nominal": 0.8,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              },
+              "90": {
+                "nominal": 0.9,
+                "calibration_n": 0,
+                "evaluation_n": 0,
+                "empirical_coverage": null,
+                "mean_evaluated_width_lbp": null,
+                "radius": null,
+                "status": "withheld",
+                "reasons": [
+                  "insufficient_nonoverlapping_matured_calibration_cases",
+                  "insufficient_chronological_coverage_tests"
+                ]
+              }
+            },
+            "eligible_n": 0,
+            "raw_distinct_targets": 0
+          }
+        },
+        "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
+        "target_limitation": "Reviewed complete official outcome sequence"
+      },
+      "forecast_id": 45339,
+      "snapshot_id": "cd0688b511264b9b6416226149a2f828bd373eb7b863a16b361f407f971d57d6"
     }
   ],
   "available_market_inputs": {
@@ -994,16 +1864,16 @@
   "status": "issued",
   "reasons": [],
   "forecast_ids": [
-    45324,
-    45325,
-    45326,
-    45327,
-    45328,
-    45329,
-    45330,
-    45331
+    45332,
+    45333,
+    45334,
+    45335,
+    45336,
+    45337,
+    45338,
+    45339
   ],
   "snapshot_ids": [
-    "a5d29613cceef076eed9b0ce929a9ae7e43f2eb4de45233b7a3544d1325d1f6e"
+    "cd0688b511264b9b6416226149a2f828bd373eb7b863a16b361f407f971d57d6"
   ]
 }

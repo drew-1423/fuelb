@@ -1,6 +1,6 @@
 # Lebanese gasoline 95 data quality report
 
-As of 2026-11-19, Asia/Beirut. Generated 2026-11-19T18:46:54.666864+00:00. Counts are database queries over actual captures.
+As of 2026-11-20, Asia/Beirut. Generated 2026-11-20T00:38:38.346896+00:00. Counts are database queries over actual captures.
 
 | Completion measure | Observed result |
 | --- | --- |
@@ -18,11 +18,11 @@ Verification: `document_verified` requires an original government PDF and record
 
 | Source | Observations | Unique valid dates | Earliest | Latest | Age days | Stale |
 | --- | ---: | ---: | --- | --- | ---: | --- |
-| ipt | 1313 | 1309 | 2008-01-02 | 2026-11-17 | 2 | False |
-| taqtek | 916 | 916 | 2010-10-27 | 2026-11-17 | 2 | False |
-| ministry | 946 | 914 | 2010-10-27 | 2026-11-17 | 2 | False |
-| official_document | 4 | 4 | 2010-10-27 | 2025-05-29 | 539 | True |
-| manual | 21 | 17 | 2026-01-16 | 2026-11-13 | 6 | False |
+| ipt | 1313 | 1309 | 2008-01-02 | 2026-11-17 | 3 | False |
+| taqtek | 916 | 916 | 2010-10-27 | 2026-11-17 | 3 | False |
+| ministry | 946 | 914 | 2010-10-27 | 2026-11-17 | 3 | False |
+| official_document | 4 | 4 | 2010-10-27 | 2025-05-29 | 540 | True |
+| manual | 21 | 17 | 2026-01-16 | 2026-11-13 | 7 | False |
 
 Latest successful IPT import parsed 1314 original rows. Semantic observations and unique dates differ because all raw row occurrences, including duplicates and same-day alternatives, are retained in `sightings`.
 
@@ -57,7 +57,7 @@ Adequate for source reconciliation and exploratory target analysis. Not ready fo
 
 See [source assessment](../research/data_source_assessment.md), [assumptions](../research/verified_assumptions.md) and [update instructions](../docs/data_updates.md).
 
-Raw integrity: 84 missing or hash-mismatched captured files. `date_alignment_review` records are excluded from verified exports pending review of inconsistent source weekday/date labels.
+Raw integrity: 69 missing or hash-mismatched captured files. `date_alignment_review` records are excluded from verified exports pending review of inconsistent source weekday/date labels.
 
 ## Longest IPT intervals to investigate
 

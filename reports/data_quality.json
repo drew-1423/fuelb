@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-19T18:46:54.666864+00:00",
-  "as_of_beirut": "2026-11-19",
+  "generated_at": "2026-11-20T00:38:38.346896+00:00",
+  "as_of_beirut": "2026-11-20",
   "timezone": "Asia/Beirut",
   "ledger_unique_dates": 1372,
   "status_counts": {
@@ -33,7 +33,6 @@
     "data/raw/ipt/d01b3e3ee5d643b5cd35168e855100731e1ff60228b3faee78deb354641b7026.html",
     "data/raw/ipt/c2237442976de7eb5dec2beb1892defe73fd04b199fac1ee7b81094bc86528ed.html",
     "data/raw/ipt/2d3f1d038bdad9bc262260e0067177fbe2420477a3f30cde2d6c0807a09eedbe.xlsx",
-    "data/raw/ministry/6e7f37e45d104256a47f421f796e24f9d1592632dc43e8ca50caf428f031af67.html",
     "data/raw/ipt/7823157d5af7604c2ea57f87632753a59842afb03855ee7d829f96a406e6ce19.html",
     "data/raw/ipt/144c6004eac93b65c88bd98797f101f94f3fb2a0c3d91b0b8961ca1a23a2aab6.html",
     "data/raw/ipt/e1db95aa55e55213e33ad6bc5cb8070f7a853a3cbd65c5c3aaf0009bafc062f6.html",
@@ -42,10 +41,8 @@
     "data/raw/ipt/3bf8b477ef7b929646f9c816b2370439a75824b649c16bca335dd530665dd1ce.html",
     "data/raw/ipt/e197387c4b5625eb02d8941b8357302b13d03dc12a3cd29a315bb38fee1c0ed8.html",
     "data/raw/ipt/1c826afdd0b4a14db269c7a9085accb5b8462681e181ee66ff9d5653b8707b13.xlsx",
-    "data/raw/taqtek/ee694c72ed38554a73cb65bafbfaa9ea095bfddf36a5589ebd2ed9598bae5e84.html",
     "data/raw/market_ec/54d0ceb2ed9347a61634237612f95c02f4cb0a67fd9c52d88e723ff2b23f2498.html",
     "data/raw/market_fed/944ae31c1f5166678826976edf235b9dea4077a9d06ea784a5846cef00eb69ae.html",
-    "data/raw/market_fed/c424bcdfe0947e48d9bc3937fd3a9e82bf144e5ac6454ae95a68346196394c77.zip",
     "data/raw/ipt/481072ac7749ed52136d46e2e658716042ec87275137be70dd81ed6658723fbc.html",
     "data/raw/ipt/531b74187e5f12d20b0cd7d5245f8a017eb887d45d496534354ccae565b3ef6e.html",
     "data/raw/ipt/74461730b3ce05ec6180c34449d25c16f0fbed864cff22d8ee5a20fa409cc332.html",
@@ -54,7 +51,6 @@
     "data/raw/ipt/aa5fe79e99e6a231b63c78fc4903898d479b9c457632ceab6e78f51443e2f723.html",
     "data/raw/ipt/2edc314b76cf50e644232d71428f63f3d7676b76ebcb2548e92ac91759f7ee54.html",
     "data/raw/ipt/dbf4a965ca74ba132ab7b906b8d872602ae5354f15aabd8162e8433325687837.xlsx",
-    "data/raw/ministry/f70e3d61a2d815f803be76623b3941f3e92e2543d1330930a3b5ff74e765d6ae.html",
     "data/raw/ipt/813b7f7e019fcaef07c0fc450df7c9f8f35531be21b595086715bb36bca1b02f.html",
     "data/raw/ipt/99368fe28974fa6fa81f051f3616a0fc6d58f122cd0efafdd389f3a4ee16396d.html",
     "data/raw/ipt/6fb84bb1c09780eb2576699b8b9d09fe4ed47b2f82cae70363cab0abbe18af3d.html",
@@ -87,17 +83,6 @@
     "data/raw/ipt/c6a7d8620cfb26175783292281f5f40264d05f3cf917be38b5aa684fc570fc2a.html",
     "data/raw/ipt/700d49e9da33ab2de82f88563f19ef07c088ff68a2f85df5b833137f5a5b9ab9.html",
     "data/raw/ipt/6d3da24eb9b033a26eb08f401a1a8ef4e07d8ea7b16a60c77a586ce1e88c0196.xlsx",
-    "data/raw/taqtek/0667cfc6f8333143be698a8467a565c2b12678d59979a4af874a3324b1d16253.html",
-    "data/raw/market_eia/8efb2a474db8665a628d73cff9f4d96fcf88ad41866aca96cbcae06cb3dc41d0.html",
-    "data/raw/market_eia/099cc50c88f3f28452b597744ca4c79147211cf15f9bbe3d7e232107d4e94672.xls",
-    "data/raw/market_eia/c043fbb34bdf2b870096b54e87eff91d2a71c62e55dc1d60dd9d50f19fcde7d4.html",
-    "data/raw/market_eia/bf7a46a165420b5ca89ec17355179403bcaf3aaa621cbebf023b30cfc77c9754.xls",
-    "data/raw/market_eia/ab845e2fe8a29fcdd5fbb275e737a34fd49e14af92713afd39b383685cac6c29.html",
-    "data/raw/market_eia/cee877416aa21ac3ec0fb21eb1a79747747d5ccdb88f302e4025fd5acf392331.xls",
-    "data/raw/market_eia/539089717d98465228884992847e5852511e91383026ce598288a4e608bece3f.html",
-    "data/raw/market_eia/91cabd86184db57035b99630c357f2683c50e51a85fec37facae5a960e38ee15.xls",
-    "data/raw/market_eia/82474ddd76ff01cac27cd5814736ba9e9d33f5a3ec92c96cc1b0f9c3c453d4b5.html",
-    "data/raw/market_eia/f453fcda4cf9567bf054e68a41b14e22ba253026b094185fd06c18eabe27d379.xls",
     "data/raw/market_ec/1867577c8f46b6cd69106beb8af9d11ba74fff110afb78053a08f918159b9ca2.html",
     "data/raw/market_ec/d03df345caa9b7ddad9a70b4fccf81b658dd7122fa55f61b49f6637e968f70d5.xlsx",
     "data/raw/market_fed/4ada726a3aecc88503d9c5415f050cc6b4e13362964db81c70bd1661d656ba8d.html"
@@ -175,7 +160,7 @@
       "valid_unique_dates": 1309,
       "earliest_source_date": "2008-01-02",
       "latest_source_date": "2026-11-17",
-      "age_days": 2,
+      "age_days": 3,
       "stale": false,
       "invalid_observations": 0,
       "within_source_conflict_dates": [
@@ -185,14 +170,14 @@
         "2025-09-30"
       ],
       "duplicate_date_extra_observations": 4,
-      "exact_duplicate_rows_in_captures": 29,
+      "exact_duplicate_rows_in_captures": 30,
       "last_successful_run": {
-        "id": 155,
-        "finished_at": "2026-11-19T18:46:43.901347+00:00",
+        "id": 157,
+        "finished_at": "2026-11-20T00:38:27.151657+00:00",
         "details": {
           "parsed_rows": 1314,
           "new_observations": 0,
-          "capture_id": 595
+          "capture_id": 604
         }
       }
     },
@@ -201,7 +186,7 @@
       "valid_unique_dates": 916,
       "earliest_source_date": "2010-10-27",
       "latest_source_date": "2026-11-17",
-      "age_days": 2,
+      "age_days": 3,
       "stale": false,
       "invalid_observations": 0,
       "within_source_conflict_dates": [],
@@ -222,7 +207,7 @@
       "valid_unique_dates": 914,
       "earliest_source_date": "2010-10-27",
       "latest_source_date": "2026-11-17",
-      "age_days": 2,
+      "age_days": 3,
       "stale": false,
       "invalid_observations": 1,
       "within_source_conflict_dates": [
@@ -255,8 +240,8 @@
       "duplicate_date_extra_observations": 31,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 156,
-        "finished_at": "2026-11-19T18:46:54.019462+00:00",
+        "id": 158,
+        "finished_at": "2026-11-20T00:38:37.787083+00:00",
         "details": {
           "parsed_rows": 9,
           "new_observations": 0,
@@ -269,7 +254,7 @@
       "valid_unique_dates": 4,
       "earliest_source_date": "2010-10-27",
       "latest_source_date": "2025-05-29",
-      "age_days": 539,
+      "age_days": 540,
       "stale": true,
       "invalid_observations": 0,
       "within_source_conflict_dates": [],
@@ -290,7 +275,7 @@
       "valid_unique_dates": 17,
       "earliest_source_date": "2026-01-16",
       "latest_source_date": "2026-11-13",
-      "age_days": 6,
+      "age_days": 7,
       "stale": false,
       "invalid_observations": 0,
       "within_source_conflict_dates": [],
@@ -1545,6 +1530,22 @@
       "source_id": "ministry",
       "started_at": "2026-11-19T18:46:44.382951+00:00",
       "finished_at": "2026-11-19T18:46:54.019462+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 9, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 157,
+      "source_id": "ipt",
+      "started_at": "2026-11-20T00:38:10.870042+00:00",
+      "finished_at": "2026-11-20T00:38:27.151657+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1314, \"new_observations\": 0, \"capture_id\": 604}"
+    },
+    {
+      "id": 158,
+      "source_id": "ministry",
+      "started_at": "2026-11-20T00:38:27.553732+00:00",
+      "finished_at": "2026-11-20T00:38:37.787083+00:00",
       "status": "success",
       "details": "{\"parsed_rows\": 9, \"new_observations\": 0, \"pages\": 1}"
     }
