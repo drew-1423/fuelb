@@ -1,5 +1,5 @@
 {
-  "origin": "2026-11-20T18:15:18.175520+00:00",
+  "origin": "2026-11-20T18:47:50.274003+00:00",
   "anchor": {
     "absolute_price_change": -52000,
     "candidate_values": [
@@ -15,6 +15,10 @@
       {
         "id": "totalenergies",
         "url": "https://pricing.totalenergies.com.lb/fuelprice/"
+      },
+      {
+        "id": "taqtek",
+        "url": "https://taqteklb.com/en/fuel/"
       }
     ],
     "date_role": "source_label",
@@ -22,7 +26,8 @@
     "issues": [],
     "observation_ids": [
       3201,
-      3202
+      3202,
+      3204
     ],
     "official_effective_date": null,
     "percentage_price_change": -2.219376867264191,
@@ -41,13 +46,13 @@
     "timezone": "Asia/Beirut",
     "unit": "LBP/20L",
     "verification_status": "provisional_corroborated",
-    "revision_id": 3480,
-    "version_known_at": "2026-11-20T18:14:46.032735+00:00"
+    "revision_id": 3482,
+    "version_known_at": "2026-11-20T18:46:34.157987+00:00"
   },
   "forecasts": [
     {
       "horizon": "decision_1",
-      "origin": "2026-11-20T18:15:18.175520+00:00",
+      "origin": "2026-11-20T18:47:50.274003+00:00",
       "endpoint": null,
       "target_label": "Next 1 official pricing decision(s)",
       "decision_date": "2026-11-24",
@@ -153,13 +158,13 @@
         "lagged_domestic_momentum": -26931.496523303755,
         "fiscal_shock": 0.0,
         "other_features": -4373.042310064,
-        "baseline_intercept": -1582.627686726369,
+        "baseline_intercept": -1582.6276867263691,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
       },
       "base_price": 2291000,
       "base_source_date": "2026-11-20",
-      "base_revision_id": 3480,
+      "base_revision_id": 3482,
       "anchor_verification": "provisional_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
@@ -171,6 +176,10 @@
         {
           "id": "totalenergies",
           "url": "https://pricing.totalenergies.com.lb/fuelprice/"
+        },
+        {
+          "id": "taqtek",
+          "url": "https://taqteklb.com/en/fuel/"
         }
       ],
       "interval": null,
@@ -285,12 +294,12 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Supplier evaluation is conditional on recorded corroborated quotes and does not certify official publication/effective times"
       },
-      "forecast_id": 45356,
-      "snapshot_id": "865d889c443d71b719ea6ad24bc3f8b9457ed8c54857d0ac609465b223c56f76"
+      "forecast_id": 45364,
+      "snapshot_id": "9cc3d47081db88326927f1cf1e0a53ecb12d76b17211ad97942ebb5002af3414"
     },
     {
       "horizon": "decision_2",
-      "origin": "2026-11-20T18:15:18.175520+00:00",
+      "origin": "2026-11-20T18:47:50.274003+00:00",
       "endpoint": null,
       "target_label": "Next 2 official pricing decision(s)",
       "decision_date": "2026-11-27",
@@ -363,13 +372,13 @@
         "lagged_domestic_momentum": -45825.00777909322,
         "fiscal_shock": 0.0,
         "other_features": -2459.1141634349196,
-        "baseline_intercept": -1800.3739870424247,
+        "baseline_intercept": -1800.373987042425,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
       },
       "base_price": 2291000,
       "base_source_date": "2026-11-20",
-      "base_revision_id": 3480,
+      "base_revision_id": 3482,
       "anchor_verification": "provisional_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
@@ -381,6 +390,10 @@
         {
           "id": "totalenergies",
           "url": "https://pricing.totalenergies.com.lb/fuelprice/"
+        },
+        {
+          "id": "taqtek",
+          "url": "https://taqteklb.com/en/fuel/"
         }
       ],
       "interval": null,
@@ -495,12 +508,12 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Supplier evaluation is conditional on recorded corroborated quotes and does not certify official publication/effective times"
       },
-      "forecast_id": 45357,
-      "snapshot_id": "865d889c443d71b719ea6ad24bc3f8b9457ed8c54857d0ac609465b223c56f76"
+      "forecast_id": 45365,
+      "snapshot_id": "9cc3d47081db88326927f1cf1e0a53ecb12d76b17211ad97942ebb5002af3414"
     },
     {
       "horizon": "decision_4",
-      "origin": "2026-11-20T18:15:18.175520+00:00",
+      "origin": "2026-11-20T18:47:50.274003+00:00",
       "endpoint": null,
       "target_label": "Next 4 official pricing decision(s)",
       "decision_date": "2026-12-04",
@@ -569,7 +582,7 @@
       "ovx_regime_conditioning": "pooled_calibration",
       "calibration_ovx_regime": null,
       "driver_contributions": {
-        "commodity_pass_through": 4310.957193327148,
+        "commodity_pass_through": 4310.957193327149,
         "lagged_domestic_momentum": -59098.979015326535,
         "fiscal_shock": 0.0,
         "other_features": -5991.872908208887,
@@ -579,7 +592,7 @@
       },
       "base_price": 2291000,
       "base_source_date": "2026-11-20",
-      "base_revision_id": 3480,
+      "base_revision_id": 3482,
       "anchor_verification": "provisional_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
@@ -591,6 +604,10 @@
         {
           "id": "totalenergies",
           "url": "https://pricing.totalenergies.com.lb/fuelprice/"
+        },
+        {
+          "id": "taqtek",
+          "url": "https://taqteklb.com/en/fuel/"
         }
       ],
       "interval": null,
@@ -705,13 +722,13 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45358,
-      "snapshot_id": "865d889c443d71b719ea6ad24bc3f8b9457ed8c54857d0ac609465b223c56f76"
+      "forecast_id": 45366,
+      "snapshot_id": "9cc3d47081db88326927f1cf1e0a53ecb12d76b17211ad97942ebb5002af3414"
     },
     {
       "horizon": "day_1",
-      "origin": "2026-11-20T18:15:18.175520+00:00",
-      "endpoint": "2026-11-21T20:15:18.175520+02:00",
+      "origin": "2026-11-20T18:47:50.274003+00:00",
+      "endpoint": "2026-11-21T20:47:50.274003+02:00",
       "target_label": "Prevailing official price in 1 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -763,17 +780,17 @@
       "ovx_regime_conditioning": "pooled_calibration",
       "calibration_ovx_regime": null,
       "driver_contributions": {
-        "commodity_pass_through": 8.166435015194994,
+        "commodity_pass_through": 8.166435015194992,
         "lagged_domestic_momentum": -6729.71903017589,
         "fiscal_shock": 0.0,
-        "other_features": -337.0451824085887,
-        "baseline_intercept": -219.88847869269293,
+        "other_features": -337.04518240858874,
+        "baseline_intercept": -219.8884786926929,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
       },
       "base_price": 2291000,
       "base_source_date": "2026-11-20",
-      "base_revision_id": 3480,
+      "base_revision_id": 3482,
       "anchor_verification": "provisional_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
@@ -785,6 +802,10 @@
         {
           "id": "totalenergies",
           "url": "https://pricing.totalenergies.com.lb/fuelprice/"
+        },
+        {
+          "id": "taqtek",
+          "url": "https://taqteklb.com/en/fuel/"
         }
       ],
       "interval": null,
@@ -899,13 +920,13 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Supplier evaluation is conditional on recorded corroborated quotes and does not certify official publication/effective times"
       },
-      "forecast_id": 45359,
-      "snapshot_id": "865d889c443d71b719ea6ad24bc3f8b9457ed8c54857d0ac609465b223c56f76"
+      "forecast_id": 45367,
+      "snapshot_id": "9cc3d47081db88326927f1cf1e0a53ecb12d76b17211ad97942ebb5002af3414"
     },
     {
       "horizon": "day_3",
-      "origin": "2026-11-20T18:15:18.175520+00:00",
-      "endpoint": "2026-11-23T20:15:18.175520+02:00",
+      "origin": "2026-11-20T18:47:50.274003+00:00",
+      "endpoint": "2026-11-23T20:47:50.274003+02:00",
       "target_label": "Prevailing official price in 3 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -960,14 +981,14 @@
         "commodity_pass_through": -5688.44933630326,
         "lagged_domestic_momentum": -17446.05232779461,
         "fiscal_shock": 0.0,
-        "other_features": -645.7416601516908,
-        "baseline_intercept": -1171.6994268346093,
+        "other_features": -645.7416601516909,
+        "baseline_intercept": -1171.6994268346095,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
       },
       "base_price": 2291000,
       "base_source_date": "2026-11-20",
-      "base_revision_id": 3480,
+      "base_revision_id": 3482,
       "anchor_verification": "provisional_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
@@ -979,6 +1000,10 @@
         {
           "id": "totalenergies",
           "url": "https://pricing.totalenergies.com.lb/fuelprice/"
+        },
+        {
+          "id": "taqtek",
+          "url": "https://taqteklb.com/en/fuel/"
         }
       ],
       "interval": null,
@@ -1093,13 +1118,13 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45360,
-      "snapshot_id": "865d889c443d71b719ea6ad24bc3f8b9457ed8c54857d0ac609465b223c56f76"
+      "forecast_id": 45368,
+      "snapshot_id": "9cc3d47081db88326927f1cf1e0a53ecb12d76b17211ad97942ebb5002af3414"
     },
     {
       "horizon": "day_7",
-      "origin": "2026-11-20T18:15:18.175520+00:00",
-      "endpoint": "2026-11-27T20:15:18.175520+02:00",
+      "origin": "2026-11-20T18:47:50.274003+00:00",
+      "endpoint": "2026-11-27T20:47:50.274003+02:00",
       "target_label": "Prevailing official price in 7 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -1188,13 +1213,13 @@
         "lagged_domestic_momentum": -36272.557360465806,
         "fiscal_shock": 0.0,
         "other_features": -8639.065697056967,
-        "baseline_intercept": -2782.149772714183,
+        "baseline_intercept": -2782.1497727141837,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
       },
       "base_price": 2291000,
       "base_source_date": "2026-11-20",
-      "base_revision_id": 3480,
+      "base_revision_id": 3482,
       "anchor_verification": "provisional_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
@@ -1206,6 +1231,10 @@
         {
           "id": "totalenergies",
           "url": "https://pricing.totalenergies.com.lb/fuelprice/"
+        },
+        {
+          "id": "taqtek",
+          "url": "https://taqteklb.com/en/fuel/"
         }
       ],
       "interval": null,
@@ -1320,13 +1349,13 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45361,
-      "snapshot_id": "865d889c443d71b719ea6ad24bc3f8b9457ed8c54857d0ac609465b223c56f76"
+      "forecast_id": 45369,
+      "snapshot_id": "9cc3d47081db88326927f1cf1e0a53ecb12d76b17211ad97942ebb5002af3414"
     },
     {
       "horizon": "day_14",
-      "origin": "2026-11-20T18:15:18.175520+00:00",
-      "endpoint": "2026-12-04T20:15:18.175520+02:00",
+      "origin": "2026-11-20T18:47:50.274003+00:00",
+      "endpoint": "2026-12-04T20:47:50.274003+02:00",
       "target_label": "Prevailing official price in 14 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -1388,7 +1417,7 @@
       },
       "base_price": 2291000,
       "base_source_date": "2026-11-20",
-      "base_revision_id": 3480,
+      "base_revision_id": 3482,
       "anchor_verification": "provisional_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
@@ -1400,6 +1429,10 @@
         {
           "id": "totalenergies",
           "url": "https://pricing.totalenergies.com.lb/fuelprice/"
+        },
+        {
+          "id": "taqtek",
+          "url": "https://taqteklb.com/en/fuel/"
         }
       ],
       "interval": null,
@@ -1514,13 +1547,13 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45362,
-      "snapshot_id": "865d889c443d71b719ea6ad24bc3f8b9457ed8c54857d0ac609465b223c56f76"
+      "forecast_id": 45370,
+      "snapshot_id": "9cc3d47081db88326927f1cf1e0a53ecb12d76b17211ad97942ebb5002af3414"
     },
     {
       "horizon": "day_30",
-      "origin": "2026-11-20T18:15:18.175520+00:00",
-      "endpoint": "2026-12-20T20:15:18.175520+02:00",
+      "origin": "2026-11-20T18:47:50.274003+00:00",
+      "endpoint": "2026-12-20T20:47:50.274003+02:00",
       "target_label": "Prevailing official price in 30 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -1582,7 +1615,7 @@
       },
       "base_price": 2291000,
       "base_source_date": "2026-11-20",
-      "base_revision_id": 3480,
+      "base_revision_id": 3482,
       "anchor_verification": "provisional_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
@@ -1594,6 +1627,10 @@
         {
           "id": "totalenergies",
           "url": "https://pricing.totalenergies.com.lb/fuelprice/"
+        },
+        {
+          "id": "taqtek",
+          "url": "https://taqteklb.com/en/fuel/"
         }
       ],
       "interval": null,
@@ -1708,8 +1745,8 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45363,
-      "snapshot_id": "865d889c443d71b719ea6ad24bc3f8b9457ed8c54857d0ac609465b223c56f76"
+      "forecast_id": 45371,
+      "snapshot_id": "9cc3d47081db88326927f1cf1e0a53ecb12d76b17211ad97942ebb5002af3414"
     }
   ],
   "available_market_inputs": {
@@ -1729,12 +1766,12 @@
       "valid": 1,
       "raw_json": "{\"excel_date\": 46343.0, \"heading\": \"Europe Brent Spot Price FOB (Dollars per Barrel)\", \"row\": 9135, \"sheet\": \"Data 1\", \"value\": 92.94}",
       "issues_json": "[]",
-      "available_at": "2026-11-19T12:53:20.412384+00:00",
+      "available_at": "2026-11-20T18:46:46.553885+00:00",
       "availability_basis": "capture_time_latest_vintage",
-      "capture_id": 576,
-      "retrieved_at": "2026-11-19T12:53:20.412384+00:00",
+      "capture_id": 652,
+      "retrieved_at": "2026-11-20T18:46:46.553885+00:00",
       "source_url": "https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls",
-      "captured_available_at": "2026-11-19T12:53:20.412384+00:00",
+      "captured_available_at": "2026-11-20T18:46:46.553885+00:00",
       "value_usd_kl": 584.5750130039598,
       "vintage_certified": true
     },
@@ -1754,12 +1791,12 @@
       "valid": 1,
       "raw_json": "{\"excel_date\": 46343.0, \"heading\": \"New York Harbor Conventional Gasoline Regular Spot Price FOB (Dollars per Gallon)\", \"row\": 9184, \"sheet\": \"Data 1\", \"value\": 2.328}",
       "issues_json": "[]",
-      "available_at": "2026-11-19T12:53:26.708087+00:00",
+      "available_at": "2026-11-20T18:46:52.846888+00:00",
       "availability_basis": "capture_time_latest_vintage",
-      "capture_id": 578,
-      "retrieved_at": "2026-11-19T12:53:26.708087+00:00",
+      "capture_id": 654,
+      "retrieved_at": "2026-11-20T18:46:52.846888+00:00",
       "source_url": "https://www.eia.gov/dnav/pet/hist_xls/EER_EPMRU_PF4_Y35NY_DPGd.xls",
-      "captured_available_at": "2026-11-19T12:53:26.708087+00:00",
+      "captured_available_at": "2026-11-20T18:46:52.846888+00:00",
       "value_usd_kl": 614.9925378897694,
       "vintage_certified": true
     },
@@ -1779,12 +1816,12 @@
       "valid": 1,
       "raw_json": "{\"excel_date\": 46339.0, \"heading\": \"Weekly U.S. Ending Stocks of Total Gasoline  (Thousand Barrels)\", \"row\": 1927, \"sheet\": \"Data 1\", \"value\": 215949.0}",
       "issues_json": "[]",
-      "available_at": "2026-11-19T12:53:34.315735+00:00",
+      "available_at": "2026-11-20T18:47:00.242972+00:00",
       "availability_basis": "capture_time_latest_vintage",
-      "capture_id": 580,
-      "retrieved_at": "2026-11-19T12:53:34.315735+00:00",
+      "capture_id": 656,
+      "retrieved_at": "2026-11-20T18:47:00.242972+00:00",
       "source_url": "https://www.eia.gov/dnav/pet/hist_xls/WGTSTUS1w.xls",
-      "captured_available_at": "2026-11-19T12:53:34.315735+00:00",
+      "captured_available_at": "2026-11-20T18:47:00.242972+00:00",
       "vintage_certified": true
     },
     "us_crude_stocks": {
@@ -1803,12 +1840,12 @@
       "valid": 1,
       "raw_json": "{\"excel_date\": 46339.0, \"heading\": \"Weekly U.S. Ending Stocks excluding SPR of Crude Oil  (Thousand Barrels)\", \"row\": 2306, \"sheet\": \"Data 1\", \"value\": 417797.0}",
       "issues_json": "[]",
-      "available_at": "2026-11-19T12:53:42.602646+00:00",
+      "available_at": "2026-11-20T18:47:09.168415+00:00",
       "availability_basis": "capture_time_latest_vintage",
-      "capture_id": 582,
-      "retrieved_at": "2026-11-19T12:53:42.602646+00:00",
+      "capture_id": 658,
+      "retrieved_at": "2026-11-20T18:47:09.168415+00:00",
       "source_url": "https://www.eia.gov/dnav/pet/hist_xls/WCESTUS1w.xls",
-      "captured_available_at": "2026-11-19T12:53:42.602646+00:00",
+      "captured_available_at": "2026-11-20T18:47:09.168415+00:00",
       "vintage_certified": true
     },
     "us_refinery_utilization": {
@@ -1827,12 +1864,12 @@
       "valid": 1,
       "raw_json": "{\"excel_date\": 46339.0, \"heading\": \"Weekly U.S. Percent Utilization of Refinery Operable Capacity (Percent)\", \"row\": 1884, \"sheet\": \"Data 1\", \"value\": 95.7}",
       "issues_json": "[]",
-      "available_at": "2026-11-19T12:53:49.780153+00:00",
+      "available_at": "2026-11-20T18:47:16.939802+00:00",
       "availability_basis": "capture_time_latest_vintage",
-      "capture_id": 584,
-      "retrieved_at": "2026-11-19T12:53:49.780153+00:00",
+      "capture_id": 660,
+      "retrieved_at": "2026-11-20T18:47:16.939802+00:00",
       "source_url": "https://www.eia.gov/dnav/pet/hist_xls/WPULEUS3w.xls",
-      "captured_available_at": "2026-11-19T12:53:49.780153+00:00",
+      "captured_available_at": "2026-11-20T18:47:16.939802+00:00",
       "vintage_certified": true
     },
     "eurusd": {
@@ -1851,12 +1888,12 @@
       "valid": 1,
       "raw_json": "{\"observation\": {\"OBS_STATUS\": \"A\", \"OBS_VALUE\": \"1.1034\", \"TIME_PERIOD\": \"2026-11-13\"}, \"package_prepared_timestamp_timezone_unspecified\": \"2026-11-16T16:47:01\", \"series\": {\"CURRENCY\": \"EUR\", \"FREQ\": \"9\", \"FX\": \"EUR\", \"SERIES_NAME\": \"RXI$US_N.B.EU\", \"UNIT\": \"Currency\", \"UNIT_MULT\": \"1\"}}",
       "issues_json": "[]",
-      "available_at": "2026-11-19T12:54:06.052875+00:00",
+      "available_at": "2026-11-20T18:47:33.173739+00:00",
       "availability_basis": "capture_time_latest_vintage",
-      "capture_id": 590,
-      "retrieved_at": "2026-11-19T12:54:06.052875+00:00",
+      "capture_id": 666,
+      "retrieved_at": "2026-11-20T18:47:33.173739+00:00",
       "source_url": "https://www.federalreserve.gov/releases/h10/data/FRB_h10_xml.zip",
-      "captured_available_at": "2026-11-19T12:54:06.052875+00:00",
+      "captured_available_at": "2026-11-20T18:47:33.173739+00:00",
       "vintage_certified": true
     },
     "italy_gasoline_ex_tax": {
@@ -1875,12 +1912,12 @@
       "valid": 1,
       "raw_json": "{\"column\": 129, \"country\": \"IT\", \"date\": \"2026-11-16T00:00:00\", \"header\": \"IT_price_wo_tax_euro95\", \"product\": \"Euro-super 95  (I)\", \"row\": 4, \"sheet\": \"Prices wo taxes\", \"value\": 941.5262295081966, \"volume_unit\": \"1000 l\"}",
       "issues_json": "[]",
-      "available_at": "2026-11-19T12:53:58.090893+00:00",
+      "available_at": "2026-11-20T18:47:25.117607+00:00",
       "availability_basis": "capture_time_latest_vintage",
-      "capture_id": 587,
-      "retrieved_at": "2026-11-19T12:53:58.090893+00:00",
+      "capture_id": 663,
+      "retrieved_at": "2026-11-20T18:47:25.117607+00:00",
       "source_url": "https://energy.ec.europa.eu/document/download/906e60ca-8b6a-44e7-8589-652854d2fd3f_en?filename=Weekly_Oil_Bulletin_Prices_History_maticni_4web.xlsx",
-      "captured_available_at": "2026-11-19T12:53:58.090893+00:00",
+      "captured_available_at": "2026-11-20T18:47:25.117607+00:00",
       "vintage_certified": true
     },
     "greece_gasoline_ex_tax": {
@@ -1899,12 +1936,12 @@
       "valid": 1,
       "raw_json": "{\"column\": 99, \"country\": \"GR\", \"date\": \"2026-11-16T00:00:00\", \"header\": \"GR_price_wo_tax_euro95\", \"product\": \"Euro-super 95  (I)\", \"row\": 4, \"sheet\": \"Prices wo taxes\", \"value\": 872.5632258064517, \"volume_unit\": \"1000 l\"}",
       "issues_json": "[]",
-      "available_at": "2026-11-19T12:53:58.090893+00:00",
+      "available_at": "2026-11-20T18:47:25.117607+00:00",
       "availability_basis": "capture_time_latest_vintage",
-      "capture_id": 587,
-      "retrieved_at": "2026-11-19T12:53:58.090893+00:00",
+      "capture_id": 663,
+      "retrieved_at": "2026-11-20T18:47:25.117607+00:00",
       "source_url": "https://energy.ec.europa.eu/document/download/906e60ca-8b6a-44e7-8589-652854d2fd3f_en?filename=Weekly_Oil_Bulletin_Prices_History_maticni_4web.xlsx",
-      "captured_available_at": "2026-11-19T12:53:58.090893+00:00",
+      "captured_available_at": "2026-11-20T18:47:25.117607+00:00",
       "vintage_certified": true
     },
     "lbp_payment_fx": {
@@ -1959,16 +1996,16 @@
   "status": "issued",
   "reasons": [],
   "forecast_ids": [
-    45356,
-    45357,
-    45358,
-    45359,
-    45360,
-    45361,
-    45362,
-    45363
+    45364,
+    45365,
+    45366,
+    45367,
+    45368,
+    45369,
+    45370,
+    45371
   ],
   "snapshot_ids": [
-    "865d889c443d71b719ea6ad24bc3f8b9457ed8c54857d0ac609465b223c56f76"
+    "9cc3d47081db88326927f1cf1e0a53ecb12d76b17211ad97942ebb5002af3414"
   ]
 }

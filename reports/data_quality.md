@@ -1,6 +1,6 @@
 # Lebanese gasoline 95 data quality report
 
-As of 2026-11-20, Asia/Beirut. Generated 2026-11-20T18:15:07.028808+00:00. Counts are database queries over actual captures.
+As of 2026-11-20, Asia/Beirut. Generated 2026-11-20T18:47:34.289774+00:00. Counts are database queries over actual captures.
 
 | Completion measure | Observed result |
 | --- | --- |
@@ -19,7 +19,7 @@ Verification: `document_verified` requires an original government PDF and record
 | Source | Observations | Unique valid dates | Earliest | Latest | Age days | Stale |
 | --- | ---: | ---: | --- | --- | ---: | --- |
 | ipt | 1314 | 1310 | 2008-01-02 | 2026-11-20 | 0 | False |
-| taqtek | 916 | 916 | 2010-10-27 | 2026-11-17 | 3 | False |
+| taqtek | 917 | 917 | 2010-10-27 | 2026-11-20 | 0 | False |
 | ministry | 946 | 914 | 2010-10-27 | 2026-11-17 | 3 | False |
 | official_document | 4 | 4 | 2010-10-27 | 2025-05-29 | 540 | True |
 | manual | 21 | 17 | 2026-01-16 | 2026-11-13 | 7 | False |
@@ -48,7 +48,7 @@ Observed frequency by year is in [frequency_by_year.csv](frequency_by_year.csv);
 
 Status counts: `{"archive_corroborated": 810, "conflict": 42, "document_verified": 4, "government_archive": 58, "provisional_corroborated": 3, "supplier_observed": 456}`. All contradictory valid source values remain in the immutable observation table; disputed dates have null canonical prices. [conflicting_observations.csv](conflicting_observations.csv) links them to observation IDs.
 
-Unknown publication timestamps: 3203 observations. Unknown official effective dates: 3199. Original Excel/HTML dates have no invented midnight release timestamp. Retrieval is stored in UTC and rendered with Asia/Beirut rules.
+Unknown publication timestamps: 3204 observations. Unknown official effective dates: 3200. Original Excel/HTML dates have no invented midnight release timestamp. Retrieval is stored in UTC and rendered with Asia/Beirut rules.
 
 Changes in the export are relative to the previous eligible verified record, with its date and an explicit basis. They are not asserted to be changes from the immediately preceding official decision. Sparse verified history cannot establish that predecessor.
 
@@ -60,7 +60,7 @@ Adequate for source reconciliation and exploratory target analysis. Not ready fo
 
 See [source assessment](../research/data_source_assessment.md), [assumptions](../research/verified_assumptions.md) and [update instructions](../docs/data_updates.md).
 
-Raw integrity: 69 missing or hash-mismatched captured files. `date_alignment_review` records are excluded from verified exports pending review of inconsistent source weekday/date labels.
+Raw integrity: 68 missing or hash-mismatched captured files. `date_alignment_review` records are excluded from verified exports pending review of inconsistent source weekday/date labels.
 
 ## Longest IPT intervals to investigate
 

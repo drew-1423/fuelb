@@ -1,6 +1,6 @@
 # International market coverage and quality
 
-Generated for 2026-11-20T18:15:07.037759+00:00. Counts below are actual stored observations, not estimates.
+Generated for 2026-11-20T18:47:34.302968+00:00. Counts below are actual stored observations, not estimates.
 
 | Series | Unique valid dates | Earliest | Latest | Latest normalized value | Stale |
 | --- | ---: | --- | --- | --- | --- |
@@ -23,15 +23,15 @@ Generated for 2026-11-20T18:15:07.037759+00:00. Counts below are actual stored o
 | Source | Result | Completed UTC | Detail |
 | --- | --- | --- | --- |
 | market_cboe | success | 2026-11-13T16:28:03.126952+00:00 | 4912 reviewed/imported rows |
-| market_ec | success | 2026-11-19T12:53:59.304366+00:00 | 2,186 rows parsed; 2 new observations |
-| market_eia | success | 2026-11-19T12:53:49.829768+00:00 | 24,421 rows parsed; 11 new observations |
-| market_fed | success | 2026-11-19T12:54:06.778753+00:00 | 7,270 rows parsed; 0 new observations |
+| market_ec | success | 2026-11-20T18:47:26.333032+00:00 | 2,186 rows parsed; 0 new observations |
+| market_eia | success | 2026-11-20T18:47:16.990025+00:00 | 24,421 rows parsed; 0 new observations |
+| market_fed | success | 2026-11-20T18:47:33.884574+00:00 | 7,270 rows parsed; 0 new observations |
 | market_official_review | success | 2026-11-14T20:06:38.456497+00:00 | 1 reviewed/imported rows |
 | market_yahoo | partial | 2026-11-12T11:01:09.971477+00:00 | rows parsed: unavailable; 0 new observations; brent_futures: unavailable — AccessStopped: Request denied by robots policy; Stored fallback: brent_spot (latest 2026-11-03); not newly collected futures; rbob_futures: unavailable — AccessStopped: Request denied by robots policy; Stored fallback: nyh_gasoline (latest 2026-11-03); not newly collected futures; gasoil_futures: unavailable — AccessStopped: Request denied by robots policy |
 
 ## Availability and validation
 
-38,791 immutable observations; 284 invalid/missing rows retained. 0 dates with captured value revisions; 0 same-capture contradictions quarantined. Raw hash failures: 1.
+38,791 immutable observations; 284 invalid/missing rows retained. 0 dates with captured value revisions; 0 same-capture contradictions quarantined. Raw hash failures: 0.
 39 long interval candidates; 2832 unclassified weekday/weekly calendar candidates. These include holidays and cannot be called missing market sessions without an authoritative calendar. No filling or interpolation was applied.
 40 large-move review candidates; 0 unusual reference-weekday candidates. Review flags do not prove source errors or erase real market shocks.
 Known per-observation publication timestamps: 0. Documented original historical vintages: 0. Dates in today's workbook are not release timestamps.
