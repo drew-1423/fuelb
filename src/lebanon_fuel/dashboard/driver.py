@@ -33,7 +33,8 @@ def health_strip(health,row):
             labels={'nyh_gasoline':'Gasoline proxy','brent_spot':'Brent spot'}
             detail=' · '.join(f'{labels.get(sid,sid.replace("_"," "))}: {v.get("observation_date") or "missing"}' for sid,v in state.get('feeds',{}).items()) or 'Required feed dates need review'
         elif key=='calibration':
-            detail=f'{progress["cases"]}/{progress["minimum_cases"]} matched cases · {progress["tests"]}/{progress["minimum_tests"]} range tests'
+            detail=(f'{progress["cases"]}/{progress["minimum_cases"]} matched cases · {progress["tests"]}/{progress["minimum_tests"]} range tests'
+                    if row is not None else 'No current forecast to evaluate')
         elif key=='operational_integrity':
             detail=f'{state["missing_files"]} original captures missing' if state.get('missing_files') else 'Strict audit '+('passed' if status=='ok' else 'needs review')
         else:
