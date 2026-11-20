@@ -28,7 +28,7 @@ DISPLAY_FX = 89500.0
 STATUS = {"document_verified": "🏛️ Official Ministry Decree",
           "archive_corroborated": "📜 Government Archive",
           "government_archive": "📜 Government Archive · uncorroborated",
-          PROVISIONAL_PRICE: "🤝 Station Consensus (IPT + Taqtek)",
+          PROVISIONAL_PRICE: "🤝 Matching dated price sources",
           "supplier_observed": "🔍 Single Station Quote",
           "conflict": "Conflicting sources"}
 
@@ -126,7 +126,7 @@ def market_and_prices(root, db_path):
         """, store.db)
         latest_capture = store.db.execute("""
             SELECT MAX(retrieved_at) FROM captures WHERE http_status BETWEEN 200 AND 299
-            AND source_id IN ('ipt','ministry','taqtek','official_document',
+            AND source_id IN ('ipt','totalenergies','ministry','taqtek','thefuelprice','official_document',
                               'market_eia','market_ec','market_fed','market_cboe','market_fred_ovx','market_official_review')
         """).fetchone()[0]
         clocks = store.db.execute("""

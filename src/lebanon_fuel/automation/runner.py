@@ -21,12 +21,12 @@ from lebanon_fuel.validation.quality import export_data, report
 from lebanon_fuel.validation.decision_tracking import settle_supplier_updates
 from lebanon_fuel.validation.settlement import settle
 from . import forecast, maintenance, monitoring
-from .schedule import SOURCES, due, settings
+from .schedule import DOMESTIC_SOURCES, SOURCES, due, settings
 from .state import Journal, atomic_write, now, refresh_lock, write_json
 
 
 def execute(root, source, cfg):
-    module = "lebanon_fuel.cli" if source in SOURCES[:3] else "lebanon_fuel.market.cli"
+    module = "lebanon_fuel.cli" if source in DOMESTIC_SOURCES else "lebanon_fuel.market.cli"
     command = [sys.executable, "-m", module, "--root", str(root), "collect", "--source", source]
     if source == "ministry":
         command.extend(["--start", (now().astimezone(BEIRUT).date() - timedelta(days=cfg["collection"]["ministry_lookback_days"])).isoformat()])
@@ -57,7 +57,7 @@ def cooldown(source, journal, cfg, at):
 
 
 def access_cooldown(store, source, started, cfg):
-    source_id = source if source in SOURCES[:3] else "market_" + source
+    source_id = source if source in DOMESTIC_SOURCES else "market_" + source
     rows = store.db.execute("SELECT http_status,retrieved_at,metadata_json FROM captures WHERE source_id=? AND retrieved_at>=? AND http_status IN (401,403,406,429)",
                             (source_id, started)).fetchall()
     deadlines = []
@@ -161,7 +161,7 @@ def run(root, *, scheduled=False, sources=None, offline=False, collector=execute
                         outcome = dict(status="failed", stderr=f"{type(exc).__name__}: {exc}")
                     with closing(Store(root, cfg["storage"]["database"])) as source_store:
                         outcome["retry_not_before"] = access_cooldown(source_store, source, started, ops)
-                        source_id = source if source in SOURCES[:3] else "market_" + source
+                        source_id = source if source in DOMESTIC_SOURCES else "market_" + source
                         # A terminated collector can leave an unclosed run. Preserve its failure.
                         interrupted = source_store.db.execute("SELECT id FROM collection_runs WHERE source_id=? AND status='running'", (source_id,)).fetchall()
                         for row in interrupted:

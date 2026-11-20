@@ -5,7 +5,7 @@ import json
 import sqlite3
 import tomllib
 
-from lebanon_fuel.domain import SOURCES, VERIFIED, PROVISIONAL_PRICE, now_utc, utc_timestamp, regime_label, weekday_disagreement
+from lebanon_fuel.domain import SOURCES, VERIFIED, PROVISIONAL_PRICE, supplier_agreement, now_utc, utc_timestamp, regime_label, weekday_disagreement
 
 
 def sqlite_connection(path, *, readonly=False):
@@ -117,13 +117,13 @@ class Store:
                 chosen = min(valid, key=lambda r:(r["priority"],r["id"])) if valid else None
                 status = "invalid"
                 if chosen:
-                    status = "supplier_observed" if chosen["source_id"] == "ipt" else "supplementary_observed"
+                    status = "supplier_observed" if chosen["source_id"] in {"ipt", "totalenergies"} else "supplementary_observed"
                     if chosen["source_id"] == "ministry":
                         status = "government_archive"
-                    if any(r["source_id"]=="ministry" for r in valid) and any(r["source_id"]=="ipt" for r in valid):
+                    if any(r["source_id"]=="ministry" for r in valid) and any(r["source_id"] in {"ipt", "totalenergies"} for r in valid):
                         status = "archive_corroborated"
-                    if status == "supplier_observed" and len(values) == 1 and any(
-                            r["source_id"] == "taqtek" for r in valid):
+                    if status == "supplier_observed" and len(values) == 1 and supplier_agreement(
+                            r["source_id"] for r in valid):
                         status = PROVISIONAL_PRICE
                     if chosen["document_verified"]:
                         status = "document_verified"
@@ -174,7 +174,8 @@ class Store:
                 if status == PROVISIONAL_PRICE:
                     payload["corroborating_sources"] = [
                         {"id": sid, "url": min(r["source_url"] for r in valid if r["source_id"] == sid)}
-                        for sid in ("ipt", "taqtek")
+                        for sid in ("ipt", "totalenergies", "taqtek")
+                        if any(r["source_id"] == sid for r in valid)
                     ]
                 if chosen:
                     previous_observed={"date":day,"price":chosen["price_lbp_20l"]}

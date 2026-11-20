@@ -8,7 +8,8 @@ from openpyxl import Workbook
 
 from lebanon_fuel.domain import Observation, price_integer, utc_timestamp, BEIRUT
 from lebanon_fuel.storage.database import Store
-from lebanon_fuel.ingestion.adapters import parse_ipt,parse_ministry,parse_taqtek,parse_manual,arabic_date,form_post
+from lebanon_fuel.ingestion.adapters import (parse_ipt, parse_ministry, parse_taqtek, parse_totalenergies,
+    parse_thefuelprice, collect_totalenergies, parse_manual, arabic_date, form_post)
 from lebanon_fuel.ingestion.http import PublicClient,AccessStopped
 from lebanon_fuel.validation.quality import report,export_data
 
@@ -19,7 +20,8 @@ def store(tmp_path):
     s.close()
 
 def add(store,source='ipt',day='2025-01-01',price=1000000,**kwargs):
-    c=store.capture(source,'https://example.com',b'original','text/plain',retrieved_at='2026-11-10T17:00:00+00:00')
+    retrieved_at=kwargs.pop('retrieved_at','2026-11-10T17:00:00+00:00')
+    c=store.capture(source,'https://example.com',b'original','text/plain',retrieved_at=retrieved_at)
     row=Observation(source,day,price,'https://example.com',{'value':price},'1',**kwargs)
     return store.ingest(c,[row])
 
@@ -209,3 +211,78 @@ def test_provisional_price_requires_agreement_between_named_sources(store):
             assert [item['id'] for item in record['corroborating_sources']] == ['ipt', 'taqtek']
         else:
             assert record['verification_status'] == 'conflict' and record['price_lbp_20l'] is None
+
+
+TOTAL_BOARD = b'''<div class="divToday">20/11/2026</div>
+<div class="divDate">Price in LBP for 20L</div><table><tr>
+<td><div class="P1">SP95</div></td><td><div class="priceAnimation">0</div>
+<div id="v2" style="display:none;">2291000</div></td></tr></table>'''
+
+
+def test_totalenergies_settled_price_and_strict_date_unit():
+    row = list(parse_totalenergies(TOTAL_BOARD))[0]
+    assert (row.source, row.source_date, row.price_lbp_20l) == ('totalenergies', '2026-11-20', '2291000')
+    assert row.raw['settled_price'] == '2291000'
+    for broken in (TOTAL_BOARD.replace(b'20/11/2026', b''),
+                   TOTAL_BOARD.replace(b'20L', b'1L'),
+                   TOTAL_BOARD.replace(b'2291000', b'')):
+        with pytest.raises(ValueError):
+            list(parse_totalenergies(broken))
+
+
+def test_totalenergies_public_iframe_collection_preserves_raw_and_corroborates(store):
+    import lebanon_fuel.ingestion.adapters as adapters
+    calls = []
+    def route(request):
+        calls.append(str(request.url))
+        if request.url.path == '/robots.txt':
+            return httpx.Response(200, text='User-agent: *\nAllow: /')
+        if str(request.url) == adapters.TOTAL_URL:
+            return httpx.Response(200, text=f'<iframe src="{adapters.TOTAL_BOARD_URL}"></iframe>',
+                                  headers={'content-type': 'text/html'})
+        if str(request.url) == adapters.TOTAL_BOARD_URL:
+            return httpx.Response(200, content=TOTAL_BOARD, headers={'content-type': 'text/html'})
+        return httpx.Response(404)
+    client = PublicClient(store, 'totalenergies', None, transport=httpx.MockTransport(route))
+    client.interval = 0
+    try:
+        assert collect_totalenergies(client)['new_observations'] == 1
+    finally:
+        client.close()
+    assert adapters.TOTAL_URL in calls and adapters.TOTAL_BOARD_URL in calls
+    assert store.db.execute("SELECT COUNT(*) FROM captures WHERE source_id='totalenergies'").fetchone()[0] == 4
+    add(store, 'ipt', day='2026-11-20', price=2291000,
+        retrieved_at='2026-11-20T17:00:00+00:00')
+    store.reconcile()
+    record = store.ledger()[-1]
+    assert record['verification_status'] == 'provisional_corroborated'
+    assert [item['id'] for item in record['corroborating_sources']] == ['ipt', 'totalenergies']
+    from lebanon_fuel.forecasting.live import anchor_check
+    anchor, reason = anchor_check([record], datetime(2026, 11, 21, tzinfo=timezone.utc), 10,
+                                  allow_provisional=True)
+    assert anchor is not None and reason is None
+
+
+def test_totalenergies_mismatch_is_visible_and_never_anchors(store):
+    add(store, 'ipt', day='2026-11-20', price=2291000,
+        retrieved_at='2026-11-20T17:00:00+00:00')
+    add(store, 'totalenergies', day='2026-11-20', price=2300000,
+        retrieved_at='2026-11-20T17:00:00+00:00')
+    store.reconcile()
+    row = store.ledger()[-1]
+    assert row['verification_status'] == 'conflict'
+    assert row['price_lbp_20l'] is None
+
+
+def test_thefuelprice_is_dated_supplementary_evidence_only(store):
+    html = b'''<section id="fuel_prices_today"><p>A gallon contains 20 liters.</p>
+    <table><tbody><tr><td>Gasoline 95</td><td>2,343,000</td><td>Gallon</td>
+    <td>-102,000</td><td>17 November 2026</td></tr></tbody></table></section>'''
+    row = list(parse_thefuelprice(html))[0]
+    assert (row.source_date, row.price_lbp_20l) == ('2026-11-17', '2,343,000')
+    cap = store.capture('thefuelprice', row.source_url, html, 'text/html')
+    store.ingest(cap, [row])
+    store.reconcile()
+    assert store.ledger()[-1]['verification_status'] == 'supplementary_observed'
+    with pytest.raises(ValueError):
+        list(parse_thefuelprice(html.replace(b'20 liters', b'5 liters')))

@@ -3,7 +3,8 @@ from datetime import datetime, time
 from zoneinfo import ZoneInfo
 import tomllib
 
-SOURCES = ("ipt", "ministry", "taqtek", "eia", "ec", "fed")
+DOMESTIC_SOURCES = ("ipt", "totalenergies", "ministry", "taqtek", "thefuelprice")
+SOURCES = DOMESTIC_SOURCES + ("eia", "ec", "fed")
 
 
 def settings(root):

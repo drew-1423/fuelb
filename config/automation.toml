@@ -16,8 +16,10 @@ access_failure_pause_hours = 24
 
 [collection.minimum_interval_minutes]
 ipt = 60
+totalenergies = 60
 ministry = 60
 taqtek = 1440
+thefuelprice = 1440
 eia = 1440
 ec = 1440
 fed = 1440

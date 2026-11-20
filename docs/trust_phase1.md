@@ -8,7 +8,7 @@ Original forecasts, models, snapshots, outcomes and evaluations remain immutable
 
 - Official evaluations retain reviewed publication/effective clocks and certified complete-coverage matching through the existing official settlement mechanism.
 - Supplier evaluations are a separate provisional evidence stratum. Starting-price evidence and outcome evidence are independent: a government-backed anchor may have a supplier-consensus outcome.
-- Decision horizons require the next 1, 2 or 4 consecutive corroborated dated records. Every intervening record must have matching IPT and Taqtek evidence, dates after issuance, capture receipts after issuance, no conflict and gaps at most seven days. These are conditional recorded-price targets, not certified counts of all official decrees.
+- Decision horizons require the next 1, 2 or 4 consecutive corroborated dated records. Every intervening record must have matching IPT and either TotalEnergies or Taqtek evidence, dates after issuance, capture receipts after issuance, no conflict and gaps at most seven days. These are conditional recorded-price targets, not certified counts of all official decrees.
 - Calendar horizons require a corroborated observation on the endpoint's Beirut date, both receipts before the endpoint, and a later corroborated witness. Missing dates do not create zero changes. They do not certify that the quotation became officially effective at a particular time. Absence of sufficient clocks/evidence is an unscored target, not a failure to predict a fabricated actual.
 - Calendar endpoints that have not passed remain immature. Ambiguous same-day decision ordering is excluded. Contradictory sources revoke provisional eligibility while preserving original evaluation rows.
 

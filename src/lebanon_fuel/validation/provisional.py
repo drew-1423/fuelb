@@ -3,7 +3,7 @@ from bisect import bisect_right
 from datetime import date, datetime, timedelta, timezone
 import json
 
-from lebanon_fuel.domain import BEIRUT, PROVISIONAL_PRICE, VERIFIED
+from lebanon_fuel.domain import BEIRUT, PROVISIONAL_PRICE, VERIFIED, supplier_agreement
 from .decision_events import stamp
 
 MAX_GAP_DAYS = 7
@@ -13,14 +13,15 @@ def proof(source, record):
     if record['verification_status'] not in VERIFIED | {PROVISIONAL_PRICE}:
         return None
     rows = source.db.execute('''SELECT id,source_id,price_lbp_20l,source_url,first_retrieved_at
-        FROM observations WHERE source_date=? AND is_valid=1 AND source_id IN ('ipt','taqtek')
+        FROM observations WHERE source_date=? AND is_valid=1 AND source_id IN ('ipt','totalenergies','taqtek')
         ORDER BY first_retrieved_at,id''', (record['source_date'],)).fetchall()
     selected = {}
     for row in rows:
         if row['price_lbp_20l'] != record['price_lbp_20l']:
             return None
         selected.setdefault(row['source_id'], dict(row))
-    return list(selected.values()) if set(selected) == {'ipt','taqtek'} else None
+    partner = 'totalenergies' if 'totalenergies' in selected else 'taqtek'
+    return [selected['ipt'], selected[partner]] if 'ipt' in selected and partner in selected else None
 
 
 def select_target(forecast, records, days, source):
@@ -94,13 +95,13 @@ def validate(forecast, outcome):
     if (forecast['mode'] not in {'prospective','prospective_research'} or outcome['verification_status'] != 'supplier_agreement'
             or not day or date.fromisoformat(day) <= issued.astimezone(BEIRUT).date()
             or outcome['decision_key'] != 'supplier:'+day):
-        raise ValueError('Provisional scoring requires a later, same-date IPT and Taqtek agreement')
+        raise ValueError('Provisional scoring requires a later, same-date IPT and independent-source agreement')
     def check_sources(item):
         sources = item.get('sources', [])
-        if ({s['source_id'] for s in sources} != {'ipt','taqtek'} or len(sources) != 2
+        if (not supplier_agreement(s['source_id'] for s in sources) or len(sources) != 2
                 or any(s['price_lbp_20l'] != item['price_lbp_20l'] or stamp(s['first_retrieved_at']) <= issued
                        or stamp(s['first_retrieved_at']) > stamp(outcome['available_at']) for s in sources)):
-            raise ValueError('Provisional scoring requires a later, same-date IPT and Taqtek agreement')
+            raise ValueError('Provisional scoring requires a later, same-date IPT and independent-source agreement')
     check_sources(dict(sources=payload.get('sources',[]),price_lbp_20l=outcome['price']))
     if forecast['horizon'] == 'decision_1' and 'path' not in payload:
         return  # Original immutable next-update payloads retain their original checks.

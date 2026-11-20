@@ -21,11 +21,18 @@ Alternatively install initial declared ranges with `.venv/bin/python -m pip inst
 .venv/bin/fuel-data report --as-of 2026-11-10
 ```
 
-Omit `--end` / `--as-of` to use today's Asia/Beirut date. Collection date bounds apply to the ministry archive; IPT/Taqtek collect their complete exposed history. Report `--as-of` controls freshness checks, not reconstruction of a historical data vintage. For an explicit current update and report: `.venv/bin/python scripts/update_fuel_data.py`. No scheduling is enabled. `collect` returns a nonzero exit code if any source fails and retains the failed run and captures; other sources still run. The report can always be regenerated offline. Run `.venv/bin/python -m pytest Tests/fuel -q` for deterministic tests; they make no real network requests.
+Omit `--end` / `--as-of` to use today's Asia/Beirut date. Collection date bounds apply to the ministry archive; IPT/Taqtek collect their complete exposed history. TotalEnergies and TheFuelPrice collect their latest dated price only. Report `--as-of` controls freshness checks, not reconstruction of a historical data vintage. For an explicit current update and report: `.venv/bin/python scripts/update_fuel_data.py`. The operations scheduler runs configured sources on its own schedule. `collect` returns a nonzero exit code if any source fails and retains the failed run and captures; other sources still run. The report can always be regenerated offline. Run `.venv/bin/python -m pytest Tests/fuel -q` for deterministic tests; they make no real network requests.
 
 IPT uses the inspected public ASP.NET `all` and `EXPORT` postbacks with the current state tokens, follows the generated spreadsheet link, and parses `Fuel Prices` / `Octane95`. This uses ordinary HTTP; Playwright is unnecessary for this verified path. The single-date filter was observed in the UI but is not used for bulk collection. If markup/control names change, the adapter fails rather than guessing.
 
 The ministry adapter reads its public `pricesCtrl.js`, derives the actual JSON search action, and follows only pagination numbers in returned HTML. Its default 200-page guard stops unexpectedly expanded runs. Taqtek's gasoline_95 LBP series is parsed from structured data embedded in the served HTML, not the USD display and not an assumed API. Original HTML is retained. Collection observes robots, waits at least three seconds per host, respects a longer declared crawl delay, uses TLS verification and stops on 401/403/406/429 or challenge pages. It never evades restrictions. Public export access does not grant a redistribution licence.
+
+TotalEnergies links a public price board from its fuel-prices page. Its SP95 table has an animated display starting at zero; collection reads the settled hidden value only after confirming the displayed date and `Price in LBP for 20L` header. Both original pages are captured. Exact same-date agreement with IPT makes the price a **provisional forecast anchor**, pending Ministry review; disagreement produces a conflict. TheFuelPrice's latest dated Gasoline 95 table row is supplementary evidence, with its explicit statement that its local `Gallon` is 20 liters. Its older historical list is incomplete and is not automatically imported or used as proof of a complete decision sequence.
+
+```bash
+.venv/bin/fuel-data collect --source totalenergies
+.venv/bin/fuel-data collect --source thefuelprice
+```
 
 ## Manual fallback and original decisions
 
