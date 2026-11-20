@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-20T06:54:18.105088+00:00",
+  "as_of": "2026-11-20T12:50:55.980070+00:00",
   "series": [
     {
       "series": "brent_spot",
@@ -288,8 +288,8 @@
     587
   ],
   "historical_strict_alignment": {
-    "origins": 1372,
-    "origins_with_any_strict_market_observation": 2
+    "origins": 1373,
+    "origins_with_any_strict_market_observation": 3
   },
   "comparison_rows": 732,
   "historical_comparison_status": "assumed_date_origins_lags_latest_vintage_NOT_A_BACKTEST",
