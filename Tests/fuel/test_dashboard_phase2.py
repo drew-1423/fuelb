@@ -44,6 +44,21 @@ def test_latest_conflict_or_single_quote_never_replaced_with_older_price():
     assert ux.current_price([old],at=at+timedelta(days=20))[0] is None
 
 
+def test_refresh_request_failure_is_not_reported_as_failed_collection():
+    message=data.refresh_result_message((False,'Read-only dashboard: owner-triggered refresh needs the LEBANON_FUEL_ACTIONS_TOKEN secret.'))
+    assert 'no collection was attempted' in message
+    assert 'Scheduled collection continues' in message
+    assert 'Collection failed' not in message
+
+
+def test_unavailable_forecast_does_not_claim_zero_calibration_cases():
+    from streamlit.testing.v1 import AppTest
+    app=AppTest.from_string('from lebanon_fuel.dashboard.driver import range_status\nrange_status(None)').run()
+    assert not app.exception
+    assert any('current eligible forecast' in item.value for item in app.info)
+    assert all('0 matched cases' not in item.value for item in app.info)
+
+
 @pytest.mark.parametrize('mutation',['horizon','artifact','level','sample','reverse','nonfinite','tier'])
 def test_uncertainty_requires_exact_release_and_finite_saved_bounds(mutation):
     row=forecast_fixture();spec=json.loads(row['target_json'])

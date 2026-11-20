@@ -44,10 +44,13 @@ def health_strip(health,row):
     if checks['operational_integrity']['status']=='failed':
         st.error('Evidence audit incomplete. Missing original capture files prevent production approval; the displayed estimate remains research only.')
     if checks['refresh']['status']=='failed':
-        st.warning('The last refresh request failed. Earlier captured prices retain their original dates; retry through the owner or scheduled refresh.')
+        st.warning(data.refresh_result_message(st.session_state.get('refresh_result',(False,''))))
 
 
 def range_status(row):
+    if row is None:
+        st.info('A prediction range needs a current eligible forecast. No range is calculated for an unavailable estimate.')
+        return
     progress=ux.readiness(row)
     available=[(level,ux.released_bounds(row,level)) for level in (80,90)] if row is not None else []
     available=[(level,bounds) for level,bounds in available if bounds]
@@ -95,7 +98,16 @@ def overview(root,snap,settings,row,refresh_controls):
                 if current['verification_status']==data.PROVISIONAL_PRICE:
                     st.caption('IPT and Taqtek report the same price. Ministry confirmation and effective timing remain pending.')
                 else:st.caption('Recorded source date; an official effective time may be undocumented.')
-            else:st.warning(reason)
+            else:
+                st.warning(reason)
+                if snap['prices']:
+                    latest=max(snap['prices'],key=lambda record:record['source_date'])
+                    quote=latest.get('price_lbp_20l')
+                    if quote and math.isfinite(float(quote)) and float(quote)>0:
+                        st.metric('Latest posted quote · unconfirmed',f'{quote:,.0f} LBP')
+                        st.caption(f"{latest['source_date']} · {data.STATUS.get(latest['verification_status'],'Evidence under review')}. This quote is visible for reference and is not a forecast anchor.")
+                        if (latest.get('source_url') or '').startswith('https://'):
+                            st.link_button('View latest quoted source',latest['source_url'])
         with b:
             st.subheader('Next update estimate')
             if row is None:

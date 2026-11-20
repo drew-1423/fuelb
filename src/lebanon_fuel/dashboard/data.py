@@ -332,6 +332,23 @@ def refresh_source(root, source, timeout_seconds=180):
     return result.returncode == 0, output
 
 
+def refresh_result_message(result):
+    """Explain a refresh request without misreporting it as a collection failure."""
+    ok, detail = result
+    if ok:
+        return 'Refresh requested. Check the next successful capture time before treating data as updated.'
+    detail = str(detail)
+    if 'LEBANON_FUEL_ACTIONS_TOKEN' in detail:
+        return ('Owner refresh is not configured on this cloud deployment. '
+                'Scheduled collection continues; no collection was attempted by this request.')
+    if 'not accepted (HTTP' in detail:
+        return 'GitHub rejected the refresh request. The owner should check the workflow token and permissions.'
+    if 'durable refresh request failed' in detail.lower():
+        return 'The refresh request could not reach GitHub Actions. Stored data is unchanged.'
+    return ('The refresh cycle reported a failure. Check collection results and the separate '
+            'evidence audit in Data Quality; stored observations keep their original dates.')
+
+
 def beirut_time(value):
     if value is None or pd.isna(value):
         return "Unavailable"
