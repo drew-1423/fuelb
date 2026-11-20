@@ -381,7 +381,7 @@ def _render_refresh_status(snap, forecast):
         st.info('Refresh request is being processed. Stored observations remain unchanged until a durable run commits them.')
     if result:
         st.session_state['refresh_result']=result
-        (st.info if result[0] else st.warning)(result[1])
+        (st.info if result[0] else st.warning)(data.refresh_result_message(result))
     if manager.get('started_at'):
         st.caption('Last refresh requested · ' + data.beirut_time(manager['started_at']) + (' · finished ' + data.beirut_time(finished_at) if finished_at else ''))
     if result and job_id and st.session_state.get('refresh_rerun_job') != job_id:
@@ -917,7 +917,7 @@ def quality_view(snap):
         if ok:
             st.info("Refresh request accepted. A queued cloud workflow is not a completed data update; check the capture times after it finishes.")
         else:
-            st.error("Collection failed or was incomplete. Stored observations retain their original dates and evidence.")
+            st.warning(data.refresh_result_message(st.session_state.refresh_result))
         with st.expander("Refresh output"):
             st.code(output, language="text")
     if not snap["runs"].empty:

@@ -165,7 +165,7 @@ def test_dashboard_views_and_interactions(monkeypatch):
     app.sidebar.text_input(key="admin_passcode_entered").set_value("test-owner-passcode").run()
     monkeypatch.setattr(data, "refresh_source", lambda root, source: (False, "Source unavailable"))
     next(b for b in app.button if b.label == "Refresh selected source").click().run()
-    assert any("Collection failed" in e.value for e in app.error)
+    assert any("refresh cycle reported a failure" in w.value for w in app.warning)
     app.radio(key="perspective").set_value("🚗 Driver Pulse").run()
     app.radio(key="view").set_value("Scenario simulator").run()
     app.radio(key='scenario_calculation_mode').set_value('Illustrative May 2025 cost reconstruction').run()
