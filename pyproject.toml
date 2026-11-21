@@ -32,7 +32,7 @@ fuel-ops = "lebanon_fuel.automation.cli:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
-lebanon_fuel = ["storage/*.sql", "market/*.sql", "dashboard/*.css"]
+lebanon_fuel = ["storage/*.sql", "market/*.sql", "dashboard/*.css", "dashboard/*.webp"]
 
 [tool.pytest.ini_options]
 testpaths = ["Tests/fuel"]

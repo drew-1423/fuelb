@@ -18,6 +18,7 @@ def files(root):
     paths = set()
     for folder in ('src','scripts','Tests','config','.github/workflows'):
         paths.update(p for p in (root/folder).rglob('*') if p.is_file() and p.suffix in {'.py','.sql','.css','.json','.toml','.yml','.yaml'})
+    paths.update((root/'src/lebanon_fuel/dashboard').glob('*.webp'))
     paths.update(root/p for p in ('requirements.txt','pyproject.toml'))
     return {str(p.relative_to(root)):digest(p) for p in sorted(paths)}
 
