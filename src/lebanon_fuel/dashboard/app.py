@@ -34,6 +34,7 @@ def _view_changed():
     _remember_inputs()
     slug = next((s for s,v in experience.SLUGS.items() if v == st.session_state.get('view')), 'driver')
     st.query_params['view'] = slug
+    st.query_params.pop('detail', None)
     st.session_state['_url_view'] = slug
 
 
@@ -42,42 +43,20 @@ def _perspective_changed():
     _view_changed()
 
 
+def _open_workspace(slug, detail=None):
+    perspective, view = experience.destination(slug)
+    st.session_state.update(perspective=perspective, view=view)
+    _view_changed()
+    if detail == 'actual':
+        st.session_state['quant_detail'] = 'Predicted vs actual'
+        st.query_params['detail'] = 'actual'
+
+
 REGIMES = {"pre_crisis": "2018–19 examined research", "recent_pre_fiscal": "2025 examined research", "stabilized_fx_2023_2026": "2026 examined research"}
 FAMILIES = {"Z_last_change": "Last change", "A_no_change": "No change", "A_mean": "Historical mean",
             "Z_brent": "Brent baseline", "B_structural_proxy": "Structural proxy",
             "E_lightgbm": "LightGBM", "F_catboost": "CatBoost", "G_hybrid": "Hybrid",
             "H_ensemble": "Ensemble", "C_ridge": "Ridge", "D_sarimax": "SARIMAX"}
-
-RESPONSIVE_CSS = """
-.currency-secondary { color: #bfe9ff; font-size: 1.12rem; font-weight: 650; margin: .25rem 0; }
-.provenance-badge { display: inline-block; padding: .35rem .6rem; border-radius: 8px;
-  background: #22234c; color: #ded7ff; font-size: .83rem; line-height: 1.5; }
-.provenance-badge.consensus { background: #163c49; color: #b9f1ff; }
-.provenance-badge.single { background: #49371a; color: #ffe1a1; }
-.provenance-badge.conflict { background: #4a2438; color: #ffd0df; }
-.decree-outlook { padding: 1.2rem 1.4rem; background: #22234c; border: 1px solid #8b8fd9;
-  border-radius: 14px; margin: .25rem 0 1.3rem; color: #f8faff; }
-.decree-outlook h3 { margin: 0 0 .5rem; font-size: 1.2rem; }
-.decree-outlook p { margin: .4rem 0; max-width: 72ch; }
-.decree-outlook small { color: #ced7ee; }
-[data-testid="stMetricValue"] > div { white-space: normal; overflow: visible;
-  overflow-wrap: anywhere; font-size: clamp(1.45rem, 2.1vw, 2rem); }
-[data-testid="stMetricDelta"] { white-space: normal; height: auto; }
-.forecast-row { display: grid; grid-template-columns: .9fr 1.3fr 1.15fr; gap: .8rem;
-  padding: .85rem 0; border-bottom: 1px solid #42486a; align-items: start; }
-.forecast-row span { min-width: 0; overflow-wrap: anywhere; }
-.forecast-row small { display: block; color: #bfe9ff; margin-top: .25rem; }
-.forecast-head { font-size: .85rem; color: #c4cee4; }
-@media (max-width: 1000px) {
-  .st-key-price_sequence [data-testid="stHorizontalBlock"] { flex-wrap: wrap; }
-  .st-key-price_sequence [data-testid="stColumn"] { flex: 1 1 100% !important; width: 100% !important; }
-}
-@media (max-width: 480px) {
-  .decree-outlook { padding: 1rem; }
-  .forecast-row { gap: .45rem; font-size: .82rem; }
-}
-"""
-
 
 def _signed_usd(change):
     return f"{'−' if change < 0 else '+'}${abs(change) / data.DISPLAY_FX:,.2f}"
@@ -157,14 +136,15 @@ def table_file(path):
         return pd.DataFrame()
 
 
-def show_chart(fig):
+def show_chart(fig, *, controls=True):
     st.plotly_chart(
         fig, width="stretch", theme=None,
         config={"displaylogo": False, "scrollZoom": True, "doubleClick": "reset",
                 "displayModeBar": True,
                 "modeBarButtonsToRemove": ["select2d", "lasso2d", "autoScale2d"]},
     )
-    st.caption("Pinch or scroll to zoom. Drag to pan, or use the chart toolbar to zoom and reset.")
+    if controls:
+        st.caption("Pinch or scroll to zoom. Drag to pan, or use the chart toolbar to zoom and reset.")
 
 
 def amount(value, decimals=0):
@@ -424,12 +404,13 @@ def _overview_price_sequence(latest, agreed, forecast):
 
 
 def _refresh_controls(snap, forecast):
-    with st.expander('Refresh and capture times'):
+    with st.expander('Refresh options'):
         operations = driver.read_report(ROOT, 'reports/operations/latest_run.json')
         if operations.get('finished_at'):
             st.caption(f"Latest refresh · {data.beirut_time(operations['finished_at'])} · {operations['status']}")
         if not _show_refresh_entry():
-            st.caption('Last successful capture · ' + data.beirut_time(snap.get('latest_capture')))
+            if data.refresh_writer(ROOT) != 'github_actions':
+                st.caption('Owner access is required to refresh data from this dashboard.')
             return
         manager = _refresh_manager()
         with manager['lock']:
@@ -454,41 +435,54 @@ def _show_refresh_entry():
 def overview(snap, latest, previous):
     result=active('decision_1')
     forecast=result.iloc[0] if not result.empty else None
-    driver.overview(ROOT,snap,SETTINGS,forecast,_refresh_controls)
+    def price_history():
+        if not snap['prices'] and result.empty:
+            st.info('Price history will appear after a source is recorded.')
+            return
+        show_chart(charts.history_chart(snap['prices'], pd.DataFrame(), result, compact=True), controls=False)
+
+    driver.overview(ROOT, snap, SETTINGS, forecast, _refresh_controls, _open_workspace, price_history)
 
 
 def price_view(snap):
-    title("Price & forecasts", "Official Lebanon pump price history and upcoming decision estimates in LBP per 20 liters")
-    st.markdown(
-        '<div class="plain-guide"><strong>How to read this chart:</strong> The solid step line tracks the official pump price '
-        'for 20 liters of 95-octane gasoline. Solid dots mark verified records, while open diamonds/squares show where the model '
-        'estimates the price will land next.</div>',
-        unsafe_allow_html=True,
-    )
+    title("Price & forecasts", "Lebanon gasoline 95 · LBP per 20 L")
     horizons = {**data.HORIZONS, 'Next two decisions': 'decision_2', 'Next four decisions': 'decision_4', '1 day': 'day_1', '3 days': 'day_3'}
-    label = st.radio("Horizon", list(horizons), key="price_horizon")
+    with st.container(key='trajectory_controls'):
+        choose, overlay = st.columns([1, 1.25], vertical_alignment='bottom')
+        label = choose.selectbox('Forecast horizon', list(horizons), key='price_horizon')
+        include_replay = overlay.checkbox('Overlay saved retrospective predictions', key='show_replay')
     horizon = horizons[label]
     production = active(horizon)
     if production.empty:
-        unavailable_forecast()
+        st.warning('No current estimate for this horizon. The observed price chart remains available.')
     else:
         forecast = production.iloc[0]
-        st.metric('Estimated future price · LBP / 20 L', amount(forecast.predicted_price), delta=f'{forecast.predicted_change:+,.0f} LBP')
-        forecast_details(forecast)
-        if horizon == 'decision_1':
-            show_chart(charts.decision_chart(forecast))
-            st.caption('Event-based estimate. The announcement date is not yet verified.')
+        tier = json.loads(forecast.target_json).get('tier')
+        st.metric('Estimated future price · LBP / 20 L', amount(forecast.predicted_price),
+                  delta=f'{forecast.predicted_change:+,.0f} LBP', delta_color='off')
+        st.caption('Validated estimate' if tier == 1 else 'Research estimate · Production approval pending')
     replay = pd.DataFrame()
-    if st.checkbox("Overlay saved retrospective predictions", key="show_replay"):
+    if include_replay:
         rows = get_ledger(horizon, "retrospective_research")
         if not rows.empty:
             replay = rows[rows.family.eq("G_hybrid")]
             st.caption("Saved research predictions use previously examined periods. Candidate intervals have unresolved calibration failures.")
     trajectory=[active(h) for h in data.EXPECTED_HORIZONS]
     trajectory=pd.concat([r for r in trajectory if not r.empty],ignore_index=True) if any(not r.empty for r in trajectory) else pd.DataFrame()
-    show_chart(charts.history_chart(snap["prices"], replay, trajectory))
-    st.caption('Shading appears only for released live conformal calibration: outer 90%, inner 80% where separately available. Bands apply at forecast targets; interpolated ribbons do not guarantee coverage between dates. Uncalibrated forecasts remain separate points.')
-    st.caption("Dots are the archived observations at their source dates. A faint step trace carries the last observed price forward between dates; its timing is indicative where official effective dates are undocumented. Forecast estimates remain separate markers.")
+    show_chart(charts.history_chart(snap['prices'], replay, trajectory, compact=True), controls=False)
+    with st.expander('How to read this chart'):
+        st.write('Dots mark dated price records. The step line carries the last observed price between reports. '
+                 'Timing is indicative where official effective dates are undocumented. Diamonds and squares are forecast targets.')
+        st.caption('Released 80% and 90% prediction bands apply at forecast targets. Pinch or scroll to zoom, drag to pan, or use Reset axes.')
+    if production.empty:
+        with st.expander('Why the estimate is unavailable'):
+            unavailable_forecast()
+    else:
+        forecast_details(forecast)
+        if horizon == 'decision_1':
+            with st.expander('Next update details'):
+                show_chart(charts.decision_chart(forecast))
+                st.caption('Estimated announcement date. The announcement time is unconfirmed.')
     if not replay.empty:
         st.dataframe(replay[["origin", "created_at", "recorded_target_date", "endpoint", "predicted_price",
                              "actual_price", "model_version", "snapshot_id"]].tail(25), hide_index=True)
@@ -563,7 +557,7 @@ def markets_view(snap):
                         hoverinfo="skip", showlegend=False)
         fig.add_scatter(x=x, y=y, mode="lines+markers",
                         line=dict(color=charts.BLUE, width=2),
-                        fill="tonexty", fillcolor="rgba(139,92,246,.09)",
+                        fill="tonexty", fillcolor="rgba(87,166,121,.13)",
                         marker=dict(color=charts.TEAL, size=5,
                                     line=dict(color=charts.SECTION, width=1)), name=SERIES[sid].title,
                         hovertemplate="%{x}<br>%{y:,.3f}<extra></extra>")
@@ -953,7 +947,7 @@ def backtest_view():
 def main():
     global SETTINGS, DECISION, LEDGER_PATH, ACTIVE_FORECASTS
     st.set_page_config(page_title="Levant Energy Terminal", layout="wide", initial_sidebar_state="auto")
-    stylesheet = Path(__file__).with_name("terminal.css").read_text(encoding="utf-8") + RESPONSIVE_CSS
+    stylesheet = Path(__file__).with_name("terminal.css").read_text(encoding="utf-8")
     st.markdown(f"<style>{stylesheet}</style>", unsafe_allow_html=True)
     try:
         SETTINGS = data.config(ROOT)
@@ -976,26 +970,23 @@ def main():
     if slug and slug != st.session_state.get('_url_view'):
         perspective, view = experience.destination(slug)
         st.session_state.update(perspective=perspective,view=view,_url_view=slug)
+        if view == 'Model performance' and st.query_params.get('detail') == 'actual':
+            st.session_state['quant_detail'] = 'Predicted vs actual'
     with st.sidebar:
         st.markdown(
             '<div class="terminal-brand">'
             '<div class="brand-row"><span class="brand-mark">L</span><strong>Levantdark X</strong></div>'
-            '<span>Lebanon Gasoline 95 Price &amp; Forecast Guide</span>'
-            '<div class="brand-badge">LBP / 20L Tank · Beirut</div></div>',
+            '<span>Lebanon gasoline 95</span></div>',
             unsafe_allow_html=True,
         )
-        perspective = st.radio("Perspective", list(PERSPECTIVES), key="perspective", on_change=_perspective_changed)
+        perspective = st.radio("Perspective", list(PERSPECTIVES), format_func=lambda name: name.split(' ', 1)[1],
+                               key="perspective", on_change=_perspective_changed)
         choices = PERSPECTIVES[perspective]
         if st.session_state.get('view') not in choices:
             st.session_state['view'] = next(iter(choices))
         view = st.radio("Workspace", list(choices), format_func=choices.get, key="view", on_change=_view_changed)
         st.divider()
-        st.caption("Local time · Asia/Beirut")
-        st.caption(f"Stored capture · {data.beirut_time(snap['latest_capture'])}")
-        if not DECISION.get("production_approved"):
-            st.caption("Production approval · Withheld")
-        current = active('decision_1')
-        st.caption('Available estimate · ' + (current.iloc[0].forecast_label if not current.empty else forecast_unavailable_reason()))
+        st.caption('All times in Beirut')
         if _configured_passcode() and data.owner_refresh_available(ROOT):
             with st.expander("Owner refresh unlock"):
                 st.text_input("Admin passcode", type="password", key="admin_passcode_entered",

@@ -133,11 +133,20 @@ def test_dashboard_views_and_interactions(monkeypatch):
     else:
         row = expected.iloc[0]
         assert next(m for m in app.metric if m.label == 'Predicted price').value == f'{row.predicted_price:,.0f} LBP'
-        assert any("Hybrid" in item.value for item in app.info)
-    app.radio(key="perspective").set_value("📊 Market & Intelligence").run()
-    app.radio(key="view").set_value("Price & forecasts").run()
+        assert any("Research estimate" in item.value or "Validated estimate" in item.value for item in app.caption)
+    assert app.get("plotly_chart")
+    app.button(key="overview_comparison").click().run()
+    assert not app.exception
+    assert app.radio(key="quant_detail").value == "Predicted vs actual"
+    assert app.selectbox(key="prospective_comparison_horizon").value == "Next update"
+    assert not app.checkbox(key="comparison_full_details").value
+    app.checkbox(key="comparison_full_details").set_value(True).run()
+    assert not app.exception
+    app.radio(key="perspective").set_value("🚗 Driver Pulse").run()
+    app.button(key="overview_trajectory").click().run()
+    assert app.radio(key="view").value == "Price & forecasts"
     for label in data.HORIZONS:
-        app.radio(key="price_horizon").set_value(label).run()
+        app.selectbox(key="price_horizon").set_value(label).run()
         app.checkbox(key="show_replay").set_value(True).run()
         assert not app.exception and app.get("plotly_chart")
     for view in ["Global markets", "Analyst report", "Model performance", "Volatility & options", "Data quality"]:

@@ -1,5 +1,6 @@
 """Public views for the pinned Hybrid and its decision evidence."""
 from datetime import date
+from html import escape
 from statistics import mean
 import sqlite3
 
@@ -64,7 +65,10 @@ def predicted_vs_actual(root, ledger):
     st.caption("Saved live forecasts since the audited baseline. One row per issuance. Prices in LBP per 20 L.")
     horizons = {"Next update": "decision_1", "Next two updates": "decision_2", "Next four updates": "decision_4",
                 **{f"{days} days" if days != 1 else "1 day": f"day_{days}" for days in (1, 3, 7, 14, 30)}}
-    selected = st.selectbox("Horizon", list(horizons), key="prospective_comparison_horizon")
+    with st.container(key='comparison_controls'):
+        picker, details = st.columns([1, 1], vertical_alignment='bottom')
+        selected = picker.selectbox('Horizon', list(horizons), key='prospective_comparison_horizon')
+        full_details = details.checkbox('Show full details', key='comparison_full_details')
     try:
         rows = _comparisons(root, ledger, horizons[selected], file_version(ledger))
     except (OSError, sqlite3.Error, ValueError, KeyError, pd.errors.DatabaseError):
@@ -77,15 +81,31 @@ def predicted_vs_actual(root, ledger):
     actual = rows.actual_price.where(rows.evaluation_kind.isin(evidence_types))
     error = rows.predicted_price - actual
     target = rows.endpoint.fillna(rows.scheduled_effective).str.slice(0, 10)
+    outcomes = rows.evaluation_kind.map(evidence_types).where(actual.notna()).fillna('Awaiting match')
     table = pd.DataFrame({
-        "Issued · Beirut": rows.created_at.map(beirut_time), "Expected date": target,
         "Forecast": rows.predicted_price.round(), "Actual": actual.round(), "Error": error.round(),
+        "Outcome": outcomes, "Issued · Beirut": rows.created_at.map(beirut_time), "Expected date": target,
         "Recorded date": rows.recorded_target_date.where(actual.notna()),
-        "Outcome": rows.evaluation_kind.map(evidence_types).where(actual.notna()).fillna("Unmatched"),
     })
-    st.dataframe(table, hide_index=True, width="stretch", column_config={
-        name: st.column_config.NumberColumn(format="localized") for name in ("Forecast", "Actual", "Error")
-    })
+    if full_details:
+        st.dataframe(table, hide_index=True, width='stretch', column_config={
+            name: st.column_config.NumberColumn(format='localized') for name in ('Forecast', 'Actual', 'Error')
+        })
+    else:
+        parts = []
+        for item in table.head(20).to_dict('records'):
+            matched = pd.notna(item['Actual'])
+            recorded = f"{item['Actual']:,.0f}" if matched else '—'
+            outcome_class = 'matched' if matched else 'pending'
+            parts.append(f'<tr><td><strong>{item["Forecast"]:,.0f}</strong>'
+                         f'<small>{escape(item["Issued · Beirut"])}</small></td>'
+                         f'<td><strong>{recorded}</strong></td>'
+                         f'<td><span class="comparison-outcome {outcome_class}">{escape(item["Outcome"])}</span></td></tr>')
+        st.html('<div class="comparison-table-wrap"><table class="comparison-table" aria-label="Live price comparisons in LBP per 20 liters">'
+                '<thead><tr><th scope="col">Forecast</th><th scope="col">Actual</th><th scope="col">Outcome</th></tr></thead>'
+                '<tbody>' + ''.join(parts) + '</tbody></table></div>')
+        if len(table) > 20:
+            st.caption(f'Showing the 20 most recent of {len(table)} forecasts. Full details includes every saved forecast.')
     st.caption("Error is forecast minus actual. Actual prices appear after the outcome passes the matching checks.")
 
 
