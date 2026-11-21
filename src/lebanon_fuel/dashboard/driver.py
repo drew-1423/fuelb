@@ -116,7 +116,7 @@ def price_panels(current, reason, prices, forecast):
                 base = forecast['base_price']
                 change = forecast['predicted_change']
                 st.metric('Predicted price', f'{price:,.0f} LBP', delta=f'{change:+,.0f} LBP ({change / base:+.2%})',
-                          delta_color='off')
+                          delta_color='normal' if change else 'off')
                 money(price)
                 label = 'Validated estimate' if tier == 1 else 'Research estimate'
                 st.caption(f'{label} · {view["schedule"]}')
