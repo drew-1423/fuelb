@@ -85,14 +85,16 @@ def price_panels(current, reason, prices, forecast):
             st.metric('Current recorded price', f'{current["price_lbp_20l"]:,.0f} LBP' if current else 'Needs verification')
             if current:
                 money(current['price_lbp_20l'])
+                age = current['age_days']
+                observation = f'Observed {current["source_date"]} · {age} {"day" if age == 1 else "days"} old'
                 if current['verification_status'] == data.PROVISIONAL_PRICE:
                     sources = {item['id'] for item in current.get('corroborating_sources', [])}
                     partner = 'TotalEnergies' if 'totalenergies' in sources else 'Taqtek' if 'taqtek' in sources else 'another source'
-                    st.caption(f'IPT + {partner} · Observed {current["source_date"]}')
+                    st.caption(f'IPT + {partner} · {observation}')
                     st.caption('Ministry confirmation and effective timing pending.')
                 else:
                     status = data.STATUS.get(current['verification_status'], 'Evidence under review')
-                    st.caption(f'{status} · Observed {current["source_date"]}')
+                    st.caption(f'{status} · {observation}')
             else:
                 st.caption(reason)
                 latest = max(prices, key=lambda record: record['source_date']) if prices else {}
@@ -120,10 +122,10 @@ def price_panels(current, reason, prices, forecast):
                 st.caption(f'{label} · {view["schedule"]}')
                 if spec.get('schedule_estimated'):
                     st.caption('Projected date · Announcement time unconfirmed')
-                if current is None or current['price_lbp_20l'] != base:
-                    base_date = spec.get('base_source_date')
-                    date_note = f' · {base_date}' if base_date else ''
-                    st.caption(f'Change measured from {base:,.0f} LBP / 20 L{date_note}')
+                base_date = spec.get('base_source_date')
+                date_note = f' on {base_date}' if base_date and (current is None or current['source_date'] != base_date) else ''
+                sign = '−' if change < 0 else '+' if change > 0 else ''
+                st.caption(f'From {base:,.0f} LBP / 20 L{date_note} · approx. {sign}${abs(change) / data.DISPLAY_FX:,.2f} USD change')
 
 
 def fill_up(forecast):
