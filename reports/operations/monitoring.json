@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-21T17:41:09.802862+00:00",
+  "generated_at": "2026-11-21T17:49:45.584217+00:00",
   "data_quality": {
     "conflict_dates": 42,
     "missing_publication_clocks": 3204,
@@ -102,8 +102,8 @@
     "revision_id": 4856
   },
   "market": {
-    "origin_utc": "2026-11-21T17:41:07.486977+00:00",
-    "origin_beirut": "2026-11-21T19:41:07.486977+02:00",
+    "origin_utc": "2026-11-21T17:49:42.326009+00:00",
+    "origin_beirut": "2026-11-21T19:49:42.326009+02:00",
     "mode": "strict",
     "backtest_eligible": true,
     "series": {
