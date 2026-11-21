@@ -1,4 +1,4 @@
-# Cloud release: reload dashboard modules for the audited data baseline.
+# Cloud release: reload dashboard modules for the live forecast comparison view.
 streamlit>=1.55,<2
 plotly>=6,<8
 pandas>=2.2,<4

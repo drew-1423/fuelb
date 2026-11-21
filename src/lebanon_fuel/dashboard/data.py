@@ -226,6 +226,20 @@ def ledger_rows(path, horizon, mode, run_id=None):
         return pd.read_sql_query(query, db, params=(horizon, mode, run_id, run_id))
 
 
+def prospective_comparisons(root, path, horizon):
+    from lebanon_fuel.validation.decision_tracking import BATCH, protocol_start
+
+    query = BATCH + LEDGER_SELECT + """
+        JOIN complete c ON c.run_id=f.run_id AND c.origin=f.origin
+        WHERE f.mode IN ('prospective','prospective_research') AND f.created_at >= :start
+          AND f.horizon=:horizon AND f.status='issued' AND f.predicted_price IS NOT NULL
+          AND json_extract(m.metadata_json, '$.family')='G_hybrid'
+        ORDER BY f.created_at DESC, f.id DESC
+    """
+    with closing(sqlite_connection(path, readonly=True)) as db:
+        return pd.read_sql_query(query, db, params=dict(start=protocol_start(root), horizon=horizon))
+
+
 def approved_forecasts(rows, settings, decision, horizon, *, at=None):
     selected = decision.get("selection", {}).get(horizon, {}).get("production_model")
     if rows.empty or not (settings["forecasting"].get("enabled") is True

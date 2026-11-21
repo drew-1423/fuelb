@@ -1031,9 +1031,11 @@ def main():
         st.download_button("Download analyst report", "\n\n".join(f"## {k}\n\n{v}" for k, v in sections.items()),
                            "lebanon-energy-brief.md", "text/markdown")
     elif view == "Model performance":
-        section = st.radio('Research view', ['Performance', 'Backtesting'], horizontal=True, key='quant_detail')
+        section = st.radio('Research view', ['Performance', 'Predicted vs actual', 'Backtesting'], horizontal=True, key='quant_detail')
         if section == 'Performance':
             model_view()
+        elif section == 'Predicted vs actual':
+            decisions.predicted_vs_actual(ROOT, LEDGER_PATH)
         else:
             backtest_view()
     elif view == "Backtesting":

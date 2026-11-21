@@ -6,7 +6,7 @@ import sqlite3
 import pandas as pd
 import streamlit as st
 
-from lebanon_fuel.dashboard.data import STATUS, file_version
+from lebanon_fuel.dashboard.data import STATUS, beirut_time, file_version, prospective_comparisons
 from lebanon_fuel.forecasting.uncertainty import direction_class
 from lebanon_fuel.validation.decision_tracking import MAX_GAP_DAYS, dashboard_evidence
 
@@ -52,6 +52,41 @@ def performance(root, ledger):
         st.dataframe(rows, hide_index=True, width="stretch")
     st.caption("Direction counts use increase, decrease and no-change with a 3,000 LBP deadband. A supplier outcome can appear in both sections once officially reviewed. Within each section "
                "and starting-price group, repeated forecasts for one date count once.")
+
+
+@st.cache_data(ttl=60, max_entries=16, show_spinner=False)
+def _comparisons(root, ledger, horizon, version):
+    return prospective_comparisons(root, ledger, horizon)
+
+
+def predicted_vs_actual(root, ledger):
+    st.subheader("Predicted vs actual")
+    st.caption("Saved live forecasts since the audited baseline. One row per issuance. Prices in LBP per 20 L.")
+    horizons = {"Next update": "decision_1", "Next two updates": "decision_2", "Next four updates": "decision_4",
+                **{f"{days} days" if days != 1 else "1 day": f"day_{days}" for days in (1, 3, 7, 14, 30)}}
+    selected = st.selectbox("Horizon", list(horizons), key="prospective_comparison_horizon")
+    try:
+        rows = _comparisons(root, ledger, horizons[selected], file_version(ledger))
+    except (OSError, sqlite3.Error, ValueError, KeyError, pd.errors.DatabaseError):
+        st.warning("The saved forecast ledger is temporarily unavailable.")
+        return
+    if rows.empty:
+        st.info("No forecasts have been issued for this horizon yet.")
+        return
+    evidence_types = {"official_match": "Official", "provisional_match": "Supplier agreement"}
+    actual = rows.actual_price.where(rows.evaluation_kind.isin(evidence_types))
+    error = rows.predicted_price - actual
+    target = rows.endpoint.fillna(rows.scheduled_effective).str.slice(0, 10)
+    table = pd.DataFrame({
+        "Issued · Beirut": rows.created_at.map(beirut_time), "Expected date": target,
+        "Forecast": rows.predicted_price.round(), "Actual": actual.round(), "Error": error.round(),
+        "Recorded date": rows.recorded_target_date.where(actual.notna()),
+        "Outcome": rows.evaluation_kind.map(evidence_types).where(actual.notna()).fillna("Unmatched"),
+    })
+    st.dataframe(table, hide_index=True, width="stretch", column_config={
+        name: st.column_config.NumberColumn(format="localized") for name in ("Forecast", "Actual", "Error")
+    })
+    st.caption("Error is forecast minus actual. Actual prices appear after the outcome passes the matching checks.")
 
 
 def timeline(records, root, ledger):
