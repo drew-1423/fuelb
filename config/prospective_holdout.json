@@ -1,20 +1,15 @@
 {
-  "version": "2026-prospective-v1",
-  "sealed_at": "2026-11-14T20:15:00+00:00",
+  "version": "2026-prospective-v2-audited-baseline",
+  "sealed_at": "2026-11-21T17:39:12.467148+00:00",
   "prior_consumed_holdout": {
     "version": "2026-holdout-v1",
     "evaluation_start": "2026-06-01",
     "evaluation_end": "2026-11-10",
     "status": "consumed_for_selection_not_final_test"
   },
-  "prospective_start": "2026-11-14T00:00:00+00:00",
-  "latest_corroborated_anchor": {
-    "source_date": "2026-11-10",
-    "price_lbp_20l": 2445000,
-    "verification_status": "archive_corroborated"
-  },
+  "prospective_start": "2026-11-21T17:39:12.467148+00:00",
   "minimum_distinct_base_decisions": 20,
   "require_certified_target_coverage": true,
   "require_live_prospective_ledger_match": true,
-  "policy": "All 2026-06-01..2026-11-10 holdout records are permanently marked as consumed for model selection. Future Tier 1 promotion requires >= 20 distinct, certified prospective outcomes from 2026-11-14 onward matched in forecast_ledger.sqlite without model refit or threshold tuning."
+  "policy": "Post-cutover production review requires at least 20 distinct, certified prospective outcomes linked to the active baseline without model refit or threshold tuning. Earlier outcomes and the consumed 2026 holdout remain historical research."
 }

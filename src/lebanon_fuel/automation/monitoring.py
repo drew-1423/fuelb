@@ -11,6 +11,8 @@ from bs4 import BeautifulSoup
 
 from lebanon_fuel.dashboard.data import anchors, market_and_prices
 from lebanon_fuel.market.catalog import SERIES
+from lebanon_fuel.storage.baseline import BASELINE_CONFIG
+from lebanon_fuel.validation.decision_tracking import protocol_start
 from .state import now
 
 
@@ -54,16 +56,17 @@ def metric_group(rows):
         maximum_class_ece=ece, probability_reliability=reliability)
 
 
-def prospective_performance(path, thresholds):
+def prospective_performance(path, thresholds, *, start=""):
     with closing(sqlite3.connect(f"{path.resolve().as_uri()}?mode=ro", uri=True)) as db:
         rows = pd.read_sql_query("""
             SELECT f.*, e.actual_change, e.prediction_error, o.decision_key
             FROM forecasts f JOIN evaluations e ON e.forecast_id=f.id
             JOIN outcomes o ON o.id=e.outcome_id
             WHERE f.mode IN ('prospective','prospective_research') AND e.kind='official_match'
+            AND f.origin >= ? AND f.created_at >= ?
             AND e.id=(SELECT MAX(id) FROM evaluations WHERE forecast_id=f.id AND kind='official_match')
             ORDER BY f.origin,f.id
-        """, db)
+        """, db, params=(start, start))
     groups, alerts = [], []
     for (mode, model, horizon), group in rows.groupby(["mode", "model_version", "horizon"]):
         # Monitoring decision uses one latest issuance per observed official decision,
@@ -155,7 +158,8 @@ def build(root, settings, operations, previous=None):
     previous_urls = {item["url"] for item in (previous or {}).get("policy_headlines", {}).get("items", [])}
     if previous and any(item["url"] not in previous_urls for item in headlines["items"]):
         alerts.append(alert("new_policy_headline", "New fuel/tax headlines appeared on the captured ministry page. Review the original instruments."))
-    performance = prospective_performance(root / cfg["validation"]["forecast_ledger"], limits)
+    start = protocol_start(root) if (root / BASELINE_CONFIG).is_file() else ""
+    performance = prospective_performance(root / cfg["validation"]["forecast_ledger"], limits, start=start)
     alerts.extend(performance["alerts"])
     if performance["evaluated_forecasts"] == 0:
         alerts.append(alert("no_prospective_accuracy", "No numerical prospective forecasts have verified settled outcomes. Live accuracy is unavailable."))

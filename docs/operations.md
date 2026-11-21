@@ -108,3 +108,30 @@ python3.13 -m venv .venv
 ```
 
 Load only trusted locally generated joblib artifacts after checksum validation. Joblib is executable serialization, not a safe format for untrusted downloads. No automatic dependency upgrade, remote model download, paid API call or external publication is scheduled.
+
+## November 2026 audited baseline
+
+The active source database at `data/lebanon_fuel.sqlite` was rebuilt from the
+capture files whose SHA-256 digests matched the source ledger. The migration
+preserved original observation and capture IDs and their evidence clocks where
+the original first sighting survived. Decision revisions were reconciled at
+cutover with new IDs. The baseline manifest records the source commit, archive
+checksums, retained counts and cutover time. The exclusion list records every
+capture left behind because its original bytes could not be verified.
+
+The compressed original source database in `data/legacy/` preserves the
+pre-cutover rows and revision IDs for frozen research audits. The immutable
+forecast ledger also retains pre-cutover issuances and evaluations.
+The prospective protocol starts a new cohort at the cutover. Historical model
+audits use the sealed legacy database and continue checking the original
+artifact checksums. The refresh job verifies every capture referenced by the
+active database. Passing that check establishes evidence integrity for the
+active data. Model approval and uncertainty calibration have separate gates.
+
+To reproduce the candidate and exclusion list, check out the source commit
+recorded in `config/audited_baseline.json` into an isolated checkout. Use the
+current `scripts/build_audited_baseline.py` with the current project on
+`PYTHONPATH`. Set `--root` to the isolated checkout, `--output` to a new
+directory, and `--source-commit` to the same recorded commit. The builder
+writes a separate candidate and archive. Reconciliation time and revision
+fingerprints should be interpreted with the candidate's own manifest.

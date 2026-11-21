@@ -99,7 +99,7 @@ class Store:
             basis=[r[0] for r in self.db.execute('SELECT id FROM observations WHERE source_date=? ORDER BY id',(day,))]
             self.db.execute("INSERT INTO resolutions(source_date,chosen_observation_id,reason,evidence_url,reviewer,reviewed_at,basis_observation_ids) VALUES (?,?,?,?,?,?,?)", (day,observation_id,reason,evidence,reviewer,now_utc(),json.dumps(basis)))
 
-    def reconcile(self):
+    def reconcile(self, *, first_revision_id=None):
         groups = {}
         for row in self.db.execute("SELECT o.*, s.priority FROM observations o JOIN sources s ON s.id=o.source_id ORDER BY source_date,o.id"):
             if row["source_date"]:
@@ -185,7 +185,8 @@ class Store:
                 digest=sha256(serialized.encode()).hexdigest()
                 prev=self.db.execute("SELECT id,fingerprint FROM decision_versions WHERE source_date=? ORDER BY id DESC LIMIT 1",(day,)).fetchone()
                 if prev is None or prev["fingerprint"]!=digest:
-                    self.db.execute("INSERT INTO decision_versions(source_date,created_at,fingerprint,previous_version_id,payload_json) VALUES (?,?,?,?,?)",(day,now_utc(),digest,prev["id"] if prev else None,serialized))
+                    self.db.execute("INSERT INTO decision_versions(id,source_date,created_at,fingerprint,previous_version_id,payload_json) VALUES (?,?,?,?,?,?)",(first_revision_id,day,now_utc(),digest,prev["id"] if prev else None,serialized))
+                    first_revision_id = None
                     changed+=1
         return changed
 

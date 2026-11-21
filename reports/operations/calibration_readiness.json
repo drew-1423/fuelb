@@ -1,12 +1,12 @@
 {
-  "as_of": "2026-11-21T12:39:47.502129+00:00",
+  "as_of": "2026-11-21T17:41:02.591620+00:00",
   "horizons": {
     "decision_1": {
       "cohort": "provisional",
       "horizon": "decision_1",
       "artifact": "fbd34b3d4dadf1a06a160469dd2c1234f8dee0b133a5f9b4f310d441650b9462",
-      "evidence_category": "provisional_match",
-      "calibration_n": 1,
+      "evidence_category": "official_match",
+      "calibration_n": 0,
       "evaluation_n": 0,
       "empirical_coverage": null,
       "minimum_calibration_n": 30,
@@ -17,7 +17,7 @@
       "levels": {
         "80": {
           "nominal": 0.8,
-          "calibration_n": 1,
+          "calibration_n": 0,
           "evaluation_n": 0,
           "empirical_coverage": null,
           "mean_evaluated_width_lbp": null,
@@ -30,7 +30,7 @@
         },
         "90": {
           "nominal": 0.9,
-          "calibration_n": 1,
+          "calibration_n": 0,
           "evaluation_n": 0,
           "empirical_coverage": null,
           "mean_evaluated_width_lbp": null,
@@ -79,7 +79,7 @@
           "levels": {
             "80": {
               "nominal": 0.8,
-              "calibration_n": 1,
+              "calibration_n": 0,
               "evaluation_n": 0,
               "empirical_coverage": null,
               "mean_evaluated_width_lbp": null,
@@ -92,7 +92,7 @@
             },
             "90": {
               "nominal": 0.9,
-              "calibration_n": 1,
+              "calibration_n": 0,
               "evaluation_n": 0,
               "empirical_coverage": null,
               "mean_evaluated_width_lbp": null,
@@ -104,19 +104,19 @@
               ]
             }
           },
-          "eligible_n": 1,
-          "raw_distinct_targets": 2
+          "eligible_n": 0,
+          "raw_distinct_targets": 0
         }
       },
       "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
-      "target_limitation": "Supplier evaluation is conditional on recorded corroborated quotes and does not certify official publication/effective times"
+      "target_limitation": "Reviewed complete official outcome sequence"
     },
     "decision_2": {
       "cohort": "provisional",
       "horizon": "decision_2",
       "artifact": "b50640d13af84cd6ada0237fcab22c8aa483d90cc5cd125539be5776f0c1687c",
-      "evidence_category": "provisional_match",
-      "calibration_n": 1,
+      "evidence_category": "official_match",
+      "calibration_n": 0,
       "evaluation_n": 0,
       "empirical_coverage": null,
       "minimum_calibration_n": 30,
@@ -127,7 +127,7 @@
       "levels": {
         "80": {
           "nominal": 0.8,
-          "calibration_n": 1,
+          "calibration_n": 0,
           "evaluation_n": 0,
           "empirical_coverage": null,
           "mean_evaluated_width_lbp": null,
@@ -140,7 +140,7 @@
         },
         "90": {
           "nominal": 0.9,
-          "calibration_n": 1,
+          "calibration_n": 0,
           "evaluation_n": 0,
           "empirical_coverage": null,
           "mean_evaluated_width_lbp": null,
@@ -189,7 +189,7 @@
           "levels": {
             "80": {
               "nominal": 0.8,
-              "calibration_n": 1,
+              "calibration_n": 0,
               "evaluation_n": 0,
               "empirical_coverage": null,
               "mean_evaluated_width_lbp": null,
@@ -202,7 +202,7 @@
             },
             "90": {
               "nominal": 0.9,
-              "calibration_n": 1,
+              "calibration_n": 0,
               "evaluation_n": 0,
               "empirical_coverage": null,
               "mean_evaluated_width_lbp": null,
@@ -214,12 +214,12 @@
               ]
             }
           },
-          "eligible_n": 1,
-          "raw_distinct_targets": 1
+          "eligible_n": 0,
+          "raw_distinct_targets": 0
         }
       },
       "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
-      "target_limitation": "Supplier evaluation is conditional on recorded corroborated quotes and does not certify official publication/effective times"
+      "target_limitation": "Reviewed complete official outcome sequence"
     },
     "decision_4": {
       "cohort": "provisional",
@@ -335,8 +335,8 @@
       "cohort": "provisional",
       "horizon": "day_1",
       "artifact": "34aaede583a9d2fb62900fce02d50ebd07a18fcc7c9616e2d042387a53861a7e",
-      "evidence_category": "provisional_match",
-      "calibration_n": 1,
+      "evidence_category": "official_match",
+      "calibration_n": 0,
       "evaluation_n": 0,
       "empirical_coverage": null,
       "minimum_calibration_n": 30,
@@ -347,7 +347,7 @@
       "levels": {
         "80": {
           "nominal": 0.8,
-          "calibration_n": 1,
+          "calibration_n": 0,
           "evaluation_n": 0,
           "empirical_coverage": null,
           "mean_evaluated_width_lbp": null,
@@ -360,7 +360,7 @@
         },
         "90": {
           "nominal": 0.9,
-          "calibration_n": 1,
+          "calibration_n": 0,
           "evaluation_n": 0,
           "empirical_coverage": null,
           "mean_evaluated_width_lbp": null,
@@ -409,7 +409,7 @@
           "levels": {
             "80": {
               "nominal": 0.8,
-              "calibration_n": 1,
+              "calibration_n": 0,
               "evaluation_n": 0,
               "empirical_coverage": null,
               "mean_evaluated_width_lbp": null,
@@ -422,7 +422,7 @@
             },
             "90": {
               "nominal": 0.9,
-              "calibration_n": 1,
+              "calibration_n": 0,
               "evaluation_n": 0,
               "empirical_coverage": null,
               "mean_evaluated_width_lbp": null,
@@ -434,12 +434,12 @@
               ]
             }
           },
-          "eligible_n": 1,
-          "raw_distinct_targets": 1
+          "eligible_n": 0,
+          "raw_distinct_targets": 0
         }
       },
       "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
-      "target_limitation": "Supplier evaluation is conditional on recorded corroborated quotes and does not certify official publication/effective times"
+      "target_limitation": "Reviewed complete official outcome sequence"
     },
     "day_3": {
       "cohort": "provisional",
@@ -883,13 +883,13 @@
     }
   },
   "forecast_ids": [
-    45388,
-    45389,
-    45390,
-    45391,
-    45392,
-    45393,
-    45394,
-    45395
+    45396,
+    45397,
+    45398,
+    45399,
+    45400,
+    45401,
+    45402,
+    45403
   ]
 }

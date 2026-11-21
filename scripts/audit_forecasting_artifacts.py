@@ -9,7 +9,7 @@ import pandas as pd
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
-from lebanon_fuel.storage.database import Store
+from lebanon_fuel.storage.baseline import historical_database
 from lebanon_fuel.automation.release import verify_frozen
 from lebanon_fuel.forecasting.pipeline import load_bundle,preview
 
@@ -49,23 +49,22 @@ def run():
     assert (pd.to_datetime(cal.calibration_maximum_label_end,utc=True)<pd.to_datetime(cal.origin,utc=True)).all()
     used=features[features.max_assumed_market_available_at.notna()]
     assert (pd.to_datetime(used.max_assumed_market_available_at,utc=True)<=pd.to_datetime(used.origin,utc=True)).all()
-    store=Store(root)
     # Saved designs reference immutable revisions, including superseded ones.
     # The current reconciled ledger alone cannot verify historical provenance.
-    ledger={r['id']:dict(json.loads(r['payload_json']),revision_id=r['id'])
-            for r in store.db.execute('SELECT id,payload_json FROM decision_versions')}
-    for row in design.itertuples():
-        base=ledger[row.base_revision_id];target=ledger[row.target_revision_id]
-        assert base['price_lbp_20l']==row.base_price_lbp_20l
-        assert target['price_lbp_20l']-base['price_lbp_20l']==row.target_change_lbp_20l
-        assert target['source_date']==row.target_source_date
-        assert ledger[row.witness_revision_id]['verification_status'] in config['target_statuses']
-    market_ids={r[0] for r in store.db.execute('SELECT id FROM market_observations')}
-    capture_ids={r[0] for r in store.db.execute('SELECT id FROM captures')}
-    for row in features.itertuples():
-        assert all(i in ledger for i in json.loads(row.domestic_provenance_json))
-        assert all(i in market_ids and c in capture_ids for i,c in json.loads(row.market_provenance_json))
-    store.close()
+    with historical_database(root) as connection:
+        ledger={r['id']:dict(json.loads(r['payload_json']),revision_id=r['id'])
+                for r in connection.execute('SELECT id,payload_json FROM decision_versions')}
+        for row in design.itertuples():
+            base=ledger[row.base_revision_id];target=ledger[row.target_revision_id]
+            assert base['price_lbp_20l']==row.base_price_lbp_20l
+            assert target['price_lbp_20l']-base['price_lbp_20l']==row.target_change_lbp_20l
+            assert target['source_date']==row.target_source_date
+            assert ledger[row.witness_revision_id]['verification_status'] in config['target_statuses']
+        market_ids={r[0] for r in connection.execute('SELECT id FROM market_observations')}
+        capture_ids={r[0] for r in connection.execute('SELECT id FROM captures')}
+        for row in features.itertuples():
+            assert all(i in ledger for i in json.loads(row.domestic_provenance_json))
+            assert all(i in market_ids and c in capture_ids for i,c in json.loads(row.market_provenance_json))
     bundle_count=0;reloaded_forecasts=0
     for path in sorted((root/'data/models/part5'/manifest['effective_config']['regimes'][0]['id']).glob('*/manifest.json')):
         meta=json.loads(path.read_text())

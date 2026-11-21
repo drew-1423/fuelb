@@ -8,7 +8,7 @@ from lebanon_fuel.forecasting.pipeline import digest,dump,load_bundle
 from lebanon_fuel.forecasting.uncertainty import direction_class
 from lebanon_fuel.validation.backtest import load_holdout,walk_forward_bundle
 from lebanon_fuel.validation.ledger import ForecastLedger,now
-from lebanon_fuel.storage.database import Store
+from lebanon_fuel.storage.baseline import historical_database
 from lebanon_fuel.automation.release import verify_frozen
 
 
@@ -57,11 +57,10 @@ def main():
         assert stored.interval_n==good.sum()
         if good.any():
             np.testing.assert_allclose(stored.interval_coverage,np.mean((rows.loc[good,'interval_low']<=y[good])&(rows.loc[good,'interval_high']>=y[good])))
-    store=Store(ROOT)
     # Match the exact immutable revision used by each saved prediction.
-    raw={r['id']:dict(json.loads(r['payload_json']),revision_id=r['id'])
-         for r in store.db.execute('SELECT id,payload_json FROM decision_versions')}
-    store.close()
+    with historical_database(ROOT) as connection:
+        raw={r['id']:dict(json.loads(r['payload_json']),revision_id=r['id'])
+             for r in connection.execute('SELECT id,payload_json FROM decision_versions')}
     for row in design.itertuples():
         assert raw[row.base_revision_id]['price_lbp_20l']==row.base_price_lbp_20l
         assert raw[row.target_revision_id]['price_lbp_20l']-row.base_price_lbp_20l==row.target_change_lbp_20l
