@@ -978,6 +978,10 @@ def main():
         encoded_image = b64encode(illustration.read_bytes()).decode("ascii")
         st.html(
             '<div class="terminal-brand">'
+            '<div class="terminal-brand-copy">'
+            '<strong>Levant<br>Energy</strong>'
+            '<span>Fuel terminal</span>'
+            '</div>'
             f'<img src="data:image/webp;base64,{encoded_image}" width="480" height="480" '
             'alt="Illustration of a boy at a Lebanese gas station">'
             '</div>'

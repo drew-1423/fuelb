@@ -2,6 +2,7 @@
   color-scheme: light;
   --canvas: #f3f5f3;
   --surface: #fff;
+  --sidebar-surface: #f9fbf9;
   --surface-raised: #edf4ee;
   --text: #18251e;
   --muted: #53645b;
@@ -36,21 +37,37 @@
   outline-offset: 3px;
 }
 
-[data-testid="stSidebar"] { background: #f9fbf9; border-right: 1px solid var(--border); }
+[data-testid="stSidebar"] { background: var(--sidebar-surface); border-right: 1px solid var(--border); }
 .terminal-brand {
   display: grid;
-  place-items: center;
-  padding: .65rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: radial-gradient(ellipse at bottom, #dcece1, #f8fbf8 75%);
+  grid-template-columns: max-content minmax(0, 1fr);
+  align-items: center;
+  gap: .45rem;
+  padding: .1rem 0 .65rem;
+  border-bottom: 1px solid var(--border);
+  isolation: isolate;
+  background: radial-gradient(ellipse 30% 44% at 70% 56%, #e5f0e8, transparent), var(--sidebar-surface);
+}
+.terminal-brand-copy strong {
+  display: block;
+  color: var(--forest);
+  font: 750 1.4rem/1.03 var(--sans);
+  letter-spacing: -.045em;
+}
+.terminal-brand-copy span {
+  display: block;
+  margin-top: .45rem;
+  color: var(--muted);
+  font-size: .75rem;
 }
 .terminal-brand img {
   display: block;
-  width: min(100%, 8.5rem);
+  width: min(100%, 9.25rem);
   height: auto;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgb(18 63 46 / 10%);
+  justify-self: end;
+  mix-blend-mode: multiply;
+  /* Fade the off-white corners into the surrounding sidebar. */
+  mask-image: radial-gradient(ellipse 74% 74% at center, #000 84%, transparent);
 }
 
 [data-testid="stMain"] :is(h1, h2, h3) { color: var(--text); font-family: var(--sans); overflow-wrap: anywhere; }

@@ -1,4 +1,4 @@
-# Cloud release: reload dashboard modules for the sidebar illustration.
+# Cloud release: reload dashboard modules for the integrated sidebar identity.
 streamlit>=1.55,<2
 plotly>=6,<8
 pandas>=2.2,<4
