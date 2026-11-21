@@ -24,28 +24,30 @@ def read_report(root,path):
 
 
 def health_strip(health,row):
-    checks=health['checks'];progress=ux.readiness(row)
+    checks=health['checks']
     parts=[]
     for key,title in [('required_feeds','Data freshness'),('forecast','Forecast status'),('calibration','Prediction range'),('operational_integrity','System integrity')]:
         state=checks[key];status=state['status']
-        if key=='calibration':status='ok' if row is not None and ux.released_bounds(row,90) else 'warning'
+        label = {'ok':'Checked','warning':'Limited','failed':'Needs attention','unknown':'Not checked'}[status]
         if key=='required_feeds':
-            labels={'nyh_gasoline':'Gasoline proxy','brent_spot':'Brent spot'}
+            label = {'ok':'Within freshness limit','warning':'Delayed','failed':'Missing or stale','unknown':'Not checked'}[status]
+            labels={'nyh_gasoline':'EIA gasoline proxy','brent_spot':'EIA Brent'}
             detail=' · '.join(f'{labels.get(sid,sid.replace("_"," "))}: {v.get("observation_date") or "missing"}' for sid,v in state.get('feeds',{}).items()) or 'Required feed dates need review'
         elif key=='calibration':
-            detail=(f'{progress["cases"]}/{progress["minimum_cases"]} matched cases · {progress["tests"]}/{progress["minimum_tests"]} range tests'
-                    if row is not None else 'No current forecast to evaluate')
+            levels = [f'{level}%' for level in (80,90) if row is not None and ux.released_bounds(row,level)]
+            status = 'ok' if levels else 'warning' if row is not None else 'unknown'
+            label = 'Available' if levels else 'Collecting outcomes' if row is not None else 'Awaiting forecast'
+            detail = ' and '.join(levels) + ' prediction ranges' if levels else 'See validation details'
         elif key=='operational_integrity':
+            label = 'Passed' if status=='ok' else label
             detail=f'{state["missing_files"]} original captures missing' if state.get('missing_files') else 'Strict audit '+('passed' if status=='ok' else 'needs review')
         else:
-            detail='Hybrid research estimate' if status=='warning' else 'No current eligible estimate' if status=='failed' else 'Model estimate within freshness limits'
-        label={'ok':'Checked','warning':'Limited','failed':'Needs attention','unknown':'Not checked'}[status]
+            label = 'Research estimate' if status=='warning' else 'Unavailable' if status=='failed' else 'Validated'
+            detail = 'Production approval pending' if status=='warning' else 'See Data Quality' if status=='failed' else 'Within freshness limits'
         parts.append(f'<div class="trust-item {status}"><strong>{title}</strong><span>{label}</span><small>{escape(detail)}</small></div>')
     st.markdown('<section class="trust-strip" aria-label="Forecast trust indicators">'+''.join(parts)+'</section>',unsafe_allow_html=True)
     if checks['operational_integrity']['status']=='failed':
         st.error('The latest evidence audit failed. Open Data Quality to see the checks that need attention.')
-    if checks['refresh']['status']=='failed':
-        st.warning(data.refresh_result_message(st.session_state.get('refresh_result',(False,''))))
 
 
 def range_status(row):
@@ -60,7 +62,7 @@ def range_status(row):
             st.write(f'{level}% pointwise prediction range · **{low:,.0f}–{high:,.0f} LBP / 20 L**')
         if len(available)==1:st.caption('The other interval level remains withheld; no range is inferred by scaling this one.')
     else:
-        st.info(f'Prediction range not ready: {progress["cases"]} matched cases and {progress["tests"]} chronological range tests for this horizon, model version and starting-price group. At least {progress["minimum_cases"]} cases and {progress["minimum_tests"]} tests are required; measured coverage must also pass.')
+        st.caption(f'Range validation needs {progress["minimum_cases"]} matched outcomes and {progress["minimum_tests"]} chronological tests with acceptable coverage. So far, {progress["cases"]} outcomes and {progress["tests"]} tests qualify.')
 
 
 def share(current,row,settings):
@@ -84,9 +86,6 @@ def overview(root,snap,settings,row,refresh_controls):
     st.caption('Lebanon gasoline 95 · LBP per 20-liter tank · Beirut time')
     current,reason=ux.current_price(snap['prices'],maximum_age_days=settings['collection']['stale_after_days'])
     health=build(root,snap,row)
-    refresh=st.session_state.get('refresh_result')
-    if refresh and not refresh[0]:
-        health['checks']['refresh']['status']='failed'
     with st.container(key='driver_prices'):
         a,b=st.columns([1.05,1])
         with a:
@@ -135,9 +134,11 @@ def overview(root,snap,settings,row,refresh_controls):
         st.write(f'If the estimate is realized, a **{liters} L** fill-up would cost **{abs(change):,.0f} LBP (~${abs(change)/data.DISPLAY_FX:.2f}) {"less" if change<0 else "more"}** than at the starting price.')
         st.caption('A conditional comparison, not guaranteed savings or an instruction to postpone refueling.')
     health_strip(health,row)
-    range_status(row)
-    with st.expander('Why these indicators matter'):
-        st.caption('Forecasts can remain available as research while the evidence audit fails. Neither a model label nor fresh inputs clears an audit failure.')
+    if row is not None and any(ux.released_bounds(row, level) for level in (80,90)):
+        range_status(row)
+    with st.expander('Validation details'):
+        if row is None or not any(ux.released_bounds(row, level) for level in (80,90)):
+            range_status(row)
         st.json(health)
     share(current,row,settings)
     with st.expander('Source evidence and older comparisons'):

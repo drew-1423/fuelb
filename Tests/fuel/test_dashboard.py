@@ -116,6 +116,7 @@ def test_dashboard_views_and_interactions(monkeypatch):
 
     monkeypatch.setenv("LEBANON_FUEL_ROOT", str(ROOT))
     monkeypatch.setenv("LEBANON_FUEL_ADMIN_PASSCODE", "test-owner-passcode")
+    monkeypatch.setenv("LEBANON_FUEL_ACTIONS_TOKEN", "test-token")
     app = AppTest.from_file(str(APP), default_timeout=20).run()
     assert not app.exception
     assert app.metric[0].label == "Current recorded price"
@@ -349,12 +350,26 @@ def test_public_passcode_gate_blocks_unauthenticated_refresh(monkeypatch):
 
     monkeypatch.setenv("LEBANON_FUEL_ROOT", str(ROOT))
     monkeypatch.setenv("LEBANON_FUEL_ADMIN_PASSCODE", "secret-owner-code")
+    monkeypatch.setenv("LEBANON_FUEL_ACTIONS_TOKEN", "test-token")
     app = AppTest.from_file(str(APP), default_timeout=20).run()
     assert not app.exception
     next(b for b in app.button if b.key == "overview_refresh").click().run()
     assert any("Public read-only mode" in w.value for w in app.warning)
     app.sidebar.text_input(key="admin_passcode_entered").set_value("secret-owner-code").run()
     assert any("Unlocked · live refresh enabled" in c.value for c in app.sidebar.caption)
+
+
+def test_cloud_without_token_offers_github_refresh(monkeypatch):
+    from streamlit.testing.v1 import AppTest
+
+    monkeypatch.setenv("LEBANON_FUEL_ROOT", str(ROOT))
+    monkeypatch.setenv("LEBANON_FUEL_ADMIN_PASSCODE", "unused-passcode")
+    monkeypatch.setenv("LEBANON_FUEL_WRITER", "github_actions")
+    monkeypatch.delenv("LEBANON_FUEL_ACTIONS_TOKEN", raising=False)
+    app = AppTest.from_file(str(APP), default_timeout=20).run()
+    assert not app.exception
+    assert not any(button.key == 'overview_refresh' for button in app.button)
+    assert any(button.proto.label == 'Open GitHub refresh' for button in app.get('link_button'))
 
 
 @pytest.mark.parametrize(('expected', 'entered', 'authorized'), [

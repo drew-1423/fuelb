@@ -293,19 +293,29 @@ def live_forecasts(rows, settings, decision, horizon, latest_record, *, at=None)
     return latest
 
 
+def refresh_writer(root):
+    deployment = config(Path(root)).get('deployment', {})
+    return os.environ.get('LEBANON_FUEL_WRITER', deployment.get('dashboard_writer', 'local'))
+
+
+def owner_refresh_available(root):
+    writer = refresh_writer(root)
+    return writer == 'local' or (writer == 'github_actions' and bool(os.environ.get('LEBANON_FUEL_ACTIONS_TOKEN', '').strip()))
+
+
 def refresh_source(root, source, timeout_seconds=180):
     from lebanon_fuel.automation.schedule import SOURCES
     if source != 'all' and source not in SOURCES:
         raise ValueError('Unknown source')
     deployment = config(Path(root)).get('deployment',{})
-    writer = os.environ.get('LEBANON_FUEL_WRITER',deployment.get('dashboard_writer','local'))
+    writer = refresh_writer(root)
     if writer == 'github_actions':
         import httpx
         import re
         repository = deployment.get('repository','drew-1423/fuelb')
         if not re.fullmatch(r'[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+',repository):
             return False,'Invalid durable writer repository configuration.'
-        token = os.environ.get('LEBANON_FUEL_ACTIONS_TOKEN')
+        token = os.environ.get('LEBANON_FUEL_ACTIONS_TOKEN', '').strip()
         if not token:
             return False,'Read-only dashboard: scheduled GitHub Actions persists updates. Owner-triggered refresh needs the LEBANON_FUEL_ACTIONS_TOKEN secret. No local database writes were started.'
         try:

@@ -309,7 +309,7 @@ def _refresh_worker(manager, root, source, job_id):
 
 
 def start_background_refresh(root, source="all"):
-    if not _refresh_authorized():
+    if not _refresh_authorized() or not data.owner_refresh_available(root):
         return False
     manager = _refresh_manager()
     with manager["lock"]:
@@ -318,78 +318,33 @@ def start_background_refresh(root, source="all"):
         job_id = uuid.uuid4().hex
         manager.update(running=True, job_id=job_id,
                        started_at=datetime.now(timezone.utc).isoformat(), result=None)
+    st.session_state['refresh_session_job'] = job_id
     threading.Thread(target=_refresh_worker, args=(manager, root, source, job_id),
                      name="fuel-dashboard-refresh", daemon=True).start()
     return True
 
 
-def _forecast_health(snap, forecast, refresh_result=None):
-    try:
-        baseline = driver.read_report(ROOT, 'config/audited_baseline.json')
-        missing = driver.read_report(ROOT, 'reports/operations/phase1_missing_raw_captures.json')
-        if not baseline and missing.get('missing_count',0):
-            return 'red', f"Strict evidence integrity failed: {missing['missing_count']} original capture files are missing. Any displayed forecast remains a research estimate."
-        latest = data.read_json(ROOT / 'reports/operations/latest_run.json')
-        if any(r['name']=='integrity_and_financial_arithmetic' and r['status']=='failed' for r in latest.get('steps',[])):
-            return 'red', 'The latest strict integrity audit failed. Review Data Quality; the model label does not clear this failure.'
-    except (OSError,ValueError,KeyError):
-        pass
-    tier, spec = 4, {}
-    if forecast is not None:
-        try:
-            spec = json.loads(forecast.target_json)
-            tier = int(spec.get('tier', 4))
-        except (TypeError, ValueError, AttributeError):
-            tier = 4
-    failures = []
-    runs = snap.get('runs')
-    if isinstance(runs, pd.DataFrame) and not runs.empty:
-        for _, row in runs.iterrows():
-            if str(row.get('status', '')).lower() not in {'ok', 'success', 'completed'}:
-                failures.append(str(row.get('source_id', 'a data source')).replace('market_', '').replace('_', ' '))
-    if refresh_result and not refresh_result[0]:
-        return 'red', 'The latest refresh request failed. Stored observations retain their original timestamps.'
-    if failures:
-        return 'yellow', 'Source collection needs review: ' + ', '.join(dict.fromkeys(failures))
-    if tier == 4 or forecast is None:
-        why = forecast_unavailable_reason() if forecast is None else _forecast_limitation(spec)
-        return 'red', why
-    if tier in (2, 3):
-        return 'yellow', _forecast_limitation(spec)
-    if refresh_result and not refresh_result[0]:
-        return 'yellow', 'The latest refresh failed; showing the last stored observations'
-    if failures:
-        return 'yellow', "Noncritical feed needs review: " + ', '.join(dict.fromkeys(failures))
-    return 'green', 'Primary inputs are fresh and a Tier 1 forecast is active'
-
-
-def refresh_status(snap, forecast):
+def refresh_status(snap):
     manager = _refresh_manager()
     with manager['lock']:
         running = manager['running']
     # Rebuild on completion via st.rerun below, dropping back to idle polling.
-    st.fragment(run_every=data.refresh_poll_seconds(running))(_render_refresh_status)(snap, forecast)
+    st.fragment(run_every=data.refresh_poll_seconds(running))(_render_refresh_status)(snap)
 
 
-def _render_refresh_status(snap, forecast):
+def _render_refresh_status(snap):
     manager = _refresh_manager()
     with manager['lock']:
         running = manager['running']
         result = manager['result']
-        finished_at = manager['finished_at']
         job_id = manager['job_id']
-    if running:
-        status, explanation = 'yellow', 'Refresh is running in the background'
-    else:
-        status, explanation = _forecast_health(snap, forecast, result)
     st.caption('Last successful capture · '+data.beirut_time(snap.get('latest_capture')))
     if running:
         st.info('Refresh request is being processed. Stored observations remain unchanged until a durable run commits them.')
-    if result:
+    own_result = result if job_id == st.session_state.get('refresh_session_job') else None
+    if own_result:
         st.session_state['refresh_result']=result
         (st.info if result[0] else st.warning)(data.refresh_result_message(result))
-    if manager.get('started_at'):
-        st.caption('Last refresh requested · ' + data.beirut_time(manager['started_at']) + (' · finished ' + data.beirut_time(finished_at) if finished_at else ''))
     if result and job_id and st.session_state.get('refresh_rerun_job') != job_id:
         st.session_state['refresh_rerun_job'] = job_id
         # Re-read SQLite and version-keyed exports after the worker has committed.
@@ -470,6 +425,12 @@ def _overview_price_sequence(latest, agreed, forecast):
 
 def _refresh_controls(snap, forecast):
     with st.expander('Refresh and capture times'):
+        operations = driver.read_report(ROOT, 'reports/operations/latest_run.json')
+        if operations.get('finished_at'):
+            st.caption(f"Latest refresh · {data.beirut_time(operations['finished_at'])} · {operations['status']}")
+        if not _show_refresh_entry():
+            st.caption('Last successful capture · ' + data.beirut_time(snap.get('latest_capture')))
+            return
         manager = _refresh_manager()
         with manager['lock']:
             running = manager['running']
@@ -478,7 +439,16 @@ def _refresh_controls(snap, forecast):
                 st.warning('Public read-only mode. Owner authorization is required; scheduled updates continue independently.')
             elif start_background_refresh(ROOT,'all'):
                 st.rerun()
-        refresh_status(snap,forecast)
+        refresh_status(snap)
+
+
+def _show_refresh_entry():
+    if _configured_passcode() and data.owner_refresh_available(ROOT):
+        return True
+    if data.refresh_writer(ROOT) == 'github_actions':
+        st.caption('Scheduled refresh runs every six hours. Repository owners can also start a run on GitHub.')
+        st.link_button('Open GitHub refresh', 'https://github.com/drew-1423/fuelb/actions/workflows/refresh.yml')
+    return False
 
 
 def overview(snap, latest, previous):
@@ -902,7 +872,8 @@ def quality_view(snap):
                 st.write(warning["message"])
     except (OSError, ValueError, KeyError):
         st.caption("No completed automation cycle is available yet.")
-    if st.button("Refresh all sources and reports"):
+    refresh_enabled = _show_refresh_entry()
+    if refresh_enabled and st.button("Refresh all sources and reports"):
         if not _refresh_authorized():
             st.warning("Public read-only mode · Enter your admin passcode in the sidebar to run live refreshes.")
         else:
@@ -915,7 +886,7 @@ def quality_view(snap):
     sources = {"ipt": "IPT", "totalenergies": "TotalEnergies", "ministry": "Ministry of Energy and Water", "taqtek": "Taqtek", "thefuelprice": "TheFuelPrice",
                "eia": "US Energy Information Administration", "ec": "European Commission", "fed": "Federal Reserve"}
     source = st.selectbox("Public source", list(sources), format_func=sources.get)
-    if st.button("Refresh selected source", type="primary"):
+    if refresh_enabled and st.button("Refresh selected source", type="primary"):
         if not _refresh_authorized():
             st.warning("Public read-only mode · Enter your admin passcode in the sidebar to run live refreshes.")
         else:
@@ -923,7 +894,7 @@ def quality_view(snap):
                 st.session_state.refresh_result = data.refresh_source(ROOT, source)
             snapshot.clear()
             st.rerun()
-    if "refresh_result" in st.session_state:
+    if refresh_enabled and _refresh_authorized() and "refresh_result" in st.session_state:
         ok, output = st.session_state.refresh_result
         if ok:
             st.info("Refresh request accepted. A queued cloud workflow is not a completed data update; check the capture times after it finishes.")
@@ -1025,7 +996,7 @@ def main():
             st.caption("Production approval · Withheld")
         current = active('decision_1')
         st.caption('Available estimate · ' + (current.iloc[0].forecast_label if not current.empty else forecast_unavailable_reason()))
-        if _configured_passcode():
+        if _configured_passcode() and data.owner_refresh_available(ROOT):
             with st.expander("Owner refresh unlock"):
                 st.text_input("Admin passcode", type="password", key="admin_passcode_entered",
                               help="Unlock live source collection on public cloud deployments.")

@@ -86,4 +86,5 @@ def build(root,snap,forecast=None,refresh=None):
     return contract(at=datetime.now(timezone.utc).isoformat(),required=required,optional=optional,anchor=anchor,
         forecast=f,calibration=calibration,integrity=integrity,release=release,
         last_attempt=(refresh or {}).get('started_at') or latest.get('started_at'),
-        last_capture=snap.get('latest_capture'),refresh_ok=(refresh or {}).get('ok'))
+        last_capture=snap.get('latest_capture'),
+        refresh_ok=(refresh or {}).get('ok', {'completed': True, 'degraded': False}.get(latest.get('status'))))
