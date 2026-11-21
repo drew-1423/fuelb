@@ -1,6 +1,6 @@
 {
-  "origin_utc": "2026-11-21T06:50:42.043443+00:00",
-  "origin_beirut": "2026-11-21T08:50:42.043443+02:00",
+  "origin_utc": "2026-11-21T12:39:26.698948+00:00",
+  "origin_beirut": "2026-11-21T14:39:26.698948+02:00",
   "mode": "strict",
   "backtest_eligible": true,
   "series": {
