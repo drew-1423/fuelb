@@ -149,6 +149,12 @@ def test_dashboard_views_and_interactions(monkeypatch):
     assert not app.exception
     assert any(button.label == "Open the backtest chart" for button in app.button)
     assert all(metric.label != "Direction accuracy" for metric in app.metric)
+    app.radio(key="quant_detail").set_value("Predicted vs actual").run()
+    assert not app.exception
+    assert app.selectbox(key="prospective_comparison_horizon").value == "Next update"
+    app.selectbox(key="prospective_comparison_horizon").set_value("7 days").run()
+    assert not app.exception
+    app.radio(key="quant_detail").set_value("Performance").run()
     next(button for button in app.button if button.label == "Open the backtest chart").click().run()
     assert app.radio(key="quant_detail").value == "Backtesting"
     assert not app.exception and app.get("plotly_chart")
