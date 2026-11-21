@@ -1,5 +1,5 @@
 {
-  "origin": "2026-11-21T00:42:00.844830+00:00",
+  "origin": "2026-11-21T06:51:03.498740+00:00",
   "anchor": {
     "absolute_price_change": -52000,
     "candidate_values": [
@@ -52,7 +52,7 @@
   "forecasts": [
     {
       "horizon": "decision_1",
-      "origin": "2026-11-21T00:42:00.844830+00:00",
+      "origin": "2026-11-21T06:51:03.498740+00:00",
       "endpoint": null,
       "target_label": "Next 1 official pricing decision(s)",
       "decision_date": "2026-11-24",
@@ -294,12 +294,12 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Supplier evaluation is conditional on recorded corroborated quotes and does not certify official publication/effective times"
       },
-      "forecast_id": 45372,
-      "snapshot_id": "22119180f3398c7ad39d5f901070ce430acaa411a5bd42b60c378c57ec6a2759"
+      "forecast_id": 45380,
+      "snapshot_id": "f0c6748a65b0ee86f5c0add546bcfa3ff8e04ce8121efc6c346081adbb910e66"
     },
     {
       "horizon": "decision_2",
-      "origin": "2026-11-21T00:42:00.844830+00:00",
+      "origin": "2026-11-21T06:51:03.498740+00:00",
       "endpoint": null,
       "target_label": "Next 2 official pricing decision(s)",
       "decision_date": "2026-11-27",
@@ -508,12 +508,12 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Supplier evaluation is conditional on recorded corroborated quotes and does not certify official publication/effective times"
       },
-      "forecast_id": 45373,
-      "snapshot_id": "22119180f3398c7ad39d5f901070ce430acaa411a5bd42b60c378c57ec6a2759"
+      "forecast_id": 45381,
+      "snapshot_id": "f0c6748a65b0ee86f5c0add546bcfa3ff8e04ce8121efc6c346081adbb910e66"
     },
     {
       "horizon": "decision_4",
-      "origin": "2026-11-21T00:42:00.844830+00:00",
+      "origin": "2026-11-21T06:51:03.498740+00:00",
       "endpoint": null,
       "target_label": "Next 4 official pricing decision(s)",
       "decision_date": "2026-12-04",
@@ -722,13 +722,13 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45374,
-      "snapshot_id": "22119180f3398c7ad39d5f901070ce430acaa411a5bd42b60c378c57ec6a2759"
+      "forecast_id": 45382,
+      "snapshot_id": "f0c6748a65b0ee86f5c0add546bcfa3ff8e04ce8121efc6c346081adbb910e66"
     },
     {
       "horizon": "day_1",
-      "origin": "2026-11-21T00:42:00.844830+00:00",
-      "endpoint": "2026-11-22T02:42:00.844830+02:00",
+      "origin": "2026-11-21T06:51:03.498740+00:00",
+      "endpoint": "2026-11-22T08:51:03.498740+02:00",
       "target_label": "Prevailing official price in 1 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -920,13 +920,13 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Supplier evaluation is conditional on recorded corroborated quotes and does not certify official publication/effective times"
       },
-      "forecast_id": 45375,
-      "snapshot_id": "22119180f3398c7ad39d5f901070ce430acaa411a5bd42b60c378c57ec6a2759"
+      "forecast_id": 45383,
+      "snapshot_id": "f0c6748a65b0ee86f5c0add546bcfa3ff8e04ce8121efc6c346081adbb910e66"
     },
     {
       "horizon": "day_3",
-      "origin": "2026-11-21T00:42:00.844830+00:00",
-      "endpoint": "2026-11-24T02:42:00.844830+02:00",
+      "origin": "2026-11-21T06:51:03.498740+00:00",
+      "endpoint": "2026-11-24T08:51:03.498740+02:00",
       "target_label": "Prevailing official price in 3 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -1118,13 +1118,13 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45376,
-      "snapshot_id": "22119180f3398c7ad39d5f901070ce430acaa411a5bd42b60c378c57ec6a2759"
+      "forecast_id": 45384,
+      "snapshot_id": "f0c6748a65b0ee86f5c0add546bcfa3ff8e04ce8121efc6c346081adbb910e66"
     },
     {
       "horizon": "day_7",
-      "origin": "2026-11-21T00:42:00.844830+00:00",
-      "endpoint": "2026-11-28T02:42:00.844830+02:00",
+      "origin": "2026-11-21T06:51:03.498740+00:00",
+      "endpoint": "2026-11-28T08:51:03.498740+02:00",
       "target_label": "Prevailing official price in 7 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -1349,13 +1349,13 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45377,
-      "snapshot_id": "22119180f3398c7ad39d5f901070ce430acaa411a5bd42b60c378c57ec6a2759"
+      "forecast_id": 45385,
+      "snapshot_id": "f0c6748a65b0ee86f5c0add546bcfa3ff8e04ce8121efc6c346081adbb910e66"
     },
     {
       "horizon": "day_14",
-      "origin": "2026-11-21T00:42:00.844830+00:00",
-      "endpoint": "2026-12-05T02:42:00.844830+02:00",
+      "origin": "2026-11-21T06:51:03.498740+00:00",
+      "endpoint": "2026-12-05T08:51:03.498740+02:00",
       "target_label": "Prevailing official price in 14 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -1547,13 +1547,13 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45378,
-      "snapshot_id": "22119180f3398c7ad39d5f901070ce430acaa411a5bd42b60c378c57ec6a2759"
+      "forecast_id": 45386,
+      "snapshot_id": "f0c6748a65b0ee86f5c0add546bcfa3ff8e04ce8121efc6c346081adbb910e66"
     },
     {
       "horizon": "day_30",
-      "origin": "2026-11-21T00:42:00.844830+00:00",
-      "endpoint": "2026-12-21T02:42:00.844830+02:00",
+      "origin": "2026-11-21T06:51:03.498740+00:00",
+      "endpoint": "2026-12-21T08:51:03.498740+02:00",
       "target_label": "Prevailing official price in 30 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -1745,8 +1745,8 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45379,
-      "snapshot_id": "22119180f3398c7ad39d5f901070ce430acaa411a5bd42b60c378c57ec6a2759"
+      "forecast_id": 45387,
+      "snapshot_id": "f0c6748a65b0ee86f5c0add546bcfa3ff8e04ce8121efc6c346081adbb910e66"
     }
   ],
   "available_market_inputs": {
@@ -1996,16 +1996,16 @@
   "status": "issued",
   "reasons": [],
   "forecast_ids": [
-    45372,
-    45373,
-    45374,
-    45375,
-    45376,
-    45377,
-    45378,
-    45379
+    45380,
+    45381,
+    45382,
+    45383,
+    45384,
+    45385,
+    45386,
+    45387
   ],
   "snapshot_ids": [
-    "22119180f3398c7ad39d5f901070ce430acaa411a5bd42b60c378c57ec6a2759"
+    "f0c6748a65b0ee86f5c0add546bcfa3ff8e04ce8121efc6c346081adbb910e66"
   ]
 }
