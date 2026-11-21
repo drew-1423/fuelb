@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-11-21T18:02:15.894349+00:00",
+  "created_at": "2026-11-21T18:03:50.991595+00:00",
   "hash_algorithm": "sha256",
   "commit_sha": null,
   "base_commit": "f4f8a3090c7c4459b965a990690dc66e13f38d34",
@@ -39,7 +39,7 @@
     "config/structural_scenario_before_vat.json": "95bd7ee2982769b65cc8533baee249e7c4ce1c0a5dc462b19764d34e684dc737",
     "config/validation_protocol.json": "11050316506b9d35ccc1c8a1264ef896711fbe09adce3f01a45bea9fcf3981e5",
     "pyproject.toml": "8ff74745e9e3bb2d6a26f64f20b9be2d77f9c7d13d361e1677767486254b9449",
-    "requirements.txt": "b724ef65828000c50cdca437bb41bd7fc06aeb9d64d458664b135e10127ab226",
+    "requirements.txt": "35c48886be80959da6e71dea6ebdba8725760d70fb06e0e5fc2fa12d02792fe9",
     "scripts/audit_forecasting_artifacts.py": "8dd69d77b783a374c9a9d4e30d7de1468790e0ffa2fec0e646c85aa049455e5d",
     "scripts/audit_structural_artifacts.py": "03e277e8819db475f82baae1865346eeb1207808c5031cbe7a96ffee76f0fe2a",
     "scripts/audit_validation_artifacts.py": "7efe1dbf674601ace25c7bc5f5acaa045b4726285a55aa205684c49e4f43082d",
@@ -132,7 +132,7 @@
     "src/lebanon_fuel/validation/shadow.py": "f5fd968de3dc9712c459f0bae97220c08553f8edd3df4b5f3856c755e2d8daee",
     "src/lebanon_fuel/validation/stress.py": "2c8d9f97992f469a34f9f0bf52fc4dc77fce899b8564009b8d868b853c4a3820"
   },
-  "source_identity": "328ef27294922468bcc4451a0e13822722e180877d9bf8f7f74b4ddab32a2592",
+  "source_identity": "4cda6c470cedd4f3ff3f2a69916ecc0f17495d91920b5ecb44c6d8e701cb314d",
   "model_sha256": {
     "data/models/part5/pre_crisis/day_1/E_lightgbm.txt": "a167094ad5062279e788c5161df57b8990a4bf7a5335d40812303239e448be65",
     "data/models/part5/pre_crisis/day_1/F_catboost.cbm": "d47aaaa5cb5b7d75f965a1b313e7d79d6ab31fae6c757de08d0df30cb03fbdef",
