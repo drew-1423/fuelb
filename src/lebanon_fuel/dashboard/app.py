@@ -409,6 +409,8 @@ def _refresh_controls(snap, forecast):
         if operations.get('finished_at'):
             st.caption(f"Latest refresh · {data.beirut_time(operations['finished_at'])} · {operations['status']}")
         if not _show_refresh_entry():
+            if data.refresh_writer(ROOT) != 'github_actions':
+                st.caption('Owner access is required to refresh data from this dashboard.')
             return
         manager = _refresh_manager()
         with manager['lock']:
