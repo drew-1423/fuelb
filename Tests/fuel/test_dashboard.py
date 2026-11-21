@@ -213,7 +213,7 @@ def test_public_dashboard_hides_legacy_uncertainty_without_live_evidence(monkeyp
     app = AppTest.from_file(str(APP), default_timeout=20).run()
     assert not app.exception
     assert not any(m.label.endswith('probability') for m in app.metric)
-    assert any('Prediction range not ready' in c.value for c in app.info)
+    assert any('Range validation needs 30 matched outcomes' in c.value for c in app.caption)
     assert not any('98.2%' in c.value for c in app.markdown)
     app.radio(key="perspective").set_value("📊 Market & Intelligence").run()
     app.radio(key="view").set_value("Analyst report").run()
@@ -430,7 +430,7 @@ def test_refresh_fragment_changes_polling_with_the_shared_worker():
     exec(compile(ast.Module(body=[function], type_ignores=[]), str(APP), 'exec'), scope)
     for running in (False, True, False):
         manager['running'] = running
-        scope['refresh_status']({}, None)
+        scope['refresh_status']({})
     assert intervals == [60, 2, 60]
 
 
