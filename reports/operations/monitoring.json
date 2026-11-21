@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-21T12:39:59.088478+00:00",
+  "generated_at": "2026-11-21T17:41:09.802862+00:00",
   "data_quality": {
     "conflict_dates": 42,
     "missing_publication_clocks": 3204,
@@ -77,10 +77,10 @@
     ],
     "issues": [],
     "observation_ids": [
-      3198,
       3199,
       3200,
-      3203
+      3203,
+      3205
     ],
     "official_effective_date": null,
     "percentage_price_change": -4.171779141104294,
@@ -99,11 +99,11 @@
     "timezone": "Asia/Beirut",
     "unit": "LBP/20L",
     "verification_status": "archive_corroborated",
-    "revision_id": 3481
+    "revision_id": 4856
   },
   "market": {
-    "origin_utc": "2026-11-21T12:39:55.105839+00:00",
-    "origin_beirut": "2026-11-21T14:39:55.105839+02:00",
+    "origin_utc": "2026-11-21T17:41:07.486977+00:00",
+    "origin_beirut": "2026-11-21T19:41:07.486977+02:00",
     "mode": "strict",
     "backtest_eligible": true,
     "series": {
@@ -2602,7 +2602,7 @@
   },
   "policy_headlines": {
     "status": "captured_headlines_only",
-    "retrieved_at": "2026-11-21T12:39:19.842206+00:00",
+    "retrieved_at": "2026-11-21T17:40:43.947209+00:00",
     "items": [],
     "note": "Changes require original-document review. This is not complete policy surveillance."
   },

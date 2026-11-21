@@ -5,8 +5,9 @@ from hashlib import sha256
 from datetime import datetime
 import csv
 import json
-import sqlite3
 import math
+
+from lebanon_fuel.storage.baseline import historical_database
 
 ROOT=Path(__file__).resolve().parents[1]
 
@@ -21,19 +22,20 @@ def audit(root=ROOT):
     design={r['date']:r for r in frame}
     predictions=list(csv.DictReader((root/'data/exports/structural/historical_proxy_predictions_RESEARCH_ONLY.csv').open()))
     metrics=list(csv.DictReader((root/'reports/structural/test_metrics.csv').open()))
-    conn=sqlite3.connect(f'file:{root / "data/lebanon_fuel.sqlite"}?mode=ro',uri=True)
-    conn.row_factory=sqlite3.Row
     checked_captures=set();checked_targets=set()
-    for r in frame:
-        assert datetime.fromisoformat(r['max_assumed_market_available_at'])<=datetime.fromisoformat(r['origin'])
-        for key,field in [('target_revision_id','actual'),('previous_revision_id','previous')]:
-            original=conn.execute('SELECT payload_json FROM decision_versions WHERE id=?',(int(r[key]),)).fetchone()[0]
-            assert D(str(json.loads(original)['price_lbp_20l']))==D(r[field]);checked_targets.add(r[key])
-        for obs,cap in json.loads(r['market_observation_capture_ids']):
-            assert conn.execute('SELECT 1 FROM market_sightings WHERE observation_id=? AND capture_id=?',(obs,cap)).fetchone()
-            if cap not in checked_captures:
-                raw=conn.execute('SELECT raw_path,sha256 FROM captures WHERE id=?',(cap,)).fetchone()
-                assert sha256((root/raw['raw_path']).read_bytes()).hexdigest()==raw['sha256'];checked_captures.add(cap)
+    with historical_database(root) as conn:
+        for r in frame:
+            assert datetime.fromisoformat(r['max_assumed_market_available_at'])<=datetime.fromisoformat(r['origin'])
+            for key,field in [('target_revision_id','actual'),('previous_revision_id','previous')]:
+                original=conn.execute('SELECT payload_json FROM decision_versions WHERE id=?',(int(r[key]),)).fetchone()[0]
+                assert D(str(json.loads(original)['price_lbp_20l']))==D(r[field]);checked_targets.add(r[key])
+            for obs,cap in json.loads(r['market_observation_capture_ids']):
+                assert conn.execute('SELECT 1 FROM market_sightings WHERE observation_id=? AND capture_id=?',(obs,cap)).fetchone()
+                if cap not in checked_captures:
+                    raw=conn.execute('SELECT raw_path,sha256 FROM captures WHERE id=?',(cap,)).fetchone()
+                    assert sha256((root/raw['raw_path']).read_bytes()).hexdigest()==raw['sha256'];checked_captures.add(cap)
+        assert conn.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+        assert not conn.execute('PRAGMA foreign_key_check').fetchall()
     for p in predictions:
         assert p['train_end']<p['date']
         assert math.isclose(float(p['actual'])-float(p['previous']),float(p['actual_change']),abs_tol=1e-7)
@@ -66,9 +68,6 @@ def audit(root=ROOT):
         assert subtotal*D('.11')==D(r['printed_vat_lbp_kl'])
         recomputed.append(abs(subtotal*D('1.11')/50-D(r['printed_price_lbp_20l'])))
     assert not any(manifest['strict_market_counts_at_last_origin'].values())
-    assert conn.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
-    assert not conn.execute('PRAGMA foreign_key_check').fetchall()
-    conn.close()
     result=dict(review_kind='implementing_agent_recomputation_not_independent_external_audit',
                 design_rows=len(frame),prediction_rows=len(predictions),distinct_test_origins=len({p['date'] for p in predictions}),
                 target_versions_checked=len(checked_targets),market_capture_hashes_checked=len(checked_captures),

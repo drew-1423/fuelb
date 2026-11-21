@@ -18,7 +18,8 @@ from lebanon_fuel.domain import BEIRUT
 from lebanon_fuel.storage.database import Store
 from lebanon_fuel.validation.ledger import ForecastLedger
 from lebanon_fuel.validation.quality import export_data, report
-from lebanon_fuel.validation.decision_tracking import settle_supplier_updates
+from lebanon_fuel.storage.baseline import BASELINE_CONFIG
+from lebanon_fuel.validation.decision_tracking import protocol_start, settle_supplier_updates
 from lebanon_fuel.validation.settlement import settle
 from . import forecast, maintenance, monitoring
 from .schedule import DOMESTIC_SOURCES, SOURCES, due, settings
@@ -86,7 +87,10 @@ def settle_available(root, cfg, ops):
     matches = {}
     with closing(ForecastLedger(root / cfg["validation"]["forecast_ledger"])) as ledger:
         # Revisit previously scored forecasts too: corrected actuals append evaluations.
-        ids = [r[0] for r in ledger.db.execute("SELECT id FROM forecasts WHERE mode IN ('prospective','prospective_research','prospective_shadow') AND status='issued'")]
+        cutoff = protocol_start(root) if (root / BASELINE_CONFIG).is_file() else ""
+        ids = [r[0] for r in ledger.db.execute("""SELECT id FROM forecasts
+            WHERE mode IN ('prospective','prospective_research','prospective_shadow') AND status='issued'
+            AND origin >= ? AND created_at >= ?""", (cutoff, cutoff))]
         for fid in ids:
             matches[str(fid)] = ledger.match(fid, payload.get("coverage", {}))
     return dict(status="reviewed_manifest_processed", import_result=imported, match_status=matches)

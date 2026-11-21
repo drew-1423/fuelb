@@ -24,7 +24,9 @@ ROOT = Path(__file__).resolve().parents[2]
 
 @pytest.fixture
 def project(tmp_path):
-    shutil.copytree(ROOT / "config", tmp_path / "config")
+    # The fixture creates its own database and has no production cutover archive.
+    shutil.copytree(ROOT / "config", tmp_path / "config",
+                    ignore=shutil.ignore_patterns("audited_baseline.json"))
     folder = tmp_path / "reports/model_validation"
     folder.mkdir(parents=True)
     for name in ("production_selection.json", "descriptive_best_models.csv"):

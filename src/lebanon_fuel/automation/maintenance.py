@@ -8,6 +8,7 @@ import sqlite3
 import tarfile
 
 from lebanon_fuel.market.catalog import SERIES
+from lebanon_fuel.storage.baseline import check_legacy_archive
 from lebanon_fuel.validation.ledger import ForecastLedger, hashed
 from .state import now, write_json
 
@@ -30,10 +31,15 @@ def check_database(path):
 
 
 def audit(root, cfg):
+    baseline = check_legacy_archive(root)
     source_path = root / cfg["storage"]["database"]
     ledger_path = root / cfg["validation"]["forecast_ledger"]
     databases = [check_database(path) for path in (source_path, ledger_path, root / "data/operations.sqlite") if path.exists()]
     with closing(sqlite3.connect(f"{source_path.resolve().as_uri()}?mode=ro", uri=True)) as db:
+        if baseline:
+            earliest_revision = db.execute("SELECT MIN(id) FROM decision_versions").fetchone()[0]
+            if earliest_revision is None or earliest_revision <= baseline['legacy_max_revision_id']:
+                raise ValueError("Active database reuses legacy decision revision IDs")
         raw = db.execute("SELECT DISTINCT raw_path,sha256 FROM captures").fetchall()
         for path, checksum in raw:
             target = root / path
@@ -78,6 +84,8 @@ def audit(root, cfg):
         if errors:
             raise ValueError("Forecast evaluation arithmetic mismatch")
     return dict(checked_at=now().isoformat(), databases=databases, raw_files_checked=len(raw),
+                baseline_version=baseline['version'] if baseline else None,
+                legacy_excluded_capture_rows=baseline['excluded_capture_rows'] if baseline else 0,
                 normalized_market_rows_checked=checked, snapshots_checked=snapshots,
                 model_files_checked=len(model_files),
                 evaluation_arithmetic_errors=errors, **integrity)
@@ -99,7 +107,7 @@ def backup(root, cfg):
         files[target.name] = digest(target)
     archive = destination / "artifacts.tar.gz"
     members = ["src/lebanon_fuel", "config", "research", "docs", "scripts", "Tests/fuel", ".streamlit",
-               ".agents/skills", "data/raw", "data/manual", "data/models", "data/exports", "reports",
+               ".agents/skills", "data/raw", "data/legacy", "data/manual", "data/models", "data/exports", "reports",
                "pyproject.toml", "README.md"] + [p.name for p in root.glob("requirements*lock.txt")]
     with tarfile.open(archive, "w:gz") as output:
         for member in members:

@@ -1,0 +1,67 @@
+{
+  "version": "audited-baseline-v1",
+  "created_at": "2026-11-21T17:39:12.467148+00:00",
+  "legacy_commit": "a10fec39394bee685375f4d8448e6f36fa01c2c5",
+  "legacy_archive": "data/legacy/lebanon_fuel_prebaseline.sqlite.gz",
+  "legacy_archive_sha256": "d3efc839725b15f158dc6b6e3a4aebb7a7c341977a5dfe3a3764eaada7224a07",
+  "legacy_database_sha256": "0df89c6ab8a2252d4b9d82b7a9caacf5b63f0ca2260ab547bb01ae81cbc5b360",
+  "initial_active_database_sha256": "324e6077f9cb939283189f559f836837c93e1cb323496830d6cc89c34765023c",
+  "excluded_capture_rows": 68,
+  "excluded_paths": 68,
+  "legacy_max_revision_id": 3482,
+  "rebuilt_revisions": 1373,
+  "row_counts": {
+    "schema_version": {
+      "legacy": 1,
+      "retained": 1
+    },
+    "sources": {
+      "legacy": 16,
+      "retained": 16
+    },
+    "collection_runs": {
+      "legacy": 180,
+      "retained": 180
+    },
+    "captures": {
+      "legacy": 701,
+      "retained": 633
+    },
+    "observations": {
+      "legacy": 3204,
+      "retained": 3203
+    },
+    "sightings": {
+      "legacy": 57770,
+      "retained": 38057
+    },
+    "resolutions": {
+      "legacy": 0,
+      "retained": 0
+    },
+    "decision_versions": {
+      "legacy": 3482,
+      "retained": 0
+    },
+    "market_series": {
+      "legacy": 13,
+      "retained": 13
+    },
+    "market_observations": {
+      "legacy": 38791,
+      "retained": 38791
+    },
+    "market_sightings": {
+      "legacy": 385125,
+      "retained": 385125
+    },
+    "news_items": {
+      "legacy": 35,
+      "retained": 35
+    },
+    "news_sightings": {
+      "legacy": 35,
+      "retained": 35
+    }
+  }
+}

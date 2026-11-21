@@ -325,8 +325,9 @@ def start_background_refresh(root, source="all"):
 
 def _forecast_health(snap, forecast, refresh_result=None):
     try:
-        missing = data.read_json(ROOT / 'reports/operations/phase1_missing_raw_captures.json')
-        if missing.get('missing_count',0):
+        baseline = driver.read_report(ROOT, 'config/audited_baseline.json')
+        missing = driver.read_report(ROOT, 'reports/operations/phase1_missing_raw_captures.json')
+        if not baseline and missing.get('missing_count',0):
             return 'red', f"Strict evidence integrity failed: {missing['missing_count']} original capture files are missing. Any displayed forecast remains a research estimate."
         latest = data.read_json(ROOT / 'reports/operations/latest_run.json')
         if any(r['name']=='integrity_and_financial_arithmetic' and r['status']=='failed' for r in latest.get('steps',[])):
@@ -858,13 +859,15 @@ def quality_view(snap):
     with st.expander('Optional unavailable feeds'):
         st.write(health['checks']['optional_feeds']['reasons'] or 'No optional feed warnings')
     with st.expander('Historical evidence gaps'):
-        catalog=driver.read_report(ROOT,'reports/operations/phase1_missing_raw_captures.json')
-        st.write(f"{catalog.get('missing_capture_rows','Unknown')} missing capture rows / {catalog.get('captures_checked','unknown')} checked captures; {catalog.get('missing_count','Unknown')} unique missing paths.")
-        missing=catalog.get('missing_captures',[])
-        if missing:
-            dates=[r['retrieved_at'] for r in missing]
-            st.caption('Missing captures retrieved '+min(dates)+' through '+max(dates)+'. These are capture counts, not pricing decisions.')
-        st.json(catalog)
+        baseline = driver.read_report(ROOT, 'config/audited_baseline.json')
+        if baseline:
+            st.write(f"The active database was rebuilt from verified capture files. "
+                     f"{baseline['excluded_capture_rows']} capture rows with incomplete evidence remain in the legacy archive.")
+            st.caption("Forecast scores before the cutover are historical research. Prospective validation starts with the audited baseline.")
+            st.json(driver.read_report(ROOT, 'reports/operations/baseline_excluded_captures.json'))
+        else:
+            catalog = driver.read_report(ROOT, 'reports/operations/phase1_missing_raw_captures.json')
+            st.json(catalog)
     st.caption(f"Clock counts below use {snap.get('raw_observation_count','unknown')} raw observations as denominator, not unique decisions. Stored source-date records: {len(snap['prices'])}; dates range from {snap['prices'][0]['source_date'] if snap['prices'] else 'unknown'} to {snap['prices'][-1]['source_date'] if snap['prices'] else 'unknown'}.")
     a, b, c = st.columns(3)
     conflicts = [r for r in snap["prices"] if r["verification_status"] == "conflict"]
