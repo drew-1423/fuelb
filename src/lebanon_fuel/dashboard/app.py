@@ -3,6 +3,7 @@ from datetime import date, datetime, timezone
 from decimal import DecimalException
 from pathlib import Path
 from html import escape
+from base64 import b64encode
 import json
 import os
 import sqlite3
@@ -973,11 +974,13 @@ def main():
         if view == 'Model performance' and st.query_params.get('detail') == 'actual':
             st.session_state['quant_detail'] = 'Predicted vs actual'
     with st.sidebar:
-        st.markdown(
+        illustration = Path(__file__).with_name("station-illustration.webp")
+        encoded_image = b64encode(illustration.read_bytes()).decode("ascii")
+        st.html(
             '<div class="terminal-brand">'
-            '<div class="brand-row"><span class="brand-mark">L</span><strong>Levantdark X</strong></div>'
-            '<span>Lebanon gasoline 95</span></div>',
-            unsafe_allow_html=True,
+            f'<img src="data:image/webp;base64,{encoded_image}" width="480" height="480" '
+            'alt="Illustration of a boy at a Lebanese gas station">'
+            '</div>'
         )
         perspective = st.radio("Perspective", list(PERSPECTIVES), format_func=lambda name: name.split(' ', 1)[1],
                                key="perspective", on_change=_perspective_changed)
