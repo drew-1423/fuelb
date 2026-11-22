@@ -1,5 +1,5 @@
 {
-  "origin": "2026-11-22T00:34:27.955373+00:00",
+  "origin": "2026-11-22T06:49:39.037322+00:00",
   "anchor": {
     "absolute_price_change": -52000,
     "candidate_values": [
@@ -52,7 +52,7 @@
   "forecasts": [
     {
       "horizon": "decision_1",
-      "origin": "2026-11-22T00:34:27.955373+00:00",
+      "origin": "2026-11-22T06:49:39.037322+00:00",
       "endpoint": null,
       "target_label": "Next 1 official pricing decision(s)",
       "decision_date": "2026-11-24",
@@ -96,7 +96,7 @@
         }
       ],
       "critical_missing_inputs": [
-        "IPT and another dated source agree on the provisional price. Ministry confirmation and effective timing are pending.",
+        "IPT and another dated source agree on the starting price.",
         "Exact publication/effective clocks and complete official decision sequence are unresolved.",
         "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
       ],
@@ -294,12 +294,12 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45420,
-      "snapshot_id": "fbc1d3e62976e7006f10c32a6e412faa5ec8e4623b84d5917dbc152c15b571ad"
+      "forecast_id": 45428,
+      "snapshot_id": "ec43526b82e201c515a59bfa1f241568e2d02a06cbd96f153b87c082ffea075d"
     },
     {
       "horizon": "decision_2",
-      "origin": "2026-11-22T00:34:27.955373+00:00",
+      "origin": "2026-11-22T06:49:39.037322+00:00",
       "endpoint": null,
       "target_label": "Next 2 official pricing decision(s)",
       "decision_date": "2026-11-27",
@@ -343,7 +343,7 @@
         }
       ],
       "critical_missing_inputs": [
-        "IPT and another dated source agree on the provisional price. Ministry confirmation and effective timing are pending.",
+        "IPT and another dated source agree on the starting price.",
         "Exact publication/effective clocks and complete official decision sequence are unresolved.",
         "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
       ],
@@ -508,12 +508,12 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45421,
-      "snapshot_id": "fbc1d3e62976e7006f10c32a6e412faa5ec8e4623b84d5917dbc152c15b571ad"
+      "forecast_id": 45429,
+      "snapshot_id": "ec43526b82e201c515a59bfa1f241568e2d02a06cbd96f153b87c082ffea075d"
     },
     {
       "horizon": "decision_4",
-      "origin": "2026-11-22T00:34:27.955373+00:00",
+      "origin": "2026-11-22T06:49:39.037322+00:00",
       "endpoint": null,
       "target_label": "Next 4 official pricing decision(s)",
       "decision_date": "2026-12-04",
@@ -557,7 +557,7 @@
         }
       ],
       "critical_missing_inputs": [
-        "IPT and another dated source agree on the provisional price. Ministry confirmation and effective timing are pending.",
+        "IPT and another dated source agree on the starting price.",
         "Exact publication/effective clocks and complete official decision sequence are unresolved.",
         "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
       ],
@@ -722,13 +722,13 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45422,
-      "snapshot_id": "fbc1d3e62976e7006f10c32a6e412faa5ec8e4623b84d5917dbc152c15b571ad"
+      "forecast_id": 45430,
+      "snapshot_id": "ec43526b82e201c515a59bfa1f241568e2d02a06cbd96f153b87c082ffea075d"
     },
     {
       "horizon": "day_1",
-      "origin": "2026-11-22T00:34:27.955373+00:00",
-      "endpoint": "2026-11-23T02:34:27.955373+02:00",
+      "origin": "2026-11-22T06:49:39.037322+00:00",
+      "endpoint": "2026-11-23T08:49:39.037322+02:00",
       "target_label": "Prevailing official price in 1 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -755,7 +755,7 @@
         }
       ],
       "critical_missing_inputs": [
-        "IPT and another dated source agree on the provisional price. Ministry confirmation and effective timing are pending.",
+        "IPT and another dated source agree on the starting price.",
         "Exact publication/effective clocks and complete official decision sequence are unresolved.",
         "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
       ],
@@ -920,13 +920,13 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45423,
-      "snapshot_id": "fbc1d3e62976e7006f10c32a6e412faa5ec8e4623b84d5917dbc152c15b571ad"
+      "forecast_id": 45431,
+      "snapshot_id": "ec43526b82e201c515a59bfa1f241568e2d02a06cbd96f153b87c082ffea075d"
     },
     {
       "horizon": "day_3",
-      "origin": "2026-11-22T00:34:27.955373+00:00",
-      "endpoint": "2026-11-25T02:34:27.955373+02:00",
+      "origin": "2026-11-22T06:49:39.037322+00:00",
+      "endpoint": "2026-11-25T08:49:39.037322+02:00",
       "target_label": "Prevailing official price in 3 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -953,7 +953,7 @@
         }
       ],
       "critical_missing_inputs": [
-        "IPT and another dated source agree on the provisional price. Ministry confirmation and effective timing are pending.",
+        "IPT and another dated source agree on the starting price.",
         "Exact publication/effective clocks and complete official decision sequence are unresolved.",
         "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
       ],
@@ -1118,13 +1118,13 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45424,
-      "snapshot_id": "fbc1d3e62976e7006f10c32a6e412faa5ec8e4623b84d5917dbc152c15b571ad"
+      "forecast_id": 45432,
+      "snapshot_id": "ec43526b82e201c515a59bfa1f241568e2d02a06cbd96f153b87c082ffea075d"
     },
     {
       "horizon": "day_7",
-      "origin": "2026-11-22T00:34:27.955373+00:00",
-      "endpoint": "2026-11-29T02:34:27.955373+02:00",
+      "origin": "2026-11-22T06:49:39.037322+00:00",
+      "endpoint": "2026-11-29T08:49:39.037322+02:00",
       "target_label": "Prevailing official price in 7 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -1151,7 +1151,7 @@
         }
       ],
       "critical_missing_inputs": [
-        "IPT and another dated source agree on the provisional price. Ministry confirmation and effective timing are pending.",
+        "IPT and another dated source agree on the starting price.",
         "Exact publication/effective clocks and complete official decision sequence are unresolved.",
         "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
       ],
@@ -1349,13 +1349,13 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45425,
-      "snapshot_id": "fbc1d3e62976e7006f10c32a6e412faa5ec8e4623b84d5917dbc152c15b571ad"
+      "forecast_id": 45433,
+      "snapshot_id": "ec43526b82e201c515a59bfa1f241568e2d02a06cbd96f153b87c082ffea075d"
     },
     {
       "horizon": "day_14",
-      "origin": "2026-11-22T00:34:27.955373+00:00",
-      "endpoint": "2026-12-06T02:34:27.955373+02:00",
+      "origin": "2026-11-22T06:49:39.037322+00:00",
+      "endpoint": "2026-12-06T08:49:39.037322+02:00",
       "target_label": "Prevailing official price in 14 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -1382,7 +1382,7 @@
         }
       ],
       "critical_missing_inputs": [
-        "IPT and another dated source agree on the provisional price. Ministry confirmation and effective timing are pending.",
+        "IPT and another dated source agree on the starting price.",
         "Exact publication/effective clocks and complete official decision sequence are unresolved.",
         "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
       ],
@@ -1547,13 +1547,13 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45426,
-      "snapshot_id": "fbc1d3e62976e7006f10c32a6e412faa5ec8e4623b84d5917dbc152c15b571ad"
+      "forecast_id": 45434,
+      "snapshot_id": "ec43526b82e201c515a59bfa1f241568e2d02a06cbd96f153b87c082ffea075d"
     },
     {
       "horizon": "day_30",
-      "origin": "2026-11-22T00:34:27.955373+00:00",
-      "endpoint": "2026-12-22T02:34:27.955373+02:00",
+      "origin": "2026-11-22T06:49:39.037322+00:00",
+      "endpoint": "2026-12-22T08:49:39.037322+02:00",
       "target_label": "Prevailing official price in 30 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -1580,7 +1580,7 @@
         }
       ],
       "critical_missing_inputs": [
-        "IPT and another dated source agree on the provisional price. Ministry confirmation and effective timing are pending.",
+        "IPT and another dated source agree on the starting price.",
         "Exact publication/effective clocks and complete official decision sequence are unresolved.",
         "Current tax/FX formula and licensed Mediterranean gasoline assessment are unavailable."
       ],
@@ -1745,8 +1745,8 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45427,
-      "snapshot_id": "fbc1d3e62976e7006f10c32a6e412faa5ec8e4623b84d5917dbc152c15b571ad"
+      "forecast_id": 45435,
+      "snapshot_id": "ec43526b82e201c515a59bfa1f241568e2d02a06cbd96f153b87c082ffea075d"
     }
   ],
   "available_market_inputs": {
@@ -1996,16 +1996,16 @@
   "status": "issued",
   "reasons": [],
   "forecast_ids": [
-    45420,
-    45421,
-    45422,
-    45423,
-    45424,
-    45425,
-    45426,
-    45427
+    45428,
+    45429,
+    45430,
+    45431,
+    45432,
+    45433,
+    45434,
+    45435
   ],
   "snapshot_ids": [
-    "fbc1d3e62976e7006f10c32a6e412faa5ec8e4623b84d5917dbc152c15b571ad"
+    "ec43526b82e201c515a59bfa1f241568e2d02a06cbd96f153b87c082ffea075d"
   ]
 }

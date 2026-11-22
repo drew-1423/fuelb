@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-22T00:34:38.242264+00:00",
+  "generated_at": "2026-11-22T06:49:50.910138+00:00",
   "data_quality": {
     "conflict_dates": 42,
     "missing_publication_clocks": 3204,
@@ -65,45 +65,56 @@
     }
   ],
   "latest_verified_record": {
-    "absolute_price_change": -102000,
+    "absolute_price_change": -52000,
     "candidate_values": [
-      2343000
+      2291000
     ],
     "change_basis": "previous_verified_record_not_certified_previous_decision",
-    "chosen_observation_id": 3200,
-    "date_role": "decision_date",
-    "decision_numbers": [
-      "246"
+    "chosen_observation_id": 3201,
+    "corroborating_sources": [
+      {
+        "id": "ipt",
+        "url": "https://www.iptgroup.com.lb/ipt/en/our-stations/fuel-prices"
+      },
+      {
+        "id": "totalenergies",
+        "url": "https://pricing.totalenergies.com.lb/fuelprice/"
+      },
+      {
+        "id": "taqtek",
+        "url": "https://taqteklb.com/en/fuel/"
+      }
     ],
+    "date_role": "source_label",
+    "decision_numbers": [],
     "issues": [],
     "observation_ids": [
-      3199,
-      3200,
-      3203,
-      3205
+      3201,
+      3202,
+      3204
     ],
     "official_effective_date": null,
-    "percentage_price_change": -4.171779141104294,
-    "previous_verified_date": "2026-11-10",
-    "previous_verified_price": 2445000,
-    "price_lbp_20l": 2343000,
+    "percentage_price_change": -2.219376867264191,
+    "previous_verified_date": "2026-11-17",
+    "previous_verified_price": 2343000,
+    "price_lbp_20l": 2291000,
     "publication_date": null,
     "publication_timestamp": null,
     "regime": "2026_fiscal_changes_unresolved",
     "regime_status": "provisional_research_bucket",
     "resolution_id": null,
-    "retrieved_at": "2026-11-18T00:44:56.829294+00:00",
-    "source_date": "2026-11-17",
-    "source_priority": 2,
-    "source_url": "https://energyandwater.gov.lb/ar/prices",
+    "retrieved_at": "2026-11-20T12:50:45.729436+00:00",
+    "source_date": "2026-11-20",
+    "source_priority": 3,
+    "source_url": "https://www.iptgroup.com.lb/ipt/en/our-stations/fuel-prices",
     "timezone": "Asia/Beirut",
     "unit": "LBP/20L",
-    "verification_status": "archive_corroborated",
-    "revision_id": 4856
+    "verification_status": "provisional_corroborated",
+    "revision_id": 4857
   },
   "market": {
-    "origin_utc": "2026-11-22T00:34:34.352591+00:00",
-    "origin_beirut": "2026-11-22T02:34:34.352591+02:00",
+    "origin_utc": "2026-11-22T06:49:46.671115+00:00",
+    "origin_beirut": "2026-11-22T08:49:46.671115+02:00",
     "mode": "strict",
     "backtest_eligible": true,
     "series": {
@@ -416,7 +427,7 @@
         "value": 97.776,
         "unit": "USD/bbl",
         "latest_observation_date": "2026-11-17",
-        "age_calendar_days": 4,
+        "age_calendar_days": 5,
         "allowed_age_days": 14,
         "return_1_observation": 0.0025839793281652312,
         "return_7_calendar_days": -0.03602484472049705,
@@ -720,7 +731,7 @@
         "value": 215.949,
         "unit": "million_bbl",
         "latest_observation_date": "2026-11-13",
-        "age_calendar_days": 8,
+        "age_calendar_days": 9,
         "allowed_age_days": 21,
         "return_1_observation": 0.024635006191965125,
         "return_7_calendar_days": 0.024635006191965125,
@@ -1023,7 +1034,7 @@
         "value": 417.797,
         "unit": "million_bbl",
         "latest_observation_date": "2026-11-13",
-        "age_calendar_days": 8,
+        "age_calendar_days": 9,
         "allowed_age_days": 21,
         "return_1_observation": 0.008156036069948858,
         "return_7_calendar_days": 0.008156036069948858,
@@ -1326,7 +1337,7 @@
         "value": 95.7,
         "unit": "percent",
         "latest_observation_date": "2026-11-13",
-        "age_calendar_days": 8,
+        "age_calendar_days": 9,
         "allowed_age_days": 21,
         "return_1_observation": 0.005252100840336116,
         "return_7_calendar_days": 0.005252100840336116,
@@ -1629,7 +1640,7 @@
         "value": 1.1034,
         "unit": "USD/EUR",
         "latest_observation_date": "2026-11-13",
-        "age_calendar_days": 8,
+        "age_calendar_days": 9,
         "allowed_age_days": 14,
         "return_1_observation": -0.001989869753979745,
         "return_7_calendar_days": -0.01075847229693383,
@@ -2561,7 +2572,7 @@
         "status": "stale",
         "value": null,
         "latest_observation_date": "2026-11-12",
-        "age_calendar_days": 9,
+        "age_calendar_days": 10,
         "observation_ids": [
           46037
         ]
@@ -2602,7 +2613,7 @@
   },
   "policy_headlines": {
     "status": "captured_headlines_only",
-    "retrieved_at": "2026-11-22T00:33:00.675205+00:00",
+    "retrieved_at": "2026-11-22T06:49:09.648451+00:00",
     "items": [],
     "note": "Changes require original-document review. This is not complete policy surveillance."
   },
