@@ -237,3 +237,24 @@ def test_revised_outcomes_update_metrics_without_rewriting_predictions(tmp_path)
     assert result["evaluated_forecasts"] == 1
     assert result["groups"][0]["monitoring_window"]["mae_lbp"] == 10
     assert result["groups"][0]["monitoring_window"]["bias_lbp"] == -10
+
+
+def test_widget_snapshot_compact_and_consistent():
+    check = dict(origin="2026-11-22T12:38:23+00:00",
+                 anchor=dict(price_lbp_20l=2291000),
+                 forecasts=[
+                     dict(horizon="decision_2", status="issued", base_price=2291000, predicted_price=1),
+                     dict(horizon="decision_1", status="issued", base_price=2291000, predicted_price=2260065.5899658627),
+                 ])
+    payload = runner.widget_snapshot(check)
+    assert payload == [2291000, 2260066, 1795351103]
+    assert len(json.dumps(payload, separators=(",", ":"))) <= 32
+
+    check["forecasts"][1]["base_price"] = 2343000
+    assert runner.widget_snapshot(check)[1] is None
+    check["anchor"]["price_lbp_20l"] = None
+    assert runner.widget_snapshot(check)[0] is None
+    check["anchor"]["price_lbp_20l"] = float("nan")
+    assert runner.widget_snapshot(check)[0] is None
+    check["origin"] = "bad"
+    assert runner.widget_snapshot(check)[2] == 0

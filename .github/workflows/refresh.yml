@@ -68,7 +68,7 @@ jobs:
           # including partial collections that the strict audit rejects.
           git add data/raw/ data/lebanon_fuel.sqlite data/forecast_ledger.sqlite data/operations.sqlite data/exports/ reports/
           if ! git diff --cached --quiet; then
-            git commit -m "chore: scheduled 6h fuel data refresh"
+            git commit -m "chore: scheduled fuel data refresh"
             git push
           else
             echo "No new observations to commit."
