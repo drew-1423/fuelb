@@ -1,5 +1,6 @@
 """One complete, bounded refresh cycle. No model fitting or automatic approval."""
 from contextlib import closing
+import math
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 import json
@@ -24,6 +25,23 @@ from lebanon_fuel.validation.settlement import settle
 from . import forecast, maintenance, monitoring
 from .schedule import DOMESTIC_SOURCES, SOURCES, due, settings
 from .state import Journal, atomic_write, now, refresh_lock, write_json
+
+
+def widget_snapshot(check):
+    """Compact display data for iOS, without exposing unrelated forecasting details."""
+    anchor = check.get("anchor") or {}
+    current = anchor.get("price_lbp_20l")
+    valid = isinstance(current, (int, float)) and not isinstance(current, bool) and math.isfinite(current) and current > 0
+    predicted = None
+    if valid:
+        for row in check.get("forecasts") or []:
+            value = row.get("predicted_price")
+            if (row.get("horizon") == "decision_1" and row.get("status") == "issued"
+                    and row.get("base_price") == current and isinstance(value, (int, float))
+                    and not isinstance(value, bool) and math.isfinite(value) and value > 0):
+                predicted = round(value)
+                break
+    return {"v": 1, "at": check.get("origin"), "c": round(current) if valid else None, "p": predicted}
 
 
 def execute(root, source, cfg):
@@ -199,6 +217,8 @@ def run(root, *, scheduled=False, sources=None, offline=False, collector=execute
                 check = step("refresh_forecast_decision", lambda: forecast.refresh(root, cfg, run_id))
                 if check["status"] == "success":
                     write_json(root / "reports/operations/current_forecast_check.json", check["result"])
+                    atomic_write(root / "reports/operations/widget_snapshot.json",
+                                 json.dumps(widget_snapshot(check["result"]), separators=(",", ":"), allow_nan=False))
                 shadow_path = ops.get("shadow", {}).get("frozen_manifest")
                 if shadow_path:
                     from lebanon_fuel.validation import shadow
