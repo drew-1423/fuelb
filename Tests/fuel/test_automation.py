@@ -247,12 +247,14 @@ def test_widget_snapshot_compact_and_consistent():
                      dict(horizon="decision_1", status="issued", base_price=2291000, predicted_price=2260065.5899658627),
                  ])
     payload = runner.widget_snapshot(check)
-    assert payload == dict(v=1, at=check["origin"], c=2291000, p=2260066)
-    assert len(json.dumps(payload, separators=(",", ":"))) < 128
+    assert payload == [2291000, 2260066, 1795351103]
+    assert len(json.dumps(payload, separators=(",", ":"))) <= 32
 
     check["forecasts"][1]["base_price"] = 2343000
-    assert runner.widget_snapshot(check)["p"] is None
+    assert runner.widget_snapshot(check)[1] is None
     check["anchor"]["price_lbp_20l"] = None
-    assert runner.widget_snapshot(check)["c"] is None
+    assert runner.widget_snapshot(check)[0] is None
     check["anchor"]["price_lbp_20l"] = float("nan")
-    assert runner.widget_snapshot(check)["c"] is None
+    assert runner.widget_snapshot(check)[0] is None
+    check["origin"] = "bad"
+    assert runner.widget_snapshot(check)[2] == 0
