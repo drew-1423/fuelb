@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-21T18:29:48.619142+00:00",
+  "as_of": "2026-11-22T00:34:08.958756+00:00",
   "series": [
     {
       "series": "brent_spot",
@@ -11,7 +11,7 @@
       "latest": "2026-11-17",
       "latest_value": 92.94,
       "unit": "USD/bbl",
-      "age_days": 4,
+      "age_days": 5,
       "stale": false,
       "known_publication_timestamps": 0,
       "documented_historical_vintages": 0,
@@ -111,7 +111,7 @@
       "latest": "2026-11-16",
       "latest_value": 0.9415262295081966,
       "unit": "EUR/L",
-      "age_days": 5,
+      "age_days": 6,
       "stale": false,
       "known_publication_timestamps": 0,
       "documented_historical_vintages": 0,
@@ -129,7 +129,7 @@
       "latest": "2026-11-16",
       "latest_value": 0.8725632258064517,
       "unit": "EUR/L",
-      "age_days": 5,
+      "age_days": 6,
       "stale": false,
       "known_publication_timestamps": 0,
       "documented_historical_vintages": 0,
@@ -147,7 +147,7 @@
       "latest": "2025-05-29",
       "latest_value": 89700.0,
       "unit": "LBP/USD",
-      "age_days": 541,
+      "age_days": 542,
       "stale": true,
       "known_publication_timestamps": 0,
       "documented_historical_vintages": 0,
@@ -228,28 +228,28 @@
       "details": "{\"status\": \"ok\", \"source_id\": \"market_cboe\", \"source_url\": \"https://fred.stlouisfed.org/graph/fredgraph.csv?id=OVXCLS\", \"capture_id\": 255, \"series\": \"cboe_ovx\", \"publisher\": \"FRED\", \"parsed_rows\": 4912, \"new_observations\": 0, \"rows_ingested\": 4912, \"latest_observation_date\": \"2026-11-12\", \"fred_series_id\": \"OVXCLS\"}"
     },
     "market_ec": {
-      "id": 171,
+      "id": 191,
       "source_id": "market_ec",
-      "started_at": "2026-11-20T18:47:17.274147+00:00",
-      "finished_at": "2026-11-20T18:47:26.333032+00:00",
+      "started_at": "2026-11-22T00:33:52.914881+00:00",
+      "finished_at": "2026-11-22T00:34:01.185482+00:00",
       "status": "success",
-      "details": "{\"results\": [{\"series\": \"italy_gasoline_ex_tax\", \"parsed_rows\": 1093, \"new_observations\": 0, \"capture_id\": 663}, {\"series\": \"greece_gasoline_ex_tax\", \"parsed_rows\": 1093, \"new_observations\": 0, \"capture_id\": 663}]}"
+      "details": "{\"results\": [{\"series\": \"italy_gasoline_ex_tax\", \"parsed_rows\": 1093, \"new_observations\": 0, \"capture_id\": 749}, {\"series\": \"greece_gasoline_ex_tax\", \"parsed_rows\": 1093, \"new_observations\": 0, \"capture_id\": 749}]}"
     },
     "market_eia": {
-      "id": 170,
+      "id": 190,
       "source_id": "market_eia",
-      "started_at": "2026-11-20T18:46:39.988034+00:00",
-      "finished_at": "2026-11-20T18:47:16.990025+00:00",
+      "started_at": "2026-11-22T00:33:15.994264+00:00",
+      "finished_at": "2026-11-22T00:33:52.643442+00:00",
       "status": "success",
-      "details": "{\"results\": [{\"series\": \"brent_spot\", \"parsed_rows\": 9132, \"new_observations\": 0, \"capture_id\": 652}, {\"series\": \"nyh_gasoline\", \"parsed_rows\": 9181, \"new_observations\": 0, \"capture_id\": 654}, {\"series\": \"us_gasoline_stocks\", \"parsed_rows\": 1924, \"new_observations\": 0, \"capture_id\": 656}, {\"series\": \"us_crude_stocks\", \"parsed_rows\": 2303, \"new_observations\": 0, \"capture_id\": 658}, {\"series\": \"us_refinery_utilization\", \"parsed_rows\": 1881, \"new_observations\": 0, \"capture_id\": 660}]}"
+      "details": "{\"results\": [{\"series\": \"brent_spot\", \"parsed_rows\": 9132, \"new_observations\": 0, \"capture_id\": 738}, {\"series\": \"nyh_gasoline\", \"parsed_rows\": 9181, \"new_observations\": 0, \"capture_id\": 740}, {\"series\": \"us_gasoline_stocks\", \"parsed_rows\": 1924, \"new_observations\": 0, \"capture_id\": 742}, {\"series\": \"us_crude_stocks\", \"parsed_rows\": 2303, \"new_observations\": 0, \"capture_id\": 744}, {\"series\": \"us_refinery_utilization\", \"parsed_rows\": 1881, \"new_observations\": 0, \"capture_id\": 746}]}"
     },
     "market_fed": {
-      "id": 172,
+      "id": 192,
       "source_id": "market_fed",
-      "started_at": "2026-11-20T18:47:26.586842+00:00",
-      "finished_at": "2026-11-20T18:47:33.884574+00:00",
+      "started_at": "2026-11-22T00:34:01.453009+00:00",
+      "finished_at": "2026-11-22T00:34:08.556008+00:00",
       "status": "success",
-      "details": "{\"results\": [{\"series\": \"eurusd\", \"parsed_rows\": 7270, \"new_observations\": 0, \"capture_id\": 666}]}"
+      "details": "{\"results\": [{\"series\": \"eurusd\", \"parsed_rows\": 7270, \"new_observations\": 0, \"capture_id\": 752}]}"
     },
     "market_official_review": {
       "id": 84,
