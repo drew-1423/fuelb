@@ -28,7 +28,7 @@ from .state import Journal, atomic_write, now, refresh_lock, write_json
 
 
 def widget_snapshot(check):
-    """Compact display data for iOS, without exposing unrelated forecasting details."""
+    """Only price, forecast and issuance timestamp; same anchor required."""
     anchor = check.get("anchor") or {}
     current = anchor.get("price_lbp_20l")
     valid = isinstance(current, (int, float)) and not isinstance(current, bool) and math.isfinite(current) and current > 0
@@ -41,7 +41,13 @@ def widget_snapshot(check):
                     and not isinstance(value, bool) and math.isfinite(value) and value > 0):
                 predicted = round(value)
                 break
-    return {"v": 1, "at": check.get("origin"), "c": round(current) if valid else None, "p": predicted}
+    origin = check.get("origin")
+    try:
+        stamp = datetime.fromisoformat(origin.replace("Z", "+00:00"))
+        timestamp = round(stamp.timestamp()) if stamp.tzinfo else 0
+    except (AttributeError, TypeError, ValueError, OverflowError):
+        timestamp = 0
+    return [round(current) if valid else None, predicted, timestamp]
 
 
 def execute(root, source, cfg):
