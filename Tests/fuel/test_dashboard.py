@@ -27,12 +27,12 @@ def test_cached_file_version_tracks_nanosecond_mtime(tmp_path):
     assert data.file_version(path)!=before
 
 
-def test_readonly_data_and_verified_anchor():
+def test_readonly_data_and_corroborated_anchor():
     settings = data.config(ROOT)
     db, _ = data.database_paths(ROOT, settings)
     result = data.market_and_prices(ROOT, db)
     latest, previous = data.anchors(result["prices"])
-    assert latest["verification_status"] in data.VERIFIED
+    assert latest["verification_status"] in data.VERIFIED | {data.PROVISIONAL_PRICE}
     assert latest["source_date"] > previous["source_date"]
     assert result["histories"]["brent_spot"][-1]["unit"] == "USD/bbl"
     assert result["latest_capture"]

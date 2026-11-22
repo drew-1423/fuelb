@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-11-22T01:07:42.340625+00:00",
+  "created_at": "2026-11-22T01:09:05.145078+00:00",
   "hash_algorithm": "sha256",
   "commit_sha": null,
   "base_commit": "a0d3842384f922c3500b872d79fee560ed46efae",
@@ -9,7 +9,7 @@
     ".github/workflows/verify.yml": "c1d48e57db89559a9d76c29ef4a6c2f1387f427c044f1ec04d064fc09a920e5e",
     "Tests/fuel/test_automation.py": "0201bfe6a6c78ba9111157cf4642967436bcf83184dba785449038096e8747e9",
     "Tests/fuel/test_cboe_market.py": "d426931c609e003f449b6c7d4bc0e046391911a23c810153e42e2e254e9d1016",
-    "Tests/fuel/test_dashboard.py": "e6c413c7100544cd2c93bedfba5de82f90d23c389c64df0ccbfed8b3cf012887",
+    "Tests/fuel/test_dashboard.py": "ea10d97c6eba8057e33e00d6985004b2c591a790d49bab12024562edb5a57cd7",
     "Tests/fuel/test_dashboard_phase2.py": "df1feafb38084fa90fe91936b6489c50de9181f3fe6fb5e18e543096c51a6960",
     "Tests/fuel/test_decision_tracking.py": "8a031e3f49083e267ef9e7e897e77143e29ffd60fc003749916ba9479dc0eb6c",
     "Tests/fuel/test_forecasting.py": "24881e257319ae1fcdebc26e69217803318b9d33e2badf428774a0cd486d0bee",
@@ -133,7 +133,7 @@
     "src/lebanon_fuel/validation/shadow.py": "f5fd968de3dc9712c459f0bae97220c08553f8edd3df4b5f3856c755e2d8daee",
     "src/lebanon_fuel/validation/stress.py": "2c8d9f97992f469a34f9f0bf52fc4dc77fce899b8564009b8d868b853c4a3820"
   },
-  "source_identity": "658a3ecf98cbdea642387af699b16ff2769a1e085df30aca79c4b1babcb288a0",
+  "source_identity": "f3993bffd43905d5014d369c021fdfeb65eb0284f798ddaf4a796e029427099d",
   "model_sha256": {
     "data/models/part5/pre_crisis/day_1/E_lightgbm.txt": "a167094ad5062279e788c5161df57b8990a4bf7a5335d40812303239e448be65",
     "data/models/part5/pre_crisis/day_1/F_catboost.cbm": "d47aaaa5cb5b7d75f965a1b313e7d79d6ab31fae6c757de08d0df30cb03fbdef",
