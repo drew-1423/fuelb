@@ -81,7 +81,11 @@ if (data && isPrice(data.c)) {
 }
 
 widget.addSpacer();
-text(stale ? "STALE CACHE • CHECK WEBSITE" : "RESEARCH FORECAST • LBP / 20L", 9);
+const age = Date.now() - Date.parse(data?.at);
+text(stale ? "OFFLINE • SAVED DATA" :
+  !Number.isFinite(age) || age > 12 * 60 * 60 * 1000
+    ? "OLD FORECAST • CHECK WEBSITE"
+    : "RESEARCH FORECAST • LBP / 20L", 9);
 
 Script.setWidget(widget);
 if (!config.runsInWidget) await widget.presentMedium();
