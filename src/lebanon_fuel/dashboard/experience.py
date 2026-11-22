@@ -43,7 +43,7 @@ def current_price(records, *, at=None, maximum_age_days=10):
     status=row.get('verification_status')
     if status not in VERIFIED | {PROVISIONAL_PRICE} or not price or not math.isfinite(price) or price <= 0:
         if status == 'supplier_observed':
-            return None, 'The newest quote comes from one station. A matching ministry record or independent station quote is needed.'
+            return None, 'The newest quote comes from one station. An independent source must agree before it can anchor the forecast.'
         if status == 'conflict':
             return None, 'Sources disagree on the newest price. Review their original records before forecasting.'
         return None, 'The newest price needs source verification before it can anchor a forecast.'

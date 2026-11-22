@@ -6,11 +6,11 @@ from lebanon_fuel.market.catalog import SERIES
 def brief(latest, previous, market, best, decision, forecast=None):
     executive = "A corroborated gasoline price is unavailable."
     if latest:
-        executive = (f"The latest verified-tier gasoline 95 record is **{latest['price_lbp_20l']:,} LBP / 20 L** "
+        executive = (f"The latest corroborated gasoline 95 record is **{latest['price_lbp_20l']:,} LBP / 20 L** "
                      f"on {latest['source_date']} ({STATUS[latest['verification_status']].lower()}).")
         if previous:
             change = latest["price_lbp_20l"] - previous["price_lbp_20l"]
-            executive += f" It is {change:+,} LBP versus the previous verified-tier record on {previous['source_date']}."
+            executive += f" It is {change:+,} LBP versus the previous corroborated record on {previous['source_date']}."
         if (latest.get("source_url") or "").startswith("https://"):
             executive += f" [Source record]({latest['source_url']})"
     conditions = []

@@ -6,7 +6,7 @@ import math
 import pandas as pd
 import plotly.graph_objects as go
 
-from .data import forecast_bounds
+from .data import STATUS, forecast_bounds
 from .experience import released_bounds
 
 TEAL = "#20734F"
@@ -154,49 +154,39 @@ def history_chart(prices, replay, current, *, compact=False):
     if not current.empty and replay.empty:
         start = (pd.to_datetime(current.origin, utc=True).min() - pd.Timedelta(days=90)).date().isoformat()
         prices=[r for r in prices if r['source_date']>=start]
-    priority = {"supplier_observed": 0, "government_archive": 1, "archive_corroborated": 2, "document_verified": 3}
-    observed = [r for r in prices if r.get("verification_status") in priority
-                and r.get("price_lbp_20l") is not None]
-    # A step line carries the last observed pump price forward without implying
-    # a smooth move between decisions. Markers below remain the original records.
+    priority = {
+        "supplier_observed": 0,
+        "government_archive": 1,
+        "provisional_corroborated": 2,
+        "archive_corroborated": 3,
+        "document_verified": 4,
+    }
     by_date = {}
-    for row in observed:
+    for row in prices:
+        status = row.get("verification_status")
+        price = row.get("price_lbp_20l")
+        if status not in priority or price is None or not math.isfinite(price) or price <= 0:
+            continue
         day = row["source_date"]
-        if day not in by_date or priority[row["verification_status"]] > priority[by_date[day]["verification_status"]]:
+        if day not in by_date or priority[status] > priority[by_date[day]["verification_status"]]:
             by_date[day] = row
     timeline = [by_date[day] for day in sorted(by_date)]
-    if len(timeline) >= 2:
+    if timeline:
         x = [row["source_date"] for row in timeline]
         y = [row["price_lbp_20l"] for row in timeline]
-        spread = max(y) - min(y)
-        base = min(y) - max(spread * .08, min(y) * .01)
-        fig.add_scatter(x=x, y=[base] * len(x), mode="lines",
-                        line=dict(width=0, color="rgba(0,0,0,0)"),
-                        hoverinfo="skip", showlegend=False)
-        fig.add_scatter(x=x, y=y, mode="lines", line=dict(width=0),
-                        line_shape="hv", fill="tonexty",
-                        fillcolor="rgba(87,166,121,.16)",
-                        hoverinfo="skip", showlegend=False)
-        fig.add_scatter(x=x, y=y, mode="lines", line_shape="hv",
-                        line=dict(color=FOREST, width=2.5),
-                        hoverinfo="skip", showlegend=False)
-    for status, label, color, symbol in [
-        ("archive_corroborated", "Corroborated archive", TEAL, "circle"),
-        ("document_verified", "Reviewed decree", FOREST, "diamond"),
-        ("government_archive", "Archive only", MUTED, "circle-open"),
-        ("provisional_corroborated", "Matching supplier quotes", TEAL, "circle-open"),
-        ("supplier_observed", "Supplier / news schedule", BLUE, "circle-open"),
-    ]:
-        rows = [r for r in prices if r["verification_status"] == status
-                and r["price_lbp_20l"] is not None]
-        if compact and not rows:
-            continue
-        fig.add_scatter(x=[r["source_date"] for r in rows],
-                        y=[r["price_lbp_20l"] for r in rows], mode="markers", name=label,
-                        marker=dict(color=color, symbol=symbol, size=7,
-                                    line=dict(color=SECTION, width=1)),
-                        customdata=[r.get("official_effective_date") or "Not documented" for r in rows],
-                        hovertemplate="%{x}<br>%{y:,.0f} LBP / 20 L<br>Effective date: %{customdata}")
+        if len(timeline) > 1:
+            base = min(y) - max((max(y) - min(y)) * .08, min(y) * .01)
+            fig.add_scatter(x=x, y=[base] * len(x), mode="lines",
+                            line=dict(width=0), hoverinfo="skip", showlegend=False)
+        fig.add_scatter(
+            x=x, y=y, mode="lines+markers", name="Observed prices",
+            line=dict(color=FOREST, width=2.5, shape="hv"),
+            marker=dict(color=TEAL, size=7, line=dict(color=SECTION, width=1)),
+            fill="tonexty" if len(timeline) > 1 else None,
+            fillcolor="rgba(87,166,121,.16)",
+            customdata=[STATUS[row["verification_status"]] for row in timeline],
+            hovertemplate="%{x}<br>%{y:,.0f} LBP / 20 L<br>%{customdata}<extra></extra>",
+        )
     historical = forecast_points(replay, replay=True)
     if not historical.empty:
         add_forecast_markers(fig, historical, "Saved research prediction", AMBER, "diamond-open")

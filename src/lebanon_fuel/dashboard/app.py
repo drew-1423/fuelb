@@ -373,7 +373,7 @@ def _forecast_limitation(spec):
     if spec.get("anchor_verification") == PROVISIONAL_PRICE:
         sources = {item.get('id') for item in spec.get('anchor_sources', [])}
         other = 'TotalEnergies' if 'totalenergies' in sources else 'Taqtek' if 'taqtek' in sources else 'another dated source'
-        return f"Based on matching IPT and {other} prices. Ministry confirmation is pending."
+        return f"Based on matching IPT and {other} prices."
     if spec.get("tier") == 4:
         return "Live inputs are unavailable for a model forecast. The estimate uses a simple price baseline."
     if spec.get("lagged_market_inputs"):
@@ -1014,7 +1014,7 @@ def main():
     elif view == "Analyst report":
         title("Senior analyst report", "Plain-English market briefing · what is driving Lebanon's gasoline price right now")
         st.markdown(
-            '<div class="plain-guide"><strong>Plain-language briefing:</strong> A structured summary of the latest verified pump price, '
+            '<div class="plain-guide"><strong>Plain-language briefing:</strong> A structured summary of the latest corroborated pump price, '
             'international oil movements, regulatory context, and model accuracy—written without jargon and downloadable in one click.</div>',
             unsafe_allow_html=True,
         )

@@ -285,6 +285,21 @@ def test_incomplete_batch_cannot_replace_complete_issuance(tmp_path, monkeypatch
         assert data.live_ledger_rows(path, at=at).empty
 
 
+def test_observed_line_includes_station_consensus():
+    prices = [
+        dict(source_date="2026-11-10", price_lbp_20l=2445000, verification_status="archive_corroborated"),
+        dict(source_date="2026-11-20", price_lbp_20l=2291000, verification_status=data.PROVISIONAL_PRICE),
+        dict(source_date="2026-11-20", price_lbp_20l=2291000, verification_status="supplier_observed"),
+        dict(source_date="2026-11-21", price_lbp_20l=2300000, verification_status="conflict"),
+    ]
+    figure = charts.history_chart(prices, pd.DataFrame(), pd.DataFrame(), compact=True)
+    observed = next(trace for trace in figure.data if trace.name == "Observed prices")
+    assert list(observed.x) == ["2026-11-10", "2026-11-20"]
+    assert list(observed.y) == [2445000, 2291000]
+    assert observed.line.shape == "hv"
+    assert data.anchors(prices) == (prices[1], prices[0])
+
+
 def test_independent_forecast_markers_keep_each_target_once():
     from lebanon_fuel.dashboard.charts import history_chart
 

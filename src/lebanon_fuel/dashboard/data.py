@@ -141,10 +141,9 @@ def market_and_prices(root, db_path):
 
 
 def anchors(prices):
-    verified = [row for row in prices if row["verification_status"] in VERIFIED
-                and row["price_lbp_20l"] is not None]
-    return (verified[-1] if verified else None,
-            verified[-2] if len(verified) >= 2 else None)
+    dated = [row for row in prices if row["verification_status"] in VERIFIED | {PROVISIONAL_PRICE}
+             and row["price_lbp_20l"] is not None]
+    return (dated[-1] if dated else None, dated[-2] if len(dated) >= 2 else None)
 
 
 # Both prospective modes can occur in one issuance and have separate snapshot IDs.
@@ -303,7 +302,7 @@ def live_forecasts(rows, settings, decision, horizon, latest_record, *, at=None)
     elif tier not in (2,3,4) or row['mode'] != 'prospective_research' or row.approved != 0:
         return latest.iloc[:0]
     latest['forecast_tier'] = tier
-    latest['forecast_label'] = spec.get('label')
+    latest['forecast_label'] = (spec.get('label') or '').removesuffix(' · PROVISIONAL PRICE ANCHOR')
     return latest
 
 
