@@ -68,12 +68,12 @@ def share(current,row,settings):
         return
     text=ux.briefing(current,row,settings)
     payload=json.dumps(text).replace('<',r'\u003c')
-    st.html('''<button id="fuel-copy-brief" type="button">📋 Copy WhatsApp Briefing</button>
+    st.html('''<button id="fuel-copy-brief" type="button">Copy fuel outlook</button>
     <span id="fuel-copy-status" role="status"></span><script>
-    (()=>{document.getElementById('fuel-copy-brief').onclick=async()=>{try{await navigator.clipboard.writeText('''+payload+''');document.getElementById('fuel-copy-status').textContent='Copied. Paste into WhatsApp or your social app.';}catch(e){document.getElementById('fuel-copy-status').textContent='Clipboard blocked. Open the preview and select or copy the text, or download the briefing.';}};})();</script>''',unsafe_allow_javascript=True)
-    with st.expander('Preview the shareable briefing'):
+    (()=>{document.getElementById('fuel-copy-brief').onclick=async()=>{try{await navigator.clipboard.writeText('''+payload+''');document.getElementById('fuel-copy-status').textContent='Fuel outlook copied.';}catch(e){document.getElementById('fuel-copy-status').textContent='Clipboard blocked. Open the preview and select or copy the text, or download the briefing.';}};})();</script>''',unsafe_allow_javascript=True)
+    with st.expander('Preview fuel outlook'):
         st.code(text,language=None)
-        st.download_button('Download briefing',text,'lebanon-gasoline-brief.txt','text/plain')
+        st.download_button('Download fuel outlook',text,'lebanon-gasoline-brief.txt','text/plain')
     if row is not None:
         st.link_button('Open exact saved forecast',ux.permalink(row['record_hash']))
 
@@ -127,14 +127,31 @@ def price_panels(current, reason, prices, forecast):
                 st.caption(f'From {base:,.0f} LBP / 20 L{date_note} · approx. {sign}${abs(change) / data.DISPLAY_FX:,.2f} USD change')
 
 
+def _submit_fill_up(*, add_can=False):
+    liters = st.session_state.tank_liters
+    if add_can:
+        liters = min(200, liters + 20)
+        st.session_state.tank_liters = liters
+    else:
+        st.session_state.calculated_tank_liters = liters
+    st.session_state.fill_up_draft = liters
+
+
 def fill_up(forecast):
     st.subheader('Your fill-up')
     if forecast is None:
         st.caption('A fill-up comparison needs a current price estimate.')
         return
-    liters = st.number_input('Fill-up size · liters', min_value=1, max_value=200,
-                             value=int(st.session_state.get('_tank_liters', 50)), key='tank_liters',
-                             on_change=lambda: st.session_state.update(_tank_liters=st.session_state.tank_liters))
+    with st.form('fill_up_volume', border=False, enter_to_submit=False):
+        st.number_input('Fill-up size · liters', min_value=1, max_value=200,
+                        value=st.session_state.get('fill_up_draft', 20), key='tank_liters')
+        add, calculate = st.columns([1, 1])
+        with add, st.container(key='fill_up_add'):
+            st.form_submit_button('+20 L', width='stretch', on_click=_submit_fill_up,
+                                  kwargs={'add_can': True})
+        with calculate:
+            st.form_submit_button('Calculate', width='stretch', type='primary', on_click=_submit_fill_up)
+    liters = st.session_state.get('calculated_tank_liters', 20)
     change = float(forecast['predicted_change']) * liters / 20
     direction = 'less' if change < 0 else 'more'
     st.markdown(f'**{abs(change):,.0f} LBP {direction}**' if change else '**No estimated change**')
@@ -159,13 +176,13 @@ def overview(root, snap, settings, row, refresh_controls, open_workspace, price_
     price_panels(current, reason, snap['prices'], row)
     st.caption(f'USD display rate: {data.DISPLAY_FX:,.0f} LBP per USD.')
     with st.container(key='driver_workspace'):
-        utility, chart = st.columns([1, 2.2])
-        with utility, st.container(key='driver_utility'):
-            fill_up(row)
-            health_strip(health, row)
+        chart, utility = st.columns([2.2, 1])
         with chart, st.container(key='driver_chart'):
             st.subheader('Observed prices and next estimate')
             price_history()
+        with utility, st.container(key='driver_utility'):
+            fill_up(row)
+            health_strip(health, row)
     with st.expander('Validation details'):
         if row is not None:
             status = ux.freshness(row, settings)
@@ -229,7 +246,7 @@ def forecast_page(root,ledger_path,record_hash,settings,show_chart):
         st.code('Forecast hash: '+record_hash+'\nArtifact: '+str(spec.get('artifact_sha256'))+'\nModel version: '+row['model_version']+'\nSnapshot: '+row['snapshot_id'])
         st.json(row['snapshot'])
     share(anchor,row,settings)
-    st.link_button('Return to Driver Pulse','?view=driver')
+    st.link_button('Return to Price Overview','?view=driver')
 
 
 def alert_center(root,snap,row,settings):
