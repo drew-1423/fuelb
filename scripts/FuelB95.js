@@ -1,6 +1,6 @@
 // B95: minimum I/O, native medium widget; no polling or dependencies.
 const url = "https://raw.githubusercontent.com/drew-1423/fuelb/main/reports/operations/widget_snapshot.json";
-const every = 10800000; // 3 hours
+const every = 21600000; // 6 hours
 const now = Date.now();
 const fm = FileManager.local();
 const file = fm.joinPath(fm.libraryDirectory(), "fuelb95-array.json");
