@@ -947,7 +947,7 @@ def backtest_view():
 
 def main():
     global SETTINGS, DECISION, LEDGER_PATH, ACTIVE_FORECASTS
-    st.set_page_config(page_title="Levant Energy Terminal", layout="wide", initial_sidebar_state="auto")
+    st.set_page_config(page_title="Lebanon Energy Terminal", layout="wide", initial_sidebar_state="auto")
     stylesheet = Path(__file__).with_name("terminal.css").read_text(encoding="utf-8")
     st.markdown(f"<style>{stylesheet}</style>", unsafe_allow_html=True)
     try:
@@ -979,7 +979,7 @@ def main():
         st.html(
             '<div class="terminal-brand">'
             '<div class="terminal-brand-copy">'
-            '<strong>Levant<br>Energy</strong>'
+            '<strong>Lebanon<br>Energy</strong>'
             '<span>Fuel terminal</span>'
             '</div>'
             f'<img src="data:image/webp;base64,{encoded_image}" width="480" height="480" '

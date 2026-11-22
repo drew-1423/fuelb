@@ -161,7 +161,14 @@ def test_routes_preserve_tank_and_alert_inputs_and_acknowledge_once(monkeypatch)
         key=buttons[0].key;buttons[0].click().run()
         assert key not in [b.key for b in app.button]
     app.radio(key='view').set_value('Overview').run()
-    if any(n.key=='tank_liters' for n in app.number_input):app.number_input(key='tank_liters').set_value(70).run()
+    if any(n.key=='tank_liters' for n in app.number_input):
+        assert app.number_input(key='tank_liters').value == 20
+        next(b for b in app.button if b.label == '+20 L').click().run()
+        assert app.number_input(key='tank_liters').value == 40
+        assert any('For 20 L' in c.value for c in app.caption)
+        app.number_input(key='tank_liters').set_value(70)
+        next(b for b in app.button if b.label == 'Calculate').click().run()
+        assert any('For 70 L' in c.value for c in app.caption)
     app.radio(key='view').set_value('Alerts').run()
     assert app.number_input(key='alert_threshold').value==10000
     app.radio(key='view').set_value('Overview').run()
@@ -178,6 +185,6 @@ def test_submitted_scenario_survives_multiple_perspective_switches(monkeypatch):
     assert not app.exception
     app.radio(key='perspective').set_value('🔬 Quantitative & Governance').run()
     app.radio(key='perspective').set_value('📊 Market & Intelligence').run()
-    app.radio(key='perspective').set_value('🚗 Driver Pulse').run()
+    app.radio(key='perspective').set_value('🚗 Fuel Prices').run()
     app.radio(key='view').set_value('Scenario simulator').run()
     assert not app.exception and app.number_input(key='scenario_freight').value==35

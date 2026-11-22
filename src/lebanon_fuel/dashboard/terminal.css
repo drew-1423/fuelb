@@ -265,9 +265,16 @@ button:is([data-testid="stBaseButton-primary"], [data-testid="stBaseButton-prima
 :is(.st-key-driver_prices, .st-key-driver_utility, .st-key-driver_chart) [data-testid="stVerticalBlock"] { gap: .375rem; }
 .st-key-driver_prices [data-testid="stMarkdownContainer"] p { margin: 0; }
 .st-key-driver_chart [data-testid="stPlotlyChart"] { border: 0; padding: 0; }
-@media (min-width: 861px) {
-  .st-key-driver_workspace [data-testid="stColumn"]:has(.st-key-driver_utility) { order: 2; }
+.st-key-driver_utility [data-testid="stForm"] { padding: 0; }
+.st-key-fill_up_add button::before {
+  content: "";
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 1rem;
+  background: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 7V4h3v3m2 0V4h6v3m-6 0H6a2 2 0 0 0-2 2v11h16V9a2 2 0 0 0-2-2h-6Zm-3 4 6 6m0-6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
 }
+
 .trust-strip {
   display: grid;
   gap: .625rem;
@@ -321,4 +328,14 @@ button:is([data-testid="stBaseButton-primary"], [data-testid="stBaseButton-prima
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+}
+
+@media (max-width: 640px) {
+  .st-key-driver_utility [data-testid="stForm"] [data-testid="stHorizontalBlock"] {
+    flex-wrap: nowrap;
+  }
+  .st-key-driver_utility [data-testid="stForm"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+    flex: 1 1 0;
+    width: auto;
+  }
 }

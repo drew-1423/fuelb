@@ -14,7 +14,7 @@ from lebanon_fuel.storage.database import sqlite_connection
 from . import data
 
 PERSPECTIVES = {
-    '🚗 Driver Pulse': {'Overview': 'Pump Pulse & Overview', 'Scenario simulator': 'What-If Fuel Calculator', 'Alerts': 'Alert center'},
+    '🚗 Fuel Prices': {'Overview': 'Price Overview', 'Scenario simulator': 'What-If Fuel Calculator', 'Alerts': 'Alert center'},
     '📊 Market & Intelligence': {'Price & forecasts': 'Price & Forecast Trajectory', 'Global markets': 'Global Energy Markets', 'Analyst report': 'Analyst Briefing'},
     '🔬 Quantitative & Governance': {'Model performance': 'Model Performance & Backtesting', 'Decision timeline': 'Decision Timeline & Ledgers', 'Volatility & options': 'Implied Volatility (OVX) & Options', 'Data quality': 'Data Quality & Gap Audit'},
 }
@@ -137,23 +137,23 @@ def readiness(row):
 
 
 def briefing(current, forecast, settings, *, at=None):
-    lines=['⛽ LEBANON GASOLINE 95 OUTLOOK · Levant Energy Terminal']
+    lines=['LEBANON GASOLINE 95 OUTLOOK · Lebanon Energy Terminal']
     if current:
         values=data.currency_values(current['price_lbp_20l'])
-        lines += [f"📍 Current recorded price: {values['lbp_20l']:,.0f} LBP (~${values['usd_20l']:.2f} / 20L)",
+        lines += [f"Current recorded price: {values['lbp_20l']:,.0f} LBP (~${values['usd_20l']:.2f} / 20L)",
                   f"Source date: {current['source_date']} · {data.STATUS.get(current['verification_status'],'Under review')}"]
     if forecast is None:
         return '\n'.join(lines+['No eligible current forecast. Check the posted station price.','https://fuelb95.streamlit.app/?view=driver'])
     spec=json.loads(forecast['target_json']);change=float(forecast['predicted_change']);status=freshness(forecast,settings,at=at)
     view=data.forecast_view(pd.Series(forecast))
-    lines += [f"⚡ Target: {view['schedule']} · estimated; announcement time unconfirmed",
-        f"🔮 Estimated price: {forecast['predicted_price']:,.0f} LBP / 20L",
+    lines += [f"Target: {view['schedule']} · estimated; announcement time unconfirmed",
+        f"Estimated price: {forecast['predicted_price']:,.0f} LBP / 20L",
         f"Change: {change:+,.0f} LBP (~{'−' if change<0 else '+'}${abs(change)/data.DISPLAY_FX:.2f} USD; {change/forecast['base_price']:+.2%}) from {forecast['base_price']:,.0f} LBP",
         f"Issued: {data.beirut_time(status['issued'])}", f"Freshness: {status['status']} · expires {data.beirut_time(status['expires'])}",
         'Research estimate; production approval withheld.' if spec.get('tier')!=1 else 'Validated model; outcomes remain uncertain.',
         'No released prediction range for this forecast.' if not any(released_bounds(forecast,level) for level in (80,90)) else 'A released pointwise prediction range is saved with this forecast; see its exact supported level at the link.',
-        '💡 The change is conditional, not a guarantee. Check the posted station price before filling.',
-        'USD display equivalents assume 89,500 LBP/USD.', '🔗 Exact saved forecast: '+permalink(forecast.get('record_hash'))]
+        'The change is conditional, not a guarantee. Check the posted station price before filling.',
+        'USD display equivalents assume 89,500 LBP/USD.', 'Exact saved forecast: '+permalink(forecast.get('record_hash'))]
     return '\n'.join(lines)
 
 

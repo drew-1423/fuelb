@@ -142,7 +142,7 @@ def test_dashboard_views_and_interactions(monkeypatch):
     assert not app.checkbox(key="comparison_full_details").value
     app.checkbox(key="comparison_full_details").set_value(True).run()
     assert not app.exception
-    app.radio(key="perspective").set_value("🚗 Driver Pulse").run()
+    app.radio(key="perspective").set_value("🚗 Fuel Prices").run()
     app.button(key="overview_trajectory").click().run()
     assert app.radio(key="view").value == "Price & forecasts"
     for label in data.HORIZONS:
@@ -182,7 +182,7 @@ def test_dashboard_views_and_interactions(monkeypatch):
     monkeypatch.setattr(data, "refresh_source", lambda root, source: (False, "Source unavailable"))
     next(b for b in app.button if b.label == "Refresh selected source").click().run()
     assert any("refresh cycle reported a failure" in w.value for w in app.warning)
-    app.radio(key="perspective").set_value("🚗 Driver Pulse").run()
+    app.radio(key="perspective").set_value("🚗 Fuel Prices").run()
     app.radio(key="view").set_value("Scenario simulator").run()
     app.radio(key='scenario_calculation_mode').set_value('Illustrative May 2025 cost reconstruction').run()
     next(b for b in app.button if b.label == "Calculate scenario").click().run()
@@ -538,3 +538,39 @@ def test_released_conformal_bands_render_and_unreleased_bands_stay_hidden():
     rows['target_json']=json.dumps({'tier':4})
     f=charts.history_chart([],pd.DataFrame(),rows)
     assert not any(t.fill=='tonexty' for t in f.data)
+
+
+
+def test_daily_comparisons_keep_matched_and_expire_old_unmatched():
+    from datetime import date
+    from lebanon_fuel.dashboard.decisions import _daily_comparison_table
+
+    rows = pd.DataFrame([
+        dict(created_at="2026-11-19T10:00:00Z", scheduled_effective="2026-11-20", predicted_price=2291000),
+        dict(created_at="2026-11-18T10:00:00Z", scheduled_effective="2026-11-20", predicted_price=2290000,
+             actual_price=2291000, evaluation_kind="provisional_match", recorded_target_date="2026-11-20"),
+        dict(created_at="2026-11-12T10:00:00Z", scheduled_effective="2026-11-15", predicted_price=2310000),
+        dict(created_at="2026-11-19T10:00:00Z", endpoint="2026-11-22T23:30:00Z", predicted_price=2250000),
+        dict(created_at="2026-11-20T10:00:00Z", scheduled_effective="2026-11-23", predicted_price=2270000),
+    ]).reindex(columns=["created_at", "scheduled_effective", "endpoint", "predicted_price",
+                        "actual_price", "evaluation_kind", "recorded_target_date"])
+    result = _daily_comparison_table(rows, date(2026, 11, 22))
+    assert list(result["Date · Beirut"]) == [date(2026, 11, 23), date(2026, 11, 20)]
+    assert list(result["Forecast"]) == [2270000, 2290000]
+    assert list(result["Outcome"]) == ["Awaiting match", "Supplier agreement"]
+
+
+def test_fill_up_requires_calculate_after_adding_a_can():
+    from streamlit.testing.v1 import AppTest
+
+    app = AppTest.from_string(
+        "from lebanon_fuel.dashboard.driver import fill_up\nfill_up({'predicted_change': -20000})"
+    ).run()
+    assert app.number_input(key="tank_liters").value == 20
+    next(b for b in app.button if b.label == "+20 L").click().run()
+    assert app.number_input(key="tank_liters").value == 40
+    assert any("For 20 L" in c.value for c in app.caption)
+    app.number_input(key="tank_liters").set_value(39)
+    next(b for b in app.button if b.label == "Calculate").click().run()
+    assert any("For 39 L" in c.value for c in app.caption)
+    assert not app.exception
