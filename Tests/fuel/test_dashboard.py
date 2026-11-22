@@ -27,12 +27,12 @@ def test_cached_file_version_tracks_nanosecond_mtime(tmp_path):
     assert data.file_version(path)!=before
 
 
-def test_readonly_data_and_verified_anchor():
+def test_readonly_data_and_corroborated_anchor():
     settings = data.config(ROOT)
     db, _ = data.database_paths(ROOT, settings)
     result = data.market_and_prices(ROOT, db)
     latest, previous = data.anchors(result["prices"])
-    assert latest["verification_status"] in data.VERIFIED
+    assert latest["verification_status"] in data.VERIFIED | {data.PROVISIONAL_PRICE}
     assert latest["source_date"] > previous["source_date"]
     assert result["histories"]["brent_spot"][-1]["unit"] == "USD/bbl"
     assert result["latest_capture"]
@@ -283,6 +283,21 @@ def test_incomplete_batch_cannot_replace_complete_issuance(tmp_path, monkeypatch
         assert data.live_ledger_rows(path, at=complete - timedelta(seconds=1)).empty
         issue('abstained', at, data.EXPECTED_HORIZONS, 'abstention', None, None)
         assert data.live_ledger_rows(path, at=at).empty
+
+
+def test_observed_line_includes_station_consensus():
+    prices = [
+        dict(source_date="2026-11-10", price_lbp_20l=2445000, verification_status="archive_corroborated"),
+        dict(source_date="2026-11-20", price_lbp_20l=2291000, verification_status=data.PROVISIONAL_PRICE),
+        dict(source_date="2026-11-20", price_lbp_20l=2291000, verification_status="supplier_observed"),
+        dict(source_date="2026-11-21", price_lbp_20l=2300000, verification_status="conflict"),
+    ]
+    figure = charts.history_chart(prices, pd.DataFrame(), pd.DataFrame(), compact=True)
+    observed = next(trace for trace in figure.data if trace.name == "Observed prices")
+    assert list(observed.x) == ["2026-11-10", "2026-11-20"]
+    assert list(observed.y) == [2445000, 2291000]
+    assert observed.line.shape == "hv"
+    assert data.anchors(prices) == (prices[1], prices[0])
 
 
 def test_independent_forecast_markers_keep_each_target_once():

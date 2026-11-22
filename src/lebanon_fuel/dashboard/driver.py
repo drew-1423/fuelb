@@ -91,7 +91,6 @@ def price_panels(current, reason, prices, forecast):
                     sources = {item['id'] for item in current.get('corroborating_sources', [])}
                     partner = 'TotalEnergies' if 'totalenergies' in sources else 'Taqtek' if 'taqtek' in sources else 'another source'
                     st.caption(f'IPT + {partner} · {observation}')
-                    st.caption('Ministry confirmation and effective timing pending.')
                 else:
                     status = data.STATUS.get(current['verification_status'], 'Evidence under review')
                     st.caption(f'{status} · {observation}')

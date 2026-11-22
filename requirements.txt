@@ -1,4 +1,4 @@
-# Cloud release: reload dashboard modules for the cedar artwork and forecast change colors.
+# Cloud release: reload dashboard modules for the unified observed price chart.
 streamlit>=1.55,<2
 plotly>=6,<8
 pandas>=2.2,<4

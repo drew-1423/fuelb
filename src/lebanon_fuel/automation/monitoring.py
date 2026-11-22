@@ -134,7 +134,7 @@ def build(root, settings, operations, previous=None):
         if conflicts > previous.get("data_quality", {}).get("conflict_dates", 0):
             alerts.append(alert("quality_deterioration", "The number of unresolved source conflicts increased."))
     if not latest or (at.date() - datetime.fromisoformat(latest["source_date"]).date()).days > limits["verified_anchor_maximum_age_days"]:
-        alerts.append(alert("stale_verified_anchor", "The latest verified-tier record is too old for a current-price assumption."))
+        alerts.append(alert("stale_verified_anchor", "The latest corroborated price is too old for a current-price assumption."))
     for row in snap["runs"].itertuples():
         if row.status != "success":
             alerts.append(alert("source_failure", f"{row.source_id}: last collection is {row.status}."))

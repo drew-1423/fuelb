@@ -59,6 +59,8 @@ def anchor_check(records, at, maximum_age, *, allow_provisional=False):
     # Never step backwards over a newer disputed or supplier-only observation.
     eligible = VERIFIED | ({PROVISIONAL_PRICE} if allow_provisional else set())
     if latest['verification_status'] not in eligible or not latest.get('price_lbp_20l') or not math.isfinite(latest['price_lbp_20l']) or latest['price_lbp_20l'] <= 0:
+        if allow_provisional:
+            return None, 'The newest price needs independent corroboration or has conflicting values.'
         return None, 'The latest price lacks official corroboration or has conflicting values. Verify its original ministry decision.'
     if latest['verification_status'] == PROVISIONAL_PRICE:
         sources = {row['id'] for row in latest.get('corroborating_sources', [])}
@@ -66,7 +68,7 @@ def anchor_check(records, at, maximum_age, *, allow_provisional=False):
             return None, 'The provisional price needs matching IPT and a second dated source.'
     age = (at.astimezone(BEIRUT).date() - date.fromisoformat(latest['source_date'])).days
     if age < 0 or age > maximum_age:
-        return None, 'The latest verified price is stale or future-dated. Retrieve a current ministry price and reconcile it with IPT.'
+        return None, 'The latest eligible price is stale or future-dated. Collect a current price and reconcile it with an independent source.'
     known = latest.get('version_known_at') or latest.get('retrieved_at')
     if not known or datetime.fromisoformat(known) >= at:
         return None, 'The verified price was unavailable at the forecast origin. Refresh after reconciliation.'
@@ -413,7 +415,7 @@ def generate(root, settings, config, decision, records, histories, at):
             output['label'] += ' · PROVISIONAL PRICE ANCHOR'
             output['anchor_sources'] = anchor.get('corroborating_sources', [])
             output['critical_missing_inputs'] = [
-                'IPT and another dated source agree on the provisional price. Ministry confirmation and effective timing are pending.',
+                'IPT and another dated source agree on the starting price.',
                 *output['critical_missing_inputs']]
             for key in ('interval', 'interval_nominal', 'interval_80', 'interval_80_nominal', 'probabilities'):
                 output.pop(key, None)

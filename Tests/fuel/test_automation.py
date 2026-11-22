@@ -145,7 +145,7 @@ def test_review_config_cannot_promote_rejected_models(project):
     config["validation"]["production_approved"] = True
     result = forecast.refresh(project, config, "forged-boolean")
     assert result["status"] == "abstain"
-    assert 'official corroboration' in result['reasons'][0]
+    assert 'independent corroboration' in result['reasons'][0]
     assert all(row['tier'] is None for row in result['forecasts'])
 
 
