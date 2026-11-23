@@ -26,6 +26,25 @@ def supplier_agreement(sources):
     ids = set(sources)
     return "ipt" in ids and bool(ids & {"totalenergies", "taqtek"})
 
+def current_price_history(records):
+    """Keep a dated price anchor when later supplementary entries repeat it."""
+    end = len(records)
+    while end and records[end - 1].get("verification_status") == "supplementary_observed":
+        end -= 1
+    if not 0 < end < len(records):
+        return records
+    anchor = records[end - 1]
+    status = anchor.get("verification_status")
+    if status == PROVISIONAL_PRICE and not supplier_agreement(
+        source["id"] for source in anchor.get("corroborating_sources", ())
+    ):
+        return records
+    price = anchor.get("price_lbp_20l")
+    if (status in VERIFIED | {PROVISIONAL_PRICE} and price and price > 0
+            and all(row.get("price_lbp_20l") == price for row in records[end:])):
+        return records[:end]
+    return records
+
 
 def now_utc():
     return datetime.now(timezone.utc).isoformat()

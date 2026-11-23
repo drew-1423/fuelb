@@ -1,0 +1,40 @@
+name: Sync public Streamlit deployment
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Refresh commits made with GITHUB_TOKEN do not trigger push workflows.
+    - cron: "17,47 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: public-streamlit-deployment
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Copy the current tree without importing main history
+        shell: bash
+        run: |
+          set -euo pipefail
+          branch=refs/heads/codex/cloud-clean
+          git fetch --no-tags --depth=1 origin "$branch"
+          deployed=$(git rev-parse FETCH_HEAD)
+          # Verification hashes the workflow files too. Deploy the exact tree.
+          tree=$(git rev-parse 'HEAD^{tree}')
+          if [ "$tree" = "$(git rev-parse "$deployed^{tree}")" ]; then
+            echo "Streamlit already has the current app files."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          revision=$(git commit-tree "$tree" -p "$deployed" -m "Deploy $(git rev-parse --short HEAD) to Streamlit")
+          git push origin "$revision:$branch"

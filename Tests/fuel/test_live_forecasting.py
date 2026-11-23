@@ -398,3 +398,25 @@ def test_government_anchor_keeps_previous_source_agreed_change(context):
     records[-2]["verification_status"] = "supplier_observed"
     frame = live.strict_feature_frame(root, records, histories, at, "decision_1")
     assert np.isnan(frame.x_domestic_change_lag1.iloc[0])
+
+
+@pytest.mark.parametrize("archive_price", [2291000, 2300000])
+def test_later_supplementary_quote_does_not_replace_station_consensus(context, archive_price):
+    from lebanon_fuel.dashboard.experience import current_price
+    from lebanon_fuel.domain import PROVISIONAL_PRICE
+
+    root, settings, config, decision, records, histories, at = context
+    record = records[-1]
+    record.update(verification_status=PROVISIONAL_PRICE, price_lbp_20l=2291000,
+                  corroborating_sources=[{"id": "ipt"}, {"id": "totalenergies"}])
+    records.append(dict(source_date=at.date().isoformat(), verification_status="supplementary_observed",
+                        price_lbp_20l=archive_price))
+    result = live.generate(root, settings, config, decision, records, histories, at)
+    displayed, _ = current_price(records, at=at)
+    if archive_price == record["price_lbp_20l"]:
+        assert result["anchor"]["source_date"] == record["source_date"]
+        assert displayed["source_date"] == record["source_date"]
+    else:
+        assert result["anchor"] is None
+        assert displayed is None
+    assert records[-1]["verification_status"] == "supplementary_observed"
