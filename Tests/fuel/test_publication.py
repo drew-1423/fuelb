@@ -10,6 +10,7 @@ from lebanon_fuel.automation import publication as publish
 
 
 def test_oversized_refresh_roundtrip_and_git_guard(tmp_path, monkeypatch):
+    monkeypatch.delenv("LEBANON_FUEL_LOCAL_STORAGE", raising=False)
     root = tmp_path / "source"
     for name in publish.DATABASES:
         path = root / name

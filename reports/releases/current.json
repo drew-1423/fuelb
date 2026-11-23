@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-11-23T13:39:43.611858+00:00",
+  "created_at": "2026-11-23T13:44:00.400391+00:00",
   "hash_algorithm": "sha256",
   "commit_sha": null,
   "base_commit": "f4d19da334c4e9de1ed430de8ed869077777a543",
@@ -19,7 +19,7 @@
     "Tests/fuel/test_news.py": "6a9498914c5a991500e94bb4856cde72cd8b7aaf6d61e36b995adc5e924c3075",
     "Tests/fuel/test_pdf_parser.py": "f25f7808f85052c0cd82b967772785959f0310c99cb557dd35f478b002cf35f5",
     "Tests/fuel/test_pipeline.py": "39fbc07cd77770484445f3eb484cfc4e679a94bc25e57862ea22ddd7f4416e21",
-    "Tests/fuel/test_publication.py": "3cd0eab17fedc5479dc7a2131acdb18e41aa6d53e0799ff56cb3be1ca195ac41",
+    "Tests/fuel/test_publication.py": "6a525ae9a3f0c3b9040189a75293bcda962d2fcfc2b2da615216e50965030dda",
     "Tests/fuel/test_regional.py": "cb9272a73a0a244a7ce6649d39fd028a636483966237026b9a11b4c4ef4e9d1b",
     "Tests/fuel/test_scorecard.py": "916a00dd9419cbcb366726c8ee1c5d4a065a4367d2a5944c37fba671fe1ab274",
     "Tests/fuel/test_shadow.py": "eb96e8ca6c9e9f50926ae513a2ec885f1456c06d995bc9499226bfa57c59d15e",
@@ -62,7 +62,7 @@
     "src/lebanon_fuel/automation/launchd.py": "a625d347a03895027f0d5bb8f061dadee53cbdbe4beae666a4575108bfc607e9",
     "src/lebanon_fuel/automation/maintenance.py": "af142ee6c0e1f455379740ddb37745ce585a54cdcd1447ce49b627580e4d3557",
     "src/lebanon_fuel/automation/monitoring.py": "eaaa5f9944769d950fb12ba206024d13fbf47602cd55f06cc8c96a81d9452079",
-    "src/lebanon_fuel/automation/publication.py": "7b92588715cd893c9d52edcf297ec8e7e6fbd36ccbbc98b32a2c47855c93c2a0",
+    "src/lebanon_fuel/automation/publication.py": "ed2f60066474fd81c19f0e6e4fed9641e61baaa6f8cfbe1d0dca1569e15192ca",
     "src/lebanon_fuel/automation/release.py": "1e2d3a52b87b1ae4b79d36d8ee90faec8d2aa5477d2e4289828c07843fd572be",
     "src/lebanon_fuel/automation/runner.py": "3d0491e80777a0d2012948d0a7a8c88801eb725d84d26bebf612e2f7f737eb0f",
     "src/lebanon_fuel/automation/schedule.py": "136d5f7d3c6a723289e8578e7db5ca8487303dfb549c77a2d5a94304db26d590",
@@ -135,7 +135,7 @@
     "src/lebanon_fuel/validation/shadow.py": "f5fd968de3dc9712c459f0bae97220c08553f8edd3df4b5f3856c755e2d8daee",
     "src/lebanon_fuel/validation/stress.py": "2c8d9f97992f469a34f9f0bf52fc4dc77fce899b8564009b8d868b853c4a3820"
   },
-  "source_identity": "3a11f1eeb1d05f476f4b10c5fdbac877ecd38b069ee0a7b49d30e3c7b239f6df",
+  "source_identity": "79e30c057544fc30c528e9b7d6aa115aa8018f61f2443ff142234a4fb06e9349",
   "model_sha256": {
     "data/models/part5/pre_crisis/day_1/E_lightgbm.txt": "a167094ad5062279e788c5161df57b8990a4bf7a5335d40812303239e448be65",
     "data/models/part5/pre_crisis/day_1/F_catboost.cbm": "d47aaaa5cb5b7d75f965a1b313e7d79d6ab31fae6c757de08d0df30cb03fbdef",

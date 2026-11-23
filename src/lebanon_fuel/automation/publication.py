@@ -180,6 +180,11 @@ def reader_root(root):
                 stage = Path(directory) / "snapshot"
                 hydrate(manifest, stage, database_only=True)
                 stage.replace(target)
+            cutoff = time.time() - 48 * 3600
+            for generation in cache.iterdir():
+                if (generation != target and re.fullmatch(r"[0-9a-f]{64}", generation.name)
+                        and generation.is_dir() and generation.stat().st_mtime < cutoff):
+                    shutil.rmtree(generation, ignore_errors=True)
     return target
 
 
