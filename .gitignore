@@ -9,9 +9,11 @@ __pycache__/
 data/backups/
 reports/model_validation/archive/
 data/exports/forecasting/development_design.csv
+data/exports/forecasting/origin_features.csv
 data/exports/model_validation/research_design.csv
 data/exports/model_validation/origin_features.csv
 data/logs/*.log
+reports/operations/runs/
 
 # Operational snapshots live in checksummed GitHub Release assets. Restore them
 # through the publication workflow or the dashboard's read-only release cache.

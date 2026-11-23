@@ -4,6 +4,8 @@ The six-hour refresh uses private-by-repository GitHub Releases as durable snaps
 
 The Streamlit read-only dashboard loads its SQLite snapshot from the release manifest into a generation-isolated local cache. It does not need database or capture blobs in the Git checkout. Verification and refresh workflows hydrate the published databases and captures before running their strict audits.
 
+Generated forecasting feature caches are excluded from the deploy checkout and recreated by `fuel-forecast build` before a local research retrain. Archived per-run JSON is excluded from the checkout; the operation history remains in the published SQLite snapshots and earlier reports remain in Git history.
+
 ## Audited starting state
 
 Read-only baseline captured on 23 November 2026 before this change:
