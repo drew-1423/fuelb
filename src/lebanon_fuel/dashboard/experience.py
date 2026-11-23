@@ -9,7 +9,7 @@ import sqlite3
 
 import pandas as pd
 
-from lebanon_fuel.domain import BEIRUT, VERIFIED, PROVISIONAL_PRICE
+from lebanon_fuel.domain import BEIRUT, VERIFIED, PROVISIONAL_PRICE, current_price_history
 from lebanon_fuel.storage.database import sqlite_connection
 from . import data
 
@@ -38,7 +38,7 @@ def current_price(records, *, at=None, maximum_age_days=10):
     """Never step backwards over a newer conflict or uncorroborated quote."""
     if not records:
         return None, 'No dated price is stored. Check the posted station price.'
-    row = max(records, key=lambda r:r['source_date'])
+    row = current_price_history(sorted(records, key=lambda record: record['source_date']))[-1]
     price = row.get('price_lbp_20l')
     status=row.get('verification_status')
     if status not in VERIFIED | {PROVISIONAL_PRICE} or not price or not math.isfinite(price) or price <= 0:
@@ -163,7 +163,7 @@ def alerts(records, forecast, health, operations, threshold, *, at=None):
     def add(kind,key,title,message,timestamp,evidence):
         identity=sha256(json.dumps([kind,key],sort_keys=True,default=str).encode()).hexdigest()
         result[identity]=dict(id=identity,kind=kind,title=title,message=message,timestamp=timestamp,evidence=evidence)
-    dated=sorted(records,key=lambda r:r['source_date'])
+    dated = current_price_history(sorted(records, key=lambda record: record['source_date']))
     if dated:
         last=dated[-1];ts=last.get('version_known_at') or last.get('retrieved_at')
         if last.get('verification_status')=='conflict':

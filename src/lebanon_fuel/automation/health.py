@@ -3,7 +3,7 @@ from datetime import datetime, timezone, date
 from pathlib import Path
 import json
 
-from lebanon_fuel.domain import BEIRUT, VERIFIED, PROVISIONAL_PRICE
+from lebanon_fuel.domain import BEIRUT, VERIFIED, PROVISIONAL_PRICE, current_price_history
 
 
 def state(status, reasons=(), recovery=None, **detail):
@@ -19,7 +19,7 @@ def contract(*, at, required, optional, anchor, forecast, calibration, integrity
         feeds[sid]=state('failed' if age is None or age<0 or age>14 else 'warning' if age>7 else 'ok',
             ['missing_or_stale_required_feed'] if age is None or age<0 or age>14 else ['lagged_required_feed'] if age>7 else [],
             'Run the durable scheduled collector; verify provider availability.',observation_date=row.get('observation_date') if row else None,age_days=age)
-    anchors=state('failed',['missing_or_conflicting_anchor'],'Reconcile current dated government or IPT/Taqtek evidence.')
+    anchors=state('failed',['missing_or_conflicting_anchor'],'Check dated IPT and TotalEnergies prices for agreement.')
     if anchor and anchor.get('verification_status') in VERIFIED | {PROVISIONAL_PRICE} and anchor.get('price_lbp_20l',0)>0:
         age=(now.astimezone(BEIRUT).date()-date.fromisoformat(anchor['source_date'])).days
         anchors=state('ok' if 0<=age<=10 else 'failed',[] if 0<=age<=10 else ['stale_or_future_anchor'],
@@ -54,7 +54,8 @@ def build(root,snap,forecast=None,refresh=None):
     for sid in required:
         history=snap.get('histories',{}).get(sid,[]);required[sid]=history[-1] if history else None
     optional=[sid for sid,info in snap.get('market',{}).get('series',{}).items() if sid not in required and info.get('status')!='available']
-    records=snap.get('prices',[]);anchor=records[-1] if records else None
+    records = current_price_history(snap.get('prices', []))
+    anchor = records[-1] if records else None
     f=None;calibration=state('unknown',['no_issued_forecast'],'Inspect horizon readiness.')
     if forecast is not None:
         row=dict(forecast);spec=json.loads(row['target_json']);f=dict(row,spec=spec)
