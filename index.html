@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lebanon Gasoline 95 Monitor</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f2f6f3;color:#17271f;font:1rem/1.55 system-ui,sans-serif}main{max-width:60rem;margin:auto;padding:clamp(1rem,5vw,4rem)}h1{font-size:clamp(2rem,6vw,3.5rem);line-height:1.1;margin:.4rem 0}h2{font-size:1.2rem;margin:0 0 .5rem}p{margin:.5rem 0}header{margin-bottom:2rem}.eyebrow{font-weight:700;color:#146447}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:1rem}section{background:white;border:1px solid #c8d9ce;border-radius:1.15rem;padding:1.25rem;margin-bottom:1rem}.primary{background:#104630;color:white;border:0}.value{font-size:clamp(1.5rem,4vw,2.3rem);font-weight:750;line-height:1.3;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}table{border-collapse:collapse;width:100%;text-align:left;font-variant-numeric:tabular-nums}td,th{padding:.55rem .25rem;border-bottom:1px solid #dae5de}th:last-child,td:last-child{text-align:right}a{color:#145d42;text-underline-offset:.18em}
+</style>
+<main>
+<header><p class="eyebrow">Lebanon Energy · Public status</p><h1>Lebanon gasoline 95</h1><p>Recorded prices and the latest published forecast check. Prices in LBP per 20 liters.</p></header>
+<div class="grid">
+<section class="primary"><h2>Last corroborated price</h2><p class="value" id="price">Loading…</p><p id="price-date"></p></section>
+<section><h2>Next price estimate</h2><p class="value" id="estimate">Loading…</p><p id="forecast-note"></p><p id="forecast-date"></p></section>
+</div>
+<section><h2>Recent corroborated prices</h2><p id="history-status" role="status">Loading observations…</p><table id="history" hidden><thead><tr><th scope="col">Observation date</th><th scope="col">LBP / 20 L</th></tr></thead><tbody></tbody></table></section>
+<footer><a href="https://github.com/drew-1423/fuelb">Project and published data on GitHub</a></footer>
+</main>
+<script>
+const base = "https://raw.githubusercontent.com/drew-1423/fuelb/main/";
+const byId = (id) => document.getElementById(id);
+const fmt = new Intl.NumberFormat("en", {maximumFractionDigits: 0});
+async function fetchPublished(path) {
+  const response = await fetch(base + path, {cache: "no-store"});
+  if (!response.ok) throw new Error("Published data request failed");
+  return response;
+}
+function fields(line) {
+  return [...line.matchAll(/(?:^|,)(?:"((?:[^"]|"")*)"|([^,]*))/g)]
+    .map((match) => (match[1] ?? match[2]).replaceAll('""', '"'));
+}
+async function showHistory() {
+  const [header, ...lines] = (await (await fetchPublished("data/exports/gasoline_95_history.csv")).text()).trim().split(/\r?\n/);
+  const columns = fields(header);
+  const date = columns.indexOf("source_date");
+  const price = columns.indexOf("price_lbp_20l");
+  const status = columns.indexOf("verification_status");
+  const accepted = new Set(["document_verified", "archive_corroborated", "provisional_corroborated"]);
+  const resolved = new Map();
+  for (const line of lines) {
+    const row = fields(line);
+    const value = Number(row[price]);
+    if (!accepted.has(row[status]) || !/^\d{4}-\d{2}-\d{2}$/.test(row[date]) || !(value > 0)) continue;
+    if (!resolved.has(row[date])) resolved.set(row[date], new Set());
+    resolved.get(row[date]).add(value);
+  }
+  const recent = [...resolved].filter(([, values]) => values.size === 1)
+    .sort(([left], [right]) => right.localeCompare(left)).slice(0, 12);
+  if (!recent.length) throw new Error("No corroborated observations");
+  const [[latest, values]] = recent;
+  byId("price").textContent = fmt.format([...values][0]) + " LBP";
+  byId("price-date").textContent = "Observed " + latest;
+  for (const [day, prices] of recent) {
+    const row = byId("history").tBodies[0].insertRow();
+    row.insertCell().textContent = day;
+    row.insertCell().textContent = fmt.format([...prices][0]);
+  }
+  byId("history").hidden = false;
+  byId("history-status").hidden = true;
+}
+async function showForecast() {
+  const check = await (await fetchPublished("reports/operations/current_forecast_check.json")).json();
+  const next = check.forecasts?.find((row) => row.horizon === "decision_1");
+  const target = next?.decision_date;
+  const today = new Intl.DateTimeFormat("sv-SE", {timeZone:"Asia/Beirut"}).format(new Date());
+  const timestamp = new Date(check.origin);
+  const current = Number.isFinite(timestamp.getTime()) && Date.now() - timestamp.getTime() <= 24 * 60 * 60 * 1000 && timestamp.getTime() <= Date.now() && target > today;
+  if (current && next?.status !== "abstain" && Number.isFinite(next?.predicted_price) && next.predicted_price > 0) {
+    byId("estimate").textContent = fmt.format(next.predicted_price) + " LBP";
+    byId("forecast-note").textContent = "Estimate for " + target + ". The announcement date is projected.";
+  } else {
+    byId("estimate").textContent = "No current estimate";
+    byId("forecast-note").textContent = next?.status === "abstain" ? (check.reasons || []).join(" ") : "Waiting for a fresh forecast with a future target.";
+  }
+  if (Number.isFinite(timestamp.getTime())) byId("forecast-date").textContent = "Last check: " + new Intl.DateTimeFormat("en-GB",{dateStyle:"medium",timeStyle:"short",timeZone:"Asia/Beirut"}).format(timestamp) + " Beirut time";
+}
+showHistory().catch(() => {byId("price").textContent = "Price unavailable"; byId("history-status").textContent = "Published observations could not be loaded. Try reloading this page.";});
+showForecast().catch(() => {byId("estimate").textContent = "Forecast status unavailable"; byId("forecast-note").textContent = "The latest published check could not be loaded.";});
+</script>
