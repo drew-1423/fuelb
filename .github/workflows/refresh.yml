@@ -70,8 +70,16 @@ jobs:
           PYTHONPATH: src
         run: python -m lebanon_fuel.automation.cli --root . audit
 
+      - name: Gate publication on collection and integrity success
+        id: publication_gate
+        if: always()
+        env:
+          COLLECT_OUTCOME: ${{ steps.collect.outcome }}
+          AUDIT_OUTCOME: ${{ steps.audit.outcome }}
+        run: python -m lebanon_fuel.automation.publication gate
+
       - name: Assemble verified publication
-        if: steps.audit.outcome == 'success'
+        if: steps.publication_gate.outcome == 'success'
         run: |
           python -m lebanon_fuel.automation.publication pack \
             --output "$RUNNER_TEMP/fuel-storage" --repository "$GITHUB_REPOSITORY" --tag "$STORAGE_TAG"
@@ -83,7 +91,7 @@ jobs:
       - name: Store and verify data before publication
         env:
           GH_TOKEN: ${{ github.token }}
-        if: steps.audit.outcome == 'success'
+        if: steps.publication_gate.outcome == 'success'
         run: |
           gh release create "$STORAGE_TAG" --target "$(git rev-parse HEAD)" --latest=false \
             --title "Fuel data $STORAGE_TAG" --notes "Checksummed SQLite backups and source captures."
@@ -98,8 +106,19 @@ jobs:
           python -m lebanon_fuel.automation.publication verify-remote \
             --manifest "$RUNNER_TEMP/fuel-storage/manifest.json"
 
+      - name: Check cumulative release storage
+        if: steps.publication_gate.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          total_bytes=$(gh api --paginate "repos/${GITHUB_REPOSITORY}/releases?per_page=100" --jq '.[].assets[]?.size' | awk '{ total += $1 } END { print total + 0 }')
+          echo "GitHub Release assets currently use ${total_bytes} bytes."
+          if [ "$total_bytes" -ge "$((8 * 1024 * 1024 * 1024))" ]; then
+            echo "::warning::GitHub Release assets exceed 8 GiB; review retained snapshots and recovery requirements."
+          fi
+
       - name: Publish dashboard manifest and widget together
-        if: steps.audit.outcome == 'success'
+        if: steps.publication_gate.outcome == 'success'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -130,7 +149,7 @@ jobs:
             ${{ runner.temp }}/fuel-storage/
 
       - name: Report collection or integrity failure
-        if: always() && (steps.collect.outcome == 'failure' || steps.audit.outcome == 'failure')
+        if: always() && (steps.collect.outcome == 'failure' || steps.audit.outcome == 'failure' || steps.publication_gate.outcome == 'failure')
         run: |
           echo "::error::The refresh was degraded or failed integrity verification. Inspect the preserved evidence and publication steps."
           exit 1

@@ -1,2 +1,0 @@
-date,value,unit,reviewer,evidence_locator,evidence_sha256
-2023-05-12,94500,LBP/USD,Codex visual transcription of original page 2 (structural_annexes.json),page 2 printed FX rate 94500 LBP/USD,6c4de8ed466ae64644fb97e6eb438e67f0dd2d55e44b5113c06ae81a172f1477

@@ -3,6 +3,7 @@ import json
 import shutil
 import sqlite3
 import subprocess
+from pathlib import Path
 
 import pytest
 
@@ -28,7 +29,7 @@ def test_oversized_refresh_roundtrip_and_git_guard(tmp_path, monkeypatch):
     widget.write_text("[2291000,2260066,1795271400]")
     subprocess.run(["git", "init", "-q", root], check=True)
     subprocess.run(["git", "add", publish.DATABASES[0]], cwd=root, check=True)
-    with pytest.raises(ValueError, match="Staged Git blob data/lebanon_fuel.sqlite"):
+    with pytest.raises(ValueError, match="Operational data must not be staged"):
         publish.check_staged_sizes(root)
 
     monkeypatch.setattr(publish, "PART_BYTES", 64 * 1024)
@@ -78,3 +79,60 @@ def test_publication_requires_widget_from_same_successful_run(tmp_path):
     (tmp_path / publish.WIDGET).write_text("[1,null,0]")
     with pytest.raises(ValueError, match="do not match"):
         publish.check_refresh_output(tmp_path)
+
+
+
+def test_publication_gate_requires_successful_collection_and_audit():
+    assert publish.publication_allowed("success", "success")
+    assert not publish.publication_allowed("failure", "success")
+    assert not publish.publication_allowed("success", "failure")
+    assert not publish.publication_allowed("skipped", "success")
+
+
+def test_workflow_gates_release_and_pointer_on_both_checks():
+    workflow = (Path(__file__).resolve().parents[2] / ".github/workflows/refresh.yml").read_text()
+    assert "publication gate" in workflow.lower()
+    assert "gh release create" in workflow
+    assert "gh release upload" in workflow
+    assert workflow.count("if: steps.publication_gate.outcome == 'success'") == 4
+    assert "FUEL_STORAGE_" not in workflow
+    assert "Check cumulative release storage" in workflow
+
+
+def test_staged_guard_rejects_raw_captures_and_sqlite_databases(tmp_path):
+    root = tmp_path
+    subprocess.run(["git", "init", "-q", root], check=True)
+    raw = root / "data/raw/ipt/source.html"
+    raw.parent.mkdir(parents=True)
+    raw.write_text("evidence")
+    subprocess.run(["git", "add", "data/raw/ipt/source.html"], cwd=root, check=True)
+    with pytest.raises(ValueError, match="Operational data must not be staged"):
+        publish.check_staged_sizes(root)
+    subprocess.run(["git", "reset", "-q"], cwd=root, check=True)
+    database = root / "data/forecast_ledger.sqlite"
+    database.write_bytes(b"sqlite data")
+    subprocess.run(["git", "add", "data/forecast_ledger.sqlite"], cwd=root, check=True)
+    with pytest.raises(ValueError, match="Operational data must not be staged"):
+        publish.check_staged_sizes(root)
+
+
+def test_retried_forecast_batch_is_idempotent_and_keeps_hash_chain(tmp_path):
+    from datetime import datetime, timezone
+    from lebanon_fuel.validation.ledger import ForecastLedger
+
+    ledger = ForecastLedger(tmp_path / "forecast-ledger.sqlite")
+    origin = datetime.now(timezone.utc).isoformat()
+    item = dict(run_id="refresh-retry", origin=origin, mode="prospective_research",
+                model_version="research-v1", model_metadata={"research_only": True},
+                snapshot_payload={"anchor": 1_000_000}, horizon="decision_1",
+                target={"kind": "decision", "steps": 1}, base_price=1_000_000,
+                prediction=10_000, interval=None, probabilities=None, reasons=[])
+    first = ledger.issue_batch([item])
+    second = ledger.issue_batch([item])
+    assert second == first
+    assert ledger.db.execute("SELECT COUNT(*) FROM forecasts").fetchone()[0] == 1
+    assert ledger.integrity()["hash_chain_valid"]
+    with pytest.raises(ValueError, match="conflicts with immutable issuance"):
+        ledger.issue_batch([dict(item, prediction=20_000)])
+    assert ledger.db.execute("SELECT COUNT(*) FROM forecasts").fetchone()[0] == 1
+    ledger.close()

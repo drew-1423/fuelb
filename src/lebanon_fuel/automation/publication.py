@@ -27,6 +27,7 @@ DATABASES = tuple(Path("data") / name for name in (
 WIDGET = Path("reports/operations/widget_snapshot.json")
 PART_BYTES = 64 * 1024**2
 GIT_MAX_BYTES = 95 * 1024**2
+MAX_RELEASE_ASSETS = 1000
 GROUPS = ("databases", "captures")
 
 
@@ -87,6 +88,8 @@ def validate_manifest(manifest):
         raise ValueError("Unsupported refresh storage manifest")
     if not re.fullmatch(r"[0-9a-f]{64}", manifest["widget_sha256"]):
         raise ValueError("Invalid widget checksum")
+    if sum(len(manifest["assets"][group]) for group in GROUPS) + 1 > MAX_RELEASE_ASSETS:
+        raise ValueError("Snapshot exceeds GitHub Release's 1,000 asset limit")
     for group in GROUPS:
         parts = manifest["assets"][group]
         if not parts:
@@ -188,6 +191,11 @@ def reader_root(root):
     return target
 
 
+def publication_allowed(collection_outcome, audit_outcome):
+    """Publish only after collection and the strict integrity audit both pass."""
+    return collection_outcome == "success" and audit_outcome == "success"
+
+
 def check_refresh_output(root):
     operations = root / "reports/operations"
     cycle = json.loads((operations / "latest_run.json").read_text())
@@ -205,6 +213,8 @@ def check_staged_sizes(root):
     ).split(b"\0")
     for path in filter(None, names):
         name = os.fsdecode(path)
+        if name.startswith("data/raw/") or (name.startswith("data/") and PurePosixPath(name).suffix in {".sqlite", ".db"}):
+            raise ValueError(f"Operational data must not be staged in Git: {name}")
         size = int(subprocess.check_output(["git", "cat-file", "-s", ":" + name], cwd=root))
         if size >= GIT_MAX_BYTES:
             raise ValueError(f"Staged Git blob {name} is {size} bytes. Publish large files as release assets.")
@@ -214,15 +224,23 @@ def check_staged_sizes(root):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=["pack", "hydrate", "verify-remote", "check-staged", "verify-widget"])
+    parser.add_argument("command", choices=["gate", "pack", "hydrate", "verify-remote", "check-staged", "verify-widget"])
     parser.add_argument("--root", type=Path, default=Path.cwd())
     parser.add_argument("--output", type=Path)
     parser.add_argument("--manifest", type=Path)
     parser.add_argument("--repository")
     parser.add_argument("--tag")
     parser.add_argument("--commit")
+    parser.add_argument("--collect-outcome")
+    parser.add_argument("--audit-outcome")
     args = parser.parse_args()
-    if args.command == "pack":
+    if args.command == "gate":
+        collection = args.collect_outcome or os.environ.get("COLLECT_OUTCOME", "")
+        audit = args.audit_outcome or os.environ.get("AUDIT_OUTCOME", "")
+        if not publication_allowed(collection, audit):
+            raise SystemExit("Publication blocked: collection and strict integrity audit must both succeed")
+        print("Collection and integrity audit passed; release publication may proceed.")
+    elif args.command == "pack":
         check_refresh_output(args.root)
         manifest = assemble(args.root, args.output, args.repository, args.tag)
         print(json.dumps({k: manifest[k] for k in ("tag", "databases", "capture_count")}, indent=2))

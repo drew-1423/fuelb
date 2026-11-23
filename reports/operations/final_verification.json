@@ -1,7 +1,7 @@
 {
-  "checked_at": "2026-11-19T23:54:43.482576+00:00",
+  "checked_at": "2026-11-23T16:28:10.687124+00:00",
   "scope": "Lebanon fuel Python project; unrelated Swift application excluded",
-  "all_passed": false,
+  "all_passed": true,
   "results": {
     "current_release_integrity": {
       "command": [
@@ -11,8 +11,8 @@
         "verify"
       ],
       "returncode": 0,
-      "seconds": 0.09027174999937415,
-      "stdout": "{\n  \"status\": \"passed\",\n  \"source_identity\": \"0db9e5a44b03ec5f182e066bd0f5224570d0d6ae8cf2d493aee7807d30afe060\",\n  \"model_identity\": \"a4547fba370f054dd7dfa0a9ac1f69e971d135e76c712985b4773e11e06ab603\",\n  \"commit_sha\": null,\n  \"production_approved\": false\n}\n",
+      "seconds": 0.0561816249974072,
+      "stdout": "{\n  \"status\": \"passed\",\n  \"source_identity\": \"94bebbb16e6877f405bd6617c472b1854be015731771d5489c23e1b865219e80\",\n  \"model_identity\": \"a4547fba370f054dd7dfa0a9ac1f69e971d135e76c712985b4773e11e06ab603\",\n  \"commit_sha\": null,\n  \"production_approved\": false\n}\n",
       "stderr": ""
     },
     "pytest": {
@@ -24,8 +24,8 @@
         "-q"
       ],
       "returncode": 0,
-      "seconds": 66.20070691697765,
-      "stdout": "........................................................................ [ 20%]\n........................................................................ [ 41%]\n........................................................................ [ 61%]\n........................................................................ [ 82%]\n..............................................................           [100%]\n350 passed in 65.24s (0:01:05)\n",
+      "seconds": 84.29673824999918,
+      "stdout": "........................................................................ [ 19%]\n........................................................................ [ 39%]\n........................................................................ [ 58%]\n........................................................................ [ 78%]\n........................................................................ [ 97%]\n........                                                                 [100%]\n368 passed in 83.72s (0:01:23)\n",
       "stderr": ""
     },
     "structural_artifact_audit": {
@@ -34,7 +34,7 @@
         "scripts/audit_structural_artifacts.py"
       ],
       "returncode": 0,
-      "seconds": 0.7819799169665202,
+      "seconds": 0.9197590840012708,
       "stdout": "{\n  \"review_kind\": \"implementing_agent_recomputation_not_independent_external_audit\",\n  \"design_rows\": 433,\n  \"prediction_rows\": 630,\n  \"distinct_test_origins\": 105,\n  \"target_versions_checked\": 468,\n  \"market_capture_hashes_checked\": 2,\n  \"saved_metric_groups_checked\": 12,\n  \"annex_mae_lbp_20l\": \"2.733333333333333333333333333\",\n  \"strict_historical_evaluation_n\": 0,\n  \"result\": \"passed\",\n  \"code_hashes\": {\n    \"src/lebanon_fuel/structural/__init__.py\": \"ad481454cebe2100aa618a8c87fdd7e530dfeb26271ba2fbda5b2d985a0a04d0\",\n    \"src/lebanon_fuel/structural/annexes.py\": \"8116a9e1cc97c9851a2f824118b94c0e6da3402a26bf4599f49cd39adc1a1e6d\",\n    \"src/lebanon_fuel/structural/cli.py\": \"30e739bb51b890a8c920a4ebbe2e52b5ffba0148ddb7ec863fb6cf7427f567f9\",\n    \"src/lebanon_fuel/structural/engine.py\": \"5fb826dd32d98cfa7a9e2cb1431e78005beef8d84884bec5566b6c1814776fd9\",\n    \"src/lebanon_fuel/structural/pdf_parser.py\": \"54b75e0ff389075a4121799cd4801f454d357eccba252066951b0edcfc86df4d\",\n    \"src/lebanon_fuel/structural/reporting.py\": \"11a1ac859720482c09b75eca79ab4b821a7db2227508179eedca8cf9dc01b8c8\",\n    \"src/lebanon_fuel/structural/research.py\": \"3cf1e4f25222492068b8b9674956741886c96ef13376b8fdf6dd4656b4fdc6a3\"\n  }\n}\n",
       "stderr": ""
     },
@@ -44,8 +44,8 @@
         "scripts/audit_forecasting_artifacts.py"
       ],
       "returncode": 0,
-      "seconds": 4.487017459003255,
-      "stdout": "{\n  \"checked_at\": \"2026-11-19T23:54:33.940732+00:00\",\n  \"status\": \"passed_mechanical_checks_not_independent_validation\",\n  \"design_labels\": 10236,\n  \"feature_origins\": 2085,\n  \"prediction_rows\": 11205,\n  \"distinct_origin_horizon_cases\": 1025,\n  \"saved_bundles\": 8,\n  \"reloaded_forecasts\": 90,\n  \"production_approved\": false\n}\n",
+      "seconds": 5.821911416998773,
+      "stdout": "{\n  \"checked_at\": \"2026-11-23T16:27:57.532392+00:00\",\n  \"status\": \"passed_mechanical_checks_not_independent_validation\",\n  \"design_labels\": 10236,\n  \"feature_origins\": 2085,\n  \"prediction_rows\": 11205,\n  \"distinct_origin_horizon_cases\": 1025,\n  \"saved_bundles\": 8,\n  \"reloaded_forecasts\": 90,\n  \"production_approved\": false\n}\n",
       "stderr": ""
     },
     "validation_artifact_audit": {
@@ -54,8 +54,8 @@
         "scripts/audit_validation_artifacts.py"
       ],
       "returncode": 0,
-      "seconds": 7.043403209070675,
-      "stdout": "{\n  \"checked_at\": \"2026-11-19T23:54:40.940639+00:00\",\n  \"status\": \"passed_integrity_and_replay_checks_not_production_approval\",\n  \"prediction_rows\": 288,\n  \"saved_prediction_replays\": 288,\n  \"metric_groups\": 51,\n  \"forecasts\": 45331,\n  \"evaluations\": 44936,\n  \"hash_chain_valid\": true,\n  \"legacy_signed_zero_matches\": 62\n}\n",
+      "seconds": 8.888799083000777,
+      "stdout": "{\n  \"checked_at\": \"2026-11-23T16:28:06.566856+00:00\",\n  \"status\": \"passed_integrity_and_replay_checks_not_production_approval\",\n  \"prediction_rows\": 288,\n  \"saved_prediction_replays\": 288,\n  \"metric_groups\": 51,\n  \"forecasts\": 45451,\n  \"evaluations\": 44964,\n  \"hash_chain_valid\": true,\n  \"legacy_signed_zero_matches\": 62\n}\n",
       "stderr": ""
     },
     "operations_integrity": {
@@ -65,10 +65,10 @@
         "lebanon_fuel.automation.cli",
         "audit"
       ],
-      "returncode": 1,
-      "seconds": 2.09533258411102,
-      "stdout": "",
-      "stderr": "ValueError: Raw capture checksum mismatch: data/raw/ipt/733ab3728f89f3d5c16d33bef509593d1a7af5d791991524b865f7a92afc43f7.html\n"
+      "returncode": 0,
+      "seconds": 3.7709626670002763,
+      "stdout": "{\n  \"checked_at\": \"2026-11-23T16:28:10.355722+00:00\",\n  \"databases\": [\n    {\n      \"database\": \"lebanon_fuel.sqlite\",\n      \"integrity\": \"ok\",\n      \"foreign_key_errors\": 0\n    },\n    {\n      \"database\": \"forecast_ledger.sqlite\",\n      \"integrity\": \"ok\",\n      \"foreign_key_errors\": 0\n    },\n    {\n      \"database\": \"operations.sqlite\",\n      \"integrity\": \"ok\",\n      \"foreign_key_errors\": 0\n    }\n  ],\n  \"raw_files_checked\": 287,\n  \"baseline_version\": \"audited-baseline-v1\",\n  \"legacy_excluded_capture_rows\": 68,\n  \"normalized_market_rows_checked\": 38507,\n  \"snapshots_checked\": 744,\n  \"model_files_checked\": 140,\n  \"evaluation_arithmetic_errors\": 0,\n  \"forecasts\": 45451,\n  \"evaluations\": 44964,\n  \"hash_chain_valid\": true,\n  \"legacy_signed_zero_matches\": 62\n}\n",
+      "stderr": ""
     },
     "dependency_compatibility": {
       "command": [
@@ -78,7 +78,7 @@
         "check"
       ],
       "returncode": 0,
-      "seconds": 0.26913291693199426,
+      "seconds": 0.2494046249994426,
       "stdout": "No broken requirements found.\n",
       "stderr": "WARNING: The directory '/Users/andrew/Library/Caches/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.\n"
     }

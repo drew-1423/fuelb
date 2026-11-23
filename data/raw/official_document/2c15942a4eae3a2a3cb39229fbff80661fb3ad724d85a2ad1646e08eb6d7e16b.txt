@@ -1,5 +1,0 @@
-User-agent: *
-
-Disallow: /liquid/*
-
-Sitemap: http://www.energyandwater.gov.lb/sitemap.xml
