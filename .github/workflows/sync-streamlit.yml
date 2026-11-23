@@ -28,11 +28,8 @@ jobs:
           branch=refs/heads/codex/cloud-clean
           git fetch --no-tags --depth=1 origin "$branch"
           deployed=$(git rev-parse FETCH_HEAD)
-          scratch=$(mktemp -d)
-          export GIT_INDEX_FILE="$scratch/index"
-          git read-tree HEAD
-          git rm -r --cached --ignore-unmatch .github/workflows
-          tree=$(git write-tree)
+          # Verification hashes the workflow files too. Deploy the exact tree.
+          tree=$(git rev-parse 'HEAD^{tree}')
           if [ "$tree" = "$(git rev-parse "$deployed^{tree}")" ]; then
             echo "Streamlit already has the current app files."
             exit 0

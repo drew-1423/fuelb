@@ -10,7 +10,7 @@ import sqlite3
 import numpy as np
 import pandas as pd
 
-from lebanon_fuel.domain import BEIRUT, VERIFIED, PROVISIONAL_PRICE, supplier_agreement
+from lebanon_fuel.domain import BEIRUT, VERIFIED, PROVISIONAL_PRICE, current_price_history, supplier_agreement
 from lebanon_fuel.market.catalog import SERIES
 from lebanon_fuel.market.store import MarketStore, close_availability
 from lebanon_fuel.structural.engine import price
@@ -271,6 +271,7 @@ def baseline(records, anchor, horizon):
 
 
 def generate(root, settings, config, decision, records, histories, at):
+    records = current_price_history(records)
     anchor, problem = anchor_check(records, at, config['anchor_maximum_age_days'], allow_provisional=True)
     provisional = bool(anchor and anchor['verification_status'] == PROVISIONAL_PRICE)
     market = {sid: dict(history[-1], vintage_certified=True) for sid, history in histories.items() if history}

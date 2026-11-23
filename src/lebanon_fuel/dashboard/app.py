@@ -16,7 +16,7 @@ import streamlit as st
 from lebanon_fuel.dashboard import analyst, backtesting, charts, data, decisions, driver, experience
 from lebanon_fuel.dashboard.scenarios import simulate, macro_preset, MACRO_PRESETS, anchored_simulate, economic_breakdown
 from lebanon_fuel.storage.database import sqlite_connection
-from lebanon_fuel.domain import BEIRUT, PROVISIONAL_PRICE
+from lebanon_fuel.domain import BEIRUT, PROVISIONAL_PRICE, current_price_history
 from lebanon_fuel.market.catalog import MISSING, SERIES
 
 ROOT = Path(os.environ.get("LEBANON_FUEL_ROOT", Path.cwd())).resolve()
@@ -809,8 +809,8 @@ def scenario_view(snap):
 def quality_view(snap):
     title("Data quality & alerts", "Live feed health, source verification checks, and why safety gates pause unverified forecasts")
     st.markdown(
-        '<div class="plain-guide"><strong>Why safety gates exist:</strong> Rather than guessing when official Ministry data is missing or market feeds are stale, '
-        'this system automatically pauses live predictions or falls back to a clearly labeled baseline until fresh, corroborated records arrive.</div>',
+        '<div class="plain-guide"><strong>What the forecast needs</strong> · Matching dated prices from IPT and TotalEnergies can support a research estimate. '
+        'Ministry confirmation is optional for that estimate. Conflicting prices or stale required market data can pause it.</div>',
         unsafe_allow_html=True,
     )
     result=active('decision_1')
@@ -965,7 +965,8 @@ def main():
             driver.forecast_page(ROOT,LEDGER_PATH,st.query_params['forecast'],SETTINGS,show_chart)
             return
         snap = snapshot(ROOT, db_path, data.file_version(db_path))
-        latest_record = snap['prices'][-1] if snap['prices'] else None
+        price_history = current_price_history(snap['prices'])
+        latest_record = price_history[-1] if price_history else None
     except (OSError, ValueError, KeyError, sqlite3.Error, pd.errors.DatabaseError) as exc:
         st.error(f"The published market and price snapshot could not be opened. {exc}")
         return
