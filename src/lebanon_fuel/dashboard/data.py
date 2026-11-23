@@ -83,29 +83,9 @@ def read_json(path):
 def database_paths(root, settings):
     if refresh_writer(root) == "github_actions":
         from lebanon_fuel.automation.publication import reader_root
-        root = reader_root(root, credentials=object_store_credentials())
+        root = reader_root(root)
     return (root / settings["storage"]["database"],
             root / settings["validation"]["forecast_ledger"])
-
-
-def object_store_credentials():
-    """Read-only object-store credentials from Streamlit secrets or local environment."""
-    access_key = os.environ.get("FUEL_STORAGE_ACCESS_KEY_ID", "").strip()
-    secret_key = os.environ.get("FUEL_STORAGE_SECRET_ACCESS_KEY", "").strip()
-    endpoint = os.environ.get("FUEL_STORAGE_ENDPOINT_URL", "").strip()
-    bucket = os.environ.get("FUEL_STORAGE_BUCKET", "").strip()
-    if access_key and secret_key and endpoint and bucket:
-        return dict(access_key_id=access_key, secret_access_key=secret_key,
-                    endpoint_url=endpoint, bucket=bucket)
-    try:
-        import streamlit as st
-        config = st.secrets.get("fuel_storage", {})
-        return dict(access_key_id=str(config.get("access_key_id", "")).strip(),
-                    secret_access_key=str(config.get("secret_access_key", "")).strip(),
-                    endpoint_url=str(config.get("endpoint_url", "")).strip(),
-                    bucket=str(config.get("bucket", "")).strip())
-    except Exception:  # Secrets are optional for the checked-in GitHub bootstrap snapshot.
-        return {}
 
 
 def file_version(path):

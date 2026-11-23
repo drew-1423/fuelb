@@ -25,10 +25,6 @@ jobs:
       PYTHONPATH: src
       LEBANON_FUEL_LOCAL_STORAGE: "1"
       STORAGE_TAG: fuel-storage-${{ github.run_id }}-${{ github.run_attempt }}
-      FUEL_STORAGE_ENDPOINT_URL: ${{ secrets.FUEL_STORAGE_ENDPOINT_URL }}
-      FUEL_STORAGE_BUCKET: ${{ secrets.FUEL_STORAGE_BUCKET }}
-      FUEL_STORAGE_ACCESS_KEY_ID: ${{ secrets.FUEL_STORAGE_ACCESS_KEY_ID }}
-      FUEL_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.FUEL_STORAGE_SECRET_ACCESS_KEY }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -45,9 +41,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
-      - name: Require configured durable object storage
-        run: python -m lebanon_fuel.automation.publication check-config
 
       - name: Restore last published snapshot
         run: python -m lebanon_fuel.automation.publication hydrate
@@ -96,14 +89,33 @@ jobs:
           python -m lebanon_fuel.automation.publication check-staged
 
       - name: Store and verify data before publication
-        if: steps.publication_gate.outcome == 'success'
-        run: python -m lebanon_fuel.automation.publication upload --root . --output "$RUNNER_TEMP/fuel-storage"
-
-      - name: Verify durable snapshot can be restored
+        env:
+          GH_TOKEN: ${{ github.token }}
         if: steps.publication_gate.outcome == 'success'
         run: |
+          gh release create "$STORAGE_TAG" --target "$(git rev-parse HEAD)" --latest=false \
+            --title "Fuel data $STORAGE_TAG" --notes "Checksummed SQLite backups and source captures."
+          for file in "$RUNNER_TEMP"/fuel-storage/*.part "$RUNNER_TEMP"/fuel-storage/manifest.json; do
+            for attempt in 1 2 3; do
+              if gh release upload "$STORAGE_TAG" "$file"; then break; fi
+              if gh release view "$STORAGE_TAG" --json assets --jq '.assets[] | select(.state == "uploaded") | .name' | grep -Fxq "$(basename "$file")"; then break; fi
+              if [ "$attempt" -eq 3 ]; then exit 1; fi
+              sleep "$((attempt * 3))"
+            done
+          done
           python -m lebanon_fuel.automation.publication verify-remote \
             --manifest "$RUNNER_TEMP/fuel-storage/manifest.json"
+
+      - name: Check cumulative release storage
+        if: steps.publication_gate.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          total_bytes=$(gh api --paginate "repos/${GITHUB_REPOSITORY}/releases?per_page=100" --jq '.[].assets[]?.size' | awk '{ total += $1 } END { print total + 0 }')
+          echo "GitHub Release assets currently use ${total_bytes} bytes."
+          if [ "$total_bytes" -ge "$((8 * 1024 * 1024 * 1024))" ]; then
+            echo "::warning::GitHub Release assets exceed 8 GiB; review retained snapshots and recovery requirements."
+          fi
 
       - name: Publish dashboard manifest and widget together
         if: steps.publication_gate.outcome == 'success'

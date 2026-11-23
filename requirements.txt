@@ -10,7 +10,6 @@ lightgbm>=4.6,<5
 catboost>=1.2,<2
 joblib>=1.4,<2
 httpx>=0.28,<1
-boto3>=1.35,<2
 beautifulsoup4>=4.12,<5
 openpyxl>=3.1,<4
 xlrd>=2,<3
