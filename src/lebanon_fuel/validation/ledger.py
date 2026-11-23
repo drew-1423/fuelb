@@ -209,6 +209,16 @@ class ForecastLedger:
                 if model_tuple is not None:
                     self.db.execute('INSERT OR IGNORE INTO models VALUES (?,?,?,?)', model_tuple)
                 self.db.execute('INSERT OR IGNORE INTO snapshots VALUES (?,?,?,?,?)', snap_tuple)
+                existing = self.db.execute('''SELECT * FROM forecasts
+                    WHERE run_id=? AND origin=? AND model_version=? AND horizon=?''',
+                    (row['run_id'], row['origin'], row['model_version'], row['horizon'])).fetchone()
+                if existing:
+                    existing = dict(existing)
+                    identity_fields = set(row) - {'created_at', 'previous_hash', 'record_hash'}
+                    if any(row[key] != existing[key] for key in identity_fields):
+                        raise ValueError('Forecast retry conflicts with immutable issuance')
+                    out.append((existing['id'], snap_tuple[0]))
+                    continue
                 row['previous_hash'] = previous_hash
                 row['record_hash'] = hashed(row)
                 cursor = self.db.execute(f"INSERT INTO forecasts({','.join(row)}) VALUES ({','.join(['?']*len(row))})", tuple(row.values()))
