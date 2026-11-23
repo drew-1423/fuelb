@@ -81,6 +81,9 @@ def read_json(path):
 
 
 def database_paths(root, settings):
+    if refresh_writer(root) == "github_actions":
+        from lebanon_fuel.automation.publication import reader_root
+        root = reader_root(root)
     return (root / settings["storage"]["database"],
             root / settings["validation"]["forecast_ledger"])
 

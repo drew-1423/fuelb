@@ -105,7 +105,7 @@ def price_panels(current, reason, prices, forecast):
         with estimate, st.container(key='forecast_quote'):
             if forecast is None:
                 st.metric('Predicted price', 'Awaiting eligible inputs')
-                st.caption('Open Data Quality for the reason and recovery steps.')
+                st.warning('No current absolute-price forecast is available. See Data Quality for the reason.')
                 st.link_button('Open Data Quality', '?view=quality')
             else:
                 spec = json.loads(forecast['target_json'])

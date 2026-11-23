@@ -952,6 +952,14 @@ def main():
     st.markdown(f"<style>{stylesheet}</style>", unsafe_allow_html=True)
     try:
         SETTINGS = data.config(ROOT)
+        from lebanon_fuel.automation.publication import POINTER
+
+        pointer = ROOT / POINTER
+        if pointer.is_file():
+            published = datetime.fromisoformat(data.read_json(pointer)["created_at"])
+            age_hours = (datetime.now(timezone.utc) - published).total_seconds() / 3600
+            if age_hours > 12:
+                st.warning(f"The last published refresh is {age_hours:.0f} hours old. Check the refresh workflow for failures.")
         db_path, LEDGER_PATH = data.database_paths(ROOT, SETTINGS)
         if st.query_params.get('forecast'):
             driver.forecast_page(ROOT,LEDGER_PATH,st.query_params['forecast'],SETTINGS,show_chart)
@@ -959,7 +967,7 @@ def main():
         snap = snapshot(ROOT, db_path, data.file_version(db_path))
         latest_record = snap['prices'][-1] if snap['prices'] else None
     except (OSError, ValueError, KeyError, sqlite3.Error, pd.errors.DatabaseError) as exc:
-        st.error(f"The local market and price database could not be opened. {exc}")
+        st.error(f"The published market and price snapshot could not be opened. {exc}")
         return
     try:
         DECISION = data.read_json(ROOT / SETTINGS["validation"]["decision_file"])

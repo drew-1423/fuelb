@@ -8,6 +8,8 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    env:
+      LEBANON_FUEL_LOCAL_STORAGE: "1"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -22,6 +24,10 @@ jobs:
         env:
           PYTHONPATH: src
         run: python -m lebanon_fuel.automation.release prepare-design
+      - name: Restore published data and captures
+        env:
+          PYTHONPATH: src
+        run: python -m lebanon_fuel.automation.publication hydrate
       - name: Verify strictly
         env:
           PYTHONPATH: src
