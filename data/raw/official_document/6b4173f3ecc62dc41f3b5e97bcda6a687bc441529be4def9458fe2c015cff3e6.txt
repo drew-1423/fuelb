@@ -1,2 +1,0 @@
-source_date,price_lbp_20l,unit,source_url,official_effective_date,publication_date,publication_timestamp,decision_number,verification_status,reviewer,evidence_locator,note
-2021-09-17,174300,LBP/20L,https://energyandwater.gov.lb/mediafiles/prices/1-2021-09-17.pdf,2021-09-17,,,180,document_verified,Codex visual document review,"Page 1 article 1 gasoline 95: 174300 LBP per 20 L; article 4 immediate effect; page 2 consumer-price row confirms 174300","Both original scanned pages inspected; signed and dated 17/9/2021. Web publication timestamp unknown."

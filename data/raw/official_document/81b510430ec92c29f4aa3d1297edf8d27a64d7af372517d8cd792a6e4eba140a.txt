@@ -1,2 +1,0 @@
-source_date,price_lbp_20l,unit,source_url,official_effective_date,publication_date,publication_timestamp,decision_number,verification_status,reviewer,evidence_locator,note
-2023-05-12,1635000,LBP/20L,https://energyandwater.gov.lb/mediafiles/prices/1-2023-05-12.pdf,2023-05-12,,,245,document_verified,Codex visual transcription of original page 2,"Page 2 annex consumer-price row 1,635,000 LBP/20L",Generated from verified structural_annexes.json capture_id 128.

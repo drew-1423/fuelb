@@ -2,6 +2,8 @@
 
 The six-hour refresh uses private-by-repository GitHub Releases as durable snapshot storage. SQLite databases and original raw captures are stored as checksummed, compressed release assets split into parts below 64 MiB. Git contains only the small release manifest, dashboard exports, and widget snapshot; operational databases and raw captures are blocked from staging. GitHub's workflow token publishes releases, so this design needs no external storage account or billing setup.
 
+The Streamlit read-only dashboard loads its SQLite snapshot from the release manifest into a generation-isolated local cache. It does not need database or capture blobs in the Git checkout. Verification and refresh workflows hydrate the published databases and captures before running their strict audits.
+
 ## Audited starting state
 
 Read-only baseline captured on 23 November 2026 before this change:

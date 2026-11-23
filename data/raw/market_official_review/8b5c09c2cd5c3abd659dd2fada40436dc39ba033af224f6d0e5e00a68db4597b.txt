@@ -1,2 +1,0 @@
-date,value,unit,reviewer,evidence_locator,evidence_sha256
-2025-05-29,89700,LBP/USD,Codex original image review 2026-11-10,page 1 red customer USD payment paragraph and boxed rate,3ca4c3538244776abe4e2e647138605c3648254349ac1e595919e4226bff9d44

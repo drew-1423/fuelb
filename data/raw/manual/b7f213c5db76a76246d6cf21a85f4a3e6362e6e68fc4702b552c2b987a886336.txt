@@ -1,5 +1,0 @@
-source_date,price_lbp_20l,unit,source_url,official_effective_date,publication_date,publication_timestamp,decision_number,verification_status,reviewer,evidence_locator,note
-2026-10-16,2773000,LBP/20L,https://www.tayyar.org,,2026-10-16,,,news_corroborated,drew-1423,tayyar.org,News agency corroboration
-2026-10-23,2686000,LBP/20L,https://www.thefuelprice.com,,2026-10-23,,,news_corroborated,drew-1423,thefuelprice.com,News agency corroboration
-2026-10-27,2651000,LBP/20L,https://www.mtv.com.lb,,2026-10-27,,,news_corroborated,drew-1423,mtv.com.lb,News agency corroboration
-2026-10-30,2611000,LBP/20L,https://www.lbcgroup.tv,,2026-10-30,,,news_corroborated,drew-1423,lbcgroup.tv,News agency corroboration
