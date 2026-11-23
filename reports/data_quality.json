@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-23T18:45:28.018525+00:00",
-  "as_of_beirut": "2026-11-23",
+  "generated_at": "2026-11-23T22:26:31.511024+00:00",
+  "as_of_beirut": "2026-11-24",
   "timezone": "Asia/Beirut",
   "ledger_unique_dates": 1374,
   "status_counts": {
@@ -91,7 +91,7 @@
       "valid_unique_dates": 1310,
       "earliest_source_date": "2008-01-02",
       "latest_source_date": "2026-11-20",
-      "age_days": 3,
+      "age_days": 4,
       "stale": false,
       "invalid_observations": 0,
       "within_source_conflict_dates": [
@@ -101,14 +101,14 @@
         "2025-09-30"
       ],
       "duplicate_date_extra_observations": 4,
-      "exact_duplicate_rows_in_captures": 28,
+      "exact_duplicate_rows_in_captures": 29,
       "last_successful_run": {
-        "id": 210,
-        "finished_at": "2026-11-23T18:45:09.283128+00:00",
+        "id": 213,
+        "finished_at": "2026-11-23T22:26:11.342741+00:00",
         "details": {
           "parsed_rows": 1315,
           "new_observations": 0,
-          "capture_id": 830
+          "capture_id": 843
         }
       }
     },
@@ -117,7 +117,7 @@
       "valid_unique_dates": 917,
       "earliest_source_date": "2010-10-27",
       "latest_source_date": "2026-11-20",
-      "age_days": 3,
+      "age_days": 4,
       "stale": false,
       "invalid_observations": 0,
       "within_source_conflict_dates": [],
@@ -138,7 +138,7 @@
       "valid_unique_dates": 914,
       "earliest_source_date": "2010-10-27",
       "latest_source_date": "2026-11-17",
-      "age_days": 6,
+      "age_days": 7,
       "stale": false,
       "invalid_observations": 1,
       "within_source_conflict_dates": [
@@ -171,8 +171,8 @@
       "duplicate_date_extra_observations": 31,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 212,
-        "finished_at": "2026-11-23T18:45:27.591328+00:00",
+        "id": 215,
+        "finished_at": "2026-11-23T22:26:30.814541+00:00",
         "details": {
           "parsed_rows": 9,
           "new_observations": 0,
@@ -185,7 +185,7 @@
       "valid_unique_dates": 4,
       "earliest_source_date": "2010-10-27",
       "latest_source_date": "2025-05-29",
-      "age_days": 543,
+      "age_days": 544,
       "stale": true,
       "invalid_observations": 0,
       "within_source_conflict_dates": [],
@@ -206,8 +206,8 @@
       "valid_unique_dates": 17,
       "earliest_source_date": "2026-01-16",
       "latest_source_date": "2026-11-13",
-      "age_days": 10,
-      "stale": false,
+      "age_days": 11,
+      "stale": true,
       "invalid_observations": 0,
       "within_source_conflict_dates": [],
       "duplicate_date_extra_observations": 4,
@@ -227,7 +227,7 @@
       "valid_unique_dates": 2,
       "earliest_source_date": "2026-11-17",
       "latest_source_date": "2026-11-22",
-      "age_days": 1,
+      "age_days": 2,
       "stale": false,
       "invalid_observations": 0,
       "within_source_conflict_dates": [],
@@ -248,19 +248,19 @@
       "valid_unique_dates": 1,
       "earliest_source_date": "2026-11-20",
       "latest_source_date": "2026-11-20",
-      "age_days": 3,
+      "age_days": 4,
       "stale": false,
       "invalid_observations": 0,
       "within_source_conflict_dates": [],
       "duplicate_date_extra_observations": 0,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 211,
-        "finished_at": "2026-11-23T18:45:17.191304+00:00",
+        "id": 214,
+        "finished_at": "2026-11-23T22:26:20.788352+00:00",
         "details": {
           "parsed_rows": 1,
           "new_observations": 0,
-          "capture_id": 834
+          "capture_id": 847
         }
       }
     }
@@ -1951,6 +1951,30 @@
       "source_id": "ministry",
       "started_at": "2026-11-23T18:45:17.500707+00:00",
       "finished_at": "2026-11-23T18:45:27.591328+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 9, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 213,
+      "source_id": "ipt",
+      "started_at": "2026-11-23T22:25:55.580819+00:00",
+      "finished_at": "2026-11-23T22:26:11.342741+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1315, \"new_observations\": 0, \"capture_id\": 843}"
+    },
+    {
+      "id": 214,
+      "source_id": "totalenergies",
+      "started_at": "2026-11-23T22:26:11.834014+00:00",
+      "finished_at": "2026-11-23T22:26:20.788352+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1, \"new_observations\": 0, \"capture_id\": 847}"
+    },
+    {
+      "id": 215,
+      "source_id": "ministry",
+      "started_at": "2026-11-23T22:26:21.288100+00:00",
+      "finished_at": "2026-11-23T22:26:30.814541+00:00",
       "status": "success",
       "details": "{\"parsed_rows\": 9, \"new_observations\": 0, \"pages\": 1}"
     }
