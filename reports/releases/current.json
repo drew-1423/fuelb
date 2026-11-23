@@ -1,9 +1,9 @@
 {
-  "created_at": "2026-11-23T13:44:00.400391+00:00",
+  "created_at": "2026-11-23T13:48:34.100723+00:00",
   "hash_algorithm": "sha256",
-  "commit_sha": null,
-  "base_commit": "f4d19da334c4e9de1ed430de8ed869077777a543",
-  "binding": "local candidate base plus exact source/model digests; not a deployed commit attestation",
+  "commit_sha": "e3ef621d56bf7347a01a0c6f23f72d1760b2941a",
+  "base_commit": "e3ef621d56bf7347a01a0c6f23f72d1760b2941a",
+  "binding": "exact CI commit",
   "source_sha256": {
     ".github/workflows/refresh.yml": "5bd29ab6ee5d057e159d45cbaf3c5c7131ce4613866e1fa523b8364841274bb2",
     ".github/workflows/verify.yml": "5be301a0b802a289017a08364c3f6b34f220ebcb1baf6afe1f5e022a89971aef",

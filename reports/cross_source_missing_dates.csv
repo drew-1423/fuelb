@@ -62,6 +62,7 @@ ipt,2025-12-18,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_
 ipt,2025-12-22,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
 ipt,2026-01-02,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
 ipt,2026-08-03,"[""ministry"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
+ipt,2026-11-22,"[""thefuelprice""]",cross_source_date_absent_not_proven_missing_decision
 ministry,2010-11-03,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
 ministry,2010-11-10,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
 ministry,2010-11-19,"[""ipt""]",cross_source_date_absent_not_proven_missing_decision
@@ -370,3 +371,4 @@ ministry,2026-10-27,"[""ipt"", ""manual""]",cross_source_date_absent_not_proven_
 ministry,2026-10-30,"[""ipt"", ""manual"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
 ministry,2026-11-13,"[""ipt"", ""manual"", ""taqtek""]",cross_source_date_absent_not_proven_missing_decision
 ministry,2026-11-20,"[""ipt"", ""taqtek"", ""totalenergies""]",cross_source_date_absent_not_proven_missing_decision
+ministry,2026-11-22,"[""thefuelprice""]",cross_source_date_absent_not_proven_missing_decision

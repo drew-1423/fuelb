@@ -1,6 +1,6 @@
 # International market coverage and quality
 
-Generated for 2026-11-22T18:31:28.353209+00:00. Counts below are actual stored observations, not estimates.
+Generated for 2026-11-23T13:50:17.492377+00:00. Counts below are actual stored observations, not estimates.
 
 | Series | Unique valid dates | Earliest | Latest | Latest normalized value | Stale |
 | --- | ---: | --- | --- | --- | --- |
@@ -23,9 +23,9 @@ Generated for 2026-11-22T18:31:28.353209+00:00. Counts below are actual stored o
 | Source | Result | Completed UTC | Detail |
 | --- | --- | --- | --- |
 | market_cboe | success | 2026-11-13T16:28:03.126952+00:00 | 4912 reviewed/imported rows |
-| market_ec | success | 2026-11-22T00:34:01.185482+00:00 | 2,186 rows parsed; 0 new observations |
-| market_eia | success | 2026-11-22T00:33:52.643442+00:00 | 24,421 rows parsed; 0 new observations |
-| market_fed | success | 2026-11-22T00:34:08.556008+00:00 | 7,270 rows parsed; 0 new observations |
+| market_ec | success | 2026-11-23T13:50:09.694502+00:00 | 2,186 rows parsed; 0 new observations |
+| market_eia | success | 2026-11-23T13:50:01.939450+00:00 | 24,421 rows parsed; 0 new observations |
+| market_fed | success | 2026-11-23T13:50:17.103518+00:00 | 7,270 rows parsed; 0 new observations |
 | market_official_review | success | 2026-11-14T20:06:38.456497+00:00 | 1 reviewed/imported rows |
 | market_yahoo | partial | 2026-11-12T11:01:09.971477+00:00 | rows parsed: unavailable; 0 new observations; brent_futures: unavailable — AccessStopped: Request denied by robots policy; Stored fallback: brent_spot (latest 2026-11-03); not newly collected futures; rbob_futures: unavailable — AccessStopped: Request denied by robots policy; Stored fallback: nyh_gasoline (latest 2026-11-03); not newly collected futures; gasoil_futures: unavailable — AccessStopped: Request denied by robots policy |
 
@@ -35,7 +35,7 @@ Generated for 2026-11-22T18:31:28.353209+00:00. Counts below are actual stored o
 39 long interval candidates; 2832 unclassified weekday/weekly calendar candidates. These include holidays and cannot be called missing market sessions without an authoritative calendar. No filling or interpolation was applied.
 40 large-move review candidates; 0 unusual reference-weekday candidates. Review flags do not prove source errors or erase real market shocks.
 Known per-observation publication timestamps: 0. Documented original historical vintages: 0. Dates in today's workbook are not release timestamps.
-At 1373 historical source-date origins, 3 have any market value proven available by this project's capture/vintage evidence. Origins are assumed 00:00 Asia/Beirut; Lebanese announcement times are still unknown.
+At 1374 historical source-date origins, 4 have any market value proven available by this project's capture/vintage evidence. Origins are assumed 00:00 Asia/Beirut; Lebanese announcement times are still unknown.
 
 ## Historical relationships
 
