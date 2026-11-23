@@ -1,4 +1,4 @@
-# Cloud release: reload the comparison table and fill-up calculator.
+# Cloud release: reload dashboard modules for durable refresh storage.
 streamlit>=1.55,<2
 plotly>=6,<8
 pandas>=2.2,<4
