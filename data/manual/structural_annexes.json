@@ -1,0 +1,275 @@
+[
+  {
+    "date": "2021-09-17",
+    "decision_number": "180",
+    "source_url": "https://energyandwater.gov.lb/mediafiles/prices/1-2021-09-17.pdf",
+    "source_publication_timestamp": null,
+    "document_date": "2021-09-17",
+    "raw_sha256": "9f59129eaa93ba4fe82d5614a28b73a02ae271e5a1f30a1e5a9537c693fa0d39",
+    "raw_path": "data/raw/official_document/9f59129eaa93ba4fe82d5614a28b73a02ae271e5a1f30a1e5a9537c693fa0d39.pdf",
+    "capture_id": 71,
+    "reviewed_by": "Codex visual transcription of original page 2",
+    "reviewed_at": "2026-11-10",
+    "printed_price_lbp_20l": 174300,
+    "printed_pretax_lbp_kl": 7851500,
+    "printed_vat_lbp_kl": 863665,
+    "printed_fx_lbp_usd": null,
+    "printed_goods_usd_kl": null,
+    "request": {
+      "mode": "reconciliation",
+      "effective_date": "2021-09-17",
+      "origin": "2026-11-10T19:12:43.634333+00:00",
+      "goods_lbp_kl": {
+        "value": "7186500",
+        "unit": "LBP/kl",
+        "status": "verified_document",
+        "valid_from": "2021-09-17",
+        "valid_to": "2021-09-17",
+        "known_at": "2026-11-10T19:12:43.634333+00:00",
+        "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2021-09-17.pdf#page=2",
+        "note": "Printed goods subtotal; upstream benchmark, freight and import margins are not decomposed."
+      },
+      "goods_taxable": true,
+      "costs": [
+        {
+          "name": "duties",
+          "taxable": true,
+          "value": "253000",
+          "unit": "LBP/kl",
+          "status": "verified_document",
+          "valid_from": "2021-09-17",
+          "valid_to": "2021-09-17",
+          "known_at": "2026-11-10T19:12:43.634333+00:00",
+          "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2021-09-17.pdf#page=2",
+          "note": "Printed aggregate fees; legal subcomposition unresolved."
+        },
+        {
+          "name": "domestic_transport",
+          "taxable": true,
+          "value": "112000",
+          "unit": "LBP/kl",
+          "status": "verified_document",
+          "valid_from": "2021-09-17",
+          "valid_to": "2021-09-17",
+          "known_at": "2026-11-10T19:12:43.634333+00:00",
+          "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2021-09-17.pdf#page=2",
+          "note": "Printed domestic transport charge, not marine freight."
+        },
+        {
+          "name": "retail_margin",
+          "taxable": true,
+          "value": "300000",
+          "unit": "LBP/kl",
+          "status": "verified_document",
+          "valid_from": "2021-09-17",
+          "valid_to": "2021-09-17",
+          "known_at": "2026-11-10T19:12:43.634333+00:00",
+          "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2021-09-17.pdf#page=2",
+          "note": "Printed station commission."
+        }
+      ],
+      "vat": {
+        "value": ".11",
+        "unit": "fraction",
+        "status": "verified_document",
+        "valid_from": "2021-09-17",
+        "valid_to": "2021-09-17",
+        "known_at": "2026-11-10T19:12:43.634333+00:00",
+        "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2021-09-17.pdf#page=2",
+        "note": "Printed VAT rate; base reconciles to listed pretax components."
+      },
+      "rounding": null,
+      "coverage_note": "Downstream arithmetic of this dated gasoline 95 annex only. No separate bank-commission row is listed; any embedded charge remains in goods. No claim of upstream reconstruction or current validity."
+    }
+  },
+  {
+    "date": "2023-05-12",
+    "decision_number": "245",
+    "source_url": "https://energyandwater.gov.lb/mediafiles/prices/1-2023-05-12.pdf",
+    "source_publication_timestamp": null,
+    "document_date": "2023-05-12",
+    "raw_sha256": "6c4de8ed466ae64644fb97e6eb438e67f0dd2d55e44b5113c06ae81a172f1477",
+    "raw_path": "data/raw/official_document/6c4de8ed466ae64644fb97e6eb438e67f0dd2d55e44b5113c06ae81a172f1477.pdf",
+    "capture_id": 128,
+    "reviewed_by": "Codex visual transcription of original page 2",
+    "reviewed_at": "2026-11-10",
+    "printed_price_lbp_20l": 1635000,
+    "printed_pretax_lbp_kl": 73648500,
+    "printed_vat_lbp_kl": 8101335,
+    "printed_fx_lbp_usd": 94500,
+    "printed_goods_usd_kl": "693.88",
+    "request": {
+      "mode": "reconciliation",
+      "effective_date": "2023-05-12",
+      "origin": "2026-11-10T20:02:22.009764+00:00",
+      "goods_lbp_kl": {
+        "value": "65591500",
+        "unit": "LBP/kl",
+        "status": "verified_document",
+        "valid_from": "2023-05-12",
+        "valid_to": "2023-05-12",
+        "known_at": "2026-11-10T20:02:22.009764+00:00",
+        "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2023-05-12.pdf#page=2",
+        "note": "Printed goods subtotal; upstream benchmark, freight and import margins are not decomposed."
+      },
+      "goods_taxable": true,
+      "costs": [
+        {
+          "name": "duties",
+          "taxable": true,
+          "value": "1022000",
+          "unit": "LBP/kl",
+          "status": "verified_document",
+          "valid_from": "2023-05-12",
+          "valid_to": "2023-05-12",
+          "known_at": "2026-11-10T20:02:22.009764+00:00",
+          "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2023-05-12.pdf#page=2",
+          "note": "Printed aggregate fees; legal subcomposition unresolved."
+        },
+        {
+          "name": "domestic_transport",
+          "taxable": true,
+          "value": "1654000",
+          "unit": "LBP/kl",
+          "status": "verified_document",
+          "valid_from": "2023-05-12",
+          "valid_to": "2023-05-12",
+          "known_at": "2026-11-10T20:02:22.009764+00:00",
+          "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2023-05-12.pdf#page=2",
+          "note": "Printed domestic transport charge, not marine freight."
+        },
+        {
+          "name": "retail_margin",
+          "taxable": true,
+          "value": "4725000",
+          "unit": "LBP/kl",
+          "status": "verified_document",
+          "valid_from": "2023-05-12",
+          "valid_to": "2023-05-12",
+          "known_at": "2026-11-10T20:02:22.009764+00:00",
+          "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2023-05-12.pdf#page=2",
+          "note": "Printed station commission."
+        },
+        {
+          "name": "bank_commission",
+          "taxable": true,
+          "value": "656000",
+          "unit": "LBP/kl",
+          "status": "verified_document",
+          "valid_from": "2023-05-12",
+          "valid_to": "2023-05-12",
+          "known_at": "2026-11-10T20:02:22.009764+00:00",
+          "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2023-05-12.pdf#page=2",
+          "note": "Printed fixed station-bank amount; 1% label does not authenticate an exact unrounded base."
+        }
+      ],
+      "vat": {
+        "value": ".11",
+        "unit": "fraction",
+        "status": "verified_document",
+        "valid_from": "2023-05-12",
+        "valid_to": "2023-05-12",
+        "known_at": "2026-11-10T20:02:22.009764+00:00",
+        "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2023-05-12.pdf#page=2",
+        "note": "Printed VAT rate; base reconciles to listed pretax components."
+      },
+      "rounding": null,
+      "coverage_note": "Downstream arithmetic of this dated gasoline 95 annex only. No claim of upstream formula reconstruction or current validity."
+    }
+  },
+  {
+    "date": "2025-05-29",
+    "decision_number": "166",
+    "source_url": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf",
+    "source_publication_timestamp": null,
+    "document_date": "2025-05-29",
+    "raw_sha256": "3ca4c3538244776abe4e2e647138605c3648254349ac1e595919e4226bff9d44",
+    "raw_path": "data/raw/official_document/3ca4c3538244776abe4e2e647138605c3648254349ac1e595919e4226bff9d44.pdf",
+    "capture_id": 69,
+    "reviewed_by": "Codex visual transcription of original page 2",
+    "reviewed_at": "2026-11-10",
+    "printed_price_lbp_20l": 1489000,
+    "printed_pretax_lbp_kl": 67072000,
+    "printed_vat_lbp_kl": 7377920,
+    "printed_fx_lbp_usd": 89700,
+    "printed_goods_usd_kl": "656.84",
+    "request": {
+      "mode": "reconciliation",
+      "effective_date": "2025-05-29",
+      "origin": "2026-11-10T19:12:15.287550+00:00",
+      "goods_lbp_kl": {
+        "value": "58956500",
+        "unit": "LBP/kl",
+        "status": "verified_document",
+        "valid_from": "2025-05-29",
+        "valid_to": "2025-05-29",
+        "known_at": "2026-11-10T19:12:15.287550+00:00",
+        "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+        "note": "Printed goods subtotal; upstream benchmark, freight and import margins are not decomposed."
+      },
+      "goods_taxable": true,
+      "costs": [
+        {
+          "name": "duties",
+          "taxable": true,
+          "value": "1022000",
+          "unit": "LBP/kl",
+          "status": "verified_document",
+          "valid_from": "2025-05-29",
+          "valid_to": "2025-05-29",
+          "known_at": "2026-11-10T19:12:15.287550+00:00",
+          "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+          "note": "Printed aggregate fees; legal subcomposition unresolved."
+        },
+        {
+          "name": "domestic_transport",
+          "taxable": true,
+          "value": "1570000",
+          "unit": "LBP/kl",
+          "status": "verified_document",
+          "valid_from": "2025-05-29",
+          "valid_to": "2025-05-29",
+          "known_at": "2026-11-10T19:12:15.287550+00:00",
+          "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+          "note": "Printed domestic transport charge, not marine freight."
+        },
+        {
+          "name": "retail_margin",
+          "taxable": true,
+          "value": "4933500",
+          "unit": "LBP/kl",
+          "status": "verified_document",
+          "valid_from": "2025-05-29",
+          "valid_to": "2025-05-29",
+          "known_at": "2026-11-10T19:12:15.287550+00:00",
+          "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+          "note": "Printed station commission."
+        },
+        {
+          "name": "bank_commission",
+          "taxable": true,
+          "value": "590000",
+          "unit": "LBP/kl",
+          "status": "verified_document",
+          "valid_from": "2025-05-29",
+          "valid_to": "2025-05-29",
+          "known_at": "2026-11-10T19:12:15.287550+00:00",
+          "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+          "note": "Printed fixed station-bank amount; 1% label does not authenticate an exact unrounded base."
+        }
+      ],
+      "vat": {
+        "value": ".11",
+        "unit": "fraction",
+        "status": "verified_document",
+        "valid_from": "2025-05-29",
+        "valid_to": "2025-05-29",
+        "known_at": "2026-11-10T19:12:15.287550+00:00",
+        "evidence": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf#page=2",
+        "note": "Printed VAT rate; base reconciles to listed pretax components."
+      },
+      "rounding": null,
+      "coverage_note": "Downstream arithmetic of this dated gasoline 95 annex only. No claim of upstream formula reconstruction or current validity."
+    }
+  }
+]

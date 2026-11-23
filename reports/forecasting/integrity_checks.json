@@ -1,0 +1,11 @@
+{
+  "checked_at": "2026-11-23T16:27:57.532392+00:00",
+  "status": "passed_mechanical_checks_not_independent_validation",
+  "design_labels": 10236,
+  "feature_origins": 2085,
+  "prediction_rows": 11205,
+  "distinct_origin_horizon_cases": 1025,
+  "saved_bundles": 8,
+  "reloaded_forecasts": 90,
+  "production_approved": false
+}

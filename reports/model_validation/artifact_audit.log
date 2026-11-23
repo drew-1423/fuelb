@@ -1,0 +1,14 @@
+{
+  "checked_at": "2026-11-11T11:12:39.599037+00:00",
+  "status": "passed_integrity_and_replay_checks_not_production_approval",
+  "metric_groups": 197,
+  "prediction_rows": 44928,
+  "source_linked_origin_horizon_cases": 3493,
+  "saved_prediction_replays": 1198,
+  "future_target_perturbation_checks": 1198,
+  "strict_n": 0,
+  "forecasts": 44936,
+  "evaluations": 44928,
+  "hash_chain_valid": true,
+  "legacy_signed_zero_matches": 62
+}

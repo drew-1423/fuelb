@@ -1,0 +1,4 @@
+date,decision_number,source_url,raw_sha256,printed_price_lbp_20l,reconstructed_unrounded_lbp_20l,signed_error_lbp_20l,pretax_error_lbp_kl,vat_error_lbp_kl,printed_fx_lbp_usd,printed_goods_usd_kl,goods_conversion_discrepancy_lbp_kl,evaluation_kind
+2021-09-17,180,https://energyandwater.gov.lb/mediafiles/prices/1-2021-09-17.pdf,9f59129eaa93ba4fe82d5614a28b73a02ae271e5a1f30a1e5a9537c693fa0d39,174300,174303.30,3.30,0,0.00,,,,same_document_accounting_NOT_FORECAST
+2023-05-12,245,https://energyandwater.gov.lb/mediafiles/prices/1-2023-05-12.pdf,6c4de8ed466ae64644fb97e6eb438e67f0dd2d55e44b5113c06ae81a172f1477,1635000,1634996.70,-3.30,0,0.00,94500,693.88,19840.00,same_document_accounting_NOT_FORECAST
+2025-05-29,166,https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf,3ca4c3538244776abe4e2e647138605c3648254349ac1e595919e4226bff9d44,1489000,1488998.40,-1.60,0,0.00,89700,656.84,37952.00,same_document_accounting_NOT_FORECAST

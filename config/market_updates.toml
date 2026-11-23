@@ -1,0 +1,15 @@
+# Part 3 historical schedule proposal. Active Part 8 settings are in automation.toml.
+[runner]
+working_directory = "/Users/andrew/MyApp_macOS/fuel forecast"
+command = ".venv/bin/python -m lebanon_fuel.market.cli collect --source all"
+overlap_policy = "one_process_only_external_lock"
+timezone = "Asia/Beirut"
+suggested_polling = "once_per_day_after_US_releases"
+failure_policy = "nonzero_exit_keep_prior_data_flag_staleness_no_access_bypass"
+
+[research_availability]
+# Assumptions only; never evidence of original publication or unchanged vintages.
+eia_calendar_days = 14
+ec_calendar_days = 7
+fed_h10_calendar_days = 10
+status = "documented_in_series_catalog_not_a_real_time_backtest"

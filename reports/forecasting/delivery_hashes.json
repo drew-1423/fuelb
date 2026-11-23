@@ -1,0 +1,10 @@
+{
+  "src/lebanon_fuel/news/pipeline.py": "e8f19e4f97362f27b6bd573689e13b347f270223966b734e35acd10c10001a3e",
+  "src/lebanon_fuel/news/ablation.py": "95d8fd0da4f63a6f04bb79fc4f85992bca4ebfe6fc01eb078a5c13bf04298875",
+  "scripts/audit_forecasting_artifacts.py": "eacf82f62f7c81a3f39b110b553974f45ad5aa557aea53a23f3853ec19cad6a3",
+  "requirements-forecasting-lock.txt": "c62a69456d41413fd470f2f247098b521faadab4e9f008f033c8c7dfff22b54d",
+  "docs/quantitative_forecasting.md": "4edc769bf3421fbfcb74608ccf58d9024ad7e9030269ecb6be92d96a890ab683",
+  "research/quantitative_forecasting_protocol.md": "e56608822bdd717b3c724e982bded71e04d1fcbb91da82c5d274782f5f40467d",
+  "research/news_intelligence.md": "870ac6fbbda25f0e2c7a30d394e24f87ddd399f67b0f1c4e1090113228fd7185",
+  "reports/forecasting_development.md": "13bc6c1ae4d130af2ea9694c19f6088112cec2ade8d11e8284ba9ee135ec94ef"
+}

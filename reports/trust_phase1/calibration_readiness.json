@@ -1,0 +1,887 @@
+{
+  "as_of": "2026-11-19T21:33:56.721436+00:00",
+  "horizons": {
+    "decision_1": {
+      "cohort": "government_backed",
+      "horizon": "decision_1",
+      "artifact": "fbd34b3d4dadf1a06a160469dd2c1234f8dee0b133a5f9b4f310d441650b9462",
+      "evidence_category": "official_match",
+      "calibration_n": 0,
+      "evaluation_n": 0,
+      "empirical_coverage": null,
+      "minimum_calibration_n": 30,
+      "minimum_evaluation_n": 20,
+      "nominal": 0.9,
+      "radius": null,
+      "radius_80": null,
+      "levels": {
+        "80": {
+          "nominal": 0.8,
+          "calibration_n": 0,
+          "evaluation_n": 0,
+          "empirical_coverage": null,
+          "mean_evaluated_width_lbp": null,
+          "radius": null,
+          "status": "withheld",
+          "reasons": [
+            "insufficient_nonoverlapping_matured_calibration_cases",
+            "insufficient_chronological_coverage_tests"
+          ]
+        },
+        "90": {
+          "nominal": 0.9,
+          "calibration_n": 0,
+          "evaluation_n": 0,
+          "empirical_coverage": null,
+          "mean_evaluated_width_lbp": null,
+          "radius": null,
+          "status": "withheld",
+          "reasons": [
+            "insufficient_nonoverlapping_matured_calibration_cases",
+            "insufficient_chronological_coverage_tests"
+          ]
+        }
+      },
+      "evidence_strata": {
+        "official_match": {
+          "levels": {
+            "80": {
+              "nominal": 0.8,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            },
+            "90": {
+              "nominal": 0.9,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            }
+          },
+          "eligible_n": 0,
+          "raw_distinct_targets": 0
+        },
+        "provisional_match": {
+          "levels": {
+            "80": {
+              "nominal": 0.8,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            },
+            "90": {
+              "nominal": 0.9,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            }
+          },
+          "eligible_n": 0,
+          "raw_distinct_targets": 0
+        }
+      },
+      "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
+      "target_limitation": "Reviewed complete official outcome sequence"
+    },
+    "decision_2": {
+      "cohort": "government_backed",
+      "horizon": "decision_2",
+      "artifact": "b50640d13af84cd6ada0237fcab22c8aa483d90cc5cd125539be5776f0c1687c",
+      "evidence_category": "official_match",
+      "calibration_n": 0,
+      "evaluation_n": 0,
+      "empirical_coverage": null,
+      "minimum_calibration_n": 30,
+      "minimum_evaluation_n": 20,
+      "nominal": 0.9,
+      "radius": null,
+      "radius_80": null,
+      "levels": {
+        "80": {
+          "nominal": 0.8,
+          "calibration_n": 0,
+          "evaluation_n": 0,
+          "empirical_coverage": null,
+          "mean_evaluated_width_lbp": null,
+          "radius": null,
+          "status": "withheld",
+          "reasons": [
+            "insufficient_nonoverlapping_matured_calibration_cases",
+            "insufficient_chronological_coverage_tests"
+          ]
+        },
+        "90": {
+          "nominal": 0.9,
+          "calibration_n": 0,
+          "evaluation_n": 0,
+          "empirical_coverage": null,
+          "mean_evaluated_width_lbp": null,
+          "radius": null,
+          "status": "withheld",
+          "reasons": [
+            "insufficient_nonoverlapping_matured_calibration_cases",
+            "insufficient_chronological_coverage_tests"
+          ]
+        }
+      },
+      "evidence_strata": {
+        "official_match": {
+          "levels": {
+            "80": {
+              "nominal": 0.8,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            },
+            "90": {
+              "nominal": 0.9,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            }
+          },
+          "eligible_n": 0,
+          "raw_distinct_targets": 0
+        },
+        "provisional_match": {
+          "levels": {
+            "80": {
+              "nominal": 0.8,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            },
+            "90": {
+              "nominal": 0.9,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            }
+          },
+          "eligible_n": 0,
+          "raw_distinct_targets": 0
+        }
+      },
+      "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
+      "target_limitation": "Reviewed complete official outcome sequence"
+    },
+    "decision_4": {
+      "cohort": "government_backed",
+      "horizon": "decision_4",
+      "artifact": "b4f2d76bb9c2bada3f6378ad1fde238c342d5e2ca263d3e8f6992d3ae723a4a1",
+      "evidence_category": "official_match",
+      "calibration_n": 0,
+      "evaluation_n": 0,
+      "empirical_coverage": null,
+      "minimum_calibration_n": 30,
+      "minimum_evaluation_n": 20,
+      "nominal": 0.9,
+      "radius": null,
+      "radius_80": null,
+      "levels": {
+        "80": {
+          "nominal": 0.8,
+          "calibration_n": 0,
+          "evaluation_n": 0,
+          "empirical_coverage": null,
+          "mean_evaluated_width_lbp": null,
+          "radius": null,
+          "status": "withheld",
+          "reasons": [
+            "insufficient_nonoverlapping_matured_calibration_cases",
+            "insufficient_chronological_coverage_tests"
+          ]
+        },
+        "90": {
+          "nominal": 0.9,
+          "calibration_n": 0,
+          "evaluation_n": 0,
+          "empirical_coverage": null,
+          "mean_evaluated_width_lbp": null,
+          "radius": null,
+          "status": "withheld",
+          "reasons": [
+            "insufficient_nonoverlapping_matured_calibration_cases",
+            "insufficient_chronological_coverage_tests"
+          ]
+        }
+      },
+      "evidence_strata": {
+        "official_match": {
+          "levels": {
+            "80": {
+              "nominal": 0.8,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            },
+            "90": {
+              "nominal": 0.9,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            }
+          },
+          "eligible_n": 0,
+          "raw_distinct_targets": 0
+        },
+        "provisional_match": {
+          "levels": {
+            "80": {
+              "nominal": 0.8,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            },
+            "90": {
+              "nominal": 0.9,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            }
+          },
+          "eligible_n": 0,
+          "raw_distinct_targets": 0
+        }
+      },
+      "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
+      "target_limitation": "Reviewed complete official outcome sequence"
+    },
+    "day_1": {
+      "cohort": "government_backed",
+      "horizon": "day_1",
+      "artifact": "34aaede583a9d2fb62900fce02d50ebd07a18fcc7c9616e2d042387a53861a7e",
+      "evidence_category": "official_match",
+      "calibration_n": 0,
+      "evaluation_n": 0,
+      "empirical_coverage": null,
+      "minimum_calibration_n": 30,
+      "minimum_evaluation_n": 20,
+      "nominal": 0.9,
+      "radius": null,
+      "radius_80": null,
+      "levels": {
+        "80": {
+          "nominal": 0.8,
+          "calibration_n": 0,
+          "evaluation_n": 0,
+          "empirical_coverage": null,
+          "mean_evaluated_width_lbp": null,
+          "radius": null,
+          "status": "withheld",
+          "reasons": [
+            "insufficient_nonoverlapping_matured_calibration_cases",
+            "insufficient_chronological_coverage_tests"
+          ]
+        },
+        "90": {
+          "nominal": 0.9,
+          "calibration_n": 0,
+          "evaluation_n": 0,
+          "empirical_coverage": null,
+          "mean_evaluated_width_lbp": null,
+          "radius": null,
+          "status": "withheld",
+          "reasons": [
+            "insufficient_nonoverlapping_matured_calibration_cases",
+            "insufficient_chronological_coverage_tests"
+          ]
+        }
+      },
+      "evidence_strata": {
+        "official_match": {
+          "levels": {
+            "80": {
+              "nominal": 0.8,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            },
+            "90": {
+              "nominal": 0.9,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            }
+          },
+          "eligible_n": 0,
+          "raw_distinct_targets": 0
+        },
+        "provisional_match": {
+          "levels": {
+            "80": {
+              "nominal": 0.8,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            },
+            "90": {
+              "nominal": 0.9,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            }
+          },
+          "eligible_n": 0,
+          "raw_distinct_targets": 0
+        }
+      },
+      "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
+      "target_limitation": "Reviewed complete official outcome sequence"
+    },
+    "day_3": {
+      "cohort": "government_backed",
+      "horizon": "day_3",
+      "artifact": "d0289ebedc304dcc4de79f8da820220347066a71491602e1850d05a2a7c5162d",
+      "evidence_category": "official_match",
+      "calibration_n": 0,
+      "evaluation_n": 0,
+      "empirical_coverage": null,
+      "minimum_calibration_n": 30,
+      "minimum_evaluation_n": 20,
+      "nominal": 0.9,
+      "radius": null,
+      "radius_80": null,
+      "levels": {
+        "80": {
+          "nominal": 0.8,
+          "calibration_n": 0,
+          "evaluation_n": 0,
+          "empirical_coverage": null,
+          "mean_evaluated_width_lbp": null,
+          "radius": null,
+          "status": "withheld",
+          "reasons": [
+            "insufficient_nonoverlapping_matured_calibration_cases",
+            "insufficient_chronological_coverage_tests"
+          ]
+        },
+        "90": {
+          "nominal": 0.9,
+          "calibration_n": 0,
+          "evaluation_n": 0,
+          "empirical_coverage": null,
+          "mean_evaluated_width_lbp": null,
+          "radius": null,
+          "status": "withheld",
+          "reasons": [
+            "insufficient_nonoverlapping_matured_calibration_cases",
+            "insufficient_chronological_coverage_tests"
+          ]
+        }
+      },
+      "evidence_strata": {
+        "official_match": {
+          "levels": {
+            "80": {
+              "nominal": 0.8,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            },
+            "90": {
+              "nominal": 0.9,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            }
+          },
+          "eligible_n": 0,
+          "raw_distinct_targets": 0
+        },
+        "provisional_match": {
+          "levels": {
+            "80": {
+              "nominal": 0.8,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            },
+            "90": {
+              "nominal": 0.9,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            }
+          },
+          "eligible_n": 0,
+          "raw_distinct_targets": 0
+        }
+      },
+      "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
+      "target_limitation": "Reviewed complete official outcome sequence"
+    },
+    "day_7": {
+      "cohort": "government_backed",
+      "horizon": "day_7",
+      "artifact": "f0afdf92c8244b3ee4d9c7f1b02729eb33eab3803a88ddc9ca8007be4c682418",
+      "evidence_category": "official_match",
+      "calibration_n": 0,
+      "evaluation_n": 0,
+      "empirical_coverage": null,
+      "minimum_calibration_n": 30,
+      "minimum_evaluation_n": 20,
+      "nominal": 0.9,
+      "radius": null,
+      "radius_80": null,
+      "levels": {
+        "80": {
+          "nominal": 0.8,
+          "calibration_n": 0,
+          "evaluation_n": 0,
+          "empirical_coverage": null,
+          "mean_evaluated_width_lbp": null,
+          "radius": null,
+          "status": "withheld",
+          "reasons": [
+            "insufficient_nonoverlapping_matured_calibration_cases",
+            "insufficient_chronological_coverage_tests"
+          ]
+        },
+        "90": {
+          "nominal": 0.9,
+          "calibration_n": 0,
+          "evaluation_n": 0,
+          "empirical_coverage": null,
+          "mean_evaluated_width_lbp": null,
+          "radius": null,
+          "status": "withheld",
+          "reasons": [
+            "insufficient_nonoverlapping_matured_calibration_cases",
+            "insufficient_chronological_coverage_tests"
+          ]
+        }
+      },
+      "evidence_strata": {
+        "official_match": {
+          "levels": {
+            "80": {
+              "nominal": 0.8,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            },
+            "90": {
+              "nominal": 0.9,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            }
+          },
+          "eligible_n": 0,
+          "raw_distinct_targets": 0
+        },
+        "provisional_match": {
+          "levels": {
+            "80": {
+              "nominal": 0.8,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            },
+            "90": {
+              "nominal": 0.9,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            }
+          },
+          "eligible_n": 0,
+          "raw_distinct_targets": 0
+        }
+      },
+      "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
+      "target_limitation": "Reviewed complete official outcome sequence"
+    },
+    "day_14": {
+      "cohort": "government_backed",
+      "horizon": "day_14",
+      "artifact": "461e1fe1925f7c456b9a8c387e131b013385a20218d507092b0a5f05191ae256",
+      "evidence_category": "official_match",
+      "calibration_n": 0,
+      "evaluation_n": 0,
+      "empirical_coverage": null,
+      "minimum_calibration_n": 30,
+      "minimum_evaluation_n": 20,
+      "nominal": 0.9,
+      "radius": null,
+      "radius_80": null,
+      "levels": {
+        "80": {
+          "nominal": 0.8,
+          "calibration_n": 0,
+          "evaluation_n": 0,
+          "empirical_coverage": null,
+          "mean_evaluated_width_lbp": null,
+          "radius": null,
+          "status": "withheld",
+          "reasons": [
+            "insufficient_nonoverlapping_matured_calibration_cases",
+            "insufficient_chronological_coverage_tests"
+          ]
+        },
+        "90": {
+          "nominal": 0.9,
+          "calibration_n": 0,
+          "evaluation_n": 0,
+          "empirical_coverage": null,
+          "mean_evaluated_width_lbp": null,
+          "radius": null,
+          "status": "withheld",
+          "reasons": [
+            "insufficient_nonoverlapping_matured_calibration_cases",
+            "insufficient_chronological_coverage_tests"
+          ]
+        }
+      },
+      "evidence_strata": {
+        "official_match": {
+          "levels": {
+            "80": {
+              "nominal": 0.8,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            },
+            "90": {
+              "nominal": 0.9,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            }
+          },
+          "eligible_n": 0,
+          "raw_distinct_targets": 0
+        },
+        "provisional_match": {
+          "levels": {
+            "80": {
+              "nominal": 0.8,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            },
+            "90": {
+              "nominal": 0.9,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            }
+          },
+          "eligible_n": 0,
+          "raw_distinct_targets": 0
+        }
+      },
+      "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
+      "target_limitation": "Reviewed complete official outcome sequence"
+    },
+    "day_30": {
+      "cohort": "government_backed",
+      "horizon": "day_30",
+      "artifact": "a0207757c08a2f4b4e4f953d604e7eedd1dae5b393474dd5e22ee5e91aaae796",
+      "evidence_category": "official_match",
+      "calibration_n": 0,
+      "evaluation_n": 0,
+      "empirical_coverage": null,
+      "minimum_calibration_n": 30,
+      "minimum_evaluation_n": 20,
+      "nominal": 0.9,
+      "radius": null,
+      "radius_80": null,
+      "levels": {
+        "80": {
+          "nominal": 0.8,
+          "calibration_n": 0,
+          "evaluation_n": 0,
+          "empirical_coverage": null,
+          "mean_evaluated_width_lbp": null,
+          "radius": null,
+          "status": "withheld",
+          "reasons": [
+            "insufficient_nonoverlapping_matured_calibration_cases",
+            "insufficient_chronological_coverage_tests"
+          ]
+        },
+        "90": {
+          "nominal": 0.9,
+          "calibration_n": 0,
+          "evaluation_n": 0,
+          "empirical_coverage": null,
+          "mean_evaluated_width_lbp": null,
+          "radius": null,
+          "status": "withheld",
+          "reasons": [
+            "insufficient_nonoverlapping_matured_calibration_cases",
+            "insufficient_chronological_coverage_tests"
+          ]
+        }
+      },
+      "evidence_strata": {
+        "official_match": {
+          "levels": {
+            "80": {
+              "nominal": 0.8,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            },
+            "90": {
+              "nominal": 0.9,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            }
+          },
+          "eligible_n": 0,
+          "raw_distinct_targets": 0
+        },
+        "provisional_match": {
+          "levels": {
+            "80": {
+              "nominal": 0.8,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            },
+            "90": {
+              "nominal": 0.9,
+              "calibration_n": 0,
+              "evaluation_n": 0,
+              "empirical_coverage": null,
+              "mean_evaluated_width_lbp": null,
+              "radius": null,
+              "status": "withheld",
+              "reasons": [
+                "insufficient_nonoverlapping_matured_calibration_cases",
+                "insufficient_chronological_coverage_tests"
+              ]
+            }
+          },
+          "eligible_n": 0,
+          "raw_distinct_targets": 0
+        }
+      },
+      "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
+      "target_limitation": "Reviewed complete official outcome sequence"
+    }
+  },
+  "point_forecasts_generated": true,
+  "forecasts_written": false
+}

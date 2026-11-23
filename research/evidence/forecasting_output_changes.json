@@ -1,0 +1,15 @@
+{
+  "recorded_at": "2026-11-11T10:32:29.148404+00:00",
+  "stage": "After first development result inspection",
+  "changes": [
+    "Added target/endpoint, timing and experimental-interval status fields to exports and saved-origin preview CLI",
+    "Reject physically negative endpoint point predictions; first run contains none, so no numeric scores change",
+    "Added common-origin and calibration-failure reports, reliability bins, docs and mechanical checks",
+    "Corrected public-news coverage-window boundary; historical ablation stays empty"
+  ],
+  "model_hyperparameters_changed": false,
+  "will_compare_numeric_metrics_to_preserved_first_run": true,
+  "numeric_metrics_reproduced": true,
+  "metric_rows_compared": 158,
+  "tolerance": 1e-12
+}

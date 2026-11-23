@@ -1,0 +1,59 @@
+{
+  "n": 3,
+  "earliest": "2021-09-17",
+  "latest": "2025-05-29",
+  "mae_lbp_20l": 2.7333333333333334,
+  "max_absolute_error_lbp_20l": 3.3,
+  "bias_lbp_20l": -0.5333333333333333,
+  "prediction_sample_size": 0,
+  "directional_accuracy": null,
+  "change_error": null,
+  "caveat": "These checks use components from the same published decision. They are not forecasts; no consecutive-annex sample exists.",
+  "rows": [
+    {
+      "date": "2021-09-17",
+      "decision_number": "180",
+      "source_url": "https://energyandwater.gov.lb/mediafiles/prices/1-2021-09-17.pdf",
+      "raw_sha256": "9f59129eaa93ba4fe82d5614a28b73a02ae271e5a1f30a1e5a9537c693fa0d39",
+      "printed_price_lbp_20l": 174300,
+      "reconstructed_unrounded_lbp_20l": "174303.30",
+      "signed_error_lbp_20l": "3.30",
+      "pretax_error_lbp_kl": "0",
+      "vat_error_lbp_kl": "0.00",
+      "printed_fx_lbp_usd": null,
+      "printed_goods_usd_kl": null,
+      "goods_conversion_discrepancy_lbp_kl": null,
+      "evaluation_kind": "same_document_accounting_NOT_FORECAST"
+    },
+    {
+      "date": "2023-05-12",
+      "decision_number": "245",
+      "source_url": "https://energyandwater.gov.lb/mediafiles/prices/1-2023-05-12.pdf",
+      "raw_sha256": "6c4de8ed466ae64644fb97e6eb438e67f0dd2d55e44b5113c06ae81a172f1477",
+      "printed_price_lbp_20l": 1635000,
+      "reconstructed_unrounded_lbp_20l": "1634996.70",
+      "signed_error_lbp_20l": "-3.30",
+      "pretax_error_lbp_kl": "0",
+      "vat_error_lbp_kl": "0.00",
+      "printed_fx_lbp_usd": 94500,
+      "printed_goods_usd_kl": "693.88",
+      "goods_conversion_discrepancy_lbp_kl": "19840.00",
+      "evaluation_kind": "same_document_accounting_NOT_FORECAST"
+    },
+    {
+      "date": "2025-05-29",
+      "decision_number": "166",
+      "source_url": "https://energyandwater.gov.lb/mediafiles/prices/1-2025-05-29.pdf",
+      "raw_sha256": "3ca4c3538244776abe4e2e647138605c3648254349ac1e595919e4226bff9d44",
+      "printed_price_lbp_20l": 1489000,
+      "reconstructed_unrounded_lbp_20l": "1488998.40",
+      "signed_error_lbp_20l": "-1.60",
+      "pretax_error_lbp_kl": "0",
+      "vat_error_lbp_kl": "0.00",
+      "printed_fx_lbp_usd": 89700,
+      "printed_goods_usd_kl": "656.84",
+      "goods_conversion_discrepancy_lbp_kl": "37952.00",
+      "evaluation_kind": "same_document_accounting_NOT_FORECAST"
+    }
+  ]
+}

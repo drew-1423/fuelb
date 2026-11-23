@@ -1,0 +1,39 @@
+{
+  "started_at": "2026-11-11T00:27:08.067647+00:00",
+  "config_sha256": "50697b00e5975e438e0a3b6c20a536e361bce45fbc85805561fdc15e92d73e61",
+  "design_sha256": "1e2b753cb9afd730ed36180b884112ef8693647d6a09cd9f17562420c5cee172",
+  "feature_sha256": "af93f854cb6599b6ccedbf426c3eb792e8decd7473785b56ff4eb377a114b244",
+  "code_hashes": {
+    "src/lebanon_fuel/forecasting/__init__.py": "1f4921e4b1d57d3b4205427a3b140ca61f3e8f144c98cf87934c1d91524dc6bc",
+    "src/lebanon_fuel/forecasting/cli.py": "c6c056d438adb0647599a79a8d511cd7910375dd9ee46e5a17044523d56e03ac",
+    "src/lebanon_fuel/forecasting/data.py": "4e76c0ea5042dfa16ee3d9dba9c3f4417ce597106e1b59f8a3c657d771505c46",
+    "src/lebanon_fuel/forecasting/models.py": "d630125d4c4e83bb5923b3a7edf5acd26a11ad1b91cc623ee95ae7bc600a753a",
+    "src/lebanon_fuel/forecasting/pipeline.py": "6b85acc1a1c5a2efcd7fd65375e99c0b254fd6ef110d33f3b564c5dd32be9f02",
+    "src/lebanon_fuel/forecasting/uncertainty.py": "4854cda38c2e2c766d46499046e382c8122a56ed26484502a38380534633f077"
+  },
+  "packages": {
+    "numpy": "2.5.4",
+    "pandas": "3.1.1",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "statsmodels": "0.15.0",
+    "lightgbm": "4.7.0",
+    "catboost": "1.2.10",
+    "joblib": "1.6.0"
+  },
+  "status": "Development only; latest vintages; strict historical reconstruction not supported",
+  "completed_at": "2026-11-11T00:27:26.543177+00:00",
+  "prediction_rows": 40641,
+  "development_origin_horizon_rows": 4120,
+  "saved_bundles": 16,
+  "production_winner": null,
+  "output_hashes": {
+    "baseline_comparisons.csv": "a910b779eab59d19dc3162f197ede72902613b861b7ebd549e4e7a4f329fe4af",
+    "development_predictions.csv": "6ec8a3948858a7a89b9a7f4d3ed01c52e63473d1b7e62483af284034dee7177b",
+    "excluded_targets.csv": "89567dee2a7d226388d885a5bbb02f864dddb4d97da0da03d57536f2199755a0",
+    "historical_preliminary_forecasts.csv": "b75d2d379f91787f8f7bf5283678bf4984fdcb3f6e0616ba4e0d5aeb2648ff29",
+    "model_availability.csv": "f169ff34ccf03b1ef416ebdbd0a504f979345ea00d122df162598a6610d5032a",
+    "model_metrics.csv": "8073d86098b6d2fe4e37356bd1cccda47680b1b5507e470efeb6beef378f9e0e",
+    "target_coverage.csv": "2a2262f069341563b2986ee642c2c69ed76a0e2a3d03312219f143482601ddb9"
+  }
+}

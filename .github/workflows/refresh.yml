@@ -1,0 +1,155 @@
+name: Refresh Lebanon Fuel Data
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      source:
+        description: Source to refresh
+        type: choice
+        default: all
+        options: [all, ipt, totalenergies, ministry, taqtek, thefuelprice, eia, ec, fed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fuel-data-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: src
+      LEBANON_FUEL_LOCAL_STORAGE: "1"
+      STORAGE_TAG: fuel-storage-${{ github.run_id }}-${{ github.run_attempt }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 2
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Restore last published snapshot
+        run: python -m lebanon_fuel.automation.publication hydrate
+
+      - name: Attest current source and frozen models
+        env:
+          PYTHONPATH: src
+        run: python -m lebanon_fuel.automation.release create --base-commit "$(git rev-parse HEAD)"
+
+      - name: Run bounded data & forecast refresh
+        id: collect
+        continue-on-error: true
+        env:
+          PYTHONPATH: src
+          REFRESH_SOURCE: ${{ inputs.source || 'all' }}
+        run: |
+          if [ "$REFRESH_SOURCE" = "all" ]; then
+            python -m lebanon_fuel.automation.cli --root . run
+          else
+            python -m lebanon_fuel.automation.cli --root . run --source "$REFRESH_SOURCE"
+          fi
+
+      - name: Verify operations integrity
+        id: audit
+        continue-on-error: true
+        env:
+          PYTHONPATH: src
+        run: python -m lebanon_fuel.automation.cli --root . audit
+
+      - name: Gate publication on collection and integrity success
+        id: publication_gate
+        if: always()
+        env:
+          COLLECT_OUTCOME: ${{ steps.collect.outcome }}
+          AUDIT_OUTCOME: ${{ steps.audit.outcome }}
+        run: python -m lebanon_fuel.automation.publication gate
+
+      - name: Assemble verified publication
+        if: steps.publication_gate.outcome == 'success'
+        run: |
+          python -m lebanon_fuel.automation.publication pack \
+            --output "$RUNNER_TEMP/fuel-storage" --repository "$GITHUB_REPOSITORY" --tag "$STORAGE_TAG"
+          manifest="$RUNNER_TEMP/fuel-storage/manifest.json"
+          cp "$manifest" reports/operations/published_storage.json
+          git add data/exports/ reports/
+          python -m lebanon_fuel.automation.publication check-staged
+
+      - name: Store and verify data before publication
+        env:
+          GH_TOKEN: ${{ github.token }}
+        if: steps.publication_gate.outcome == 'success'
+        run: |
+          gh release create "$STORAGE_TAG" --target "$(git rev-parse HEAD)" --latest=false \
+            --title "Fuel data $STORAGE_TAG" --notes "Checksummed SQLite backups and source captures."
+          for file in "$RUNNER_TEMP"/fuel-storage/*.part "$RUNNER_TEMP"/fuel-storage/manifest.json; do
+            for attempt in 1 2 3; do
+              if gh release upload "$STORAGE_TAG" "$file"; then break; fi
+              if gh release view "$STORAGE_TAG" --json assets --jq '.assets[] | select(.state == "uploaded") | .name' | grep -Fxq "$(basename "$file")"; then break; fi
+              if [ "$attempt" -eq 3 ]; then exit 1; fi
+              sleep "$((attempt * 3))"
+            done
+          done
+          python -m lebanon_fuel.automation.publication verify-remote \
+            --manifest "$RUNNER_TEMP/fuel-storage/manifest.json"
+
+      - name: Check cumulative release storage
+        if: steps.publication_gate.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          total_bytes=$(gh api --paginate "repos/${GITHUB_REPOSITORY}/releases?per_page=100" --jq '.[].assets[]?.size' | awk '{ total += $1 } END { print total + 0 }')
+          echo "GitHub Release assets currently use ${total_bytes} bytes."
+          if [ "$total_bytes" -ge "$((8 * 1024 * 1024 * 1024))" ]; then
+            echo "::warning::GitHub Release assets exceed 8 GiB; review retained snapshots and recovery requirements."
+          fi
+
+      - name: Publish dashboard manifest and widget together
+        if: steps.publication_gate.outcome == 'success'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: publish fuel snapshot $STORAGE_TAG"
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then break; fi
+            if [ "$attempt" -eq 3 ]; then exit 1; fi
+            git fetch origin main
+            if [ "$(git rev-parse HEAD^)" != "$(git rev-parse origin/main)" ]; then
+              echo "::error::Main changed during collection. Retry from the current published state."
+              exit 1
+            fi
+            sleep "$((attempt * 3))"
+          done
+          python -m lebanon_fuel.automation.publication verify-widget --commit "$(git rev-parse HEAD)"
+
+      - name: Preserve failed refresh evidence
+        if: always() && (failure() || steps.collect.outcome == 'failure' || steps.audit.outcome == 'failure')
+        uses: actions/upload-artifact@v4
+        with:
+          name: refresh-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 14
+          path: |
+            reports/operations/latest_run.json
+            reports/operations/widget_snapshot.json
+            data/*.sqlite
+            data/raw/
+            ${{ runner.temp }}/fuel-storage/
+
+      - name: Report collection or integrity failure
+        if: always() && (steps.collect.outcome == 'failure' || steps.audit.outcome == 'failure' || steps.publication_gate.outcome == 'failure')
+        run: |
+          echo "::error::The refresh was degraded or failed integrity verification. Inspect the preserved evidence and publication steps."
+          exit 1

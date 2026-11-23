@@ -1,0 +1,53 @@
+{
+  "note": "Exploratory Part 1 artifacts; file mtime is not source publication time. Authoritative Part 2 captures have exact retrieval and source metadata in SQLite.",
+  "files": [
+    {
+      "path": "research/evidence/ipt_fuel_prices_20261110.xlsx",
+      "sha256": "141868038a6d78c120c4673242fb51770c6bb1d0aaa998604e4cd4cb76ae89b7",
+      "bytes": 51558,
+      "saved_file_mtime_utc": "2026-11-10T16:38:12.286019+00:00"
+    },
+    {
+      "path": "research/evidence/probe_20261110/ipt.html",
+      "sha256": "017c9d57c5bfeb8654dc6cf160ae7fed912b9eb2e01047ebf986ed07f11c916c",
+      "bytes": 146125,
+      "saved_file_mtime_utc": "2026-11-10T18:57:04.267835+00:00"
+    },
+    {
+      "path": "research/evidence/probe_20261110/ipt_robots.html",
+      "sha256": "f92b29e924af851363123f78d5bbb3737bcbab7f45745793b26191eafb69e06e",
+      "bytes": 30,
+      "saved_file_mtime_utc": "2026-11-10T18:56:59.684183+00:00"
+    },
+    {
+      "path": "research/evidence/probe_20261110/ministry.html",
+      "sha256": "23bd5ed2b1f70f00fa385ca7fe4c84bbe7a2aed9e5e610c16e076f85357b6cad",
+      "bytes": 28321,
+      "saved_file_mtime_utc": "2026-11-10T18:57:11.713322+00:00"
+    },
+    {
+      "path": "research/evidence/probe_20261110/ministry_pricesCtrl.js",
+      "sha256": "9282c70e58e8001ea6499af28faf26770f761e8afa0a188700d03100b92ffff9",
+      "bytes": 1105,
+      "saved_file_mtime_utc": "2026-11-10T18:57:36.643659+00:00"
+    },
+    {
+      "path": "research/evidence/probe_20261110/ministry_robots.html",
+      "sha256": "2c15942a4eae3a2a3cb39229fbff80661fb3ad724d85a2ad1646e08eb6d7e16b",
+      "bytes": 89,
+      "saved_file_mtime_utc": "2026-11-10T18:57:07.956076+00:00"
+    },
+    {
+      "path": "research/evidence/probe_20261110/taqtek.html",
+      "sha256": "a6f259fbd88c0a091be833241f28ad7763338e84d24fc4a04106073427fd2145",
+      "bytes": 394799,
+      "saved_file_mtime_utc": "2026-11-10T18:57:22.140745+00:00"
+    },
+    {
+      "path": "research/evidence/probe_20261110/taqtek_robots.html",
+      "sha256": "d8d3ac5cef6806bdb992141dc5fab2b62d6e9f428e0f96808cbcd0f0aa9141c4",
+      "bytes": 66,
+      "saved_file_mtime_utc": "2026-11-10T18:57:16.083181+00:00"
+    }
+  ]
+}

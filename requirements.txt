@@ -1,0 +1,16 @@
+# Cloud release: reload dashboard modules for durable refresh storage.
+streamlit>=1.55,<2
+plotly>=6,<8
+pandas>=2.2,<4
+numpy>=1.26,<3
+scipy>=1.14,<2
+statsmodels>=0.14,<1
+scikit-learn>=1.5,<2
+lightgbm>=4.6,<5
+catboost>=1.2,<2
+joblib>=1.4,<2
+httpx>=0.28,<1
+beautifulsoup4>=4.12,<5
+openpyxl>=3.1,<4
+xlrd>=2,<3
+pypdf>=5,<7

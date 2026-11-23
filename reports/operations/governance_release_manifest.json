@@ -1,0 +1,38 @@
+{
+  "base_commit": "05064862c80623480ed4881d0b4ac0f520b05f4d",
+  "database_sha256": "af38fa5d90645a98c3edf92b5c4b2cbe60e383c7080668e7130928eaa70ed540",
+  "kind": "strict_operations_governance_fix_no_model_changes",
+  "source_sha256": {
+    "src/lebanon_fuel/automation/maintenance.py": "77b52c104f819875cb9051d31c0a774a47e902fc5264c3e59afc3834cb6c0637",
+    ".github/workflows/refresh.yml": "9a33b6cab877ad8a027acf181f14656268740be924ff85b4ae7a70583fa4219c",
+    "Tests/fuel/test_regional.py": "cb9272a73a0a244a7ce6649d39fd028a636483966237026b9a11b4c4ef4e9d1b"
+  },
+  "evidence_catalog_sha256": "47b30643ea80636b5c37d3d08051ede0d6e95b04e2a73a660d84769fe6022adb",
+  "historical_training_and_validation_manifests": "Unchanged: no retraining or revalidation of model weights; this manifest covers operations release only.",
+  "verification": {
+    "pytest": "285 passed; zero warnings",
+    "regional_tests_from_filesystem_root": "8 passed; zero warnings",
+    "workflow": "YAML parsed using bundled Ruby YAML; embedded bash syntax checked",
+    "strict_operations_audit_exit_code": 1,
+    "production_verifier_exit_code": 1,
+    "artifact_audits": {
+      "structural_artifact_audit": 0,
+      "forecasting_artifact_audit": 0,
+      "validation_artifact_audit": 0
+    },
+    "all_passed": false,
+    "missing_capture_files": 86,
+    "phase1_requested_cohort": 54
+  },
+  "database_unchanged_during_verification": true,
+  "evidence_hashes": {
+    "reports/operations/phase1_missing_raw_captures.json": "47b30643ea80636b5c37d3d08051ede0d6e95b04e2a73a660d84769fe6022adb",
+    "reports/operations/final_verification.json": "1338b3869d730b5ad96ff790cf6ccc0068964b8aa01067d0bd67ab99d23ea67f"
+  },
+  "verification_data_snapshots": {
+    "data/lebanon_fuel.sqlite": "af38fa5d90645a98c3edf92b5c4b2cbe60e383c7080668e7130928eaa70ed540",
+    "data/forecast_ledger.sqlite": "1ff9e8ff4fe2210ef95ca85e89956c191cdf63b3f2208b8ba5a238bf18fe0066",
+    "data/operations.sqlite": "e2787d7c35fcecd8eda08b392d373e7cb5d1a5e238c880c4fc3dac5159098e62"
+  },
+  "verification_scope_note": "Code matches the base commit. Domestic price database downloaded from that exact commit. Auxiliary ledger and operations databases are from local tracked commit f29c7896168e5ed2c908290db06852aaa024c55e. No production databases changed. Missing-capture inventory describes the exact downloaded domestic database and tracked raw-file snapshot."
+}

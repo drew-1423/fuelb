@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Levant Energy X — Lebanon Gasoline 95 Intelligence Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            canvas: '#081028',
+            card: '#0B1739',
+            cardHover: '#0F1E47',
+            activeNav: '#131F47',
+            borderHairline: '#1E294A',
+            borderActive: '#343B4F',
+            textPrimary: '#F8FAFC',
+            textSecondary: '#CBD5E1',
+            textSubtle: '#94A3B8',
+            neonMagenta: '#8B5CF6',
+            neonPurple: '#7C3AED',
+            neonCyan: '#38BDF8',
+            neonBlue: '#0EA5E9',
+            emeraldText: '#14CA74',
+            roseText: '#FF5A65'
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+            mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+    html, body {
+      background-color: #081028;
+      color: #F8FAFC;
+      font-family: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+      overflow-x: hidden;
+      max-width: 100vw;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 76px);
+      -webkit-tap-highlight-color: transparent;
+    }
+    @media (min-width: 1024px) {
+      html, body {
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+    }
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+    /* Mobile Safe Area Utility */
+    .pb-safe {
+      padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 0.5rem);
+    }
+    /* Minimum 44x44px Touch Targets & Active Haptic Scale */
+    .touch-target {
+      min-width: 44px;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 140ms cubic-bezier(0.22, 1, 0.36, 1), background-color 160ms ease, border-color 160ms ease;
+    }
+    .touch-target:active,
+    button:active {
+      transform: scale(0.97);
+    }
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    .info-tip:focus-visible {
+      outline: 2px solid #38BDF8 !important;
+      outline-offset: 2px !important;
+    }
+    /* Prevent iOS Safari Auto-Zoom on Input Focus */
+    input, select, textarea {
+      font-size: 16px !important;
+    }
+    /* Dashdark X Card Surface & Hairline Physics */
+    .dash-card {
+      background-color: #0B1739;
+      border: 1px solid #1E294A;
+      border-radius: 12px;
+      box-shadow: 0 8px 28px rgba(4, 9, 26, 0.45);
+      transition: border-color 180ms ease, transform 180ms ease;
+    }
+    .dash-card:hover {
+      border-color: #343B4F;
+    }
+    /* Primary CTA Pill (#8B5CF6 -> #38BDF8) */
+    .btn-primary-neon {
+      background: linear-gradient(135deg, #8B5CF6 0%, #38BDF8 100%);
+      box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35);
+      transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
+    }
+    .btn-primary-neon:hover {
+      filter: brightness(1.08);
+      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.45);
+    }
+    /* Secondary Dark Pill */
+    .btn-secondary-dark {
+      background-color: #131F47;
+      border: 1px solid #2A365E;
+      color: #CBD5E1;
+      transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease, transform 140ms ease;
+    }
+    .btn-secondary-dark:hover {
+      background-color: #1E294A;
+      color: #F8FAFC;
+      border-color: #38BDF8;
+    }
+    /* Quick Range Pill Chips */
+    .range-pill {
+      min-height: 44px;
+      min-width: 52px;
+      padding: 0 14px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid #2A365E;
+      background-color: #131F47;
+      color: #CBD5E1;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+      transition: all 150ms ease;
+    }
+    .range-pill.active {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.32) 0%, rgba(56, 189, 248, 0.28) 100%);
+      border-color: #38BDF8;
+      color: #F8FAFC;
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
+    }
+    /* Scroll Collision Prevention for Touch Charts */
+    .chart-touch-surface {
+      touch-action: pan-y pinch-zoom;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    /* Trend Badges */
+    .badge-up {
+      background-color: rgba(20, 202, 116, 0.16);
+      color: #14CA74;
+      border: 1px solid rgba(20, 202, 116, 0.32);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-variant-numeric: tabular-nums;
+    }
+    .badge-down {
+      background-color: rgba(255, 90, 101, 0.16);
+      color: #FF5A65;
+      border: 1px solid rgba(255, 90, 101, 0.32);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-variant-numeric: tabular-nums;
+    }
+    /* Sidebar Active Item */
+    .nav-item {
+      border-left: 3px solid transparent;
+      min-height: 44px;
+      transition: all 160ms ease;
+    }
+    .nav-item:hover {
+      background-color: rgba(19, 31, 71, 0.55);
+      color: #F8FAFC;
+    }
+    .nav-item.active {
+      background-color: #131F47;
+      border-left: 3px solid #8B5CF6;
+      color: #F8FAFC;
+      font-weight: 600;
+    }
+    /* Signature SVG Line Bloom */
+    .glow-magenta {
+      filter: drop-shadow(0 6px 14px rgba(139, 92, 246, 0.48));
+    }
+    .glow-cyan {
+      filter: drop-shadow(0 6px 14px rgba(56, 189, 248, 0.42));
+    }
+    /* Accessible Info Icon Popover */
+    .info-tip {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 9999px;
+      border: 1px solid #343B4F;
+      background: #131F47;
+      color: #38BDF8;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: help;
+      flex-shrink: 0;
+    }
+    .info-tip-box {
+      visibility: hidden;
+      opacity: 0;
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 260px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: #081028;
+      border: 1px solid #38BDF8;
+      color: #CBD5E1;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.45;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.65);
+      z-index: 50;
+      pointer-events: none;
+      transition: opacity 150ms ease;
+    }
+    .info-tip:hover .info-tip-box,
+    .info-tip:focus .info-tip-box {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col lg:flex-row selection:bg-neonMagenta selection:text-white">
+
+  <!-- LEFT SIDEBAR (Desktop 264px, compact mobile header on <1024px since primary nav sits in sticky bottom bar) -->
+  <aside class="w-full lg:w-[264px] lg:min-h-screen bg-canvas border-b lg:border-b-0 lg:border-r border-borderHairline flex flex-col justify-between shrink-0 select-none">
+    <div class="p-4 sm:p-6">
+      <!-- Brand Header -->
+      <div class="flex items-center justify-between mb-4 lg:mb-6">
+        <div class="flex items-center gap-3">
+          <div class="relative w-8 h-8 flex items-center justify-center">
+            <svg viewBox="0 0 36 36" class="w-8 h-8">
+              <path d="M18 4 A14 14 0 1 0 32 18" fill="none" stroke="#8B5CF6" stroke-width="5" stroke-linecap="round"/>
+              <path d="M18 10 A8 8 0 1 1 10 18" fill="none" stroke="#38BDF8" stroke-width="5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <span class="text-[19px] font-bold tracking-tight text-white">Levantdark X</span>
+        </div>
+        <button onclick="openExplainerModal()" class="lg:hidden touch-target px-3 rounded-lg bg-card border border-borderHairline text-xs font-semibold text-neonCyan">
+          Guide ⓘ
+        </button>
+      </div>
+
+      <!-- Search Input (16px font size prevents iOS Safari zoom) -->
+      <div class="relative mb-2 lg:mb-6">
+        <svg class="w-4 h-4 text-textSubtle absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.3-4.3"></path>
+        </svg>
+        <input id="sidebarSearch" type="text" placeholder="Search for decision, fuel..." class="w-full bg-card border border-borderHairline focus:border-neonCyan rounded-lg pl-10 pr-3 py-2.5 text-white placeholder-textSubtle outline-none transition" />
+      </div>
+
+      <!-- Desktop Primary Navigation Group -->
+      <div class="hidden lg:block space-y-2">
+        <div class="flex items-center justify-between px-3 py-2 text-neonMagenta text-sm font-semibold">
+          <div class="flex items-center gap-2.5">
+            <svg class="w-4 h-4 text-neonMagenta" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+            </svg>
+            <span>Dashboard</span>
+          </div>
+        </div>
+
+        <div class="space-y-2 pl-2">
+          <button onclick="switchPage('overview')" id="nav-overview" class="nav-item active w-full text-left px-4 py-2.5 rounded-r-lg text-[13px] text-white flex items-center justify-between">
+            <span>Pump Price &amp; Reports</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-neonMagenta/20 text-neonMagenta font-semibold">LIVE</span>
+          </button>
+          <button onclick="switchPage('analytics')" id="nav-analytics" class="nav-item w-full text-left px-4 py-2.5 rounded-r-lg text-[13px] text-textSecondary flex items-center justify-between">
+            <span>Cost &amp; Model Analytics</span>
+          </button>
+          <button onclick="switchPage('simulator')" id="nav-simulator" class="nav-item w-full text-left px-4 py-2.5 rounded-r-lg text-[13px] text-textSecondary flex items-center justify-between">
+            <span>What-If Tank Calculator</span>
+          </button>
+          <button onclick="switchPage('ledger')" id="nav-ledger" class="nav-item w-full text-left px-4 py-2.5 rounded-r-lg text-[13px] text-textSecondary flex items-center justify-between">
+            <span>Official Ministry Archive</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Sidebar Settings & Profile Footer (Desktop) -->
+    <div class="hidden lg:block p-6 border-t border-borderHairline space-y-3">
+      <button onclick="openExplainerModal()" class="touch-target w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-card text-[13px] text-textSecondary hover:text-white transition">
+        <span>Plain-English Glossary</span>
+        <span class="text-xs text-textSubtle">&rsaquo;</span>
+      </button>
+      <div class="pt-2 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-neonMagenta to-neonCyan flex items-center justify-center text-white font-bold text-sm shadow-md">
+            LX
+          </div>
+          <div>
+            <div class="text-xs font-semibold text-white leading-tight">Levantdark X</div>
+            <div class="text-[11px] text-textSecondary">Beirut · Quant Terminal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="flex-1 p-4 sm:p-6 lg:p-9 max-w-[1440px] mx-auto w-full space-y-6">
+
+    <!-- TOP HEADER BAR -->
+    <header class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <div class="flex flex-wrap items-center gap-2.5">
+          <h1 id="pageHeading" class="text-xl sm:text-[26px] font-bold tracking-tight text-white">Lebanon Fuel Monitor</h1>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emeraldText/15 text-emeraldText border border-emeraldText/30">
+            <span class="w-1.5 h-1.5 rounded-full bg-emeraldText animate-pulse"></span>
+            Beirut Live Monitor
+          </span>
+        </div>
+        <p id="pageSubheading" class="text-[13px] text-textSecondary mt-1">
+          Track Lebanon's official 95-octane pump price per 20-liter tank (122,250 LBP/L) and see where the next Ministry decision is headed.
+        </p>
+      </div>
+      <div class="flex items-center gap-2.5">
+        <button onclick="exportCSV()" class="touch-target btn-secondary-dark px-4 py-2.5 rounded-lg text-[13px] font-medium inline-flex items-center gap-1.5">
+          <span>Export CSV</span>
+        </button>
+        <button onclick="openExplainerModal()" class="touch-target btn-primary-neon px-4 py-2.5 rounded-lg text-[13px] font-semibold text-white inline-flex items-center gap-1.5">
+          <span>Plain-English Guide</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ROW 1: 4 BENTO KPI CARDS -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+      <div class="dash-card p-5">
+        <div class="flex items-center justify-between text-[13px] text-textSecondary mb-2">
+          <span class="font-medium">Official 20L Price (Nov 10)</span>
+        </div>
+        <div class="flex items-baseline gap-2.5">
+          <span class="text-[26px] font-bold text-white tabular-nums tracking-tight">2,445K</span>
+          <span class="badge-up">-1.9% &searr;</span>
+        </div>
+        <div class="text-[13px] text-textSubtle mt-1.5 tabular-nums">
+          ~$27.32 USD per 20L tank &middot; 122,250 LBP/L
+        </div>
+      </div>
+
+      <div class="dash-card p-5">
+        <div class="flex items-center justify-between text-[13px] text-textSecondary mb-2">
+          <span class="font-medium">Newest Station Quote (Nov 13)</span>
+        </div>
+        <div class="flex items-baseline gap-2.5">
+          <span class="text-[26px] font-bold text-white tabular-nums tracking-tight">2,391K</span>
+          <span class="badge-up">-54K &searr;</span>
+        </div>
+        <div class="text-[13px] text-textSubtle mt-1.5 tabular-nums">
+          ~$26.72 USD &middot; Supplier-observed (IPT)
+        </div>
+      </div>
+
+      <div class="dash-card p-5">
+        <div class="flex items-center justify-between text-[13px] text-textSecondary mb-2">
+          <span class="font-medium">Global Gasoline Proxy</span>
+        </div>
+        <div class="flex items-baseline gap-2.5">
+          <span class="text-[26px] font-bold text-white tabular-nums tracking-tight">$114.6</span>
+          <span class="badge-down">11d lag &nearr;</span>
+        </div>
+        <div class="text-[13px] text-textSubtle mt-1.5 tabular-nums">
+          Brent Crude: $107.03/bbl &middot; USD/LBP: 89,500
+        </div>
+      </div>
+
+      <div class="dash-card p-5">
+        <div class="flex items-center justify-between text-[13px] text-textSecondary mb-2">
+          <span class="flex items-center gap-2 font-medium">
+            Model Accuracy (MAE)
+            <span class="info-tip" tabindex="0" aria-label="Explain MAE">i<span class="info-tip-box"><strong class="text-white">Mean Absolute Error (MAE):</strong> The average miss per 20-liter tank across 69 past decisions. 8,801 LBP is roughly $0.10 USD per tank—17.3% more accurate than guessing &ldquo;no change&rdquo;.</span></span>
+          </span>
+        </div>
+        <div class="flex items-baseline gap-2.5">
+          <span class="text-[26px] font-bold text-white tabular-nums tracking-tight">&plusmn;8.8K</span>
+          <span class="badge-up">+17.3% &nearr;</span>
+        </div>
+        <div class="text-[13px] text-textSubtle mt-1.5 tabular-nums">
+          ~$0.10/tank avg error (LightGBM, n=69)
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 1: OVERVIEW & REPORTS -->
+    <div id="view-overview" class="space-y-6">
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <!-- LEFT 8 COLS: Primary Dual-Spline Chart with Pinch-to-Zoom, Panning & Fixed Loupe Header -->
+        <div class="dash-card lg:col-span-8 p-4 sm:p-6 flex flex-col justify-between">
+          <div>
+            <!-- Fixed Scrubbing Header Bar Above Chart (Thumb Never Blocks Readout) -->
+            <div class="bg-[#081028] border border-borderHairline rounded-xl p-3.5 mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+              <div>
+                <div class="text-xs text-textSecondary font-medium">Touch &amp; Drag Readout &middot; <span id="ttDate" class="text-neonCyan font-semibold">Nov 10, 2026 &middot; Corroborated</span></div>
+                <div class="flex flex-wrap items-baseline gap-3 mt-1 tabular-nums">
+                  <span id="ttPrice" class="text-2xl font-extrabold text-white">2,445,000 LBP</span>
+                  <span id="ttLanded" class="text-[13px] text-neonCyan font-semibold">Landed: 2,398,000 LBP</span>
+                  <span id="ttBadge" class="badge-up">-1.9%</span>
+                </div>
+              </div>
+              <!-- Quick-Range Horizontal Scrolling Chips (44px min height, 8px separation) -->
+              <div class="flex items-center gap-2 overflow-x-auto py-1">
+                <button onclick="setQuickRange('1D', this)" class="range-pill touch-target">1D</button>
+                <button onclick="setQuickRange('1W', this)" class="range-pill touch-target">1W</button>
+                <button onclick="setQuickRange('1M', this)" class="range-pill touch-target">1M</button>
+                <button onclick="setQuickRange('All', this)" class="range-pill active touch-target">All</button>
+              </div>
+            </div>
+
+            <!-- Interactive SVG Spline Chart with Pinch-to-Zoom & 1-Finger Pan -->
+            <div id="chartContainer" class="relative w-full h-[310px] sm:h-[340px] chart-touch-surface overflow-hidden rounded-lg">
+              <!-- Persistent Floating Reset Zoom Button (Pops in when zoomed) -->
+              <button id="resetZoomBtn" onclick="resetChartZoom()" class="hidden absolute top-3 right-3 z-20 touch-target px-3.5 py-2 rounded-full bg-[#081028]/95 border border-neonCyan text-neonCyan text-xs font-bold shadow-lg">
+                Reset Zoom (1.0x)
+              </button>
+
+              <svg id="heroSvg" viewBox="0 0 760 310" class="w-full h-full overflow-visible">
+                <defs>
+                  <linearGradient id="gradMagenta" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.36"/>
+                    <stop offset="65%" stop-color="#8B5CF6" stop-opacity="0.08"/>
+                    <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0.0"/>
+                  </linearGradient>
+                  <linearGradient id="gradCyan" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.32"/>
+                    <stop offset="70%" stop-color="#38BDF8" stop-opacity="0.06"/>
+                    <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.0"/>
+                  </linearGradient>
+                </defs>
+
+                <!-- 13px Tabular Y-Axis Labels & Gridlines -->
+                <g class="text-[13px] fill-[#CBD5E1] tabular-nums">
+                  <text x="0" y="28">2.90M</text>
+                  <line x1="52" y1="24" x2="745" y2="24" stroke="#1E294A" stroke-width="1" stroke-dasharray="3 3"/>
+                  <text x="0" y="74">2.60M</text>
+                  <line x1="52" y1="70" x2="745" y2="70" stroke="#1E294A" stroke-width="1" stroke-dasharray="3 3"/>
+                  <text x="0" y="120">2.30M</text>
+                  <line x1="52" y1="116" x2="745" y2="116" stroke="#1E294A" stroke-width="1" stroke-dasharray="3 3"/>
+                  <text x="0" y="166">2.00M</text>
+                  <line x1="52" y1="162" x2="745" y2="162" stroke="#1E294A" stroke-width="1" stroke-dasharray="3 3"/>
+                  <text x="0" y="212">1.70M</text>
+                  <line x1="52" y1="208" x2="745" y2="208" stroke="#1E294A" stroke-width="1" stroke-dasharray="3 3"/>
+                  <text x="0" y="258">1.35M</text>
+                  <line x1="52" y1="254" x2="745" y2="254" stroke="#1E294A" stroke-width="1"/>
+                </g>
+
+                <g id="zoomViewport">
+                  <path id="areaCyan" fill="url(#gradCyan)" d=""/>
+                  <path id="areaMagenta" fill="url(#gradMagenta)" d=""/>
+                  <path id="lineCyan" fill="none" stroke="#38BDF8" stroke-width="2.8" stroke-linecap="round" class="glow-cyan" d=""/>
+                  <path id="lineMagenta" fill="none" stroke="#8B5CF6" stroke-width="3" stroke-linecap="round" class="glow-magenta" d=""/>
+
+                  <!-- Vertical Scrubbing Crosshair Loupe -->
+                  <line id="hoverLine" x1="396" y1="20" x2="396" y2="254" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="4 4"/>
+                  <circle id="activeNodeMagenta" cx="396" cy="96" r="6.5" fill="#0B1739" stroke="#8B5CF6" stroke-width="3"/>
+                  <circle id="activeNodeCyan" cx="396" cy="102" r="5" fill="#38BDF8" stroke="#0B1739" stroke-width="2"/>
+                  <g id="chartHitLayer"></g>
+                  <g id="xAxisLabels" class="text-[13px] fill-[#CBD5E1] tabular-nums"></g>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-borderHairline flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-[13px] text-textSecondary">
+            <span><strong class="text-white">Touch Gestures:</strong> Pinch with two fingers to zoom, drag horizontally to scrub values into the top bar, or swipe vertically to scroll the page.</span>
+            <button onclick="switchPage('analytics')" class="touch-target text-neonCyan hover:underline font-semibold shrink-0">Compare all 11 models &rarr;</button>
+          </div>
+        </div>
+
+        <!-- RIGHT 4 COLS: Stacked Top Bar Card + Bottom Live OVX Card -->
+        <div class="lg:col-span-4 flex flex-col gap-5">
+          <div class="dash-card p-5 sm:p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="text-[13px] text-textSecondary font-medium mb-1">Backtest Accuracy Gain vs. Baseline</div>
+              <div class="flex items-baseline gap-2.5 mb-4">
+                <span class="text-2xl font-bold text-white tabular-nums">8,801 LBP</span>
+                <span class="badge-up">17.3% better &nearr;</span>
+              </div>
+              <div class="h-32 flex items-end justify-between gap-1.5 pt-4 pb-2 px-1 border-b border-borderHairline">
+                <div class="w-full bg-neonMagenta rounded-t h-[82%]" title="LightGBM: 8,801 LBP MAE"></div>
+                <div class="w-full bg-neonCyan rounded-t h-[65%]" title="Structural Proxy: 9,485 LBP MAE"></div>
+                <div class="w-full bg-neonMagenta rounded-t h-[74%]" title="Last Change: 9,772 LBP MAE"></div>
+                <div class="w-full bg-neonCyan rounded-t h-[58%]" title="Ensemble: 9,949 LBP MAE"></div>
+                <div class="w-full bg-neonMagenta rounded-t h-[88%]" title="CatBoost: 10,063 LBP MAE"></div>
+                <div class="w-full bg-neonCyan rounded-t h-[70%]" title="No-Change Baseline: 10,638 LBP MAE"></div>
+                <div class="w-full bg-neonMagenta rounded-t h-[92%]" title="Hybrid: 10,659 LBP MAE"></div>
+                <div class="w-full bg-neonCyan rounded-t h-[62%]" title="Historical Median: 10,667 LBP MAE"></div>
+              </div>
+              <div class="flex justify-between text-[13px] text-textSubtle mt-1.5 tabular-nums">
+                <span>LightGBM</span>
+                <span>Struct</span>
+                <span>Ensemble</span>
+                <span>Hybrid</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between text-[13px] pt-3">
+              <span class="text-textSecondary">69 verified decisions</span>
+              <button onclick="switchPage('analytics')" class="touch-target text-neonCyan font-semibold hover:underline">View report</button>
+            </div>
+          </div>
+
+          <div class="dash-card p-5 sm:p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2 text-[13px] text-textSecondary font-medium mb-1">
+                <span>Oil Market Turbulence (Cboe OVX)</span>
+                <span class="info-tip" tabindex="0" aria-label="Explain OVX and 252-close percentile">i<span class="info-tip-box"><strong class="text-white">252-Close Percentile:</strong> Compares today's oil turbulence to the past 252 trading days (~1 year).<br/>&bull; <strong class="text-emeraldText">0–25%:</strong> Calm<br/>&bull; <strong class="text-neonCyan">25–75%:</strong> Normal range<br/>&bull; <strong class="text-neonMagenta">75–90%:</strong> Elevated<br/>&bull; <strong class="text-roseText">90–100%:</strong> Market stress</span></span>
+              </div>
+              <div class="flex items-baseline gap-2.5 mb-3">
+                <span class="text-2xl font-bold text-white tabular-nums">34.8%</span>
+                <span class="badge-up">Normal regime &searr;</span>
+              </div>
+              <svg viewBox="0 0 280 85" class="w-full h-20 overflow-visible">
+                <defs>
+                  <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.32"/>
+                    <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0.0"/>
+                  </linearGradient>
+                </defs>
+                <path d="M0,70 L28,62 L56,42 L84,56 L112,38 L140,48 L168,14 L196,54 L224,54 L252,36 L280,64 L280,78 L0,78 Z" fill="url(#sparkGrad)"/>
+                <path d="M0,70 L28,62 L56,42 L84,56 L112,38 L140,48 L168,14 L196,54 L224,54 L252,36 L280,64" fill="none" stroke="#8B5CF6" stroke-width="2.4" class="glow-magenta"/>
+              </svg>
+              <div class="flex justify-between text-[13px] text-textSubtle mt-1 tabular-nums">
+                <span>Jun</span>
+                <span>Aug</span>
+                <span>Oct</span>
+                <span>Nov 2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- VIEW 2: COST & MODEL ANALYTICS -->
+    <div id="view-analytics" class="hidden space-y-6">
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <div class="dash-card lg:col-span-4 p-6 flex flex-col justify-between">
+          <div>
+            <h3 class="text-base font-bold text-white">What You Pay For in 20L</h3>
+            <p class="text-[13px] text-textSecondary">May 2025 Official Annex Breakdown</p>
+          </div>
+          <div class="relative flex items-center justify-center my-4">
+            <svg viewBox="0 0 220 220" class="w-52 h-52 -rotate-90">
+              <circle cx="110" cy="110" r="86" fill="none" stroke="#1E294A" stroke-width="10"/>
+              <circle cx="110" cy="110" r="68" fill="none" stroke="#1E294A" stroke-width="10"/>
+              <circle cx="110" cy="110" r="50" fill="none" stroke="#1E294A" stroke-width="10"/>
+              <circle cx="110" cy="110" r="86" fill="none" stroke="#8B5CF6" stroke-width="10" stroke-linecap="round" stroke-dasharray="427 540" class="glow-magenta"/>
+              <circle cx="110" cy="110" r="68" fill="none" stroke="#0EA5E9" stroke-width="10" stroke-linecap="round" stroke-dasharray="260 427"/>
+              <circle cx="110" cy="110" r="50" fill="none" stroke="#38BDF8" stroke-width="10" stroke-linecap="round" stroke-dasharray="185 314" class="glow-cyan"/>
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+              <span class="text-2xl font-extrabold text-white tabular-nums">2.45M</span>
+              <span class="text-xs text-textSecondary">LBP / 20 Liters</span>
+            </div>
+          </div>
+          <div class="space-y-3 pt-2 border-t border-borderHairline text-[13px]">
+            <div class="flex items-center justify-between">
+              <span class="text-textSecondary">Imported Fuel Cargo (CIF)</span>
+              <span class="font-bold text-white tabular-nums">79.2% (~$21.63)</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-textSecondary">11% VAT &amp; Customs Duties</span>
+              <span class="font-bold text-white tabular-nums">11.3% (~$3.09)</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-textSecondary">Station Margin &amp; Trucking</span>
+              <span class="font-bold text-white tabular-nums">9.5% (~$2.60)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-card lg:col-span-8 p-6 flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-bold text-white mb-3">All Forecasting Models Ranked (Stabilized FX)</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse text-[13px] tabular-nums">
+                <thead>
+                  <tr class="border-b border-borderHairline text-textSubtle uppercase text-xs">
+                    <th class="py-2.5 pr-3">Model Family</th>
+                    <th class="py-2.5 px-3 text-right">Dev MAE (n=69)</th>
+                    <th class="py-2.5 px-3 text-right">2026 Holdout (n=4)</th>
+                    <th class="py-2.5 pl-3 text-right">Direction Hit Rate</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-borderHairline/60">
+                  <tr>
+                    <td class="py-2.5 pr-3 font-semibold text-white">E_lightgbm</td>
+                    <td class="py-2.5 px-3 text-right font-bold text-emeraldText">8,801 LBP</td>
+                    <td class="py-2.5 px-3 text-right text-white">23,085 LBP</td>
+                    <td class="py-2.5 pl-3 text-right text-white">47.8% (100% holdout)</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-3 font-semibold text-white">B_structural_proxy</td>
+                    <td class="py-2.5 px-3 text-right font-bold text-neonCyan">9,485 LBP</td>
+                    <td class="py-2.5 px-3 text-right text-white">19,727 LBP</td>
+                    <td class="py-2.5 pl-3 text-right text-white">53.6% (100% holdout)</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-3 font-semibold text-white">Z_last_change</td>
+                    <td class="py-2.5 px-3 text-right text-white">9,772 LBP</td>
+                    <td class="py-2.5 px-3 text-right text-white">15,500 LBP (n=2)</td>
+                    <td class="py-2.5 pl-3 text-right font-bold text-emeraldText">63.2%</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-3 font-semibold text-neonMagenta">G_hybrid (Selected)</td>
+                    <td class="py-2.5 px-3 text-right text-white">10,659 LBP</td>
+                    <td class="py-2.5 px-3 text-right font-bold text-emeraldText">18,951 LBP (366 on n=2)</td>
+                    <td class="py-2.5 pl-3 text-right text-white">47.8% (100% holdout)</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-3 font-semibold text-white">A_no_change</td>
+                    <td class="py-2.5 px-3 text-right text-textSecondary">10,638 LBP</td>
+                    <td class="py-2.5 px-3 text-right text-roseText">34,250 LBP</td>
+                    <td class="py-2.5 pl-3 text-right text-textSecondary">30.4%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- VIEW 3: INTERACTIVE WHAT-IF TANK CALCULATOR -->
+    <div id="view-simulator" class="hidden space-y-6">
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <div class="dash-card lg:col-span-7 p-6 space-y-5">
+          <div>
+            <h3 class="text-lg font-bold text-white">Interactive 20-Liter Pump Price Calculator</h3>
+            <p class="text-[13px] text-textSecondary mt-0.5">Move the sliders to see how global oil prices, exchange rates, and taxes change what you pay at the station.</p>
+          </div>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between text-[13px] mb-1.5">
+                <label for="simOil" class="text-textSecondary font-medium">Global Refined Gasoline Benchmark (USD / bbl)</label>
+                <span id="simOilVal" class="font-bold text-neonCyan tabular-nums">$114.58 / bbl</span>
+              </div>
+              <input id="simOil" type="range" min="70" max="160" step="0.5" value="114.58" oninput="runSimulator()" class="w-full h-11 accent-neonMagenta cursor-pointer"/>
+            </div>
+            <div>
+              <div class="flex justify-between text-[13px] mb-1.5">
+                <label for="simFx" class="text-textSecondary font-medium">USD / LBP Exchange Rate</label>
+                <span id="simFxVal" class="font-bold text-neonMagenta tabular-nums">89,500 LBP / $1</span>
+              </div>
+              <input id="simFx" type="range" min="89500" max="110000" step="250" value="89500" oninput="runSimulator()" class="w-full h-11 accent-neonMagenta cursor-pointer"/>
+            </div>
+            <div>
+              <div class="flex justify-between text-[13px] mb-1.5">
+                <label for="simTax" class="text-textSecondary font-medium">Domestic Taxes, Trucking &amp; Station Margin (LBP / 20L)</label>
+                <span id="simTaxVal" class="font-bold text-white tabular-nums">510,000 LBP</span>
+              </div>
+              <input id="simTax" type="range" min="250000" max="800000" step="10000" value="510000" oninput="runSimulator()" class="w-full h-11 accent-neonCyan cursor-pointer"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-card lg:col-span-5 p-6 flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-wider text-neonMagenta">Simulated 20-Liter Tank Cost</span>
+            <div id="simTotalLbp" class="text-3xl sm:text-4xl font-extrabold text-white tabular-nums mt-2">2,445,000 LBP</div>
+            <div id="simTotalUsd" class="text-sm text-neonCyan font-semibold tabular-nums mt-1">~$27.32 USD per 20L &middot; 122,250 LBP / liter</div>
+            <div class="mt-6 space-y-2.5 pt-4 border-t border-borderHairline text-[13px] tabular-nums">
+              <div class="flex justify-between">
+                <span class="text-textSecondary">Imported Gasoline + Freight (CIF):</span>
+                <strong id="simCifPart" class="text-white">1,935,000 LBP</strong>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-textSecondary">Domestic Wedge (Taxes, VAT, Margin):</span>
+                <strong id="simWedgePart" class="text-white">510,000 LBP</strong>
+              </div>
+              <div class="flex justify-between pt-2 border-t border-borderHairline/60">
+                <span class="text-textSecondary">Difference vs. Nov 10 Official:</span>
+                <strong id="simDiffPart" class="text-emeraldText">0 LBP (Matches current)</strong>
+              </div>
+            </div>
+          </div>
+          <button onclick="resetSimulator()" class="touch-target btn-secondary-dark w-full py-3 rounded-lg text-[13px] font-semibold mt-4">
+            Reset to Current Lebanon Baseline
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <!-- VIEW 4: OFFICIAL MINISTRY ARCHIVE -->
+    <div id="view-ledger" class="hidden space-y-6">
+      <div class="dash-card p-6">
+        <h3 class="text-lg font-bold text-white mb-2">Recent Lebanon 95-Octane Price Decisions</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-[13px] tabular-nums">
+            <thead>
+              <tr class="border-b border-borderHairline text-textSubtle uppercase text-xs">
+                <th class="py-2.5 pr-3">Date</th>
+                <th class="py-2.5 px-3">20L Price (LBP)</th>
+                <th class="py-2.5 px-3">USD Equiv</th>
+                <th class="py-2.5 pl-3">Verification Tier</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-borderHairline/60">
+              <tr>
+                <td class="py-2.5 pr-3 font-semibold text-white">2026-11-13</td>
+                <td class="py-2.5 px-3 font-bold text-neonCyan">2,391,000 LBP</td>
+                <td class="py-2.5 px-3 text-textSecondary">$26.72</td>
+                <td class="py-2.5 pl-3"><span class="badge-up">Supplier Observed (IPT)</span></td>
+              </tr>
+              <tr>
+                <td class="py-2.5 pr-3 font-semibold text-white">2026-11-10</td>
+                <td class="py-2.5 px-3 font-bold text-white">2,445,000 LBP</td>
+                <td class="py-2.5 px-3 text-textSecondary">$27.32</td>
+                <td class="py-2.5 pl-3"><span class="badge-up">Archive Corroborated</span></td>
+              </tr>
+              <tr>
+                <td class="py-2.5 pr-3 font-semibold text-white">2026-11-06</td>
+                <td class="py-2.5 px-3 font-bold text-white">2,492,000 LBP</td>
+                <td class="py-2.5 px-3 text-textSecondary">$27.84</td>
+                <td class="py-2.5 pl-3"><span class="badge-up">Archive Corroborated</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- STICKY BOTTOM THUMB NAVIGATION BAR FOR MOBILE (<1024px) -->
+  <nav aria-label="Mobile Primary Navigation" class="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-[#0B1739]/95 backdrop-blur-md border-t border-borderHairline px-3 pt-2 pb-safe">
+    <div class="grid grid-cols-4 gap-2 max-w-md mx-auto">
+      <button onclick="switchPage('overview')" id="mnav-overview" class="touch-target flex flex-col items-center justify-center rounded-xl py-1.5 text-neonCyan bg-activeNav font-semibold text-xs">
+        <span>Overview</span>
+      </button>
+      <button onclick="switchPage('analytics')" id="mnav-analytics" class="touch-target flex flex-col items-center justify-center rounded-xl py-1.5 text-textSecondary font-medium text-xs">
+        <span>Analytics</span>
+      </button>
+      <button onclick="switchPage('simulator')" id="mnav-simulator" class="touch-target flex flex-col items-center justify-center rounded-xl py-1.5 text-textSecondary font-medium text-xs">
+        <span>Simulator</span>
+      </button>
+      <button onclick="switchPage('ledger')" id="mnav-ledger" class="touch-target flex flex-col items-center justify-center rounded-xl py-1.5 text-textSecondary font-medium text-xs">
+        <span>Archive</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PLAIN-ENGLISH MODAL -->
+  <div id="explainerModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="dash-card max-w-lg w-full p-6 space-y-4 border border-borderActive">
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-bold text-white">Plain-English Guide to Lebanon Fuel Prices</h3>
+        <button onclick="closeExplainerModal()" class="touch-target text-textSecondary hover:text-white text-lg font-bold">&times;</button>
+      </div>
+      <div class="space-y-3 text-[13px] text-textSecondary leading-relaxed">
+        <p><strong class="text-white">1. What does "2,445,000 LBP / 20L" mean?</strong><br/>In Lebanon, gasoline is priced per 20-liter tank ("tanakeh"). At 89,500 LBP per US dollar, 2,445,000 LBP equals <strong>$27.32 USD per 20 liters</strong> (122,250 LBP/L).</p>
+        <p><strong class="text-white">2. How accurate is the prediction model?</strong><br/>Across 69 historical decisions in the stabilized exchange-rate era, our top model (<code class="text-neonMagenta">E_lightgbm</code>) missed the actual 20-liter price by an average of just <strong>8,801 LBP (~$0.10 USD per tank)</strong>.</p>
+      </div>
+      <div class="pt-2 flex justify-end">
+        <button onclick="closeExplainerModal()" class="touch-target btn-primary-neon px-5 py-2.5 rounded-lg text-[13px] font-semibold text-white">Got it</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const DATA_SERIES = {
+      'All': [
+        { label: 'Jan', date: 'Jan 2, 2026 · Ministry', pump: 1359000, landed: 1390000, change: '-1.2%' },
+        { label: 'Feb', date: 'Feb 14, 2026 · IPT Archive', pump: 1580000, landed: 1640000, change: '+16.2%' },
+        { label: 'Mar', date: 'Mar 20, 2026 · IPT Archive', pump: 1890000, landed: 1810000, change: '+19.6%' },
+        { label: 'Apr', date: 'Apr 18, 2026 · IPT Archive', pump: 2150000, landed: 2220000, change: '+13.8%' },
+        { label: 'May', date: 'May 26, 2026 · Decision #129', pump: 2582000, landed: 2490000, change: '+20.1%' },
+        { label: 'Jul', date: 'Jul 28, 2026 · Decision #186', pump: 2402000, landed: 2360000, change: '-7.0%' },
+        { label: 'Aug 3', date: 'Aug 3, 2026 · Decision #190', pump: 2468000, landed: 2440000, change: '+2.7%' },
+        { label: 'Aug 7', date: 'Aug 7, 2026 · Decision #193', pump: 2461000, landed: 2435000, change: '-0.3%' },
+        { label: 'Aug 11', date: 'Aug 11, 2026 · Decision #195', pump: 2455000, landed: 2510000, change: '-0.2%' },
+        { label: 'Oct 2', date: 'Oct 2, 2026 · Decision #221', pump: 2837000, landed: 2760000, change: '+15.6%' },
+        { label: 'Nov 6', date: 'Nov 6, 2026 · Corroborated', pump: 2492000, landed: 2450000, change: '-3.0%' },
+        { label: 'Nov 10', date: 'Nov 10, 2026 · Corroborated', pump: 2445000, landed: 2398000, change: '-1.9%' }
+      ],
+      '1M': [
+        { label: 'Oct 2', date: 'Oct 2, 2026 · Decision #221', pump: 2837000, landed: 2760000, change: '+15.6%' },
+        { label: 'Oct 30', date: 'Oct 30, 2026 · Supplier', pump: 2611000, landed: 2580000, change: '-8.0%' },
+        { label: 'Nov 3', date: 'Nov 3, 2026 · Corroborated', pump: 2569000, landed: 2520000, change: '-1.6%' },
+        { label: 'Nov 6', date: 'Nov 6, 2026 · Corroborated', pump: 2492000, landed: 2450000, change: '-3.0%' },
+        { label: 'Nov 10', date: 'Nov 10, 2026 · Corroborated', pump: 2445000, landed: 2398000, change: '-1.9%' },
+        { label: 'Nov 13*', date: 'Nov 13, 2026 · Station Quote', pump: 2391000, landed: 2375000, change: '-2.2%' }
+      ],
+      '1W': [
+        { label: 'Nov 3', date: 'Nov 3, 2026 · Corroborated', pump: 2569000, landed: 2520000, change: '-1.6%' },
+        { label: 'Nov 6', date: 'Nov 6, 2026 · Corroborated', pump: 2492000, landed: 2450000, change: '-3.0%' },
+        { label: 'Nov 10', date: 'Nov 10, 2026 · Corroborated', pump: 2445000, landed: 2398000, change: '-1.9%' },
+        { label: 'Nov 13*', date: 'Nov 13, 2026 · Station Quote', pump: 2391000, landed: 2375000, change: '-2.2%' }
+      ],
+      '1D': [
+        { label: 'Nov 10', date: 'Nov 10, 2026 · Corroborated', pump: 2445000, landed: 2398000, change: '-1.9%' },
+        { label: 'Nov 13*', date: 'Nov 13, 2026 · Station Quote', pump: 2391000, landed: 2375000, change: '-2.2%' }
+      ]
+    };
+
+    let currentPoints = [];
+    let zoomScale = 1.0;
+    let panX = 0;
+    let initialPinchDist = null;
+    let initialZoomScale = 1.0;
+    let touchStartX = null;
+    let initialPanX = 0;
+
+    function priceToY(val) {
+      const minP = 1300000;
+      const maxP = 2950000;
+      const topY = 24;
+      const bottomY = 254;
+      return bottomY - ((val - minP) / (maxP - minP)) * (bottomY - topY);
+    }
+
+    function catmullRom2bezier(points) {
+      if (points.length === 0) return '';
+      let d = `M ${points[0].x},${points[0].y}`;
+      for (let i = 0; i < points.length - 1; i++) {
+        const p0 = i === 0 ? points[0] : points[i - 1];
+        const p1 = points[i];
+        const p2 = points[i + 1];
+        const p3 = i + 2 < points.length ? points[i + 2] : p2;
+        const cp1x = p1.x + (p2.x - p0.x) / 6;
+        const cp1y = p1.y + (p2.y - p0.y) / 6;
+        const cp2x = p2.x - (p3.x - p1.x) / 6;
+        const cp2y = p2.y - (p3.y - p1.y) / 6;
+        d += ` C ${cp1x.toFixed(1)},${cp1y.toFixed(1)} ${cp2x.toFixed(1)},${cp2y.toFixed(1)} ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`;
+      }
+      return d;
+    }
+
+    function setQuickRange(rangeKey, btnEl) {
+      document.querySelectorAll('.range-pill').forEach(b => b.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
+      resetChartZoom();
+      updateHeroChart(rangeKey);
+    }
+
+    function updateHeroChart(key) {
+      const series = DATA_SERIES[key] || DATA_SERIES['All'];
+      const startX = 60;
+      const endX = 738;
+      const stepX = (endX - startX) / Math.max(series.length - 1, 1);
+
+      const magentaPts = series.map((d, i) => ({
+        x: startX + i * stepX,
+        y: priceToY(d.pump),
+        CyanY: priceToY(d.landed),
+        raw: d
+      }));
+      const cyanPts = series.map((d, i) => ({
+        x: startX + i * stepX,
+        y: priceToY(d.landed)
+      }));
+
+      currentPoints = magentaPts;
+
+      const lineM = catmullRom2bezier(magentaPts);
+      const lineC = catmullRom2bezier(cyanPts);
+      const areaM = `${lineM} L ${endX},254 L ${startX},254 Z`;
+      const areaC = `${lineC} L ${endX},254 L ${startX},254 Z`;
+
+      document.getElementById('lineMagenta').setAttribute('d', lineM);
+      document.getElementById('areaMagenta').setAttribute('d', areaM);
+      document.getElementById('lineCyan').setAttribute('d', lineC);
+      document.getElementById('areaCyan').setAttribute('d', areaC);
+
+      const xGroup = document.getElementById('xAxisLabels');
+      xGroup.innerHTML = series.map((d, i) =>
+        `<text x="${(startX + i * stepX).toFixed(1)}" y="282" text-anchor="middle">${d.label}</text>`
+      ).join('');
+
+      const hitLayer = document.getElementById('chartHitLayer');
+      hitLayer.innerHTML = magentaPts.map((pt, i) =>
+        `<rect x="${(pt.x - stepX / 2).toFixed(1)}" y="15" width="${stepX.toFixed(1)}" height="245" fill="transparent" class="cursor-pointer" onmouseenter="selectPoint(${i})" onclick="selectPoint(${i})"/>`
+      ).join('');
+
+      selectPoint(series.length - 1);
+    }
+
+    function selectPoint(idx) {
+      const pt = currentPoints[idx];
+      if (!pt) return;
+      document.getElementById('hoverLine').setAttribute('x1', pt.x);
+      document.getElementById('hoverLine').setAttribute('x2', pt.x);
+      document.getElementById('activeNodeMagenta').setAttribute('cx', pt.x);
+      document.getElementById('activeNodeMagenta').setAttribute('cy', pt.y);
+      document.getElementById('activeNodeCyan').setAttribute('cx', pt.x);
+      document.getElementById('activeNodeCyan').setAttribute('cy', pt.CyanY);
+
+      document.getElementById('ttPrice').textContent = pt.raw.pump.toLocaleString() + ' LBP';
+      document.getElementById('ttLanded').textContent = 'Landed: ' + pt.raw.landed.toLocaleString() + ' LBP';
+      document.getElementById('ttBadge').textContent = pt.raw.change;
+      document.getElementById('ttDate').textContent = pt.raw.date;
+    }
+
+    function applyZoomTransform() {
+      const vp = document.getElementById('zoomViewport');
+      vp.setAttribute('transform', `translate(${panX.toFixed(1)}, 0) scale(${zoomScale.toFixed(2)}, 1)`);
+      const resetBtn = document.getElementById('resetZoomBtn');
+      if (zoomScale > 1.02 || Math.abs(panX) > 4) {
+        resetBtn.classList.remove('hidden');
+        resetBtn.textContent = `Reset Zoom (${zoomScale.toFixed(1)}x)`;
+      } else {
+        resetBtn.classList.add('hidden');
+      }
+    }
+
+    function resetChartZoom() {
+      zoomScale = 1.0;
+      panX = 0;
+      applyZoomTransform();
+    }
+
+    // Multi-touch Pinch-to-Zoom (d = sqrt(dx^2 + dy^2)) & 1-Finger Scrub/Pan Engine
+    const chartEl = document.getElementById('chartContainer');
+    chartEl.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 2) {
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        initialPinchDist = Math.sqrt(dx * dx + dy * dy);
+        initialZoomScale = zoomScale;
+      } else if (e.touches.length === 1) {
+        touchStartX = e.touches[0].clientX;
+        initialPanX = panX;
+      }
+    }, { passive: true });
+
+    chartEl.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 2 && initialPinchDist) {
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        zoomScale = Math.min(Math.max(initialZoomScale * (dist / initialPinchDist), 1.0), 3.5);
+        panX = Math.min(Math.max(panX, -760 * (zoomScale - 1)), 0);
+        applyZoomTransform();
+      } else if (e.touches.length === 1 && currentPoints.length > 0) {
+        const rect = chartEl.getBoundingClientRect();
+        const relX = ((e.touches[0].clientX - rect.left) / rect.width) * 760;
+        if (zoomScale > 1.05 && touchStartX !== null) {
+          const deltaX = e.touches[0].clientX - touchStartX;
+          panX = Math.min(Math.max(initialPanX + deltaX, -760 * (zoomScale - 1)), 0);
+          applyZoomTransform();
+        }
+        // Nearest-point scrubbing into fixed top header bar
+        let bestIdx = 0;
+        let bestDist = Infinity;
+        currentPoints.forEach((pt, idx) => {
+          const transformedX = pt.x * zoomScale + panX;
+          const d = Math.abs(transformedX - relX);
+          if (d < bestDist) {
+            bestDist = d;
+            bestIdx = idx;
+          }
+        });
+        selectPoint(bestIdx);
+      }
+    }, { passive: true });
+
+    chartEl.addEventListener('touchend', () => {
+      initialPinchDist = null;
+      touchStartX = null;
+    }, { passive: true });
+
+    function switchPage(page) {
+      ['overview', 'analytics', 'simulator', 'ledger'].forEach(id => {
+        document.getElementById('view-' + id).classList.toggle('hidden', id !== page);
+        const navBtn = document.getElementById('nav-' + id);
+        if (navBtn) {
+          navBtn.classList.toggle('active', id === page);
+          navBtn.classList.toggle('text-white', id === page);
+          navBtn.classList.toggle('text-textSecondary', id !== page);
+        }
+        const mBtn = document.getElementById('mnav-' + id);
+        if (mBtn) {
+          mBtn.classList.toggle('text-neonCyan', id === page);
+          mBtn.classList.toggle('bg-activeNav', id === page);
+          mBtn.classList.toggle('text-textSecondary', id !== page);
+        }
+      });
+    }
+
+    function runSimulator() {
+      const oil = parseFloat(document.getElementById('simOil').value);
+      const fx = parseFloat(document.getElementById('simFx').value);
+      const tax = parseFloat(document.getElementById('simTax').value);
+
+      document.getElementById('simOilVal').textContent = `$${oil.toFixed(2)} / bbl`;
+      document.getElementById('simFxVal').textContent = `${fx.toLocaleString()} LBP / $1`;
+      document.getElementById('simTaxVal').textContent = `${tax.toLocaleString()} LBP`;
+
+      const cifLbp = Math.round((oil / 114.58) * (fx / 89500) * 1935000 / 1000) * 1000;
+      const totalLbp = cifLbp + tax;
+      const usdEquiv = totalLbp / fx;
+      const perLiter = Math.round(totalLbp / 20);
+      const diff = totalLbp - 2445000;
+
+      document.getElementById('simTotalLbp').textContent = `${totalLbp.toLocaleString()} LBP`;
+      document.getElementById('simTotalUsd').textContent = `~$${usdEquiv.toFixed(2)} USD per 20L · ${perLiter.toLocaleString()} LBP / liter`;
+      document.getElementById('simCifPart').textContent = `${cifLbp.toLocaleString()} LBP`;
+      document.getElementById('simWedgePart').textContent = `${tax.toLocaleString()} LBP`;
+
+      const diffEl = document.getElementById('simDiffPart');
+      if (diff === 0) {
+        diffEl.textContent = '0 LBP (Matches Nov 10 official)';
+        diffEl.className = 'text-emeraldText';
+      } else if (diff > 0) {
+        diffEl.textContent = `+${diff.toLocaleString()} LBP higher than Nov 10`;
+        diffEl.className = 'text-roseText';
+      } else {
+        diffEl.textContent = `${diff.toLocaleString()} LBP cheaper than Nov 10`;
+        diffEl.className = 'text-emeraldText';
+      }
+    }
+
+    function resetSimulator() {
+      document.getElementById('simOil').value = 114.58;
+      document.getElementById('simFx').value = 89500;
+      document.getElementById('simTax').value = 510000;
+      runSimulator();
+    }
+
+    function openExplainerModal() {
+      const m = document.getElementById('explainerModal');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+    function closeExplainerModal() {
+      const m = document.getElementById('explainerModal');
+      m.classList.add('hidden');
+      m.classList.remove('flex');
+    }
+
+    function exportCSV() {
+      const rows = [
+        ['Date', 'Price_LBP_20L', 'USD_Equiv_89500', 'Status'],
+        ['2026-11-13', '2391000', '26.72', 'supplier_observed'],
+        ['2026-11-10', '2445000', '27.32', 'archive_corroborated'],
+        ['2026-11-06', '2492000', '27.84', 'archive_corroborated'],
+        ['2026-11-03', '2569000', '28.70', 'archive_corroborated'],
+        ['2026-10-02', '2837000', '31.70', 'archive_corroborated']
+      ];
+      const csvContent = 'data:text/csv;charset=utf-8,' + rows.map(e => e.join(',')).join('\n');
+      const link = document.createElement('a');
+      link.setAttribute('href', encodeURI(csvContent));
+      link.setAttribute('download', 'lebanon_gasoline_95_summary.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    updateHeroChart('All');
+  </script>
+</body>
+</html>

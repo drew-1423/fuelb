@@ -1,0 +1,17 @@
+horizon,selected,baseline,n,selected_mae,baseline_mae,difference
+decision_1,G_hybrid,A_no_change,2,366.16826975414097,26500.0,-26133.83173024586
+decision_1,G_hybrid,Z_last_change,2,366.16826975414097,15500.0,-15133.83173024586
+decision_2,C_ridge,A_no_change,2,41005.900899561515,68500.0,-27494.099100438485
+decision_2,C_ridge,Z_last_change,2,41005.900899561515,,
+decision_4,E_lightgbm,A_no_change,0,,,
+decision_4,E_lightgbm,Z_last_change,0,,,
+day_1,F_catboost,A_no_change,6,196.00740543477818,0.0,196.00740543477818
+day_1,F_catboost,Z_last_change,6,196.00740543477818,13708.333333333334,-13512.325927898555
+day_3,E_lightgbm,A_no_change,2,7465.391288596231,0.0,7465.391288596231
+day_3,E_lightgbm,Z_last_change,2,7465.391288596231,41125.0,-33659.608711403765
+day_7,G_hybrid,A_no_change,1,1354.2343498426526,7000.0,-5645.765650157347
+day_7,G_hybrid,Z_last_change,1,1354.2343498426526,,
+day_14,F_catboost,A_no_change,0,,,
+day_14,F_catboost,Z_last_change,0,,,
+day_30,H_ensemble,A_no_change,0,,,
+day_30,H_ensemble,Z_last_change,0,,,

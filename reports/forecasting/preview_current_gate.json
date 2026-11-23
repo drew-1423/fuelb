@@ -1,0 +1,86 @@
+{
+  "checked_at": "2026-11-11T10:32:57.186779+00:00",
+  "production_approved": false,
+  "horizons": {
+    "decision_1": {
+      "status": "abstain",
+      "predicted_change_lbp_20l": null,
+      "reasons": [
+        "Current fiscal/regulatory regime is outside both saved development strata",
+        "Latest supplier quote is not a verified effective official anchor",
+        "Current dated official formula and Mediterranean benchmark path are incomplete",
+        "No real-time historical validation or Part 6 independent approval"
+      ]
+    },
+    "decision_2": {
+      "status": "abstain",
+      "predicted_change_lbp_20l": null,
+      "reasons": [
+        "Current fiscal/regulatory regime is outside both saved development strata",
+        "Latest supplier quote is not a verified effective official anchor",
+        "Current dated official formula and Mediterranean benchmark path are incomplete",
+        "No real-time historical validation or Part 6 independent approval"
+      ]
+    },
+    "decision_4": {
+      "status": "abstain",
+      "predicted_change_lbp_20l": null,
+      "reasons": [
+        "Current fiscal/regulatory regime is outside both saved development strata",
+        "Latest supplier quote is not a verified effective official anchor",
+        "Current dated official formula and Mediterranean benchmark path are incomplete",
+        "No real-time historical validation or Part 6 independent approval"
+      ]
+    },
+    "day_1": {
+      "status": "abstain",
+      "predicted_change_lbp_20l": null,
+      "reasons": [
+        "Current fiscal/regulatory regime is outside both saved development strata",
+        "Latest supplier quote is not a verified effective official anchor",
+        "Current dated official formula and Mediterranean benchmark path are incomplete",
+        "No real-time historical validation or Part 6 independent approval"
+      ]
+    },
+    "day_3": {
+      "status": "abstain",
+      "predicted_change_lbp_20l": null,
+      "reasons": [
+        "Current fiscal/regulatory regime is outside both saved development strata",
+        "Latest supplier quote is not a verified effective official anchor",
+        "Current dated official formula and Mediterranean benchmark path are incomplete",
+        "No real-time historical validation or Part 6 independent approval"
+      ]
+    },
+    "day_7": {
+      "status": "abstain",
+      "predicted_change_lbp_20l": null,
+      "reasons": [
+        "Current fiscal/regulatory regime is outside both saved development strata",
+        "Latest supplier quote is not a verified effective official anchor",
+        "Current dated official formula and Mediterranean benchmark path are incomplete",
+        "No real-time historical validation or Part 6 independent approval"
+      ]
+    },
+    "day_14": {
+      "status": "abstain",
+      "predicted_change_lbp_20l": null,
+      "reasons": [
+        "Current fiscal/regulatory regime is outside both saved development strata",
+        "Latest supplier quote is not a verified effective official anchor",
+        "Current dated official formula and Mediterranean benchmark path are incomplete",
+        "No real-time historical validation or Part 6 independent approval"
+      ]
+    },
+    "day_30": {
+      "status": "abstain",
+      "predicted_change_lbp_20l": null,
+      "reasons": [
+        "Current fiscal/regulatory regime is outside both saved development strata",
+        "Latest supplier quote is not a verified effective official anchor",
+        "Current dated official formula and Mediterranean benchmark path are incomplete",
+        "No real-time historical validation or Part 6 independent approval"
+      ]
+    }
+  }
+}

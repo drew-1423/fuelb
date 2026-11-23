@@ -1,0 +1,38 @@
+[
+  {
+    "regime": "pre_crisis",
+    "train_n": 185,
+    "train_start": "2012-01-02",
+    "train_end": "2016-12-28",
+    "cusum_stat": 0.9384647375404885,
+    "cusum_p": 0.34185531679267084,
+    "cusum_status": "Diagnostic, not a dated policy break or forecast feature",
+    "asymmetry_slope_positive": 23.437989246400825,
+    "asymmetry_slope_negative": 54.16765173583502,
+    "asymmetry_difference_p": 0.18944469689122279,
+    "asymmetry_status": "Training only, HC1; small samples, serial dependence and proxy basis prevent causal interpretation",
+    "ecm": {
+      "eligible": false,
+      "reason": "Requires >=60 consecutive weekly actual observations; irregular decisions cannot be silently regularized",
+      "n": 185
+    }
+  },
+  {
+    "regime": "recent_pre_fiscal",
+    "train_n": 65,
+    "train_start": "2023-05-16",
+    "train_end": "2023-12-29",
+    "cusum_stat": 1.887466818457038,
+    "cusum_p": 0.0016093662652992657,
+    "cusum_status": "Diagnostic, not a dated policy break or forecast feature",
+    "asymmetry_slope_positive": 1153.5939113268537,
+    "asymmetry_slope_negative": 894.45691590407,
+    "asymmetry_difference_p": 0.800941451519903,
+    "asymmetry_status": "Training only, HC1; small samples, serial dependence and proxy basis prevent causal interpretation",
+    "ecm": {
+      "eligible": false,
+      "reason": "Requires >=60 consecutive weekly actual observations; irregular decisions cannot be silently regularized",
+      "n": 65
+    }
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "created_at": "2026-11-11T21:55:42.883783+00:00",
+  "directory": "/Users/andrew/MyApp_macOS/data/backups/20261111T215537776282Z",
+  "files": {
+    "lebanon_fuel.sqlite": "b41c83cf84f7ffb1242975a417431e1ab36eaf8fda7e3baeb4aafad6c663fc22",
+    "forecast_ledger.sqlite": "f59c07a02e93ab687f253992cb59519e7864702f53534b63c9f71d8df3116375",
+    "operations.sqlite": "c7765f38392e59aba4f87a91b1da09f79d73df502b2de6eb8d35764f35d39ae0",
+    "artifacts.tar.gz": "1e3344713a81940fb2e7b419646d5fd5e3eaa173b694a726488711d58078393d"
+  },
+  "note": "SQLite online backups under the shared refresh lock. Retain this entire directory and copy off-device."
+}

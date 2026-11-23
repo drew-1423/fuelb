@@ -1,0 +1,20 @@
+{
+  "code_base_commit": "b62c20fd901e350400553f7eb07e87ac702f9b3d",
+  "local_data_base_commit": "6dce6c920e1114417a5b11bee929ea1313102a13",
+  "scope": "Phase 1 deterministic fixes; no retraining, model changes, schema changes or production data writes",
+  "test_summary": "256 passed, zero warnings",
+  "verification_exit_code": 1,
+  "verification_checks": {
+    "pytest": 0,
+    "structural_artifact_audit": 0,
+    "forecasting_artifact_audit": 0,
+    "validation_artifact_audit": 0,
+    "operations_integrity": 1,
+    "dependency_compatibility": 0
+  },
+  "remaining_blocker": "Original raw capture files referenced by the database are missing from the repository/local history. Full operations integrity remains failed. The refresh workflow commits databases and reports but does not commit data/raw; restoring exact recorded-hash bytes is required.",
+  "model_checks": "Saved LightGBM, Hybrid and ensemble bundles generated finite endpoints from the same strictly captured live inputs. Production remains pinned to G_hybrid for all eight horizons.",
+  "domestic_change_lag1_lbp": -48000.0,
+  "next_hybrid_price_lbp_20l": 2311125.918366177,
+  "manifest_policy": "Current release SHA-256 checksums updated; original training_code_hashes and evaluation_source_sha256 retained. No new training or holdout result claimed."
+}

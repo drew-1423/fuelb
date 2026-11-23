@@ -1,0 +1,9 @@
+horizon,selected,tier,n,mae_lbp,rmse_lbp,direction_accuracy,brier,probability_n,coverage_90,interval_n,coverage_80_p10_p90,interval_80_n,calibration_n,selection_basis
+decision_1,G_hybrid,2,2,366.16826975414097,369.3414638815938,1.0,0.06295556617616575,2,1.0,2,1.0,2,60,holdout_common_origins
+decision_2,C_ridge,2,2,41005.900899561515,41864.87715677099,1.0,2.1965343391842722e-06,2,0.5,2,0.5,2,51,holdout_common_origins
+decision_4,E_lightgbm,2,0,,,,,0,,0,,0,22,development_only_no_holdout_targets
+day_1,F_catboost,2,6,196.00740543477818,205.96090318075883,1.0,0.03949957905544745,6,1.0,6,1.0,6,60,holdout_common_origins
+day_3,E_lightgbm,2,2,7465.391288596231,8037.190211364775,0.0,1.0419261549789922,2,1.0,2,1.0,2,60,holdout_common_origins
+day_7,G_hybrid,2,1,1354.2343498426526,1354.2343498426526,1.0,0.15437691080841437,1,1.0,1,1.0,1,60,holdout_common_origins
+day_14,F_catboost,2,0,,,,,0,,0,,0,25,development_only_no_holdout_targets
+day_30,H_ensemble,2,0,,,,,0,,0,,0,6,development_only_no_holdout_targets

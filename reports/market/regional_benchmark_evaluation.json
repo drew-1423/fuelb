@@ -1,0 +1,79 @@
+{
+  "status": "evaluated",
+  "evaluation_period_start": "2023-05-12",
+  "evaluation_timestamp": "2026-11-18T19:44:23.712201+00:00",
+  "observations_matched": 344,
+  "benchmarks": {
+    "med_composite_usd_bbl": {
+      "sample_size": 344,
+      "level_pearson_correlation": 0.9659,
+      "level_r2": 0.9331,
+      "level_slope_lbp_per_usd_bbl": 20666.51,
+      "level_intercept_lbp": -1165615.36,
+      "diff_pearson_correlation": 0.2661,
+      "diff_r2": 0.0708,
+      "diff_pass_through_slope": 3216.69,
+      "tracking_error_lbp": 31228.14
+    },
+    "italy_ex_tax_usd_bbl": {
+      "sample_size": 344,
+      "level_pearson_correlation": 0.9591,
+      "level_r2": 0.9198,
+      "level_slope_lbp_per_usd_bbl": 19953.78,
+      "level_intercept_lbp": -1054505.29,
+      "diff_pearson_correlation": 0.1813,
+      "diff_r2": 0.0329,
+      "diff_pass_through_slope": 1738.86,
+      "tracking_error_lbp": 31859.07
+    },
+    "greece_ex_tax_usd_bbl": {
+      "sample_size": 344,
+      "level_pearson_correlation": 0.96,
+      "level_r2": 0.9215,
+      "level_slope_lbp_per_usd_bbl": 20850.24,
+      "level_intercept_lbp": -1202978.21,
+      "diff_pearson_correlation": 0.3158,
+      "diff_r2": 0.0997,
+      "diff_pass_through_slope": 3969.93,
+      "tracking_error_lbp": 30738.66
+    },
+    "brent_crude_usd_bbl": {
+      "sample_size": 344,
+      "level_pearson_correlation": 0.8452,
+      "level_r2": 0.7143,
+      "level_slope_lbp_per_usd_bbl": 22585.2,
+      "level_intercept_lbp": -116427.49,
+      "diff_pearson_correlation": 0.1621,
+      "diff_r2": 0.0263,
+      "diff_pass_through_slope": 1442.22,
+      "tracking_error_lbp": 31967.43
+    },
+    "nyh_gasoline_usd_bbl": {
+      "sample_size": 344,
+      "level_pearson_correlation": 0.8862,
+      "level_r2": 0.7854,
+      "level_slope_lbp_per_usd_bbl": 427.38,
+      "level_intercept_lbp": -121953.19,
+      "diff_pearson_correlation": 0.0651,
+      "diff_r2": 0.0042,
+      "diff_pass_through_slope": 12.39,
+      "tracking_error_lbp": 32327.42
+    }
+  },
+  "performance_ranking_by_diff_correlation": [
+    "greece_ex_tax_usd_bbl",
+    "med_composite_usd_bbl",
+    "italy_ex_tax_usd_bbl",
+    "brent_crude_usd_bbl",
+    "nyh_gasoline_usd_bbl"
+  ],
+  "mediterranean_crack_spread": {
+    "sample_size": 1091,
+    "mean_usd_bbl": 43.42,
+    "std_usd_bbl": 10.38,
+    "min_usd_bbl": 19.89,
+    "max_usd_bbl": 87.08,
+    "current_usd_bbl": 60.92
+  },
+  "methodological_notes": "EC Weekly Oil Bulletin provides European consumer prices excluding duties and taxes. Converted to USD/bbl via contemporaneous Federal Reserve H.10 EUR/USD exchange rate. Evaluated against official Lebanese Ministry of Energy and Water 95-octane gasoline price decrees. Mediterranean ex-tax gasoline proxy demonstrates higher empirical correlation and pass-through coherence to Lebanese decisions than transatlantic NY Harbor gasoline or Brent crude."
+}

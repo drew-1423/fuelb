@@ -1,0 +1,63 @@
+{
+  "as_of": "2026-11-23T18:45:46.868399+00:00",
+  "horizons": {
+    "decision_1": {
+      "status": "abstained",
+      "reasons": [
+        "The newest price needs independent corroboration or has conflicting values."
+      ]
+    },
+    "decision_2": {
+      "status": "abstained",
+      "reasons": [
+        "The newest price needs independent corroboration or has conflicting values."
+      ]
+    },
+    "decision_4": {
+      "status": "abstained",
+      "reasons": [
+        "The newest price needs independent corroboration or has conflicting values."
+      ]
+    },
+    "day_1": {
+      "status": "abstained",
+      "reasons": [
+        "The newest price needs independent corroboration or has conflicting values."
+      ]
+    },
+    "day_3": {
+      "status": "abstained",
+      "reasons": [
+        "The newest price needs independent corroboration or has conflicting values."
+      ]
+    },
+    "day_7": {
+      "status": "abstained",
+      "reasons": [
+        "The newest price needs independent corroboration or has conflicting values."
+      ]
+    },
+    "day_14": {
+      "status": "abstained",
+      "reasons": [
+        "The newest price needs independent corroboration or has conflicting values."
+      ]
+    },
+    "day_30": {
+      "status": "abstained",
+      "reasons": [
+        "The newest price needs independent corroboration or has conflicting values."
+      ]
+    }
+  },
+  "forecast_ids": [
+    45460,
+    45461,
+    45462,
+    45463,
+    45464,
+    45465,
+    45466,
+    45467
+  ]
+}

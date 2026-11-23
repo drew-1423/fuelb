@@ -1,0 +1,39 @@
+{
+  "at": "2026-11-10T19:42:05.850786+00:00",
+  "source": "market_fred",
+  "reason": "Current FRED software/AI use and storage restrictions; switched to original Federal Reserve source. Removal applies only to exploratory Part 3 artifacts created in this turn.",
+  "terms_url": "https://fred.stlouisfed.org/legal/",
+  "removed_market_observations": 7265,
+  "withdrawn_captures": [
+    {
+      "id": 79,
+      "url": "https://fred.stlouisfed.org/robots.txt",
+      "sha256": "ae2677d993247f34d0c1f1e974d3940c24cc4c14ec1544a28d334158c41d99ed"
+    },
+    {
+      "id": 80,
+      "url": "https://fred.stlouisfed.org/series/DEXUSEU",
+      "sha256": "1e4e98fa6b62f8729b95e30a31d10bf329519a4989b8c79bf27c3f70a6bc4cb0"
+    },
+    {
+      "id": 85,
+      "url": "https://fred.stlouisfed.org/robots.txt",
+      "sha256": "ae2677d993247f34d0c1f1e974d3940c24cc4c14ec1544a28d334158c41d99ed"
+    },
+    {
+      "id": 86,
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DEXUSEU",
+      "sha256": "2374b98f07cdfc5c0f3b5147325bfe5ddc15fc9d6cc5eb71b2c320d19c5438d3"
+    }
+  ],
+  "lebanon_table_counts_unchanged": [
+    3168,
+    3443,
+    3169
+  ],
+  "immutable_triggers_restored": [
+    "captures_no_delete",
+    "market_observations_no_delete",
+    "market_sightings_no_delete"
+  ]
+}

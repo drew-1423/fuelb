@@ -1,0 +1,53 @@
+{
+  "origin": "2026-11-11T10:54:15.070834+00:00",
+  "forecast_ids": [
+    44929,
+    44930,
+    44931,
+    44932,
+    44933,
+    44934,
+    44935,
+    44936
+  ],
+  "anchor": {
+    "price": 2445000,
+    "source_date": "2026-11-10",
+    "revision_id": 3440,
+    "official_verified": false,
+    "known_at": "2026-11-10T19:08:28.437598+00:00",
+    "effective_at": null
+  },
+  "available_market_inputs": {
+    "brent_spot": {
+      "id": 9122,
+      "capture_id": 113,
+      "value": 107.03,
+      "unit": "USD/bbl",
+      "observation_date": "2026-11-03",
+      "available_at": "2026-11-10T19:43:18.245860+00:00",
+      "source_url": "https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls",
+      "vintage_certified": true
+    },
+    "nyh_gasoline": {
+      "id": 25558,
+      "capture_id": 115,
+      "value": 114.57600000000001,
+      "unit": "USD/bbl",
+      "observation_date": "2026-11-03",
+      "available_at": "2026-11-10T19:43:25.895867+00:00",
+      "source_url": "https://www.eia.gov/dnav/pet/hist_xls/EER_EPMRU_PF4_Y35NY_DPGd.xls",
+      "vintage_certified": true
+    }
+  },
+  "status": "abstain",
+  "reasons": [
+    "model_not_approved",
+    "unsupported_regulatory_regime",
+    "unverified_official_anchor",
+    "anchor_effective_at_missing",
+    "decision_coverage_unverified"
+  ],
+  "intervals_allowed": false,
+  "probabilities_allowed": false
+}

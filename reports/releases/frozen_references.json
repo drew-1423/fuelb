@@ -1,0 +1,105 @@
+{
+  "frozen_manifests": {
+    "reports/forecasting/run_manifest.json": "7441ad319689b39f919fc1100539b80ea28ac3c256a869342ea70228ab5ce579",
+    "reports/model_validation/input_manifest.json": "cb40874d5369f1147f5aa6e3c2aaac34a655c89e5b0ea12b6a1e540a10074bdb"
+  },
+  "source_archives": {
+    "1f4921e4b1d57d3b4205427a3b140ca61f3e8f144c98cf87934c1d91524dc6bc": "research/evidence/frozen_sources/1f4921e4b1d57d3b4205427a3b140ca61f3e8f144c98cf87934c1d91524dc6bc.py",
+    "ff95325f21f909fc7c682d407b14a51f0e121cc5241a55cabd429f47b3e47439": "research/evidence/frozen_sources/ff95325f21f909fc7c682d407b14a51f0e121cc5241a55cabd429f47b3e47439.py",
+    "37695b1f9de4cb041d0593cbedf5cd1a8a985ce95df98a7e11625f98fdb3b986": "research/evidence/frozen_sources/37695b1f9de4cb041d0593cbedf5cd1a8a985ce95df98a7e11625f98fdb3b986.py",
+    "79d1f4983aa095bc85281506e8fe5fd0d348c9e5ebcc636cdf14e3990e4c575c": "research/evidence/frozen_sources/79d1f4983aa095bc85281506e8fe5fd0d348c9e5ebcc636cdf14e3990e4c575c.py",
+    "f67fad76dbd7312933c265bc4d040d89f3a0d12bf4928cc61892baa18558596f": "research/evidence/frozen_sources/f67fad76dbd7312933c265bc4d040d89f3a0d12bf4928cc61892baa18558596f.py",
+    "21de04a89974e3226a0ed691572a6018cc7f136727dc2dd07b642175b4c033e6": "research/evidence/frozen_sources/21de04a89974e3226a0ed691572a6018cc7f136727dc2dd07b642175b4c033e6.py",
+    "ea8734f0f543321c518524da6dc690a3b8b235e0352782fc73a0e5c00c7cff6f": "research/evidence/frozen_sources/ea8734f0f543321c518524da6dc690a3b8b235e0352782fc73a0e5c00c7cff6f.py",
+    "0275bd63d147d826cc595cc4b3f9dacea802ca421258ff9ebc9bb178a0728ba0": "research/evidence/frozen_sources/0275bd63d147d826cc595cc4b3f9dacea802ca421258ff9ebc9bb178a0728ba0.py",
+    "d55baaad8f1040e22ba2c140715b688947f2c17e2585001ba580f4226d7040ff": "research/evidence/frozen_sources/d55baaad8f1040e22ba2c140715b688947f2c17e2585001ba580f4226d7040ff.py",
+    "b83f8c1371701018402595ee1680f38299d3a7b77e684a37f34f453a56893dd5": "research/evidence/frozen_sources/b83f8c1371701018402595ee1680f38299d3a7b77e684a37f34f453a56893dd5.py",
+    "92a0fbde5adfaafed74da5d7d446b8bcd975d9a2fb861ca447bb22d640d23f14": "research/evidence/frozen_sources/92a0fbde5adfaafed74da5d7d446b8bcd975d9a2fb861ca447bb22d640d23f14.py",
+    "62eaeea1c2f6cb8ca0c8d2f97b45618da5ed613909950ae02264eb53bcfdba13": "research/evidence/frozen_sources/62eaeea1c2f6cb8ca0c8d2f97b45618da5ed613909950ae02264eb53bcfdba13.py",
+    "2c8d9f97992f469a34f9f0bf52fc4dc77fce899b8564009b8d868b853c4a3820": "research/evidence/frozen_sources/2c8d9f97992f469a34f9f0bf52fc4dc77fce899b8564009b8d868b853c4a3820.py",
+    "325a3df6f2d206bbb5d34d99f422ece3115718b645938c8b97bbac6b105fa8c1": "research/evidence/frozen_sources/325a3df6f2d206bbb5d34d99f422ece3115718b645938c8b97bbac6b105fa8c1.py",
+    "d4f34d03ebe0e11efde542e0e536e69eb30aad0d051fec97fef683f0740863f1": "research/evidence/frozen_sources/d4f34d03ebe0e11efde542e0e536e69eb30aad0d051fec97fef683f0740863f1.py",
+    "2f8f4a7cb081b192c3137c5c0657a110b06b1e36f3c13d71acbe929a475aa6c8": "research/evidence/frozen_sources/2f8f4a7cb081b192c3137c5c0657a110b06b1e36f3c13d71acbe929a475aa6c8.py",
+    "d7fc3674215201165030e3e02ba467c4b9e798ccf7746f5e81427bb58dafb5f2": "research/evidence/frozen_sources/d7fc3674215201165030e3e02ba467c4b9e798ccf7746f5e81427bb58dafb5f2.py",
+    "8a04702d031527dee1cbeec997cf8c53992fdc81467bee435378abade10432c4": "research/evidence/frozen_sources/8a04702d031527dee1cbeec997cf8c53992fdc81467bee435378abade10432c4.py",
+    "a8c2fc04f51fadd774572174c75ef678433e20ec9b8b0b64153ead4863670163": "research/evidence/frozen_sources/a8c2fc04f51fadd774572174c75ef678433e20ec9b8b0b64153ead4863670163.py",
+    "24881e257319ae1fcdebc26e69217803318b9d33e2badf428774a0cd486d0bee": "research/evidence/frozen_sources/24881e257319ae1fcdebc26e69217803318b9d33e2badf428774a0cd486d0bee.py",
+    "5fd589905e7e16a831758fc8504cca79ae781522c40f7c0f84ae6b86f2bfa658": "research/evidence/frozen_sources/5fd589905e7e16a831758fc8504cca79ae781522c40f7c0f84ae6b86f2bfa658.py",
+    "b7d0936514f1db7a8f99be9e044a33f338d769f86708a8ac493b25b3a986a0da": "research/evidence/frozen_sources/b7d0936514f1db7a8f99be9e044a33f338d769f86708a8ac493b25b3a986a0da.py",
+    "5eca8d2615fb7ebc157e971041651cfaa6d77188cbfdbaced0cf853988c27573": "research/evidence/frozen_sources/5eca8d2615fb7ebc157e971041651cfaa6d77188cbfdbaced0cf853988c27573.py",
+    "de84012a63872dd25665f7a0af549d1bc68d7ca0445adff4737752271eb785cb": "research/evidence/frozen_sources/de84012a63872dd25665f7a0af549d1bc68d7ca0445adff4737752271eb785cb.py",
+    "e9725f2bfb719e523d8272b4b137083c41ac769084267e6d4e40755632b3b249": "research/evidence/frozen_sources/e9725f2bfb719e523d8272b4b137083c41ac769084267e6d4e40755632b3b249.py",
+    "507f9e11a7e5f94df50f6a90813904952f860b544e8601043e4f2182c32f875e": "research/evidence/frozen_sources/507f9e11a7e5f94df50f6a90813904952f860b544e8601043e4f2182c32f875e.py",
+    "6d7084982051039d0acd64ddac7de8a93f48eb59e5c00c79a6f963dba24b983b": "research/evidence/frozen_sources/6d7084982051039d0acd64ddac7de8a93f48eb59e5c00c79a6f963dba24b983b.py",
+    "b2777ea24678885d5352e5a4eda6a74419a9e8b962b428f3d8d343657a840e72": "research/evidence/frozen_sources/b2777ea24678885d5352e5a4eda6a74419a9e8b962b428f3d8d343657a840e72.py"
+  },
+  "unrecoverable_source_versions": [
+    {
+      "path": "src/lebanon_fuel/forecasting/live.py",
+      "sha256": "0267e7a7c80a9618d6617de87c09d0ba86f1f50ba31ac4550c5ed883699bf831",
+      "required_for_existing_audit": false
+    },
+    {
+      "path": "src/lebanon_fuel/forecasting/pipeline.py",
+      "sha256": "82c15b335bcd8006e28b78049aafcb1de78474284fef30cd75a667eaa580890f",
+      "required_for_existing_audit": false
+    },
+    {
+      "path": "src/lebanon_fuel/forecasting/uncertainty.py",
+      "sha256": "e5d82c5ddc6febcd31258634d68f58bea91a4cc5966ffdd7041ac607bea7f298",
+      "required_for_existing_audit": false
+    },
+    {
+      "path": "src/lebanon_fuel/validation/ledger.py",
+      "sha256": "acb757f39dc3ce036fa649a82de931abf93dfb89b1ece923e31f7252643e2bc2",
+      "required_for_existing_audit": false
+    },
+    {
+      "path": "src/lebanon_fuel/validation/reporting.py",
+      "sha256": "551ebb31239fde0b523f6925ab02c56f3a400564678aeab4736a08a50b0991a4",
+      "required_for_existing_audit": false
+    },
+    {
+      "path": "src/lebanon_fuel/validation/runner.py",
+      "sha256": "6125a3cb145273ee816458138ea504eb1fbdd38f01206897d5468b8ffd67c064",
+      "required_for_existing_audit": false
+    },
+    {
+      "path": "src/lebanon_fuel/forecasting/live.py",
+      "sha256": "f24d86d749c5f018c3dd8c4a8cc4992d97d61dc19d249a4757e99eed3da662a2",
+      "required_for_existing_audit": false
+    },
+    {
+      "path": "src/lebanon_fuel/forecasting/data.py",
+      "sha256": "4e76c0ea5042dfa16ee3d9dba9c3f4417ce597106e1b59f8a3c657d771505c46",
+      "required_for_existing_audit": false
+    },
+    {
+      "path": "src/lebanon_fuel/forecasting/models.py",
+      "sha256": "d630125d4c4e83bb5923b3a7edf5acd26a11ad1b91cc623ee95ae7bc600a753a",
+      "required_for_existing_audit": false
+    },
+    {
+      "path": "src/lebanon_fuel/forecasting/pipeline.py",
+      "sha256": "4a2666fda0cd8331407dee9b209cb227a3197ee0ccff8f86cd61fa0150cc6ef5",
+      "required_for_existing_audit": false
+    },
+    {
+      "path": "src/lebanon_fuel/forecasting/reporting.py",
+      "sha256": "76fef4378615dcbdf2377fa279088168817aac774ba735148e38d6cf0636f904",
+      "required_for_existing_audit": false
+    },
+    {
+      "path": "src/lebanon_fuel/forecasting/uncertainty.py",
+      "sha256": "4854cda38c2e2c766d46499046e382c8122a56ed26484502a38380534633f077",
+      "required_for_existing_audit": false
+    }
+  ],
+  "notes": "Original manifest bytes and source hash identities unchanged. SHA-256 verified original source bytes archived from repository history where recoverable; no replacements invented.",
+  "frozen_design": {
+    "path": "data/exports/forecasting/development_design.csv",
+    "sha256": "660426cf6abcf621ae245d1a743d84c0f77056e0bcb094ddca226361df2cc2b1",
+    "archive": "research/evidence/frozen_design/development_design.csv.gz",
+    "archive_sha256": "39ecb52a1cfdbe0abd0e0769cba70cea23872cc83e5c227dac9bbdc1f8d2b3bb"
+  }
+}

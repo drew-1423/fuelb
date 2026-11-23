@@ -1,0 +1,54 @@
+{
+  "at": "2026-11-10T19:52:44.042689+00:00",
+  "results": [
+    {
+      "series": "brent_spot",
+      "parsed_rows": 9122,
+      "new_observations": 0,
+      "capture_id": 82
+    },
+    {
+      "series": "italy_gasoline_ex_tax",
+      "parsed_rows": 1091,
+      "new_observations": 0,
+      "capture_id": 84
+    },
+    {
+      "series": "greece_gasoline_ex_tax",
+      "parsed_rows": 1091,
+      "new_observations": 0,
+      "capture_id": 84
+    },
+    {
+      "series": "nyh_gasoline",
+      "parsed_rows": 9171,
+      "new_observations": 0,
+      "capture_id": 89
+    },
+    {
+      "series": "us_gasoline_stocks",
+      "parsed_rows": 1922,
+      "new_observations": 0,
+      "capture_id": 91
+    },
+    {
+      "series": "us_crude_stocks",
+      "parsed_rows": 2301,
+      "new_observations": 0,
+      "capture_id": 93
+    },
+    {
+      "series": "us_refinery_utilization",
+      "parsed_rows": 1879,
+      "new_observations": 0,
+      "capture_id": 95
+    },
+    {
+      "series": "eurusd",
+      "parsed_rows": 7265,
+      "new_observations": 0,
+      "capture_id": 110
+    }
+  ],
+  "new_observations": 0
+}

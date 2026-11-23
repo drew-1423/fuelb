@@ -1,0 +1,26 @@
+{
+  "protocol_version": "part4-v1",
+  "created_before_model_evaluation": true,
+  "purpose": "Retrospective latest-vintage sensitivity study; not certified real-time forecast accuracy",
+  "target": "Next retained source-date observation, conditional on its date; gaps <=14 days; not certified next official decision",
+  "target_statuses": ["document_verified", "archive_corroborated", "government_archive"],
+  "origin": "00:00 Asia/Beirut on target source date; prior target source date assumed available next local day",
+  "market_availability": "Part 3 conservative assumed release lags, latest captured editions; strict evaluation separately fails closed",
+  "series": ["nyh_gasoline", "brent_spot"],
+  "averaging_windows_observations": [1, 5, 10, 20],
+  "additional_lags_calendar_days": [0, 7, 14],
+  "families": ["persistence", "drift", "linear", "distributed_lag", "rolling_linear", "asymmetric"],
+  "rolling_training_observations": 40,
+  "minimum_train": 24,
+  "calibration_window": 40,
+  "minimum_calibration": 20,
+  "nominal_interval_coverage": 0.9,
+  "regimes": [
+    {"id":"pre_crisis", "start":"2012-01-01", "validation_start":"2017-01-01", "test_start":"2018-01-01", "end":"2019-08-31"},
+    {"id":"recent_pre_fiscal", "start":"2023-05-12", "validation_start":"2024-01-01", "test_start":"2025-01-01", "end":"2025-05-28"}
+  ],
+  "excluded": "2019-09 through 2023-05-11: subsidy/FX transitions without full FX history. 2025-05-29 onward: fiscal breaks without verified component history or sufficient regime-specific official targets.",
+  "selection": "Mean absolute validation error; family/window/lag frozen before final evaluation; expanding coefficients may use only earlier targets. No selection by final-test error.",
+  "ecm_gate": "Training only: at least 60 consecutive weekly observations; both log levels compatible with I(1), differences stationary, Engle-Granger rejects no cointegration at 5%; no interpolated/filled prices.",
+  "break_analysis": "Policy-defined research boundaries; training-only CUSUM diagnostic, no automatically fitted full-sample break dates"
+}

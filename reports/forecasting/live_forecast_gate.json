@@ -1,0 +1,62 @@
+{
+  "checked_at": "2026-11-13T19:02:34.463358+00:00",
+  "production_approved": false,
+  "horizons": {
+    "decision_1": {
+      "status": "development_only",
+      "reasons": [
+        "Production selection and dashboard integration are outside this stage",
+        "Residual probabilities and intervals require independent evaluation; current official timing and policy remain unresolved"
+      ]
+    },
+    "decision_2": {
+      "status": "development_only",
+      "reasons": [
+        "Production selection and dashboard integration are outside this stage",
+        "Residual probabilities and intervals require independent evaluation; current official timing and policy remain unresolved"
+      ]
+    },
+    "decision_4": {
+      "status": "development_only",
+      "reasons": [
+        "Production selection and dashboard integration are outside this stage",
+        "Residual probabilities and intervals require independent evaluation; current official timing and policy remain unresolved"
+      ]
+    },
+    "day_1": {
+      "status": "development_only",
+      "reasons": [
+        "Production selection and dashboard integration are outside this stage",
+        "Residual probabilities and intervals require independent evaluation; current official timing and policy remain unresolved"
+      ]
+    },
+    "day_3": {
+      "status": "development_only",
+      "reasons": [
+        "Production selection and dashboard integration are outside this stage",
+        "Residual probabilities and intervals require independent evaluation; current official timing and policy remain unresolved"
+      ]
+    },
+    "day_7": {
+      "status": "development_only",
+      "reasons": [
+        "Production selection and dashboard integration are outside this stage",
+        "Residual probabilities and intervals require independent evaluation; current official timing and policy remain unresolved"
+      ]
+    },
+    "day_14": {
+      "status": "development_only",
+      "reasons": [
+        "Production selection and dashboard integration are outside this stage",
+        "Residual probabilities and intervals require independent evaluation; current official timing and policy remain unresolved"
+      ]
+    },
+    "day_30": {
+      "status": "development_only",
+      "reasons": [
+        "Production selection and dashboard integration are outside this stage",
+        "Residual probabilities and intervals require independent evaluation; current official timing and policy remain unresolved"
+      ]
+    }
+  }
+}

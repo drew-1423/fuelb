@@ -1,0 +1,11 @@
+{
+  "at": "2026-11-10T19:52:44.043213+00:00",
+  "integrity_check": "ok",
+  "foreign_key_errors": [],
+  "market_observations": 33843,
+  "valid_market_observations": 33560,
+  "lebanon_observations": 3168,
+  "lebanon_versions": 3443,
+  "lebanon_sightings": 3169,
+  "withdrawn_source_payload_rows": 0
+}

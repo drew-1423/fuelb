@@ -1,0 +1,82 @@
+[
+  {
+    "id": "V01",
+    "severity": "blocking",
+    "finding": "No strict historical information set",
+    "evidence": "33,843 market observations: zero original publication clocks/vintages. Domestic archive clocks also zero; all captures are from November 2026.",
+    "location": "market/store.py:history; validation/backtest.py:strict_design_from_lineage",
+    "disposition": "Strict evaluator abstains; no strict error figure"
+  },
+  {
+    "id": "V02",
+    "severity": "blocking",
+    "finding": "Final test contamination and no fresh final holdout",
+    "evidence": "Part 4 scored 2018\u20132019 and 2025 periods before Part 5. Part 6 labels them exposed challenges; prospective final n=0.",
+    "location": "research/regulatory_regimes.md; reports/structural_validation.md",
+    "disposition": "No production approval; prospective holdout remains sealed"
+  },
+  {
+    "id": "V03",
+    "severity": "high",
+    "finding": "Calibration thinning overselects unchanged labels",
+    "evidence": "Recent day_3: 18.25% zero in 137 eligible earlier errors versus 90% zero in 20 retained; reproduced selection mechanism.",
+    "location": "forecasting/uncertainty.py:nonoverlapping; calibration_selection_bias.csv",
+    "disposition": "Reject affected intervals; retain scored failures, no same-outcome recalibration"
+  },
+  {
+    "id": "V04",
+    "severity": "high",
+    "finding": "Missing strong baseline altered interpretation",
+    "evidence": "Last-change benchmark has lower next-decision MAE than all advanced models on common origins in both challenge regimes.",
+    "location": "baseline_comparisons.csv; descriptive_best_models.csv",
+    "disposition": "Reject a complexity-based promotion"
+  },
+  {
+    "id": "V05",
+    "severity": "blocking",
+    "finding": "Official target timing, sequence and current policy unknown",
+    "evidence": "Three effective dates but no original target clocks; witnesses/gap rules do not prove absence of intervening decisions.",
+    "location": "forecasting/data.py:label_for; strict_availability.json",
+    "disposition": "Calendar/event scores remain conditional research"
+  },
+  {
+    "id": "V06",
+    "severity": "high",
+    "finding": "Research imputation can return a number with all market inputs missing",
+    "evidence": "Synthetic sensitivity report exercises saved models; operational wrapper requires valid/fresh inputs and supported regime.",
+    "location": "forecasting/models.py:preprocess; validation/policy.py:gate",
+    "disposition": "Fail-closed gate added; research raw predictions not authorized for direct deployment"
+  },
+  {
+    "id": "V07",
+    "severity": "high",
+    "finding": "Structural comparator is a proxy and FX/regulatory features are incomplete",
+    "evidence": "Official B has zero admissible forecasts. NYH and Brent are not Med95; no continuous official pricing FX.",
+    "location": "research/structural_pricing_equation.md; market/catalog.py",
+    "disposition": "No claim of improvement over the complete official formula"
+  },
+  {
+    "id": "V08",
+    "severity": "medium",
+    "finding": "Shared direction model is not a separate probability model for every regressor",
+    "evidence": "Same classifier probabilities recur across families. Independent score table deduplicates origins and compares historical frequency/no-change baselines.",
+    "location": "forecasting/pipeline.py:forecast; probability_scores.csv",
+    "disposition": "Explicit separate attribution, class calibration and sample counts"
+  },
+  {
+    "id": "V09",
+    "severity": "resolved_engineering",
+    "finding": "Signed-zero persistence affected initial hash verification",
+    "evidence": "62 first-run rows used -0.0 before SQLite normalized the stored zero; exact legacy hashes verified without edits.",
+    "location": "validation/ledger.py:canonical,integrity",
+    "disposition": "Canonicalization fixed; original rows retained; regression test added"
+  },
+  {
+    "id": "V10",
+    "severity": "governance",
+    "finding": "Review is not organizationally independent",
+    "evidence": "Separate validation equations/modules and frozen model hashes were used by the same development agent.",
+    "location": "Part 6 execution record",
+    "disposition": "No claim of external independent certification"
+  }
+]

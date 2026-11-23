@@ -1,0 +1,25 @@
+# Virtual environments & caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+
+# Large local backups, training design matrices & validation archives (keep repo under GitHub 100MB limit)
+data/backups/
+reports/model_validation/archive/
+data/exports/forecasting/development_design.csv
+data/exports/forecasting/origin_features.csv
+data/exports/model_validation/research_design.csv
+data/exports/model_validation/origin_features.csv
+data/logs/*.log
+reports/operations/runs/
+
+# Operational snapshots live in checksummed GitHub Release assets. Restore them
+# through the publication workflow or the dashboard's read-only release cache.
+data/*.sqlite*
+data/raw/
+
+# Local secrets
+.streamlit/secrets.toml
+.env

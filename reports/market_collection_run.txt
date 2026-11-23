@@ -1,0 +1,3 @@
+[{"series": "brent_spot", "parsed_rows": 9122, "new_observations": 0, "capture_id": 113}, {"series": "nyh_gasoline", "parsed_rows": 9171, "new_observations": 0, "capture_id": 115}, {"series": "us_gasoline_stocks", "parsed_rows": 1922, "new_observations": 0, "capture_id": 117}, {"series": "us_crude_stocks", "parsed_rows": 2301, "new_observations": 0, "capture_id": 119}, {"series": "us_refinery_utilization", "parsed_rows": 1879, "new_observations": 0, "capture_id": 121}]
+ec: FAILED: HTTP 429; stopped without retry/bypass
+[{"series": "eurusd", "parsed_rows": 7265, "new_observations": 0, "capture_id": 126}]

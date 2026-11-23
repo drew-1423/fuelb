@@ -1,0 +1,3 @@
+interface:
+  display_name: "Fuel Price Source Investigation"
+  short_description: "Find and verify historical fuel prices"

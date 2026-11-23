@@ -1,0 +1,29 @@
+{
+  "domestic": {
+    "n": 3175,
+    "publication_clocks": 0,
+    "effective_dates": 4,
+    "first_capture": "2026-11-10T19:04:20.867602+00:00"
+  },
+  "market": {
+    "n": 38773,
+    "publication_clocks": 0,
+    "original_vintages": 0,
+    "first_capture": "2026-11-10T19:28:28.107081+00:00"
+  },
+  "strict_market_counts_at_latest_historical_origin": {
+    "brent_spot": 0,
+    "nyh_gasoline": 0,
+    "eurusd": 0,
+    "italy_gasoline_ex_tax": 0,
+    "greece_gasoline_ex_tax": 0,
+    "us_gasoline_stocks": 0,
+    "us_crude_stocks": 0,
+    "us_refinery_utilization": 0
+  },
+  "latest_historical_origin": "2025-05-22T21:00:00+00:00",
+  "domestic_versions_known_before_latest_origin": 0,
+  "strict_historical_forecasts": 0,
+  "strict_performance_metrics": null,
+  "reason": "No captured domestic versions or original market vintages existed at any evaluated historical origin"
+}

@@ -1,0 +1,56 @@
+{
+  "verified_at": "2026-11-12T19:48:43.937610+00:00",
+  "tests": {
+    "command": ".venv/bin/pytest Tests/fuel/test_validation.py Tests/fuel/test_live_forecasting.py Tests/fuel/test_market.py Tests/fuel/test_dashboard.py -q",
+    "passed": 102,
+    "failed": 0
+  },
+  "validation_commands": {
+    "run": "exit 0",
+    "report": "exit 0"
+  },
+  "offline_run_id": "ops-20261112T194740-471eb7a4",
+  "offline_status": "completed",
+  "failed_steps": [],
+  "forecast_ids": [
+    45017,
+    45018,
+    45019,
+    45020,
+    45021,
+    45022,
+    45023,
+    45024
+  ],
+  "forecast_tiers": {
+    "decision_1": 4,
+    "decision_2": 4,
+    "decision_4": 4,
+    "day_1": 4,
+    "day_3": 4,
+    "day_7": 4,
+    "day_14": 4,
+    "day_30": 4
+  },
+  "ledger_schema_and_triggers_unchanged": true,
+  "ledger_integrity": {
+    "forecasts": 45024,
+    "evaluations": 44928,
+    "hash_chain_valid": true,
+    "legacy_signed_zero_matches": 62
+  },
+  "limitations": [
+    "Refreshed EIA data still end on 2026-11-03, exceeding 7-day input limit.",
+    "Quantitative candidates registered as Tier 2; no Tier 1 evidence established.",
+    "30-day finite 90% conformal interval unavailable with six calibration residuals."
+  ],
+  "approved_scope_fixes": {
+    "dashboard_date_reader": "completed",
+    "market_collection_report": "completed"
+  },
+  "rendered_expected_decision_date": "13 Nov 2026 (date only)",
+  "approved_fix_source_hashes": {
+    "src/lebanon_fuel/dashboard/data.py": "c33941458677c02c7d07567e3fd9629a8325d884e7931647d22bcdacd5265197",
+    "src/lebanon_fuel/market/reports.py": "7c68c6226f5ca5c78fc2e3f8c3593d41a6d4b8b4548caf23f1e4edeff8c5a6c7"
+  }
+}

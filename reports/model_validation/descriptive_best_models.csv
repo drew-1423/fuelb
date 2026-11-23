@@ -1,0 +1,7 @@
+regime,horizon,descriptive_best,n,distinct_base_decisions,mae_lbp,direction_accuracy,no_change_mae_lbp,production_approved
+pre_crisis,day_30,C_ridge,565,81,842.4635378263038,0.6619469026548672,1062.654867256637,False
+pre_crisis,day_7,Z_last_change,588,84,154.42176870748298,0.7210884353741497,289.7959183673469,False
+pre_crisis,decision_1,Z_last_change,85,85,150.58823529411765,0.7294117647058823,291.7647058823529,False
+recent_pre_fiscal,day_30,A_mean,9,2,34763.07189542483,1.0,58666.666666666664,False
+recent_pre_fiscal,day_7,G_hybrid,46,11,23337.508701326653,0.5434782608695652,27304.347826086956,False
+recent_pre_fiscal,decision_1,Z_last_change,15,15,11066.666666666666,0.8666666666666667,15866.666666666666,False

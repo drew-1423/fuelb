@@ -1,0 +1,110 @@
+[
+  {
+    "scenario": "control",
+    "evidence": "synthetic_gate_fixture_not_production_approval",
+    "passed": true,
+    "status": "eligible",
+    "reasons": [],
+    "intervals_allowed": false,
+    "probabilities_allowed": false
+  },
+  {
+    "scenario": "missing_market",
+    "evidence": "synthetic_gate_fixture_not_production_approval",
+    "passed": true,
+    "status": "abstain",
+    "reasons": [
+      "brent_spot_missing"
+    ],
+    "intervals_allowed": false,
+    "probabilities_allowed": false
+  },
+  {
+    "scenario": "stale_market",
+    "evidence": "synthetic_gate_fixture_not_production_approval",
+    "passed": true,
+    "status": "abstain",
+    "reasons": [
+      "brent_spot_stale_observation"
+    ],
+    "intervals_allowed": false,
+    "probabilities_allowed": false
+  },
+  {
+    "scenario": "future_input",
+    "evidence": "synthetic_gate_fixture_not_production_approval",
+    "passed": true,
+    "status": "abstain",
+    "reasons": [
+      "brent_spot_not_known_before_origin"
+    ],
+    "intervals_allowed": false,
+    "probabilities_allowed": false
+  },
+  {
+    "scenario": "fx_disruption",
+    "evidence": "synthetic_gate_fixture_not_production_approval",
+    "passed": true,
+    "status": "abstain",
+    "reasons": [
+      "fx_disruption_requires_review"
+    ],
+    "intervals_allowed": false,
+    "probabilities_allowed": false
+  },
+  {
+    "scenario": "tax_change",
+    "evidence": "synthetic_gate_fixture_not_production_approval",
+    "passed": true,
+    "status": "abstain",
+    "reasons": [
+      "tax_change_requires_review"
+    ],
+    "intervals_allowed": false,
+    "probabilities_allowed": false
+  },
+  {
+    "scenario": "government_intervention",
+    "evidence": "synthetic_gate_fixture_not_production_approval",
+    "passed": true,
+    "status": "abstain",
+    "reasons": [
+      "government_intervention_requires_review"
+    ],
+    "intervals_allowed": false,
+    "probabilities_allowed": false
+  },
+  {
+    "scenario": "input_out_of_support",
+    "evidence": "synthetic_gate_fixture_not_production_approval",
+    "passed": true,
+    "status": "abstain",
+    "reasons": [
+      "input_out_of_support_requires_review"
+    ],
+    "intervals_allowed": false,
+    "probabilities_allowed": false
+  },
+  {
+    "scenario": "wrong_regime",
+    "evidence": "synthetic_gate_fixture_not_production_approval",
+    "passed": true,
+    "status": "abstain",
+    "reasons": [
+      "unsupported_regulatory_regime"
+    ],
+    "intervals_allowed": false,
+    "probabilities_allowed": false
+  },
+  {
+    "scenario": "unverified_anchor",
+    "evidence": "synthetic_gate_fixture_not_production_approval",
+    "passed": true,
+    "status": "abstain",
+    "reasons": [
+      "unverified_official_anchor"
+    ],
+    "intervals_allowed": false,
+    "probabilities_allowed": false
+  }
+]

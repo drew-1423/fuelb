@@ -1,0 +1,52 @@
+{
+  "url": "https://energyandwater.gov.lb/ajax/pricesCtrl.php",
+  "retrieved_at": "2026-11-16T14:13:36.577886+00:00",
+  "http_status": 200,
+  "sha256": "33baed77fd9b7f694fd5a96998d51cb8e15d7b09eb70fd3108bbc33d66672bb2",
+  "artifact": "archive-response.json",
+  "request": {
+    "action": "RenderPrices",
+    "fromDate": "2026-10-01",
+    "page": "0",
+    "priceTypeId": "1",
+    "toDate": "2026-11-16"
+  },
+  "rows": [
+    {
+      "source_date": "2026-10-02",
+      "price_lbp_20l": 2837000,
+      "unit": "LBP/20L",
+      "decision_number": "221",
+      "publication_date": null,
+      "publication_timestamp": null,
+      "official_effective_date": null
+    },
+    {
+      "source_date": "2026-11-03",
+      "price_lbp_20l": 2569000,
+      "unit": "LBP/20L",
+      "decision_number": null,
+      "publication_date": null,
+      "publication_timestamp": null,
+      "official_effective_date": null
+    },
+    {
+      "source_date": "2026-11-06",
+      "price_lbp_20l": 2492000,
+      "unit": "LBP/20L",
+      "decision_number": null,
+      "publication_date": null,
+      "publication_timestamp": null,
+      "official_effective_date": null
+    },
+    {
+      "source_date": "2026-11-10",
+      "price_lbp_20l": 2445000,
+      "unit": "LBP/20L",
+      "decision_number": null,
+      "publication_date": null,
+      "publication_timestamp": null,
+      "official_effective_date": null
+    }
+  ]
+}

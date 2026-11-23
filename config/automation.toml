@@ -1,0 +1,51 @@
+# Native launchd wakes every 5 minutes. Python evaluates Asia/Beirut windows,
+# even if the Mac moves to another timezone. All thresholds are operating policy.
+[schedule]
+timezone = "Asia/Beirut"
+poll_seconds = 300
+regular_interval_minutes = 360
+window_interval_minutes = 60
+window_weekdays = [0, 1, 2, 3, 4] # Monday = 0
+announcement_windows = ["09:00-12:00"]
+# These are operator watch windows, NOT verified announcement appointments.
+
+[collection]
+timeout_seconds = 300
+ministry_lookback_days = 120
+access_failure_pause_hours = 24
+
+[collection.minimum_interval_minutes]
+ipt = 60
+totalenergies = 60
+ministry = 60
+taqtek = 1440
+thefuelprice = 1440
+eia = 1440
+ec = 1440
+fed = 1440
+
+[monitoring]
+window_outcomes = 60
+minimum_outcomes = 30
+mae_review_lbp = 50000
+absolute_bias_review_lbp = 20000
+direction_review_below = 0.50
+coverage_tolerance = 0.10
+probability_ece_review_above = 0.15
+weekly_market_move_review = 0.10
+verified_anchor_maximum_age_days = 10
+policy_review_maximum_age_days = 30
+
+[maintenance]
+backup_every_hours = 24
+# Copy raw captures/model artifacts to separate storage as documented.
+# Daily SQLite backups are retained until explicitly removed by the operator.
+
+[settlement]
+# A named reviewer must attest clocks and complete official coverage first.
+# Refer to docs/model_validation.md. Empty means pending, never guessed.
+reviewed_manifest = ""
+
+[shadow]
+# Opt in with a reviewed frozen manifest. Research forecasts stay out of the public dashboard.
+frozen_manifest = ""

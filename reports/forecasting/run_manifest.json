@@ -1,0 +1,217 @@
+{
+  "started_at": "2026-11-13T18:59:57.162574+00:00",
+  "stage": "part2_retraining_v2",
+  "config_sha256": "9ce314aad7d1b018cc3379d57637925b0da0baa1345a85352dc85fe07c7b1f9a",
+  "design_sha256": "660426cf6abcf621ae245d1a743d84c0f77056e0bcb094ddca226361df2cc2b1",
+  "data_input": "data/exports/forecasting/development_design.csv",
+  "code_hashes": {
+    "src/lebanon_fuel/forecasting/__init__.py": "1f4921e4b1d57d3b4205427a3b140ca61f3e8f144c98cf87934c1d91524dc6bc",
+    "src/lebanon_fuel/forecasting/cli.py": "ff95325f21f909fc7c682d407b14a51f0e121cc5241a55cabd429f47b3e47439",
+    "src/lebanon_fuel/forecasting/data.py": "2f8f4a7cb081b192c3137c5c0657a110b06b1e36f3c13d71acbe929a475aa6c8",
+    "src/lebanon_fuel/forecasting/live.py": "d7fc3674215201165030e3e02ba467c4b9e798ccf7746f5e81427bb58dafb5f2",
+    "src/lebanon_fuel/forecasting/models.py": "8a04702d031527dee1cbeec997cf8c53992fdc81467bee435378abade10432c4",
+    "src/lebanon_fuel/forecasting/pipeline.py": "325a3df6f2d206bbb5d34d99f422ece3115718b645938c8b97bbac6b105fa8c1",
+    "src/lebanon_fuel/forecasting/reporting.py": "f67fad76dbd7312933c265bc4d040d89f3a0d12bf4928cc61892baa18558596f",
+    "src/lebanon_fuel/forecasting/uncertainty.py": "d4f34d03ebe0e11efde542e0e536e69eb30aad0d051fec97fef683f0740863f1"
+  },
+  "packages": {
+    "numpy": "2.5.4",
+    "pandas": "3.1.1",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "statsmodels": "0.15.0",
+    "lightgbm": "4.7.0",
+    "catboost": "1.2.10",
+    "joblib": "1.6.0"
+  },
+  "data_first_origin": "2023-05-27T00:00:00+00:00",
+  "data_last_origin": "2025-12-21T01:00:00+00:00",
+  "data_maximum_label_end": "2025-12-22T22:00:00+00:00",
+  "effective_config": {
+    "version": "t1-differential-v1",
+    "purpose": "Model development only; latest-vintage research; no production selection before Part 6",
+    "targets": {
+      "decisions": [
+        1,
+        2,
+        4
+      ],
+      "calendar_days": [
+        1,
+        3,
+        7,
+        14,
+        30
+      ]
+    },
+    "target_statuses": [
+      "document_verified",
+      "archive_corroborated",
+      "government_archive"
+    ],
+    "target_assumption": "Each source-date record becomes known the next Asia/Beirut midnight. Effective dates and complete decision coverage remain unverified.",
+    "calendar_assumption": "Last recorded price at endpoint conditional on observed archive completeness. Never a newly observed daily official price.",
+    "maximum_gap_days": 14,
+    "minimum_domestic_history": 5,
+    "series": [
+      "nyh_gasoline",
+      "brent_spot",
+      "eurusd",
+      "italy_gasoline_ex_tax",
+      "greece_gasoline_ex_tax",
+      "us_gasoline_stocks",
+      "us_crude_stocks",
+      "us_refinery_utilization",
+      "brent_futures",
+      "rbob_futures",
+      "gasoil_futures",
+      "cboe_ovx"
+    ],
+    "market_availability": "Research close convention: daily d 23:59:59 UTC; weekly EIA d+5 at 23:59:59 UTC. EIA spot T-1 is an optimistic research assumption, not its verified release history. Strict mode retains actual capture/vintage clocks. Latest-vintage revision risk remains.",
+    "regimes": [
+      {
+        "id": "stabilized_fx_2023_2026",
+        "start": "2023-05-12",
+        "development_end": "2026-05-31",
+        "fold_starts": [
+          "2024-06-01",
+          "2025-01-01",
+          "2025-09-01"
+        ],
+        "evaluation_start": "2026-06-01",
+        "evaluation_end": "2026-11-10",
+        "part6_period": "June-November 2026 evaluation, separate export; no model fitting in this stage.",
+        "regime_status": "unified research bucket under user-specified stable-FX assumption; fiscal breaks remain in data"
+      }
+    ],
+    "families": [
+      "A_no_change",
+      "A_mean",
+      "A_median",
+      "B_structural_proxy",
+      "C_ridge",
+      "C_distributed",
+      "D_sarimax",
+      "E_lightgbm",
+      "F_catboost",
+      "G_hybrid",
+      "H_ensemble",
+      "Z_last_change"
+    ],
+    "minimum_train": 24,
+    "minimum_tree_train": 60,
+    "minimum_sarimax_run": 40,
+    "minimum_calibration": 20,
+    "calibration_max": 60,
+    "coverage": 0.9,
+    "ridge_alphas": [
+      1.0,
+      10.0,
+      100.0
+    ],
+    "trees": {
+      "iterations": 80,
+      "depth": 3,
+      "minimum_leaf": 20,
+      "learning_rate": 0.04,
+      "regularization": 10.0
+    },
+    "ensemble_minimum_oof": 20,
+    "competitive_tolerance": 0.02,
+    "threads": 2,
+    "random_seed": 20261111,
+    "structural_status": "B official requires complete dated inputs and abstains if absent. B_structural_proxy is a positive estimated composite pass-through under constant policy and flat future market scenarios, never official FX/formula.",
+    "news": "Optional deterministic channel classification; strict known-at availability; no zero-filled unknown historical news coverage; no paid API",
+    "part6_reservation": "Development stops 2026-05-31; June-November targets go only to holdout_evaluation_design.csv. Prior stages already viewed some history; not a globally untouched holdout. No tuning, fitting or accuracy claims in this stage.",
+    "market_availability_mode": "as_of_close",
+    "origin_local_time": "03:00",
+    "structural_delta": {
+      "enabled": true,
+      "stabilized_start": "2023-05-12",
+      "fx_lbp_per_usd": 89700,
+      "bank_factor": 1.01,
+      "vat_factor": 1.11,
+      "shock_threshold_lbp": 150000,
+      "window_observed_sessions": 4,
+      "assumption_status": "User-specified sensitivity assumptions, not verified current government parameters",
+      "equation": "delta(mean4 USD/bbl)*1000/158.987294928*89700*1.01*1.11/50 after stabilization; preceding periods use trailing median price/product ratio (fees already embedded).",
+      "baseline_window": "Four available trading observations at latest known domestic source date, 03:00 Asia/Beirut; exact announcement/calculation windows unresolved.",
+      "shock_interpretation": "Large lagged price movement; may reflect commodity, FX or tax changes. Not proof of a fiscal decree.",
+      "limitations": "Constant charges cancel only between policy changes. Constant FX, bank fee and VAT are hypotheses. No licensed CIF Med benchmark or roll adjustment is available.",
+      "benchmark_series": "nyh_gasoline"
+    },
+    "futures_provenance": {
+      "provider": "Yahoo public chart daily unadjusted close; continuous front-symbol roll calendar unknown",
+      "symbols": {
+        "BZ=F": "NYMEX Brent last-day financial, not direct ICE contract history",
+        "RB=F": "NYMEX RBOB US gasoline, not Mediterranean 95",
+        "HO=F": "NYMEX NY Harbor ULSD, not ICE gasoil"
+      },
+      "sources": [
+        "https://finance.yahoo.com/quote/BZ=F/history/",
+        "https://finance.yahoo.com/quote/RB=F/history/",
+        "https://www.cmegroup.com/markets/energy/refined-products/heating-oil.html",
+        "https://www.cmegroup.com/tools-information/lookups/advisories/ser/SER-6887.html"
+      ],
+      "verification_date": "2026-11-12",
+      "fallback": "Retain futures as unavailable; choose fresh brent_spot/nyh_gasoline explicitly in derived features. No heating-oil substitute.",
+      "short_windows": "Means of last 3/4/5/10 observed trading sessions; return3/return5 compare against 3/5 observed sessions earlier; no holiday filling.",
+      "collection_status": "Yahoo robots policy denied; Stooq browser barrier; stopped. User directs EIA spot fallback for this stage. No futures observations collected."
+    },
+    "energy_source_override": {
+      "refined_gasoline": "nyh_gasoline",
+      "brent": "brent_spot"
+    },
+    "probability_deadband_lbp": 3000.0,
+    "probability_smoothing_alpha": 0.03
+  },
+  "holdout_read": false,
+  "status": "Chronological development only; assumed close times and revised histories; no production approval",
+  "completed_at": "2026-11-13T19:02:34.463609+00:00",
+  "prediction_rows": 11205,
+  "development_origin_horizon_rows": 1025,
+  "saved_bundles": 8,
+  "production_winner": null,
+  "output_hashes": {
+    "baseline_comparisons.csv": "a82b832dcb43648d8bfc36e9bb652e26a293ef0567538dba6db4ee21e395745c",
+    "common_origin_metrics.csv": "7ac7e476590e6cb9d3005fd46b87c5507452938ecd0a22c3c0195aca1b480368",
+    "development_predictions.csv": "68375f9976ecd2f0ce7d40f0c45d257fc1c7c454365cd0744befef562a404896",
+    "direction_reliability.csv": "027e06de31d4b64018c0074ed8f4db8936ab091c13ebca73e157f88dd9b79eba",
+    "ensemble_baseline_comparisons.csv": "c338ae5e72a43ea1e87aa8ac63b0c56c627d5486adf8adcfdfdb27b5c8559b24",
+    "excluded_targets.csv": "61f428a1f8c9026776fb09456cc3ff581bcdaf41003bfc3c504b5ab02a0ec181",
+    "historical_preliminary_forecasts.csv": "a0b8622fa0ada79d941f7a4ccadac77fb925546524327d8906dbf3e6b038336b",
+    "horizon_summary.csv": "cdff6d024650ba50813c16b43d99870d03c77d93dade1f987c7c06faffa37d96",
+    "interval_calibration_failures.csv": "beccb340c17f06c62de56a8aa4ba2e2ba8f583d626e3db1fad6716ace8e8a2d6",
+    "model_availability.csv": "bdef0aff95cb9f867b9ac5a5d5f715f5dc978176a87cb0491553daa72b99432b",
+    "model_metrics.csv": "f207dae9442a1df0b9f039020f174265c2cb5c80f7377f5e5f64b0a72970468a",
+    "target_coverage.csv": "b9524ddd385bbd9d27f6a35a987a467f4e4b78a170e816633ff039c3ac8b8630"
+  },
+  "report_code_sha256": "f67fad76dbd7312933c265bc4d040d89f3a0d12bf4928cc61892baa18558596f",
+  "report_sha256": "6e9dff67098104a799110d9cc01fcc3f492f49c303e554ffc9fe090912256f2a",
+  "training_code_hashes": {
+    "src/lebanon_fuel/forecasting/__init__.py": "1f4921e4b1d57d3b4205427a3b140ca61f3e8f144c98cf87934c1d91524dc6bc",
+    "src/lebanon_fuel/forecasting/cli.py": "ff95325f21f909fc7c682d407b14a51f0e121cc5241a55cabd429f47b3e47439",
+    "src/lebanon_fuel/forecasting/data.py": "37695b1f9de4cb041d0593cbedf5cd1a8a985ce95df98a7e11625f98fdb3b986",
+    "src/lebanon_fuel/forecasting/live.py": "0267e7a7c80a9618d6617de87c09d0ba86f1f50ba31ac4550c5ed883699bf831",
+    "src/lebanon_fuel/forecasting/models.py": "79d1f4983aa095bc85281506e8fe5fd0d348c9e5ebcc636cdf14e3990e4c575c",
+    "src/lebanon_fuel/forecasting/pipeline.py": "82c15b335bcd8006e28b78049aafcb1de78474284fef30cd75a667eaa580890f",
+    "src/lebanon_fuel/forecasting/reporting.py": "f67fad76dbd7312933c265bc4d040d89f3a0d12bf4928cc61892baa18558596f",
+    "src/lebanon_fuel/forecasting/uncertainty.py": "e5d82c5ddc6febcd31258634d68f58bea91a4cc5966ffdd7041ac607bea7f298"
+  },
+  "release": {
+    "recorded_at": "2026-11-18T18:47:14.263776+00:00",
+    "base_commit": "b62c20fd901e350400553f7eb07e87ac702f9b3d",
+    "kind": "deterministic_bugfix_no_refit",
+    "hash_algorithm": "sha256",
+    "source_sha256": {
+      "src/lebanon_fuel/forecasting/data.py": "2f8f4a7cb081b192c3137c5c0657a110b06b1e36f3c13d71acbe929a475aa6c8",
+      "src/lebanon_fuel/forecasting/live.py": "d7fc3674215201165030e3e02ba467c4b9e798ccf7746f5e81427bb58dafb5f2",
+      "src/lebanon_fuel/dashboard/app.py": "a8c2fc04f51fadd774572174c75ef678433e20ec9b8b0b64153ead4863670163",
+      "Tests/fuel/test_forecasting.py": "24881e257319ae1fcdebc26e69217803318b9d33e2badf428774a0cd486d0bee",
+      "Tests/fuel/test_dashboard.py": "5fd589905e7e16a831758fc8504cca79ae781522c40f7c0f84ae6b86f2bfa658",
+      "scripts/audit_forecasting_artifacts.py": "b7d0936514f1db7a8f99be9e044a33f338d769f86708a8ac493b25b3a986a0da",
+      "scripts/audit_validation_artifacts.py": "5eca8d2615fb7ebc157e971041651cfaa6d77188cbfdbaced0cf853988c27573"
+    },
+    "note": "Release file checksums, not a new training or validation run. Frozen model bundles, datasets and saved predictions are unchanged. Original run code identities are preserved separately."
+  }
+}
