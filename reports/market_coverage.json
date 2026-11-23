@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-23T18:45:28.032197+00:00",
+  "as_of": "2026-11-23T22:26:31.535006+00:00",
   "series": [
     {
       "series": "brent_spot",
@@ -147,7 +147,7 @@
       "latest": "2025-05-29",
       "latest_value": 89700.0,
       "unit": "LBP/USD",
-      "age_days": 543,
+      "age_days": 544,
       "stale": true,
       "known_publication_timestamps": 0,
       "documented_historical_vintages": 0,
