@@ -1,6 +1,6 @@
 # International market coverage and quality
 
-Generated for 2026-11-24T12:55:57.756584+00:00. Counts below are actual stored observations, not estimates.
+Generated for 2026-11-24T18:45:19.914009+00:00. Counts below are actual stored observations, not estimates.
 
 | Series | Unique valid dates | Earliest | Latest | Latest normalized value | Stale |
 | --- | ---: | --- | --- | --- | --- |
@@ -9,7 +9,7 @@ Generated for 2026-11-24T12:55:57.756584+00:00. Counts below are actual stored o
 | us_gasoline_stocks | 1924 | 1990-01-05 | 2026-11-13 | 215.949 million_bbl | False |
 | us_crude_stocks | 2303 | 1982-08-20 | 2026-11-13 | 417.797 million_bbl | False |
 | us_refinery_utilization | 1881 | 1990-11-02 | 2026-11-13 | 95.7 percent | False |
-| eurusd | 6988 | 1999-01-04 | 2026-11-13 | 1.1034 USD/EUR | False |
+| eurusd | 6993 | 1999-01-04 | 2026-11-20 | 1.0981 USD/EUR | False |
 | italy_gasoline_ex_tax | 1092 | 2005-01-03 | 2026-11-16 | 0.941526 EUR/L | False |
 | greece_gasoline_ex_tax | 1092 | 2005-01-03 | 2026-11-16 | 0.872563 EUR/L | False |
 | lbp_payment_fx | 2 | 2023-05-12 | 2025-05-29 | 89700 LBP/USD | True |
@@ -23,15 +23,15 @@ Generated for 2026-11-24T12:55:57.756584+00:00. Counts below are actual stored o
 | Source | Result | Completed UTC | Detail |
 | --- | --- | --- | --- |
 | market_cboe | success | 2026-11-13T16:28:03.126952+00:00 | 4912 reviewed/imported rows |
-| market_ec | success | 2026-11-23T13:50:09.694502+00:00 | 2,186 rows parsed; 0 new observations |
-| market_eia | success | 2026-11-23T13:50:01.939450+00:00 | 24,421 rows parsed; 0 new observations |
-| market_fed | success | 2026-11-23T13:50:17.103518+00:00 | 7,270 rows parsed; 0 new observations |
+| market_ec | success | 2026-11-24T18:45:11.515374+00:00 | 2,186 rows parsed; 0 new observations |
+| market_eia | success | 2026-11-24T18:45:02.054555+00:00 | 24,421 rows parsed; 0 new observations |
+| market_fed | success | 2026-11-24T18:45:19.230821+00:00 | 7,275 rows parsed; 5 new observations |
 | market_official_review | success | 2026-11-14T20:06:38.456497+00:00 | 1 reviewed/imported rows |
 | market_yahoo | partial | 2026-11-12T11:01:09.971477+00:00 | rows parsed: unavailable; 0 new observations; brent_futures: unavailable — AccessStopped: Request denied by robots policy; Stored fallback: brent_spot (latest 2026-11-03); not newly collected futures; rbob_futures: unavailable — AccessStopped: Request denied by robots policy; Stored fallback: nyh_gasoline (latest 2026-11-03); not newly collected futures; gasoil_futures: unavailable — AccessStopped: Request denied by robots policy |
 
 ## Availability and validation
 
-38,791 immutable observations; 284 invalid/missing rows retained. 0 dates with captured value revisions; 0 same-capture contradictions quarantined. Raw hash failures: 0.
+38,796 immutable observations; 284 invalid/missing rows retained. 0 dates with captured value revisions; 0 same-capture contradictions quarantined. Raw hash failures: 0.
 39 long interval candidates; 2832 unclassified weekday/weekly calendar candidates. These include holidays and cannot be called missing market sessions without an authoritative calendar. No filling or interpolation was applied.
 40 large-move review candidates; 0 unusual reference-weekday candidates. Review flags do not prove source errors or erase real market shocks.
 Known per-observation publication timestamps: 0. Documented original historical vintages: 0. Dates in today's workbook are not release timestamps.
