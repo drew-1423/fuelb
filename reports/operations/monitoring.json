@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-11-24T06:53:58.859211+00:00",
+  "generated_at": "2026-11-24T12:56:38.683687+00:00",
   "data_quality": {
     "conflict_dates": 42,
-    "missing_publication_clocks": 3205,
-    "missing_effective_dates": 3201,
-    "candidate_dates": 1374,
+    "missing_publication_clocks": 3207,
+    "missing_effective_dates": 3203,
+    "candidate_dates": 1375,
     "suspicious_dates": 4
   },
   "alerts": [
@@ -65,12 +65,12 @@
     }
   ],
   "latest_verified_record": {
-    "absolute_price_change": -52000,
+    "absolute_price_change": -101000,
     "candidate_values": [
-      2291000
+      2242000
     ],
     "change_basis": "previous_verified_record_not_certified_previous_decision",
-    "chosen_observation_id": 3201,
+    "chosen_observation_id": 3207,
     "corroborating_sources": [
       {
         "id": "ipt",
@@ -79,42 +79,37 @@
       {
         "id": "totalenergies",
         "url": "https://pricing.totalenergies.com.lb/fuelprice/"
-      },
-      {
-        "id": "taqtek",
-        "url": "https://taqteklb.com/en/fuel/"
       }
     ],
     "date_role": "source_label",
     "decision_numbers": [],
     "issues": [],
     "observation_ids": [
-      3201,
-      3202,
-      3204
+      3207,
+      3208
     ],
     "official_effective_date": null,
-    "percentage_price_change": -2.219376867264191,
+    "percentage_price_change": -4.310712761416987,
     "previous_verified_date": "2026-11-17",
     "previous_verified_price": 2343000,
-    "price_lbp_20l": 2291000,
+    "price_lbp_20l": 2242000,
     "publication_date": null,
     "publication_timestamp": null,
     "regime": "2026_fiscal_changes_unresolved",
     "regime_status": "provisional_research_bucket",
     "resolution_id": null,
-    "retrieved_at": "2026-11-20T12:50:45.729436+00:00",
-    "source_date": "2026-11-20",
+    "retrieved_at": "2026-11-24T12:55:37.189937+00:00",
+    "source_date": "2026-11-24",
     "source_priority": 3,
     "source_url": "https://www.iptgroup.com.lb/ipt/en/our-stations/fuel-prices",
     "timezone": "Asia/Beirut",
     "unit": "LBP/20L",
     "verification_status": "provisional_corroborated",
-    "revision_id": 4857
+    "revision_id": 4860
   },
   "market": {
-    "origin_utc": "2026-11-24T06:53:54.002304+00:00",
-    "origin_beirut": "2026-11-24T08:53:54.002304+02:00",
+    "origin_utc": "2026-11-24T12:56:33.792552+00:00",
+    "origin_beirut": "2026-11-24T14:56:33.792552+02:00",
     "mode": "strict",
     "backtest_eligible": true,
     "series": {
@@ -2613,7 +2608,7 @@
   },
   "policy_headlines": {
     "status": "captured_headlines_only",
-    "retrieved_at": "2026-11-24T06:53:10.186471+00:00",
+    "retrieved_at": "2026-11-24T12:55:50.959702+00:00",
     "items": [],
     "note": "Changes require original-document review. This is not complete policy surveillance."
   },
