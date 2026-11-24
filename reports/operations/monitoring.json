@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-11-24T12:56:38.683687+00:00",
+  "generated_at": "2026-11-24T18:46:08.864284+00:00",
   "data_quality": {
     "conflict_dates": 42,
-    "missing_publication_clocks": 3207,
-    "missing_effective_dates": 3203,
+    "missing_publication_clocks": 3208,
+    "missing_effective_dates": 3204,
     "candidate_dates": 1375,
     "suspicious_dates": 4
   },
@@ -79,6 +79,10 @@
       {
         "id": "totalenergies",
         "url": "https://pricing.totalenergies.com.lb/fuelprice/"
+      },
+      {
+        "id": "taqtek",
+        "url": "https://taqteklb.com/en/fuel/"
       }
     ],
     "date_role": "source_label",
@@ -86,7 +90,8 @@
     "issues": [],
     "observation_ids": [
       3207,
-      3208
+      3208,
+      3209
     ],
     "official_effective_date": null,
     "percentage_price_change": -4.310712761416987,
@@ -105,11 +110,11 @@
     "timezone": "Asia/Beirut",
     "unit": "LBP/20L",
     "verification_status": "provisional_corroborated",
-    "revision_id": 4860
+    "revision_id": 4861
   },
   "market": {
-    "origin_utc": "2026-11-24T12:56:33.792552+00:00",
-    "origin_beirut": "2026-11-24T14:56:33.792552+02:00",
+    "origin_utc": "2026-11-24T18:46:03.277924+00:00",
+    "origin_beirut": "2026-11-24T20:46:03.277924+02:00",
     "mode": "strict",
     "backtest_eligible": true,
     "series": {
@@ -129,7 +134,7 @@
         "trend_above_trailing_mean20": 0,
         "high_vol_vs_prior_trailing_median": 1,
         "lag_1_observation_value": 92.9,
-        "max_available_at": "2026-11-23T13:49:29.001681+00:00",
+        "max_available_at": "2026-11-24T18:44:30.677862+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
@@ -433,7 +438,7 @@
         "trend_above_trailing_mean20": 0,
         "high_vol_vs_prior_trailing_median": 1,
         "lag_1_observation_value": 97.524,
-        "max_available_at": "2026-11-23T13:49:35.226303+00:00",
+        "max_available_at": "2026-11-24T18:44:37.567187+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
@@ -737,7 +742,7 @@
         "trend_above_trailing_mean20": 1,
         "high_vol_vs_prior_trailing_median": 0,
         "lag_1_observation_value": 210.757,
-        "max_available_at": "2026-11-23T13:49:44.468514+00:00",
+        "max_available_at": "2026-11-24T18:44:45.246202+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
@@ -1040,7 +1045,7 @@
         "trend_above_trailing_mean20": 0,
         "high_vol_vs_prior_trailing_median": 1,
         "lag_1_observation_value": 414.41700000000003,
-        "max_available_at": "2026-11-23T13:49:54.530490+00:00",
+        "max_available_at": "2026-11-24T18:44:54.726931+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
@@ -1343,7 +1348,7 @@
         "trend_above_trailing_mean20": 1,
         "high_vol_vs_prior_trailing_median": 0,
         "lag_1_observation_value": 95.2,
-        "max_available_at": "2026-11-23T13:50:01.898528+00:00",
+        "max_available_at": "2026-11-24T18:45:01.943997+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
@@ -1632,30 +1637,25 @@
       },
       "eurusd": {
         "status": "available",
-        "value": 1.1034,
+        "value": 1.0981,
         "unit": "USD/EUR",
-        "latest_observation_date": "2026-11-13",
-        "age_calendar_days": 11,
+        "latest_observation_date": "2026-11-20",
+        "age_calendar_days": 4,
         "allowed_age_days": 14,
-        "return_1_observation": -0.001989869753979745,
-        "return_7_calendar_days": -0.01075847229693383,
-        "momentum_30_calendar_days": -0.008001438460846999,
-        "rolling_mean_5_observations": 1.11202,
-        "rolling_mean_20_observations": 1.117705,
-        "volatility_20_returns_annualized": 0.05387038228084336,
+        "return_1_observation": 0.0,
+        "return_7_calendar_days": -0.0048033351459124685,
+        "momentum_30_calendar_days": -0.021214011944023392,
+        "rolling_mean_5_observations": 1.099,
+        "rolling_mean_20_observations": 1.11194,
+        "volatility_20_returns_annualized": 0.05430205886315565,
         "trend_above_trailing_mean20": 0,
         "high_vol_vs_prior_trailing_median": 1,
-        "lag_1_observation_value": 1.1056,
-        "max_available_at": "2026-11-23T13:50:16.401236+00:00",
+        "lag_1_observation_value": 1.0981,
+        "max_available_at": "2026-11-24T18:45:18.071550+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
         "observation_ids": [
-          40828,
-          40830,
-          40831,
-          40832,
-          40833,
           40834,
           40835,
           40836,
@@ -1923,14 +1923,19 @@
           46039,
           46040,
           46042,
-          46043
+          46043,
+          46057,
+          46058,
+          46059,
+          46060,
+          46061
         ],
-        "mean3": 1.1080999999999999,
-        "mean4": 1.111175,
-        "mean5": 1.11202,
-        "mean10": 1.11612,
-        "return3": -0.015173152445555282,
-        "return5": -0.017890520694259004,
+        "mean3": 1.0976666666666668,
+        "mean4": 1.0986500000000001,
+        "mean5": 1.099,
+        "mean10": 1.10551,
+        "return3": -0.003177196804647675,
+        "return5": -0.0048033351459124685,
         "short_window_convention": "trailing_observed_sessions_not_calendar_days"
       },
       "italy_gasoline_ex_tax": {
@@ -1949,7 +1954,7 @@
         "trend_above_trailing_mean20": 0,
         "high_vol_vs_prior_trailing_median": 1,
         "lag_1_observation_value": 0.9626983606557379,
-        "max_available_at": "2026-11-23T13:50:08.652855+00:00",
+        "max_available_at": "2026-11-24T18:45:09.497896+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
@@ -2252,7 +2257,7 @@
         "trend_above_trailing_mean20": 0,
         "high_vol_vs_prior_trailing_median": 1,
         "lag_1_observation_value": 0.9314341935483871,
-        "max_available_at": "2026-11-23T13:50:08.652855+00:00",
+        "max_available_at": "2026-11-24T18:45:09.497896+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
@@ -2582,7 +2587,7 @@
         46047,
         46051
       ],
-      "max_available_at": "2026-11-23T13:49:35.226303+00:00"
+      "max_available_at": "2026-11-24T18:44:37.567187+00:00"
     },
     "rbob_minus_brent": {
       "value": null,
@@ -2608,7 +2613,7 @@
   },
   "policy_headlines": {
     "status": "captured_headlines_only",
-    "retrieved_at": "2026-11-24T12:55:50.959702+00:00",
+    "retrieved_at": "2026-11-24T18:44:09.317791+00:00",
     "items": [],
     "note": "Changes require original-document review. This is not complete policy surveillance."
   },
