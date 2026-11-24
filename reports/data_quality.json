@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-23T22:26:31.511024+00:00",
+  "generated_at": "2026-11-24T00:42:49.505793+00:00",
   "as_of_beirut": "2026-11-24",
   "timezone": "Asia/Beirut",
   "ledger_unique_dates": 1374,
@@ -101,14 +101,14 @@
         "2025-09-30"
       ],
       "duplicate_date_extra_observations": 4,
-      "exact_duplicate_rows_in_captures": 29,
+      "exact_duplicate_rows_in_captures": 30,
       "last_successful_run": {
-        "id": 213,
-        "finished_at": "2026-11-23T22:26:11.342741+00:00",
+        "id": 216,
+        "finished_at": "2026-11-24T00:42:29.863938+00:00",
         "details": {
           "parsed_rows": 1315,
           "new_observations": 0,
-          "capture_id": 843
+          "capture_id": 856
         }
       }
     },
@@ -171,8 +171,8 @@
       "duplicate_date_extra_observations": 31,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 215,
-        "finished_at": "2026-11-23T22:26:30.814541+00:00",
+        "id": 218,
+        "finished_at": "2026-11-24T00:42:49.004224+00:00",
         "details": {
           "parsed_rows": 9,
           "new_observations": 0,
@@ -255,12 +255,12 @@
       "duplicate_date_extra_observations": 0,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 214,
-        "finished_at": "2026-11-23T22:26:20.788352+00:00",
+        "id": 217,
+        "finished_at": "2026-11-24T00:42:39.272432+00:00",
         "details": {
           "parsed_rows": 1,
           "new_observations": 0,
-          "capture_id": 847
+          "capture_id": 860
         }
       }
     }
@@ -1975,6 +1975,30 @@
       "source_id": "ministry",
       "started_at": "2026-11-23T22:26:21.288100+00:00",
       "finished_at": "2026-11-23T22:26:30.814541+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 9, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 216,
+      "source_id": "ipt",
+      "started_at": "2026-11-24T00:42:12.948869+00:00",
+      "finished_at": "2026-11-24T00:42:29.863938+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1315, \"new_observations\": 0, \"capture_id\": 856}"
+    },
+    {
+      "id": 217,
+      "source_id": "totalenergies",
+      "started_at": "2026-11-24T00:42:30.224790+00:00",
+      "finished_at": "2026-11-24T00:42:39.272432+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1, \"new_observations\": 0, \"capture_id\": 860}"
+    },
+    {
+      "id": 218,
+      "source_id": "ministry",
+      "started_at": "2026-11-24T00:42:39.639040+00:00",
+      "finished_at": "2026-11-24T00:42:49.004224+00:00",
       "status": "success",
       "details": "{\"parsed_rows\": 9, \"new_observations\": 0, \"pages\": 1}"
     }
