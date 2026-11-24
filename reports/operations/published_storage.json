@@ -1,41 +1,41 @@
 {
   "version": 1,
   "repository": "drew-1423/fuelb",
-  "tag": "fuel-storage-45299181179-1",
-  "created_at": "2026-11-24T00:43:40.194592+00:00",
+  "tag": "fuel-storage-45343603133-1",
+  "created_at": "2026-11-24T06:54:15.851889+00:00",
   "assets": {
     "databases": [
       {
         "name": "databases-0000.part",
-        "bytes": 44694501,
-        "sha256": "a9d68227fdc371361fd348e642be8f3c46fbe0014d4e2fa9193670f2311cfd13"
+        "bytes": 44885127,
+        "sha256": "19cf2f864914aa3f85d9c194861ae5545c64c269557ab286bbf97728e8aeca44"
       }
     ],
     "captures": [
       {
         "name": "captures-0000.part",
-        "bytes": 32279796,
-        "sha256": "e2a74c7eb118ecb57e9466acdddce3f18bd3baca48de562fbf5816e976a7c50b"
+        "bytes": 32476611,
+        "sha256": "d5f06e1fcfbb952c64f9e0dd2885b34f3ca241c9af650d2b1f70360f0efd2a9f"
       }
     ]
   },
   "databases": {
     "lebanon_fuel.sqlite": {
-      "bytes": 109543424,
+      "bytes": 109662208,
       "reclaimable_bytes": 0,
-      "sha256": "f10d451e43dc68ab1546726afcdf4ee2d634559aa5f5a436e917cf715b22572f"
+      "sha256": "cf7800544d32965734ca89f646ee3b58c005a85b1ec3d33e68fbb0747088738b"
     },
     "forecast_ledger.sqlite": {
-      "bytes": 86978560,
+      "bytes": 87347200,
       "reclaimable_bytes": 0,
-      "sha256": "38e03d6fe2dcbf8899f9cd67f997fdb6538ea8ac766c14a3ebcb4255c8b99033"
+      "sha256": "98fa4fa4ddb82b323318a312f1b8035535a0110fc28f2f2955702ba6e39e9f34"
     },
     "operations.sqlite": {
-      "bytes": 9027584,
+      "bytes": 9203712,
       "reclaimable_bytes": 0,
-      "sha256": "ee489f8e14ea111ac643c9e12d2f0ee9294bb3c2afc3cd1568b8ed3a3bba31a7"
+      "sha256": "921f7ab0f930876cd2ef4b47780f89ccb24284b8701bd589d3a469dc7d750cbf"
     }
   },
-  "capture_count": 309,
-  "widget_sha256": "6d2a192d2f4f1d0ee51fccc918acadca6b94945d61f1cd2a72f1cb3bbcd71415"
+  "capture_count": 313,
+  "widget_sha256": "91fcac673772c61fdf812338e070fad81a2af6a4ce2adb742bed2cd165cc5c52"
 }
