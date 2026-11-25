@@ -1,6 +1,6 @@
 {
-  "origin_utc": "2026-11-24T18:45:19.914009+00:00",
-  "origin_beirut": "2026-11-24T20:45:19.914009+02:00",
+  "origin_utc": "2026-11-25T00:45:51.084704+00:00",
+  "origin_beirut": "2026-11-25T02:45:51.084704+02:00",
   "mode": "strict",
   "backtest_eligible": true,
   "series": {
@@ -9,7 +9,7 @@
       "value": 92.94,
       "unit": "USD/bbl",
       "latest_observation_date": "2026-11-17",
-      "age_calendar_days": 7,
+      "age_calendar_days": 8,
       "allowed_age_days": 14,
       "return_1_observation": 0.0004305705059202136,
       "return_7_calendar_days": 0.030834072759538644,
@@ -1829,7 +1829,7 @@
       "value": 0.9415262295081966,
       "unit": "EUR/L",
       "latest_observation_date": "2026-11-16",
-      "age_calendar_days": 8,
+      "age_calendar_days": 9,
       "allowed_age_days": 21,
       "return_1_observation": -0.02199248696457734,
       "return_7_calendar_days": -0.02199248696457734,
@@ -2132,7 +2132,7 @@
       "value": 0.8725632258064517,
       "unit": "EUR/L",
       "latest_observation_date": "2026-11-16",
-      "age_calendar_days": 8,
+      "age_calendar_days": 9,
       "allowed_age_days": 21,
       "return_1_observation": -0.06320464521241242,
       "return_7_calendar_days": -0.06320464521241242,
@@ -2434,7 +2434,7 @@
       "status": "stale",
       "value": null,
       "latest_observation_date": "2025-05-29",
-      "age_calendar_days": 544,
+      "age_calendar_days": 545,
       "observation_ids": [
         29360
       ]

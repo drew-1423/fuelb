@@ -1,5 +1,5 @@
 {
-  "origin": "2026-11-24T18:45:53.446384+00:00",
+  "origin": "2026-11-25T00:46:14.693086+00:00",
   "anchor": {
     "absolute_price_change": -101000,
     "candidate_values": [
@@ -52,7 +52,7 @@
   "forecasts": [
     {
       "horizon": "decision_1",
-      "origin": "2026-11-24T18:45:53.446384+00:00",
+      "origin": "2026-11-25T00:46:14.693086+00:00",
       "endpoint": null,
       "target_label": "Next 1 official pricing decision(s)",
       "decision_date": "2026-11-27",
@@ -103,13 +103,13 @@
         "Required quantitative features unavailable: domestic change"
       ],
       "pinned_family": "G_hybrid",
-      "forecast_id": 45500,
-      "snapshot_id": "a71e29937c7e30a272b9acb9e65641ce514ab689fecd922941e717c15346f046",
+      "forecast_id": 45508,
+      "snapshot_id": "80c5bec18a885e4681485ed505768d918c0eff43ee6b025f6e6a88123cbaa253",
       "model_version": "live-unavailable-v1"
     },
     {
       "horizon": "decision_2",
-      "origin": "2026-11-24T18:45:53.446384+00:00",
+      "origin": "2026-11-25T00:46:14.693086+00:00",
       "endpoint": null,
       "target_label": "Next 2 official pricing decision(s)",
       "decision_date": "2026-12-01",
@@ -160,13 +160,13 @@
         "Required quantitative features unavailable: domestic change"
       ],
       "pinned_family": "G_hybrid",
-      "forecast_id": 45501,
-      "snapshot_id": "a71e29937c7e30a272b9acb9e65641ce514ab689fecd922941e717c15346f046",
+      "forecast_id": 45509,
+      "snapshot_id": "80c5bec18a885e4681485ed505768d918c0eff43ee6b025f6e6a88123cbaa253",
       "model_version": "live-unavailable-v1"
     },
     {
       "horizon": "decision_4",
-      "origin": "2026-11-24T18:45:53.446384+00:00",
+      "origin": "2026-11-25T00:46:14.693086+00:00",
       "endpoint": null,
       "target_label": "Next 4 official pricing decision(s)",
       "decision_date": "2026-12-08",
@@ -217,14 +217,14 @@
         "Required quantitative features unavailable: domestic change"
       ],
       "pinned_family": "G_hybrid",
-      "forecast_id": 45502,
-      "snapshot_id": "a71e29937c7e30a272b9acb9e65641ce514ab689fecd922941e717c15346f046",
+      "forecast_id": 45510,
+      "snapshot_id": "80c5bec18a885e4681485ed505768d918c0eff43ee6b025f6e6a88123cbaa253",
       "model_version": "live-unavailable-v1"
     },
     {
       "horizon": "day_1",
-      "origin": "2026-11-24T18:45:53.446384+00:00",
-      "endpoint": "2026-11-25T20:45:53.446384+02:00",
+      "origin": "2026-11-25T00:46:14.693086+00:00",
+      "endpoint": "2026-11-26T02:46:14.693086+02:00",
       "target_label": "Prevailing official price in 1 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -258,14 +258,14 @@
         "Required quantitative features unavailable: domestic change"
       ],
       "pinned_family": "G_hybrid",
-      "forecast_id": 45503,
-      "snapshot_id": "a71e29937c7e30a272b9acb9e65641ce514ab689fecd922941e717c15346f046",
+      "forecast_id": 45511,
+      "snapshot_id": "80c5bec18a885e4681485ed505768d918c0eff43ee6b025f6e6a88123cbaa253",
       "model_version": "live-unavailable-v1"
     },
     {
       "horizon": "day_3",
-      "origin": "2026-11-24T18:45:53.446384+00:00",
-      "endpoint": "2026-11-27T20:45:53.446384+02:00",
+      "origin": "2026-11-25T00:46:14.693086+00:00",
+      "endpoint": "2026-11-28T02:46:14.693086+02:00",
       "target_label": "Prevailing official price in 3 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -299,14 +299,14 @@
         "Required quantitative features unavailable: domestic change"
       ],
       "pinned_family": "G_hybrid",
-      "forecast_id": 45504,
-      "snapshot_id": "a71e29937c7e30a272b9acb9e65641ce514ab689fecd922941e717c15346f046",
+      "forecast_id": 45512,
+      "snapshot_id": "80c5bec18a885e4681485ed505768d918c0eff43ee6b025f6e6a88123cbaa253",
       "model_version": "live-unavailable-v1"
     },
     {
       "horizon": "day_7",
-      "origin": "2026-11-24T18:45:53.446384+00:00",
-      "endpoint": "2026-12-01T20:45:53.446384+02:00",
+      "origin": "2026-11-25T00:46:14.693086+00:00",
+      "endpoint": "2026-12-02T02:46:14.693086+02:00",
       "target_label": "Prevailing official price in 7 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -340,14 +340,14 @@
         "Required quantitative features unavailable: domestic change"
       ],
       "pinned_family": "G_hybrid",
-      "forecast_id": 45505,
-      "snapshot_id": "a71e29937c7e30a272b9acb9e65641ce514ab689fecd922941e717c15346f046",
+      "forecast_id": 45513,
+      "snapshot_id": "80c5bec18a885e4681485ed505768d918c0eff43ee6b025f6e6a88123cbaa253",
       "model_version": "live-unavailable-v1"
     },
     {
       "horizon": "day_14",
-      "origin": "2026-11-24T18:45:53.446384+00:00",
-      "endpoint": "2026-12-08T20:45:53.446384+02:00",
+      "origin": "2026-11-25T00:46:14.693086+00:00",
+      "endpoint": "2026-12-09T02:46:14.693086+02:00",
       "target_label": "Prevailing official price in 14 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -381,14 +381,14 @@
         "Required quantitative features unavailable: domestic change"
       ],
       "pinned_family": "G_hybrid",
-      "forecast_id": 45506,
-      "snapshot_id": "a71e29937c7e30a272b9acb9e65641ce514ab689fecd922941e717c15346f046",
+      "forecast_id": 45514,
+      "snapshot_id": "80c5bec18a885e4681485ed505768d918c0eff43ee6b025f6e6a88123cbaa253",
       "model_version": "live-unavailable-v1"
     },
     {
       "horizon": "day_30",
-      "origin": "2026-11-24T18:45:53.446384+00:00",
-      "endpoint": "2026-12-24T20:45:53.446384+02:00",
+      "origin": "2026-11-25T00:46:14.693086+00:00",
+      "endpoint": "2026-12-25T02:46:14.693086+02:00",
       "target_label": "Prevailing official price in 30 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -422,8 +422,8 @@
         "Required quantitative features unavailable: domestic change"
       ],
       "pinned_family": "G_hybrid",
-      "forecast_id": 45507,
-      "snapshot_id": "a71e29937c7e30a272b9acb9e65641ce514ab689fecd922941e717c15346f046",
+      "forecast_id": 45515,
+      "snapshot_id": "80c5bec18a885e4681485ed505768d918c0eff43ee6b025f6e6a88123cbaa253",
       "model_version": "live-unavailable-v1"
     }
   ],
@@ -676,16 +676,16 @@
     "Required quantitative features unavailable: domestic change"
   ],
   "forecast_ids": [
-    45500,
-    45501,
-    45502,
-    45503,
-    45504,
-    45505,
-    45506,
-    45507
+    45508,
+    45509,
+    45510,
+    45511,
+    45512,
+    45513,
+    45514,
+    45515
   ],
   "snapshot_ids": [
-    "a71e29937c7e30a272b9acb9e65641ce514ab689fecd922941e717c15346f046"
+    "80c5bec18a885e4681485ed505768d918c0eff43ee6b025f6e6a88123cbaa253"
   ]
 }
