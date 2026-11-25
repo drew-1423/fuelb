@@ -80,6 +80,25 @@ def strict_feature_frame(root, records, histories, at, horizon):
     # A source-agreed historical price stays eligible after the next
     # government-backed update. Otherwise the preceding change becomes NaN.
     config['target_statuses'] = sorted(set(config['target_statuses']) | {PROVISIONAL_PRICE})
+    # A supplementary archive may repeat the last corroborated station price
+    # between two real updates. It is evidence of the same price, not another
+    # pricing event, so it must not break the latest domestic change. Keep
+    # differing or uncorroborated observations as barriers to inference.
+    feature_records = []
+    ignored_revisions = []
+    for record in records:
+        previous = feature_records[-1] if feature_records else None
+        previous_price = previous.get('price_lbp_20l') if previous else None
+        previous_supported = previous and (previous['verification_status'] in VERIFIED or (
+            previous['verification_status'] == PROVISIONAL_PRICE and supplier_agreement(
+                source['id'] for source in previous.get('corroborating_sources', ()))))
+        if (record['verification_status'] == 'supplementary_observed'
+                and previous_supported and isinstance(previous_price, (int, float))
+                and math.isfinite(previous_price) and previous_price > 0
+                and previous_price == record.get('price_lbp_20l')):
+            ignored_revisions.append(record.get('revision_id'))
+            continue
+        feature_records.append(record)
     market = MarketFeatures.__new__(MarketFeatures)
     market.config, market.cache, market.mode = config, {}, 'as_of_close'
     market.histories = {}
@@ -100,11 +119,12 @@ def strict_feature_frame(root, records, histories, at, horizon):
         market.histories[sid] = sorted(rows, key=lambda r:r['available_at'])
     market.timestamps = {sid: np.array([datetime.fromisoformat(r['available_at']).timestamp() for r in history])
                          for sid, history in market.histories.items()}
-    values = features_at(records, len(records)-1, at.astimezone(BEIRUT), market, config)
+    values = features_at(feature_records, len(feature_records)-1, at.astimezone(BEIRUT), market, config)
     if values is None:
         raise ValueError('Insufficient verified domestic feature history')
     values.update(horizon=horizon, origin=at.isoformat(), sequence_index=len(records)-1,
-                  day_index=(at.date()-date(1970,1,1)).days)
+                  day_index=(at.date()-date(1970,1,1)).days,
+                  ignored_redundant_supplementary_revisions=ignored_revisions)
     return pd.DataFrame([values])
 
 
