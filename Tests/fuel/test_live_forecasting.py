@@ -400,6 +400,38 @@ def test_government_anchor_keeps_previous_source_agreed_change(context):
     assert np.isnan(frame.x_domestic_change_lag1.iloc[0])
 
 
+@pytest.mark.parametrize('supplementary_price,expected_tier', [(1030000, 2), (1020000, 4)])
+def test_repeated_supplementary_quote_between_station_updates_preserves_live_lag(
+        context, supplementary_price, expected_tier):
+    from lebanon_fuel.domain import PROVISIONAL_PRICE
+
+    candidate(context)
+    root, _, _, _, records, histories, at = context
+    previous = records[-2]
+    previous.update(verification_status=PROVISIONAL_PRICE,
+                    corroborating_sources=[{'id': 'ipt'}, {'id': 'totalenergies'}])
+    current = records[-1]
+    current.update(verification_status=PROVISIONAL_PRICE,
+                   corroborating_sources=[{'id': 'ipt'}, {'id': 'totalenergies'}])
+    supplement = dict(source_date=(at-timedelta(days=2)).date().isoformat(),
+                      verification_status='supplementary_observed',
+                      price_lbp_20l=supplementary_price, revision_id=99,
+                      version_known_at=(at-timedelta(days=1)).isoformat())
+    records.insert(-1, supplement)
+
+    frame = live.strict_feature_frame(root, records, histories, at, 'decision_1')
+    result = issued(context)
+    assert result['base_source_date'] == current['source_date']
+    assert result['tier'] == expected_tier
+    if expected_tier == 2:
+        assert frame.x_domestic_change_lag1.iloc[0] == 10000
+        assert frame.ignored_redundant_supplementary_revisions.iloc[0] == [99]
+        assert np.isfinite(result['predicted_price'])
+    else:
+        assert np.isnan(frame.x_domestic_change_lag1.iloc[0])
+        assert frame.ignored_redundant_supplementary_revisions.iloc[0] == []
+
+
 @pytest.mark.parametrize("archive_price", [2291000, 2300000])
 def test_later_supplementary_quote_does_not_replace_station_consensus(context, archive_price):
     from lebanon_fuel.dashboard.experience import current_price
