@@ -1,6 +1,6 @@
 # Lebanese gasoline 95 data quality report
 
-As of 2026-11-25, Asia/Beirut. Generated 2026-11-25T18:39:04.926950+00:00. Counts are database queries over actual captures.
+As of 2026-11-26, Asia/Beirut. Generated 2026-11-26T00:46:56.836055+00:00. Counts are database queries over actual captures.
 
 | Completion measure | Observed result |
 | --- | --- |
@@ -18,13 +18,13 @@ Verification: `document_verified` requires an original government PDF and record
 
 | Source | Observations | Unique valid dates | Earliest | Latest | Age days | Stale |
 | --- | ---: | ---: | --- | --- | ---: | --- |
-| ipt | 1315 | 1311 | 2008-01-02 | 2026-11-24 | 1 | False |
-| taqtek | 918 | 918 | 2010-10-27 | 2026-11-24 | 1 | False |
-| ministry | 946 | 914 | 2010-10-27 | 2026-11-17 | 8 | False |
-| official_document | 4 | 4 | 2010-10-27 | 2025-05-29 | 545 | True |
-| manual | 21 | 17 | 2026-01-16 | 2026-11-13 | 12 | True |
-| thefuelprice | 2 | 2 | 2026-11-17 | 2026-11-22 | 3 | False |
-| totalenergies | 2 | 2 | 2026-11-20 | 2026-11-24 | 1 | False |
+| ipt | 1315 | 1311 | 2008-01-02 | 2026-11-24 | 2 | False |
+| taqtek | 918 | 918 | 2010-10-27 | 2026-11-24 | 2 | False |
+| ministry | 946 | 914 | 2010-10-27 | 2026-11-17 | 9 | False |
+| official_document | 4 | 4 | 2010-10-27 | 2025-05-29 | 546 | True |
+| manual | 21 | 17 | 2026-01-16 | 2026-11-13 | 13 | True |
+| thefuelprice | 3 | 3 | 2026-11-17 | 2026-11-24 | 2 | False |
+| totalenergies | 2 | 2 | 2026-11-20 | 2026-11-24 | 2 | False |
 
 Latest successful IPT import parsed 1316 original rows. Semantic observations and unique dates differ because all raw row occurrences, including duplicates and same-day alternatives, are retained in `sightings`.
 
@@ -48,7 +48,7 @@ Observed frequency by year is in [frequency_by_year.csv](frequency_by_year.csv);
 
 Status counts: `{"archive_corroborated": 810, "conflict": 42, "document_verified": 4, "government_archive": 58, "provisional_corroborated": 4, "supplementary_observed": 1, "supplier_observed": 456}`. All contradictory valid source values remain in the immutable observation table; disputed dates have null canonical prices. [conflicting_observations.csv](conflicting_observations.csv) links them to observation IDs.
 
-Unknown publication timestamps: 3208 observations. Unknown official effective dates: 3204. Original Excel/HTML dates have no invented midnight release timestamp. Retrieval is stored in UTC and rendered with Asia/Beirut rules.
+Unknown publication timestamps: 3209 observations. Unknown official effective dates: 3205. Original Excel/HTML dates have no invented midnight release timestamp. Retrieval is stored in UTC and rendered with Asia/Beirut rules.
 
 Changes in the export are relative to the previous eligible verified record, with its date and an explicit basis. They are not asserted to be changes from the immediately preceding official decision. Sparse verified history cannot establish that predecessor.
 
