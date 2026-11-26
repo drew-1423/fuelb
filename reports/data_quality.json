@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-26T00:46:56.836055+00:00",
+  "generated_at": "2026-11-26T06:55:00.707601+00:00",
   "as_of_beirut": "2026-11-26",
   "timezone": "Asia/Beirut",
   "ledger_unique_dates": 1375,
@@ -101,14 +101,14 @@
         "2025-09-30"
       ],
       "duplicate_date_extra_observations": 4,
-      "exact_duplicate_rows_in_captures": 38,
+      "exact_duplicate_rows_in_captures": 39,
       "last_successful_run": {
-        "id": 245,
-        "finished_at": "2026-11-26T00:45:34.704622+00:00",
+        "id": 253,
+        "finished_at": "2026-11-26T06:54:42.190766+00:00",
         "details": {
           "parsed_rows": 1316,
           "new_observations": 0,
-          "capture_id": 981
+          "capture_id": 1015
         }
       }
     },
@@ -171,8 +171,8 @@
       "duplicate_date_extra_observations": 31,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 247,
-        "finished_at": "2026-11-26T00:45:52.738896+00:00",
+        "id": 255,
+        "finished_at": "2026-11-26T06:55:00.240514+00:00",
         "details": {
           "parsed_rows": 8,
           "new_observations": 0,
@@ -255,12 +255,12 @@
       "duplicate_date_extra_observations": 0,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 246,
-        "finished_at": "2026-11-26T00:45:42.939958+00:00",
+        "id": 254,
+        "finished_at": "2026-11-26T06:54:50.024175+00:00",
         "details": {
           "parsed_rows": 1,
           "new_observations": 0,
-          "capture_id": 985
+          "capture_id": 1019
         }
       }
     }
@@ -2273,6 +2273,30 @@
       "finished_at": "2026-11-26T00:46:56.222928+00:00",
       "status": "success",
       "details": "{\"results\": [{\"series\": \"eurusd\", \"parsed_rows\": 7275, \"new_observations\": 0, \"capture_id\": 1010}]}"
+    },
+    {
+      "id": 253,
+      "source_id": "ipt",
+      "started_at": "2026-11-26T06:54:25.809489+00:00",
+      "finished_at": "2026-11-26T06:54:42.190766+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1316, \"new_observations\": 0, \"capture_id\": 1015}"
+    },
+    {
+      "id": 254,
+      "source_id": "totalenergies",
+      "started_at": "2026-11-26T06:54:42.509089+00:00",
+      "finished_at": "2026-11-26T06:54:50.024175+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1, \"new_observations\": 0, \"capture_id\": 1019}"
+    },
+    {
+      "id": 255,
+      "source_id": "ministry",
+      "started_at": "2026-11-26T06:54:50.338208+00:00",
+      "finished_at": "2026-11-26T06:55:00.240514+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 8, \"new_observations\": 0, \"pages\": 1}"
     }
   ],
   "readiness": "Adequate for source reconciliation and exploratory target analysis. Not ready for an institutional as-of forecasting backtest: effective/release times, unresolved conflicts, coverage and regimes need review."
