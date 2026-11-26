@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-26T12:58:13.975619+00:00",
+  "generated_at": "2026-11-26T18:43:47.678105+00:00",
   "data_quality": {
     "conflict_dates": 42,
     "missing_publication_clocks": 3209,
@@ -52,11 +52,6 @@
       "code": "policy_review_required",
       "severity": "warning",
       "message": "Current pricing policy needs a dated, evidence-backed human review."
-    },
-    {
-      "code": "new_policy_headline",
-      "severity": "warning",
-      "message": "New fuel/tax headlines appeared on the captured ministry page. Review the original instruments."
     },
     {
       "code": "no_prospective_accuracy",
@@ -119,8 +114,8 @@
     "revision_id": 4862
   },
   "market": {
-    "origin_utc": "2026-11-26T12:58:07.978063+00:00",
-    "origin_beirut": "2026-11-26T14:58:07.978063+02:00",
+    "origin_utc": "2026-11-26T18:43:42.226495+00:00",
+    "origin_beirut": "2026-11-26T20:43:42.226495+02:00",
     "mode": "strict",
     "backtest_eligible": true,
     "series": {
@@ -2619,7 +2614,7 @@
   },
   "policy_headlines": {
     "status": "captured_headlines_only",
-    "retrieved_at": "2026-11-26T12:57:15.892029+00:00",
+    "retrieved_at": "2026-11-26T18:42:56.063626+00:00",
     "items": [
       {
         "url": "/ar/details/101238/%D9%82%D8%A7%D9%85-%D9%88%D8%B2%D9%8A%D8%B1-%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9-%D9%88%D8%A7%D9%84%D9%85%D9%8A%D8%A7%D9%87-%D8%AC%D9%88-%D8%A7%D9%84%D8%B5%D8%AF%D9%8A-%D8%A8%D8%B2%D9%8A%D8%A7%D8%B1%D8%A9-%D8%B1%D8%B3%D9%85%D9%8A%D8%A9-%D8%A7%D9%84%D9%89-%D9%82%D8%A8%D8%B1%D8%B5",

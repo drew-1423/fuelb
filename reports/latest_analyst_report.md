@@ -1,6 +1,6 @@
 # Lebanon gasoline 95 analyst report
 
-Generated 2026-11-26T12:58:13.975619+00:00
+Generated 2026-11-26T18:43:47.678105+00:00
 
 ## Executive summary
 
@@ -45,6 +45,5 @@ Selected G_hybrid measured MAE 366 LBP / 20 L, direction accuracy 100.0%, n=2 on
 - Yahoo HO=F NYMEX NY Harbor ULSD / heating oil futures: no_available_observation.
 - Cboe Crude Oil ETF Volatility Index (OVX): stale.
 - Current pricing policy needs a dated, evidence-backed human review.
-- New fuel/tax headlines appeared on the captured ministry page. Review the original instruments.
 - No numerical prospective forecasts have verified settled outcomes. Live accuracy is unavailable.
 - Part 6 rejects production approval for all selected horizons.
