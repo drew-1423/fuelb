@@ -126,7 +126,7 @@ def _daily_comparison_table(rows, today, *, scored_ids=(), archive=False):
     })
     keep = table if archive else table.loc[actual.notna() | day.gt(cutoff) | scored]
     return (keep
-            .sort_values(["Date · Beirut", "Selected for scoring", "_matched", "_issued"],
+            .sort_values(["Date · Beirut", "_matched", "Selected for scoring", "_issued"],
                          ascending=False, kind="stable")
             .drop_duplicates("Date · Beirut")
             .drop(columns=["_issued", "_matched"]))

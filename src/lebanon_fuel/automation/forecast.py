@@ -74,7 +74,7 @@ def refresh(root, cfg, run_id):
         with _read(root / cfg['validation']['forecast_ledger']) as db:
             assessment_time = now()
             write_json(root / 'reports/operations/live_scorecard.json', {
-                horizon: report(db, score_policy, assessment_time, horizon=horizon, include_research=True)
+                horizon: report(db, score_policy, assessment_time, horizon=horizon)
                 for horizon in (row['horizon'] for row in result['forecasts'])
             })
     return result

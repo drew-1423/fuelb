@@ -279,7 +279,7 @@ def baseline(records, anchor, horizon):
     return 0.0, 'A_no_change', 'Persistence of the latest verified price. Central assumption of no net change through the target horizon.'
 
 
-def generate(root, settings, config, decision, records, histories, at):
+def generate(root, settings, config, decision, records, histories, at, *, research_sensitivity=False):
     records = current_price_history(records)
     anchor, problem = anchor_check(records, at, config['anchor_maximum_age_days'], allow_provisional=True)
     provisional = bool(anchor and anchor['verification_status'] == PROVISIONAL_PRICE)
@@ -383,7 +383,7 @@ def generate(root, settings, config, decision, records, histories, at):
                             driver_contributions=driver_contributions(bundle,candidate['family'],frame))
                         if tier==1 and (radius is None or selected.get('probabilities') is None):
                             raise ValueError('Approved uncertainty evidence is incomplete')
-                        if candidate['family'] == 'G_hybrid':
+                        if research_sensitivity and candidate['family'] == 'G_hybrid':
                             # Research challenger using the same bundle and available inputs.
                             # Zero the single lag feature, keeping other lag variables intact.
                             counterfactual = frame.assign(x_domestic_change_lag1=0.0)

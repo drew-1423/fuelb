@@ -105,7 +105,7 @@ def _metrics(cases, model, deadband):
                 bias=mean(signed), direction_hits=hits)
 
 
-def report(db, policy, at, *, horizon="decision_1", include_research=False):
+def report(db, policy, at, *, horizon="decision_1"):
     from .decision_tracking import ATTEMPT, _matched
 
     at = at.isoformat() if isinstance(at, datetime) else at
@@ -132,8 +132,6 @@ def report(db, policy, at, *, horizon="decision_1", include_research=False):
         reason = attempt["status"] if attempt else "no_match_attempt"
         if outcome:
             prices = {"Hybrid": outcome["forecast"], **spec["score_protocol"]["baselines"]}
-            if include_research and spec.get("shadow_zero_domestic_lag1_price") is not None:
-                prices["Zero latest domestic change"] = spec["shadow_zero_domestic_lag1_price"]
             candidate = dict(outcome, prices=prices)
             prior = cases_by_day.get(outcome["day"])
             # Distinct outcomes across evidence levels. For competing origins,
@@ -157,10 +155,7 @@ def report(db, policy, at, *, horizon="decision_1", include_research=False):
                             evidence=outcome["kind"] if outcome else None))
     cases = list(cases_by_day.values())
     comparisons = []
-    models = ["No change", "Last change"]
-    if include_research:
-        models.append("Zero latest domestic change")
-    for name in models:
+    for name in ("No change", "Last change"):
         sample = [case for case in cases if name in case["prices"]]
         if sample:
             comparisons.extend(dict(_metrics(sample, model, policy["direction_deadband_lbp"]), comparison=name)
