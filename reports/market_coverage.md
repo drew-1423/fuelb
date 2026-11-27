@@ -1,6 +1,6 @@
 # International market coverage and quality
 
-Generated for 2026-11-27T12:53:40.762525+00:00. Counts below are actual stored observations, not estimates.
+Generated for 2026-11-27T18:42:12.636872+00:00. Counts below are actual stored observations, not estimates.
 
 | Series | Unique valid dates | Earliest | Latest | Latest normalized value | Stale |
 | --- | ---: | --- | --- | --- | --- |

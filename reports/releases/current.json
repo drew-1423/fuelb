@@ -1,8 +1,8 @@
 {
-  "created_at": "2026-11-27T12:53:01.650108+00:00",
+  "created_at": "2026-11-27T18:41:34.083559+00:00",
   "hash_algorithm": "sha256",
-  "commit_sha": "30b4f39dc6b8adab4b286184a181639744a4002d",
-  "base_commit": "30b4f39dc6b8adab4b286184a181639744a4002d",
+  "commit_sha": "055f638a7eb7fb10fa274d749539500d8ad0e6c3",
+  "base_commit": "055f638a7eb7fb10fa274d749539500d8ad0e6c3",
   "binding": "exact CI commit",
   "source_sha256": {
     ".github/workflows/refresh.yml": "ae2769b03f0bb2189fb2ae39343a949b817750991868cc51dbdaf7d5c1458ebc",
