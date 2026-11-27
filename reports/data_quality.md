@@ -1,6 +1,6 @@
 # Lebanese gasoline 95 data quality report
 
-As of 2026-11-26, Asia/Beirut. Generated 2026-11-26T18:43:02.826532+00:00. Counts are database queries over actual captures.
+As of 2026-11-27, Asia/Beirut. Generated 2026-11-27T00:51:29.783387+00:00. Counts are database queries over actual captures.
 
 | Completion measure | Observed result |
 | --- | --- |
@@ -18,13 +18,13 @@ Verification: `document_verified` requires an original government PDF and record
 
 | Source | Observations | Unique valid dates | Earliest | Latest | Age days | Stale |
 | --- | ---: | ---: | --- | --- | ---: | --- |
-| ipt | 1315 | 1311 | 2008-01-02 | 2026-11-24 | 2 | False |
-| taqtek | 918 | 918 | 2010-10-27 | 2026-11-24 | 2 | False |
-| ministry | 946 | 914 | 2010-10-27 | 2026-11-17 | 9 | False |
-| official_document | 4 | 4 | 2010-10-27 | 2025-05-29 | 546 | True |
-| manual | 21 | 17 | 2026-01-16 | 2026-11-13 | 13 | True |
-| thefuelprice | 3 | 3 | 2026-11-17 | 2026-11-24 | 2 | False |
-| totalenergies | 2 | 2 | 2026-11-20 | 2026-11-24 | 2 | False |
+| ipt | 1315 | 1311 | 2008-01-02 | 2026-11-24 | 3 | False |
+| taqtek | 918 | 918 | 2010-10-27 | 2026-11-24 | 3 | False |
+| ministry | 946 | 914 | 2010-10-27 | 2026-11-17 | 10 | False |
+| official_document | 4 | 4 | 2010-10-27 | 2025-05-29 | 547 | True |
+| manual | 21 | 17 | 2026-01-16 | 2026-11-13 | 14 | True |
+| thefuelprice | 3 | 3 | 2026-11-17 | 2026-11-24 | 3 | False |
+| totalenergies | 2 | 2 | 2026-11-20 | 2026-11-24 | 3 | False |
 
 Latest successful IPT import parsed 1316 original rows. Semantic observations and unique dates differ because all raw row occurrences, including duplicates and same-day alternatives, are retained in `sightings`.
 

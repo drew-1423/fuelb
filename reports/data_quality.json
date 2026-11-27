@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-26T18:43:02.826532+00:00",
-  "as_of_beirut": "2026-11-26",
+  "generated_at": "2026-11-27T00:51:29.783387+00:00",
+  "as_of_beirut": "2026-11-27",
   "timezone": "Asia/Beirut",
   "ledger_unique_dates": 1375,
   "status_counts": {
@@ -91,7 +91,7 @@
       "valid_unique_dates": 1311,
       "earliest_source_date": "2008-01-02",
       "latest_source_date": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "stale": false,
       "invalid_observations": 0,
       "within_source_conflict_dates": [
@@ -101,14 +101,14 @@
         "2025-09-30"
       ],
       "duplicate_date_extra_observations": 4,
-      "exact_duplicate_rows_in_captures": 41,
+      "exact_duplicate_rows_in_captures": 42,
       "last_successful_run": {
-        "id": 259,
-        "finished_at": "2026-11-26T18:42:43.019022+00:00",
+        "id": 262,
+        "finished_at": "2026-11-27T00:50:08.572802+00:00",
         "details": {
           "parsed_rows": 1316,
           "new_observations": 0,
-          "capture_id": 1041
+          "capture_id": 1054
         }
       }
     },
@@ -117,19 +117,19 @@
       "valid_unique_dates": 918,
       "earliest_source_date": "2010-10-27",
       "latest_source_date": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "stale": false,
       "invalid_observations": 0,
       "within_source_conflict_dates": [],
       "duplicate_date_extra_observations": 0,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 248,
-        "finished_at": "2026-11-26T00:45:56.846518+00:00",
+        "id": 265,
+        "finished_at": "2026-11-27T00:50:30.891539+00:00",
         "details": {
           "parsed_rows": 918,
           "new_observations": 0,
-          "capture_id": 991
+          "capture_id": 1064
         }
       }
     },
@@ -138,7 +138,7 @@
       "valid_unique_dates": 914,
       "earliest_source_date": "2010-10-27",
       "latest_source_date": "2026-11-17",
-      "age_days": 9,
+      "age_days": 10,
       "stale": false,
       "invalid_observations": 1,
       "within_source_conflict_dates": [
@@ -171,8 +171,8 @@
       "duplicate_date_extra_observations": 31,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 261,
-        "finished_at": "2026-11-26T18:43:02.191360+00:00",
+        "id": 264,
+        "finished_at": "2026-11-27T00:50:26.720149+00:00",
         "details": {
           "parsed_rows": 8,
           "new_observations": 0,
@@ -185,7 +185,7 @@
       "valid_unique_dates": 4,
       "earliest_source_date": "2010-10-27",
       "latest_source_date": "2025-05-29",
-      "age_days": 546,
+      "age_days": 547,
       "stale": true,
       "invalid_observations": 0,
       "within_source_conflict_dates": [],
@@ -206,7 +206,7 @@
       "valid_unique_dates": 17,
       "earliest_source_date": "2026-01-16",
       "latest_source_date": "2026-11-13",
-      "age_days": 13,
+      "age_days": 14,
       "stale": true,
       "invalid_observations": 0,
       "within_source_conflict_dates": [],
@@ -227,19 +227,19 @@
       "valid_unique_dates": 3,
       "earliest_source_date": "2026-11-17",
       "latest_source_date": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "stale": false,
       "invalid_observations": 0,
       "within_source_conflict_dates": [],
       "duplicate_date_extra_observations": 0,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 249,
-        "finished_at": "2026-11-26T00:46:01.776862+00:00",
+        "id": 266,
+        "finished_at": "2026-11-27T00:50:35.695335+00:00",
         "details": {
           "parsed_rows": 1,
-          "new_observations": 1,
-          "capture_id": 993
+          "new_observations": 0,
+          "capture_id": 1066
         }
       }
     },
@@ -248,19 +248,19 @@
       "valid_unique_dates": 2,
       "earliest_source_date": "2026-11-20",
       "latest_source_date": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "stale": false,
       "invalid_observations": 0,
       "within_source_conflict_dates": [],
       "duplicate_date_extra_observations": 0,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 260,
-        "finished_at": "2026-11-26T18:42:52.278704+00:00",
+        "id": 263,
+        "finished_at": "2026-11-27T00:50:16.944844+00:00",
         "details": {
           "parsed_rows": 1,
           "new_observations": 0,
-          "capture_id": 1045
+          "capture_id": 1058
         }
       }
     }
@@ -2345,6 +2345,70 @@
       "finished_at": "2026-11-26T18:43:02.191360+00:00",
       "status": "success",
       "details": "{\"parsed_rows\": 8, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 262,
+      "source_id": "ipt",
+      "started_at": "2026-11-27T00:49:52.904983+00:00",
+      "finished_at": "2026-11-27T00:50:08.572802+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1316, \"new_observations\": 0, \"capture_id\": 1054}"
+    },
+    {
+      "id": 263,
+      "source_id": "totalenergies",
+      "started_at": "2026-11-27T00:50:09.043050+00:00",
+      "finished_at": "2026-11-27T00:50:16.944844+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1, \"new_observations\": 0, \"capture_id\": 1058}"
+    },
+    {
+      "id": 264,
+      "source_id": "ministry",
+      "started_at": "2026-11-27T00:50:17.419262+00:00",
+      "finished_at": "2026-11-27T00:50:26.720149+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 8, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 265,
+      "source_id": "taqtek",
+      "started_at": "2026-11-27T00:50:27.188565+00:00",
+      "finished_at": "2026-11-27T00:50:30.891539+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 918, \"new_observations\": 0, \"capture_id\": 1064}"
+    },
+    {
+      "id": 266,
+      "source_id": "thefuelprice",
+      "started_at": "2026-11-27T00:50:31.362061+00:00",
+      "finished_at": "2026-11-27T00:50:35.695335+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1, \"new_observations\": 0, \"capture_id\": 1066}"
+    },
+    {
+      "id": 267,
+      "source_id": "market_eia",
+      "started_at": "2026-11-27T00:50:36.185231+00:00",
+      "finished_at": "2026-11-27T00:51:11.560430+00:00",
+      "status": "success",
+      "details": "{\"results\": [{\"series\": \"brent_spot\", \"parsed_rows\": 9137, \"new_observations\": 0, \"capture_id\": 1069}, {\"series\": \"nyh_gasoline\", \"parsed_rows\": 9186, \"new_observations\": 0, \"capture_id\": 1071}, {\"series\": \"us_gasoline_stocks\", \"parsed_rows\": 1925, \"new_observations\": 0, \"capture_id\": 1073}, {\"series\": \"us_crude_stocks\", \"parsed_rows\": 2304, \"new_observations\": 0, \"capture_id\": 1075}, {\"series\": \"us_refinery_utilization\", \"parsed_rows\": 1882, \"new_observations\": 0, \"capture_id\": 1077}]}"
+    },
+    {
+      "id": 268,
+      "source_id": "market_ec",
+      "started_at": "2026-11-27T00:51:11.956766+00:00",
+      "finished_at": "2026-11-27T00:51:21.374157+00:00",
+      "status": "success",
+      "details": "{\"results\": [{\"series\": \"italy_gasoline_ex_tax\", \"parsed_rows\": 1094, \"new_observations\": 0, \"capture_id\": 1080}, {\"series\": \"greece_gasoline_ex_tax\", \"parsed_rows\": 1094, \"new_observations\": 0, \"capture_id\": 1080}]}"
+    },
+    {
+      "id": 269,
+      "source_id": "market_fed",
+      "started_at": "2026-11-27T00:51:21.733652+00:00",
+      "finished_at": "2026-11-27T00:51:29.156919+00:00",
+      "status": "success",
+      "details": "{\"results\": [{\"series\": \"eurusd\", \"parsed_rows\": 7275, \"new_observations\": 0, \"capture_id\": 1083}]}"
     }
   ],
   "readiness": "Adequate for source reconciliation and exploratory target analysis. Not ready for an institutional as-of forecasting backtest: effective/release times, unresolved conflicts, coverage and regimes need review."
