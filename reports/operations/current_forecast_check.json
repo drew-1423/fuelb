@@ -1,12 +1,12 @@
 {
-  "origin": "2026-11-27T06:57:28.090143+00:00",
+  "origin": "2026-11-27T12:54:16.929217+00:00",
   "anchor": {
-    "absolute_price_change": -101000,
+    "absolute_price_change": -185000,
     "candidate_values": [
-      2242000
+      2158000
     ],
     "change_basis": "previous_verified_record_not_certified_previous_decision",
-    "chosen_observation_id": 3207,
+    "chosen_observation_id": 3211,
     "corroborating_sources": [
       {
         "id": "ipt",
@@ -15,45 +15,39 @@
       {
         "id": "totalenergies",
         "url": "https://pricing.totalenergies.com.lb/fuelprice/"
-      },
-      {
-        "id": "taqtek",
-        "url": "https://taqteklb.com/en/fuel/"
       }
     ],
     "date_role": "source_label",
     "decision_numbers": [],
     "issues": [],
     "observation_ids": [
-      3207,
-      3208,
-      3209,
-      3210
+      3211,
+      3212
     ],
     "official_effective_date": null,
-    "percentage_price_change": -4.310712761416987,
+    "percentage_price_change": -7.895860008536065,
     "previous_verified_date": "2026-11-17",
     "previous_verified_price": 2343000,
-    "price_lbp_20l": 2242000,
+    "price_lbp_20l": 2158000,
     "publication_date": null,
     "publication_timestamp": null,
     "regime": "2026_fiscal_changes_unresolved",
     "regime_status": "provisional_research_bucket",
     "resolution_id": null,
-    "retrieved_at": "2026-11-24T12:55:37.189937+00:00",
-    "source_date": "2026-11-24",
+    "retrieved_at": "2026-11-27T12:53:20.592525+00:00",
+    "source_date": "2026-11-27",
     "source_priority": 3,
     "source_url": "https://www.iptgroup.com.lb/ipt/en/our-stations/fuel-prices",
     "timezone": "Asia/Beirut",
     "unit": "LBP/20L",
     "verification_status": "provisional_corroborated",
-    "revision_id": 4862,
-    "version_known_at": "2026-11-26T00:46:01.901225+00:00"
+    "revision_id": 4864,
+    "version_known_at": "2026-11-27T12:53:29.868412+00:00"
   },
   "forecasts": [
     {
       "horizon": "decision_1",
-      "origin": "2026-11-27T06:57:28.090143+00:00",
+      "origin": "2026-11-27T12:54:16.929217+00:00",
       "endpoint": null,
       "target_label": "Next 1 official pricing decision(s)",
       "decision_date": "2026-12-01",
@@ -80,9 +74,9 @@
       "tier": 2,
       "label": "QUANTITATIVE MODEL FORECAST · PROVISIONAL PRICE ANCHOR",
       "status": "issued",
-      "predicted_price": 2207694.674290582,
-      "predicted_change": -34305.32570941773,
-      "percentage_change": -1.5301215749071246,
+      "predicted_price": 2106904.512454987,
+      "predicted_change": -51095.487545013064,
+      "percentage_change": -2.3677241679802163,
       "uncertainty": "Waiting for a validated prediction range from live outcomes.",
       "attempts": [
         {
@@ -155,17 +149,17 @@
       "ovx_regime_conditioning": "pooled_calibration",
       "calibration_ovx_regime": null,
       "driver_contributions": {
-        "commodity_pass_through": -3172.960671933958,
-        "lagged_domestic_momentum": -25376.68069757263,
+        "commodity_pass_through": -1823.6045406661478,
+        "lagged_domestic_momentum": -43516.198664435775,
         "fiscal_shock": 0.0,
         "other_features": -4173.056653184774,
         "baseline_intercept": -1582.6276867263691,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
       },
-      "base_price": 2242000,
-      "base_source_date": "2026-11-24",
-      "base_revision_id": 4862,
+      "base_price": 2158000,
+      "base_source_date": "2026-11-27",
+      "base_revision_id": 4864,
       "anchor_verification": "provisional_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
@@ -177,10 +171,6 @@
         {
           "id": "totalenergies",
           "url": "https://pricing.totalenergies.com.lb/fuelprice/"
-        },
-        {
-          "id": "taqtek",
-          "url": "https://taqteklb.com/en/fuel/"
         }
       ],
       "interval": null,
@@ -189,8 +179,8 @@
         "cohort": "provisional",
         "horizon": "decision_1",
         "artifact": "fbd34b3d4dadf1a06a160469dd2c1234f8dee0b133a5f9b4f310d441650b9462",
-        "evidence_category": "official_match",
-        "calibration_n": 0,
+        "evidence_category": "provisional_match",
+        "calibration_n": 1,
         "evaluation_n": 0,
         "empirical_coverage": null,
         "minimum_calibration_n": 30,
@@ -201,7 +191,7 @@
         "levels": {
           "80": {
             "nominal": 0.8,
-            "calibration_n": 0,
+            "calibration_n": 1,
             "evaluation_n": 0,
             "empirical_coverage": null,
             "mean_evaluated_width_lbp": null,
@@ -214,7 +204,7 @@
           },
           "90": {
             "nominal": 0.9,
-            "calibration_n": 0,
+            "calibration_n": 1,
             "evaluation_n": 0,
             "empirical_coverage": null,
             "mean_evaluated_width_lbp": null,
@@ -263,7 +253,7 @@
             "levels": {
               "80": {
                 "nominal": 0.8,
-                "calibration_n": 0,
+                "calibration_n": 1,
                 "evaluation_n": 0,
                 "empirical_coverage": null,
                 "mean_evaluated_width_lbp": null,
@@ -276,7 +266,7 @@
               },
               "90": {
                 "nominal": 0.9,
-                "calibration_n": 0,
+                "calibration_n": 1,
                 "evaluation_n": 0,
                 "empirical_coverage": null,
                 "mean_evaluated_width_lbp": null,
@@ -288,19 +278,19 @@
                 ]
               }
             },
-            "eligible_n": 0,
-            "raw_distinct_targets": 0
+            "eligible_n": 1,
+            "raw_distinct_targets": 1
           }
         },
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
-        "target_limitation": "Reviewed complete official outcome sequence"
+        "target_limitation": "Supplier evaluation is conditional on recorded corroborated quotes and does not certify official publication/effective times"
       },
-      "forecast_id": 45588,
-      "snapshot_id": "f4d9e5c42fc15c4d7a09400fe908c181368a16f9ea220b2d478fff805a17304c"
+      "forecast_id": 45596,
+      "snapshot_id": "b1fa2559789a30beb7cde9d4dc0d64fd8ea8d25056cedabf929bb80304d7c3ed"
     },
     {
       "horizon": "decision_2",
-      "origin": "2026-11-27T06:57:28.090143+00:00",
+      "origin": "2026-11-27T12:54:16.929217+00:00",
       "endpoint": null,
       "target_label": "Next 2 official pricing decision(s)",
       "decision_date": "2026-12-04",
@@ -327,9 +317,9 @@
       "tier": 2,
       "label": "QUANTITATIVE MODEL FORECAST · PROVISIONAL PRICE ANCHOR",
       "status": "issued",
-      "predicted_price": 2199293.498208716,
-      "predicted_change": -42706.50179128415,
-      "percentage_change": -1.9048395089778836,
+      "predicted_price": 2088097.6632159322,
+      "predicted_change": -69902.33678406777,
+      "percentage_change": -3.239218572014262,
       "uncertainty": "Waiting for a validated prediction range from live outcomes.",
       "attempts": [
         {
@@ -369,17 +359,17 @@
       "ovx_regime_conditioning": "pooled_calibration",
       "calibration_ovx_regime": null,
       "driver_contributions": {
-        "commodity_pass_through": 2873.7374833109834,
-        "lagged_domestic_momentum": -43244.01079654756,
+        "commodity_pass_through": 5789.533953560052,
+        "lagged_domestic_momentum": -73355.64225958024,
         "fiscal_shock": 0.0,
         "other_features": -535.8544910051393,
         "baseline_intercept": -1800.373987042425,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
       },
-      "base_price": 2242000,
-      "base_source_date": "2026-11-24",
-      "base_revision_id": 4862,
+      "base_price": 2158000,
+      "base_source_date": "2026-11-27",
+      "base_revision_id": 4864,
       "anchor_verification": "provisional_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
@@ -391,10 +381,6 @@
         {
           "id": "totalenergies",
           "url": "https://pricing.totalenergies.com.lb/fuelprice/"
-        },
-        {
-          "id": "taqtek",
-          "url": "https://taqteklb.com/en/fuel/"
         }
       ],
       "interval": null,
@@ -509,12 +495,12 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45589,
-      "snapshot_id": "f4d9e5c42fc15c4d7a09400fe908c181368a16f9ea220b2d478fff805a17304c"
+      "forecast_id": 45597,
+      "snapshot_id": "b1fa2559789a30beb7cde9d4dc0d64fd8ea8d25056cedabf929bb80304d7c3ed"
     },
     {
       "horizon": "decision_4",
-      "origin": "2026-11-27T06:57:28.090143+00:00",
+      "origin": "2026-11-27T12:54:16.929217+00:00",
       "endpoint": null,
       "target_label": "Next 4 official pricing decision(s)",
       "decision_date": "2026-12-11",
@@ -541,9 +527,9 @@
       "tier": 2,
       "label": "QUANTITATIVE MODEL FORECAST · PROVISIONAL PRICE ANCHOR",
       "status": "issued",
-      "predicted_price": 2188200.704414098,
-      "predicted_change": -53799.295585902015,
-      "percentage_change": -2.3996117567306876,
+      "predicted_price": 2068200.896809607,
+      "predicted_change": -89799.10319039294,
+      "percentage_change": -4.161218868878264,
       "uncertainty": "Waiting for a validated prediction range from live outcomes.",
       "attempts": [
         {
@@ -583,17 +569,17 @@
       "ovx_regime_conditioning": "pooled_calibration",
       "calibration_ovx_regime": null,
       "driver_contributions": {
-        "commodity_pass_through": -1434.286043967009,
-        "lagged_domestic_momentum": -55520.83180031639,
+        "commodity_pass_through": 4310.957193327149,
+        "lagged_domestic_momentum": -97265.88264210147,
         "fiscal_shock": 0.0,
         "other_features": 6808.015971449466,
         "baseline_intercept": -3652.1937130680835,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
       },
-      "base_price": 2242000,
-      "base_source_date": "2026-11-24",
-      "base_revision_id": 4862,
+      "base_price": 2158000,
+      "base_source_date": "2026-11-27",
+      "base_revision_id": 4864,
       "anchor_verification": "provisional_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
@@ -605,10 +591,6 @@
         {
           "id": "totalenergies",
           "url": "https://pricing.totalenergies.com.lb/fuelprice/"
-        },
-        {
-          "id": "taqtek",
-          "url": "https://taqteklb.com/en/fuel/"
         }
       ],
       "interval": null,
@@ -723,13 +705,13 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45590,
-      "snapshot_id": "f4d9e5c42fc15c4d7a09400fe908c181368a16f9ea220b2d478fff805a17304c"
+      "forecast_id": 45598,
+      "snapshot_id": "b1fa2559789a30beb7cde9d4dc0d64fd8ea8d25056cedabf929bb80304d7c3ed"
     },
     {
       "horizon": "day_1",
-      "origin": "2026-11-27T06:57:28.090143+00:00",
-      "endpoint": "2026-11-28T08:57:28.090143+02:00",
+      "origin": "2026-11-27T12:54:16.929217+00:00",
+      "endpoint": "2026-11-28T14:54:16.929217+02:00",
       "target_label": "Prevailing official price in 1 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -739,9 +721,9 @@
       "tier": 2,
       "label": "QUANTITATIVE MODEL FORECAST · PROVISIONAL PRICE ANCHOR",
       "status": "issued",
-      "predicted_price": 2234453.825539991,
-      "predicted_change": -7546.174460009178,
-      "percentage_change": -0.3365822685106681,
+      "predicted_price": 2145616.314307533,
+      "predicted_change": -12383.685692466659,
+      "percentage_change": -0.5738501247667589,
       "uncertainty": "Waiting for a validated prediction range from live outcomes.",
       "attempts": [
         {
@@ -781,17 +763,17 @@
       "ovx_regime_conditioning": "pooled_calibration",
       "calibration_ovx_regime": null,
       "driver_contributions": {
-        "commodity_pass_through": 775.2959924520221,
-        "lagged_domestic_momentum": -6299.777206244796,
+        "commodity_pass_through": -122.50937800264094,
+        "lagged_domestic_momentum": -11437.753593147878,
         "fiscal_shock": 0.0,
-        "other_features": -1801.8047675237115,
+        "other_features": -603.5342426234456,
         "baseline_intercept": -219.8884786926929,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
       },
-      "base_price": 2242000,
-      "base_source_date": "2026-11-24",
-      "base_revision_id": 4862,
+      "base_price": 2158000,
+      "base_source_date": "2026-11-27",
+      "base_revision_id": 4864,
       "anchor_verification": "provisional_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
@@ -803,10 +785,6 @@
         {
           "id": "totalenergies",
           "url": "https://pricing.totalenergies.com.lb/fuelprice/"
-        },
-        {
-          "id": "taqtek",
-          "url": "https://taqteklb.com/en/fuel/"
         }
       ],
       "interval": null,
@@ -921,13 +899,13 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45591,
-      "snapshot_id": "f4d9e5c42fc15c4d7a09400fe908c181368a16f9ea220b2d478fff805a17304c"
+      "forecast_id": 45599,
+      "snapshot_id": "b1fa2559789a30beb7cde9d4dc0d64fd8ea8d25056cedabf929bb80304d7c3ed"
     },
     {
       "horizon": "day_3",
-      "origin": "2026-11-27T06:57:28.090143+00:00",
-      "endpoint": "2026-11-30T08:57:28.090143+02:00",
+      "origin": "2026-11-27T12:54:16.929217+00:00",
+      "endpoint": "2026-11-30T14:54:16.929217+02:00",
       "target_label": "Prevailing official price in 3 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -937,9 +915,9 @@
       "tier": 2,
       "label": "QUANTITATIVE MODEL FORECAST · PROVISIONAL PRICE ANCHOR",
       "status": "issued",
-      "predicted_price": 2220348.6030396097,
-      "predicted_change": -21651.396960390244,
-      "percentage_change": -0.9657179732555862,
+      "predicted_price": 2121834.006470368,
+      "predicted_change": -36165.9935296322,
+      "percentage_change": -1.6759033146261446,
       "uncertainty": "Waiting for a validated prediction range from live outcomes.",
       "attempts": [
         {
@@ -979,17 +957,17 @@
       "ovx_regime_conditioning": "pooled_calibration",
       "calibration_ovx_regime": null,
       "driver_contributions": {
-        "commodity_pass_through": -5369.457987478379,
-        "lagged_domestic_momentum": -15948.098765576027,
+        "commodity_pass_through": -4417.626592780878,
+        "lagged_domestic_momentum": -31408.87998321519,
         "fiscal_shock": 0.0,
-        "other_features": 837.8592194987752,
+        "other_features": 832.2124731984763,
         "baseline_intercept": -1171.6994268346095,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
       },
-      "base_price": 2242000,
-      "base_source_date": "2026-11-24",
-      "base_revision_id": 4862,
+      "base_price": 2158000,
+      "base_source_date": "2026-11-27",
+      "base_revision_id": 4864,
       "anchor_verification": "provisional_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
@@ -1001,10 +979,6 @@
         {
           "id": "totalenergies",
           "url": "https://pricing.totalenergies.com.lb/fuelprice/"
-        },
-        {
-          "id": "taqtek",
-          "url": "https://taqteklb.com/en/fuel/"
         }
       ],
       "interval": null,
@@ -1119,13 +1093,13 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45592,
-      "snapshot_id": "f4d9e5c42fc15c4d7a09400fe908c181368a16f9ea220b2d478fff805a17304c"
+      "forecast_id": 45600,
+      "snapshot_id": "b1fa2559789a30beb7cde9d4dc0d64fd8ea8d25056cedabf929bb80304d7c3ed"
     },
     {
       "horizon": "day_7",
-      "origin": "2026-11-27T06:57:28.090143+00:00",
-      "endpoint": "2026-12-04T08:57:28.090143+02:00",
+      "origin": "2026-11-27T12:54:16.929217+00:00",
+      "endpoint": "2026-12-04T14:54:16.929217+02:00",
       "target_label": "Prevailing official price in 7 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -1135,9 +1109,9 @@
       "tier": 2,
       "label": "QUANTITATIVE MODEL FORECAST · PROVISIONAL PRICE ANCHOR",
       "status": "issued",
-      "predicted_price": 2197373.195257607,
-      "predicted_change": -44626.8047423933,
-      "percentage_change": -1.9904908448881935,
+      "predicted_price": 2085429.5845801185,
+      "predicted_change": -72570.41541988138,
+      "percentage_change": -3.3628552094477007,
       "uncertainty": "Waiting for a validated prediction range from live outcomes.",
       "attempts": [
         {
@@ -1210,17 +1184,17 @@
       "ovx_regime_conditioning": "pooled_calibration",
       "calibration_ovx_regime": null,
       "driver_contributions": {
-        "commodity_pass_through": -2979.275841733399,
-        "lagged_domestic_momentum": -33668.60321804315,
+        "commodity_pass_through": -1307.0115149194066,
+        "lagged_domestic_momentum": -63284.478222345206,
         "fiscal_shock": 0.0,
         "other_features": -5196.77590990258,
         "baseline_intercept": -2782.1497727141837,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
       },
-      "base_price": 2242000,
-      "base_source_date": "2026-11-24",
-      "base_revision_id": 4862,
+      "base_price": 2158000,
+      "base_source_date": "2026-11-27",
+      "base_revision_id": 4864,
       "anchor_verification": "provisional_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
@@ -1232,10 +1206,6 @@
         {
           "id": "totalenergies",
           "url": "https://pricing.totalenergies.com.lb/fuelprice/"
-        },
-        {
-          "id": "taqtek",
-          "url": "https://taqteklb.com/en/fuel/"
         }
       ],
       "interval": null,
@@ -1350,13 +1320,13 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45593,
-      "snapshot_id": "f4d9e5c42fc15c4d7a09400fe908c181368a16f9ea220b2d478fff805a17304c"
+      "forecast_id": 45601,
+      "snapshot_id": "b1fa2559789a30beb7cde9d4dc0d64fd8ea8d25056cedabf929bb80304d7c3ed"
     },
     {
       "horizon": "day_14",
-      "origin": "2026-11-27T06:57:28.090143+00:00",
-      "endpoint": "2026-12-11T08:57:28.090143+02:00",
+      "origin": "2026-11-27T12:54:16.929217+00:00",
+      "endpoint": "2026-12-11T14:54:16.929217+02:00",
       "target_label": "Prevailing official price in 14 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -1366,9 +1336,9 @@
       "tier": 2,
       "label": "QUANTITATIVE MODEL FORECAST · PROVISIONAL PRICE ANCHOR",
       "status": "issued",
-      "predicted_price": 2154614.646300103,
-      "predicted_change": -87385.35369989689,
-      "percentage_change": -3.8976518153388446,
+      "predicted_price": 2029075.4183737189,
+      "predicted_change": -128924.58162628103,
+      "percentage_change": -5.974262355249353,
       "uncertainty": "Waiting for a validated prediction range from live outcomes.",
       "attempts": [
         {
@@ -1408,17 +1378,17 @@
       "ovx_regime_conditioning": "pooled_calibration",
       "calibration_ovx_regime": null,
       "driver_contributions": {
-        "commodity_pass_through": -16016.873565563748,
-        "lagged_domestic_momentum": -62864.415321943234,
+        "commodity_pass_through": -12780.400098012014,
+        "lagged_domestic_momentum": -107700.80948039783,
         "fiscal_shock": 0.0,
-        "other_features": -205.1656772789588,
+        "other_features": -144.47291276020724,
         "baseline_intercept": -8298.899135110953,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
       },
-      "base_price": 2242000,
-      "base_source_date": "2026-11-24",
-      "base_revision_id": 4862,
+      "base_price": 2158000,
+      "base_source_date": "2026-11-27",
+      "base_revision_id": 4864,
       "anchor_verification": "provisional_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
@@ -1430,10 +1400,6 @@
         {
           "id": "totalenergies",
           "url": "https://pricing.totalenergies.com.lb/fuelprice/"
-        },
-        {
-          "id": "taqtek",
-          "url": "https://taqteklb.com/en/fuel/"
         }
       ],
       "interval": null,
@@ -1548,13 +1514,13 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45594,
-      "snapshot_id": "f4d9e5c42fc15c4d7a09400fe908c181368a16f9ea220b2d478fff805a17304c"
+      "forecast_id": 45602,
+      "snapshot_id": "b1fa2559789a30beb7cde9d4dc0d64fd8ea8d25056cedabf929bb80304d7c3ed"
     },
     {
       "horizon": "day_30",
-      "origin": "2026-11-27T06:57:28.090143+00:00",
-      "endpoint": "2026-12-27T08:57:28.090143+02:00",
+      "origin": "2026-11-27T12:54:16.929217+00:00",
+      "endpoint": "2026-12-27T14:54:16.929217+02:00",
       "target_label": "Prevailing official price in 30 calendar days",
       "decision_date": null,
       "scheduled_effective": null,
@@ -1564,9 +1530,9 @@
       "tier": 2,
       "label": "QUANTITATIVE MODEL FORECAST · PROVISIONAL PRICE ANCHOR",
       "status": "issued",
-      "predicted_price": 2088801.59761896,
-      "predicted_change": -153198.4023810399,
-      "percentage_change": -6.833113397905437,
+      "predicted_price": 1989981.5054900134,
+      "predicted_change": -168018.49450998649,
+      "percentage_change": -7.785843119091125,
       "uncertainty": "Waiting for a validated prediction range from live outcomes.",
       "attempts": [
         {
@@ -1606,17 +1572,17 @@
       "ovx_regime_conditioning": "pooled_calibration",
       "calibration_ovx_regime": null,
       "driver_contributions": {
-        "commodity_pass_through": -4335.197033482599,
-        "lagged_domestic_momentum": -17523.0327575002,
+        "commodity_pass_through": -674.15145272594,
+        "lagged_domestic_momentum": -39487.247215487376,
         "fiscal_shock": 412.50592570475743,
-        "other_features": -27003.15113174699,
+        "other_features": -23520.074383463103,
         "baseline_intercept": -104749.52738401484,
         "unit": "LBP/20L",
         "method": "Exact linear contributions / tree SHAP, ensemble weighted; statistical attribution, not causation"
       },
-      "base_price": 2242000,
-      "base_source_date": "2026-11-24",
-      "base_revision_id": 4862,
+      "base_price": 2158000,
+      "base_source_date": "2026-11-27",
+      "base_revision_id": 4864,
       "anchor_verification": "provisional_corroborated",
       "validation_status": "unapproved_research",
       "future_market_assumption": "Future commodity prices are unknown. No numerical market path is supplied. Policy and commodity shocks may change the result.",
@@ -1628,10 +1594,6 @@
         {
           "id": "totalenergies",
           "url": "https://pricing.totalenergies.com.lb/fuelprice/"
-        },
-        {
-          "id": "taqtek",
-          "url": "https://taqteklb.com/en/fuel/"
         }
       ],
       "interval": null,
@@ -1746,8 +1708,8 @@
         "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
         "target_limitation": "Reviewed complete official outcome sequence"
       },
-      "forecast_id": 45595,
-      "snapshot_id": "f4d9e5c42fc15c4d7a09400fe908c181368a16f9ea220b2d478fff805a17304c"
+      "forecast_id": 45603,
+      "snapshot_id": "b1fa2559789a30beb7cde9d4dc0d64fd8ea8d25056cedabf929bb80304d7c3ed"
     }
   ],
   "available_market_inputs": {
@@ -1997,16 +1959,16 @@
   "status": "issued",
   "reasons": [],
   "forecast_ids": [
-    45588,
-    45589,
-    45590,
-    45591,
-    45592,
-    45593,
-    45594,
-    45595
+    45596,
+    45597,
+    45598,
+    45599,
+    45600,
+    45601,
+    45602,
+    45603
   ],
   "snapshot_ids": [
-    "f4d9e5c42fc15c4d7a09400fe908c181368a16f9ea220b2d478fff805a17304c"
+    "b1fa2559789a30beb7cde9d4dc0d64fd8ea8d25056cedabf929bb80304d7c3ed"
   ]
 }

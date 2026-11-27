@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-11-27T06:57:44.329648+00:00",
+  "generated_at": "2026-11-27T12:54:32.157184+00:00",
   "data_quality": {
     "conflict_dates": 42,
-    "missing_publication_clocks": 3209,
-    "missing_effective_dates": 3205,
-    "candidate_dates": 1375,
+    "missing_publication_clocks": 3211,
+    "missing_effective_dates": 3207,
+    "candidate_dates": 1376,
     "suspicious_dates": 4
   },
   "alerts": [
@@ -65,12 +65,12 @@
     }
   ],
   "latest_verified_record": {
-    "absolute_price_change": -101000,
+    "absolute_price_change": -185000,
     "candidate_values": [
-      2242000
+      2158000
     ],
     "change_basis": "previous_verified_record_not_certified_previous_decision",
-    "chosen_observation_id": 3207,
+    "chosen_observation_id": 3211,
     "corroborating_sources": [
       {
         "id": "ipt",
@@ -79,43 +79,37 @@
       {
         "id": "totalenergies",
         "url": "https://pricing.totalenergies.com.lb/fuelprice/"
-      },
-      {
-        "id": "taqtek",
-        "url": "https://taqteklb.com/en/fuel/"
       }
     ],
     "date_role": "source_label",
     "decision_numbers": [],
     "issues": [],
     "observation_ids": [
-      3207,
-      3208,
-      3209,
-      3210
+      3211,
+      3212
     ],
     "official_effective_date": null,
-    "percentage_price_change": -4.310712761416987,
+    "percentage_price_change": -7.895860008536065,
     "previous_verified_date": "2026-11-17",
     "previous_verified_price": 2343000,
-    "price_lbp_20l": 2242000,
+    "price_lbp_20l": 2158000,
     "publication_date": null,
     "publication_timestamp": null,
     "regime": "2026_fiscal_changes_unresolved",
     "regime_status": "provisional_research_bucket",
     "resolution_id": null,
-    "retrieved_at": "2026-11-24T12:55:37.189937+00:00",
-    "source_date": "2026-11-24",
+    "retrieved_at": "2026-11-27T12:53:20.592525+00:00",
+    "source_date": "2026-11-27",
     "source_priority": 3,
     "source_url": "https://www.iptgroup.com.lb/ipt/en/our-stations/fuel-prices",
     "timezone": "Asia/Beirut",
     "unit": "LBP/20L",
     "verification_status": "provisional_corroborated",
-    "revision_id": 4862
+    "revision_id": 4864
   },
   "market": {
-    "origin_utc": "2026-11-27T06:57:38.312678+00:00",
-    "origin_beirut": "2026-11-27T08:57:38.312678+02:00",
+    "origin_utc": "2026-11-27T12:54:26.129683+00:00",
+    "origin_beirut": "2026-11-27T14:54:26.129683+02:00",
     "mode": "strict",
     "backtest_eligible": true,
     "series": {
@@ -2614,7 +2608,7 @@
   },
   "policy_headlines": {
     "status": "captured_headlines_only",
-    "retrieved_at": "2026-11-27T06:56:45.833968+00:00",
+    "retrieved_at": "2026-11-27T12:53:33.760106+00:00",
     "items": [
       {
         "url": "/ar/details/101238/%D9%82%D8%A7%D9%85-%D9%88%D8%B2%D9%8A%D8%B1-%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9-%D9%88%D8%A7%D9%84%D9%85%D9%8A%D8%A7%D9%87-%D8%AC%D9%88-%D8%A7%D9%84%D8%B5%D8%AF%D9%8A-%D8%A8%D8%B2%D9%8A%D8%A7%D8%B1%D8%A9-%D8%B1%D8%B3%D9%85%D9%8A%D8%A9-%D8%A7%D9%84%D9%89-%D9%82%D8%A8%D8%B1%D8%B5",
