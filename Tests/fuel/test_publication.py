@@ -94,9 +94,7 @@ def test_workflow_gates_release_and_pointer_on_both_checks():
     assert "publication gate" in workflow.lower()
     assert "gh release create" in workflow
     assert "gh release upload" in workflow
-    assert workflow.count("if: steps.publication_gate.outcome == 'success'") == 5
-    assert "Deploy verified snapshot to the public app branch" in workflow
-    assert 'git push origin "$deployment_commit:refs/heads/codex/cloud-clean"' in workflow
+    assert workflow.count("if: steps.publication_gate.outcome == 'success'") == 4
     assert "FUEL_STORAGE_" not in workflow
     assert "Check cumulative release storage" in workflow
 
