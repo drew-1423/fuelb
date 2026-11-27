@@ -31,6 +31,10 @@ def select_target(forecast, records, days, source):
     if not base or base.get('price_lbp_20l') != forecast['base_price'] or base['verification_status'] == 'conflict':
         return 'anchor_revised', None, None
     issued = max(stamp(forecast['origin']), stamp(forecast['created_at']))
+    if spec.get('score_protocol'):
+        from .live_score import update_records
+
+        days = [row['source_date'] for row in update_records(records[day] for day in days)]
     first = bisect_right(days, base_day)
     kind, number = forecast['horizon'].split('_')
     number = int(number)

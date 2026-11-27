@@ -4,7 +4,8 @@ from hashlib import sha256
 import json
 
 from lebanon_fuel.forecasting.live import current_context, generate
-from lebanon_fuel.validation.decision_tracking import apply_live_calibration
+from lebanon_fuel.validation.decision_tracking import _read, apply_live_calibration
+from lebanon_fuel.validation.live_score import issuance_protocol, previous_update, protocol, report
 from lebanon_fuel.validation.ledger import ForecastLedger, hashed
 from .state import now
 
@@ -16,6 +17,13 @@ def refresh(root, cfg, run_id):
     policy = json.loads(policy_path.read_text())
     records, histories = current_context(root, cfg, at)
     result = generate(root, cfg, policy, decision, records, histories, at)
+    score_policy = protocol(root)
+    anchor = result['anchor']
+    previous = previous_update(records, anchor) if anchor else None
+    if previous is not None:
+        result['observed_change'] = dict(previous_recorded_date=previous['source_date'],
+            previous_recorded_price=previous['price_lbp_20l'],
+            change_since_previous_recorded_price=anchor['price_lbp_20l'] - previous['price_lbp_20l'])
     with closing(ForecastLedger(root / cfg['validation']['forecast_ledger'])) as ledger:
         if policy.get('pinned_family'):
             apply_live_calibration(root, root / cfg['validation']['forecast_ledger'], result['forecasts'], at.isoformat())
@@ -38,6 +46,9 @@ def refresh(root, cfg, run_id):
             if tier == 1:
                 metadata['decision_sha256'] = hashed(decision)
             kind, steps = output['horizon'].split('_')
+            score_marker = issuance_protocol(score_policy, records, anchor, output, at)
+            if score_marker is not None:
+                output['score_protocol'] = score_marker
             target = dict(output, kind='decision' if kind == 'decision' else 'calendar', steps=int(steps))
             items.append(dict(
                 run_id=run_id, origin=at.isoformat(), mode=mode,
@@ -59,4 +70,11 @@ def refresh(root, cfg, run_id):
     write_json(root/'reports/operations/calibration_readiness.json',dict(as_of=at.isoformat(),
         horizons={r['horizon']:r.get('public_calibration',dict(status='abstained',reasons=r['critical_missing_inputs'])) for r in result['forecasts']},
         forecast_ids=ids))
+    if score_policy:
+        with _read(root / cfg['validation']['forecast_ledger']) as db:
+            assessment_time = now()
+            write_json(root / 'reports/operations/live_scorecard.json', {
+                horizon: report(db, score_policy, assessment_time, horizon=horizon, include_research=True)
+                for horizon in (row['horizon'] for row in result['forecasts'])
+            })
     return result

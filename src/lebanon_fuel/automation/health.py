@@ -48,7 +48,7 @@ def _read(root,path):
     except (OSError,ValueError):return {}
 
 
-def build(root,snap,forecast=None,refresh=None):
+def build(root,snap,forecast=None,refresh=None,*,reports_root=None):
     root=Path(root);policy=_read(root,'config/live_forecasting.json')
     required={sid:None for candidate in policy.get('quantitative_candidates',[]) if candidate.get('family')=='G_hybrid' for sid in candidate.get('required_market',[])}
     for sid in required:
@@ -63,7 +63,7 @@ def build(root,snap,forecast=None,refresh=None):
         calibration=state('ok' if measured.get('radius') is not None else 'warning',
             [] if measured.get('radius') is not None else ['insufficient_validated_outcomes'],
             'Collect independent matured outcomes; do not manufacture interval widths.',horizon=row.get('horizon'),readiness=measured)
-    latest=_read(root,'reports/operations/latest_run.json')
+    latest=_read(Path(reports_root) if reports_root else root,'reports/operations/latest_run.json')
     audits=[s for s in latest.get('steps',[]) if s['name']=='integrity_and_financial_arithmetic']
     integrity=state('unknown',['strict_audit_not_recorded'],'Run fuel-ops audit.')
     if audits:

@@ -15,6 +15,7 @@ import pandas as pd
 import streamlit as st
 
 from lebanon_fuel.dashboard import analyst, backtesting, charts, data, decisions, driver, experience
+from lebanon_fuel.dashboard import served
 from lebanon_fuel.dashboard.scenarios import simulate, macro_preset, MACRO_PRESETS, anchored_simulate, economic_breakdown
 from lebanon_fuel.storage.database import sqlite_connection
 from lebanon_fuel.domain import BEIRUT, PROVISIONAL_PRICE, current_price_history
@@ -84,7 +85,7 @@ def whatsapp_briefing(current, forecast=None):
 
 
 def _share_briefing(current, forecast):
-    driver.share(current, forecast, SETTINGS)
+    driver.share(current, forecast, st.session_state._settings)
 
 
 def _decree_outlook(records, forecast):
@@ -165,14 +166,14 @@ def title(heading, subtitle):
 
 def get_ledger(horizon, mode, run_id=None):
     try:
-        return ledger(LEDGER_PATH, horizon, mode, run_id, data.file_version(LEDGER_PATH))
+        return ledger(st.session_state._ledger_path, horizon, mode, run_id, data.file_version(st.session_state._ledger_path))
     except (OSError, sqlite3.Error, pd.errors.DatabaseError):
         st.warning("The forecast ledger is unavailable.")
         return pd.DataFrame()
 
 
 def active(horizon):
-    return ACTIVE_FORECASTS.loc[ACTIVE_FORECASTS.horizon.eq(horizon)]
+    return st.session_state._active_forecasts.loc[st.session_state._active_forecasts.horizon.eq(horizon)]
 
 
 def current_forecasts(path, settings, decision, latest_record):
@@ -224,7 +225,7 @@ def forecast_details(forecast):
 def unavailable_forecast():
     st.warning('No current absolute-price forecast is available · ' + forecast_unavailable_reason())
     try:
-        check = data.read_json(ROOT / 'reports/operations/current_forecast_check.json')
+        check = data.read_json(served.report_path(ROOT, "reports/operations/current_forecast_check.json"))
         for reason in check.get('reasons', []):
             st.write(reason)
     except (OSError, ValueError):
@@ -245,7 +246,7 @@ def forecast_unavailable_reason():
         "decision_coverage_unverified": "the historical decision sequence is incomplete",
     }
     try:
-        check = data.read_json(ROOT / 'reports/operations/current_forecast_check.json')
+        check = data.read_json(served.report_path(ROOT, "reports/operations/current_forecast_check.json"))
         reasons = [plain_gate if reason == source_gate else labels.get(reason, str(reason).replace('_', ' '))
                    for reason in check.get('reasons', [])]
         if reasons:
@@ -361,7 +362,9 @@ def future_table():
     st.markdown(''.join(parts) + '</div>', unsafe_allow_html=True)
     with st.expander('Forecast dates, methods and technical details'):
         st.dataframe(pd.DataFrame(rows), hide_index=True, width='stretch')
-    st.caption('Calendar estimates describe the prevailing price at each endpoint. They do not assume a daily official update. No-change estimates allow intervening rises or falls; they are a central baseline, not certainty.')
+    st.caption("Decision estimates apply after an update. Calendar estimates are independently fitted for their "
+               "endpoint dates. A calendar change before the projected decision implies an earlier update is possible. "
+               "The points do not form a single price path.")
     return pd.concat(dated, ignore_index=True) if dated else pd.DataFrame()
 
 
@@ -443,7 +446,7 @@ def overview(snap, latest, previous):
             return
         show_chart(charts.history_chart(snap['prices'], pd.DataFrame(), result, compact=True), controls=False)
 
-    driver.overview(ROOT, snap, SETTINGS, forecast, _refresh_controls, _open_workspace, price_history)
+    driver.overview(ROOT, snap, st.session_state._settings, forecast, _refresh_controls, _open_workspace, price_history)
 
 
 def price_view(snap):
@@ -705,9 +708,9 @@ def model_view():
             st.dataframe(rows,hide_index=True,width='stretch')
             st.caption('Saved research intervals; these measurements do not release live bands. Small samples and weak coverage remain visible.')
     st.subheader('Prospective outcomes · saved before the result')
-    decisions.performance(ROOT, LEDGER_PATH)
+    decisions.performance(ROOT, st.session_state._ledger_path)
     with st.expander('Forecast availability and abstentions'):
-        rows=experience.availability(ROOT,LEDGER_PATH)
+        rows=experience.availability(ROOT,st.session_state._ledger_path)
         st.dataframe(rows,hide_index=True,width='stretch')
         st.caption('Denominator: complete recorded eight-horizon issuance attempts since the sealed prospective cutoff, not uptime or independent pricing decisions. Hybrid estimates plus abstentions may not sum to the denominator when older archived attempts used another method. No alternate active model is offered.')
     st.divider()
@@ -843,7 +846,7 @@ def quality_view(snap):
     st.warning("Production approval withheld · Official timing, current regime and calibration remain unresolved.")
     with st.expander("Latest recorded prospective forecast checks"):
         try:
-            current_check = ROOT / "reports/operations/current_forecast_check.json"
+            current_check = served.report_path(ROOT, "reports/operations/current_forecast_check.json")
             checks = data.read_json(current_check if current_check.exists() else REPORTS / "current_abstentions.json")
             st.caption(f"Evaluation origin · {data.beirut_time(checks['origin'])}")
             labels = {"model_not_approved": "Model approval withheld",
@@ -859,9 +862,9 @@ def quality_view(snap):
             st.caption("The saved prospective checks are unavailable.")
     st.subheader("Scheduled operations")
     try:
-        operations = data.read_json(ROOT / "reports/operations/latest_run.json")
+        operations = data.read_json(served.report_path(ROOT, "reports/operations/latest_run.json"))
         st.caption(f"Latest cycle · {data.beirut_time(operations['finished_at'])} · {operations['status']}")
-        monitored = data.read_json(ROOT / "reports/operations/monitoring.json")
+        monitored = data.read_json(served.report_path(ROOT, "reports/operations/monitoring.json"))
         st.caption(f"Verified prospective outcomes · {monitored['performance']['evaluated_forecasts']}")
         with st.expander("Operating alerts and review triggers"):
             for warning in monitored["alerts"]:
@@ -913,7 +916,7 @@ def quality_view(snap):
         st.dataframe(pd.DataFrame(flags)[["source_date", "verification_status", "candidate_values", "issues"]].sort_values("source_date", ascending=False), hide_index=True)
     with st.expander("Missing observations and unusual market moves"):
         try:
-            audit = data.read_json(ROOT / "reports/data_quality.json")
+            audit = data.read_json(served.report_path(ROOT, "reports/data_quality.json"))
             st.caption(f"Audit snapshot · {data.beirut_time(audit['generated_at'])}. Gaps are investigation candidates.")
         except (OSError, ValueError, KeyError):
             st.warning("The dated source quality audit is unavailable.")
@@ -947,24 +950,19 @@ def backtest_view():
 
 
 def main():
-    global SETTINGS, DECISION, LEDGER_PATH, ACTIVE_FORECASTS
     st.set_page_config(page_title="Lebanon Energy Terminal", layout="wide", initial_sidebar_state="auto")
     stylesheet = Path(__file__).with_name("terminal.css").read_text(encoding="utf-8")
     st.markdown(f"<style>{stylesheet}</style>", unsafe_allow_html=True)
     try:
-        SETTINGS = data.config(ROOT)
-        from lebanon_fuel.automation.publication import POINTER
-
-        pointer = ROOT / POINTER
-        if pointer.is_file():
-            published = datetime.fromisoformat(data.read_json(pointer)["created_at"])
-            age_hours = (datetime.now(timezone.utc) - published).total_seconds() / 3600
-            if age_hours > 12:
-                st.warning(f"The last published refresh is {age_hours:.0f} hours old. Check the refresh workflow for failures.")
+        st.session_state._settings = data.config(ROOT)
+        storage = served.select_snapshot(ROOT)
+        if storage is None:
+            return
         with st.spinner("Loading published fuel prices and forecasts…"):
-            db_path, LEDGER_PATH = data.database_paths(ROOT, SETTINGS)
+            db_path = storage / st.session_state._settings["storage"]["database"]
+            st.session_state._ledger_path = storage / st.session_state._settings["validation"]["forecast_ledger"]
             if st.query_params.get('forecast'):
-                driver.forecast_page(ROOT,LEDGER_PATH,st.query_params['forecast'],SETTINGS,show_chart)
+                driver.forecast_page(ROOT,st.session_state._ledger_path,st.query_params['forecast'],st.session_state._settings,show_chart)
                 return
             snap = snapshot(ROOT, db_path, data.file_version(db_path))
         price_history = current_price_history(snap['prices'])
@@ -975,11 +973,11 @@ def main():
         st.link_button("Open public price summary", "https://drew-1423.github.io/fuelb/")
         return
     try:
-        DECISION = data.read_json(ROOT / SETTINGS["validation"]["decision_file"])
+        st.session_state._decision = data.read_json(ROOT / st.session_state._settings["validation"]["decision_file"])
     except (OSError, ValueError):
-        DECISION = {}
+        st.session_state._decision = {}
         st.warning("The validation decision file is unavailable. Production-approved forecasts are withheld.")
-    ACTIVE_FORECASTS = current_forecasts(LEDGER_PATH, SETTINGS, DECISION, latest_record)
+    st.session_state._active_forecasts = current_forecasts(st.session_state._ledger_path, st.session_state._settings, st.session_state._decision, latest_record)
     slug=st.query_params.get('view')
     if slug and slug != st.session_state.get('_url_view'):
         perspective, view = experience.destination(slug)
@@ -1032,8 +1030,8 @@ def main():
             unsafe_allow_html=True,
         )
         result = active("decision_1")
-        current = DECISION.get("selection", {}).get("decision_1", {})
-        hybrid_decision = DECISION if current.get("family") == "G_hybrid" else {}
+        current = st.session_state._decision.get("selection", {}).get("decision_1", {})
+        hybrid_decision = st.session_state._decision if current.get("family") == "G_hybrid" else {}
         sections = analyst.brief(latest, previous, snap["market"], pd.DataFrame(),
                                  hybrid_decision, result.iloc[0] if not result.empty else None)
         for heading, content in sections.items():
@@ -1046,7 +1044,7 @@ def main():
         if section == 'Performance':
             model_view()
         elif section == 'Predicted vs actual':
-            decisions.predicted_vs_actual(ROOT, LEDGER_PATH)
+            decisions.predicted_vs_actual(ROOT, st.session_state._ledger_path)
         else:
             backtest_view()
     elif view == "Backtesting":
@@ -1054,10 +1052,10 @@ def main():
 
     elif view == "Decision timeline":
         title("Decision timeline", "Price evidence, gaps and forecast outcomes")
-        decisions.timeline(snap["prices"], ROOT, LEDGER_PATH)
+        decisions.timeline(snap["prices"], ROOT, st.session_state._ledger_path)
     elif view == "Alerts":
         result=active('decision_1')
-        driver.alert_center(ROOT,snap,result.iloc[0] if not result.empty else None,SETTINGS)
+        driver.alert_center(ROOT,snap,result.iloc[0] if not result.empty else None,st.session_state._settings)
     elif view == "Scenario simulator":
         for key,value in st.session_state.get('_scenario_inputs',{}).items():
             if key not in st.session_state: st.session_state[key]=value

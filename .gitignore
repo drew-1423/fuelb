@@ -19,6 +19,8 @@ reports/operations/runs/
 # through the publication workflow or the dashboard's read-only release cache.
 data/*.sqlite*
 data/raw/
+data/cache/dashboard-snapshots/
+data/cache/published-storage/
 
 # Local secrets
 .streamlit/secrets.toml

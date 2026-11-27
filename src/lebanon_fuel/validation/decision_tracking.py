@@ -168,11 +168,16 @@ def settle_supplier_updates(root, cfg, source):
     return counts
 
 
-def _matched(db, start, at):
+def _matched(db, start, at, *, selected_ids=None):
     cases = {}
     cutoff = stamp(at)
     for row in db.execute(VERSION_QUERY, {"start": start, "cutoff": cutoff.isoformat()}):
         spec = json.loads(row["target_json"])
+        if selected_ids is not None:
+            if row["forecast_id"] not in selected_ids:
+                continue
+        elif spec.get("score_protocol"):
+            continue  # The historical track retains its original selection rule.
         cohort = "provisional" if spec.get("anchor_verification") == PROVISIONAL_PRICE else "government_backed"
         if spec.get("anchor_verification") not in VERIFIED | {PROVISIONAL_PRICE}:
             continue
@@ -204,6 +209,8 @@ def _matched(db, start, at):
                     continue
                 day = endpoint.astimezone(BEIRUT).date().isoformat()
         key = (row["kind"], cohort, spec.get("artifact_sha256"), row["horizon"], day)
+        if selected_ids is not None:
+            key = (row["kind"], row["forecast_id"])
         cases[key] = dict(kind=row["kind"], cohort=cohort, artifact=spec.get("artifact_sha256"),
                           horizon=row["horizon"], label_end=known,
                           day=day, known=known, origin=origin, forecast_id=row["forecast_id"],
@@ -298,8 +305,16 @@ def _read(path):
 
 
 def apply_live_calibration(root, ledger_path, forecasts, at):
+    from .live_score import protocol, selections
+
+    policy = protocol(root)
     with _read(ledger_path) as db:
-        cases = _matched(db, protocol_start(root), at)
+        if policy and _clock(at) >= stamp(policy["starts_at"]):
+            selected, _ = selections(db, policy, at)
+            cases = _matched(db, stamp(policy["starts_at"]).isoformat(), at,
+                             selected_ids={row["id"] for row, _ in selected.values()})
+        else:
+            cases = _matched(db, protocol_start(root), at)
     for forecast in forecasts:
         if forecast.get("pinned_family") != FAMILY or forecast["status"] != "issued":
             continue
