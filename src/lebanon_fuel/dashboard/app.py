@@ -5,6 +5,7 @@ from pathlib import Path
 from html import escape
 from base64 import b64encode
 import json
+import logging
 import os
 import sqlite3
 import threading
@@ -960,15 +961,18 @@ def main():
             age_hours = (datetime.now(timezone.utc) - published).total_seconds() / 3600
             if age_hours > 12:
                 st.warning(f"The last published refresh is {age_hours:.0f} hours old. Check the refresh workflow for failures.")
-        db_path, LEDGER_PATH = data.database_paths(ROOT, SETTINGS)
-        if st.query_params.get('forecast'):
-            driver.forecast_page(ROOT,LEDGER_PATH,st.query_params['forecast'],SETTINGS,show_chart)
-            return
-        snap = snapshot(ROOT, db_path, data.file_version(db_path))
+        with st.spinner("Loading published fuel prices and forecasts…"):
+            db_path, LEDGER_PATH = data.database_paths(ROOT, SETTINGS)
+            if st.query_params.get('forecast'):
+                driver.forecast_page(ROOT,LEDGER_PATH,st.query_params['forecast'],SETTINGS,show_chart)
+                return
+            snap = snapshot(ROOT, db_path, data.file_version(db_path))
         price_history = current_price_history(snap['prices'])
         latest_record = price_history[-1] if price_history else None
-    except (OSError, ValueError, KeyError, sqlite3.Error, pd.errors.DatabaseError) as exc:
-        st.error(f"The published market and price snapshot could not be opened. {exc}")
+    except (OSError, ValueError, KeyError, sqlite3.Error, pd.errors.DatabaseError):
+        logging.getLogger(__name__).exception("Published market and price snapshot could not be opened")
+        st.error("The published snapshot could not be opened. Reload to retry or view the public price summary.")
+        st.link_button("Open public price summary", "https://drew-1423.github.io/fuelb/")
         return
     try:
         DECISION = data.read_json(ROOT / SETTINGS["validation"]["decision_file"])
