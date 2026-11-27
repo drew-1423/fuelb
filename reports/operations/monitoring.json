@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T12:54:32.157184+00:00",
+  "generated_at": "2026-11-27T18:42:54.314330+00:00",
   "data_quality": {
     "conflict_dates": 42,
     "missing_publication_clocks": 3211,
@@ -108,8 +108,8 @@
     "revision_id": 4864
   },
   "market": {
-    "origin_utc": "2026-11-27T12:54:26.129683+00:00",
-    "origin_beirut": "2026-11-27T14:54:26.129683+02:00",
+    "origin_utc": "2026-11-27T18:42:49.383885+00:00",
+    "origin_beirut": "2026-11-27T20:42:49.383885+02:00",
     "mode": "strict",
     "backtest_eligible": true,
     "series": {
@@ -2608,7 +2608,7 @@
   },
   "policy_headlines": {
     "status": "captured_headlines_only",
-    "retrieved_at": "2026-11-27T12:53:33.760106+00:00",
+    "retrieved_at": "2026-11-27T18:42:05.574080+00:00",
     "items": [
       {
         "url": "/ar/details/101238/%D9%82%D8%A7%D9%85-%D9%88%D8%B2%D9%8A%D8%B1-%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9-%D9%88%D8%A7%D9%84%D9%85%D9%8A%D8%A7%D9%87-%D8%AC%D9%88-%D8%A7%D9%84%D8%B5%D8%AF%D9%8A-%D8%A8%D8%B2%D9%8A%D8%A7%D8%B1%D8%A9-%D8%B1%D8%B3%D9%85%D9%8A%D8%A9-%D8%A7%D9%84%D9%89-%D9%82%D8%A8%D8%B1%D8%B5",
