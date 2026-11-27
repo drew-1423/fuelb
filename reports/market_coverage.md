@@ -1,6 +1,6 @@
 # International market coverage and quality
 
-Generated for 2026-11-27T06:56:52.789841+00:00. Counts below are actual stored observations, not estimates.
+Generated for 2026-11-27T12:53:40.762525+00:00. Counts below are actual stored observations, not estimates.
 
 | Series | Unique valid dates | Earliest | Latest | Latest normalized value | Stale |
 | --- | ---: | --- | --- | --- | --- |
@@ -35,7 +35,7 @@ Generated for 2026-11-27T06:56:52.789841+00:00. Counts below are actual stored o
 39 long interval candidates; 2832 unclassified weekday/weekly calendar candidates. These include holidays and cannot be called missing market sessions without an authoritative calendar. No filling or interpolation was applied.
 40 large-move review candidates; 0 unusual reference-weekday candidates. Review flags do not prove source errors or erase real market shocks.
 Known per-observation publication timestamps: 0. Documented original historical vintages: 0. Dates in today's workbook are not release timestamps.
-At 1375 historical source-date origins, 5 have any market value proven available by this project's capture/vintage evidence. Origins are assumed 00:00 Asia/Beirut; Lebanese announcement times are still unknown.
+At 1376 historical source-date origins, 6 have any market value proven available by this project's capture/vintage evidence. Origins are assumed 00:00 Asia/Beirut; Lebanese announcement times are still unknown.
 
 ## Historical relationships
 
