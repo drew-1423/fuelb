@@ -135,6 +135,26 @@ jobs:
           done
           python -m lebanon_fuel.automation.publication verify-widget --commit "$(git rev-parse HEAD)"
 
+      - name: Deploy verified snapshot to the public app branch
+        if: steps.publication_gate.outcome == 'success'
+        run: |
+          # Preserve the small independent deployment history while publishing
+          # the exact tree that passed the main-branch integrity checks.
+          git fetch --no-tags --depth=1 origin \
+            codex/cloud-clean:refs/remotes/origin/codex/cloud-clean
+          published_tree=$(git rev-parse HEAD^{tree})
+          deployment_parent=$(git rev-parse refs/remotes/origin/codex/cloud-clean)
+          deployed_tree=$(git rev-parse "$deployment_parent^{tree}")
+          if [ "$published_tree" = "$deployed_tree" ]; then
+            echo "Public app already has the verified tree."
+            exit 0
+          fi
+          deployment_commit=$(printf 'Deploy verified fuel snapshot %s\n' "$STORAGE_TAG" |
+            git -c user.name='github-actions[bot]' \
+                -c user.email='github-actions[bot]@users.noreply.github.com' \
+                commit-tree "$published_tree" -p "$deployment_parent")
+          git push origin "$deployment_commit:refs/heads/codex/cloud-clean"
+
       - name: Preserve failed refresh evidence
         if: always() && (failure() || steps.collect.outcome == 'failure' || steps.audit.outcome == 'failure')
         uses: actions/upload-artifact@v4
