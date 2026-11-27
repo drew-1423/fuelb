@@ -1,6 +1,6 @@
 # Lebanon gasoline 95 analyst report
 
-Generated 2026-11-26T18:43:47.678105+00:00
+Generated 2026-11-27T00:52:22.185677+00:00
 
 ## Executive summary
 
@@ -8,7 +8,7 @@ The latest corroborated gasoline 95 record is **2,242,000 LBP / 20 L** on 2026-1
 
 ## Expected price movement
 
-QUANTITATIVE MODEL FORECAST: 2,207,695 LBP / 20 L, -34,305 LBP (-1.53%). Estimated announcement: 27 Nov 2026 (Fri cadence). A calibrated 90% interval is not supported for this issuance. Directional probabilities are awaiting calibrated live evidence.
+QUANTITATIVE MODEL FORECAST: 2,207,695 LBP / 20 L, -34,305 LBP (-1.53%). Estimated announcement: 01 Dec 2026 (Tue cadence). A calibrated 90% interval is not supported for this issuance. Directional probabilities are awaiting calibrated live evidence.
 
 ## Primary market drivers
 

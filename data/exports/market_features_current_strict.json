@@ -1,6 +1,6 @@
 {
-  "origin_utc": "2026-11-26T18:43:02.956416+00:00",
-  "origin_beirut": "2026-11-26T20:43:02.956416+02:00",
+  "origin_utc": "2026-11-27T00:51:29.805265+00:00",
+  "origin_beirut": "2026-11-27T02:51:29.805265+02:00",
   "mode": "strict",
   "backtest_eligible": true,
   "series": {
@@ -9,7 +9,7 @@
       "value": 91.8,
       "unit": "USD/bbl",
       "latest_observation_date": "2026-11-24",
-      "age_calendar_days": 2,
+      "age_calendar_days": 3,
       "allowed_age_days": 14,
       "return_1_observation": 0.006578947368421018,
       "return_7_calendar_days": -0.01226597805035512,
@@ -20,7 +20,7 @@
       "trend_above_trailing_mean20": 0,
       "high_vol_vs_prior_trailing_median": 1,
       "lag_1_observation_value": 91.2,
-      "max_available_at": "2026-11-26T00:46:08.622933+00:00",
+      "max_available_at": "2026-11-27T00:50:42.535365+00:00",
       "availability_basis": [
         "capture_time_latest_vintage"
       ],
@@ -324,7 +324,7 @@
       "trend_above_trailing_mean20": 0,
       "high_vol_vs_prior_trailing_median": 1,
       "lag_1_observation_value": 92.4,
-      "max_available_at": "2026-11-26T00:46:14.984171+00:00",
+      "max_available_at": "2026-11-27T00:50:48.723640+00:00",
       "availability_basis": [
         "capture_time_latest_vintage"
       ],
@@ -628,7 +628,7 @@
       "trend_above_trailing_mean20": 1,
       "high_vol_vs_prior_trailing_median": 0,
       "lag_1_observation_value": 215.949,
-      "max_available_at": "2026-11-26T00:46:22.832858+00:00",
+      "max_available_at": "2026-11-27T00:50:56.032897+00:00",
       "availability_basis": [
         "capture_time_latest_vintage"
       ],
@@ -931,7 +931,7 @@
       "trend_above_trailing_mean20": 1,
       "high_vol_vs_prior_trailing_median": 1,
       "lag_1_observation_value": 417.797,
-      "max_available_at": "2026-11-26T00:46:30.327520+00:00",
+      "max_available_at": "2026-11-27T00:51:03.851632+00:00",
       "availability_basis": [
         "capture_time_latest_vintage"
       ],
@@ -1234,7 +1234,7 @@
       "trend_above_trailing_mean20": 1,
       "high_vol_vs_prior_trailing_median": 0,
       "lag_1_observation_value": 95.7,
-      "max_available_at": "2026-11-26T00:46:39.023040+00:00",
+      "max_available_at": "2026-11-27T00:51:11.448658+00:00",
       "availability_basis": [
         "capture_time_latest_vintage"
       ],
@@ -1537,7 +1537,7 @@
       "trend_above_trailing_mean20": 0,
       "high_vol_vs_prior_trailing_median": 1,
       "lag_1_observation_value": 1.0981,
-      "max_available_at": "2026-11-26T00:46:55.071749+00:00",
+      "max_available_at": "2026-11-27T00:51:27.996066+00:00",
       "availability_basis": [
         "capture_time_latest_vintage"
       ],
@@ -1829,7 +1829,7 @@
       "value": 0.9185672131147541,
       "unit": "EUR/L",
       "latest_observation_date": "2026-11-23",
-      "age_calendar_days": 3,
+      "age_calendar_days": 4,
       "allowed_age_days": 21,
       "return_1_observation": -0.024384893032066812,
       "return_7_calendar_days": -0.024384893032066812,
@@ -1840,7 +1840,7 @@
       "trend_above_trailing_mean20": 0,
       "high_vol_vs_prior_trailing_median": 1,
       "lag_1_observation_value": 0.9415262295081966,
-      "max_available_at": "2026-11-26T00:46:46.479413+00:00",
+      "max_available_at": "2026-11-27T00:51:19.345704+00:00",
       "availability_basis": [
         "capture_time_latest_vintage"
       ],
@@ -2132,7 +2132,7 @@
       "value": 0.8354664516129031,
       "unit": "EUR/L",
       "latest_observation_date": "2026-11-23",
-      "age_calendar_days": 3,
+      "age_calendar_days": 4,
       "allowed_age_days": 21,
       "return_1_observation": -0.042514711938796856,
       "return_7_calendar_days": -0.042514711938796856,
@@ -2143,7 +2143,7 @@
       "trend_above_trailing_mean20": 0,
       "high_vol_vs_prior_trailing_median": 1,
       "lag_1_observation_value": 0.8725632258064517,
-      "max_available_at": "2026-11-26T00:46:46.479413+00:00",
+      "max_available_at": "2026-11-27T00:51:19.345704+00:00",
       "availability_basis": [
         "capture_time_latest_vintage"
       ],
@@ -2434,7 +2434,7 @@
       "status": "stale",
       "value": null,
       "latest_observation_date": "2025-05-29",
-      "age_calendar_days": 546,
+      "age_calendar_days": 547,
       "observation_ids": [
         29360
       ]
@@ -2473,7 +2473,7 @@
       46066,
       46071
     ],
-    "max_available_at": "2026-11-26T00:46:14.984171+00:00"
+    "max_available_at": "2026-11-27T00:50:48.723640+00:00"
   },
   "rbob_minus_brent": {
     "value": null,
