@@ -119,6 +119,8 @@ def price_panels(current, reason, prices, forecast):
                 money(price)
                 label = 'Validated estimate' if tier == 1 else 'Research estimate'
                 st.caption(f'{label} · {view["schedule"]}')
+                if not any(ux.released_bounds(forecast, level) for level in (80, 90)):
+                    st.caption("Validated prediction range pending.")
                 if spec.get('schedule_estimated'):
                     st.caption('Projected date · Announcement time unconfirmed')
                 base_date = spec.get('base_source_date')

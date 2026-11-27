@@ -70,8 +70,9 @@ def _daily_comparison_table(rows, today):
     recorded = pd.to_datetime(rows.recorded_target_date, errors="coerce").where(actual.notna())
     issued = pd.to_datetime(rows.created_at, format="mixed", utc=True)
     issued_date = issued.dt.tz_convert(BEIRUT).dt.tz_localize(None).dt.normalize()
-    target = endpoint_date.fillna(scheduled).fillna(recorded)
-    day = target.fillna(issued_date)
+    target = endpoint_date.fillna(scheduled)
+    # A settled decision uses its recorded date. Calendar outcomes retain the fixed endpoint.
+    day = endpoint_date.fillna(recorded).fillna(scheduled).fillna(issued_date)
     cutoff = pd.Timestamp(today) - pd.Timedelta(days=7)
     outcomes = rows.evaluation_kind.map(evidence_types).where(actual.notna()).fillna("Awaiting match")
     table = pd.DataFrame({
@@ -90,7 +91,7 @@ def _daily_comparison_table(rows, today):
 
 def predicted_vs_actual(root, ledger):
     st.subheader("Predicted vs actual")
-    st.caption("One forecast per target date per horizon. Matched forecasts take priority. Unmatched forecasts disappear after seven days. Prices in LBP per 20 L.")
+    st.caption("One forecast per displayed date and horizon. Matched updates use the recorded date. Other rows use the expected date when available. Unmatched rows are hidden after seven days. Prices in LBP per 20 L.")
     horizons = {"Next update": "decision_1", "Next two updates": "decision_2", "Next four updates": "decision_4",
                 **{f"{days} days" if days != 1 else "1 day": f"day_{days}" for days in (1, 3, 7, 14, 30)}}
     with st.container(key='comparison_controls'):
@@ -118,10 +119,14 @@ def predicted_vs_actual(root, ledger):
         for item in table.head(20).to_dict('records'):
             matched = pd.notna(item['Actual'])
             recorded = f"{item['Actual']:,.0f}" if matched else '—'
+            expected = item["Expected date"]
+            schedule = (f'<small>Expected {expected:%d %b %Y}</small>'
+                        if pd.notna(expected) and expected != item["Date · Beirut"] else '')
+            error = f'<small>Error {item["Error"]:+,.0f} LBP</small>' if matched else ''
             outcome_class = 'matched' if matched else 'pending'
             parts.append(f'<tr><td><strong>{item["Forecast"]:,.0f}</strong>'
-                         f'<small>{escape(item["Date · Beirut"].strftime("%d %b %Y"))}</small></td>'
-                         f'<td><strong>{recorded}</strong></td>'
+                         f'<small>{escape(item["Date · Beirut"].strftime("%d %b %Y"))}</small>{schedule}</td>'
+                         f'<td><strong>{recorded}</strong>{error}</td>'
                          f'<td><span class="comparison-outcome {outcome_class}">{escape(item["Outcome"])}</span></td></tr>')
         st.html('<div class="comparison-table-wrap"><table class="comparison-table" aria-label="Live price comparisons in LBP per 20 liters">'
                 '<thead><tr><th scope="col">Forecast</th><th scope="col">Actual</th><th scope="col">Outcome</th></tr></thead>'

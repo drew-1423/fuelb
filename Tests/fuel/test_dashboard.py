@@ -560,6 +560,28 @@ def test_daily_comparisons_keep_matched_and_expire_old_unmatched():
     assert list(result["Outcome"]) == ["Awaiting match", "Supplier agreement"]
 
 
+def test_live_comparisons_distinguish_expected_and_recorded_dates():
+    from datetime import date
+    from lebanon_fuel.dashboard.decisions import _daily_comparison_table
+
+    rows = pd.DataFrame([
+        dict(created_at="2026-11-18T10:00:00Z", scheduled_effective="2026-11-20",
+             predicted_price=2290000, actual_price=2291000, evaluation_kind="provisional_match",
+             recorded_target_date="2026-11-21"),
+        dict(created_at="2026-11-19T10:00:00Z", scheduled_effective="2026-11-22",
+             predicted_price=2295000, actual_price=2291000, evaluation_kind="provisional_match",
+             recorded_target_date="2026-11-21"),
+        dict(created_at="2026-11-21T10:00:00Z", endpoint="2026-11-22T23:30:00Z",
+             predicted_price=2250000, actual_price=2240000, evaluation_kind="official_match",
+             recorded_target_date="2026-11-22"),
+    ])
+    result = _daily_comparison_table(rows, date(2026, 11, 24))
+    assert list(result["Date · Beirut"]) == [date(2026, 11, 23), date(2026, 11, 21)]
+    assert list(result["Expected date"]) == [date(2026, 11, 23), date(2026, 11, 22)]
+    assert list(result["Recorded date"]) == [date(2026, 11, 22), date(2026, 11, 21)]
+    assert list(result["Error"]) == [10000, 4000]
+
+
 def test_fill_up_requires_calculate_after_adding_a_can():
     from streamlit.testing.v1 import AppTest
 
