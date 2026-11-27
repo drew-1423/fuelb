@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T00:52:22.185677+00:00",
+  "generated_at": "2026-11-27T06:57:44.329648+00:00",
   "data_quality": {
     "conflict_dates": 42,
     "missing_publication_clocks": 3209,
@@ -114,8 +114,8 @@
     "revision_id": 4862
   },
   "market": {
-    "origin_utc": "2026-11-27T00:52:16.023607+00:00",
-    "origin_beirut": "2026-11-27T02:52:16.023607+02:00",
+    "origin_utc": "2026-11-27T06:57:38.312678+00:00",
+    "origin_beirut": "2026-11-27T08:57:38.312678+02:00",
     "mode": "strict",
     "backtest_eligible": true,
     "series": {
@@ -428,7 +428,7 @@
         "value": 93.95400000000001,
         "unit": "USD/bbl",
         "latest_observation_date": "2026-11-24",
-        "age_calendar_days": 2,
+        "age_calendar_days": 3,
         "allowed_age_days": 14,
         "return_1_observation": 0.016818181818181843,
         "return_7_calendar_days": -0.03908934707903766,
@@ -732,7 +732,7 @@
         "value": 217.68200000000002,
         "unit": "million_bbl",
         "latest_observation_date": "2026-11-20",
-        "age_calendar_days": 6,
+        "age_calendar_days": 7,
         "allowed_age_days": 21,
         "return_1_observation": 0.008025042949955763,
         "return_7_calendar_days": 0.008025042949955763,
@@ -1035,7 +1035,7 @@
         "value": 418.906,
         "unit": "million_bbl",
         "latest_observation_date": "2026-11-20",
-        "age_calendar_days": 6,
+        "age_calendar_days": 7,
         "allowed_age_days": 21,
         "return_1_observation": 0.002654399145996633,
         "return_7_calendar_days": 0.002654399145996633,
@@ -1338,7 +1338,7 @@
         "value": 97.5,
         "unit": "percent",
         "latest_observation_date": "2026-11-20",
-        "age_calendar_days": 6,
+        "age_calendar_days": 7,
         "allowed_age_days": 21,
         "return_1_observation": 0.01880877742946696,
         "return_7_calendar_days": 0.01880877742946696,
@@ -1641,7 +1641,7 @@
         "value": 1.0981,
         "unit": "USD/EUR",
         "latest_observation_date": "2026-11-20",
-        "age_calendar_days": 6,
+        "age_calendar_days": 7,
         "allowed_age_days": 14,
         "return_1_observation": 0.0,
         "return_7_calendar_days": -0.0048033351459124685,
@@ -2573,7 +2573,7 @@
         "status": "stale",
         "value": null,
         "latest_observation_date": "2026-11-12",
-        "age_calendar_days": 14,
+        "age_calendar_days": 15,
         "observation_ids": [
           46037
         ]
@@ -2614,7 +2614,7 @@
   },
   "policy_headlines": {
     "status": "captured_headlines_only",
-    "retrieved_at": "2026-11-27T00:50:20.599021+00:00",
+    "retrieved_at": "2026-11-27T06:56:45.833968+00:00",
     "items": [
       {
         "url": "/ar/details/101238/%D9%82%D8%A7%D9%85-%D9%88%D8%B2%D9%8A%D8%B1-%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9-%D9%88%D8%A7%D9%84%D9%85%D9%8A%D8%A7%D9%87-%D8%AC%D9%88-%D8%A7%D9%84%D8%B5%D8%AF%D9%8A-%D8%A8%D8%B2%D9%8A%D8%A7%D8%B1%D8%A9-%D8%B1%D8%B3%D9%85%D9%8A%D8%A9-%D8%A7%D9%84%D9%89-%D9%82%D8%A8%D8%B1%D8%B5",

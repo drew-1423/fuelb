@@ -1,6 +1,6 @@
 # Lebanon gasoline 95 analyst report
 
-Generated 2026-11-27T00:52:22.185677+00:00
+Generated 2026-11-27T06:57:44.329648+00:00
 
 ## Executive summary
 
