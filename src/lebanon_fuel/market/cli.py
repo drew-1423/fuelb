@@ -22,7 +22,7 @@ def main(argv=None):
     p=sub.add_parser('replay');p.add_argument('--capture-id',type=int,required=True);p.add_argument('--series',choices=SERIES,required=True)
     p=sub.add_parser('import-csv');p.add_argument('path',type=Path);p.add_argument('--series',choices=SERIES,required=True)
     p.add_argument('--source-url',required=True);p.add_argument('--license-note',required=True)
-    p=sub.add_parser('snapshot');p.add_argument('--origin',required=True);p.add_argument('--mode',choices=['strict','research','as_of_close'],default='strict');p.add_argument('--output',type=Path)
+    p=sub.add_parser('snapshot');p.add_argument('--origin',required=True);p.add_argument('--mode',choices=['captured','strict','research','as_of_close'],default='captured');p.add_argument('--output',type=Path)
     p=sub.add_parser('report');p.add_argument('--as-of',default=datetime.now(timezone.utc).isoformat())
     args=parser.parse_args(argv)
     root=args.root.resolve()

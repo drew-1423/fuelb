@@ -91,7 +91,7 @@ def snapshot(store,origin,mode='strict'):
 def from_histories(histories,origin,mode):
     origin=utc_timestamp(origin)
     result={'origin_utc':origin,'origin_beirut':datetime.fromisoformat(origin).astimezone(ZoneInfo('Asia/Beirut')).isoformat(),
-            'mode':mode,'backtest_eligible':mode=='strict','series':{}}
+            'mode':mode,'backtest_eligible':mode in {'strict', 'captured'},'series':{}}
     for sid,spec in SERIES.items():
         result['series'][sid]=trailing_features(histories.get(sid,[]),spec,origin)
     # Synchronized calendar observations, not independent stale leg fills.

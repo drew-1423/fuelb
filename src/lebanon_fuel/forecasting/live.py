@@ -15,6 +15,7 @@ from lebanon_fuel.market.catalog import SERIES
 from lebanon_fuel.market.store import MarketStore, close_availability
 from lebanon_fuel.structural.engine import price
 from lebanon_fuel.validation.policy import gate
+from lebanon_fuel.validation.live_score import update_records
 from .data import MarketFeatures, features_at
 from .pipeline import load_bundle
 from .uncertainty import residual_probabilities
@@ -33,7 +34,7 @@ def current_context(root, settings, at):
             (SELECT source_date,MAX(id) id FROM decision_versions WHERE created_at<? GROUP BY source_date) v
             ON d.id=v.id ORDER BY d.source_date''', (at.isoformat(),)):
             records.append(dict(json.loads(row['payload_json']), revision_id=row['id'], version_known_at=row['created_at']))
-        histories = {sid: store.history(sid, at.isoformat(), 'strict') for sid in SERIES}
+        histories = {sid: store.history(sid, at.isoformat(), 'captured') for sid in SERIES}
     # A reviewed settlement document can supply clocks absent from archive rows.
     # Tie it to the exact source revision and retain the review's actual knowledge time.
     ledger_path = root/settings['validation']['forecast_ledger']
@@ -84,21 +85,9 @@ def strict_feature_frame(root, records, histories, at, horizon):
     # between two real updates. It is evidence of the same price, not another
     # pricing event, so it must not break the latest domestic change. Keep
     # differing or uncorroborated observations as barriers to inference.
-    feature_records = []
-    ignored_revisions = []
-    for record in records:
-        previous = feature_records[-1] if feature_records else None
-        previous_price = previous.get('price_lbp_20l') if previous else None
-        previous_supported = previous and (previous['verification_status'] in VERIFIED or (
-            previous['verification_status'] == PROVISIONAL_PRICE and supplier_agreement(
-                source['id'] for source in previous.get('corroborating_sources', ()))))
-        if (record['verification_status'] == 'supplementary_observed'
-                and previous_supported and isinstance(previous_price, (int, float))
-                and math.isfinite(previous_price) and previous_price > 0
-                and previous_price == record.get('price_lbp_20l')):
-            ignored_revisions.append(record.get('revision_id'))
-            continue
-        feature_records.append(record)
+    feature_records = update_records(records)
+    kept = {id(row) for row in feature_records}
+    ignored_revisions = [row.get('revision_id') for row in records if id(row) not in kept]
     market = MarketFeatures.__new__(MarketFeatures)
     market.config, market.cache, market.mode = config, {}, 'as_of_close'
     market.histories = {}
@@ -116,7 +105,7 @@ def strict_feature_frame(root, records, histories, at, horizon):
                 continue
             rows.append(dict(row, captured_available_at=row['available_at'], available_at=window_at.isoformat(),
                              availability_basis='historical_close_window_in_vintage_captured_before_live_origin'))
-        market.histories[sid] = sorted(rows, key=lambda r:r['available_at'])
+        market.histories[sid] = sorted(rows, key=lambda r: r['observation_date'])
     market.timestamps = {sid: np.array([datetime.fromisoformat(r['available_at']).timestamp() for r in history])
                          for sid, history in market.histories.items()}
     values = features_at(feature_records, len(feature_records)-1, at.astimezone(BEIRUT), market, config)
@@ -290,7 +279,7 @@ def baseline(records, anchor, horizon):
     return 0.0, 'A_no_change', 'Persistence of the latest verified price. Central assumption of no net change through the target horizon.'
 
 
-def generate(root, settings, config, decision, records, histories, at):
+def generate(root, settings, config, decision, records, histories, at, *, research_sensitivity=False):
     records = current_price_history(records)
     anchor, problem = anchor_check(records, at, config['anchor_maximum_age_days'], allow_provisional=True)
     provisional = bool(anchor and anchor['verification_status'] == PROVISIONAL_PRICE)
@@ -302,7 +291,7 @@ def generate(root, settings, config, decision, records, histories, at):
         kind, steps = horizon.split('_')
         endpoint = (at.astimezone(BEIRUT)+timedelta(days=int(steps))).isoformat() if kind=='day' else None
         output = dict(horizon=horizon, origin=at.isoformat(), endpoint=endpoint,
-                      target_label=f'Next {steps} official pricing decision(s)' if kind=='decision' else f'Prevailing official price in {steps} calendar days',
+                      target_label=f'Price after {steps} recorded update(s)' if kind=='decision' else f'Prevailing price in {steps} calendar days',
                       decision_date=schedule['dates'].get(horizon), scheduled_effective=schedule['dates'].get(horizon),
                       schedule_basis=schedule['schedule_basis'] if kind=='decision' else None,
                       schedule_estimated=kind=='decision', schedule_details=schedule if kind=='decision' else None, tier=None, label='FORECAST UNAVAILABLE', status='abstain',
@@ -394,6 +383,16 @@ def generate(root, settings, config, decision, records, histories, at):
                             driver_contributions=driver_contributions(bundle,candidate['family'],frame))
                         if tier==1 and (radius is None or selected.get('probabilities') is None):
                             raise ValueError('Approved uncertainty evidence is incomplete')
+                        if research_sensitivity and candidate['family'] == 'G_hybrid':
+                            # Research challenger using the same bundle and available inputs.
+                            # Zero the single lag feature, keeping other lag variables intact.
+                            counterfactual = frame.assign(x_domestic_change_lag1=0.0)
+                            try:
+                                challenger = anchor['price_lbp_20l'] + model_prediction(bundle, 'G_hybrid', counterfactual)
+                                if math.isfinite(challenger) and challenger > 0:
+                                    selected['shadow_zero_domestic_lag1_price'] = challenger
+                            except (ValueError, KeyError, TypeError, RuntimeError, ArithmeticError):
+                                pass  # A missing challenger never changes the public forecast.
                         output.update(selected)
                         break
                     except (ValueError, KeyError, OSError, ImportError, TypeError, RuntimeError, ArithmeticError, IndexError) as exc:

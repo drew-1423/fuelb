@@ -76,11 +76,14 @@ def forecast_points(rows, *, replay=False):
 
 
 def add_forecast_markers(fig, points, label, color, symbol):
-    upper, lower = [], []
+    upper, lower, hover = [], [], []
     for row in points.to_dict("records"):
         bounds = released_bounds(row, 90)
         upper.append(bounds[1] - row["predicted_price"] if bounds else None)
         lower.append(row["predicted_price"] - bounds[0] if bounds else None)
+        calendar = pd.notna(row.get("endpoint"))
+        target = "Prevailing price at calendar endpoint" if calendar else "Price after a recorded update · date projected"
+        hover.append([row["origin"], f"{bounds[0]:,.0f}–{bounds[1]:,.0f} LBP / 20 L" if bounds else "Not released", target])
     error = {}
     if any(value is not None for value in upper):
         error = dict(error_y=dict(type="data", symmetric=False, array=upper,
@@ -88,9 +91,8 @@ def add_forecast_markers(fig, points, label, color, symbol):
     fig.add_scatter(
         x=points.plot_date, y=points.predicted_price, mode="markers", name=label,
         marker=dict(symbol=symbol, color=color, size=9,
-                    line=dict(color=color if symbol.endswith('-open') else SECTION, width=1.5)), customdata=[[r["origin"],
-                        f'{released_bounds(r,90)[0]:,.0f}–{released_bounds(r,90)[1]:,.0f} LBP / 20 L' if released_bounds(r,90) else 'Not released'] for r in points.to_dict("records")],
-        hovertemplate="%{x|%d %b %Y}<br>Estimate %{y:,.0f} LBP / 20 L<br>90% range: %{customdata[1]}<br>Issued %{customdata[0]}<extra></extra>",
+                    line=dict(color=color if symbol.endswith('-open') else SECTION, width=1.5)), customdata=hover,
+        hovertemplate="%{x|%d %b %Y}<br>%{customdata[2]}<br>Estimate %{y:,.0f} LBP / 20 L<br>90% range: %{customdata[1]}<br>Issued %{customdata[0]}<extra></extra>",
         **error,
     )
 

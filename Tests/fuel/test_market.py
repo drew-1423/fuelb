@@ -107,6 +107,7 @@ def test_documented_vintage_needs_evidence_and_period_order(market):
         vintage_timestamp='2025-01-01T22:00:00+00:00',vintage_evidence_url='https://example.org/original-edition')
     row=market.history('brent_spot','2025-01-01T22:00:00+00:00')[0]
     assert row['availability_basis']=='documented_historical_vintage'
+    assert market.history('brent_spot', '2025-01-01T22:00:00+00:00', mode='captured') == []
 
 
 def test_research_not_mislabeled_as_strict(market):

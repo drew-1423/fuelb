@@ -8,8 +8,9 @@ import sqlite3
 import pandas as pd
 import streamlit as st
 
-from lebanon_fuel.automation.health import build
-from . import data, experience as ux
+from lebanon_fuel.automation.health import build as health_contract
+from lebanon_fuel.validation.live_score import previous_update
+from . import data, experience as ux, served
 
 
 def money(price):
@@ -18,8 +19,12 @@ def money(price):
     st.caption(f'{values["lbp_liter"]:,.0f} LBP / L · ~${values["usd_liter"]:,.2f} USD / L')
 
 
+def build(root, snap, row):
+    return health_contract(root, snap, row, reports_root=st.session_state.get("_report_snapshot_root"))
+
+
 def read_report(root,path):
-    try:return data.read_json(root/path)
+    try:return data.read_json(served.report_path(root, path))
     except (OSError,ValueError):return {}
 
 
@@ -94,6 +99,17 @@ def price_panels(current, reason, prices, forecast):
                 else:
                     status = data.STATUS.get(current['verification_status'], 'Evidence under review')
                     st.caption(f'{status} · {observation}')
+                previous = previous_update(prices, current)
+                if previous:
+                    change = current["price_lbp_20l"] - previous["price_lbp_20l"]
+                    st.caption(f"{change:+,} LBP / 20 L since the preceding eligible price on {previous['source_date']}.")
+                archive = current.get("previous_verified_price")
+                if archive and (not previous or previous["source_date"] != current.get("previous_verified_date")):
+                    change = current["price_lbp_20l"] - archive
+                    with st.expander("Earlier government-backed price"):
+                        st.caption(f"{change:+,} LBP / 20 L since the government-backed record on "
+                                   f"{current['previous_verified_date']}. That span can cover multiple updates.")
+
             else:
                 st.caption(reason)
                 latest = max(prices, key=lambda record: record['source_date']) if prices else {}
@@ -121,6 +137,10 @@ def price_panels(current, reason, prices, forecast):
                 st.caption(f'{label} · {view["schedule"]}')
                 if not any(ux.released_bounds(forecast, level) for level in (80, 90)):
                     st.caption("Validated prediction range pending.")
+                    progress = ux.readiness(forecast)
+                    st.caption(f"{progress['cases']}/{progress['minimum_cases']} matched outcomes · "
+                               f"{progress['tests']}/{progress['minimum_tests']} chronological range tests.")
+                st.caption("Issued · " + data.beirut_time(forecast.get("created_at") or forecast.get("origin")))
                 if spec.get('schedule_estimated'):
                     st.caption('Projected date · Announcement time unconfirmed')
                 base_date = spec.get('base_source_date')
@@ -176,7 +196,7 @@ def overview(root, snap, settings, row, refresh_controls, open_workspace, price_
             st.button('Price trajectory', on_click=open_workspace, args=('trajectory',), key='overview_trajectory', type='primary')
             st.button('Predicted vs actual', on_click=open_workspace, args=('performance', 'actual'), key='overview_comparison')
     price_panels(current, reason, snap['prices'], row)
-    st.caption(f'USD display rate: {data.DISPLAY_FX:,.0f} LBP per USD.')
+    st.caption(f'Approximate USD conversion uses {data.DISPLAY_FX:,.0f} LBP per USD.')
     with st.container(key='driver_workspace'):
         chart, utility = st.columns([2.2, 1])
         with chart, st.container(key='driver_chart'):

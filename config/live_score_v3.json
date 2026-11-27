@@ -1,0 +1,9 @@
+{
+  "version": "2026-live-score-v3",
+  "starts_at": "2026-11-28T00:00:00+02:00",
+  "timezone": "Asia/Beirut",
+  "calendar_cutoff_hour": 12,
+  "decision_entry_days_after_anchor": 1,
+  "outcome_grace_days": 7,
+  "direction_deadband_lbp": 3000
+}

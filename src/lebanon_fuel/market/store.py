@@ -115,8 +115,8 @@ class MarketStore(Store):
         date lag. It MUST NOT be used to report real-time backtest performance.
         """
         origin = utc_timestamp(origin)
-        if mode not in {'strict', 'research', 'as_of_close'}:
-            raise ValueError('mode must be strict, research or as_of_close')
+        if mode not in {'strict', 'captured', 'research', 'as_of_close'}:
+            raise ValueError('mode must be strict, captured, research or as_of_close')
         spec = SERIES[series_id]
         sql = """SELECT o.*, ms.available_at, ms.availability_basis, ms.capture_id,
                  c.retrieved_at, c.url AS source_url FROM market_observations o
@@ -127,7 +127,10 @@ class MarketStore(Store):
         for raw in rows:
             row = dict(raw)
             row['captured_available_at'] = row['available_at']
-            if mode == 'research':
+            if mode == 'captured':
+                row['available_at'] = max(row['available_at'], row['retrieved_at'])
+                row['availability_basis'] = 'captured_vintage_at_cutoff'
+            elif mode == 'research':
                 dt = datetime.combine(date.fromisoformat(row['observation_date'])+timedelta(days=spec.research_lag_days),time(23,59,59),ZoneInfo(spec.timezone))
                 row['available_at'] = utc_timestamp(dt.isoformat())
                 row['availability_basis'] = 'assumed_lag_latest_vintage_NOT_BACKTEST'
@@ -142,7 +145,7 @@ class MarketStore(Store):
         result = []
         for day, candidates in sorted(groups.items()):
             # A reversal A->B->A remains visible because every capture has a sighting.
-            rank = (lambda r:(r['available_at'],r['retrieved_at'])) if mode == 'strict' else (lambda r:(r['retrieved_at'],))
+            rank = (lambda r:(r['available_at'],r['retrieved_at'])) if mode in {'strict', 'captured'} else (lambda r:(r['retrieved_at'],))
             latest = max(rank(r) for r in candidates)
             edition = [r for r in candidates if rank(r)==latest]
             if any(not r['valid'] for r in edition):

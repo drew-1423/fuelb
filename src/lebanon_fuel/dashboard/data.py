@@ -381,7 +381,8 @@ def beirut_time(value):
     if isinstance(value, str) and len(value) == 10:
         # A projected calendar date has no announcement clock to convert.
         return date.fromisoformat(value).strftime("%d %b %Y") + " (date only)"
-    return datetime.fromisoformat(value).astimezone(BEIRUT).strftime("%d %b %Y %H:%M %Z")
+    at = datetime.fromisoformat(value) if isinstance(value, str) else value
+    return at.astimezone(BEIRUT).strftime("%d %b %Y %H:%M %Z")
 
 
 def forecast_bounds(row, *, tier=None):
