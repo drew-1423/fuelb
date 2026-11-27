@@ -22,6 +22,7 @@ jobs:
         with:
           ref: main
       - name: Copy the current tree without importing main history
+        id: sync
         shell: bash
         run: |
           set -euo pipefail
@@ -38,3 +39,16 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           revision=$(git commit-tree "$tree" -p "$deployed" -m "Deploy $(git rev-parse --short HEAD) to Streamlit")
           git push origin "$revision:$branch"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - uses: actions/setup-python@v5
+        if: steps.sync.outputs.changed == 'true'
+        with:
+          python-version: '3.13'
+      - name: Prepare browser snapshot verification
+        if: steps.sync.outputs.changed == 'true'
+        run: |
+          python -m pip install 'playwright>=1.51,<2'
+          python -m playwright install --with-deps chromium
+      - name: Verify snapshot loaded on the public app
+        if: steps.sync.outputs.changed == 'true'
+        run: python scripts/check_public_snapshot.py

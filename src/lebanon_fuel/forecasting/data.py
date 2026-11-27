@@ -97,7 +97,9 @@ class MarketFeatures:
         self.config=config
         now=datetime.now(timezone.utc).isoformat()
         self.mode=config.get('market_availability_mode','research')
-        self.histories={s:store.history(s,now,mode=self.mode) for s in config['series']}
+        self.store = store
+        self.histories = ({} if self.mode in {'strict', 'captured'}
+                          else {s: store.history(s, now, mode=self.mode) for s in config['series']})
         self.timestamps={s:np.array([datetime.fromisoformat(r['available_at']).timestamp() for r in h]) for s,h in self.histories.items()}
         self.cache={}
 
@@ -105,10 +107,20 @@ class MarketFeatures:
         key=at.isoformat()
         if key in self.cache:return self.cache[key]
         result={};used=set();available=[];last={};ovx_rows=[]
-        for sid,history in self.histories.items():
-            stop=int(np.searchsorted(self.timestamps[sid],at.timestamp(),side='right'))
-            history_window=273 if sid=='cboe_ovx' else 80
-            h=history[max(0,stop-history_window):stop];prefix='x_'+sid+'_'
+        replay = getattr(self, 'store', None) is not None and self.mode in {'strict', 'captured'}
+        histories = ({sid: self.store.history(sid, key, mode='captured') for sid in self.config['series']}
+                     if replay else self.histories)
+        for sid, history in histories.items():
+            history_window = 273 if sid == 'cboe_ovx' else 80
+            timestamps = (np.asarray([datetime.fromisoformat(r['available_at']).timestamp() for r in history])
+                          if replay else self.timestamps[sid])
+            if np.all(timestamps[:-1] <= timestamps[1:]):
+                stop = int(np.searchsorted(timestamps, at.timestamp(), side='right'))
+                h = history[max(0, stop-history_window):stop]
+            else:
+                # A late correction can make release times non-monotonic by observation date.
+                h = [r for r, known in zip(history, timestamps) if known <= at.timestamp()][-history_window:]
+            prefix = 'x_' + sid + '_'
             value=ret7=ret30=vol=mean5=mean20=lag7=lag14=np.nan
             short = {k:np.nan for k in ('mean3','mean4','mean10','return3','return5')}
             age=(at.date()-date.fromisoformat(h[-1]['observation_date'])).days if h else None
@@ -134,7 +146,7 @@ class MarketFeatures:
                 if len(values)>=21 and max(gaps[-20:])<=maxgap:
                     mean20=float(values[-20:].mean());vol=float(np.std(np.diff(np.log(values[-21:])),ddof=1))
                 for r in h:used.add((r['id'],r['capture_id']))
-                available.append(h[-1]['available_at'])
+                available.append(max(row['available_at'] for row in h))
             for k,v in dict(value=value,return7=ret7,momentum30=ret30,volatility20=vol,mean5=mean5,mean20=mean20,lag7=lag7,lag14=lag14,**short).items():
                 if sid in {'nyh_gasoline','brent_spot','rbob_futures','brent_futures','gasoil_futures'} or k in {'value','return7'}:
                     result[prefix+k]=v

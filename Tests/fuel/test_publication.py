@@ -136,3 +136,40 @@ def test_retried_forecast_batch_is_idempotent_and_keeps_hash_chain(tmp_path):
         ledger.issue_batch([dict(item, prediction=20_000)])
     assert ledger.db.execute("SELECT COUNT(*) FROM forecasts").fetchone()[0] == 1
     ledger.close()
+
+
+def test_dashboard_cache_keeps_matching_reports_and_previous_verified_release(tmp_path, monkeypatch):
+    from lebanon_fuel.automation import dashboard_snapshot as dashboard
+
+    root = tmp_path / "repo"
+    snapshots = []
+    for id_ in (1, 2):
+        for name in publish.DATABASES:
+            path = root / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            with closing(sqlite3.connect(path)) as db:
+                db.execute("CREATE TABLE IF NOT EXISTS history (price INTEGER)")
+                db.execute("INSERT INTO history VALUES (?)", (id_,))
+                db.commit()
+        for name in dashboard.REPORTS:
+            path = root / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(json.dumps([id_, None, 0] if name == publish.WIDGET else {"release": id_}))
+        capture = root / "data/raw/ipt/source.html"
+        capture.parent.mkdir(parents=True, exist_ok=True)
+        capture.write_bytes(b"source receipt")
+        assets = tmp_path / str(id_)
+        manifest = publish.assemble(root, assets, dashboard.REPOSITORY, f"fuel-storage-{id_}-1")
+        snapshots.append(dashboard.publication_record(json.dumps(manifest).encode()))
+        monkeypatch.setattr(publish, "download", lambda url, dest: shutil.copyfile(assets / url.rsplit("/", 1)[-1], dest))
+        if id_ == 1:
+            first = dashboard.restore(root, snapshots[0])
+            assert dashboard.verified_widget(first / publish.WIDGET, snapshots[0]) == (1, None, 0)
+        else:
+            (root / publish.WIDGET).write_text("[999,null,0]")
+            with pytest.raises(ValueError, match="summary checksum"):
+                dashboard.restore(root, snapshots[1])
+            assert not dashboard.ready(dashboard.cache_dir(root) / snapshots[1]["identity"])
+            assert dashboard.previous_snapshot(root, before=snapshots[1]["created_at"]) == (first, snapshots[0])
+            with closing(sqlite3.connect(first / publish.DATABASES[0])) as db:
+                assert db.execute("SELECT price FROM history").fetchall() == [(1,)]
