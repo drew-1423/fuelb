@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-28T00:46:52.607048+00:00",
+  "generated_at": "2026-11-28T06:53:21.639722+00:00",
   "as_of_beirut": "2026-11-28",
   "timezone": "Asia/Beirut",
   "ledger_unique_dates": 1376,
@@ -71,8 +71,8 @@
     "duplicate_date_source_price": 8,
     "invalid_price": 1
   },
-  "missing_publication_timestamp_observations": 3211,
-  "unknown_effective_date_observations": 3207,
+  "missing_publication_timestamp_observations": 3212,
+  "unknown_effective_date_observations": 3208,
   "gap_candidates": 169,
   "cross_source_absent_dates": 375,
   "official_ids_on_multiple_dates": {
@@ -101,35 +101,35 @@
         "2025-09-30"
       ],
       "duplicate_date_extra_observations": 4,
-      "exact_duplicate_rows_in_captures": 46,
+      "exact_duplicate_rows_in_captures": 47,
       "last_successful_run": {
-        "id": 279,
-        "finished_at": "2026-11-28T00:32:42.967308+00:00",
+        "id": 282,
+        "finished_at": "2026-11-28T06:51:57.296879+00:00",
         "details": {
           "parsed_rows": 1317,
           "new_observations": 0,
-          "capture_id": 1127
+          "capture_id": 1140
         }
       }
     },
     "taqtek": {
-      "unique_source_observations": 918,
-      "valid_unique_dates": 918,
+      "unique_source_observations": 919,
+      "valid_unique_dates": 919,
       "earliest_source_date": "2010-10-27",
-      "latest_source_date": "2026-11-24",
-      "age_days": 4,
+      "latest_source_date": "2026-11-27",
+      "age_days": 1,
       "stale": false,
       "invalid_observations": 0,
       "within_source_conflict_dates": [],
       "duplicate_date_extra_observations": 0,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 265,
-        "finished_at": "2026-11-27T00:50:30.891539+00:00",
+        "id": 285,
+        "finished_at": "2026-11-28T06:52:20.556577+00:00",
         "details": {
-          "parsed_rows": 918,
-          "new_observations": 0,
-          "capture_id": 1064
+          "parsed_rows": 919,
+          "new_observations": 1,
+          "capture_id": 1150
         }
       }
     },
@@ -171,8 +171,8 @@
       "duplicate_date_extra_observations": 31,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 281,
-        "finished_at": "2026-11-28T00:33:02.243069+00:00",
+        "id": 284,
+        "finished_at": "2026-11-28T06:52:16.332537+00:00",
         "details": {
           "parsed_rows": 8,
           "new_observations": 0,
@@ -234,12 +234,12 @@
       "duplicate_date_extra_observations": 0,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 266,
-        "finished_at": "2026-11-27T00:50:35.695335+00:00",
+        "id": 286,
+        "finished_at": "2026-11-28T06:52:25.974798+00:00",
         "details": {
           "parsed_rows": 1,
           "new_observations": 0,
-          "capture_id": 1066
+          "capture_id": 1152
         }
       }
     },
@@ -255,12 +255,12 @@
       "duplicate_date_extra_observations": 0,
       "exact_duplicate_rows_in_captures": 0,
       "last_successful_run": {
-        "id": 280,
-        "finished_at": "2026-11-28T00:32:51.959467+00:00",
+        "id": 283,
+        "finished_at": "2026-11-28T06:52:06.103214+00:00",
         "details": {
           "parsed_rows": 1,
           "new_observations": 0,
-          "capture_id": 1131
+          "capture_id": 1144
         }
       }
     }
@@ -2505,6 +2505,70 @@
       "finished_at": "2026-11-28T00:33:02.243069+00:00",
       "status": "success",
       "details": "{\"parsed_rows\": 8, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 282,
+      "source_id": "ipt",
+      "started_at": "2026-11-28T06:51:40.202258+00:00",
+      "finished_at": "2026-11-28T06:51:57.296879+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1317, \"new_observations\": 0, \"capture_id\": 1140}"
+    },
+    {
+      "id": 283,
+      "source_id": "totalenergies",
+      "started_at": "2026-11-28T06:51:57.709516+00:00",
+      "finished_at": "2026-11-28T06:52:06.103214+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1, \"new_observations\": 0, \"capture_id\": 1144}"
+    },
+    {
+      "id": 284,
+      "source_id": "ministry",
+      "started_at": "2026-11-28T06:52:06.519218+00:00",
+      "finished_at": "2026-11-28T06:52:16.332537+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 8, \"new_observations\": 0, \"pages\": 1}"
+    },
+    {
+      "id": 285,
+      "source_id": "taqtek",
+      "started_at": "2026-11-28T06:52:16.747701+00:00",
+      "finished_at": "2026-11-28T06:52:20.556577+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 919, \"new_observations\": 1, \"capture_id\": 1150}"
+    },
+    {
+      "id": 286,
+      "source_id": "thefuelprice",
+      "started_at": "2026-11-28T06:52:20.975629+00:00",
+      "finished_at": "2026-11-28T06:52:25.974798+00:00",
+      "status": "success",
+      "details": "{\"parsed_rows\": 1, \"new_observations\": 0, \"capture_id\": 1152}"
+    },
+    {
+      "id": 287,
+      "source_id": "market_eia",
+      "started_at": "2026-11-28T06:52:26.408332+00:00",
+      "finished_at": "2026-11-28T06:53:02.995639+00:00",
+      "status": "success",
+      "details": "{\"results\": [{\"series\": \"brent_spot\", \"parsed_rows\": 9137, \"new_observations\": 0, \"capture_id\": 1155}, {\"series\": \"nyh_gasoline\", \"parsed_rows\": 9186, \"new_observations\": 0, \"capture_id\": 1157}, {\"series\": \"us_gasoline_stocks\", \"parsed_rows\": 1925, \"new_observations\": 0, \"capture_id\": 1159}, {\"series\": \"us_crude_stocks\", \"parsed_rows\": 2304, \"new_observations\": 0, \"capture_id\": 1161}, {\"series\": \"us_refinery_utilization\", \"parsed_rows\": 1882, \"new_observations\": 0, \"capture_id\": 1163}]}"
+    },
+    {
+      "id": 288,
+      "source_id": "market_ec",
+      "started_at": "2026-11-28T06:53:03.393679+00:00",
+      "finished_at": "2026-11-28T06:53:13.144053+00:00",
+      "status": "success",
+      "details": "{\"results\": [{\"series\": \"italy_gasoline_ex_tax\", \"parsed_rows\": 1094, \"new_observations\": 0, \"capture_id\": 1166}, {\"series\": \"greece_gasoline_ex_tax\", \"parsed_rows\": 1094, \"new_observations\": 0, \"capture_id\": 1166}]}"
+    },
+    {
+      "id": 289,
+      "source_id": "market_fed",
+      "started_at": "2026-11-28T06:53:13.489783+00:00",
+      "finished_at": "2026-11-28T06:53:21.024718+00:00",
+      "status": "success",
+      "details": "{\"results\": [{\"series\": \"eurusd\", \"parsed_rows\": 7275, \"new_observations\": 0, \"capture_id\": 1169}]}"
     }
   ],
   "readiness": "Adequate for source reconciliation and exploratory target analysis. Not ready for an institutional as-of forecasting backtest: effective/release times, unresolved conflicts, coverage and regimes need review."

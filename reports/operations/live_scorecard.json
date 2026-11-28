@@ -20,7 +20,14 @@
         "base_price": 2158000.0,
         "forecast": 2110705.6631466867,
         "actual": null,
-        "evidence": null
+        "evidence": null,
+        "evidence_url": null,
+        "outcome_id": null,
+        "outcome_known_at": null,
+        "baseline_prices": {
+          "Last change": 2074000,
+          "No change": 2158000
+        }
       }
     ]
   },
@@ -45,7 +52,14 @@
         "base_price": 2158000.0,
         "forecast": 2088097.6632159322,
         "actual": null,
-        "evidence": null
+        "evidence": null,
+        "evidence_url": null,
+        "outcome_id": null,
+        "outcome_known_at": null,
+        "baseline_prices": {
+          "Last change": 2074000,
+          "No change": 2158000
+        }
       }
     ]
   },
@@ -70,7 +84,14 @@
         "base_price": 2158000.0,
         "forecast": 2068200.896809607,
         "actual": null,
-        "evidence": null
+        "evidence": null,
+        "evidence_url": null,
+        "outcome_id": null,
+        "outcome_known_at": null,
+        "baseline_prices": {
+          "Last change": 2074000,
+          "No change": 2158000
+        }
       }
     ]
   },
@@ -95,7 +116,14 @@
         "base_price": 2158000.0,
         "forecast": 2145616.314307533,
         "actual": null,
-        "evidence": null
+        "evidence": null,
+        "evidence_url": null,
+        "outcome_id": null,
+        "outcome_known_at": null,
+        "baseline_prices": {
+          "Last change": 2074000,
+          "No change": 2158000
+        }
       }
     ]
   },
@@ -120,7 +148,14 @@
         "base_price": 2158000.0,
         "forecast": 2121834.006470368,
         "actual": null,
-        "evidence": null
+        "evidence": null,
+        "evidence_url": null,
+        "outcome_id": null,
+        "outcome_known_at": null,
+        "baseline_prices": {
+          "Last change": 2074000,
+          "No change": 2158000
+        }
       }
     ]
   },
@@ -145,7 +180,14 @@
         "base_price": 2158000.0,
         "forecast": 2085429.5845801185,
         "actual": null,
-        "evidence": null
+        "evidence": null,
+        "evidence_url": null,
+        "outcome_id": null,
+        "outcome_known_at": null,
+        "baseline_prices": {
+          "Last change": 2074000,
+          "No change": 2158000
+        }
       }
     ]
   },
@@ -170,7 +212,14 @@
         "base_price": 2158000.0,
         "forecast": 2029075.4183737189,
         "actual": null,
-        "evidence": null
+        "evidence": null,
+        "evidence_url": null,
+        "outcome_id": null,
+        "outcome_known_at": null,
+        "baseline_prices": {
+          "Last change": 2074000,
+          "No change": 2158000
+        }
       }
     ]
   },
@@ -195,7 +244,14 @@
         "base_price": 2158000.0,
         "forecast": 1988758.9937684843,
         "actual": null,
-        "evidence": null
+        "evidence": null,
+        "evidence_url": null,
+        "outcome_id": null,
+        "outcome_known_at": null,
+        "baseline_prices": {
+          "Last change": 2074000,
+          "No change": 2158000
+        }
       }
     ]
   }

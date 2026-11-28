@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-11-28T00:47:48.019148+00:00",
+  "generated_at": "2026-11-28T06:54:16.809859+00:00",
   "data_quality": {
     "conflict_dates": 42,
-    "missing_publication_clocks": 3211,
-    "missing_effective_dates": 3207,
+    "missing_publication_clocks": 3212,
+    "missing_effective_dates": 3208,
     "candidate_dates": 1376,
     "suspicious_dates": 4
   },
@@ -79,6 +79,10 @@
       {
         "id": "totalenergies",
         "url": "https://pricing.totalenergies.com.lb/fuelprice/"
+      },
+      {
+        "id": "taqtek",
+        "url": "https://taqteklb.com/en/fuel/"
       }
     ],
     "date_role": "source_label",
@@ -86,7 +90,8 @@
     "issues": [],
     "observation_ids": [
       3211,
-      3212
+      3212,
+      3213
     ],
     "official_effective_date": null,
     "percentage_price_change": -7.895860008536065,
@@ -105,11 +110,11 @@
     "timezone": "Asia/Beirut",
     "unit": "LBP/20L",
     "verification_status": "provisional_corroborated",
-    "revision_id": 4864
+    "revision_id": 4865
   },
   "market": {
-    "origin_utc": "2026-11-28T00:47:41.817871+00:00",
-    "origin_beirut": "2026-11-28T02:47:41.817871+02:00",
+    "origin_utc": "2026-11-28T06:54:10.178086+00:00",
+    "origin_beirut": "2026-11-28T08:54:10.178086+02:00",
     "mode": "strict",
     "backtest_eligible": true,
     "series": {
@@ -129,7 +134,7 @@
         "trend_above_trailing_mean20": 0,
         "high_vol_vs_prior_trailing_median": 1,
         "lag_1_observation_value": 91.2,
-        "max_available_at": "2026-11-27T00:50:42.535365+00:00",
+        "max_available_at": "2026-11-28T06:52:32.888470+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
@@ -422,7 +427,7 @@
         "value": 93.95400000000001,
         "unit": "USD/bbl",
         "latest_observation_date": "2026-11-24",
-        "age_calendar_days": 3,
+        "age_calendar_days": 4,
         "allowed_age_days": 14,
         "return_1_observation": 0.016818181818181843,
         "return_7_calendar_days": -0.03908934707903766,
@@ -433,7 +438,7 @@
         "trend_above_trailing_mean20": 0,
         "high_vol_vs_prior_trailing_median": 1,
         "lag_1_observation_value": 92.4,
-        "max_available_at": "2026-11-27T00:50:48.723640+00:00",
+        "max_available_at": "2026-11-28T06:52:39.122601+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
@@ -726,7 +731,7 @@
         "value": 217.68200000000002,
         "unit": "million_bbl",
         "latest_observation_date": "2026-11-20",
-        "age_calendar_days": 7,
+        "age_calendar_days": 8,
         "allowed_age_days": 21,
         "return_1_observation": 0.008025042949955763,
         "return_7_calendar_days": 0.008025042949955763,
@@ -737,7 +742,7 @@
         "trend_above_trailing_mean20": 1,
         "high_vol_vs_prior_trailing_median": 0,
         "lag_1_observation_value": 215.949,
-        "max_available_at": "2026-11-27T00:50:56.032897+00:00",
+        "max_available_at": "2026-11-28T06:52:46.899701+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
@@ -1029,7 +1034,7 @@
         "value": 418.906,
         "unit": "million_bbl",
         "latest_observation_date": "2026-11-20",
-        "age_calendar_days": 7,
+        "age_calendar_days": 8,
         "allowed_age_days": 21,
         "return_1_observation": 0.002654399145996633,
         "return_7_calendar_days": 0.002654399145996633,
@@ -1040,7 +1045,7 @@
         "trend_above_trailing_mean20": 1,
         "high_vol_vs_prior_trailing_median": 1,
         "lag_1_observation_value": 417.797,
-        "max_available_at": "2026-11-27T00:51:03.851632+00:00",
+        "max_available_at": "2026-11-28T06:52:55.286029+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
@@ -1332,7 +1337,7 @@
         "value": 97.5,
         "unit": "percent",
         "latest_observation_date": "2026-11-20",
-        "age_calendar_days": 7,
+        "age_calendar_days": 8,
         "allowed_age_days": 21,
         "return_1_observation": 0.01880877742946696,
         "return_7_calendar_days": 0.01880877742946696,
@@ -1343,7 +1348,7 @@
         "trend_above_trailing_mean20": 1,
         "high_vol_vs_prior_trailing_median": 0,
         "lag_1_observation_value": 95.7,
-        "max_available_at": "2026-11-27T00:51:11.448658+00:00",
+        "max_available_at": "2026-11-28T06:53:02.921750+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
@@ -1635,7 +1640,7 @@
         "value": 1.0981,
         "unit": "USD/EUR",
         "latest_observation_date": "2026-11-20",
-        "age_calendar_days": 7,
+        "age_calendar_days": 8,
         "allowed_age_days": 14,
         "return_1_observation": 0.0,
         "return_7_calendar_days": -0.0048033351459124685,
@@ -1646,7 +1651,7 @@
         "trend_above_trailing_mean20": 0,
         "high_vol_vs_prior_trailing_median": 1,
         "lag_1_observation_value": 1.0981,
-        "max_available_at": "2026-11-27T00:51:27.996066+00:00",
+        "max_available_at": "2026-11-28T06:53:19.996452+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
@@ -1949,7 +1954,7 @@
         "trend_above_trailing_mean20": 0,
         "high_vol_vs_prior_trailing_median": 1,
         "lag_1_observation_value": 0.9415262295081966,
-        "max_available_at": "2026-11-27T00:51:19.345704+00:00",
+        "max_available_at": "2026-11-28T06:53:11.442707+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
@@ -2252,7 +2257,7 @@
         "trend_above_trailing_mean20": 0,
         "high_vol_vs_prior_trailing_median": 1,
         "lag_1_observation_value": 0.8725632258064517,
-        "max_available_at": "2026-11-27T00:51:19.345704+00:00",
+        "max_available_at": "2026-11-28T06:53:11.442707+00:00",
         "availability_basis": [
           "capture_time_latest_vintage"
         ],
@@ -2567,7 +2572,7 @@
         "status": "stale",
         "value": null,
         "latest_observation_date": "2026-11-12",
-        "age_calendar_days": 15,
+        "age_calendar_days": 16,
         "observation_ids": [
           46037
         ]
@@ -2582,7 +2587,7 @@
         46066,
         46071
       ],
-      "max_available_at": "2026-11-27T00:50:48.723640+00:00"
+      "max_available_at": "2026-11-28T06:52:39.122601+00:00"
     },
     "rbob_minus_brent": {
       "value": null,
@@ -2608,7 +2613,7 @@
   },
   "policy_headlines": {
     "status": "captured_headlines_only",
-    "retrieved_at": "2026-11-28T00:32:55.738250+00:00",
+    "retrieved_at": "2026-11-28T06:52:10.130800+00:00",
     "items": [
       {
         "url": "/ar/details/101238/%D9%82%D8%A7%D9%85-%D9%88%D8%B2%D9%8A%D8%B1-%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9-%D9%88%D8%A7%D9%84%D9%85%D9%8A%D8%A7%D9%87-%D8%AC%D9%88-%D8%A7%D9%84%D8%B5%D8%AF%D9%8A-%D8%A8%D8%B2%D9%8A%D8%A7%D8%B1%D8%A9-%D8%B1%D8%B3%D9%85%D9%8A%D8%A9-%D8%A7%D9%84%D9%89-%D9%82%D8%A8%D8%B1%D8%B5",
