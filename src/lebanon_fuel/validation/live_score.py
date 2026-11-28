@@ -124,7 +124,7 @@ def report(db, policy, at, *, horizon="decision_1"):
     cases_by_day = {}
     entries = []
     for fid, (row, spec) in primary.items():
-        attempt = db.execute(ATTEMPT, (fid,)).fetchone()
+        attempt = db.execute(ATTEMPT, {"id": fid, "cutoff": stamp(at).isoformat()}).fetchone()
         outcome = by_id.get(fid)
         target = spec.get("endpoint") or spec.get("scheduled_effective") or spec["score_protocol"]["target_key_date"]
         target_day = (stamp(target).astimezone(BEIRUT).date() if "T" in target else date.fromisoformat(target))
@@ -152,7 +152,11 @@ def report(db, policy, at, *, horizon="decision_1"):
                             model_version=row["model_version"], snapshot_id=row["snapshot_id"],
                             base_price=row["base_price"], forecast=row["predicted_price"],
                             actual=outcome["actual"] if outcome else None,
-                            evidence=outcome["kind"] if outcome else None))
+                            evidence=outcome["kind"] if outcome else None,
+                            evidence_url=outcome["source_url"] if outcome else None,
+                            outcome_id=outcome["outcome_id"] if outcome else None,
+                            outcome_known_at=outcome["known"].isoformat() if outcome else None,
+                            baseline_prices=spec["score_protocol"]["baselines"]))
     cases = list(cases_by_day.values())
     comparisons = []
     for name in ("No change", "Last change"):

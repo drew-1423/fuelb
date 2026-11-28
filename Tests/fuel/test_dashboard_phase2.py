@@ -188,3 +188,26 @@ def test_submitted_scenario_survives_multiple_perspective_switches(monkeypatch):
     app.radio(key='perspective').set_value('🚗 Fuel Prices').run()
     app.radio(key='view').set_value('Scenario simulator').run()
     assert not app.exception and app.number_input(key='scenario_freight').value==35
+
+
+def test_market_intelligence_forecast_review_shows_pending_state_and_download(monkeypatch):
+    from streamlit.testing.v1 import AppTest
+    from lebanon_fuel.dashboard import review
+
+    monkeypatch.setenv("LEBANON_FUEL_ROOT", str(ROOT))
+    monkeypatch.setattr(review, "_journal", lambda *args: dict(
+        current_matches=0, counts={"pending": 1}, review_checkpoint=30,
+        selections=[dict(forecast_id=123, forecast=2300000, expected_date="2026-12-01", status="pending")],
+        cases=[], earlier_cases=[], hypotheses=[]))
+    app = AppTest.from_file(str(APP), default_timeout=20)
+    app.query_params["view"] = "forecast-review"
+    app.run()
+    assert not app.exception
+    assert app.radio(key="perspective").value == "📊 Market & Intelligence"
+    assert app.radio(key="view").value == "Forecast review"
+    assert any("1 selected forecast awaiting an actual price" in item.value for item in app.info)
+    assert len(app.get("download_button")) == 1
+    app.text_area[0].set_value("Check the gasoline observation timestamp")
+    next(b for b in app.button if b.label == "Add notes to packet").click().run()
+    assert not app.exception
+    assert app.session_state["review_private_notes"] == "Check the gasoline observation timestamp"
