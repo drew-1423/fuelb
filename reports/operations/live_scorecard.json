@@ -1,0 +1,202 @@
+{
+  "decision_1": {
+    "version": "2026-live-score-v3",
+    "starts_at": "2026-11-28T00:00:00+02:00",
+    "counts": {
+      "selected": 1,
+      "pending": 1
+    },
+    "comparisons": [],
+    "entries": [
+      {
+        "forecast_id": 45612,
+        "issued_at": "2026-11-28T00:33:47.229978+00:00",
+        "expected_date": "2026-12-01",
+        "recorded_date": null,
+        "status": "pending",
+        "reason": "no_match_attempt",
+        "model_version": "part3-fbd34b3d4dadf1a06a16-decision_1-G_hybrid-experimental",
+        "snapshot_id": "46f7946abb39afe49838918fbaca0fbb937af080832ad0f0afafbca2c133cc20",
+        "base_price": 2158000.0,
+        "forecast": 2110705.6631466867,
+        "actual": null,
+        "evidence": null
+      }
+    ]
+  },
+  "decision_2": {
+    "version": "2026-live-score-v3",
+    "starts_at": "2026-11-28T00:00:00+02:00",
+    "counts": {
+      "selected": 1,
+      "pending": 1
+    },
+    "comparisons": [],
+    "entries": [
+      {
+        "forecast_id": 45613,
+        "issued_at": "2026-11-28T00:33:47.229978+00:00",
+        "expected_date": "2026-12-04",
+        "recorded_date": null,
+        "status": "pending",
+        "reason": "no_match_attempt",
+        "model_version": "part3-b50640d13af84cd6ada0-decision_2-G_hybrid-experimental",
+        "snapshot_id": "46f7946abb39afe49838918fbaca0fbb937af080832ad0f0afafbca2c133cc20",
+        "base_price": 2158000.0,
+        "forecast": 2088097.6632159322,
+        "actual": null,
+        "evidence": null
+      }
+    ]
+  },
+  "decision_4": {
+    "version": "2026-live-score-v3",
+    "starts_at": "2026-11-28T00:00:00+02:00",
+    "counts": {
+      "selected": 1,
+      "pending": 1
+    },
+    "comparisons": [],
+    "entries": [
+      {
+        "forecast_id": 45614,
+        "issued_at": "2026-11-28T00:33:47.229978+00:00",
+        "expected_date": "2026-12-11",
+        "recorded_date": null,
+        "status": "pending",
+        "reason": "no_match_attempt",
+        "model_version": "part3-b4f2d76bb9c2bada3f63-decision_4-G_hybrid-experimental",
+        "snapshot_id": "46f7946abb39afe49838918fbaca0fbb937af080832ad0f0afafbca2c133cc20",
+        "base_price": 2158000.0,
+        "forecast": 2068200.896809607,
+        "actual": null,
+        "evidence": null
+      }
+    ]
+  },
+  "day_1": {
+    "version": "2026-live-score-v3",
+    "starts_at": "2026-11-28T00:00:00+02:00",
+    "counts": {
+      "selected": 1,
+      "pending": 1
+    },
+    "comparisons": [],
+    "entries": [
+      {
+        "forecast_id": 45615,
+        "issued_at": "2026-11-28T00:33:47.229978+00:00",
+        "expected_date": "2026-11-29",
+        "recorded_date": null,
+        "status": "pending",
+        "reason": "no_match_attempt",
+        "model_version": "part3-34aaede583a9d2fb6290-day_1-G_hybrid-experimental",
+        "snapshot_id": "46f7946abb39afe49838918fbaca0fbb937af080832ad0f0afafbca2c133cc20",
+        "base_price": 2158000.0,
+        "forecast": 2145616.314307533,
+        "actual": null,
+        "evidence": null
+      }
+    ]
+  },
+  "day_3": {
+    "version": "2026-live-score-v3",
+    "starts_at": "2026-11-28T00:00:00+02:00",
+    "counts": {
+      "selected": 1,
+      "pending": 1
+    },
+    "comparisons": [],
+    "entries": [
+      {
+        "forecast_id": 45616,
+        "issued_at": "2026-11-28T00:33:47.229978+00:00",
+        "expected_date": "2026-12-01",
+        "recorded_date": null,
+        "status": "pending",
+        "reason": "no_match_attempt",
+        "model_version": "part3-d0289ebedc304dcc4de7-day_3-G_hybrid-experimental",
+        "snapshot_id": "46f7946abb39afe49838918fbaca0fbb937af080832ad0f0afafbca2c133cc20",
+        "base_price": 2158000.0,
+        "forecast": 2121834.006470368,
+        "actual": null,
+        "evidence": null
+      }
+    ]
+  },
+  "day_7": {
+    "version": "2026-live-score-v3",
+    "starts_at": "2026-11-28T00:00:00+02:00",
+    "counts": {
+      "selected": 1,
+      "pending": 1
+    },
+    "comparisons": [],
+    "entries": [
+      {
+        "forecast_id": 45617,
+        "issued_at": "2026-11-28T00:33:47.229978+00:00",
+        "expected_date": "2026-12-05",
+        "recorded_date": null,
+        "status": "pending",
+        "reason": "no_match_attempt",
+        "model_version": "part3-f0afdf92c8244b3ee4d9-day_7-G_hybrid-experimental",
+        "snapshot_id": "46f7946abb39afe49838918fbaca0fbb937af080832ad0f0afafbca2c133cc20",
+        "base_price": 2158000.0,
+        "forecast": 2085429.5845801185,
+        "actual": null,
+        "evidence": null
+      }
+    ]
+  },
+  "day_14": {
+    "version": "2026-live-score-v3",
+    "starts_at": "2026-11-28T00:00:00+02:00",
+    "counts": {
+      "selected": 1,
+      "pending": 1
+    },
+    "comparisons": [],
+    "entries": [
+      {
+        "forecast_id": 45618,
+        "issued_at": "2026-11-28T00:33:47.229978+00:00",
+        "expected_date": "2026-12-12",
+        "recorded_date": null,
+        "status": "pending",
+        "reason": "no_match_attempt",
+        "model_version": "part3-461e1fe1925f7c456b9a-day_14-G_hybrid-experimental",
+        "snapshot_id": "46f7946abb39afe49838918fbaca0fbb937af080832ad0f0afafbca2c133cc20",
+        "base_price": 2158000.0,
+        "forecast": 2029075.4183737189,
+        "actual": null,
+        "evidence": null
+      }
+    ]
+  },
+  "day_30": {
+    "version": "2026-live-score-v3",
+    "starts_at": "2026-11-28T00:00:00+02:00",
+    "counts": {
+      "selected": 1,
+      "pending": 1
+    },
+    "comparisons": [],
+    "entries": [
+      {
+        "forecast_id": 45619,
+        "issued_at": "2026-11-28T00:33:47.229978+00:00",
+        "expected_date": "2026-12-28",
+        "recorded_date": null,
+        "status": "pending",
+        "reason": "no_match_attempt",
+        "model_version": "part3-a0207757c08a2f4b4e4f-day_30-G_hybrid-experimental",
+        "snapshot_id": "46f7946abb39afe49838918fbaca0fbb937af080832ad0f0afafbca2c133cc20",
+        "base_price": 2158000.0,
+        "forecast": 1988758.9937684843,
+        "actual": null,
+        "evidence": null
+      }
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 # Lebanon gasoline 95 analyst report
 
-Generated 2026-11-27T18:42:54.314330+00:00
+Generated 2026-11-28T00:33:53.586591+00:00
 
 ## Executive summary
 
@@ -8,11 +8,11 @@ The latest corroborated gasoline 95 record is **2,158,000 LBP / 20 L** on 2026-1
 
 ## Expected price movement
 
-QUANTITATIVE MODEL FORECAST: 2,106,905 LBP / 20 L, -51,095 LBP (-2.37%). Estimated announcement: 01 Dec 2026 (Tue cadence). A calibrated 90% interval is not supported for this issuance. Directional probabilities are awaiting calibrated live evidence.
+QUANTITATIVE MODEL FORECAST: 2,110,706 LBP / 20 L, -47,294 LBP (-2.19%). Estimated announcement: 01 Dec 2026 (Tue cadence). A calibrated 90% interval is not supported for this issuance. Directional probabilities are awaiting calibrated live evidence.
 
 ## Primary market drivers
 
-Gasoline / Brent proxy contribution (combined): -1,824 LBP; Domestic lagged adjustment: -43,516 LBP; Fiscal shock indicator: +0 LBP; Other model features: -4,173 LBP; Model intercept: -1,583 LBP. Statistical attribution, not causation. Brent futures has no fresh stored observation. RBOB futures has no fresh stored observation. Brent spot proxy last printed 91.80 USD/bbl on 2026-11-24, -1.23% over the trailing seven-day comparison. [Source](https://www.eia.gov/dnav/pet/hist/RBRTED.htm) New York Harbor gasoline proxy last printed 93.95 USD/bbl on 2026-11-24, -3.91% over the trailing seven-day comparison. [Source](https://www.eia.gov/dnav/pet/hist/EER_EPMRU_PF4_Y35NY_DPGD.htm)
+Gasoline / Brent proxy contribution (combined): -833 LBP; Domestic lagged adjustment: -43,475 LBP; Fiscal shock indicator: +0 LBP; Other model features: -1,404 LBP; Model intercept: -1,583 LBP. Statistical attribution, not causation. Brent futures has no fresh stored observation. RBOB futures has no fresh stored observation. Brent spot proxy last printed 91.80 USD/bbl on 2026-11-24, -1.23% over the trailing seven-day comparison. [Source](https://www.eia.gov/dnav/pet/hist/RBRTED.htm) New York Harbor gasoline proxy last printed 93.95 USD/bbl on 2026-11-24, -3.91% over the trailing seven-day comparison. [Source](https://www.eia.gov/dnav/pet/hist/EER_EPMRU_PF4_Y35NY_DPGD.htm)
 
 ## Commodity market conditions
 

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T18:42:54.314330+00:00",
+  "generated_at": "2026-11-28T00:33:53.586591+00:00",
   "data_quality": {
     "conflict_dates": 42,
     "missing_publication_clocks": 3211,
@@ -108,8 +108,8 @@
     "revision_id": 4864
   },
   "market": {
-    "origin_utc": "2026-11-27T18:42:49.383885+00:00",
-    "origin_beirut": "2026-11-27T20:42:49.383885+02:00",
+    "origin_utc": "2026-11-28T00:33:47.580420+00:00",
+    "origin_beirut": "2026-11-28T02:33:47.580420+02:00",
     "mode": "strict",
     "backtest_eligible": true,
     "series": {
@@ -118,7 +118,7 @@
         "value": 91.8,
         "unit": "USD/bbl",
         "latest_observation_date": "2026-11-24",
-        "age_calendar_days": 3,
+        "age_calendar_days": 4,
         "allowed_age_days": 14,
         "return_1_observation": 0.006578947368421018,
         "return_7_calendar_days": -0.01226597805035512,
@@ -1938,7 +1938,7 @@
         "value": 0.9185672131147541,
         "unit": "EUR/L",
         "latest_observation_date": "2026-11-23",
-        "age_calendar_days": 4,
+        "age_calendar_days": 5,
         "allowed_age_days": 21,
         "return_1_observation": -0.024384893032066812,
         "return_7_calendar_days": -0.024384893032066812,
@@ -2241,7 +2241,7 @@
         "value": 0.8354664516129031,
         "unit": "EUR/L",
         "latest_observation_date": "2026-11-23",
-        "age_calendar_days": 4,
+        "age_calendar_days": 5,
         "allowed_age_days": 21,
         "return_1_observation": -0.042514711938796856,
         "return_7_calendar_days": -0.042514711938796856,
@@ -2543,7 +2543,7 @@
         "status": "stale",
         "value": null,
         "latest_observation_date": "2025-05-29",
-        "age_calendar_days": 547,
+        "age_calendar_days": 548,
         "observation_ids": [
           29360
         ]
@@ -2608,7 +2608,7 @@
   },
   "policy_headlines": {
     "status": "captured_headlines_only",
-    "retrieved_at": "2026-11-27T18:42:05.574080+00:00",
+    "retrieved_at": "2026-11-28T00:32:55.738250+00:00",
     "items": [
       {
         "url": "/ar/details/101238/%D9%82%D8%A7%D9%85-%D9%88%D8%B2%D9%8A%D8%B1-%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9-%D9%88%D8%A7%D9%84%D9%85%D9%8A%D8%A7%D9%87-%D8%AC%D9%88-%D8%A7%D9%84%D8%B5%D8%AF%D9%8A-%D8%A8%D8%B2%D9%8A%D8%A7%D8%B1%D8%A9-%D8%B1%D8%B3%D9%85%D9%8A%D8%A9-%D8%A7%D9%84%D9%89-%D9%82%D8%A8%D8%B1%D8%B5",

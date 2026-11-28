@@ -1,12 +1,12 @@
 {
-  "as_of": "2026-11-27T18:42:41.863242+00:00",
+  "as_of": "2026-11-28T00:33:37.867772+00:00",
   "horizons": {
     "decision_1": {
       "cohort": "provisional",
       "horizon": "decision_1",
       "artifact": "fbd34b3d4dadf1a06a160469dd2c1234f8dee0b133a5f9b4f310d441650b9462",
-      "evidence_category": "provisional_match",
-      "calibration_n": 1,
+      "evidence_category": "official_match",
+      "calibration_n": 0,
       "evaluation_n": 0,
       "empirical_coverage": null,
       "minimum_calibration_n": 30,
@@ -17,7 +17,7 @@
       "levels": {
         "80": {
           "nominal": 0.8,
-          "calibration_n": 1,
+          "calibration_n": 0,
           "evaluation_n": 0,
           "empirical_coverage": null,
           "mean_evaluated_width_lbp": null,
@@ -30,7 +30,7 @@
         },
         "90": {
           "nominal": 0.9,
-          "calibration_n": 1,
+          "calibration_n": 0,
           "evaluation_n": 0,
           "empirical_coverage": null,
           "mean_evaluated_width_lbp": null,
@@ -79,7 +79,7 @@
           "levels": {
             "80": {
               "nominal": 0.8,
-              "calibration_n": 1,
+              "calibration_n": 0,
               "evaluation_n": 0,
               "empirical_coverage": null,
               "mean_evaluated_width_lbp": null,
@@ -92,7 +92,7 @@
             },
             "90": {
               "nominal": 0.9,
-              "calibration_n": 1,
+              "calibration_n": 0,
               "evaluation_n": 0,
               "empirical_coverage": null,
               "mean_evaluated_width_lbp": null,
@@ -104,12 +104,12 @@
               ]
             }
           },
-          "eligible_n": 1,
-          "raw_distinct_targets": 1
+          "eligible_n": 0,
+          "raw_distinct_targets": 0
         }
       },
       "policy": "Separate outcome-evidence strata; exact horizon/artifact/anchor cohort; nonoverlapping intervals; strictly earlier matured labels; trailing 60 residuals",
-      "target_limitation": "Supplier evaluation is conditional on recorded corroborated quotes and does not certify official publication/effective times"
+      "target_limitation": "Reviewed complete official outcome sequence"
     },
     "decision_2": {
       "cohort": "provisional",
@@ -883,13 +883,13 @@
     }
   },
   "forecast_ids": [
-    45604,
-    45605,
-    45606,
-    45607,
-    45608,
-    45609,
-    45610,
-    45611
+    45612,
+    45613,
+    45614,
+    45615,
+    45616,
+    45617,
+    45618,
+    45619
   ]
 }
