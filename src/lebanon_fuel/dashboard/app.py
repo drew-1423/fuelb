@@ -15,7 +15,7 @@ import pandas as pd
 import streamlit as st
 
 from lebanon_fuel.dashboard import analyst, backtesting, charts, data, decisions, driver, experience
-from lebanon_fuel.dashboard import served
+from lebanon_fuel.dashboard import review, served
 from lebanon_fuel.dashboard.scenarios import simulate, macro_preset, MACRO_PRESETS, anchored_simulate, economic_breakdown
 from lebanon_fuel.storage.database import sqlite_connection
 from lebanon_fuel.domain import BEIRUT, PROVISIONAL_PRICE, current_price_history
@@ -1039,6 +1039,8 @@ def main():
             st.write(content)
         st.download_button("Download analyst report", "\n\n".join(f"## {k}\n\n{v}" for k, v in sections.items()),
                            "lebanon-energy-brief.md", "text/markdown")
+    elif view == "Forecast review":
+        review.render(ROOT, st.session_state._ledger_path)
     elif view == "Model performance":
         section = st.radio('Research view', ['Performance', 'Predicted vs actual', 'Backtesting'], horizontal=True, key='quant_detail')
         if section == 'Performance':

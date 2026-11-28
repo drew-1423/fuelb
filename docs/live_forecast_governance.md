@@ -15,6 +15,14 @@ Each eligible issued Hybrid row stores the selection key, exclusive entry cutoff
 
 Calibration uses only the selected live forecasts for this protocol, strictly earlier matured labels, nonoverlapping eligible cases, and the original horizon, artifact, starting evidence and outcome evidence strata. Release rules still require at least 30 qualifying cases and 20 chronological coverage tests with acceptable coverage. The chart treats decision dates as projections and independent calendar results as point estimates.
 
+## Forecast Review
+
+Market & Intelligence → Forecast Review reads the selected forecasts and supported outcomes in the published ledger. Each matched row carries the issue time, outcome evidence, forecast and price, signed error, available paired baselines, and the saved market inputs and model attribution. An earlier match is available for reference without entering the current checkpoint.
+
+The 30-outcome checkpoint counts distinct matches for the latest selected model version and the chosen horizon. It is a cue to review the evidence, independent of calibration and model approval. The journal records forecast timing separately from pricing errors. It flags hypotheses such as domestic momentum overshoot or delayed market inputs for point-in-time tests on shared origins. Outcomes with missing or disputed evidence stay out of pricing metrics.
+
+The downloadable JSON research packet includes the matching and market cutoffs, forecast IDs and hashes, paired errors, test ideas and any personal notes added in the session. Save the packet to retain personal notes. The journal has no training or model-selection write path.
+
 ## Evidence check for 27 November 2026
 
 The restored release `fuel-storage-46051273585-1` had 1,312 dated IPT records (2008-01-02 through 2026-11-27) and three dated TotalEnergies observations (2026-11-20 through 2026-11-27). All three TotalEnergies dates had an agreeing IPT price. The TotalEnergies page exposed one current price date at inspection. [IPT fuel price archive](https://www.iptgroup.com.lb/ipt/en/our-stations/fuel-prices) · [TotalEnergies fuel prices](https://pricing.totalenergies.com.lb/fuelprice/)

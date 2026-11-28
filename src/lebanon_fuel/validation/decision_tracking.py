@@ -61,7 +61,8 @@ FORECASTS = """
 """
 ATTEMPT = """
     SELECT * FROM match_attempts
-    WHERE forecast_id=? AND json_extract(details_json, '$.channel')='supplier_next_update'
+    WHERE forecast_id=:id AND json_extract(details_json, '$.channel')='supplier_next_update'
+      AND (:cutoff IS NULL OR created_at < :cutoff)
     ORDER BY id DESC LIMIT 1
 """
 VERSION_QUERY = BATCH + """
@@ -158,7 +159,7 @@ def settle_supplier_updates(root, cfg, source):
                     status = SUPPLIER_STATUS
                 else:
                     status = 'not_matured'
-            previous = ledger.db.execute(ATTEMPT, (forecast["id"],)).fetchone()
+            previous = ledger.db.execute(ATTEMPT, {"id": forecast["id"], "cutoff": None}).fetchone()
             payload = canonical(details)
             if previous is None or (previous["status"], previous["details_json"]) != (status, payload):
                 with ledger.db:
@@ -215,7 +216,8 @@ def _matched(db, start, at, *, selected_ids=None):
                           horizon=row["horizon"], label_end=known,
                           day=day, known=known, origin=origin, forecast_id=row["forecast_id"],
                           forecast=row["predicted_price"], actual=row["price"], base=row["base_price"],
-                          predicted_change=row["predicted_change"], source_url=row["source_url"])
+                          predicted_change=row["predicted_change"], source_url=row["source_url"],
+                          outcome_id=row["id"])
     return sorted(cases.values(), key=lambda row: (row["origin"], row["forecast_id"]))
 
 
@@ -344,7 +346,7 @@ def dashboard_evidence(root, path):
         checks = []
         official = {r["forecast_id"] for r in cases if r["kind"] == "official_match"}
         for f in issued[:12]:
-            attempt = db.execute(ATTEMPT, (f["id"],)).fetchone()
+            attempt = db.execute(ATTEMPT, {"id": f["id"], "cutoff": None}).fetchone()
             detail = json.loads(attempt["details_json"]) if attempt else {}
             checks.append(dict(issued=f["created_at"], start_date=json.loads(f["target_json"]).get("base_source_date"),
                                target_date=detail.get("source_date"), status="Official outcome scored" if f["id"] in official

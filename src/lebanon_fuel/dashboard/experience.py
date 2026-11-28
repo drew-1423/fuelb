@@ -15,11 +15,15 @@ from . import data
 
 PERSPECTIVES = {
     '🚗 Fuel Prices': {'Overview': 'Price Overview', 'Scenario simulator': 'What-If Fuel Calculator', 'Alerts': 'Alert center'},
-    '📊 Market & Intelligence': {'Price & forecasts': 'Price & Forecast Trajectory', 'Global markets': 'Global Energy Markets', 'Analyst report': 'Analyst Briefing'},
+    '📊 Market & Intelligence': {'Price & forecasts': 'Price & Forecast Trajectory', 'Global markets': 'Global Energy Markets', 'Analyst report': 'Analyst Briefing', 'Forecast review': 'Forecast Review'},
     '🔬 Quantitative & Governance': {'Model performance': 'Model Performance & Backtesting', 'Decision timeline': 'Decision Timeline & Ledgers', 'Volatility & options': 'Implied Volatility (OVX) & Options', 'Data quality': 'Data Quality & Gap Audit'},
 }
-SLUGS = dict(zip(['driver','calculator','alerts','trajectory','markets','briefing','performance','timeline','volatility','quality'],
-                [v for views in PERSPECTIVES.values() for v in views]))
+SLUGS = {
+    'driver': 'Overview', 'calculator': 'Scenario simulator', 'alerts': 'Alerts',
+    'trajectory': 'Price & forecasts', 'markets': 'Global markets', 'briefing': 'Analyst report',
+    'forecast-review': 'Forecast review', 'performance': 'Model performance',
+    'timeline': 'Decision timeline', 'volatility': 'Volatility & options', 'quality': 'Data quality',
+}
 
 
 def destination(slug):
