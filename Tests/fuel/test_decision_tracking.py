@@ -81,19 +81,28 @@ def test_intervals_require_matured_cases_and_measured_coverage_in_the_same_group
 
 
 def test_fixed_protocol_selects_before_matching_and_does_not_replace_first_issuance(tmp_path):
+    from lebanon_fuel.validation import review_journal
     from lebanon_fuel.validation.live_score import issuance_protocol, report, selections
 
     now = datetime(2026, 2, 4, tzinfo=timezone.utc)
     policy = dict(version="test-fixed", starts_at="2026-02-01T00:00:00+00:00",
                   calendar_cutoff_hour=12, decision_entry_days_after_anchor=1,
                   outcome_grace_days=7, direction_deadband_lbp=3000)
+    config = tmp_path / "config"
+    config.mkdir()
+    (config / "live_score_v3.json").write_text(json.dumps(policy))
+    (config / "prospective_holdout.json").write_text(json.dumps(
+        dict(prospective_start=policy["starts_at"], sealed_at=policy["starts_at"])))
     anchor = dict(source_date="2026-02-02", revision_id=2, price_lbp_20l=1000000,
                   verification_status="archive_corroborated")
     history = [dict(anchor, source_date="2026-01-30", revision_id=1, price_lbp_20l=990000), anchor]
     with closing(ForecastLedger(tmp_path / "ledger.sqlite")) as ledger:
         db = ledger.db
         db.execute("INSERT INTO models VALUES ('model', '', 0, ?)", (json.dumps({"family":tracking.FAMILY}),))
-        db.execute("INSERT INTO snapshots VALUES ('snap', '', '', 'prospective_research', '{}')")
+        market = {"nyh_gasoline": dict(available_at="2026-02-02T12:00:00+00:00", observation_date="2026-02-01"),
+                  "brent_spot": dict(available_at="2026-02-03T12:00:00+00:00", observation_date="2026-02-02")}
+        db.execute("INSERT INTO snapshots VALUES ('snap', '', '', 'prospective_research', ?)",
+                   (json.dumps({"available_market_inputs": market}),))
         starts = ["2026-02-02T10:00:00+00:00", "2026-02-02T14:00:00+00:00", "2026-02-03T13:00:00+00:00"]
         for i, start in enumerate(starts):
             issued = datetime.fromisoformat(start)
@@ -106,7 +115,9 @@ def test_fixed_protocol_selects_before_matching_and_does_not_replace_first_issua
                                 status="issued", endpoint=endpoint)
                 marker = issuance_protocol(policy, history, anchor, forecast, issued)
                 spec = dict(forecast, score_protocol=marker, base_source_date=anchor["source_date"],
-                            anchor_verification=PROVISIONAL_PRICE, artifact_sha256="test")
+                            anchor_verification=PROVISIONAL_PRICE, artifact_sha256="test",
+                            scheduled_effective="2026-02-05" if is_decision else None,
+                            lagged_market_inputs=[{"series": "nyh_gasoline"}])
                 db.execute("""INSERT INTO forecasts (run_id, created_at, origin, mode, model_version, snapshot_id,
                            horizon, target_json, status, base_price, predicted_price, predicted_change, reason_json, record_hash)
                            VALUES (?, ?, ?, 'prospective_research', 'model', 'snap', ?, ?, 'issued',
@@ -141,3 +152,21 @@ def test_fixed_protocol_selects_before_matching_and_does_not_replace_first_issua
         assert score["counts"]["matched"] == 1
         assert score["comparisons"][0]["mae"] == 10000
         assert score["comparisons"][1]["mae"] == 30000
+        db.commit()
+        assert report(db, policy, now)["entries"][0]["reason"] == "no_match_attempt"
+    ledger_path = tmp_path / "ledger.sqlite"
+    pending = review_journal.load(tmp_path, ledger_path, "decision_1", now.isoformat())
+    assert pending["current_matches"] == 0 and pending["mae"] is None
+    assert pending["hypotheses"] == []
+    journal = review_journal.load(tmp_path, ledger_path, "decision_1", (now + timedelta(hours=12)).isoformat())
+    assert journal["current_matches"] == 1
+    assert journal["earlier_cases"] == []
+    assert journal["mae"] == journal["rmse"] == 10000
+    assert journal["mean_error"] == -10000 and journal["direction_hits"] == 1
+    case, = journal["cases"]
+    assert case["forecast_id"] == row["id"] and case["outcome_id"] == 1
+    assert case["outcome_known_at"] == "2026-02-04T09:00:00+00:00"
+    assert case["days_from_projection"] == -1
+    assert case["baselines"]["Last change"]["absolute_error"] == 20000
+    assert [item["series"] for item in case["market"]] == ["nyh_gasoline"]
+    assert {idea["topic"] for idea in journal["hypotheses"]} == {"Lagged market inputs", "Projected date", "Move size"}
