@@ -1,21 +1,21 @@
 {
   "version": 1,
   "repository": "drew-1423/fuelb",
-  "tag": "fuel-storage-46088330982-1",
-  "created_at": "2026-11-28T00:34:12.418216+00:00",
+  "tag": "fuel-storage-46089631862-1",
+  "created_at": "2026-11-28T00:48:07.158522+00:00",
   "assets": {
     "databases": [
       {
         "name": "databases-0000.part",
-        "bytes": 51264448,
-        "sha256": "d4115c28f550714526a631bdaf30e70b6f0e6bd97154866ab8c3aa2c10a70acf"
+        "bytes": 51395896,
+        "sha256": "ca8b229152f50cd4e812e8548a9fb0dbc4be8dcb9d4e9c8b450f96e56597df15"
       }
     ],
     "captures": [
       {
         "name": "captures-0000.part",
-        "bytes": 42660267,
-        "sha256": "75b729f3263f09d59d6a3403981b0f3f077646451223c5923693c235275e04e3"
+        "bytes": 42659772,
+        "sha256": "c3c03f26e80f3295dd6146010010d43ef3135ddfa4afbf35fee0d58db1ba3065"
       }
     ]
   },
@@ -26,16 +26,16 @@
       "sha256": "a591404b6c6469a17ed244fb9cc7d0f138e0709c5376be4c0ffecd0db0039bb6"
     },
     "forecast_ledger.sqlite": {
-      "bytes": 93077504,
+      "bytes": 93446144,
       "reclaimable_bytes": 0,
-      "sha256": "04b7439c15e12cf06af09d71910ccba6dc589f09831713a6610697baec2a79e7"
+      "sha256": "688bc53dedf0084bf1401cff9108bdc9b5789b3c9e2af224a81360202b1a3dc4"
     },
     "operations.sqlite": {
-      "bytes": 12054528,
+      "bytes": 12251136,
       "reclaimable_bytes": 0,
-      "sha256": "dce41e0ca43e9e29c9fa9b4513a0439b2c7369f974053a2124ad44068b07ef4b"
+      "sha256": "4a07af6d4d96bc93b4c5adab262a341fde638df520c2ea32e5dfc5b3ac3e9af7"
     }
   },
   "capture_count": 404,
-  "widget_sha256": "9ca17dcfaa0d040d17d9cbd67f7ade9e70e23cac0ecf16c36a29b1744bdaf5af"
+  "widget_sha256": "eccb7b89b7cfa8b710a7cbe2c887a6cfd9fb654cd211a04ffd6c5f9be7a98c0f"
 }

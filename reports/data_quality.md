@@ -1,6 +1,6 @@
 # Lebanese gasoline 95 data quality report
 
-As of 2026-11-28, Asia/Beirut. Generated 2026-11-28T00:33:02.860997+00:00. Counts are database queries over actual captures.
+As of 2026-11-28, Asia/Beirut. Generated 2026-11-28T00:46:52.607048+00:00. Counts are database queries over actual captures.
 
 | Completion measure | Observed result |
 | --- | --- |
