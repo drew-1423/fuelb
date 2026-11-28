@@ -1,6 +1,6 @@
 {
-  "origin_utc": "2026-11-28T00:46:52.629969+00:00",
-  "origin_beirut": "2026-11-28T02:46:52.629969+02:00",
+  "origin_utc": "2026-11-28T06:53:21.665105+00:00",
+  "origin_beirut": "2026-11-28T08:53:21.665105+02:00",
   "mode": "strict",
   "backtest_eligible": true,
   "series": {
@@ -20,7 +20,7 @@
       "trend_above_trailing_mean20": 0,
       "high_vol_vs_prior_trailing_median": 1,
       "lag_1_observation_value": 91.2,
-      "max_available_at": "2026-11-27T00:50:42.535365+00:00",
+      "max_available_at": "2026-11-28T06:52:32.888470+00:00",
       "availability_basis": [
         "capture_time_latest_vintage"
       ],
@@ -313,7 +313,7 @@
       "value": 93.95400000000001,
       "unit": "USD/bbl",
       "latest_observation_date": "2026-11-24",
-      "age_calendar_days": 3,
+      "age_calendar_days": 4,
       "allowed_age_days": 14,
       "return_1_observation": 0.016818181818181843,
       "return_7_calendar_days": -0.03908934707903766,
@@ -324,7 +324,7 @@
       "trend_above_trailing_mean20": 0,
       "high_vol_vs_prior_trailing_median": 1,
       "lag_1_observation_value": 92.4,
-      "max_available_at": "2026-11-27T00:50:48.723640+00:00",
+      "max_available_at": "2026-11-28T06:52:39.122601+00:00",
       "availability_basis": [
         "capture_time_latest_vintage"
       ],
@@ -617,7 +617,7 @@
       "value": 217.68200000000002,
       "unit": "million_bbl",
       "latest_observation_date": "2026-11-20",
-      "age_calendar_days": 7,
+      "age_calendar_days": 8,
       "allowed_age_days": 21,
       "return_1_observation": 0.008025042949955763,
       "return_7_calendar_days": 0.008025042949955763,
@@ -628,7 +628,7 @@
       "trend_above_trailing_mean20": 1,
       "high_vol_vs_prior_trailing_median": 0,
       "lag_1_observation_value": 215.949,
-      "max_available_at": "2026-11-27T00:50:56.032897+00:00",
+      "max_available_at": "2026-11-28T06:52:46.899701+00:00",
       "availability_basis": [
         "capture_time_latest_vintage"
       ],
@@ -920,7 +920,7 @@
       "value": 418.906,
       "unit": "million_bbl",
       "latest_observation_date": "2026-11-20",
-      "age_calendar_days": 7,
+      "age_calendar_days": 8,
       "allowed_age_days": 21,
       "return_1_observation": 0.002654399145996633,
       "return_7_calendar_days": 0.002654399145996633,
@@ -931,7 +931,7 @@
       "trend_above_trailing_mean20": 1,
       "high_vol_vs_prior_trailing_median": 1,
       "lag_1_observation_value": 417.797,
-      "max_available_at": "2026-11-27T00:51:03.851632+00:00",
+      "max_available_at": "2026-11-28T06:52:55.286029+00:00",
       "availability_basis": [
         "capture_time_latest_vintage"
       ],
@@ -1223,7 +1223,7 @@
       "value": 97.5,
       "unit": "percent",
       "latest_observation_date": "2026-11-20",
-      "age_calendar_days": 7,
+      "age_calendar_days": 8,
       "allowed_age_days": 21,
       "return_1_observation": 0.01880877742946696,
       "return_7_calendar_days": 0.01880877742946696,
@@ -1234,7 +1234,7 @@
       "trend_above_trailing_mean20": 1,
       "high_vol_vs_prior_trailing_median": 0,
       "lag_1_observation_value": 95.7,
-      "max_available_at": "2026-11-27T00:51:11.448658+00:00",
+      "max_available_at": "2026-11-28T06:53:02.921750+00:00",
       "availability_basis": [
         "capture_time_latest_vintage"
       ],
@@ -1526,7 +1526,7 @@
       "value": 1.0981,
       "unit": "USD/EUR",
       "latest_observation_date": "2026-11-20",
-      "age_calendar_days": 7,
+      "age_calendar_days": 8,
       "allowed_age_days": 14,
       "return_1_observation": 0.0,
       "return_7_calendar_days": -0.0048033351459124685,
@@ -1537,7 +1537,7 @@
       "trend_above_trailing_mean20": 0,
       "high_vol_vs_prior_trailing_median": 1,
       "lag_1_observation_value": 1.0981,
-      "max_available_at": "2026-11-27T00:51:27.996066+00:00",
+      "max_available_at": "2026-11-28T06:53:19.996452+00:00",
       "availability_basis": [
         "capture_time_latest_vintage"
       ],
@@ -1840,7 +1840,7 @@
       "trend_above_trailing_mean20": 0,
       "high_vol_vs_prior_trailing_median": 1,
       "lag_1_observation_value": 0.9415262295081966,
-      "max_available_at": "2026-11-27T00:51:19.345704+00:00",
+      "max_available_at": "2026-11-28T06:53:11.442707+00:00",
       "availability_basis": [
         "capture_time_latest_vintage"
       ],
@@ -2143,7 +2143,7 @@
       "trend_above_trailing_mean20": 0,
       "high_vol_vs_prior_trailing_median": 1,
       "lag_1_observation_value": 0.8725632258064517,
-      "max_available_at": "2026-11-27T00:51:19.345704+00:00",
+      "max_available_at": "2026-11-28T06:53:11.442707+00:00",
       "availability_basis": [
         "capture_time_latest_vintage"
       ],
@@ -2458,7 +2458,7 @@
       "status": "stale",
       "value": null,
       "latest_observation_date": "2026-11-12",
-      "age_calendar_days": 15,
+      "age_calendar_days": 16,
       "observation_ids": [
         46037
       ]
@@ -2473,7 +2473,7 @@
       46066,
       46071
     ],
-    "max_available_at": "2026-11-27T00:50:48.723640+00:00"
+    "max_available_at": "2026-11-28T06:52:39.122601+00:00"
   },
   "rbob_minus_brent": {
     "value": null,
